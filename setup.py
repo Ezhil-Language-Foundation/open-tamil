@@ -3,7 +3,7 @@
 from distutils.core import setup
 from codecs import open
 
-setup(name='Open Tamil',
+setup(name='Open-Tamil',
       version='0.1-dev',
       description='Tamil language text processing tools',
       author='Muthiah Annamalai',
