@@ -198,13 +198,12 @@ def reverse_word( word ):
 ## Split a tamil-unicode stream into
 ## tamil characters (individuals).
 def get_letters( word ):
-        """ splits the word into a character-list of tamil/english
-        characters present in the stream """
-            #word = unicode(word) #.encode('utf-8')
-        prev = u''
-        word=word.decode('utf-8')
+	""" splits the word into a character-list of tamil/english
+	characters present in the stream """ 
+	prev = u''#word = unicode(word) #.encode('utf-8')
+	word=word.decode('utf-8')
 	ta_letters = []
-        for c in word:
+	for c in word:
 		if c in uyir_letters or c == ayudha_letter:
 			ta_letters.append(prev+c)
 			prev = u''
