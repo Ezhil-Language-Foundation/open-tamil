@@ -6,14 +6,14 @@ Open Source Tamil Tools
 Software
 ========
 
-*tamil*
+#tamil
 open-tamil rovides Python package 'tamil' with ability to,
 
 1. map unicode code-points to Tamil letters - basic but important parsing - in a routine called get_letters from a Tamil word
 2. work with vowels (uyir) and consonants (mei), compound, uyir-mei letters
 3. reverse letters in Tamil word
 
-*transliterate*
+#transliterate
 the python package 'transliterate' provides for commonly used transliteration
 phonetic schemes like,
 1. Azhagi
