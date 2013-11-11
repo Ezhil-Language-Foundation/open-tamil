@@ -3,7 +3,7 @@ python:
   #- "3.3" #not yet ready
   - "2.7"
   - "2.6"
-install:  python setup.py install && pip install argparse && cd ./C-tamil && make
+install:  python setup.py install && pip install argparse && cd ./C-tamil && make && cd ../
 script: ./unittest && ./C-tamil/tamil_letters
 
 
