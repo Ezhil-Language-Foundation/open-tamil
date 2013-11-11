@@ -4,7 +4,4 @@ python:
   - "2.7"
   - "2.6"
 install:  python setup.py install && pip install argparse
-script: ./unittest && cd ./C-tamil && make && ./tamil_letters
-
-
-
+script: ./unittest && cd ./C-tamil && make && ./tamil-letters

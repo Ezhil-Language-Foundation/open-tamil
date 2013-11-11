@@ -16,6 +16,7 @@ open-tamil rovides Python package 'tamil' with ability to,
 #transliterate
 the python package 'transliterate' provides for commonly used transliteration
 phonetic schemes like,
+
 1. Azhagi
 2. Jaffna Library
 
