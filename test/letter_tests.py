@@ -24,4 +24,3 @@ class Letters(unittest.TestCase):
     
 if __name__ == '__main__':    
     test_support.run_unittest(Letters)
-

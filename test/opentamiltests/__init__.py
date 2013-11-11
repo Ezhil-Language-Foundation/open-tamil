@@ -13,6 +13,7 @@ sys.path.insert(0,open_tamil_path)
 
 import tamil
 
+import transliterate
+
 import unittest
 from test import test_support
-
