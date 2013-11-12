@@ -24,6 +24,10 @@ where you can supply English text, which phonetically encodes Tamil, and then re
 *C-tamil*
 the package under C-tamil provides some of the same functionality as Python 'tamil' but in ISO-C for C/C++ use.
 
+#language models
+Basic support for letter unigram, bigram models using UTF-8 based corpora are supported in the package 'ngram/'
+which supports unigram model at the moment. More complex language models are expected to be developed soon.
+
 Goals
 =====
 Goal of this package is to collect and develop open-source licensed Tamil tools, in one location that provide the following,

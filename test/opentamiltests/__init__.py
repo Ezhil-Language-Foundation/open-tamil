@@ -15,5 +15,7 @@ import tamil
 
 import transliterate
 
+import ngram
+
 import unittest
 from test import test_support
