@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+# (C) 2013 முத்தையா அண்ணாமலை 
+# open-tamil project
+
 from distutils.core import setup
 from codecs import open
 
