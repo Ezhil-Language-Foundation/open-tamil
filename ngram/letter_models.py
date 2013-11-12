@@ -5,6 +5,7 @@
 # N-gram language model for Tamil letters
 
 import tamil
+import copy
 
 from corpus import Corpus
 
@@ -31,6 +32,23 @@ class Unigram(Letters):
             self.letter[next_letter] = self.letter[next_letter] + 1
     
 class Bigram(Unigram):
+    def __init__(self,filename):
+        Unigram.__init__(self,filename)
+        self.letter2 = dict();
+        for k in  tamil.utf8.tamil_letters:
+            self.letter2[k] = copy.copy( self.letter )
+        
     def language_model(self):
         """ builds a Tamil bigram letter model """
-        pass
+        # use a generator in corpus
+        prev = None
+        for next_letter in self.corpus.next_tamil_letter():
+            # update frequency from corpus
+            if prev:
+                self.letter2[prev][next_letter] = self.letter2[prev][next_letter] + 1
+                print prev
+                print next_letter
+                print( self.letter2[prev][next_letter] )            
+            prev = next_letter #update always
+        return
+
