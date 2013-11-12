@@ -22,5 +22,14 @@ class Letters(unittest.TestCase):
             print(u"%d %s"%(pos,letter))
         assert( letter == (u"ர்") )
     
+    def test_tamil_letter_sizes( self ):
+        assert( len(utf8.uyir_letters) == 12 )
+        assert( len(utf8.mei_letters) == 18 )
+        assert( len(utf8.uyir_letters) == (len(utf8.accent_symbols)-1) )
+        assert( len(utf8.uyirmei_letters) == 18*12 )
+        assert( len(utf8.sanskrit_letters) == 4 )
+        assert( len(utf8.tamil_letters) == 321 )
+        
+        
 if __name__ == '__main__':    
     test_support.run_unittest(Letters)
