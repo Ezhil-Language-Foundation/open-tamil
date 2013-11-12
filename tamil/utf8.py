@@ -178,10 +178,8 @@ def has_tamil( word ):
 def istamil ( tchar ):
         """ check if the letter tchar is prefix of 
         any of tamil-letter. It suggests we have a tamil identifier"""
-        if ( tchar.isalpha() ): return False
-        for letters in tamil_letters:
-                if ( letters.find( tchar ) == 0 ):
-                        return True
+        if (tchar in tamil_letters):
+                return True
         return False
 
 def istamil_alnum( tchar ):
@@ -220,7 +218,7 @@ def get_letters( word ):
 				prev = u''
 			elif ord(c) < 256:
 				# plain-old ascii
-				ta_letters.append( c )
+				ta_letters.append( c.decode('utf-8') )
 			else:
 				assert False #unknown/expected state
 	if prev != u'': #if prev is not null it is $c

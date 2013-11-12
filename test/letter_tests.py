@@ -30,6 +30,20 @@ class Letters(unittest.TestCase):
         assert( len(utf8.sanskrit_letters) == 4 )
         assert( len(utf8.tamil_letters) == 321 )
         
+    def test_istamil( self ):
+        zz = u"முத்தையா அண்ணாமலை எந்த ஒரு தெரிந்த அல்லது தெரியாத எழுத்துருவாகவிருந்தாலும் அதனை மேல்தட்டில் உள்ளிட்டு கீழே உள்ள முடியும்"
+        for z in zz.split(u" "):
+            print("********** t/f ********")
+            for x,y in zip(map(utf8.istamil,utf8.get_letters(z)),utf8.get_letters(z)):
+                print("%s => %s"%(y,x))        
+                assert( all( map( utf8.istamil, utf8.get_letters( z ) ) ) )
         
-if __name__ == '__main__':    
+        z = u"முத்தையா அண்ணாமலை"
+        assert( any( map( utf8.istamil, utf8.get_letters( z ) ) ) )
+        
+        correct = [True, True, True, True, False, True, True, True, True, True, False, False, False, False, False]
+        assert( map(utf8.istamil,utf8.get_letters(u"முத்தையா அண்ணாமலை 2013")) == correct )
+    
+
+if __name__ == '__main__':
     test_support.run_unittest(Letters)
