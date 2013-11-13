@@ -48,7 +48,23 @@ class Letters(unittest.TestCase):
         
         correct = [True, True, True, True, False, True, True, True, True, True, False, False, False, False, False]
         assert( map(utf8.istamil,utf8.get_letters(u"முத்தையா அண்ணாமலை 2013")) == correct )
-    
 
+
+class TSCII(unittest.TestCase):
+    def test_vowels(self):
+        TSCII = tamil.tscii.TSCII
+        assert( TSCII[0xAB] == u"அ" )
+        assert( TSCII[0xAC] == u"ஆ" )
+        
+    def test_sanskrit(self):
+        TSCII = tamil.tscii.TSCII
+        assert( TSCII[0x82] == u"ஶ்ரீ")
+        assert( TSCII[0x83] == u"ஜ")
+        assert( TSCII[0x84] == u"ஷ")
+        
+    def test_basic_lookup2UTF8( self ):
+        TSCII = tamil.tscii.TSCII
+        assert( TSCII[0xAB]+TSCII[0xF4]+TSCII[0xC0]+TSCII[0xA1] == u"அப்பா" )
+        
 if __name__ == '__main__':
-    test_support.run_unittest(Letters)
+    test_support.run_unittest(Letters,TSCII)
