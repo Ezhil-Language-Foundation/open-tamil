@@ -65,6 +65,18 @@ class TSCII(unittest.TestCase):
     def test_basic_lookup2UTF8( self ):
         TSCII = tamil.tscii.TSCII
         assert( TSCII[0xAB]+TSCII[0xF4]+TSCII[0xC0]+TSCII[0xA1] == u"அப்பா" )
+
+    def test_TSCII_to_UTF8_part1( self ):        
+        str=open("data/Sample.TSCII").read()
+        output = tamil.tscii.convert_to_unicode( str )
+        print output
+        needle = u"""உடுப்பி ஒட்டலுக்குப் போய் மசாலா தோசை சாப்பிட்டு வரலாமா"""
+        assert( output.find(needle) >= 0 )
+
+    def test_TSCII_to_UTF8_part2( self ):
+        str=open("data/dumb.tscii").read()
+        output = tamil.tscii.convert_to_unicode( str )
+        assert( output.find(u"அப்பா") >= 0 )
         
 if __name__ == '__main__':
     test_support.run_unittest(Letters,TSCII)
