@@ -25,9 +25,16 @@ TSCII[0xB8:0xCA] = [u"க",u"ங",u"ச",u"ஞ",u"ட",u"ண",u"த",u"ந",
                     u"ற",u"ன",]
 
 # Grantha 
+TSCII[0x83] = u"ஜ" #Je
 TSCII[0x84] = u"\u0BB7" # SSA - ஷ
 TSCII[0x85] = u"\u0BB8" # SA - ஸ
 TSCII[0x86] = u"\u0BB9" # HA - ஹ
+
+# Grantha/Mei forms
+TSCII[0x88] = u"ஜ்" # iJ
+TSCII[0x89] = u"\u0BB7\u0BCD" # iSS - ஷ்
+TSCII[0x8A] = u"\u0BB8\u0BCD" # iS - ஸ்
+TSCII[0x8B] = u"\u0BB9\u0BCD" # iH - ஹ்
 
 # Sec. 3 - Tamil numerals
 TSCII[0x80] = u"\u0BE6" # Tamil digit 0 - ௦
@@ -95,7 +102,7 @@ TSCII[0xA8] = u"ை" #u"\u0BC8"
 # 0xA7 + consonant_TSCII + 0xA1 -> consonant_Unicode + ோ #\u0BCB
 # 0xA6 + consonant_TSCII + 0xAA -> consonant_Unicode + ௌ #\u0BCC
 
-TSCII[0xAA] = u"ௌ"
+TSCII[0xAA] = u"ௌ" #its not exactly this symbol - but a composite mapping
 
 # Sec. 6 -  five other non-Tamil specific characters
 TSCII[0x91] = u"\u2018" #left single quote
