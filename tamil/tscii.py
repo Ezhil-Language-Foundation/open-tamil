@@ -11,7 +11,7 @@
 # Ref: M. Nedumaran, "Text conversion from TSCII 1.7 to Unicode," (2007).
 
 # load ASCII 7-bit code page first
-TSCII = map( lambda x:  x < 128 and u"%c"%x or u"" , range(0,256))
+TSCII = map( lambda x:  x < 128 and u"%c"%x or u"?" , range(0,256))
 
 # append TSCII tamil page on higher side
 
@@ -72,8 +72,9 @@ TSCII[0x9B] = u"ஙூ"
 TSCII[0x9C] = u"ஞூ"
 TSCII[0xDC:0xEC] = [u"கூ", u"சூ",u"டூ",u"ணூ",u"தூ",u"நூ",u"பூ",u"மூ",u"யூ",u"ரூ", u"லூ", u"வூ",u"ழூ",u"ளூ",u"றூ",u"னூ"]
 
-# Sec. 4.5 - Ligature symbols
-# Conjugation rule = 
+# Sec. 4.5 - Ligature symbols de, dee - unlike Dexter
+TSCII[0xCA] = u"டி"
+TSCII[0xCB] = u"டீ"
 
 # Sec. 5 - ligature glyph symbols for compound uyirmei encoding
 
@@ -92,7 +93,9 @@ TSCII[0xA8] = u"ை" #u"\u0BC8"
 # Sec. 5.3 - two part modifiers - conversion rules
 # 0xA6 + consonant_TSCII + 0xA1 -> consonant_Unicode + ொ #\u0BCA
 # 0xA7 + consonant_TSCII + 0xA1 -> consonant_Unicode + ோ #\u0BCB
-# 0xa6 + consonant_TSCII + 0xAA -> consonant_Unicode + ௌ #\u0BCC
+# 0xA6 + consonant_TSCII + 0xAA -> consonant_Unicode + ௌ #\u0BCC
+
+TSCII[0xAA] = u"ௌ"
 
 # Sec. 6 -  five other non-Tamil specific characters
 TSCII[0x91] = u"\u2018" #left single quote
