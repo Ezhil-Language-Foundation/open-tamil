@@ -3,3 +3,4 @@
 # 
 
 import utf8
+import tscii
