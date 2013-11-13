@@ -1,5 +1,5 @@
-#!/usr/bin/env python
-
+# -*- coding: utf-8 -*-
+# 
 # (C) 2013 முத்தையா அண்ணாமலை 
 # open-tamil project
 
