@@ -29,6 +29,11 @@ class Letters(unittest.TestCase):
         assert( len(utf8.uyirmei_letters) == 18*12 )
         assert( len(utf8.sanskrit_letters) == 4 )
         assert( len(utf8.tamil_letters) == 321 )
+
+    def test_get_letters2( self ):
+        letters = utf8.get_letters(u"hello world  தெரிந்த அல்லது தெரியாத")
+        assert( len(letters) == 26 )
+        assert( letters[13] == u"தெ" )
         
     def test_istamil( self ):
         zz = u"முத்தையா அண்ணாமலை எந்த ஒரு தெரிந்த அல்லது தெரியாத எழுத்துருவாகவிருந்தாலும் அதனை மேல்தட்டில் உள்ளிட்டு கீழே உள்ள முடியும்"
