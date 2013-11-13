@@ -144,12 +144,12 @@ def print_table():
     print "</table>"
 
 
-## FIXME: rewrite as a look-ahead with 3-tokens before you decide to throw
+## List based code uses as a look-ahead with 3-tokens before you decide to throw
 ## or convert the tokens into Unicode
 def convert_to_unicode( tscii_input ):
     """ convert a byte-ASCII encoded string into equivalent Unicode string
     in the UTF-8 notation."""
-    output = u""
+    output = []
     prev = None
     prev2x = None
     # need a look ahead of 2 tokens atleast
@@ -157,13 +157,13 @@ def convert_to_unicode( tscii_input ):
         ## print "%2x"%ord(char) # debugging
         if ord(char) < 128 :
             # base-ASCII copy to output
-            output = output + char
+            output = output + [char]
         elif ord(char) in TSCII_DIRECT_LOOKUP:
             if ( prev in TSCII_PRE_MODIFIER ):
-                curr_char = TSCII[ord(char)]+TSCII[prev]
+                curr_char = [TSCII[ord(char)],TSCII[prev]]                
             else:
                 # we are direct lookup char
-                curr_char = TSCII[ord(char)]
+                curr_char = [TSCII[ord(char)]]
                 char = None
 
             output = output + curr_char
@@ -172,13 +172,18 @@ def convert_to_unicode( tscii_input ):
             
             if ( (prev in TSCII_DIRECT_LOOKUP) and 
                  (prev2x in TSCII_PRE_MODIFIER) ):
-                #FIXME::
-                #del output[-1] #we already added this string once
-                output = output + TSCII[prev] + TSCII[prev2x]
+                if len(output) >= 2:
+                    del output[-1] #we are reducing this token to something new
+                    del output[-2]
+                elif len(output)==1:
+                    del output[-1] 
+                else:
+                    # nothing to delete here.. 
+                    pass
+                output = output + [TSCII[prev], TSCII[prev2x]]
             else:
                 print("Warning: malformed TSCII encoded file; skipping characters")
             
-            prev2x = None
             prev = None
             char = None
         else:
@@ -188,4 +193,5 @@ def convert_to_unicode( tscii_input ):
         prev2x = prev
         if char:
             prev = ord(char)
-    return output
+    return u"".join(output)
+
