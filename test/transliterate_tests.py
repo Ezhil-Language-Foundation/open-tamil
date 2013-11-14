@@ -37,6 +37,17 @@ class Yazhpanam(unittest.TestCase):
             tamil_tx = iterative_transliterate(azhagi.Transliteration.table,eng_string)
             print "]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), "]"+tamil_words+"["
             #assert( tamil_words == tamil_tx )
-    
+
+    def test_devotional(self):
+        for k,v in {u"thiruvaachakam":u"திருவாசகம்",
+                    u"mANikka vAsagar":u"மாணிக்க வாசகர்"}.items():
+            tamil_tx = iterative_transliterate( azhagi.Transliteration.table,
+                                                k )
+            if( tamil_tx != v ):
+                raise Exception(u"Transliteration changed\n Expected %s, but got %s for string input %\n"%(v,tamil_tx,k))
+            else:
+                print u"matched %s => %s"%(k,unicode(tamil_tx))
+        return
+
 if __name__ == '__main__':    
     test_support.run_unittest(Yazhpanam)
