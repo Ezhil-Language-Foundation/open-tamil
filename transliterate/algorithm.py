@@ -101,7 +101,12 @@ class Iterative:
             
             # too-bad we didn't find a replacement - just copy char to output
             ## print "concatennate the unmatched =>",english_str[pos],"<="
-            out_str = out_str + english_str[pos].decode('utf-8')
+            if ord(english_str[pos]) < 128:
+                rep_char = english_str[pos].decode('utf-8')
+            else:
+                rep_char = u"?"
+            out_str = out_str + rep_char
+            
             pos = pos + 1
         
         return out_str
