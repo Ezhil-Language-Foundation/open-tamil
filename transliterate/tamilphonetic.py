@@ -6,8 +6,8 @@ from sys import argv, exit, stdin
 from cmd import Cmd
 
 import codecs, sys
-sys.stdin = codecs.getreader('utf-8')(sys.stdin)
-sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
+#sys.stdin = codecs.getreader('utf-8')(sys.stdin)
+#sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 
 from transliterate import *
 
