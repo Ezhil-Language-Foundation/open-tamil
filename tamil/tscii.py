@@ -158,6 +158,9 @@ def convert_to_unicode( tscii_input ):
         if ord(char) < 128 :
             # base-ASCII copy to output
             output = output + [char]
+            prev = None
+            prev2x = None
+            
         elif ord(char) in TSCII_DIRECT_LOOKUP:
             if ( prev in TSCII_PRE_MODIFIER ):
                 curr_char = [TSCII[ord(char)],TSCII[prev]]                
