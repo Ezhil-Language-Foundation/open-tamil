@@ -5,6 +5,10 @@
 from sys import argv, exit, stdin
 from cmd import Cmd
 
+import codecs, sys
+sys.stdin = codecs.getreader('utf-8')(sys.stdin)
+sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
+
 from transliterate import *
 
 def usage():
@@ -41,3 +45,4 @@ if __name__ == u"__main__":
                 print( output )
         except Exception as fileOrConvException:
             print(u"tamilphonetic.py error - file %s could not be processed due to - %s"%(fname,str(fileOrConvException)))
+            raise fileOrConvException
