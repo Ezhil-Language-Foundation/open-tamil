@@ -10,6 +10,8 @@
 # 
 # Ref: M. Nedumaran, "Text conversion from TSCII 1.7 to Unicode," (2007).
 
+VERSION = "1.7"
+
 # load ASCII 7-bit code page first
 TSCII = map( lambda x:  x < 128 and u"%c"%x or u"?" , range(0,256))
 
