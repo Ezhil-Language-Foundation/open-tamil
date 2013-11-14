@@ -87,6 +87,10 @@ class Iterative:
             
             while iters >= 0:
                 curr_prefix = english_str[pos:min(pos+iters-1,remaining)]
+                curr_prefix_lower = None
+                if ( len(curr_prefix) >= 2 ):                    
+                    curr_prefix_lower = curr_prefix[0].lower() + curr_prefix[1:]
+                
                 ## print curr_prefix
                 iters = iters - 1
                 if ( curr_prefix in eng_parts ):
@@ -94,7 +98,12 @@ class Iterative:
                     pos = pos + len( curr_prefix)
                     success = True
                     break;
-            
+                elif ( curr_prefix_lower in eng_parts ):
+                    out_str = out_str + table[curr_prefix_lower].decode('utf-8')
+                    pos = pos + len( curr_prefix_lower )
+                    success = True
+                    break;
+                
             # replacement was a success
             if ( success ):
                 continue
@@ -110,3 +119,4 @@ class Iterative:
             pos = pos + 1
         
         return out_str
+
