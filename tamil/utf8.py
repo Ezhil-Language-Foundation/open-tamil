@@ -2,7 +2,7 @@
 ##
 ## (C) 2007, 2008, 2013 Muthiah Annamalai <ezhillang@gmail.com>
 ## Licensed under GPL Version 3
-## Error Correction:msathia 2013<msathia@gmail.com>
+## (C) 2013 msathia <msathia@gmail.com>
 
 ## constants
 TA_ACCENT_LEN = 13 #12 + 1
@@ -52,6 +52,20 @@ u"ல"  ,u"லா"  ,u"லி"  ,u"லீ"  ,u"லு"  ,u"லூ"  ,u"லெ"  
 u"வ"  ,u"வா"  ,u"வி"  ,u"வீ"  ,u"வு"  ,u"வூ"  ,u"வெ"  ,u"வே"  ,u"வை"  ,u"வொ"  ,u"வோ"  ,u"வௌ" , 
 u"ழ"  ,u"ழா"  ,u"ழி"  ,u"ழீ"  ,u"ழு"  ,u"ழூ"  ,u"ழெ"  ,u"ழே"  ,u"ழை"  ,u"ழொ"  ,u"ழோ"  ,u"ழௌ" , 
 u"ள"  ,u"ளா"  ,u"ளி"  ,u"ளீ"  ,u"ளு"  ,u"ளூ"  ,u"ளெ"  ,u"ளே"  ,u"ளை"  ,u"ளொ"  ,u"ளோ"  ,u"ளௌ" ]
+
+# tamil symbols
+_day = u"௳"
+_month = u"௴"
+_year = u"௵"
+_debit = u"௶"
+_credit = u"௷"
+_rupee = u"௹"
+_numeral = u"௺"
+_sri = u"\u0bb6\u0bcd\u0bb0\u0bc0" #SRI - ஶ்ரீ
+_ksha = u"\u0b95\u0bcd\u0bb7" #KSHA - க்ஷ
+_ksh = u"\u0b95\u0bcd\u0bb7\u0bcd" #KSH - க்ஷ்
+
+tamil_symbols = [_day, _month, _year, _debit, _credit, _rupee, _numeral, _sri, _ksha, _ksh]
 
 ## total tamil letters in use, including sanskrit letters
 tamil_letters = [

@@ -6,3 +6,7 @@
 
 import utf8
 import tscii
+
+def printchar( letters ):
+    for c in letters: 
+        print c, "\u%04x"%ord(c)

@@ -199,4 +199,3 @@ def convert_to_unicode( tscii_input ):
         if char:
             prev = ord(char)
     return u"".join(output)
-

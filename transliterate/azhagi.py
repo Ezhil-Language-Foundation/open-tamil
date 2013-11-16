@@ -93,6 +93,8 @@ class Transliteration:
     table["khe"]="கெ"
     table["ghe"]="கெ"
     table["ke"]="கெ"
+    table["ko"]="கெ"
+    table["kO"]="கே"
     table["kE"]="கே"
     table["gE"]="கே"
     table["gae"]="கே"
