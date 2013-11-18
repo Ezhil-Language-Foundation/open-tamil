@@ -30,7 +30,7 @@ class BlindIterative:
         eng_parts.reverse()
         
         for eng_part in eng_parts:
-            tamil_equiv = table[eng_part].decode('utf-8')
+            tamil_equiv = table[eng_part]
             parts = out_str.split( eng_part )
             out_str = tamil_equiv.join( parts )
         
@@ -94,12 +94,12 @@ class Iterative:
                 ## print curr_prefix
                 iters = iters - 1
                 if ( curr_prefix in eng_parts ):
-                    out_str = out_str + table[curr_prefix].decode('utf-8')
+                    out_str = out_str + table[curr_prefix]
                     pos = pos + len( curr_prefix)
                     success = True
                     break;
                 elif ( curr_prefix_lower in eng_parts ):
-                    out_str = out_str + table[curr_prefix_lower].decode('utf-8')
+                    out_str = out_str + table[curr_prefix_lower]
                     pos = pos + len( curr_prefix_lower )
                     success = True
                     break;
@@ -111,7 +111,7 @@ class Iterative:
             # too-bad we didn't find a replacement - just copy char to output
             ## print "concatennate the unmatched =>",english_str[pos],"<="
             if ord(english_str[pos]) < 128:
-                rep_char = english_str[pos].decode('utf-8')
+                rep_char = english_str[pos]
             else:
                 rep_char = u"?"
             out_str = out_str + rep_char
@@ -119,4 +119,3 @@ class Iterative:
             pos = pos + 1
         
         return out_str
-

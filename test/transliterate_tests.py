@@ -16,8 +16,17 @@ class Yazhpanam(unittest.TestCase):
         tamil_tx = iterative_transliterate(jaffna.Transliteration.table,eng_string)
         print "]"+tamil_tx+"[", len(tamil_words), len(tamil_tx),type(tamil_tx),type(tamil_words)
         print "]"+tamil_words+"["
-        assert( tamil_words == tamil_tx )
+        self.assertTrue( tamil_words == tamil_tx )
 
+    def test_combinational(self):
+        tamil_words = u"வந்தே மாதரம்"
+        eng_string = u'van-thee maatharam'
+        tamil_tx = iterative_transliterate(combinational.Transliteration.table,eng_string)
+        print "]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), type(tamil_tx), type(tamil_words)
+        print "]"+tamil_words+"[", len(tamil_tx), len(tamil_words)
+        
+        self.assertTrue( tamil_words.find(tamil_tx) >= 0 )
+        
     def test_azhagi(self):
         ## challenge use a probabilistic model on Tamil language to score the next letter,
         ## instead of using the longest/earliest match
@@ -36,8 +45,8 @@ class Yazhpanam(unittest.TestCase):
         for eng_string, tamil_words in codes.items():
             tamil_tx = iterative_transliterate(azhagi.Transliteration.table,eng_string)
             print "]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), "]"+tamil_words+"["
-            #assert( tamil_words == tamil_tx )
-
+            #self.assertTrue( tamil_words == tamil_tx ) #we are almost there but not yet
+        
     def test_devotional(self):
         for k,v in {u"thiruvaachakam":u"திருவாசகம்",
                     u"mANikka vAsagar":u"மாணிக்க வாசகர்"}.items():
