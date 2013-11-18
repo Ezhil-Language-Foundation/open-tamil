@@ -234,7 +234,9 @@ def get_letters( word ):
 				# plain-old ascii
 				ta_letters.append( c.decode('utf-8') )
 			else:
-				assert False #unknown/expected state
+                                # assertion is somewhat heavy handed here
+				print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
+                                ta_letters.append( c )
 	if prev != u'': #if prev is not null it is $c
 		ta_letters.append( prev )
 #print ta_letters
