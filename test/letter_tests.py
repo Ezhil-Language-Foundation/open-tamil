@@ -69,7 +69,7 @@ class TSCII(unittest.TestCase):
     def test_TSCII_to_UTF8_part1( self ):        
         str=open("data/Sample.TSCII").read()
         output = tamil.tscii.convert_to_unicode( str )
-        print output
+        print(output)
         needle = u"""உடுப்பி ஒட்டலுக்குப் போய் மசாலா தோசை சாப்பிட்டு வரலாமா"""
         assert( output.find(needle) >= 0 )
 

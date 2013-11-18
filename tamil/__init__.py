@@ -4,11 +4,11 @@
 # Library provides various encoding services for Tamil libraries
 # 
 
-import utf8
-import tscii
+from . import utf8
+from . import tscii
 
 def printchar( letters ):
     for c in letters: 
-        print c, "\u%04x"%ord(c)
+        print(c, u"\\u%04x"%ord(c))
 
 P = lambda x: u" ".join(x)
