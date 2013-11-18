@@ -1,8 +1,8 @@
 # (C) 2013 Muthiah Annamalai
 
-import jaffna
-import azhagi
-import combinational
-from algorithm import Iterative
+from . import jaffna
+from . import azhagi
+from . import combinational
+from .algorithm import Iterative
 
 iterative_transliterate = Iterative.transliterate

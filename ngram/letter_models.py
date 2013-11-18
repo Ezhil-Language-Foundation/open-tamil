@@ -20,7 +20,7 @@ class Letters:
         op = u""
         for lett,freq in self.letter.items():
             op = op + u"%s => %d\n"%(lett,freq)
-        print max(self.letter.values())
+        print(max(self.letter.values()))
         return op
 
 class Unigram(Letters):
@@ -46,8 +46,8 @@ class Bigram(Unigram):
             # update frequency from corpus
             if prev:
                 self.letter2[prev][next_letter] = self.letter2[prev][next_letter] + 1
-                print prev
-                print next_letter
+                print(prev)
+                print(next_letter)
                 print( self.letter2[prev][next_letter] )            
             prev = next_letter #update always
         return
