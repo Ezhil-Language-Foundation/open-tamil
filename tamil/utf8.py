@@ -242,3 +242,38 @@ def get_letters( word ):
 #print ta_letters
 #print u"".join(ta_letters)
 	return ta_letters
+
+# same as get_letters but use as iterable
+def get_letters_iterable( word ):
+	""" splits the word into a character-list of tamil/english
+	characters present in the stream """
+	prev = u''#word = unicode(word) #.encode('utf-8')
+	#word=word.decode('utf-8')
+	ta_letters = []
+	for c in word:
+		if c in uyir_letters or c == ayudha_letter:
+			yield (prev+c)
+			prev = u''
+		elif c in agaram_letters or c in sanskrit_letters:
+			if prev != u'':
+				yield (prev)
+			prev = c
+		elif c in accent_symbols:
+			yield (prev+c)
+			prev = u''
+		else:
+			if prev != u'':
+				yield (prev+c)
+				prev = u''
+			elif ord(c) < 256:
+				# plain-old ascii
+				yield ( c.decode('utf-8') )
+			else:
+                                # assertion is somewhat heavy handed here
+				print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
+                                yield c
+	if prev != u'': #if prev is not null it is $c
+		yield prev
+#print ta_letters
+#print u"".join(ta_letters)
+        raise StopIteration

@@ -21,6 +21,17 @@ class Letters(unittest.TestCase):
         for pos,letter in  enumerate(letters):
             print(u"%d %s"%(pos,letter))
         assert( letter == (u"ர்") )
+
+    def test_letter_extract_yield(self):
+        letters = []
+        for l in utf8.get_letters_iterable(u"கூவிளம் என்பது என்ன சீர்"):
+            letters.append( l )
+        #print "len ==== > " , len(letters)
+        assert( len(letters) == 15 )
+        for pos,letter in  enumerate(letters):
+            print(u"%d %s"%(pos,letter))
+        assert( letter == (u"ர்") )
+
     
     def test_tamil_letter_sizes( self ):
         assert( len(utf8.uyir_letters) == 12 )
