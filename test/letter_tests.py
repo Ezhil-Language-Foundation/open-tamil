@@ -32,7 +32,16 @@ class Letters(unittest.TestCase):
             print(u"%d %s"%(pos,letter))
         assert( letter == (u"ர்") )
 
-    
+    def test_reverse_words( self ):
+        """ unittest for reverse a Tamil string"""
+        print utf8.get_letters(u"இந்த")
+        print u"".join(utf8.get_letters(u"இந்த"))
+        for word in u"இந்த (C) tamil முத்தையா அண்ணாமலை 2013 இந்த ஒரு எழில் தமிழ் நிரலாக்க மொழி உதாரணம்".split():
+            rword = utf8.reverse_word(word)
+            print word,rword
+            self.assertTrue( utf8.get_letters(rword)[0] == utf8.get_letters(word)[-1] )
+        return
+
     def test_tamil_letter_sizes( self ):
         assert( len(utf8.uyir_letters) == 12 )
         assert( len(utf8.mei_letters) == 18 )
@@ -44,7 +53,7 @@ class Letters(unittest.TestCase):
     def test_get_letters2( self ):
         letters = utf8.get_letters(u"hello world  தெரிந்த அல்லது தெரியாத")
         assert( len(letters) == 26 )
-        assert( letters[13] == u"தெ" )
+        self.assertTrue( letters[13] == u"தெ" )
         
     def test_istamil( self ):
         zz = u"முத்தையா அண்ணாமலை எந்த ஒரு தெரிந்த அல்லது தெரியாத எழுத்துருவாகவிருந்தாலும் அதனை மேல்தட்டில் உள்ளிட்டு கீழே உள்ள முடியும்"
