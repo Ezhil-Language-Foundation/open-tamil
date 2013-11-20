@@ -17,8 +17,9 @@ open-tamil rovides Python package 'tamil' with ability to,
 the python package 'transliterate' provides for commonly used transliteration
 phonetic schemes like,
 
-1. Azhagi
-2. Jaffna Library
+1. Azhagi - phonetic maps for all Tamil letters - many -> one supporting multiple form inputs
+2. Jaffna Library - phonetic maps for all Tamil letters - one->one
+3. Combinational layout - based on phonetic mapping of vowel+consonant
 
 where you can supply English text, which phonetically encodes Tamil, and then receive Unicode encoded, in a best-effort algorithm for the longest phonetic match.
 *C-tamil*
