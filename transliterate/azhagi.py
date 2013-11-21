@@ -93,8 +93,6 @@ class Transliteration:
     table["khe"]=u"கெ"
     table["ghe"]=u"கெ"
     table["ke"]=u"கெ"
-    table["ko"]=u"கெ"
-    table["kO"]=u"கே"
     table["kE"]=u"கே"
     table["gE"]=u"கே"
     table["gae"]=u"கே"
@@ -110,6 +108,15 @@ class Transliteration:
     table["khai"]=u"கை"
     table["ghai"]=u"கை"
     table["koa"]=u"கை"
+
+    table["koh"]=u"கொ"
+    table["ko"]=u"கொ"
+    table["kO"]=u"கொ"
+    table["kO"]=u"கொ"
+
+    table["kho"]=u"கோ"
+    table["kHO"]=u"கோ"
+    
     table["kou"]=u"கௌ"
     table["kau"]=u"கௌ"
     table["gow"]=u"கௌ"
