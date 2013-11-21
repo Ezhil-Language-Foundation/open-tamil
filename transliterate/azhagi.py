@@ -113,7 +113,7 @@ class Transliteration:
     table["ko"]=u"கொ"
     table["kO"]=u"கொ"
     table["kO"]=u"கொ"
-
+    
     table["kho"]=u"கோ"
     table["kHO"]=u"கோ"
     

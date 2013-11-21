@@ -27,6 +27,16 @@ class Yazhpanam(unittest.TestCase):
         
         self.assertTrue( tamil_words.find(tamil_tx) >= 0 )
         
+    def test_azhagi_spec(self):
+        # test for 
+        tamil_tx = {}
+        correct_tx = {u"ke" : u"கெ", u"khae":u"கே", u"cai" : u"கை",
+                      u"koh" : u"கொ", u"kho" : u"கோ"}
+        for eng_string in [u"ke",u"khae",u"cai",u"koh",u"kho"]:
+            tamil_tx[eng_string] = iterative_transliterate(azhagi.Transliteration.table,eng_string)
+            print tamil_tx[eng_string], " => ", eng_string
+            self.assertTrue( tamil_tx[eng_string], eng_string )
+        
     def test_azhagi(self):
         ## challenge use a probabilistic model on Tamil language to score the next letter,
         ## instead of using the longest/earliest match
