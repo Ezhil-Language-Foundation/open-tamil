@@ -32,6 +32,14 @@ Open-tamil provides the keyboard layout in the file 'keyboard/tamil.js' for they
 Basic support for letter unigram, bigram models using UTF-8 based corpora are supported in the package 'ngram/'
 which supports unigram model at the moment. More complex language models are expected to be developed soon.
 
+Examples
+========
+Open-Tamil is a set of Python libraries which can help your application - web, system software, GUI on desktop etc. support Tamil text processing, inputs etc.
+
+Open-Tamil is still a basic collection of tools - its not complete yet. We have keyboard layouts, converters to change old encoding to UTF-8, N-gram language models, transliterators etc.
+
+Examples for using Python Open-Tamil are found in https://github.com/arcturusannamalai/open-tamil/tree/master/test
+
 Goals
 =====
 Goal of this package is to collect and develop open-source licensed Tamil tools, in one location that provide the following,
