@@ -13,6 +13,10 @@ TA_AGARAM_LEN = 18
 TA_SANSKRIT_LEN = 4
 TA_UYIRMEI_LEN = 216 # 18*12
 
+def  letters_to_py( _letters ):
+        """ return list of letters e.g. uyir_letters as a Python list """
+        return u"['"+u"','".join( _letters )+u"']"
+
 # List of letters you can use
 uyir_letters = [u"அ",u"ஆ",u"இ", 
 	u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ"]
