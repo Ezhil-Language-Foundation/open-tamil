@@ -10,10 +10,14 @@ from opentamiltests import *
 import tamil.utf8 as utf8
 
 class Letters(unittest.TestCase):
-    def test_uyirmei(self):     
+    def test_lettertopy(self):
+        round_trip = eval(utf8.letters_to_py( utf8.mei_letters ))
+        assert( round_trip == utf8.mei_letters )
+
+    def test_uyirmei(self):
         print(utf8.uyirmei(2))
         assert( utf8.uyirmei(2)  == u"கி" )
-
+    
     def test_letter_extract_from_code_pts(self):
         letters = utf8.get_letters(u"கூவிளம் என்பது என்ன சீர்")
         #print "len ==== > " , len(letters)
