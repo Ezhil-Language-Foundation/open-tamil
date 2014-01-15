@@ -1,0 +1,2 @@
+include setup.py ngram/*.py tamil/*.py transliterate/*.py
+include README.md
