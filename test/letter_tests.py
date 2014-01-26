@@ -26,6 +26,14 @@ class Letters(unittest.TestCase):
             print(u"%d %s"%(pos,letter))
         assert( letter == (u"ர்") )
 
+    def test_letter_extract_with_ascii(self):
+        letters = utf8.get_letters(u"கூவிளம் is என்பது also என்ன a சீர்")
+        print "len ==== > " , len(letters)
+        assert(len(letters) == 25 )
+        for pos,letter in  enumerate(letters):
+            print(u"%d %s"%(pos,letter))
+        assert( letters[-4] == u"a" )
+        
     def test_letter_extract_yield(self):
         letters = []
         for l in utf8.get_letters_iterable(u"கூவிளம் என்பது என்ன சீர்"):

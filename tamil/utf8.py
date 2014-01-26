@@ -236,7 +236,7 @@ def get_letters( word ):
 				prev = u''
 			elif ord(c) < 256:
 				# plain-old ascii
-				ta_letters.append( c.decode('utf-8') )
+				ta_letters.append( c )
 			else:
                                 # assertion is somewhat heavy handed here
 				print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
