@@ -291,9 +291,8 @@ def get_words( letters, tamil_only=False ):
                 opstr = u"".join(letters)
 
         # debug helpers
-        for parts in re.split('\s+',opstr):
-                print parts
-        
+        #for parts in re.split('\s+',opstr):
+        #        print parts   
         return re.split('\s+',opstr)
 
 def get_tamil_words( letters ):
