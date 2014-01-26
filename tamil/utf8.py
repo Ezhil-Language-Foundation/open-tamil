@@ -251,8 +251,7 @@ def get_letters( word ):
 def get_letters_iterable( word ):
 	""" splits the word into a character-list of tamil/english
 	characters present in the stream """
-	prev = u''#word = unicode(word) #.encode('utf-8')
-	#word=word.decode('utf-8')
+	prev = u''
 	ta_letters = []
 	for c in word:
 		if c in uyir_letters or c == ayudha_letter:
@@ -271,7 +270,7 @@ def get_letters_iterable( word ):
 				prev = u''
 			elif ord(c) < 256:
 				# plain-old ascii
-				yield ( c.decode('utf-8') )
+				yield ( c )
 			else:
                                 # assertion is somewhat heavy handed here
 				print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")

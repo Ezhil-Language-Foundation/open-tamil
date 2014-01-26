@@ -33,12 +33,22 @@ class Letters(unittest.TestCase):
         for pos,letter in  enumerate(letters):
             print(u"%d %s"%(pos,letter))
         assert( letters[-4] == u"a" )
+
+    def test_letter_extract_yield_with_ascii(self):
+        letters = []
+        for l in  utf8.get_letters_iterable(u"கூவிளம் is என்பது also என்ன a சீர்"):
+            letters.append( l )
+        print "len ==== > " , len(letters)
+        assert(len(letters) == 25 )
+        for pos,letter in  enumerate(letters):
+            print(u"%d %s"%(pos,letter))
+        assert( letters[-4] == u"a" )
         
     def test_letter_extract_yield(self):
         letters = []
         for l in utf8.get_letters_iterable(u"கூவிளம் என்பது என்ன சீர்"):
             letters.append( l )
-        #print "len ==== > " , len(letters)
+        print "len ==== > " , len(letters)
         assert( len(letters) == 15 )
         for pos,letter in  enumerate(letters):
             print(u"%d %s"%(pos,letter))
