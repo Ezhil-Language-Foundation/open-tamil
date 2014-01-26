@@ -34,6 +34,30 @@ class Letters(unittest.TestCase):
             print(u"%d %s"%(pos,letter))
         assert( letters[-4] == u"a" )
 
+    def test_words(self):
+        string = u"உடனே random elevator jazz உடனே எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
+        words = string.split(u" ")
+
+        letters = utf8.get_letters( string )
+        outWords = utf8.get_words( letters )
+        
+        print u"|".join(words)
+        print u"|".join(outWords)
+        
+        assert( outWords == words )
+
+    def test_tamil_only_words(self):
+        string = u"உடனே உடனே seventh heaven எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
+        words = string.replace(u"seventh heaven ",u"").split(u" ")
+
+        letters = utf8.get_letters( string )
+        outWords = utf8.get_tamil_words( letters )
+        
+        print u"|".join(words)
+        print u"|".join(outWords)
+        
+        assert( outWords == words )
+
     def test_letter_extract_yield_with_ascii(self):
         letters = []
         for l in  utf8.get_letters_iterable(u"கூவிளம் is என்பது also என்ன a சீர்"):

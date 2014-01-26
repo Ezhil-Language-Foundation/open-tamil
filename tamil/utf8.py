@@ -281,6 +281,24 @@ def get_letters_iterable( word ):
 #print u"".join(ta_letters)
         raise StopIteration
 
+def get_words( letters, tamil_only=False ):
+        """ given a list of UTF-8 letters section them into words, grouping them at spaces """
+        import re
+        if ( tamil_only ):
+                opstr = u"".join(filter( lambda x: x.isspace() or istamil(x),
+                                         letters ))
+        else:
+                opstr = u"".join(letters)
+
+        # debug helpers
+        for parts in re.split('\s+',opstr):
+                print parts
+        
+        return re.split('\s+',opstr)
+
+def get_tamil_words( letters ):
+        tamil_only = True
+        return get_words( letters, tamil_only )
 
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ 
 # க் ச் ட் த் ப் ற் ஞ் ங் ண் ந் ம் ன் ய் ர் ல் வ் ழ் ள் ஜ் ஷ் ஸ் ஹ் 
