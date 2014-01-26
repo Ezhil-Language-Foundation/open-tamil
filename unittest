@@ -19,6 +19,7 @@ touch failed.txt
 for i in `ls *.py`
 do
     echo Running test $i
+    sleep 1
     python $i
     if [ $? -eq 0 ]
     then
