@@ -3,8 +3,6 @@
 # 
 # This file is part of 'open-tamil' package tests
 # 
-#import sys
-#sys.path = ['/home/mannamal/devel/open-tamil/test/opentamiltests'] + sys.path
 
 # setup the paths
 #from opentamiltests import *
