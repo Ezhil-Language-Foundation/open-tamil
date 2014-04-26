@@ -15,21 +15,23 @@ class Letters(unittest.TestCase):
         self.assertFalse( utf8.all_tamil(u"அஆஇNotTamilஈஉ") )
 
     def test_lexicographic( self ):        
-        # dad comes before mom, atleast in dictionary...
-        self.assertTrue( utf8.compare_words_lexicographic( u"அப்பா",u"அம்மா" ) == 1 )
-        # same words compare equally as in dictionary...
-        self.assertTrue( utf8.compare_words_lexicographic( u"அப்பா",u"அப்பா" ) == 0  )
-        # symmetry is preserved upon negation equally as in dictionary...
-        self.assertTrue( utf8.compare_words_lexicographic( u"அம்மா",u"அப்பா")  == -1 )
-
-        # compare two other words,
-        self.assertTrue( utf8.compare_words_lexicographic( u"நீம்",u"காகம்") == -1 )
-
         # check if sorting works with a new predicate
         expected =  [ u"அப்பா",u"அம்மா",u"காகம்",u"நீம்"]
         words = [ u"நீம்",u"காகம்",u"அம்மா",u"அப்பா",]
         words.sort( utf8.compare_words_lexicographic )
         self.assertEqual( words, expected )
+        
+        print utf8.compare_words_lexicographic( u"அப்பா",u"அம்மா" )
+
+        # dad comes before mom, atleast in dictionary...
+        self.assertTrue( utf8.compare_words_lexicographic( u"அப்பா",u"அம்மா" ) == -1 )
+        # same words compare equally as in dictionary...
+        self.assertTrue( utf8.compare_words_lexicographic( u"அப்பா",u"அப்பா" ) == 0  )
+        # symmetry is preserved upon negation equally as in dictionary...
+        self.assertTrue( utf8.compare_words_lexicographic( u"அம்மா",u"அப்பா")  == 1 )
+
+        # compare two other words,
+        self.assertTrue( utf8.compare_words_lexicographic( u"நீம்",u"காகம்") == 1 )
         
     def test_lettertopy(self):
         round_trip = eval(utf8.letters_to_py( utf8.mei_letters ))

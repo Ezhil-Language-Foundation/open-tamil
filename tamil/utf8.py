@@ -308,7 +308,6 @@ def get_tamil_words( letters ):
 def compare_words_lexicographic( word_a, word_b ):
         # sanity check for words to be all Tamil
         assert( all_tamil( word_a ) and all_tamil(word_b), "Both operands need to be Tamil words")
-
         La = len(word_a)
         Lb = len(word_b)
         all_TA_letters = u"".join(tamil_letters)
@@ -318,14 +317,14 @@ def compare_words_lexicographic( word_a, word_b ):
                 
                 if pos1 != pos2 :
                         #print  not( pos1 > pos2), pos1, pos2
-                        return not(pos1 > pos2)
+                        return cmp(pos1, pos2)
                 
         if La == Lb:                
                 # both words are equal
-                return True
-                
+                return 0
+        
         # else result depends on if La is shorter than Lb
-        return (La < Lb)
+        return cmp(La,Lb)
 
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ 
 # க் ச் ட் த் ப் ற் ஞ் ங் ண் ந் ம் ன் ய் ர் ல் வ் ழ் ள் ஜ் ஷ் ஸ் ஹ் 
