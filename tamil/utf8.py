@@ -186,8 +186,12 @@ def istamil_prefix( word ):
                         return True
         return False
 
+def all_tamil( word ):
+        return all( [(letter in tamil_letters) for letter in word] )
+
 def has_tamil( word ):
         """check if the word has any occurance of any tamil letter """
+        # list comprehension is not necessary - we bail at earliest
         for letters in tamil_letters:
                 if ( word.find(letters) >= 0 ):
                         return True
@@ -298,6 +302,30 @@ def get_words( letters, tamil_only=False ):
 def get_tamil_words( letters ):
         tamil_only = True
         return get_words( letters, tamil_only )
+
+# answer if word_a ranks ahead of, or at same level, as word_b in a Tamil dictionary order...
+# for use with Python : if a > 0 
+def compare_words_lexicographic( word_a, word_b ):
+        # sanity check for words to be all Tamil
+        assert( all_tamil( word_a ) and all_tamil(word_b), "Both operands need to be Tamil words")
+
+        La = len(word_a)
+        Lb = len(word_b)
+        all_TA_letters = u"".join(tamil_letters)
+        for itr in range(0,min(La,Lb)):
+                pos1 =   all_TA_letters.find( word_a[itr] )
+                pos2 =   all_TA_letters.find( word_b[itr] )
+                
+                if pos1 != pos2 :
+                        #print  not( pos1 > pos2), pos1, pos2
+                        return not(pos1 > pos2)
+                
+        if La == Lb:                
+                # both words are equal
+                return True
+                
+        # else result depends on if La is shorter than Lb
+        return (La < Lb)
 
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ 
 # க் ச் ட் த் ப் ற் ஞ் ங் ண் ந் ம் ன் ய் ர் ல் வ் ழ் ள் ஜ் ஷ் ஸ் ஹ் 
