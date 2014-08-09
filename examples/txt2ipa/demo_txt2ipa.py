@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# (C) 2014 Arulalan.T <arulalant@gmail.com>
+# 
+# This file is part of 'open-tamil/txt2ipa' package examples
+# 
+
 import sys
 sys.path.append('../..')
 
