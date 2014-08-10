@@ -54,7 +54,7 @@ input text. Find your encode unique compound characters [here]()
 
 
 
-#[eg 1](demo_tscii2utf8.py):#
+#[eg 1](../demo_tscii2utf8.py):#
 
 
 ```python
@@ -144,7 +144,7 @@ From unicode to tscii : ¾¢ÕÅûÙÅ÷ «ÕÇ¢Â ¾¢ÕìÌÈû
 Again back to unicode from above tscii : திருவள்ளுவர் அருளிய திருக்குறள்  
 
 
-#[eg 5](demo_utf8_2_auto.py):#
+#[eg 5](../demo_utf8_2_auto.py):#
 *The below code shows example for auto reverse engine, i.e. `unicode2auto`*
 
 ```python
@@ -173,6 +173,12 @@ From unicode to tscii : ¾¢ÕÅûÙÅ÷ «ÕÇ¢Â ¾¢ÕìÌÈû
 From unicode to tscii by auto function : ¾¢ÕÅûÙÅ÷ «ÕÇ¢Â ¾¢ÕìÌÈû    
 
 Again back to unicode from above tscii by auto function: திருவள்ளுவர் அருளிய திருக்குறள்  
+
+
+#[eg 6](../demo_bigfiles_auto2unicode.py):#
+
+Click on `eg 6` header to view big file encode 2 unicode conversion and its inputs/outputs are stored [here](../sample_encode_documents)
+
 
 
 ------------------------------------------------------------------------------------------------------------
