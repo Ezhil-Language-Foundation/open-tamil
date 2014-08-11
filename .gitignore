@@ -5,6 +5,8 @@ TODO
 misc/
 *.py[cod]
 
+*~
+*.*~
 # C extensions
 *.so
 
