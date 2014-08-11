@@ -7,7 +7,7 @@ This script will convert any long unicode sentences (many word strings) into Int
 
 Read more about IPA http://en.wikipedia.org/wiki/International_Phonetic_Alphabet
 
-Right now it will works for only Tamil Unicode strings.
+Right now it will work for only Tamil Unicode strings.
 
 Mile Karkal (MileStones)
 ========================

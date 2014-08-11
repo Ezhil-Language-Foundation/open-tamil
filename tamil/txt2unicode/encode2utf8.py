@@ -20,7 +20,11 @@
 # <http://www.gnu.org/licenses/>.                                            #  
 #                                                                            #
 ##############################################################################     
-from collections import OrderedDict
+try:
+    from collections import OrderedDict
+except ImportError as e:
+    OrderedDict = dict
+    pass
 
 # begin of anjal2utf8 dictionary 
 anjal2utf8 = OrderedDict([

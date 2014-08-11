@@ -2,7 +2,7 @@ language: python
 python:
   # - "3.3" #not yet ready
   - "2.7"
-  #- "2.6"  #not support for import collection
+  - "2.6"  #lack of OrderedDict support disables certain libraries
 install:  python setup.py install && pip install argparse
 script: ./unittest && cd ./C-tamil && make && ./tamil-letters && cd ..
 
