@@ -1,0 +1,7 @@
+Initial tscii : ¾¢ÕÅûÙÅ÷ «ÕÇ¢Â ¾¢ÕìÌÈû  
+
+From tscii to unicode : திருவள்ளுவர் அருளிய திருக்குறள்  
+
+From unicode to tscii : ¾¢ÕÅûÙÅ÷ «ÕÇ¢Â ¾¢ÕìÌÈû  
+
+Again back to unicode from above tscii : திருவள்ளுவர் அருளிய திருக்குறள்  
