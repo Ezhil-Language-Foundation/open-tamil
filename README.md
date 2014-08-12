@@ -15,17 +15,15 @@ open-tamil rovides Python package 'tamil' with ability to,
 3. reverse letters in Tamil word
 
 #txt2unicode
-  Tamil Text Encode to Unicode Converter and vice versa.
-  
-  Don't you know what is your text encode ? Don't worry. This tamil/txt2unicode/`auto2unicode` function will find it & convert to unicode for you :-)
+Tamil Text Encode to Unicode Converter and vice versa.
+If you Don't you know what your Tamil text encoding, don't worry; the '''tamil.txt2unicode.auto2unicode''' function will find it & convert to unicode for you.
     
-    Right now, it supports with 20 Tamil encodes. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of `auto2unicode` and `unicode2auto`
-    
+Right now, it supports with 20 Tamil encodes. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of 'auto2unicode' and 'unicode2auto'
 
 #txt2ipa
-  Tamil Unicode Text to International Phonetic Alphabet (IPA) converter
+Tamil Unicode Text to International Phonetic Alphabet (IPA) converter
   
-  Read more details about [txt2ipa](tamil/txt2ipa/README.md)
+Read more details about [txt2ipa](tamil/txt2ipa/README.md)
 
 #transliterate
 the python package 'transliterate' provides for commonly used transliteration
