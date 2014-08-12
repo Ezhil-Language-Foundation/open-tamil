@@ -5,7 +5,8 @@ Open Source Tamil Tools
 
 Software
 ========
-
+Python  Packages
+================
 #tamil
 open-tamil rovides Python package 'tamil' with ability to,
 
@@ -13,21 +14,18 @@ open-tamil rovides Python package 'tamil' with ability to,
 2. work with vowels (uyir) and consonants (mei), compound, uyir-mei letters
 3. reverse letters in Tamil word
 
-  ##txt2unicode
-    Tamil Text Encode to Unicode Converter and vice versa.
-    
-    Don't you know what is your text encode ? Don't worry. This tamil/txt2unicode/`auto2unicode` function will find it & convert to unicode for you :-)
+#txt2unicode
+  Tamil Text Encode to Unicode Converter and vice versa.
+  
+  Don't you know what is your text encode ? Don't worry. This tamil/txt2unicode/`auto2unicode` function will find it & convert to unicode for you :-)
     
     Right now, it supports with 20 Tamil encodes. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of `auto2unicode` and `unicode2auto`
     
 
-  ##txt2ipa
-    Tamil Unicode Text to International Phonetic Alphabet (IPA) converter
-    
-    Read more details about [txt2ipa](tamil/txt2ipa/README.md)
-
-
-    
+#txt2ipa
+  Tamil Unicode Text to International Phonetic Alphabet (IPA) converter
+  
+  Read more details about [txt2ipa](tamil/txt2ipa/README.md)
 
 #transliterate
 the python package 'transliterate' provides for commonly used transliteration
