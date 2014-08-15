@@ -242,7 +242,7 @@ def get_letters( word ):
 				# plain-old ascii
 				ta_letters.append( c )
 			else:
-                                # assertion is somewhat heavy handed here
+                # assertion is somewhat heavy handed here
 				print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
                                 ta_letters.append( c )
 	if prev != u'': #if prev is not null it is $c
@@ -276,7 +276,7 @@ def get_letters_iterable( word ):
 				# plain-old ascii
 				yield ( c )
 			else:
-                                # assertion is somewhat heavy handed here
+                # assertion is somewhat heavy handed here
 				print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
                                 yield c
 	if prev != u'': #if prev is not null it is $c
@@ -307,7 +307,11 @@ def get_tamil_words( letters ):
 # for use with Python : if a > 0 
 def compare_words_lexicographic( word_a, word_b ):
         # sanity check for words to be all Tamil
-        assert( all_tamil( word_a ) and all_tamil(word_b), "Both operands need to be Tamil words")
+        if ( not all_tamil(word_a) ) or (not all_tamil(word_b)) :
+            print("## ")
+            print word_a
+            print word_b
+            print("Both operands need to be Tamil words")
         La = len(word_a)
         Lb = len(word_b)
         all_TA_letters = u"".join(tamil_letters)
