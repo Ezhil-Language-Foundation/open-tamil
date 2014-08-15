@@ -57,7 +57,7 @@ _all_encodes_ = OrderedDict([('anjal2utf8', anjal2utf8),
 
 # By enable this flage, it will write individual encodes unique & common
 # characters in text file.
-__WRITE_CHARS_TXT = True
+__WRITE_CHARS_TXT = False
 
 
 def encode2unicode(text, charmap):
