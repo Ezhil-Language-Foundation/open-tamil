@@ -2,7 +2,9 @@ language: python
 python:
   # - "3.3" #not yet ready
   - "2.7"
-  - "2.6"  #lack of OrderedDict support disables certain libraries
-install:  python setup.py install && pip install argparse
+  - "2.6"  #lack of OrderedDict. so install ordereddict only for python 2.6.
+install:  
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install --use-mirrors ordereddict; fi
+  - python setup.py install && pip install argparse
 script: ./unittest && cd ./C-tamil && make && ./tamil-letters && cd ..
 
