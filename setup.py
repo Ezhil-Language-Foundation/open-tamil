@@ -8,9 +8,9 @@ from distutils.core import setup
 from codecs import open
 
 setup(name='Open-Tamil',
-      version='0.2.4',
+      version='0.2.8',
       description='Tamil language text processing tools',
-      author='Muthiah Annamalai',
+      author='M. Annamalai, T. Arulalan,',
       author_email='ezhillang@gmail.com',
       url='https://github.com/arcturusannamalai/open-tamil',
       packages=['tamil','transliterate','ngram'],
@@ -20,3 +20,4 @@ setup(name='Open-Tamil',
       long_description=open('README.md','r','UTF-8').read(),
       download_url='https://github.com/arcturusannamalai/open-tamil/archive/latest.zip',#pip
       )
+
