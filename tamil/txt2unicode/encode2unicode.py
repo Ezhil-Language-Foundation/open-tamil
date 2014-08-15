@@ -21,7 +21,7 @@
 #                                                                            #
 ##############################################################################
 
-from collections import OrderedDict
+from orddic import OrderedDict
 from encode2utf8 import anjal2utf8, bamini2utf8, boomi2utf8, \
     dinakaran2utf8, dinamani2utf8, dinathanthy2utf8, \
     kavipriya2utf8, murasoli2utf8, mylai2utf8, nakkeeran2utf8, \
