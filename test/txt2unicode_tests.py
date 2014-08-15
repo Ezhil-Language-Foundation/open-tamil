@@ -9,14 +9,9 @@ from opentamiltests import *
 
 from tamil.txt2unicode import *
 
-# don't run 3 tests for Python 2.6
-import sys
 
 class Valluvar(unittest.TestCase):
-    def test_tscii2unicode(self): 
-        if  ( sys.version_info[1] <= 6 ):
-            print 'Skipping test b/c no import collections'
-            return
+    def test_tscii2unicode(self):        
         tscii_words = u"""¾¢ÕÅûÙÅ÷ «ÕÇ¢Â ¾¢ÕìÌÈû  """
         uni_words = tscii2unicode(tscii_words)
         tscii_from_uni = unicode2tscii(uni_words)
@@ -24,9 +19,6 @@ class Valluvar(unittest.TestCase):
         print "tscii2unicode test passed 'OK'"
 
     def test_unicode2tscii(self):        
-        if  ( sys.version_info[1] <= 6 ):
-            print 'Skipping test b/c no import collections'
-            return
         tscii_words = u"""¾¢ÕÅûÙÅ÷ «ÕÇ¢Â ¾¢ÕìÌÈû  """
         uni_words = tscii2unicode(tscii_words)
         tscii_from_uni = unicode2tscii(uni_words)
@@ -52,9 +44,6 @@ class Valluvar(unittest.TestCase):
         print "auto2unicode test passed 'OK'"
         
     def test_unicode2tscii_single(self):       
-        if  ( sys.version_info[1] <= 6 ):
-            print 'Skipping test b/c no import collections'
-            return
         tscii_words = u"""¾¢ÕÅûÙÅ÷ «ÕÇ¢Â ¾¢ÕìÌÈû """
         uni_words = r"""திருவள்ளுவர் அருளிய திருக்குறள் """
         tscii_words_from_unicode2tscii = unicode2tscii(uni_words)        
