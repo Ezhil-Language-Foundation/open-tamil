@@ -55,10 +55,9 @@ the package under C-tamil provides some of the same functionality as Python 'tam
 Open-tamil provides the keyboard layout in the file `keyboard/tamil.js` for they jQuery UI plugin.
 'tamil.js' விசைப்பலகை அமைப்பை வழங்குகிறது. 
 
-#Language Models
+#Language Models (மாதிரிகள்)
 Basic support for letter unigram, bigram models using UTF-8 based corpora are supported in the package 'ngram/'
 which supports unigram model at the moment. More complex language models are expected to be developed soon.
-#மாதிரிகள்
 எழுத்து unigram அடிப்படை ஆதரவு, bigram மாதிரிகள், UTF-8 அடிப்படையில் சொற்கிடங்கின் பயன்படுத்தி தொகுப்பு ஆதரவு 'Ngram /'
 எந்த நேரத்தில் மாதிரி unigram ஆதரிக்கிறது. மிகவும் நுணுக்கமான மொழி மாதிரிகள் விரைவில் அபிவிருத்தி செய்யப்படும் என எதிர்பார்க்கப்படுகிறது.
 
