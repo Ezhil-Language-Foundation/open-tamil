@@ -1,21 +1,22 @@
 
 Look at all available files of `encodes_chars` directory [here]() 
 
-[all.encodes.common.chars.txt](all.encodes.common.chars.txt) file contains **commonly available 916 compound characters among all encodings**.
+[all.encodes.common.chars.txt](all.encodes.common.chars.txt) file contains **commonly available 1066 compound characters among all 25 encodings**.
 
 So if your input text fully falls only under the compund characters of `all.encodes.common.chars.txt`, then `auto2unicode` will fails. :-(
 
 
-Look at the files [dinamani2utf8.unique.chars.txt](dinamani2utf8.unique.chars.txt),  [nakkeeran2utf8.unique.chars.txt](nakkeeran2utf8.unique.chars.txt) and [murasoli2utf8.unique.chars.txt](murasoli2utf8.unique.chars.txt). There are fully empty!
+Look at the files [dinamani2utf8.unique.chars.txt](dinamani2utf8.unique.chars.txt),  [nakkeeran2utf8.unique.chars.txt](nakkeeran2utf8.unique.chars.txt),  [murasoli2utf8.unique.chars.txt](murasoli2utf8.unique.chars.txt) and
+[webulagam2utf8.unique.chars.txt](webulagam2utf8.unique.chars.txt). They are fully empty!
 
 It seems these two encodes characters are fully falls under commonly available
 916 compound characters [all.encodes.common.chars.txt](all.encodes.common.chars.txt).
 
-So there is **zero %** chance to identify `dinamani`, `nakkeeran` and `murasoli` encodes by using `auto2unicode` function.
+So there is **zero %** chance to identify `dinamani`, `nakkeeran`, `murasoli` and `webulagam` encodes by using `auto2unicode` function.
 
-Look at the files [tam2utf8.unique.chars.txt](tam2utf8.unique.chars.txt) and [webulagam2utf8.unique.chars.txt](webulagam2utf8.unique.chars.txt), it has only one unique compound characters.
+Look at the files [tam2utf8.unique.chars.txt](tam2utf8.unique.chars.txt) it has only one unique compound characters.
 
-So there is (1/916)x100 = **0.10917030567685589 %** chances to identify `tam` and `webulagam` encode by using `auto2unicode` function.
+So there is (1/1066)x100 = **0.09380863039399624 %** chances to identify `tam` encode by using `auto2unicode` function.
 
 
 **Tip** : If you need to find auto encode of your input text, then make sure that
@@ -26,30 +27,35 @@ input text. Find your encode unique compound characters [here]()
 | S.No  | Enocdes | Unique Chars|
 | ---- | :--------- | :---------: |
 | 1  |  [Anjal](anjal2utf8.unique.chars.txt) | 190 |
-| 2  | [Bamini](bamini2utf8.unique.chars.txt)  | 118 |
-| 3  | [Boomi](boomi2utf8.unique.chars.txt)  | 99 |
-| 4  | [Dinakaran](dinakaran2utf8.unique.chars.txt) | 87 |
-| 5  | [Dinamani](dinamani2utf8.unique.chars.txt)  | **0** |
-| 6  | [Dinathanthy](dinathanthy2utf8.unique.chars.txt)  | 172  |
-| 7  | [Indoweb](indoweb2utf8.unique.chars.txt)     | 230   |  
-| 8  | [Kavipriya](kavipriya2utf8.unique.chars.txt)  | 39 |
-| 9  | [Koeln](koeln2utf8.unique.chars.txt)     | 109  |
-| 10 | [Libi](libi2utf8.unique.chars.txt)       | 155  |
-| 11  | [Murasoli](murasoli2utf8.unique.chars.txt)  | **0** |
-| 12 | [Mylai](mylai2utf8.unique.chars.txt)  | 189 |
-| 13  | [Nakkeeran](nakkeeran2utf8.unique.chars.txt)   | **0** |
-| 14  | [OldVikatan](oldvikatan2utf8.unique.chars.txt)   |   92  |
-| 15  | [Pallavar](pallavar2utf8.unique.chars.txt)       |  163   |
-| 16 | [Roman](roman2utf8.unique.chars.txt)  | 342 |
-| 17  | [Tab](tab2utf8.unique.chars.txt)  | 62 |
-| 18 | [Tam](tam2utf8.unique.chars.txt)  | **1** |
-| 19 | [Tscii](tscii2utf8.unique.chars.txt)   | 213 |   
-| 20   | [Webulagam](webulagam2utf8.unique.chars.txt)       |  **1**  |
+| 2  | [Bamini](bamini2utf8.unique.chars.txt)  | 117 |
+| 3  | [Boomi](boomi2utf8.unique.chars.txt)  | 100 |
+| 4  | [Diacritic](diacritic2utf8.unique.chars.txt) | 201   |
+| 5  | [Dinakaran](dinakaran2utf8.unique.chars.txt) | 87 |
+| 6  | [Dinamani](dinamani2utf8.unique.chars.txt)  | **0** |
+| 7  | [Dinathanthy](dinathanthy2utf8.unique.chars.txt)  | 170  |
+| 8  | [Indoweb](indoweb2utf8.unique.chars.txt)     | 230   |  
+| 9  | [Kavipriya](kavipriya2utf8.unique.chars.txt)  | 39 |
+| 10  | [Koeln](koeln2utf8.unique.chars.txt)     | 104  |
+| 11 | [Libi](libi2utf8.unique.chars.txt)       | 14  |
+| 12  | [Murasoli](murasoli2utf8.unique.chars.txt)  | **0** |
+| 13 | [Mylai](mylai2utf8.unique.chars.txt)  | 188 |
+| 14  | [Nakkeeran](nakkeeran2utf8.unique.chars.txt)   | **0** |
+| 15  | [OldVikatan](oldvikatan2utf8.unique.chars.txt)   |   92  |
+| 16  | [Pallavar](pallavar2utf8.unique.chars.txt)       |  163   |
+| 17 | [Roman](roman2utf8.unique.chars.txt)  | 342 |
+| 18 | [Shreelipi](shreelipi2utf8.unique.chars.txt)  |  15 |
+| 19 | [Softview](softview2utf8.unique.chars.txt)    | 31  |
+| 20 | [Tab](tab2utf8.unique.chars.txt)  | 68 |
+| 21 | [Tace](tace2utf8.unique.chars.txt)     | 312   |
+| 22| [Tam](tam2utf8.unique.chars.txt)  | **1** |
+| 23 | [Tscii](tscii2utf8.unique.chars.txt)   | 211 |   
+| 24  | [Vanavil](vanavil2utf8.unique.chars.txt)     |   25 |
+| 25   | [Webulagam](webulagam2utf8.unique.chars.txt)       |  **0**  |
 
 
 | S.No| Common Compound Characters                 | Count |
 | ---| -------------------------------------------------------|:-----:|
-| 1 | [common characters in all encodes](all.encodes.common.chars.txt) | 916 |
+| 1 | [common characters in all encodes](all.encodes.common.chars.txt) | 1066 |
 
 
 
@@ -178,7 +184,6 @@ Again back to unicode from above tscii by auto function: திருவள்�
 #[eg 6](../demo_bigfiles_auto2unicode.py):#
 
 Click on `eg 6` header to view big file encode 2 unicode conversion and its inputs/outputs are stored [here](../sample_encode_documents)
-
 
 
 ------------------------------------------------------------------------------------------------------------

@@ -23,8 +23,8 @@ If you Don't you know what your Tamil text encoding, don't worry; the '''tamil.t
 யுனிகோட் மாற்றி மற்றும் மாறாகவும் தமிழ் உரை குறியாக்கம்.
 நீங்கள் என்ன உங்கள் தமிழ் உரை குறியீட்டு தெரியாது என்றால், கவலைப்பட வேண்டாம்; '' 'tamil.txt2unicode.auto2unicode' '' செயல்பாடு அது கண்டுபிடிக்கும் & நீங்கள் யுனிகோட் மாற்ற வேண்டும்.
 
-Right now, it supports with 20 Tamil encodes. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of `auto2unicode` and `unicode2auto`
-இப்போது, அது 20 தமிழ் குறியாக்கம் கொண்ட ஆதரிக்கிறது. 'Auto2unicode' மற்றும் 'unicode2auto' என்ற [txt2unicode] (தமிழ் / txt2unicode / README.md) மற்றும் [குறைபாடு] (உதாரணங்கள் / txt2unicode / encodes_chars / README.md) பற்றி மேலும் விவரங்களை படிக்க
+Right now, it supports with 25 Tamil encodes. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of `auto2unicode` and `unicode2auto`
+இப்போது, அது 25 தமிழ் குறியாக்கம் கொண்ட ஆதரிக்கிறது. 'auto2unicode' மற்றும் 'unicode2auto' என்ற [txt2unicode] (தமிழ் / txt2unicode / README.md) மற்றும் [குறைபாடு] (உதாரணங்கள் / txt2unicode / encodes_chars / README.md) பற்றி மேலும் விவரங்களை படிக்க
 
 #txt2ipa
 Tamil Unicode Text to International Phonetic Alphabet (IPA) converter 
@@ -75,13 +75,13 @@ Goals
 =====
 Goal of this package is to collect and develop open-source licensed Tamil tools, in one location that provide the following,
 
-1. Unicode standard tools for Tamil - provide various tools for Tamil Unicode development. Currently TSCII, UTF8 encoding tables are provided. TAB, TAM, and other layouts are planned to be addded.
+1. Unicode standard tools for Tamil - provide various tools for Tamil Unicode development. Currently 25 encodes are supported, read about it [here](tamil/txt2unicode/README.md) 
 2. Access Unicode Tamil letters, vowels and consonants.
 3. Breakdown Tamil glyphs and unicode code-points into Tamil letter representations - collation
 4. Tools for navigating a corpus of data, build word frequency, prediction tables etc.
 5. Conversion from various encodings. e.g. TSCII to Unicode etc. We hope eventually to converts between the other major Tamil encodings like TAB, TAM, Bamini (*insert-your-favortie-font-encoding*) into Tamil Unicode encoding.
 
-While most of tools in this package will be in Python 2.6. or later, I am open to other open-source language source code contributions.
+While most of tools in this package will be in Python 2.6. or later, we are open to other open-source language source code contributions.
 
 About (பற்றி)
 ==========
