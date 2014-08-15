@@ -129,7 +129,7 @@ class Letters(unittest.TestCase):
         for z in zz.split(u" "):
             print("********** t/f ********")
             for x,y in zip(map(utf8.istamil,utf8.get_letters(z)),utf8.get_letters(z)):
-                print("%s => %s"%(y,x))        
+                print(u"%s => %s"%(y,x))        
                 assert( all( map( utf8.istamil, utf8.get_letters( z ) ) ) )
         
         z = u"முத்தையா அண்ணாமலை"
