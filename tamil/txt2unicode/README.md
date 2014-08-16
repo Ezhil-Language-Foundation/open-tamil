@@ -87,7 +87,10 @@ RoadMap:
 
 Credits:
 =======
-  Thanks to http://kandupidi.com/converter/ and http://www.suratha.com/reader.htm online tools.
+  Thanks to following online & offline tools.
+  1. http://kandupidi.com/converter/,
+  2. http://www.suratha.com/reader.htm  and 
+  3. http://nhm-converter.software.informer.com/1.0/ 
   
 Regards,
 
