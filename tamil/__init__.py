@@ -6,6 +6,7 @@
 
 from . import utf8
 from . import tscii
+
 import txt2unicode
 import txt2ipa
 
