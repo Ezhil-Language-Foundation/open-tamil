@@ -4,10 +4,10 @@
 # Library provides various encoding services for Tamil libraries
 # 
 
-from . import utf8
-from . import tscii
-from . import txt2unicode
-from . import txt2ipa
+import utf8
+import tscii
+import txt2unicode
+import txt2ipa
 
 def printchar( letters ):
     for c in letters: 
