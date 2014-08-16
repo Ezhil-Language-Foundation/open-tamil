@@ -18,6 +18,6 @@ setup(name='Open-Tamil',
       platforms='PC,Linux,Mac',
       classifiers='Natural Language :: Tamil',
       long_description=open('README.md','r','UTF-8').read(),
-      download_url='https://github.com/arcturusannamalai/open-tamil/archive/latest.zip',#pip
+      download_url='https://github.com/arcturusannamalai/open-tamil/archive/master.zip',#pip
       )
 
