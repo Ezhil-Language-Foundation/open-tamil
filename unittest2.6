@@ -4,17 +4,17 @@
 cd test/
 
 
-if [ -e success.txt ];
+if [ -e success26.txt ];
 then
-    rm success.txt
+    rm success26.txt
 fi
-if [ -e failed.txt ];
+if [ -e failed26.txt ];
 then
-    rm failed.txt
+    rm failed26.txt
 fi
 
-touch success.txt
-touch failed.txt
+touch success26.txt
+touch failed26.txt
 
 for i in `ls *.py`
 do
@@ -23,14 +23,14 @@ do
     python2.6 $i
     if [ $? -eq 0 ]
     then
-        echo $i >> success.txt
+        echo $i >> success26.txt
     else
-        echo $i >> failed.txt
+        echo $i >> failed26.txt
     fi
 done
 
 NFAIL=0 #ideally no unittests should fail
-TOTFAIL=`wc -l failed.txt | cut -d'f' -f1`
+TOTFAIL=`wc -l failed26.txt | cut -d'f' -f1`
 echo "from sys import exit; exit( $TOTFAIL !=  $NFAIL )" | python
 if [ $?  -eq 0 ]
 then
@@ -43,7 +43,7 @@ else
 fi
 
 # cleanup
-rm failed.txt
-rm success.txt
+rm failed26.txt
+rm success26.txt
 cd ../
 exit $exitcode
