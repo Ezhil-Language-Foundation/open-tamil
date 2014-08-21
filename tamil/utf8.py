@@ -13,6 +13,11 @@ TA_AGARAM_LEN = 18
 TA_SANSKRIT_LEN = 4
 TA_UYIRMEI_LEN = 216 # 18*12
 
+def  to_unicode_repr( _letters ):
+    """ helpful in situations where browser/app may recognize Unicode encoding
+        in the \u0b8e type syntax but not actual unicode glyph/code-point"""
+    return repr(_letters)
+
 def  letters_to_py( _letters ):
         """ return list of letters e.g. uyir_letters as a Python list """
         return u"[u'"+u"',u'".join( _letters )+u"']"

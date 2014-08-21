@@ -10,6 +10,11 @@ from opentamiltests import *
 import tamil.utf8 as utf8
 
 class Letters(unittest.TestCase):
+    def test_unicode_repr( self ):    
+        actual = utf8.to_unicode_repr(u'எழில்') 
+        wanted = "u'\\u0b8e\\u0bb4\\u0bbf\\u0bb2\\u0bcd'"
+        self.assertTrue( actual == wanted )
+    
     def test_alltamil( self ):
         self.assertTrue( utf8.all_tamil(u"அஆஇஈஉ") )
         self.assertFalse( utf8.all_tamil(u"அஆஇNotTamilஈஉ") )
