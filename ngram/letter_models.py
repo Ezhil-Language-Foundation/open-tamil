@@ -51,4 +51,3 @@ class Bigram(Unigram):
                 print( self.letter2[prev][next_letter] )            
             prev = next_letter #update always
         return
-
