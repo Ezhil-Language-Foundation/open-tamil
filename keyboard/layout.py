@@ -3,15 +3,15 @@
 
 # class borrowed from Ezhil language library
 class Keymap(dict):
-	""" dictionary structure with a set like mathematical structure.
-	    that way when you insert functions for keymap library, we don't trample on each other
-	    by accidentally overwriting stuff"""
-	def __init__(self):
-		dict.__init__(self)
-	def __setitem__(self,key,val):
-		if ( self.has_key(key) ):
-			raise KeyError(u"Dictionary is getting clobbered; key "+key+" already present")
-		dict.__setitem__(self,key,val)
+    """ dictionary structure with a set like mathematical structure.
+        that way when you insert functions for keymap library, we don't trample on each other
+        by accidentally overwriting stuff"""
+    def __init__(self):
+        dict.__init__(self)
+    def __setitem__(self,key,val):
+        if ( self.has_key(key) ):
+            raise KeyError(u"Dictionary is getting clobbered; key "+key+" already present")
+        dict.__setitem__(self,key,val)
 
 # map to onscreen kbd
 class Layout:
@@ -30,6 +30,6 @@ class Layout:
                     if ( len(v) >= 4 and v == u"PIPE" ):
                             v = u"|"
                     print u"<input type=\"button\" id=\"btn_kw_%s_%d\" value=\"%s\" onClick=\"appendText('%s');\" />"%(k,pos,v,v)
-            print "/* -------------------------------- */"
+        print "/* -------------------------------- */"
         return
 
