@@ -254,7 +254,13 @@ def get_letters( word ):
         ta_letters.append( prev )
 #print ta_letters
 #print u"".join(ta_letters)
-    return ta_letters
+    ta_letters_fixup = []
+    for letter in ta_letters:
+        if letter == u"ா":
+            ta_letters_fixup[-1]+=letter
+        else:
+            ta_letters_fixup.append(letter)
+    return ta_letters_fixup
 
 # same as get_letters but use as iterable
 def get_letters_iterable( word ):

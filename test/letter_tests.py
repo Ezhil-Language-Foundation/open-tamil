@@ -18,6 +18,11 @@ class Words(unittest.TestCase):
         self.assertFalse(  pos2 )
 
 class Letters(unittest.TestCase):
+    def test_word_length( self ):
+        actual = 5
+        letters = utf8.get_letters(u"மென்பொருள்")
+        self.assertTrue( actual == len(letters) )
+    
     def test_unicode_repr( self ):    
         actual = utf8.to_unicode_repr(u'எழில்') 
         wanted = "u'\\u0b8e\\u0bb4\\u0bbf\\u0bb2\\u0bcd'"
