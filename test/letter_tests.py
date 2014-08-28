@@ -17,6 +17,10 @@ class Words(unittest.TestCase):
         pos2 = utf8.word_intersection( u"தேடுக",u"சொல்")
         self.assertFalse(  pos2 )
 
+        pos3 = utf8.word_intersection(u"மென்பொருள்",u"யுனிகோட்")
+        self.assertFalse( pos3 )
+        
+
 class Letters(unittest.TestCase):
     def test_word_length( self ):
         actual = 5
