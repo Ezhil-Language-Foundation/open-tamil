@@ -24,20 +24,20 @@ def  letters_to_py( _letters ):
 
 # List of letters you can use
 uyir_letters = [u"அ",u"ஆ",u"இ", 
-	u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ"]
+    u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ"]
 
 ayudha_letter = u"ஃ"
 
 mei_letters = [u"க்",u"ச்",u"ட்",u"த்",u"ப்",u"ற்",
-	       u"ஞ்",u"ங்",u"ண்",u"ந்",u"ம்",u"ன்",
-	       u"ய்",u"ர்",u"ல்",u"வ்",u"ழ்",u"ள்" ]
+           u"ஞ்",u"ங்",u"ண்",u"ந்",u"ம்",u"ன்",
+           u"ய்",u"ர்",u"ல்",u"வ்",u"ழ்",u"ள்" ]
 
 accent_symbols = [u"",u"ா",u"ி",u"ீ",u"ு",u"ூ",
-		  u"ெ",u"ே",u"ை",u"ொ",u"ோ",u"ௌ",u"ஃ"]
+          u"ெ",u"ே",u"ை",u"ொ",u"ோ",u"ௌ",u"ஃ"]
 
 agaram_letters = [u"க",u"ச",u"ட",u"த",u"ப",u"ற",
-		  u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",
-		  u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள"]
+          u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",
+          u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள"]
 
 sanskrit_letters = [u"ஜ",u"ஷ", u"ஸ",u"ஹ"]
 sanskrit_mei_letters =[u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்"]
@@ -78,25 +78,25 @@ tamil_symbols = [_day, _month, _year, _debit, _credit, _rupee, _numeral, _sri, _
 
 ## total tamil letters in use, including sanskrit letters
 tamil_letters = [
-	
+    
 ## /* Uyir */
 u"அ",u"ஆ",u"இ", u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ",
 
 ##/* Ayuda Ezhuthu */
 u"ஃ",
-	
-## /* Mei */	
+    
+## /* Mei */    
 u"க்",u"ச்",u"ட்",u"த்",u"ப்",u"ற்",u"ஞ்",u"ங்",u"ண்",u"ந்",u"ம்",u"ன்",u"ய்",u"ர்",u"ல்",u"வ்",u"ழ்",u"ள்",
 
 ## /* Agaram */
 u"க",u"ச",u"ட",u"த",u"ப",u"ற",u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள",
-	
+    
 ## /* Sanskrit (Vada Mozhi) */
 u"ஜ",u"ஷ", u"ஸ",u"ஹ",
 
 ##/* Sanskrit (Mei) */
 u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்",
-	
+    
 ## /* Uyir Mei */
 u"க"  ,u"கா"  ,u"கி"  ,u"கீ"  ,u"கு"  ,u"கூ"  ,u"கெ"  ,u"கே"  ,u"கை"  ,u"கொ"  ,u"கோ"  ,u"கௌ" 
  ,u"ச"  ,u"சா"  ,u"சி"  ,u"சீ"  ,u"சு"  ,u"சூ"  ,u"செ"  ,u"சே"  ,u"சை"  ,u"சொ"  ,u"சோ"  ,u"சௌ" 
@@ -216,76 +216,76 @@ def istamil_alnum( tchar ):
 
 ## reverse a Tamil word according to letters not unicode-points
 def reverse_word( word ):
-	op = get_letters( word )
-	op.reverse()
-	return u"".join(op)
+    op = get_letters( word )
+    op.reverse()
+    return u"".join(op)
 
 ## Split a tamil-unicode stream into
 ## tamil characters (individuals).
 def get_letters( word ):
-	""" splits the word into a character-list of tamil/english
-	characters present in the stream """ 
-	prev = u''#word = unicode(word) #.encode('utf-8')
-	#word=word.decode('utf-8')
-	ta_letters = []
-	for c in word:
-		if c in uyir_letters or c == ayudha_letter:
-			ta_letters.append(prev+c)
-			prev = u''
-		elif c in agaram_letters or c in sanskrit_letters:
-			if prev != u'':
-				ta_letters.append(prev)
-			prev = c
-		elif c in accent_symbols:
-			ta_letters.append(prev+c)
-			prev = u''
-		else:
-			if prev != u'':
-				ta_letters.append(prev+c)
-				prev = u''
-			elif ord(c) < 256:
-				# plain-old ascii
-				ta_letters.append( c )
-			else:
+    """ splits the word into a character-list of tamil/english
+    characters present in the stream """ 
+    prev = u''#word = unicode(word) #.encode('utf-8')
+    #word=word.decode('utf-8')
+    ta_letters = []
+    for c in word:
+        if c in uyir_letters or c == ayudha_letter:
+            ta_letters.append(prev+c)
+            prev = u''
+        elif c in agaram_letters or c in sanskrit_letters:
+            if prev != u'':
+                ta_letters.append(prev)
+            prev = c
+        elif c in accent_symbols:
+            ta_letters.append(prev+c)
+            prev = u''
+        else:
+            if prev != u'':
+                ta_letters.append(prev+c)
+                prev = u''
+            elif ord(c) < 256:
+                # plain-old ascii
+                ta_letters.append( c )
+            else:
                 # assertion is somewhat heavy handed here
-				print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
-                                ta_letters.append( c )
-	if prev != u'': #if prev is not null it is $c
-		ta_letters.append( prev )
+                print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
+                ta_letters.append( c )
+    if prev != u'': #if prev is not null it is $c
+        ta_letters.append( prev )
 #print ta_letters
 #print u"".join(ta_letters)
-	return ta_letters
+    return ta_letters
 
 # same as get_letters but use as iterable
 def get_letters_iterable( word ):
-	""" splits the word into a character-list of tamil/english
-	characters present in the stream """
-	prev = u''
-	ta_letters = []
-	for c in word:
-		if c in uyir_letters or c == ayudha_letter:
-			yield (prev+c)
-			prev = u''
-		elif c in agaram_letters or c in sanskrit_letters:
-			if prev != u'':
-				yield (prev)
-			prev = c
-		elif c in accent_symbols:
-			yield (prev+c)
-			prev = u''
-		else:
-			if prev != u'':
-				yield (prev+c)
-				prev = u''
-			elif ord(c) < 256:
-				# plain-old ascii
-				yield ( c )
-			else:
+    """ splits the word into a character-list of tamil/english
+    characters present in the stream """
+    prev = u''
+    ta_letters = []
+    for c in word:
+        if c in uyir_letters or c == ayudha_letter:
+            yield (prev+c)
+            prev = u''
+        elif c in agaram_letters or c in sanskrit_letters:
+            if prev != u'':
+                yield (prev)
+            prev = c
+        elif c in accent_symbols:
+            yield (prev+c)
+            prev = u''
+        else:
+            if prev != u'':
+                yield (prev+c)
+                prev = u''
+            elif ord(c) < 256:
+                # plain-old ascii
+                yield ( c )
+            else:
                 # assertion is somewhat heavy handed here
-				print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
-                                yield c
-	if prev != u'': #if prev is not null it is $c
-		yield prev
+                print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
+                yield c
+    if prev != u'': #if prev is not null it is $c
+        yield prev
 #print ta_letters
 #print u"".join(ta_letters)
         raise StopIteration
@@ -334,6 +334,20 @@ def compare_words_lexicographic( word_a, word_b ):
         
         # else result depends on if La is shorter than Lb
         return cmp(La,Lb)
+
+# return a list of ordered-pairs containing positions
+# that are common in word_a, and word_b; e.g.
+# தேடுக x தடங்கல் -> one common letter க [(2,3)]
+# சொல் x   தேடுக -> no common letters []
+def word_intersection( word_a, word_b ):
+    positions = []
+    word_a_letters = get_letters( word_a )
+    word_b_letters = get_letters( word_b )
+    for idx,wa in enumerate(word_a_letters):
+        for idy,wb in enumerate(word_b_letters):
+            if ( wa == wb ):
+                positions.append( (idx, idy) )
+    return positions
 
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ 
 # க் ச் ட் த் ப் ற் ஞ் ங் ண் ந் ம் ன் ய் ர் ல் வ் ழ் ள் ஜ் ஷ் ஸ் ஹ் 

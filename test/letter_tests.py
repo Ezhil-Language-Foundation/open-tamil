@@ -9,6 +9,14 @@ from opentamiltests import *
 
 import tamil.utf8 as utf8
 
+class Words(unittest.TestCase):
+    def test_word_xsection( self ):
+        pos1 = utf8.word_intersection( u"தேடுக",u"தடங்கல்")
+        self.assertTrue( pos1[0] == (2,3) )
+        
+        pos2 = utf8.word_intersection( u"தேடுக",u"சொல்")
+        self.assertFalse(  pos2 )
+
 class Letters(unittest.TestCase):
     def test_unicode_repr( self ):    
         actual = utf8.to_unicode_repr(u'எழில்') 
@@ -173,4 +181,4 @@ class TSCII(unittest.TestCase):
         assert( output.find(u"அப்பா") >= 0 )
         
 if __name__ == '__main__':
-    test_support.run_unittest(Letters,TSCII)
+    test_support.run_unittest(Letters,Words,TSCII)
