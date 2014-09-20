@@ -10,7 +10,7 @@ from codecs import open
 setup(name='Open-Tamil',
       version='0.3',
       description='Tamil language text processing tools',
-      author='M. Annamalai, T. Arulalan,',
+      author='M. Annamalai, T. Arulalan, T. Shrinivasan',
       author_email='ezhillang@gmail.com',
       url='https://github.com/arcturusannamalai/open-tamil',
       packages=['tamil','transliterate','ngram','tamil.txt2ipa','tamil.txt2unicode'],
