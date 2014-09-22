@@ -411,9 +411,6 @@ def joinMeiUyir(mei_char, uyir_char):
 # end of def joinMeiUyir(mei_char, uyir_char): 
 
 
-
-
-
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ 
 # க் ச் ட் த் ப் ற் ஞ் ங் ண் ந் ம் ன் ய் ர் ல் வ் ழ் ள் ஜ் ஷ் ஸ் ஹ் 
 # க ச ட த ப ற ஞ ங ண ந ம ன ய ர ல வ ழ ள ஜ ஷ ஸ ஹ 
