@@ -341,24 +341,6 @@ def compare_words_lexicographic( word_a, word_b ):
         # else result depends on if La is shorter than Lb
         return cmp(La,Lb)
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-# return a list of ordered-pairs containing positions
-# that are common in word_a, and word_b; e.g.
-# தேடுக x தடங்கல் -> one common letter க [(2,3)]
-# சொல் x   தேடுக -> no common letters []
-def word_intersection( word_a, word_b ):
-    positions = []
-    word_a_letters = get_letters( word_a )
-    word_b_letters = get_letters( word_b )
-    for idx,wa in enumerate(word_a_letters):
-        for idy,wb in enumerate(word_b_letters):
-            if ( wa == wb ):
-                positions.append( (idx, idy) )
-    return positions
-=======
-=======
->>>>>>> 448ea511bb67e562b97075a652d08a1398dde85b
 
 def splitMeiUyir(uyirmei_char):    
     """
@@ -375,15 +357,12 @@ def splitMeiUyir(uyirmei_char):
     if not isinstance(uyirmei_char, unicode):
         raise ValueError("Passed input letter '%s' must be unicode, \
                                 not just string" % uyirmei_char)
-<<<<<<< HEAD
-=======
                                 
     if uyirmei_char in mei_letters:
         return uyirmei_char
 
     if uyirmei_char in uyir_letters:
         return uyirmei_char   
->>>>>>> 448ea511bb67e562b97075a652d08a1398dde85b
     
     if uyirmei_char not in uyirmei_letters: 
         raise ValueError("Passed input letter '%s' is not tamil letter" % uyirmei_char)
@@ -434,10 +413,6 @@ def joinMeiUyir(mei_char, uyir_char):
 
 
 
-<<<<<<< HEAD
->>>>>>> added two functions to split,join uyir mei tamil characters.
-=======
->>>>>>> 448ea511bb67e562b97075a652d08a1398dde85b
 
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ 
 # க் ச் ட் த் ப் ற் ஞ் ங் ண் ந் ம் ன் ய் ர் ல் வ் ழ் ள் ஜ் ஷ் ஸ் ஹ் 
