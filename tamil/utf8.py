@@ -346,6 +346,12 @@ def splitMeiUyir(uyirmei_char):
     if not isinstance(uyirmei_char, unicode):
         raise ValueError("Passed input letter '%s' must be unicode, \
                                 not just string" % uyirmei_char)
+                                
+    if uyirmei_char in mei_letters:
+        return uyirmei_char
+
+    if uyirmei_char in uyir_letters:
+        return uyirmei_char   
     
     if uyirmei_char not in uyirmei_letters: 
         raise ValueError("Passed input letter '%s' is not tamil letter" % uyirmei_char)
