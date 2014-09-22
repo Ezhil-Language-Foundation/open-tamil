@@ -341,6 +341,19 @@ def compare_words_lexicographic( word_a, word_b ):
         # else result depends on if La is shorter than Lb
         return cmp(La,Lb)
 
+# return a list of ordered-pairs containing positions
+# that are common in word_a, and word_b; e.g.
+# தேடுக x தடங்கல் -> one common letter க [(2,3)]
+# சொல் x   தேடுக -> no common letters []
+def word_intersection( word_a, word_b ):
+    positions = []
+    word_a_letters = get_letters( word_a )
+    word_b_letters = get_letters( word_b )
+    for idx,wa in enumerate(word_a_letters):
+        for idy,wb in enumerate(word_b_letters):
+            if ( wa == wb ):
+                positions.append( (idx, idy) )
+    return positions
 
 def splitMeiUyir(uyirmei_char):    
     """
@@ -372,7 +385,6 @@ def splitMeiUyir(uyirmei_char):
     meiidx = idx / 12
     return (mei_letters[meiidx], uyir_letters[uyiridx])
 # end of def splitMeiUyir(uyirmei_char): 
-
 
 def joinMeiUyir(mei_char, uyir_char):    
     """
