@@ -341,6 +341,7 @@ def compare_words_lexicographic( word_a, word_b ):
         # else result depends on if La is shorter than Lb
         return cmp(La,Lb)
 
+<<<<<<< HEAD
 # return a list of ordered-pairs containing positions
 # that are common in word_a, and word_b; e.g.
 # தேடுக x தடங்கல் -> one common letter க [(2,3)]
@@ -354,6 +355,74 @@ def word_intersection( word_a, word_b ):
             if ( wa == wb ):
                 positions.append( (idx, idy) )
     return positions
+=======
+
+def splitMeiUyir(uyirmei_char):    
+    """
+    This function split uyirmei compound character into mei + uyir characters
+    and returns in tuple.
+    
+    Input : It must be unicode tamil char. 
+     
+    Written By : Arulalan.T
+    Date : 22.09.2014
+    
+    """
+    
+    if not isinstance(uyirmei_char, unicode):
+        raise ValueError("Passed input letter '%s' must be unicode, \
+                                not just string" % uyirmei_char)
+    
+    if uyirmei_char not in uyirmei_letters: 
+        raise ValueError("Passed input letter '%s' is not tamil letter" % uyirmei_char)
+    
+    idx = uyirmei_letters.index(uyirmei_char)
+    uyiridx = idx % 12
+    meiidx = idx / 12
+    return (mei_letters[meiidx], uyir_letters[uyiridx])
+# end of def splitMeiUyir(uyirmei_char): 
+
+
+def joinMeiUyir(mei_char, uyir_char):    
+    """
+    This function join mei character and uyir character, and retuns as 
+    compound uyirmei unicode character.
+    
+    Inputs:
+        mei_char : It must be unicode tamil mei char. 
+        uyir_char : It must be unicode tamil uyir char. 
+     
+    Written By : Arulalan.T
+    Date : 22.09.2014
+    
+    """
+    
+    if not isinstance(mei_char, unicode):
+        raise ValueError("Passed input mei character '%s' must be unicode, \
+                                not just string" % mei_char)
+
+    if not isinstance(uyir_char, unicode):
+        raise ValueError("Passed input uyir character '%s' must be unicode, \
+                                not just string" % uyir_char)
+
+    if mei_char not in mei_letters:
+        raise ValueError("Passed input character '%s' is not tamil mei character" % mei_char)
+
+    if uyir_char not in uyir_letters:
+        raise ValueError("Passed input character '%s' is not tamil uyir character" % uyir_char)
+
+    uyiridx = uyir_letters.index(uyir_char)
+    meiidx = mei_letters.index(mei_char)
+    # calculate uyirmei index 
+    uyirmeiidx = meiidx*12 + uyiridx
+
+    return uyirmei_letters[uyirmeiidx]
+# end of def joinMeiUyir(mei_char, uyir_char): 
+
+
+
+
+>>>>>>> added two functions to split,join uyir mei tamil characters.
 
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ 
 # க் ச் ட் த் ப் ற் ஞ் ங் ண் ந் ம் ன் ய் ர் ல் வ் ழ் ள் ஜ் ஷ் ஸ் ஹ் 
