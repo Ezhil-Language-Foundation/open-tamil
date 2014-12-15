@@ -1,4 +1,4 @@
-open-tamil [![Build Status](https://travis-ci.org/arcturusannamalai/open-tamil.png)](https://travis-ci.org/arcturusannamalai/open-tamil)
+open-tamil [![Build Status](https://travis-ci.org/arcturusannamalai/open-tamil.png)](https://travis-ci.org/arcturusannamalai/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/?version=latest)](https://readthedocs.org/projects/open-tamil/?badge=latest)
 ==========
 
 Open Source Tamil Tools
