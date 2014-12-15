@@ -30,13 +30,13 @@ sys.path.append(os.path.abspath('sphinxext'))
 extensions = ['sphinx.ext.autodoc', 'sphinx.ext.doctest', 'sphinx.ext.intersphinx', 'sphinx.ext.coverage', 'sphinx.ext.pngmath', 'sphinx.ext.mathjax', 'sphinx.ext.viewcode']
 
 
-# tell to readthedocs.org that keep the sphinx kind of theme itself.
+# tell to readthedocs.org that keep the sphinx default theme itself.
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if on_rtd:
     html_theme = 'default'
 else:
     html_theme = 'nature'
-    
+# tell to readthedocs.org that keep the sphinx default css style itself.
 html_style = '/default.css'
 
 # Add any paths that contain templates here, relative to this directory.
