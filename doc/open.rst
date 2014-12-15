@@ -4,10 +4,10 @@
 Documentation of **OpenTamil** source code
 ******************************************
 
-Monthly Progress
-================
+txt2unicode
+===========
 
-The monthly progress of `test`_ are listed below.
+The available modules of `txt2unicode`_ are listed below.
 
 * `encode2unicode`_
 * `unicode2encode`_
