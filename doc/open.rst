@@ -48,7 +48,7 @@ The below script *compute_month_mean.py* should explain more how we are implemen
 encode2unicode
 ---------------
 
-.. automodule:: encode2unicode
+.. automodule:: tamil.txt2unicode.encode2unicode
    :members:
 
 Month Anomaly
