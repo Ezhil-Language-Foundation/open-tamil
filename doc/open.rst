@@ -45,7 +45,11 @@ The word *Mean* means average of the data. The average will be taken over the mo
 The below script *compute_month_mean.py* should explain more how we are implementing monthly mean and generating the nc files.
 
 
+encode2unicode
+---------------
 
+.. automodule:: encode2unicode
+   :members:
 
 Month Anomaly
 --------------
