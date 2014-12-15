@@ -37,7 +37,7 @@ if on_rtd:
 else:
     html_theme = 'nature'
     
-html_style = True
+html_style = ''
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
