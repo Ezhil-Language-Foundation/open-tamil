@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 10
 
    
-   test
+   doc/open
    
     
 Indices and tables
