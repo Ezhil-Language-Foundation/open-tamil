@@ -17,8 +17,7 @@ import sys, os
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 sys.path.insert(0, os.path.abspath('.'))
-#sys.path.insert(0, os.path.abspath('../../diagnosis1/diagnosis'))
-#sys.path.insert(0, os.path.abspath('../../diagnosis1/diagnosisutils'))
+
 # -- General configuration -----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -229,7 +228,7 @@ latex_documents = [
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('index', 'Open-Tamil', u'Open-Tamil Documentation',
-     [u'Arulalan.T, Dileepkumar.R, Dr.Krishna AchutaRao'], 1)
+     [u'Arulalan.T'], 1)
 ]
 
 # If true, show URL addresses after external links.
