@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path.append('..')
-from utf8 import splitMeiUyir, joinMeiUyir, get_letters, uyir_letters, mei_letters
+from tamil.utf8 import splitMeiUyir, joinMeiUyir, get_letters, uyir_letters, mei_letters
 
 # http://www.tamilvu.org/library/lA432/html/lA432cn1.htm
 all_rules = {
@@ -136,5 +134,3 @@ def joinWords(word_a, word_b):
     # if all above rules not applicable, then just return as it is !
     return word_a + ' ' + word_b
 # end of def joinWords(word_a, word_b):
-
-
