@@ -10,6 +10,12 @@ from opentamiltests import *
 import tamil.utf8 as utf8
 
 class Words(unittest.TestCase):
+    def test_all_tamil( self ):
+        self.assertTrue( tamil.utf8.all_tamil(u"சம்மதம்") )
+        self.assertFalse( tamil.utf8.all_tamil(u"சம்மதம்1") )
+        self.assertTrue( tamil.utf8.all_tamil( [u"பொ", u"ம", u"த"]))
+    
+    
     def test_word_xsection( self ):
         pos1 = utf8.word_intersection( u"தேடுக",u"தடங்கல்")
         self.assertTrue( pos1[0] == (2,3) )
