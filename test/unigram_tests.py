@@ -13,11 +13,11 @@ class Letters(unittest.TestCase):
     def test_basic_unigram_counts(self):
         z = ngram.Corpus("data/ex.unicode")
         for letter in z.next_tamil_letter():
-            print letter
+            print(letter)
         
         q = ngram.LetterModels.Unigram( "data/ex.unicode" )
         q.frequency_model( )
-        print unicode(q)
+        print(unicode(q))
         assert( q.letter[u"ஷை"] + q.letter[u"சி"] == q.letter[u"ந"] )
 
     def test_bigram_counts(self):

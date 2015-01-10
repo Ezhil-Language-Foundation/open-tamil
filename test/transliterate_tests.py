@@ -34,7 +34,7 @@ class Yazhpanam(unittest.TestCase):
                       u"koh" : u"கொ", u"kho" : u"கோ"}
         for eng_string in [u"ke",u"khae",u"cai",u"koh",u"kho"]:
             tamil_tx[eng_string] = iterative_transliterate(azhagi.Transliteration.table,eng_string)
-            print tamil_tx[eng_string], " => ", eng_string
+            print(tamil_tx[eng_string], " => ", eng_string)
             self.assertTrue( tamil_tx[eng_string], eng_string )
         
     def test_azhagi(self):
