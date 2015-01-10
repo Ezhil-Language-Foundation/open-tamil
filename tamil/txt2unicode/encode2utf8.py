@@ -21,7 +21,12 @@
 # <http://www.gnu.org/licenses/>.                                            #  
 #                                                                            #
 ##############################################################################     
-from orddic import OrderedDict
+try:
+    # python 2
+    from orddic import OrderedDict
+except ImportError as ime:
+    # python 3
+    from collections import OrderedDict
 
 # begin of anjal2utf8 dictionary 
 anjal2utf8 = OrderedDict([

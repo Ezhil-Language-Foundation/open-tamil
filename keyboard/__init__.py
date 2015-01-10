@@ -1,1 +1,1 @@
-import bamini
+from . import bamini

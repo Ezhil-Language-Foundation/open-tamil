@@ -7,7 +7,7 @@
 import tamil
 import copy
 
-from corpus import Corpus
+from .corpus import Corpus
 
 class Letters:
     def __init__(self,filename):

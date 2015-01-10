@@ -29,7 +29,7 @@ class Layout:
                 for pos,v in enumerate(vv.split(u"|")):                    
                     if ( len(v) >= 4 and v == u"PIPE" ):
                             v = u"|"
-                    print u"<input type=\"button\" id=\"btn_kw_%s_%d\" value=\"%s\" onClick=\"appendText('%s');\" />"%(k,pos,v,v)
-        print "/* -------------------------------- */"
+                    print(u"<input type=\"button\" id=\"btn_kw_%s_%d\" value=\"%s\" onClick=\"appendText('%s');\" />"%(k,pos,v,v))
+        print("/* -------------------------------- */")
         return
 

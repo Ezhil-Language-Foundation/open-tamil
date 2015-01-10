@@ -7,7 +7,6 @@
 # Ref: "CS 388: Natural Language Processing: N-Gram Language Models", Raymond J. Mooney, U of Texas, Austin.
 # Ref: N-gram models https://en.wikipedia.org/wiki/N-gram
 
-import letter_models as LetterModels
-import word_models as WordModels
-
+from . import letter_models as LetterModels
+from . import word_models as WordModels
 from .corpus import Corpus

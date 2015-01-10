@@ -95,4 +95,3 @@ def tam2lat(text):
 
     return text
 # end of def tam2lat(text):
-

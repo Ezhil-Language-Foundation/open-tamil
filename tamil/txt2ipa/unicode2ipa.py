@@ -20,9 +20,9 @@
 #                                                                            #
 ##############################################################################
 
-from transliteration import tam2lat
-from ipaconvert import ipa
-from ipaconvert import broad as broad_ipa
+from .transliteration import tam2lat
+from .ipaconvert import ipa
+from .ipaconvert import broad as broad_ipa
 
 def txt2ipa(text, broad=True):
     

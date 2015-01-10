@@ -22,14 +22,14 @@
 #                                                                            #
 ##############################################################################
 
-from encode2utf8 import anjal2utf8, bamini2utf8, boomi2utf8, \
+from .encode2utf8 import anjal2utf8, bamini2utf8, boomi2utf8, \
     dinakaran2utf8, dinamani2utf8, dinathanthy2utf8, \
     kavipriya2utf8, murasoli2utf8, mylai2utf8, nakkeeran2utf8, \
     roman2utf8, tab2utf8, tam2utf8, tscii2utf8, pallavar2utf8, \
     indoweb2utf8, koeln2utf8, libi2utf8, oldvikatan2utf8, webulagam2utf8, \
     diacritic2utf8, shreelipi2utf8, softview2utf8, tace2utf8, vanavil2utf8
 
-from encode2unicode import _all_encodes_, _get_unique_ch, \
+from .encode2unicode import _all_encodes_, _get_unique_ch, \
                                 _get_unique_common_encodes
 
 __all__ = ['unicode2anjal', 'unicode2bamini', 'unicode2boomi', 
@@ -168,7 +168,7 @@ def unicode2auto(unicode_text, encode_text):
     msg += 'Need more words to find unique encode out side of %d ' % clen
     msg += 'common compound characters'
     if not unique_chars:
-        print msg
+        print(msg)
         return ''
     # end of if not unique_chars:
 
@@ -178,13 +178,13 @@ def unicode2auto(unicode_text, encode_text):
             # check either encode char is presnent in word
             if ch in unique_chars:
                 # found encode
-                print "Whola! found encode : ", encode_name
+                print("Whola! found encode : ", encode_name)
                 encode = _all_encodes_[encode_name]
                 return unicode2encode(unicode_text, encode)
             # end of if ch in unique_chars:
         # end of ifor ch in encode_keys:
     else:
-        print msg
+        print(msg)
         return ''
     # end of for encode in _all_unique_encodes_:
 # end of def auto2unicode(text):

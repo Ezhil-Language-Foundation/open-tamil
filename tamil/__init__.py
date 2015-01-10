@@ -7,8 +7,8 @@
 from . import utf8
 from . import tscii
 
-import txt2unicode
-import txt2ipa
+from . import txt2unicode
+from . import txt2ipa
 
 def printchar( letters ):
     for c in letters: 
