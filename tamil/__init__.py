@@ -9,6 +9,7 @@ from . import tscii
 
 from . import txt2unicode
 from . import txt2ipa
+from . import utils
 
 def printchar( letters ):
     for c in letters: 
