@@ -30,4 +30,7 @@ class Letters(unittest.TestCase):
         assert( q.letter2[u"சி"][u"சி"] == 0 )        
     
 if __name__ == '__main__':
-    test_support.run_unittest(Letters)
+    if not PYTHON3:
+        test_support.run_unittest(Letters)
+    else:
+        unittest.main()
