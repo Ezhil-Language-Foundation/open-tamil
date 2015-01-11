@@ -15,7 +15,7 @@ from tamil import utf8 as tamil
 def demo_lib_tamil():
      """ some example modules for Tamil library """
      for c in tamil.accent_symbols:
-          if c: print(u"%s"%c, "u%04x"%ord(c))
+          if c and (LINUX): print(u"%s"%c, "u%04x"%ord(c))
           
      if ( LINUX ): print(u"|".join(tamil.accent_symbols[1:]))
      
