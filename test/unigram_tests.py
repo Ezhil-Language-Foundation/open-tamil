@@ -17,7 +17,10 @@ class Letters(unittest.TestCase):
         
         q = ngram.LetterModels.Unigram( "data/ex.unicode" )
         q.frequency_model( )
-        print(unicode(q))
+        if not PYTHON3:
+            print(unicode(q))
+        else:
+            print( q )
         assert( q.letter[u"ஷை"] + q.letter[u"சி"] == q.letter[u"ந"] )
 
     def test_bigram_counts(self):
