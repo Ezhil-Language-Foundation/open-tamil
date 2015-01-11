@@ -69,4 +69,7 @@ class Yazhpanam(unittest.TestCase):
         return
 
 if __name__ == '__main__':    
-    test_support.run_unittest(Yazhpanam)
+    if PYTHON3:
+        print("####### TEST FILTERED FOR PYTHON 3 #############")
+    else:
+        test_support.run_unittest(Yazhpanam)

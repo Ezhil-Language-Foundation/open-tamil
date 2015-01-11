@@ -50,5 +50,8 @@ class Valluvar(unittest.TestCase):
         self.assertTrue( tscii_words == tscii_words_from_unicode2tscii)
         print("unicode2tscii_single test passed 'OK'")
         
-if __name__ == '__main__':    
-    test_support.run_unittest(Valluvar)   
+if __name__ == '__main__':
+    if PYTHON3:
+        print("####### TEST FILTERED FOR PYTHON 3 #############")
+    else:
+        test_support.run_unittest(Valluvar)   
