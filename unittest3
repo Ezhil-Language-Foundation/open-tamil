@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# run unittests on Python 3
+# run unit tests when previous bits passed
+cd test/
+
+
+if [ -e success3.txt ];
+then
+    rm success3.txt
+fi
+if [ -e failed3.txt ];
+then
+    rm failed3.txt
+fi
+
+touch success3.txt
+touch failed3.txt
+
+for i in `ls *.py`
+do
+    echo Running test $i
+    sleep 1
+    python3 $i
+    if [ $? -eq 0 ]
+    then
+        echo $i >> success3.txt
+    else
+        echo $i >> failed3.txt
+    fi
+done
+
+NFAIL=0 #ideally no unittests should fail
+TOTFAIL=`wc -l failed3.txt | cut -d'f' -f1`
+echo "from sys import exit; exit( $TOTFAIL !=  $NFAIL )" | python
+if [ $?  -eq 0 ]
+then
+   echo "Testing Successful!"
+   exitcode=0 # success
+else
+   echo "Expecting $NFAIL failures, but found $TOTFAIL failures"
+   echo "Too few/many failures; some negative tests may have failed"
+   exitcode=255 #failed failures != $NFAIL
+fi
+
+# cleanup
+rm failed3.txt
+rm success3.txt
+cd ../
+exit $exitcode
