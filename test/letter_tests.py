@@ -143,7 +143,8 @@ class Letters(unittest.TestCase):
             print( u"".join(utf8.get_letters(u"இந்த")) )
         for word in u"இந்த (C) tamil முத்தையா அண்ணாமலை 2013 இந்த ஒரு எழில் தமிழ் நிரலாக்க மொழி உதாரணம்".split():
             rword = utf8.reverse_word(word)
-            print( word,rword )
+            if ( LINUX ):
+                print( word,rword )
             self.assertTrue( utf8.get_letters(rword)[0] == utf8.get_letters(word)[-1] )
         return
 
