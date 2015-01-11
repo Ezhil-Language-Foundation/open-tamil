@@ -13,19 +13,19 @@ class Letters(unittest.TestCase):
     def test_basic_unigram_counts(self):
         z = ngram.Corpus("data/ex.unicode")
         for letter in z.next_tamil_letter():
-            print(letter)
+            if ( LINUX ): print(letter)
         
         q = ngram.LetterModels.Unigram( "data/ex.unicode" )
         q.frequency_model( )
         if not PYTHON3:
-            print(unicode(q))
+            if ( LINUX ): print(unicode(q))
         else:
-            print( q )
+            if ( LINUX ): print( q )
         assert( q.letter[u"ஷை"] + q.letter[u"சி"] == q.letter[u"ந"] )
 
     def test_bigram_counts(self):
         q=ngram.LetterModels.Bigram("data/ex.unicode")
-        q.language_model()
+        q.language_model(verbose=LINUX) #suppress output
         assert( q.letter2[u"த்"][u"து"] == 7 )
         assert( q.letter2[u"சி"][u"சி"] == 0 )        
     

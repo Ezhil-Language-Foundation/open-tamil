@@ -14,16 +14,16 @@ class Yazhpanam(unittest.TestCase):
         tamil_words = u"வந்தே மாதரம்"
         eng_string = u'vanthE mAtharam'
         tamil_tx = iterative_transliterate(jaffna.Transliteration.table,eng_string)
-        print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx),type(tamil_tx),type(tamil_words))
-        print("]"+tamil_words+"[")
+        if ( LINUX ): print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx),type(tamil_tx),type(tamil_words))
+        if ( LINUX ): print("]"+tamil_words+"[")
         self.assertTrue( tamil_words == tamil_tx )
 
     def test_combinational(self):
         tamil_words = u"வந்தே மாதரம்"
         eng_string = u'van-thee maatharam'
         tamil_tx = iterative_transliterate(combinational.Transliteration.table,eng_string)
-        print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), type(tamil_tx), type(tamil_words))
-        print("]"+tamil_words+"[", len(tamil_tx), len(tamil_words))
+        if ( LINUX ): print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), type(tamil_tx), type(tamil_words))
+        if ( LINUX ): print("]"+tamil_words+"[", len(tamil_tx), len(tamil_words))
         
         self.assertTrue( tamil_words.find(tamil_tx) >= 0 )
         
@@ -34,7 +34,7 @@ class Yazhpanam(unittest.TestCase):
                       u"koh" : u"கொ", u"kho" : u"கோ"}
         for eng_string in [u"ke",u"khae",u"cai",u"koh",u"kho"]:
             tamil_tx[eng_string] = iterative_transliterate(azhagi.Transliteration.table,eng_string)
-            print(tamil_tx[eng_string], " => ", eng_string)
+            if ( LINUX ): print(tamil_tx[eng_string], " => ", eng_string)
             self.assertTrue( tamil_tx[eng_string], eng_string )
         
     def test_azhagi(self):
@@ -54,7 +54,7 @@ class Yazhpanam(unittest.TestCase):
         tamil_words = u""
         for eng_string, tamil_words in codes.items():
             tamil_tx = iterative_transliterate(azhagi.Transliteration.table,eng_string)
-            print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), "]"+tamil_words+"[")
+            if ( LINUX ): print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), "]"+tamil_words+"[")
             #self.assertTrue( tamil_words == tamil_tx ) #we are almost there but not yet
         
     def test_devotional(self):
@@ -65,11 +65,11 @@ class Yazhpanam(unittest.TestCase):
             if( tamil_tx != v ):
                 raise Exception(u"Transliteration changed\n Expected %s, but got %s for string input %\n"%(v,tamil_tx,k))
             else:
-                print(u"matched %s => %s"%(k,unicode(tamil_tx)))
+                if ( LINUX ): print(u"matched %s => %s"%(k,unicode(tamil_tx)))
         return
 
 if __name__ == '__main__':    
     if PYTHON3:
-        print("####### TEST FILTERED FOR PYTHON 3 #############")
+        if ( LINUX ): print("####### TEST FILTERED FOR PYTHON 3 #############")
     else:
         test_support.run_unittest(Yazhpanam)

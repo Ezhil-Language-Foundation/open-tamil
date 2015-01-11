@@ -6,7 +6,6 @@
 
 # setup the paths
 from opentamiltests import *
-
 import tamil.utf8 as utf8
 
 class Words(unittest.TestCase):
@@ -14,7 +13,6 @@ class Words(unittest.TestCase):
         self.assertTrue( tamil.utf8.all_tamil(u"சம்மதம்") )
         self.assertFalse( tamil.utf8.all_tamil(u"சம்மதம்1") )
         self.assertTrue( tamil.utf8.all_tamil( [u"பொ", u"ம", u"த"]))
-    
     
     def test_word_xsection( self ):
         pos1 = utf8.word_intersection( u"தேடுக",u"தடங்கல்")
@@ -25,7 +23,6 @@ class Words(unittest.TestCase):
 
         pos3 = utf8.word_intersection(u"மென்பொருள்",u"யுனிகோட்")
         self.assertFalse( pos3 )
-        
 
 class Letters(unittest.TestCase):
     def test_word_length( self ):
@@ -40,8 +37,9 @@ class Letters(unittest.TestCase):
             wanted = u"'\u0b8e\u0bb4\u0bbf\u0bb2\u0bcd'"
         else:
             wanted = "u'\\u0b8e\\u0bb4\\u0bbf\\u0bb2\\u0bcd'"
-        print(wanted,actual)
-        print(len(wanted),len(actual))
+        if ( LINUX ):
+            print(wanted,actual)
+            print(len(wanted),len(actual))
         self.assertTrue( actual == wanted )
     
     def test_alltamil( self ):
@@ -58,19 +56,16 @@ class Letters(unittest.TestCase):
             ## Ref: http://python3porting.com/problems.html#unorderable-types-cmp-and-cmp
             self.assertTrue( PYTHON3 )
             return
-        
         words.sort( utf8.compare_words_lexicographic )
-        self.assertEqual( words, expected )
-        
-        print( utf8.compare_words_lexicographic( u"அப்பா",u"அம்மா" ) )
-
+        self.assertEqual( words, expected )        
+        if ( LINUX ):
+            print( utf8.compare_words_lexicographic( u"அப்பா",u"அம்மா" ) )
         # dad comes before mom, atleast in dictionary...
         self.assertTrue( utf8.compare_words_lexicographic( u"அப்பா",u"அம்மா" ) == -1 )
         # same words compare equally as in dictionary...
         self.assertTrue( utf8.compare_words_lexicographic( u"அப்பா",u"அப்பா" ) == 0  )
         # symmetry is preserved upon negation equally as in dictionary...
         self.assertTrue( utf8.compare_words_lexicographic( u"அம்மா",u"அப்பா")  == 1 )
-
         # compare two other words,
         self.assertTrue( utf8.compare_words_lexicographic( u"நீம்",u"காகம்") == 1 )
         
@@ -79,7 +74,7 @@ class Letters(unittest.TestCase):
         assert( round_trip == utf8.mei_letters )
 
     def test_uyirmei(self):
-        print(utf8.uyirmei(2))
+        if ( LINUX ): print(utf8.uyirmei(2))
         assert( utf8.uyirmei(2)  == u"கி" )
     
     def test_letter_extract_from_code_pts(self):
@@ -87,7 +82,7 @@ class Letters(unittest.TestCase):
         #print "len ==== > " , len(letters)
         assert( len(letters) == 15 )
         for pos,letter in  enumerate(letters):
-            print(u"%d %s"%(pos,letter))
+            if ( LINUX ): print(u"%d %s"%(pos,letter))
         assert( letter == (u"ர்") )
 
     def test_letter_extract_with_ascii(self):
@@ -95,7 +90,7 @@ class Letters(unittest.TestCase):
         print( "len ==== > " , len(letters) )
         assert(len(letters) == 25 )
         for pos,letter in  enumerate(letters):
-            print(u"%d %s"%(pos,letter))
+            if ( LINUX ): print(u"%d %s"%(pos,letter))
         assert( letters[-4] == u"a" )
 
     def test_words(self):
@@ -104,10 +99,9 @@ class Letters(unittest.TestCase):
 
         letters = utf8.get_letters( string )
         outWords = utf8.get_words( letters )
-        
-        print( u"|".join(words) )
-        print( u"|".join(outWords) )
-        
+        if ( LINUX ):
+            print( u"|".join(words) )
+            print( u"|".join(outWords) )
         assert( outWords == words )
 
     def test_tamil_only_words(self):
@@ -117,9 +111,9 @@ class Letters(unittest.TestCase):
         letters = utf8.get_letters( string )
         outWords = utf8.get_tamil_words( letters )
         
-        print( u"|".join(words) )
-        print( u"|".join(outWords) )
-        
+        if ( LINUX ):
+            print( u"|".join(words) )
+            print( u"|".join(outWords) )
         assert( outWords == words )
 
     def test_letter_extract_yield_with_ascii(self):
@@ -129,7 +123,7 @@ class Letters(unittest.TestCase):
         print( "len ==== > " , len(letters) )
         assert(len(letters) == 25 )
         for pos,letter in  enumerate(letters):
-            print( u"%d %s"%(pos,letter) )
+            if ( LINUX ): print( u"%d %s"%(pos,letter) )
         assert( letters[-4] == u"a" )
         
     def test_letter_extract_yield(self):
@@ -139,13 +133,14 @@ class Letters(unittest.TestCase):
         print( "len ==== > " , len(letters) )
         assert( len(letters) == 15 )
         for pos,letter in  enumerate(letters):
-            print(u"%d %s"%(pos,letter))
+            if ( LINUX ): print(u"%d %s"%(pos,letter))
         assert( letter == (u"ர்") )
 
     def test_reverse_words( self ):
         """ unittest for reverse a Tamil string"""
-        print( utf8.get_letters(u"இந்த") )
-        print( u"".join(utf8.get_letters(u"இந்த")) )
+        if ( LINUX ):
+            print( utf8.get_letters(u"இந்த") )
+            print( u"".join(utf8.get_letters(u"இந்த")) )
         for word in u"இந்த (C) tamil முத்தையா அண்ணாமலை 2013 இந்த ஒரு எழில் தமிழ் நிரலாக்க மொழி உதாரணம்".split():
             rword = utf8.reverse_word(word)
             print( word,rword )
@@ -170,7 +165,7 @@ class Letters(unittest.TestCase):
         for z in zz.split(u" "):
             print("********** t/f ********")
             for x,y in zip(map(utf8.istamil,utf8.get_letters(z)),utf8.get_letters(z)):
-                print(u"%s => %s"%(y,x))        
+                if ( LINUX ): print(u"%s => %s"%(y,x))        
                 assert( all( map( utf8.istamil, utf8.get_letters( z ) ) ) )
         
         z = u"முத்தையா அண்ணாமலை"
@@ -204,7 +199,7 @@ class TSCII(unittest.TestCase):
             return
         str=open("data/Sample.TSCII").read()
         output = tamil.tscii.convert_to_unicode( str )
-        print(output)
+        if ( LINUX ): print(output)
         needle = u"""உடுப்பி ஒட்டலுக்குப் போய் மசாலா தோசை சாப்பிட்டு வரலாமா"""
         assert( output.find(needle) >= 0 )
 

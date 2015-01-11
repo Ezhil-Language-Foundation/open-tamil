@@ -12,6 +12,8 @@ print(open_tamil_path) # library
 sys.path.insert(0,open_tamil_path)
 
 PYTHON3 = sys.version > '3'
+WINDOWS = (sys.platform.find('win') != -1)
+LINUX = not WINDOWS
 
 import tamil
 
@@ -26,4 +28,3 @@ try:
     from test import test_support
 except ImportError as ex:
     from test import support as test_support
-

@@ -17,7 +17,7 @@ def demo_lib_tamil():
      for c in tamil.accent_symbols:
           if c: print(u"%s"%c, "u%04x"%ord(c))
           
-     print(u"|".join(tamil.accent_symbols[1:]))
+     if ( LINUX ): print(u"|".join(tamil.accent_symbols[1:]))
      
      u" ".join(["\\u%04X"%ord(c) for c in tamil.accent_symbols[1:]])     
      
