@@ -16,6 +16,12 @@ class Letters:
                                 map(lambda x : 0, tamil.utf8.tamil_letters) ) )
         self.corpus = Corpus( filename )
 
+    def __del__(self):
+        try:
+            del self.corpus
+        except Exception as e:
+            pass
+
     def __unicode__( self ):
         op = u""
         for lett,freq in self.letter.items():

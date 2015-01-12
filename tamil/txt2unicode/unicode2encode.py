@@ -49,7 +49,7 @@ def unicode2encode(text, charmap):
     if isinstance(text, (list, tuple)):
         unitxt = ''
         for line in text:
-            for val,key in charmap.iteritems():
+            for val,key in charmap.items():
                 if key in line:
                     line = line.replace(key, val)
                 # end of if val in text:
@@ -57,7 +57,7 @@ def unicode2encode(text, charmap):
         # end of for line in text:
         return unitxt
     elif isinstance(text, str):
-        for val,key in charmap.iteritems():
+        for val,key in charmap.items():
             if key in text:
                 text = text.replace(key, val)
         # end of for val,key in charmap.iteritems():
@@ -178,7 +178,7 @@ def unicode2auto(unicode_text, encode_text):
             # check either encode char is presnent in word
             if ch in unique_chars:
                 # found encode
-                print("Whola! found encode : ", encode_name)
+                print(("Whola! found encode : ", encode_name))
                 encode = _all_encodes_[encode_name]
                 return unicode2encode(unicode_text, encode)
             # end of if ch in unique_chars:
@@ -188,4 +188,3 @@ def unicode2auto(unicode_text, encode_text):
         return ''
     # end of for encode in _all_unique_encodes_:
 # end of def auto2unicode(text):
-

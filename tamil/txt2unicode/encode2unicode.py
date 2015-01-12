@@ -20,10 +20,13 @@
 # <http://www.gnu.org/licenses/>.                                            #
 #                                                                            #
 ##############################################################################
+from sys import version
+PYTHON3 = version > '3'
+del version
 
 try:
     # python 2
-    from orddic import OrderedDict
+    from .orddic import OrderedDict
 except ImportError as ime:
     # python 3
     from collections import OrderedDict
@@ -73,7 +76,7 @@ def encode2unicode(text, charmap):
     if isinstance(text, (list, tuple)):
         unitxt = ''
         for line in text:
-            for key,val in charmap.iteritems():
+            for key,val in list(charmap.items()):
                 if key in line:
                     line = line.replace(key, val)
                 # end of if key in text:
@@ -81,7 +84,7 @@ def encode2unicode(text, charmap):
         # end of for line in text:
         return unitxt
     elif isinstance(text, str):
-        for key,val in charmap.iteritems():
+        for key,val in list(charmap.items()):
             if key in text:
                 text = text.replace(key, val)
             # end of if key in text:
@@ -181,11 +184,10 @@ def _get_unique_ch(text, all_common_encodes):
     special_chars = ['.', ',', ';', ':','', ' ', '\r', '\t', '=', '\n']
     for line in text:
         for word in line.split(' '):
-            word = unicode(word, 'utf-8')
+            if ( not PYTHON3 ): word = word.decode( 'utf-8')
             for ch in all_common_encodes:
                 if ch in word: word = word.replace(ch, '')
             # end of for ch in _all_common_encodes_:
-
             # if len of word is zero, then go for another word
             if not word: continue
 
@@ -224,15 +226,15 @@ def _get_unique_common_encodes():
     _all_common_encodes_ = set([])
     _all_common_encodes_single_char_ = set([])
 
-    for name, encode in _all_encodes_.iteritems():
-        encode_utf8 = set([unicode(ch, 'utf-8') for ch in encode.keys()])
+    for name, encode in list(_all_encodes_.items()):
+        encode_utf8 = set([PYTHON3 and ch or ch.decode( 'utf-8') for ch in list(encode.keys())])
         _all_unicode_encodes_[name] = encode_utf8
     # end of for name, encode in _all_encodes_.iteritems():
 
     _all_unique_encodes_full_ =_all_unicode_encodes_.copy()
 
-    for supname, super_encode in _all_unicode_encodes_.iteritems():
-        for subname, sub_encode in _all_unicode_encodes_.iteritems():
+    for supname, super_encode in list(_all_unicode_encodes_.items()):
+        for subname, sub_encode in list(_all_unicode_encodes_.items()):
             if supname == subname: continue
             # get unique of super_encode among other encodings
             super_encode = super_encode - sub_encode
@@ -259,7 +261,7 @@ def _get_unique_common_encodes():
         f = open('all.encodes.common.chars.txt', 'w')
         for ch in _all_common_encodes_:
             ch = ch.encode('utf-8')
-            for encode_keys in _all_encodes_.values():
+            for encode_keys in list(_all_encodes_.values()):
                 if ch in encode_keys:
                     uni = encode_keys[ch]
                     break
@@ -315,7 +317,7 @@ def auto2unicode(text):
             # check either encode char is presnent in word
             if ch in unique_chars:
                 # found encode
-                print("Whola! found encode : ", encode_name)
+                print(("Whola! found encode : ", encode_name))
                 encode = _all_encodes_[encode_name]
                 return encode2unicode(text, encode)
             # end of if ch in unique_chars:

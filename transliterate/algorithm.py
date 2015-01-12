@@ -25,7 +25,7 @@ class BlindIterative:
         out_str = english_str
 
         # for consistent results we need to work on sorted keys
-        eng_parts = table.keys()
+        eng_parts = list(table.keys())
         eng_parts.sort()
         eng_parts.reverse()
         
@@ -70,11 +70,11 @@ class Iterative:
         out_str = english_str
 
         # for consistent results we need to work on sorted keys
-        eng_parts = table.keys()
+        eng_parts = list(table.keys())
         eng_parts.sort()
         eng_parts.reverse()
         
-        MAX_ITERS_BEFORE_YOU_DROP_LETTER = max(map(len,eng_parts))
+        MAX_ITERS_BEFORE_YOU_DROP_LETTER = max(list(map(len,eng_parts)))
         
         remaining = len(english_str)
         out_str = ''
@@ -113,7 +113,7 @@ class Iterative:
             if ord(english_str[pos]) < 128:
                 rep_char = english_str[pos]
             else:
-                rep_char = u"?"
+                rep_char = "?"
             out_str = out_str + rep_char
             
             pos = pos + 1

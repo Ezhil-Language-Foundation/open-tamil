@@ -23,7 +23,7 @@
 ##############################################################################     
 try:
     # python 2
-    from orddic import OrderedDict
+    from .orddic import OrderedDict
 except ImportError as ime:
     # python 3
     from collections import OrderedDict

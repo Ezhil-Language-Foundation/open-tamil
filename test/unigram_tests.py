@@ -22,6 +22,7 @@ class Letters(unittest.TestCase):
         else:
             if ( LINUX ): print( q )
         assert( q.letter[u"ஷை"] + q.letter[u"சி"] == q.letter[u"ந"] )
+        del z, q
 
     def test_bigram_counts(self):
         q=ngram.LetterModels.Bigram("data/ex.unicode")

@@ -143,7 +143,8 @@ class Letters(unittest.TestCase):
             print( u"".join(utf8.get_letters(u"இந்த")) )
         for word in u"இந்த (C) tamil முத்தையா அண்ணாமலை 2013 இந்த ஒரு எழில் தமிழ் நிரலாக்க மொழி உதாரணம்".split():
             rword = utf8.reverse_word(word)
-            print( word,rword )
+            if ( LINUX ):
+                print( word,rword )
             self.assertTrue( utf8.get_letters(rword)[0] == utf8.get_letters(word)[-1] )
         return
 
@@ -197,7 +198,8 @@ class TSCII(unittest.TestCase):
         if PYTHON3:
             print("#### TEST NOT RUN FOR PYTHON3 #######")
             return
-        str=open("data/Sample.TSCII").read()
+        with open("data/Sample.TSCII") as fp:
+            str = fp.read()
         output = tamil.tscii.convert_to_unicode( str )
         if ( LINUX ): print(output)
         needle = u"""உடுப்பி ஒட்டலுக்குப் போய் மசாலா தோசை சாப்பிட்டு வரலாமா"""
@@ -207,10 +209,10 @@ class TSCII(unittest.TestCase):
         if PYTHON3:
             print("#### TEST NOT RUN FOR PYTHON3 #######")
             return
-        str=open("data/dumb.tscii").read()
+        with open("data/dumb.tscii") as fp: str = fp.read()
         output = tamil.tscii.convert_to_unicode( str )
         assert( output.find(u"அப்பா") >= 0 )
-        
+
 if __name__ == '__main__':    
     if not PYTHON3:
         test_support.run_unittest(Letters,Words,TSCII)

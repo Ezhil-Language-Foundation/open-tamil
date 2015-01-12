@@ -6,9 +6,7 @@
 
 # setup the paths
 from opentamiltests import *
-
 from tamil.txt2unicode import *
-
 
 class Valluvar(unittest.TestCase):
     def test_tscii2unicode(self):        
@@ -52,6 +50,6 @@ class Valluvar(unittest.TestCase):
         
 if __name__ == '__main__':
     if PYTHON3:
-        if ( LINUX ): print("####### TEST FILTERED FOR PYTHON 3 #############")
+        unittest.main()
     else:
         test_support.run_unittest(Valluvar)   
