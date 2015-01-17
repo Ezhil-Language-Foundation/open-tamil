@@ -1,8 +1,12 @@
 ## This Python file uses the following encoding: utf-8
 ##
-## (C) 2007, 2008, 2013 Muthiah Annamalai <ezhillang@gmail.com>
+## (C) 2007, 2008, 2013, 2015 Muthiah Annamalai <ezhillang@gmail.com>
 ## Licensed under GPL Version 3
 ## (C) 2013 msathia <msathia@gmail.com>
+
+from sys import version
+PYTHON3 = version > '3'
+del version
 
 ## constants
 TA_ACCENT_LEN = 13 #12 + 1
@@ -371,7 +375,7 @@ def splitMeiUyir(uyirmei_char):
     
     """
     
-    if not isinstance(uyirmei_char, unicode):
+    if not isinstance(uyirmei_char, PYTHON3 and str or unicode):
         raise ValueError("Passed input letter '%s' must be unicode, \
                                 not just string" % uyirmei_char)
                                 
@@ -386,7 +390,7 @@ def splitMeiUyir(uyirmei_char):
     
     idx = uyirmei_letters.index(uyirmei_char)
     uyiridx = idx % 12
-    meiidx = idx / 12
+    meiidx = int((idx - uyiridx)/ 12)
     return (mei_letters[meiidx], uyir_letters[uyiridx])
 # end of def splitMeiUyir(uyirmei_char): 
 
@@ -404,11 +408,11 @@ def joinMeiUyir(mei_char, uyir_char):
     
     """
     
-    if not isinstance(mei_char, unicode):
+    if not isinstance(mei_char, PYTHON3 and str or unicode):
         raise ValueError("Passed input mei character '%s' must be unicode, \
                                 not just string" % mei_char)
 
-    if not isinstance(uyir_char, unicode):
+    if not isinstance(uyir_char, PYTHON3 and str or unicode):
         raise ValueError("Passed input uyir character '%s' must be unicode, \
                                 not just string" % uyir_char)
 
