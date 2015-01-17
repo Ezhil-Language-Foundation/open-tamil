@@ -77,8 +77,8 @@ def tam2lat(text):
     'ஃ' : 'K'
     }
 
-    for key, value in tameng.iteritems():
-	    text = text.replace(key, value)
+    for key, value in tameng.items():
+        text = text.replace(key, value)
 
 
     text = re.sub('([kGcJTNtnpmyrlvZLXVjSsh])F',lambda m: "_"+m.group(1),text)

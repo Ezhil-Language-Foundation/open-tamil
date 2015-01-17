@@ -17,7 +17,6 @@ f = open('unicode-result.txt', 'w')
 f.write(uni)
 f.close()
 
-print "tscii", tscii
-print "unicode", uni 
-print "converted unicode stored in 'unicode-result.txt' file"
-
+print("tscii", tscii)
+print("unicode", uni)
+print("converted unicode stored in 'unicode-result.txt' file")

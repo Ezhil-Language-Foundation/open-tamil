@@ -3,7 +3,7 @@
 
 import sys
 sys.path.append('..')
-from txt2unicode import auto2unicode, tscii2unicode
+from tamil.txt2unicode import auto2unicode, tscii2unicode
 
 BUF_SIZE = 100
 
@@ -30,4 +30,4 @@ while tmp_lines:
 inf.close()
 outf.close()
 
-print "converted unicode stored in file", outfile
+print("converted unicode stored in file", outfile)

@@ -76,7 +76,7 @@ def encode2unicode(text, charmap):
     if isinstance(text, (list, tuple)):
         unitxt = ''
         for line in text:
-            for key,val in list(charmap.items()):
+            for key,val in charmap.items():
                 if key in line:
                     line = line.replace(key, val)
                 # end of if key in text:
@@ -84,14 +84,11 @@ def encode2unicode(text, charmap):
         # end of for line in text:
         return unitxt
     elif isinstance(text, str):
-        for key,val in list(charmap.items()):
+        for key,val in charmap.items():
             if key in text:
                 text = text.replace(key, val)
-            # end of if key in text:
-        # end of for key,val in charmap.iteritems():
         return text
-    # end of if isinstance(text, (list, tuple)):
-# end of def encode2unicode(text, charmap):
+    raise Exception("Unexpected input kind. Must be string or list or tuple")
 
 def anjal2unicode(text):
     return encode2unicode(text, anjal2utf8)
@@ -226,27 +223,22 @@ def _get_unique_common_encodes():
     _all_common_encodes_ = set([])
     _all_common_encodes_single_char_ = set([])
 
-    for name, encode in list(_all_encodes_.items()):
-        encode_utf8 = set([PYTHON3 and ch or ch.decode( 'utf-8') for ch in list(encode.keys())])
+    for name, encode in _all_encodes_.items():
+        encode_utf8 = set([PYTHON3 and ch or ch.decode( 'utf-8') for ch in encode.keys()])
         _all_unicode_encodes_[name] = encode_utf8
-    # end of for name, encode in _all_encodes_.iteritems():
-
     _all_unique_encodes_full_ =_all_unicode_encodes_.copy()
 
-    for supname, super_encode in list(_all_unicode_encodes_.items()):
-        for subname, sub_encode in list(_all_unicode_encodes_.items()):
+    for supname, super_encode in _all_unicode_encodes_.items():
+        for subname, sub_encode in _all_unicode_encodes_.items():
             if supname == subname: continue
             # get unique of super_encode among other encodings
             super_encode = super_encode - sub_encode
-        # end of for sub_encode in _all_unicode_encodes_.iteritems():
         # get common for all over encodings
         common = _all_unique_encodes_full_[supname] - super_encode
         # merge common to all encodings common
         _all_common_encodes_ = _all_common_encodes_.union(common)
         # store super_encode's unique keys with its name
         _all_unique_encodes_.append((supname, super_encode))
-    # end of for supname, super_encode in _all_unicode_encodes_.iteritems():
-
     for ch in _all_common_encodes_:
         # collect single common chars
         if len(ch) == 1: _all_common_encodes_single_char_.add(ch)
@@ -261,7 +253,7 @@ def _get_unique_common_encodes():
         f = open('all.encodes.common.chars.txt', 'w')
         for ch in _all_common_encodes_:
             ch = ch.encode('utf-8')
-            for encode_keys in list(_all_encodes_.values()):
+            for encode_keys in _all_encodes_.values():
                 if ch in encode_keys:
                     uni = encode_keys[ch]
                     break
@@ -327,4 +319,3 @@ def auto2unicode(text):
         return ''
     # end of for encode in _all_unique_encodes_:
 # end of def auto2unicode(text):
-

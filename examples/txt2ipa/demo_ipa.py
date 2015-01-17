@@ -20,7 +20,6 @@ t1 = tam2lat(text)
 t2 = " " + t1 + " "
 t2 = ipa(t2)
 t3 = broad(t2)
-print "after tam2lat", t1
-print "after ipa", t2
-print "after broad", t3
-
+print("after tam2lat", t1)
+print("after ipa", t2)
+print("after broad", t3)

@@ -10,8 +10,13 @@
 import tamil
 
 from transliterate import *
-
-import bs4 #requires beautiful soup 4
+try:
+    import bs4 #requires beautiful soup 4
+except ImportError as ie:
+    # work with BS3
+    import BeautifulSoup
+    class bs4:
+        BeautifulSoup = BeautifulSoup.BeautifulSoup
 from urllib2 import urlopen
 
 import re
@@ -22,12 +27,12 @@ def print_tamil_words( tatext ):
      
      # raw words
      #for word in re.split(u"\s+",tatext):
-     #     print u"-> ",word
+     #     print(u"-> ",word)
      
      # tamil words only
      frequency = {}
      for pos,word in enumerate(tamil.utf8.get_tamil_words(taletters)):
-          print pos, word
+          print(pos, word)
           frequency[word] = 1 + frequency.get(word,0)
      
      #for key in frequency.keys():
@@ -35,7 +40,7 @@ def print_tamil_words( tatext ):
      
      # sort words by descending order of occurence
      for l in sorted(frequency.iteritems(), key=operator.itemgetter(1)):
-          print l[0],':',l[1]
+          print( l[0],':',l[1])
      
 
 def demo_tamil_text_filter( ):

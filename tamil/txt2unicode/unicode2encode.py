@@ -60,10 +60,7 @@ def unicode2encode(text, charmap):
         for val,key in charmap.items():
             if key in text:
                 text = text.replace(key, val)
-        # end of for val,key in charmap.iteritems():
         return text
-    # end of if isinstance(text, (list, tuple)):
-# end of def unicode2encode(text, charmap):
 
 def unicode2anjal(text):
     return unicode2encode(text, anjal2utf8)
