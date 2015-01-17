@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # -*- coding: utf-8 -*-
-# (C) 2013 Muthiah Annamalai
+# (C) 2013-2015 Muthiah Annamalai
 # 
 # This file is part of 'open-tamil' package tests
 # 
