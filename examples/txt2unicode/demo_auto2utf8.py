@@ -25,13 +25,12 @@ f = open('unicode-result.txt', 'w')
 f.write(uni)
 f.close()
 
-print "tscii", tscii
-print "unicode", uni 
-print "converted unicode stored in 'unicode-result.txt' file\n\n"
-
+print("tscii", tscii)
+print("unicode", uni)
+print("converted unicode stored in 'unicode-result.txt' file\n\n")
 
 # demo for common compound characters
 common = """ù£tPùP\[tI
 è£n\[nwh ùSô ªþ£ ùaô """
-print "common", common
+print("common", common)
 uni = auto2unicode(common)

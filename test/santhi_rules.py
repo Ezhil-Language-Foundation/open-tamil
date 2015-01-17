@@ -6,7 +6,7 @@ from santhirules import joinWords
 a = u'என்ன'
 b = u'என்ன'
 w = joinWords(a, b).encode('utf8')
-print w
+print( w )
 
 A = a.encode('utf8')
 B = b.encode('utf8')
