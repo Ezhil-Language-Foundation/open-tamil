@@ -83,6 +83,14 @@ Goal of this package is to collect and develop open-source licensed Tamil tools,
 
 While most of tools in this package will be in Python 2.6. or later, we are open to other open-source language source code contributions.
 
+Contributing to Open-Tamil
+==========================
+1. Please add your code, and unit tests under MIT, GNU GPL or ASF licenses.
+2. Update your code into modules, add unit tests following the Python flake8, pylint standards
+3. Please do not mix TABS and SPACES. Use 4-space for Tabs. Use 
+4. Make sure your module installed as part of pip package
+5. Ensure your code works for Python 2 and 3.
+
 About (பற்றி)
 ==========
 Tamil is classical language primarily spoken in South India.

@@ -9,7 +9,7 @@
 
 # setup the paths
 from opentamiltests import *
-from tamil.utils import joinWords
+from tamil.utils.santhirules import joinWords
 
 class SantheeRules(unittest.TestCase):
     def test_grammar_conjugation( self ):

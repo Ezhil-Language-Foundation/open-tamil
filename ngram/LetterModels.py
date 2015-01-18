@@ -9,9 +9,10 @@ import copy
 
 from .Corpus import Corpus
 
+
 class Letters:
     def __init__(self,filename):
-        self.letter = dict();
+        self.letter = dict()
         self.letter.update(zip( tamil.utf8.tamil_letters,
                                 map(lambda x : 0, tamil.utf8.tamil_letters) ) )
         self.corpus = Corpus( filename )
@@ -19,7 +20,7 @@ class Letters:
     def __del__(self):
         try:
             del self.corpus
-        except Exception as e:
+        except Exception:
             pass
 
     def __unicode__( self ):
@@ -29,6 +30,7 @@ class Letters:
         print(max(self.letter.values()))
         return op
 
+
 class Unigram(Letters):
     def frequency_model( self ):
         """ build a letter frequency model for Tamil letters from a corpus """
@@ -36,14 +38,15 @@ class Unigram(Letters):
         for next_letter in self.corpus.next_tamil_letter():
             # update frequency from corpus
             self.letter[next_letter] = self.letter[next_letter] + 1
-    
+
+
 class Bigram(Unigram):
     def __init__(self,filename):
         Unigram.__init__(self,filename)
-        self.letter2 = dict();
-        for k in  tamil.utf8.tamil_letters:
+        self.letter2 = dict()
+        for k in tamil.utf8.tamil_letters:
             self.letter2[k] = copy.copy( self.letter )
-        
+
     def language_model(self,verbose=True):
         """ builds a Tamil bigram letter model """
         # use a generator in corpus
@@ -51,7 +54,7 @@ class Bigram(Unigram):
         for next_letter in self.corpus.next_tamil_letter():
             # update frequency from corpus
             if prev:
-                self.letter2[prev][next_letter] = self.letter2[prev][next_letter] + 1
+                self.letter2[prev][next_letter] += 1
                 if ( verbose ) :
                     print(prev)
                     print(next_letter)

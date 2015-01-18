@@ -13,7 +13,7 @@
 VERSION = "1.7"
 
 # load ASCII 7-bit code page first
-TSCII = list(map( lambda x:  x < 128 and u"%c"%x or u"?" , range(0,256)))
+TSCII = list(map( lambda x: x < 128 and u"%c"%x or u"?" , range(0,256)))
 
 # append TSCII tamil page on higher side
 
