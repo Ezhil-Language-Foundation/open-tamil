@@ -4,6 +4,6 @@ do
   echo $i; 
   echo ##########################; 
   echo python $i; 
-  python $i; 
+  PYTHONPATH=../ python $i; 
 done
 

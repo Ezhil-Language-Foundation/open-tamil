@@ -4,9 +4,6 @@
 # This file is part of 'open-tamil' package tests
 # 
 
-# setup the paths
-#from opentamiltests import *
-
 import tamil
 from transliterate import *
 try:
