@@ -7,13 +7,13 @@
 # setup the paths
 from opentamiltests import *
 
-from transliterate import *
+from transliterate import azhagi, jaffna, combinational, algorithm
 
 class Yazhpanam(unittest.TestCase):
     def test_vandemataram(self):     
         tamil_words = u"வந்தே மாதரம்"
         eng_string = u'vanthE mAtharam'
-        tamil_tx = iterative_transliterate(jaffna.Transliteration.table,eng_string)
+        tamil_tx = algorithm.Iterative.transliterate(jaffna.Transliteration.table,eng_string)
         if ( LINUX ): print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx),type(tamil_tx),type(tamil_words))
         if ( LINUX ): print("]"+tamil_words+"[")
         self.assertTrue( tamil_words == tamil_tx )
@@ -21,7 +21,7 @@ class Yazhpanam(unittest.TestCase):
     def test_combinational(self):
         tamil_words = u"வந்தே மாதரம்"
         eng_string = u'van-thee maatharam'
-        tamil_tx = iterative_transliterate(combinational.Transliteration.table,eng_string)
+        tamil_tx = algorithm.Iterative.transliterate(combinational.Transliteration.table,eng_string)
         if ( LINUX ): print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), type(tamil_tx), type(tamil_words))
         if ( LINUX ): print("]"+tamil_words+"[", len(tamil_tx), len(tamil_words))
         
@@ -33,7 +33,7 @@ class Yazhpanam(unittest.TestCase):
         correct_tx = {u"ke" : u"கெ", u"khae":u"கே", u"cai" : u"கை",
                       u"koh" : u"கொ", u"kho" : u"கோ"}
         for eng_string in [u"ke",u"khae",u"cai",u"koh",u"kho"]:
-            tamil_tx[eng_string] = iterative_transliterate(azhagi.Transliteration.table,eng_string)
+            tamil_tx[eng_string] = algorithm.Iterative.transliterate(azhagi.Transliteration.table,eng_string)
             if ( LINUX ): print(tamil_tx[eng_string], " => ", eng_string)
             self.assertTrue( tamil_tx[eng_string], eng_string )
         
@@ -53,14 +53,14 @@ class Yazhpanam(unittest.TestCase):
         
         tamil_words = u""
         for eng_string, tamil_words in codes.items():
-            tamil_tx = iterative_transliterate(azhagi.Transliteration.table,eng_string)
+            tamil_tx = algorithm.Iterative.transliterate(azhagi.Transliteration.table,eng_string)
             if ( LINUX ): print("]"+tamil_tx+"[", len(tamil_words), len(tamil_tx), "]"+tamil_words+"[")
             #self.assertTrue( tamil_words == tamil_tx ) #we are almost there but not yet
         
     def test_devotional(self):
         for k,v in {u"thiruvaachakam":u"திருவாசகம்",
                     u"mANikka vAsagar":u"மாணிக்க வாசகர்"}.items():
-            tamil_tx = iterative_transliterate( azhagi.Transliteration.table,
+            tamil_tx = algorithm.Iterative.transliterate( azhagi.Transliteration.table,
                                                 k )
             if( tamil_tx != v ):
                 raise Exception(u"Transliteration changed\n Expected %s, but got %s for string input %\n"%(v,tamil_tx,k))

@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # 
-# (C) முத்தையா அண்ணாமலை 2013
+# (C) முத்தையா அண்ணாமலை 2013-2015
 # 
 # N-gram language model for Tamil letters
 
 import tamil
 import copy
 
-from .corpus import Corpus
+from .Corpus import Corpus
 
 class Letters:
     def __init__(self,filename):

@@ -6,7 +6,8 @@
 
 # setup the paths
 from opentamiltests import *
-import tamil.utf8 as utf8
+import tamil.utf8 as utf8 
+from tamil.tscii import TSCII
 
 class Words(unittest.TestCase):
     def test_all_tamil( self ):
@@ -178,9 +179,8 @@ class Letters(unittest.TestCase):
         assert( list(map(utf8.istamil,utf8.get_letters(u"முத்தையா அண்ணாமலை 2013"))) == correct )
 
 
-class TSCII(unittest.TestCase):
+class CodecTSCII(unittest.TestCase):
     def test_vowels(self):
-        TSCII = tamil.tscii.TSCII
         assert( TSCII[0xAB] == u"அ" )
         assert( TSCII[0xAC] == u"ஆ" )
         
@@ -215,6 +215,6 @@ class TSCII(unittest.TestCase):
 
 if __name__ == '__main__':    
     if not PYTHON3:
-        test_support.run_unittest(Letters,Words,TSCII)
+        test_support.run_unittest(Letters,Words,CodecTSCII)
     else:
         unittest.main()

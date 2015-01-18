@@ -6,16 +6,18 @@
 
 # setup the paths
 from opentamiltests import *
+from ngram.Corpus import Corpus
+from ngram import LetterModels
 
 import tamil.utf8 as utf8
 
 class Letters(unittest.TestCase):
     def test_basic_unigram_counts(self):
-        z = ngram.Corpus("data/ex.unicode")
+        z = Corpus("data/ex.unicode")
         for letter in z.next_tamil_letter():
             if ( LINUX ): print(letter)
         
-        q = ngram.LetterModels.Unigram( "data/ex.unicode" )
+        q = LetterModels.Unigram( "data/ex.unicode" )
         q.frequency_model( )
         if not PYTHON3:
             if ( LINUX ): print(unicode(q))
@@ -25,7 +27,7 @@ class Letters(unittest.TestCase):
         del z, q
 
     def test_bigram_counts(self):
-        q=ngram.LetterModels.Bigram("data/ex.unicode")
+        q=LetterModels.Bigram("data/ex.unicode")
         q.language_model(verbose=LINUX) #suppress output
         assert( q.letter2[u"த்"][u"து"] == 7 )
         assert( q.letter2[u"சி"][u"சி"] == 0 )        
