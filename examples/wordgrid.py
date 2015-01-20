@@ -10,7 +10,7 @@ PYTHON3 = version > '3'
         
 # Vertical / Horizontal Word Grids
 
-# Put a list of words into a grid
+# Put a list of words into a grid. this is purely vertical or purely horizontal style.
 class WordGrid:
     @staticmethod
     def sorter(a,b):
@@ -79,10 +79,11 @@ class WordGrid:
     
     def generate_horizontal(self):
         for idx,word_i in enumerate(self.words):
-            L = len(word_i)
+            letters_i = utf8.get_letters(word_i)
+            L = len(letters_i)
             excess = self.grid_size - L
             start_pos = random.choice( list(range(excess)) )
-            for idy,letter in enumerate(word_i):
+            for idy,letter in enumerate(letters_i):
                 self.grid[idx][start_pos+idy] = [letter,True]
             pass
         return
@@ -90,8 +91,12 @@ class WordGrid:
     def generate(self):
         self.generate_horizontal()
     
-
 if __name__ == "__main__":
-    wordlist = ['food','water','shelter','clothing']
-    fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
+    lang = ['EN','TA'][1]
+    if lang == 'EN':
+        wordlist = ['food','water','shelter','clothing']
+        fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
+    else:
+        wordlist = [u'உப்பு', u'நாற்பண்',u'பராபரம்', u'கான்யாறு', u'ஆறு', u'சன்னியாசி', u'நெல்லி']
+        fill_letters = utf8.tamil_letters
     WordGrid.compute( wordlist, fill_letters )
