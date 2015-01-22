@@ -7,31 +7,53 @@ import tamil
 
 from sys import version
 PYTHON3 = version > '3'
-        
-# Vertical / Horizontal Word Grids
 
-# Put a list of words into a grid. this is purely vertical or purely horizontal style.
+# compute word intersection graph of the a wordlist
+# optimized for using the symmetry in computation but not space
 class WordXSec:
     @staticmethod
-    def compute( wordlist ):
+    def driver(wordlist):
+        obj = WordXSec( wordlist )
+        obj.compute()
+        obj.display()
+        return obj
+    
+    def __init__(self,wordlist):
+        self.wordlist = wordlist
+        # adjacency list of intersection graph
+        self.xsections = {}
+    
+    def compute( self ):
+        # compute the intersection graph into @xsections dictionary
+        wordlist = self.wordlist
         """ build a dictionary of words, and their intersections """
         xsections = {}
-        for i in xrange(len(wordlist)):
+        for i in range(len(wordlist)):
             word_i = wordlist[i]
-            for j in xrange(len(wordlist)):
+            for j in range(len(wordlist)):
                 word_j = wordlist[j]
-                if i == j :
-                    xsections[word_i] = xsections.get(word_i,list())
+                if i == j:
+                    # force self-intersection to be 0
+                    if not xsections.get(word_i,None):
+                        xsections[word_i] = ['']
+                    else:
+                        xsections[word_i].extend([''])
                     continue
                 # optimize for, i > j, info is calculated already 
-                #if i > j:
-                #    xsections[word_j].extend( [ xsections[word_i][j] ] )
-                xsec_counts = tamil.utf8.word_intersection( word_i, word_j )
+                if i > j:
+                    xsec_counts = xsections[word_j][i]
+                else:
+                    xsec_counts = tamil.utf8.word_intersection( word_i, word_j )
                 if not xsections.get(word_i,None):
                     xsections[word_i] =  [xsec_counts]
                 else:
                     xsections[word_i].extend( [ xsec_counts ] )
-        for k,v in xsections.items():
+        self.xsections = xsections
+    
+    def display(self):
+        # print adjacency list of intersection graph
+        for k in self.wordlist:
+            v = self.xsections[k]
             print( ",".join( ["%d"%len(vv) for vv in v] ) )
         return
 
@@ -43,4 +65,4 @@ if __name__ == "__main__":
     else:
         wordlist = [u'உப்பு', u'நாற்பண்',u'பராபரம்', u'கான்யாறு', u'ஆறு', u'சன்னியாசி', u'நெல்லி']
         fill_letters = tamil.utf8.tamil_letters
-    WordXSec.compute( wordlist )
+    WordXSec.driver( wordlist )
