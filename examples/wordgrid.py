@@ -32,6 +32,7 @@ class WordGrid:
     
     def __init__(self,words,letters):
         self.words = copy.copy(words)
+        self.words_letters = [tamil.utf8.get_letters(word_i) for word_i in words]
         self.fill_letters = letters
         self.max_word_len = 0
         self.grid_size = 0
@@ -79,7 +80,7 @@ class WordGrid:
     
     def generate_horizontal(self):
         for idx,word_i in enumerate(self.words):
-            letters_i = utf8.get_letters(word_i)
+            letters_i = self.words_letters[idx]
             L = len(letters_i)
             excess = self.grid_size - L
             start_pos = random.choice( list(range(excess)) )
@@ -92,11 +93,11 @@ class WordGrid:
         self.generate_horizontal()
     
 if __name__ == "__main__":
-    lang = ['EN','TA'][1]
+    lang = ['EN','TA'][0]
     if lang == 'EN':
-        wordlist = ['food','water','shelter','clothing']
+        wordlist = [u'food',u'water',u'shelter',u'clothing']
         fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
     else:
         wordlist = [u'உப்பு', u'நாற்பண்',u'பராபரம்', u'கான்யாறு', u'ஆறு', u'சன்னியாசி', u'நெல்லி']
-        fill_letters = utf8.tamil_letters
+        fill_letters = tamil.utf8.tamil_letters
     WordGrid.compute( wordlist, fill_letters )
