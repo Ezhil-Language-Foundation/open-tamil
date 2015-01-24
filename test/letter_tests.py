@@ -178,6 +178,41 @@ class Letters(unittest.TestCase):
         print ( correct )
         assert( list(map(utf8.istamil,utf8.get_letters(u"முத்தையா அண்ணாமலை 2013"))) == correct )
 
+class NumeralTest(unittest.TestCase):
+    def test_numerals(self):
+        var = {0:u"பூஜ்ஜியம்",
+        1:u"ஒன்று",
+        2:u"இரண்டு",
+        3:u"மூன்று",
+        5:u"ஐந்து",
+        10:u"பத்து",
+        11:u"பதினொன்று",
+        17:u"பதினேழு",
+        19:u"பத்தொன்பது",
+        20:u"இருபது",
+        21:u"இருபத்தி  ஒன்று",
+        1051:u"ஒன்று ஆயிரத்தி ஐம்பத்தி  ஒன்று",
+        100000:u"ஒரு இலட்சம்",
+        100001:u"ஒன்று இலட்சத்தி ஒன்று",
+        10011:u"பத்து ஆயிரத்தி பதினொன்று",
+        49:u"நாற்பத்தி  ஒன்பது",
+        50:u"ஐம்பது",
+        55:u"ஐம்பத்தி  ஐந்து",
+        1000001:u"பத்து இலட்சத்தி ஒன்று",
+        90:u"தொன்னூறு",
+        99:u"தொன்னூற்றி  ஒன்பது",
+        100:u"இருநூறு",
+        101:u"நூற்றி  ஒன்று",
+        1000:u"ஓர் ஆயிரம்",
+        111:u"நூற்றி  பதினொன்று",
+        1000000000000:u"ஒரு இலட்சம் கோடி",
+        1011:u"ஒன்று ஆயிரத்தி பதினொன்று"}
+        
+        for k,actual_v in var.items():
+            v = tamil.numeral.num2tamilstr(k)
+            print('verifying => # %d'%k)
+            self.assertEqual(v,actual_v)
+        return
 
 class CodecTSCII(unittest.TestCase):
     def test_vowels(self):
@@ -215,6 +250,6 @@ class CodecTSCII(unittest.TestCase):
 
 if __name__ == '__main__':    
     if not PYTHON3:
-        test_support.run_unittest(Letters,Words,CodecTSCII)
+        test_support.run_unittest(Letters,Words,CodecTSCII,NumeralTest)
     else:
         unittest.main()

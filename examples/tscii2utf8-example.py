@@ -6,8 +6,6 @@ from sys import argv, exit
 import tamil
 import sys
 
-
-
 def usage():
     return u"tscii2utf8.py <source-file> <destination-file> "
 
