@@ -8,6 +8,7 @@ from . import tscii
 
 from . import txt2unicode
 from . import txt2ipa
-from .numeral import num2tamilstr
+from . import numeral
+from . import regexp
 
-__all__ = ['utf8','txt2unicode','num2tamilstr','txt2unicode','txt2ipa']
+__all__ = ['utf8','txt2unicode','num2tamilstr','txt2unicode','txt2ipa','numeral','regexp']

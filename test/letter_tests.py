@@ -28,9 +28,18 @@ class Words(unittest.TestCase):
 class Letters(unittest.TestCase):
     def test_word_length( self ):
         actual = 5
-        letters = utf8.get_letters(u"மென்பொருள்")
-        self.assertTrue( actual == len(letters) )
+        letters = utf8.get_letters(u"மென்பொருள்")        
+        self.assertEqual( actual, len(letters) )
     
+    def test_word_no2_length( self ):
+        actual = 6
+        letters = utf8.get_letters(u'[\u0baa-\u0baa\u0bcc]+')
+        self.assertEqual( actual, len(letters) )
+    
+    def test_grantha( self ):
+        self.assertEqual( 22, len(utf8.grantha_mei_letters) )
+        self.assertEqual( 22, len(utf8.grantha_agaram_letters) )
+        
     def test_unicode_repr( self ):    
         print("********* unicode repr ******")
         actual = utf8.to_unicode_repr(u'எழில்') 
@@ -81,7 +90,7 @@ class Letters(unittest.TestCase):
     def test_letter_extract_from_code_pts(self):
         letters = utf8.get_letters(u"கூவிளம் என்பது என்ன சீர்")
         #print "len ==== > " , len(letters)
-        assert( len(letters) == 15 )
+        assert( len(letters) == 16 )
         for pos,letter in  enumerate(letters):
             if ( LINUX ): print(u"%d %s"%(pos,letter))
         assert( letter == (u"ர்") )
@@ -89,7 +98,7 @@ class Letters(unittest.TestCase):
     def test_letter_extract_with_ascii(self):
         letters = utf8.get_letters(u"கூவிளம் is என்பது also என்ன a சீர்")
         print( "len ==== > " , len(letters) )
-        assert(len(letters) == 25 )
+        assert(len(letters) == 26 )
         for pos,letter in  enumerate(letters):
             if ( LINUX ): print(u"%d %s"%(pos,letter))
         assert( letters[-4] == u"a" )
@@ -159,7 +168,7 @@ class Letters(unittest.TestCase):
 
     def test_get_letters2( self ):
         letters = utf8.get_letters(u"hello world  தெரிந்த அல்லது தெரியாத")
-        assert( len(letters) == 26 )
+        assert( len(letters) == 27 )
         self.assertTrue( letters[13] == u"தெ" )
         
     def test_istamil( self ):

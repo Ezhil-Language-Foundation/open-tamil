@@ -1,0 +1,110 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+# 
+# (C) 2013-2015 Muthiah Annamalai
+# 
+# This file is part of 'open-tamil' package tests
+# 
+
+# setup the paths
+import codecs
+import re
+from opentamiltests import *
+from tamil.utils.santhirules import joinWords
+from tamil.regexp import make_pattern
+
+class SantheeRules(unittest.TestCase):
+    def test_grammar_conjugation( self ):
+        a = u'என்ன'
+        b = u'என்ன'
+        w = joinWords(a, b).encode('utf8')
+        
+        print( w )
+        self.assertTrue( w.decode('utf-8') == u'என்னென்ன')
+        
+        # write to file
+        # A = a.encode('utf8')
+        # B = b.encode('utf8')
+        # 
+        # f = open('out1.txt', 'a')
+        # f.write(A + ' + ' + B + ' = ' + w+'\n')
+        # f.close()
+
+class TamilRegex(unittest.TestCase):
+    def test_basic_A2Z( self ):
+        pattern = u"[அ-ஔ]+"
+        expected = u"[அ,ஆ,இ,ஈ,உ,ஊ,எ,ஏ,ஐ,ஒ,ஓ,ஔ]+"
+        [cpattern,opattern] = make_pattern( pattern )
+        self.assertEqual( opattern, expected )
+    
+    def test_basic_no2_A2Z( self ):
+        pattern = u"^[அ-உ]+"
+        expected = u"^[அ,ஆ,இ,ஈ,உ]+"
+        [cpattern,opattern] = make_pattern( pattern )
+        self.assertEqual( opattern, expected )
+    
+    def test_basic_no3_A2Z( self ):
+        pattern = u"^[அ-ஔ][0-9]+"
+        expected = u"^[அ,ஆ,இ,ஈ,உ,ஊ,எ,ஏ,ஐ,ஒ,ஓ,ஔ][0-9]+"
+        [cpattern,opattern] = make_pattern( pattern )
+        self.assertEqual( opattern, expected )
+    
+    def test_basic_no4_A2Z( self ):
+        pattern = u"^[அ-ஔ][0-9]+"
+        expected = u"^[அ,ஆ,இ,ஈ,உ,ஊ,எ,ஏ,ஐ,ஒ,ஓ,ஔ][0-9]+"
+        [cpattern,opattern] = make_pattern( pattern )
+        self.assertEqual( opattern, expected )
+
+    def test_basic_no5_A2Z( self ):
+        pattern = u"^[க்-ம்]+"
+        expected = u"^[க்,ச்,ட்,த்,ப்,ற்,ஞ்,ங்,ண்,ந்,ம்]+"
+        [cpattern,opattern] = make_pattern( pattern )
+        self.assertEqual( opattern, expected )
+
+    def test_uyirmei_no6_A2Z( self ):
+        pattern = u"[ப-பௌ]+"
+        expected = u"[ப,பா,பி,பீ,பு,பூ,பெ,பே,பை,பொ,போ,பௌ]+"
+        [cpattern,opattern] = make_pattern( pattern )
+        self.assertEqual( opattern, expected )
+    
+class GrepTests(unittest.TestCase):
+    def setUp(self):
+        self.data = codecs.open('data/richmond.txt','r','utf-8').readlines()
+        print("\ndata size = %d L"%len(self.data))
+    
+    def search_test(self,pattern,expected):
+        return self.match_test(pattern,expected,fcn=re.search)
+    
+    def match_test(self,pattern,expected,fcn=re.match):
+        [repatt,ymp] = make_pattern( pattern )
+        word_matches = []
+        for idx,line in enumerate(self.data):
+            q = fcn(repatt,line.strip())
+            if q:
+                print("matched @ %d"%idx)
+                word_matches.append( idx )
+        self.assertEqual( word_matches, expected )
+        return
+   
+    def test_exprs(self):
+        pattern = u"^ரிச்.*[க்-ழ்]$"
+        expected = [0,1,2,3,7,8,10]
+        self.match_test( pattern, expected )
+    
+    def test_match_letterend_exprs(self):
+        pattern = u"டு$"
+        expected = [5,6]
+        self.search_test(pattern,expected)
+        return
+                
+    def test_match_exprs(self):
+        pattern = u".*[^க்-ழ்]$"
+        expected = [4,5,6,9]
+        self.match_test(pattern,expected)
+        return
+
+if __name__ == '__main__':
+    if not PYTHON3:
+        test_support.run_unittest(SantheeRules,TamilRegex,GrepTests)
+    else:
+        unittest.main()

@@ -5,6 +5,8 @@
 ## (C) 2013 msathia <msathia@gmail.com>
 
 from sys import version
+from copy import copy
+
 PYTHON3 = version > '3'
 del version
 
@@ -15,7 +17,9 @@ TA_UYIR_LEN = 12
 TA_MEI_LEN = 18
 TA_AGARAM_LEN = 18
 TA_SANSKRIT_LEN = 4
-TA_UYIRMEI_LEN = 216 # 18*12
+TA_UYIRMEI_LEN = 216
+TA_GRANTHA_UYIRMEI_LEN = 22*12
+TA_LETTERS_LEN = 247 + 4*12 + 22 + 4
 
 def to_unicode_repr( _letters ):
     """ helpful in situations where browser/app may recognize Unicode encoding
@@ -45,7 +49,13 @@ agaram_letters = [u"க",u"ச",u"ட",u"த",u"ப",u"ற",
 
 sanskrit_letters = [u"ஜ",u"ஷ", u"ஸ",u"ஹ"]
 sanskrit_mei_letters =[u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்"]
-3
+
+grantha_mei_letters = copy(mei_letters)
+grantha_mei_letters.extend(sanskrit_mei_letters)
+
+grantha_agaram_letters = copy(agaram_letters)
+grantha_agaram_letters.extend(sanskrit_letters)
+
 uyirmei_letters = [
 u"க"  ,u"கா"  ,u"கி"  ,u"கீ"  ,u"கு"  ,u"கூ"  ,u"கெ"  ,u"கே"  ,u"கை"  ,u"கொ"  ,u"கோ"  ,u"கௌ"  ,
 u"ச"  ,u"சா"  ,u"சி"  ,u"சீ"  ,u"சு"  ,u"சூ"  ,u"செ"  ,u"சே"  ,u"சை"  ,u"சொ"  ,u"சோ"  ,u"சௌ" , 
@@ -127,6 +137,8 @@ u"க"  ,u"கா"  ,u"கி"  ,u"கீ"  ,u"கு"  ,u"கூ"  ,u"கெ"  
 ,u"ஸ"  ,u"ஸா"  ,u"ஸி"  ,u"ஸீ"  ,u"ஸு"  ,u"ஸூ"  ,u"ஸெ"  ,u"ஸே"  ,u"ஸை"  ,u"ஸொ"  ,u"ஸோ"  ,u"ஸௌ" 
 ,u"ஹ"  ,u"ஹா"  ,u"ஹி"  ,u"ஹீ"  ,u"ஹு"  ,u"ஹூ"  ,u"ஹெ"  ,u"ஹே"  ,u"ஹை"  ,u"ஹொ"  ,u"ஹோ"  ,u"ஹௌ" ]
 
+grantha_uyirmei_letters = copy( tamil_letters[tamil_letters.index(u"கா")-1:] )
+
 ## some assertions, languages dont change fast.
 assert ( TA_ACCENT_LEN == len(accent_symbols) )
 assert ( TA_AYUDHA_LEN == 1 )
@@ -135,6 +147,8 @@ assert ( TA_MEI_LEN == len( mei_letters ) )
 assert ( TA_AGARAM_LEN == len( agaram_letters ) )
 assert ( TA_SANSKRIT_LEN == len( sanskrit_letters )) 
 assert ( TA_UYIRMEI_LEN == len( uyirmei_letters ) )
+assert ( TA_GRANTHA_UYIRMEI_LEN == len( grantha_uyirmei_letters) )
+assert ( TA_LETTERS_LEN == len(tamil_letters) )
 
 ## length of the definitions
 def accent_len( ):
@@ -176,12 +190,14 @@ def uyirmei( idx ):
     return uyirmei_letters[idx]
 
 def uyirmei_constructed( mei_idx, uyir_idx):
+    """ construct uyirmei letter give mei index and uyir index """
     idx,idy = mei_idx,uyir_idx
     assert ( idy >= 0 and idy < uyir_len() )
     assert ( idx >= 0 and idx < mei_len() )
     return agaram_letters[mei_idx]+accent_symbols[uyir_idx]
 
 def tamil( idx ):
+    """ retrieve Tamil letter at canonical index from array utf8.tamil_letters """
     assert ( idx >= 0 and idx < tamil_len() )
     return tamil_letters[idx]
 
@@ -197,6 +213,7 @@ def istamil_prefix( word ):
     return False
 
 def all_tamil( word_in ):
+    """ predicate checks if all letters of the input word are Tamil letters """ 
     if isinstance(word_in,list):
         word = word_in
     else:
@@ -223,8 +240,8 @@ def istamil_alnum( tchar ):
     This saves time from running through istamil() check. """
     return ( tchar.isalnum( ) or tchar.istamil( ) )
 
-## reverse a Tamil word according to letters not unicode-points
 def reverse_word( word ):
+    """ reverse a Tamil word according to letters not unicode-points """
     op = get_letters( word )
     op.reverse()
     return u"".join(op)
@@ -234,42 +251,34 @@ def reverse_word( word ):
 def get_letters( word ):
     """ splits the word into a character-list of tamil/english
     characters present in the stream """ 
-    prev = u''#word = unicode(word) #.encode('utf-8')
-    #word=word.decode('utf-8')
-    ta_letters = []
-    for c in word:
+    ta_letters = list()
+    WLEN,idx = len(word),0
+    while idx  < WLEN:
+        c = word[idx]
+        #print(idx,hex(ord(c)),len(ta_letters))
         if c in uyir_letters or c == ayudha_letter:
-            ta_letters.append(prev+c)
-            prev = u''
-        elif c in agaram_letters or c in sanskrit_letters:
-            if prev != u'':
-                ta_letters.append(prev)
-            prev = c
+            ta_letters.append(c)
+        elif c in grantha_agaram_letters:
+            ta_letters.append(c)
         elif c in accent_symbols:
-            ta_letters.append(prev+c)
-            prev = u''
+            if len(ta_letters) < 1:
+                # odd situation
+                ta_letters.append(c)
+            else:
+                #print("Merge/accent")
+                ta_letters[-1] += c
         else:
-            if prev != u'':
-                ta_letters.append(prev+c)
-                prev = u''
-            elif ord(c) < 256:
-                # plain-old ascii
+            if ord(c) < 256:
                 ta_letters.append( c )
             else:
-                # assertion is somewhat heavy handed here
-                print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
-                ta_letters.append( c )
-    if prev != u'': #if prev is not null it is $c
-        ta_letters.append( prev )
-#print ta_letters
-#print u"".join(ta_letters)
-    ta_letters_fixup = []
-    for letter in ta_letters:
-        if letter == u"ா":
-            ta_letters_fixup[-1]+=letter
-        else:
-            ta_letters_fixup.append(letter)
-    return ta_letters_fixup
+                if len(ta_letters) > 0:
+                    #print("Merge/??")
+                    ta_letters[-1]+= c
+                else:
+                    ta_letters.append(c)
+        idx = idx + 1
+    
+    return ta_letters
 
 # same as get_letters but use as iterable
 def get_letters_iterable( word ):
@@ -319,41 +328,44 @@ def get_words( letters, tamil_only=False ):
         return re.split('\s+',opstr)
 
 def get_tamil_words( letters ):
-        tamil_only = True
-        return get_words( letters, tamil_only )
+    """ reverse a Tamil word according to letters, not unicode-points """
+    tamil_only = True
+    return get_words( letters, tamil_only )
 
 # answer if word_a ranks ahead of, or at same level, as word_b in a Tamil dictionary order...
 # for use with Python : if a > 0 
 def compare_words_lexicographic( word_a, word_b ):
-        # sanity check for words to be all Tamil
-        if ( not all_tamil(word_a) ) or (not all_tamil(word_b)) :
-            print("## ")
-            print(word_a)
-            print(word_b)
-            print("Both operands need to be Tamil words")
-        La = len(word_a)
-        Lb = len(word_b)
-        all_TA_letters = u"".join(tamil_letters)
-        for itr in range(0,min(La,Lb)):
-                pos1 = all_TA_letters.find( word_a[itr] )
-                pos2 = all_TA_letters.find( word_b[itr] )
- 
-                if pos1 != pos2 :
-                        #print  not( pos1 > pos2), pos1, pos2
-                        return cmp(pos1, pos2)
- 
-        if La == Lb:                
-                # both words are equal
-                return 0
- 
-        # else result depends on if La is shorter than Lb
-        return cmp(La,Lb)
+    """ compare words in Tamil lexicographic order """
+    # sanity check for words to be all Tamil
+    if ( not all_tamil(word_a) ) or (not all_tamil(word_b)) :
+        print("## ")
+        print(word_a)
+        print(word_b)
+        print("Both operands need to be Tamil words")
+    La = len(word_a)
+    Lb = len(word_b)
+    all_TA_letters = u"".join(tamil_letters)
+    for itr in range(0,min(La,Lb)):
+            pos1 = all_TA_letters.find( word_a[itr] )
+            pos2 = all_TA_letters.find( word_b[itr] )
+
+            if pos1 != pos2 :
+                    #print  not( pos1 > pos2), pos1, pos2
+                    return cmp(pos1, pos2)
+
+    if La == Lb:                
+            # both words are equal
+            return 0
+
+    # else result depends on if La is shorter than Lb
+    return cmp(La,Lb)
 
 # return a list of ordered-pairs containing positions
 # that are common in word_a, and word_b; e.g.
 # தேடுக x தடங்கல் -> one common letter க [(2,3)]
 # சொல் x   தேடுக -> no common letters []
 def word_intersection( word_a, word_b ):
+    """ return a list of tuples where word_a, word_b intersect """
     positions = []
     word_a_letters = get_letters( word_a )
     word_b_letters = get_letters( word_b )
@@ -385,13 +397,13 @@ def splitMeiUyir(uyirmei_char):
     if uyirmei_char in uyir_letters:
         return uyirmei_char   
  
-    if uyirmei_char not in uyirmei_letters: 
+    if uyirmei_char not in grantha_uyirmei_letters: 
         raise ValueError("Passed input letter '%s' is not tamil letter" % uyirmei_char)
  
-    idx = uyirmei_letters.index(uyirmei_char)
+    idx = grantha_uyirmei_letters.index(uyirmei_char)
     uyiridx = idx % 12
     meiidx = int((idx - uyiridx)/ 12)
-    return (mei_letters[meiidx], uyir_letters[uyiridx])
+    return (grantha_mei_letters[meiidx], uyir_letters[uyiridx])
 # end of def splitMeiUyir(uyirmei_char): 
 
 def joinMeiUyir(mei_char, uyir_char):    
@@ -412,18 +424,17 @@ def joinMeiUyir(mei_char, uyir_char):
     if not isinstance(uyir_char, PYTHON3 and str or unicode):
         raise ValueError("Passed input uyir character '%s' must be unicode, \
                                 not just string" % uyir_char)
-    if mei_char not in mei_letters:
+    if mei_char not in grantha_mei_letters:
         raise ValueError("Passed input character '%s' is not a"
                          "tamil mei character" % mei_char)
     if uyir_char not in uyir_letters:
         raise ValueError("Passed input character '%s' is not a"
                          "tamil uyir character" % uyir_char)
     uyiridx = uyir_letters.index(uyir_char)
-    meiidx = mei_letters.index(mei_char)
+    meiidx = grantha_mei_letters.index(mei_char)
     # calculate uyirmei index 
     uyirmeiidx = meiidx*12 + uyiridx
-    return uyirmei_letters[uyirmeiidx]
-# end of def joinMeiUyir(mei_char, uyir_char): 
+    return grantha_uyirmei_letters[uyirmeiidx]
 
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ 
