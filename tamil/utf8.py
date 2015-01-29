@@ -42,11 +42,12 @@ mei_letters = [u"க்",u"ச்",u"ட்",u"த்",u"ப்",u"ற்",
 
 accent_symbols = [u"",u"ா",u"ி",u"ீ",u"ு",u"ூ",
           u"ெ",u"ே",u"ை",u"ொ",u"ோ",u"ௌ",u"ஃ"]
+pulli_symbols = [u"்"]
 
 agaram_letters = [u"க",u"ச",u"ட",u"த",u"ப",u"ற",
           u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",
           u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள"]
-
+          
 sanskrit_letters = [u"ஜ",u"ஷ", u"ஸ",u"ஹ"]
 sanskrit_mei_letters =[u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்"]
 
@@ -284,34 +285,29 @@ def get_letters( word ):
 def get_letters_iterable( word ):
     """ splits the word into a character-list of tamil/english
     characters present in the stream """
-    prev = u''
-    for c in word:
+    WLEN,idx = len(word),0
+    
+    all_symbols = copy( accent_symbols )
+    all_symbols.extend( pulli_symbols )
+    
+    while idx  < WLEN:
+        c = word[idx]
+        #print(idx,hex(ord(c)),len(ta_letters))
         if c in uyir_letters or c == ayudha_letter:
-            yield (prev+c)
-            prev = u''
-        elif c in agaram_letters or c in sanskrit_letters:
-            if prev != u'':
-                yield (prev)
-            prev = c
-        elif c in accent_symbols:
-            yield (prev+c)
-            prev = u''
-        else:
-            if prev != u'':
-                yield (prev+c)
-                prev = u''
-            elif ord(c) < 256:
-                # plain-old ascii
-                yield ( c )
+            idx = idx + 1
+            yield c
+        elif c in grantha_agaram_letters:
+            if idx + 1 < WLEN and word[idx+1] in all_symbols:
+                c2 = word[idx+1]
+                idx = idx + 2
+                yield (c + c2)
             else:
-                # assertion is somewhat heavy handed here
-                print(u"Warning: #unknown/expected state - continuing tamil letter tokenizing. Copy unknown character to string output")
+                idx = idx + 1
                 yield c
-    if prev != u'': #if prev is not null it is $c
-        yield prev
-#print ta_letters
-#print u"".join(ta_letters)
-        raise StopIteration
+        else: 
+            idx = idx + 1
+            yield c
+    raise StopIteration
 
 def get_words( letters, tamil_only=False ):
         """ given a list of UTF-8 letters section them into words, grouping them at spaces """

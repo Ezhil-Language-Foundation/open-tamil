@@ -9,6 +9,10 @@ from opentamiltests import *
 import tamil.utf8 as utf8 
 from tamil.tscii import TSCII
 
+if PYTHON3:
+    class long(int):
+        pass
+
 class Words(unittest.TestCase):
     def test_all_tamil( self ):
         self.assertTrue( tamil.utf8.all_tamil(u"சம்மதம்") )
@@ -128,20 +132,26 @@ class Letters(unittest.TestCase):
 
     def test_letter_extract_yield_with_ascii(self):
         letters = []
-        for l in  utf8.get_letters_iterable(u"கூவிளம் is என்பது also என்ன a சீர்"):
+        ta_str = u"கூவிளம் is என்பது also என்ன a சீர்"
+        for l in  utf8.get_letters_iterable(ta_str):
             letters.append( l )
-        print( "len ==== > " , len(letters) )
-        assert(len(letters) == 25 )
+        act_letters = utf8.get_letters(ta_str)
+        print( "len ==== > " , len(letters),"get_letters CALL = ",len(act_letters) )
+        assert(len(letters) == len(act_letters) )
         for pos,letter in  enumerate(letters):
             if ( LINUX ): print( u"%d %s"%(pos,letter) )
         assert( letters[-4] == u"a" )
         
     def test_letter_extract_yield(self):
+        ta_str = u"கூவிளம் என்பது என்ன சீர்"
+        act_letters = utf8.get_letters(ta_str)
         letters = []
-        for l in utf8.get_letters_iterable(u"கூவிளம் என்பது என்ன சீர்"):
+        for l in utf8.get_letters_iterable(ta_str):
             letters.append( l )
         print( "len ==== > " , len(letters) )
-        assert( len(letters) == 15 )
+        assert( len(letters) == 16 )
+        print( "len ==== > " , len(letters),"get_letters CALL = ",len(act_letters) )
+        assert(len(letters) == len(act_letters) )
         for pos,letter in  enumerate(letters):
             if ( LINUX ): print(u"%d %s"%(pos,letter))
         assert( letter == (u"ர்") )
@@ -187,9 +197,50 @@ class Letters(unittest.TestCase):
         print ( correct )
         assert( list(map(utf8.istamil,utf8.get_letters(u"முத்தையா அண்ணாமலை 2013"))) == correct )
 
-class NumeralTest(unittest.TestCase):
+class NumeralTestAmerican(unittest.TestCase):
+    def runTest(self,var,nos):
+        for numerStr,num in zip(var,nos):
+            print('Testing ---> ',num)
+            self.assertEqual( numerStr, tamil.numeral.num2tamilstr_american( num ), num )
+        return
+
+    def test_units( self ):
+        units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
+        self.runTest( units, range(0,11) )
+        return
+
+        
+    def test_units( self ):
+        units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
+        self.runTest( units, range(0,11) )
+        return
+        
+    def test_teens( self ):
+        teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19    
+        self.runTest( teens, range(11,20) )
+        return
+        
+    def test_tens ( self ):
+        tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
+        self.runTest( tens, range(10,100,10) )
+        return
+        
+    def test_100s( self ):
+        hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு','ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
+        self.runTest( hundreds, range(100,1000,100) )
+        return
+        
+    def test_max( self ):
+        maxno = long(1e15 - 1)
+        expected = u'தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது டிரில்லியன் தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது பில்லியன் தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது மில்லியன் தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது ஆயிரத்தி தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது'
+        self.assertEqual( tamil.numeral.num2tamilstr_american( maxno ), expected )
+        return
+    
     def test_numerals(self):
         var = {0:u"பூஜ்ஜியம்",
+        long(1e7):u"பத்து மில்லியன்",
+        long(1e9-1):u"தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது மில்லியன் தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது ஆயிரத்தி தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது",
+        3060:u"மூன்று ஆயிரத்தி அறுபது",
         1:u"ஒன்று",
         2:u"இரண்டு",
         3:u"மூன்று",
@@ -199,28 +250,103 @@ class NumeralTest(unittest.TestCase):
         17:u"பதினேழு",
         19:u"பத்தொன்பது",
         20:u"இருபது",
-        21:u"இருபத்தி  ஒன்று",
-        1051:u"ஒன்று ஆயிரத்தி ஐம்பத்தி  ஒன்று",
-        100000:u"ஒரு இலட்சம்",
-        100001:u"ஒன்று இலட்சத்தி ஒன்று",
+        21:u"இருபத்தி ஒன்று",
+        1051:u"ஓர் ஆயிரத்தி ஐம்பத்தி ஒன்று",
+        100000:u"நூறு ஆயிரம்",
+        100001:u"நூறு ஆயிரத்தி ஒன்று",
         10011:u"பத்து ஆயிரத்தி பதினொன்று",
-        49:u"நாற்பத்தி  ஒன்பது",
+        49:u"நாற்பத்தி ஒன்பது",
         50:u"ஐம்பது",
-        55:u"ஐம்பத்தி  ஐந்து",
+        55:u"ஐம்பத்தி ஐந்து",
+        1000001:u"ஒரு மில்லியன் ஒன்று",
+        90:u"தொன்னூறு",
+        99:u"தொன்னூற்றி ஒன்பது",
+        100:u"நூறு",
+        101:u"நூற்றி ஒன்று",
+        1000:u"ஓர் ஆயிரம்",
+        111:u"நூற்றி பதினொன்று",
+        1000000000000:u"ஒரு டிரில்லியன்",
+        1011:u"ஓர் ஆயிரத்தி பதினொன்று"}
+        
+        for k,actual_v in var.items():
+            v = tamil.numeral.num2tamilstr_american(k)
+            print('verifying => # %d'%k)
+            self.assertEqual(v,actual_v,k)
+        return
+
+class NumeralTest(unittest.TestCase):
+    def runTest(self,var,nos):
+        for numerStr,num in zip(var,nos):
+            print('Testing ---> ',num)
+            self.assertEqual( numerStr, tamil.numeral.num2tamilstr( num ), num )
+        return
+
+    def test_units( self ):
+        units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
+        self.runTest( units, range(0,11) )
+        return
+
+        
+    def test_units( self ):
+        units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
+        self.runTest( units, range(0,11) )
+        return
+        
+    def test_teens( self ):
+        teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19    
+        self.runTest( teens, range(11,20) )
+        return
+        
+    def test_tens ( self ):
+        tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
+        self.runTest( tens, range(10,100,10) )
+        return
+        
+    def test_100s( self ):
+        hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு','ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
+        self.runTest( hundreds, range(100,1000,100) )
+        return
+        
+    def test_max( self ):
+        maxno = long(1e12 - 1 )
+        expected = u'தொன்னூற்றி ஒன்பது ஆயிரத்தி தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது கோடியே தொன்னூற்றி ஒன்பது இலட்சத்தி தொன்னூற்றி ஒன்பது ஆயிரத்தி தொள்ளாயிரத்து தொன்னூற்றி ஒன்பது'
+        self.assertEqual( tamil.numeral.num2tamilstr( maxno ), expected )
+        return
+    
+    def test_numerals(self):
+        var = {0:u"பூஜ்ஜியம்",
+        3060:u"மூன்று ஆயிரத்தி அறுபது",
+        1:u"ஒன்று",
+        2:u"இரண்டு",
+        3:u"மூன்று",
+        5:u"ஐந்து",
+        10:u"பத்து",
+        11:u"பதினொன்று",
+        17:u"பதினேழு",
+        19:u"பத்தொன்பது",
+        20:u"இருபது",
+        21:u"இருபத்தி ஒன்று",
+        1051:u"ஓர் ஆயிரத்தி ஐம்பத்தி ஒன்று",
+        100000:u"ஒரு இலட்சம்",
+        100001:u"ஒரு இலட்சத்தி ஒன்று",
+        10011:u"பத்து ஆயிரத்தி பதினொன்று",
+        49:u"நாற்பத்தி ஒன்பது",
+        50:u"ஐம்பது",
+        55:u"ஐம்பத்தி ஐந்து",
         1000001:u"பத்து இலட்சத்தி ஒன்று",
         90:u"தொன்னூறு",
-        99:u"தொன்னூற்றி  ஒன்பது",
-        100:u"இருநூறு",
-        101:u"நூற்றி  ஒன்று",
+        99:u"தொன்னூற்றி ஒன்பது",
+        100:u"நூறு",
+        101:u"நூற்றி ஒன்று",
         1000:u"ஓர் ஆயிரம்",
-        111:u"நூற்றி  பதினொன்று",
+        111:u"நூற்றி பதினொன்று",
         1000000000000:u"ஒரு இலட்சம் கோடி",
-        1011:u"ஒன்று ஆயிரத்தி பதினொன்று"}
+        1011:u"ஓர் ஆயிரத்தி பதினொன்று"}
         
         for k,actual_v in var.items():
             v = tamil.numeral.num2tamilstr(k)
             print('verifying => # %d'%k)
-            self.assertEqual(v,actual_v)
+            self.assertEqual(v,actual_v,k)
         return
 
 class CodecTSCII(unittest.TestCase):
@@ -259,6 +385,6 @@ class CodecTSCII(unittest.TestCase):
 
 if __name__ == '__main__':    
     if not PYTHON3:
-        test_support.run_unittest(Letters,Words,CodecTSCII,NumeralTest)
+        test_support.run_unittest(Letters,Words,CodecTSCII,NumeralTest,NumeralTestAmerican)
     else:
         unittest.main()

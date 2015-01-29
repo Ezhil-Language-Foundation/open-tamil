@@ -1,7 +1,7 @@
 open-tamil [![Build Status](https://travis-ci.org/arcturusannamalai/open-tamil.png)](https://travis-ci.org/arcturusannamalai/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/)](http://open-tamil.readthedocs.org/en/latest/)
 ==========
 
-Open Source Tamil Tools
+Open Source Tamil Tools and Tamil Library for Python 2, 3
 திற மூல தமிழ் கருவிகள்
 
 Software ( மென்பொருள் )
@@ -14,8 +14,15 @@ Python  Packages ( பைதான் தொகுப்புகள்  )
 open-tamil provides Python package 'tamil' with ability to,
 
 1. map unicode code-points to Tamil letters - basic but important parsing - in a routine called get_letters from a Tamil word
+   '''tamil.utf8.get_letters''' and '''tamil.utf8.get_letters_iterable''' API return the Tamil letters from the unicode points of a normalized unicode string.
+   These routines are written with efficiency in mind, and tested for accuracy.
+   
 2. work with vowels (uyir) and consonants (mei), compound, uyir-mei letters
 3. reverse letters in Tamil word
+4. numeral - convert a given number (integer) into a numeral in Indian or American based system.
+   e.g. following call will return the string
+        >> '''tamil.numeral.num2tamilstr_american( long(1e7) )'''  
+        u"பத்து மில்லியன்",
 
 #txt2unicode
 Tamil Text Encode to Unicode Converter and vice versa.
@@ -80,6 +87,7 @@ Goal of this package is to collect and develop open-source licensed Tamil tools,
 3. Breakdown Tamil glyphs and unicode code-points into Tamil letter representations - collation
 4. Tools for navigating a corpus of data, build word frequency, prediction tables etc.
 5. Conversion from various encodings. e.g. TSCII to Unicode etc. We hope eventually to converts between the other major Tamil encodings like TAB, TAM, Bamini (*insert-your-favortie-font-encoding*) into Tamil Unicode encoding.
+6. Support all of above in Python 2.6.x, 2.7.x as well as in Python3.
 
 While most of tools in this package will be in Python 2.6. or later, we are open to other open-source language source code contributions.
 
