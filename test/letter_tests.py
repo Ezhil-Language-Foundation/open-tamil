@@ -224,6 +224,12 @@ class NumeralTestAmerican(unittest.TestCase):
             self.assertEqual( numerStr, tamil.numeral.num2tamilstr_american( num ), num )
         return
 
+    def test_friend_of_rama( self ):
+        ramanujan = 1729
+        gometra = tamil.numeral.num2tamilstr( ramanujan )
+        expected = u"ஓர் ஆயிரத்தி எழுநூற்று இருபத்தி ஒன்பது"
+        self.assertEqual( gometra, expected )
+    
     def test_units( self ):
         units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
         self.runTest( units, range(0,11) )
