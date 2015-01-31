@@ -33,8 +33,10 @@ def letters_to_py( _letters ):
 # List of letters you can use
 uyir_letters = [u"அ",u"ஆ",u"இ", 
     u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ"]
-
 ayudha_letter = u"ஃ"
+
+kuril_letters = [u"அ", u"இ", u"உ", u"எ", u"ஒ"]
+nedil_letters = [u"ஆ", u"ஈ", u"ஊ", u"ஏ", u"ஓ"]
 
 vallinam_letters = [u"க்", u"ச்", u"ட்", u"த்", u"ப்", u"ற்"]
 mellinam_letters = [u"ங்", u"ஞ்", u"ண்", u"ந்", u"ம்", u"ன்"]

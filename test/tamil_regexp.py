@@ -75,10 +75,12 @@ class GrepTests(unittest.TestCase):
     def search_test(self,pattern,expected):
         return self.match_test(pattern,expected,fcn=re.search)
     
-    def match_test(self,pattern,expected,fcn=re.match):
+    def match_test(self,pattern,expected,data=None,fcn=re.match):
         [repatt,ymp] = make_pattern( pattern )
         word_matches = []
-        for idx,line in enumerate(self.data):
+        if not data:
+            data = self.data
+        for idx,line in enumerate(data):
             q = fcn(repatt,line.strip())
             if q:
                 print("matched @ %d"%idx)
@@ -102,7 +104,14 @@ class GrepTests(unittest.TestCase):
         expected = [4,5,6,9]
         self.match_test(pattern,expected)
         return
-
+    
+    def test_demo_regex(self):
+        pattern = u"^[க-ள].+[க்-ள்]$"
+        data = [u"இந்த",u"தமிழ்",u"ரெகேஸ்புல்",u"\"^[க-ள].+[க்-ள்]$\"",u"இத்தொடரில்", u"எதை", u"பொருந்தும்"]
+        expected = [1,2,6] # i.e.தமிழ்
+        self.match_test(pattern,expected,data)
+        return
+    
 if __name__ == '__main__':
     if not PYTHON3:
         test_support.run_unittest(SantheeRules,TamilRegex,GrepTests)

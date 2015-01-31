@@ -206,7 +206,17 @@ class Letters(unittest.TestCase):
         print ( list(map(utf8.istamil,utf8.get_letters(u"முத்தையா அண்ணாமலை 2013"))) )
         print ( correct )
         assert( list(map(utf8.istamil,utf8.get_letters(u"முத்தையா அண்ணாமலை 2013"))) == correct )
-
+    
+    def test_kuril_nedil(self):
+        letters = list()
+        letters.extend( utf8.kuril_letters )
+        self.assertEqual( len(letters), 5)
+        letters.extend( utf8.nedil_letters )
+        self.assertEqual( len(letters), 10)
+        letters.extend( [u"ஐ",u"ஔ"] )
+        self.assertTrue( all( [x in letters for x in utf8.uyir_letters ] ) )
+        return
+    
 class NumeralTestAmerican(unittest.TestCase):
     def runTest(self,var,nos):
         for numerStr,num in zip(var,nos):

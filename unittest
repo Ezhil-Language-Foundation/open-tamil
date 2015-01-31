@@ -45,5 +45,6 @@ fi
 # cleanup
 rm failed.txt
 rm success.txt
+rm -fr ./tmp*
 cd ../
 exit $exitcode
