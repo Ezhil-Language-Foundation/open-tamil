@@ -181,6 +181,16 @@ class Letters(unittest.TestCase):
         assert( len(letters) == 27 )
         self.assertTrue( letters[13] == u"தெ" )
         
+    def test_mei_vaggupu( self ):
+        vaguppu = list()
+        for cat in [utf8.vallinam_letters, utf8.mellinam_letters, utf8.idayinam_letters]:
+            self.assertTrue( len(cat), 6 ) 
+            vaguppu.extend( cat )
+        
+        self.assertEqual( len(vaguppu), len(utf8.mei_letters) )
+        # assert mei = sum of all 3
+        self.assertTrue( all( [ mei in vaguppu for mei in utf8.mei_letters] ) )                
+    
     def test_istamil( self ):
         zz = u"முத்தையா அண்ணாமலை எந்த ஒரு தெரிந்த அல்லது தெரியாத எழுத்துருவாகவிருந்தாலும் அதனை மேல்தட்டில் உள்ளிட்டு கீழே உள்ள முடியும்"
         for z in zz.split(u" "):

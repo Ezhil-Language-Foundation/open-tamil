@@ -36,6 +36,10 @@ uyir_letters = [u"அ",u"ஆ",u"இ",
 
 ayudha_letter = u"ஃ"
 
+vallinam_letters = [u"க்", u"ச்", u"ட்", u"த்", u"ப்", u"ற்"]
+mellinam_letters = [u"ங்", u"ஞ்", u"ண்", u"ந்", u"ம்", u"ன்"]
+idayinam_letters = [u"ய்", u"ர்", u"ல்", u"வ்", u"ழ்", u"ள்"]
+
 mei_letters = [u"க்",u"ச்",u"ட்",u"த்",u"ப்",u"ற்",
            u"ஞ்",u"ங்",u"ண்",u"ந்",u"ம்",u"ன்",
            u"ய்",u"ர்",u"ல்",u"வ்",u"ழ்",u"ள்" ]
