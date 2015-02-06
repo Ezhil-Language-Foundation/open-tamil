@@ -19,8 +19,5 @@ class Keechu(unittest.TestCase):
             self.assertEqual( word_length[idx], idx_len)
 
 
-if __name__ == '__main__':    
-    if not PYTHON3:
-        test_support.run_unittest(Keechu)
-    else:
-        unittest.main()
+if __name__ == '__main__':
+    unittest.main()

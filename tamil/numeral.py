@@ -2,7 +2,6 @@
 # (C) 2015 Muthiah Annamalai
 # This file is part of open-tamil project
 
-from __future__ import division, print_function
 import sys
 PYTHON3 = sys.version > '3'
 

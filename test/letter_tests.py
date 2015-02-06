@@ -108,10 +108,10 @@ class Letters(unittest.TestCase):
         assert( letters[-4] == u"a" )
 
     def test_words(self):
-        string = u"உடனே random elevator jazz உடனே எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
-        words = string.split(u" ")
+        _str = u"உடனே random elevator jazz உடனே எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
+        words = _str.split(u" ")
 
-        letters = utf8.get_letters( string )
+        letters = utf8.get_letters( _str )
         outWords = utf8.get_words( letters )
         if ( LINUX ):
             print( u"|".join(words) )
@@ -119,17 +119,15 @@ class Letters(unittest.TestCase):
         assert( outWords == words )
 
     def test_tamil_only_words(self):
-        string = u"உடனே உடனே seventh heaven எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
-        words = string.replace(u"seventh heaven ",u"").split(u" ")
-
-        letters = utf8.get_letters( string )
-        outWords = utf8.get_tamil_words( letters )
-        
+        s = u"உடனே உடனே seventh heaven எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
+        words = s.replace(u"seventh heaven ",u"").split(u" ")
+        letters = utf8.get_letters( s )
+        outWords = utf8.get_tamil_words( letters )        
         if ( LINUX ):
             print( u"|".join(words) )
             print( u"|".join(outWords) )
-        assert( outWords == words )
-
+        self.assertEqual( outWords, words )
+        
     def test_letter_extract_yield_with_ascii(self):
         letters = []
         ta_str = u"கூவிளம் is என்பது also என்ன a சீர்"
@@ -140,7 +138,7 @@ class Letters(unittest.TestCase):
         assert(len(letters) == len(act_letters) )
         for pos,letter in  enumerate(letters):
             if ( LINUX ): print( u"%d %s"%(pos,letter) )
-        assert( letters[-4] == u"a" )
+        self.assertEqual( letters[-4], u"a" )
         
     def test_letter_extract_yield(self):
         ta_str = u"கூவிளம் என்பது என்ன சீர்"
@@ -409,8 +407,5 @@ class CodecTSCII(unittest.TestCase):
         output = tamil.tscii.convert_to_unicode( str )
         assert( output.find(u"அப்பா") >= 0 )
 
-if __name__ == '__main__':    
-    if not PYTHON3:
-        test_support.run_unittest(Letters,Words,CodecTSCII,NumeralTest,NumeralTestAmerican)
-    else:
-        unittest.main()
+if __name__ == '__main__':        
+    unittest.main()

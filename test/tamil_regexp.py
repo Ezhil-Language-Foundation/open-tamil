@@ -112,8 +112,5 @@ class GrepTests(unittest.TestCase):
         self.match_test(pattern,expected,data)
         return
     
-if __name__ == '__main__':
-    if not PYTHON3:
-        test_support.run_unittest(SantheeRules,TamilRegex,GrepTests)
-    else:
-        unittest.main()
+if __name__ == '__main__':    
+    unittest.main()

@@ -49,7 +49,4 @@ class Valluvar(unittest.TestCase):
         if ( LINUX ): print("unicode2tscii_single test passed 'OK'")
         
 if __name__ == '__main__':
-    if PYTHON3:
-        unittest.main()
-    else:
-        test_support.run_unittest(Valluvar)   
+    unittest.main()

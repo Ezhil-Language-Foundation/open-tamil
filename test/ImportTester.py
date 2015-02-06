@@ -12,7 +12,4 @@ class ImportTester(unittest.TestCase):
         import tamil; import ngram; import transliterate
 
 if __name__ == '__main__':    
-    if not PYTHON3:
-        test_support.run_unittest(ImportTester)
-    else:
-        unittest.main()
+    unittest.main()

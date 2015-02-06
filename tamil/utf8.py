@@ -6,6 +6,7 @@
 
 from sys import version
 from copy import copy
+import re
 
 PYTHON3 = version > '3'
 del version
@@ -253,36 +254,73 @@ def reverse_word( word ):
     op.reverse()
     return u"".join(op)
 
+## find out if the letters like, "பொ" are written in canonical "ப + ொ"" graphemes then
+## return True. If they are written like "ப + ெ + ா" then return False on first occurrence
+def is_normalized( text ):
+    TLEN,idx = len(text),1
+    kaal = u"ா"
+    sinna_kombu, periya_kombu = u"ெ", u"ே"
+    kombugal = [sinna_kombu, periya_kombu]
+    print(TLEN,text)
+    def predicate( last_letter, prev_letter):
+        if ((last_letter == kaal) and (prev_letter in kombugal)):
+            return True
+        return False
+    if TLEN < 2:
+        return True
+    elif TLEN == 2:
+        if predicate( text[-1], text[-2] ):
+            return False
+        return True
+    a = text[0]
+    b = text[1]
+    assert idx == 1
+    while (idx < TLEN):
+        print(idx,a,b)
+        if predicate(b,a):
+            return False
+        a=b
+        idx = idx + 1
+        if idx < TLEN:
+            b=text[idx]
+    # reached end and nothing tripped us
+    return True 
+
 ## Split a tamil-unicode stream into
 ## tamil characters (individuals).
 def get_letters( word ):
     """ splits the word into a character-list of tamil/english
     characters present in the stream """ 
     ta_letters = list()
+    not_empty = False
     WLEN,idx = len(word),0
-    while idx  < WLEN:
+    while (idx < WLEN):
         c = word[idx]
         #print(idx,hex(ord(c)),len(ta_letters))
         if c in uyir_letters or c == ayudha_letter:
             ta_letters.append(c)
+            not_empty = True
         elif c in grantha_agaram_letters:
             ta_letters.append(c)
+            not_empty = True
         elif c in accent_symbols:
-            if len(ta_letters) < 1:
+            if not not_empty:
                 # odd situation
                 ta_letters.append(c)
+                not_empty = True
             else:
                 #print("Merge/accent")
-                ta_letters[-1] += c
+                ta_letters[-1] += c             
         else:
             if ord(c) < 256:
                 ta_letters.append( c )
             else:
-                if len(ta_letters) > 0:
+                if not_empty:
                     #print("Merge/??")
                     ta_letters[-1]+= c
                 else:
                     ta_letters.append(c)
+                    not_empty = True
         idx = idx + 1
     
     return ta_letters
@@ -296,7 +334,7 @@ def get_letters_iterable( word ):
     all_symbols = copy( accent_symbols )
     all_symbols.extend( pulli_symbols )
     
-    while idx  < WLEN:
+    while (idx < WLEN):
         c = word[idx]
         #print(idx,hex(ord(c)),len(ta_letters))
         if c in uyir_letters or c == ayudha_letter:
@@ -316,18 +354,13 @@ def get_letters_iterable( word ):
     raise StopIteration
 
 def get_words( letters, tamil_only=False ):
-        """ given a list of UTF-8 letters section them into words, grouping them at spaces """
-        import re
-        if ( tamil_only ):
-                opstr = u"".join(filter( lambda x: x.isspace() or istamil(x),
-                                         letters ))
-        else:
-                opstr = u"".join(letters)
-
-        # debug helpers
-        #for parts in re.split('\s+',opstr):
-        #        print parts   
-        return re.split('\s+',opstr)
+    """ given a list of UTF-8 letters section them into words, grouping them at spaces """
+    if ( tamil_only ):
+        isspace_or_tamil = lambda x: x.isspace() or istamil(x)
+        opstr = u"".join(filter( isspace_or_tamil, letters ))
+    else:
+        opstr = u"".join(letters)
+    return re.split(r'\s+',opstr)
 
 def get_tamil_words( letters ):
     """ reverse a Tamil word according to letters, not unicode-points """

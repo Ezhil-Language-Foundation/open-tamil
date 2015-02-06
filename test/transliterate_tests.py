@@ -69,7 +69,4 @@ class Yazhpanam(unittest.TestCase):
         return
 
 if __name__ == '__main__':    
-    if PYTHON3:
-        unittest.main()
-    else:
-        test_support.run_unittest(Yazhpanam)
+    unittest.main()
