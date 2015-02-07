@@ -2,7 +2,7 @@
 
 # run unittests on Python 3
 # run unit tests when previous bits passed
-cd test/
+cd tests/
 
 
 if [ -e success3.txt ];
