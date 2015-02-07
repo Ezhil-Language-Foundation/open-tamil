@@ -14,6 +14,24 @@ from tamil.utils.santhirules import joinWords
 from tamil.regexp import make_pattern
 
 class SantheeRules(unittest.TestCase):
+    def test_filebased_conjugation_tests( self ):
+        # write to file
+        with codecs.open('out.txt','r','utf-8') as FP:
+            data = FP.readlines()
+            for no,combo in enumerate(data):
+                print("testing #",no)
+                word = combo.split('=')
+                parts = word[0].split('+')
+                joind = word[1].strip()
+                a = parts[0].strip()
+                b = parts[1].strip()
+                jword = joinWords(a,b)
+                
+                print(a + u' + ' + b + u' = ' + jword+u'\n')
+                print(jword,u'|',joind)
+                self.assertEqual( joind, jword )
+        return
+
     def test_grammar_conjugation( self ):
         a = u'என்ன'
         b = u'என்ன'
@@ -22,13 +40,6 @@ class SantheeRules(unittest.TestCase):
         print( w )
         self.assertTrue( w.decode('utf-8') == u'என்னென்ன')
         
-        # write to file
-        # A = a.encode('utf8')
-        # B = b.encode('utf8')
-        # 
-        # f = open('out1.txt', 'a')
-        # f.write(A + ' + ' + B + ' = ' + w+'\n')
-        # f.close()
 
 class TamilRegex(unittest.TestCase):
     def test_basic_A2Z( self ):
