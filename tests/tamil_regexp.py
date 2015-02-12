@@ -27,8 +27,9 @@ class SantheeRules(unittest.TestCase):
                 b = parts[1].strip()
                 jword = joinWords(a,b)
                 
-                print(a + u' + ' + b + u' = ' + jword+u'\n')
-                print(jword,u'|',joind)
+                if ( LINUX ):
+                    print(a + u' + ' + b + u' = ' + jword+u'\n')
+                    print(jword,u'|',joind)
                 self.assertEqual( joind, jword )
         return
 
