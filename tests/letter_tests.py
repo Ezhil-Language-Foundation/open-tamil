@@ -41,8 +41,8 @@ class Letters(unittest.TestCase):
         self.assertEqual( actual, len(letters) )
     
     def test_grantha( self ):
-        self.assertEqual( 23, len(utf8.grantha_mei_letters) )
-        self.assertEqual( 23, len(utf8.grantha_agaram_letters) )
+        self.assertEqual( 24, len(utf8.grantha_mei_letters) )
+        self.assertEqual( 24, len(utf8.grantha_agaram_letters) )
         
     def test_unicode_repr( self ):    
         print("********* unicode repr ******")
@@ -175,8 +175,8 @@ class Letters(unittest.TestCase):
         self.assertEqual( len(utf8.mei_letters) , 18 )
         self.assertEqual( len(utf8.uyir_letters),  (len(utf8.accent_symbols)-1) )
         self.assertEqual( len(utf8.uyirmei_letters) , 18*12 )
-        self.assertEqual( len(utf8.sanskrit_letters) , 5 )
-        self.assertEqual( len(utf8.tamil_letters) , 333 )
+        self.assertEqual( len(utf8.sanskrit_letters) , 6 )
+        self.assertEqual( len(utf8.tamil_letters) , 345 )
     
     def test_get_letters2( self ):
         letters = utf8.get_letters(u"hello world  தெரிந்த அல்லது தெரியாத")

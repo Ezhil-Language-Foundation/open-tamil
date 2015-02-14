@@ -17,10 +17,10 @@ TA_AYUDHA_LEN = 1
 TA_UYIR_LEN = 12
 TA_MEI_LEN = 18
 TA_AGARAM_LEN = 18
-TA_SANSKRIT_LEN = 5
+TA_SANSKRIT_LEN = 6
 TA_UYIRMEI_LEN = 216
-TA_GRANTHA_UYIRMEI_LEN = 23*12
-TA_LETTERS_LEN = 247 + 5*12 + 22 + 4
+TA_GRANTHA_UYIRMEI_LEN = 24*12
+TA_LETTERS_LEN = 247 + 6*12 + 22 + 4
 
 def to_unicode_repr( _letters ):
     """ helpful in situations where browser/app may recognize Unicode encoding
@@ -55,8 +55,8 @@ agaram_letters = [u"க",u"ச",u"ட",u"த",u"ப",u"ற",
           u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",
           u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள"]
           
-sanskrit_letters = [u"ஜ",u"ஷ", u"ஸ",u"ஹ",u"க்ஷ"]
-sanskrit_mei_letters =[u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்",u"க்ஷ்"]
+sanskrit_letters = [u"ஶ",u"ஜ",u"ஷ", u"ஸ",u"ஹ",u"க்ஷ"]
+sanskrit_mei_letters =[u"ஶ்",u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்",u"க்ஷ்"]
 
 grantha_mei_letters = copy(mei_letters)
 grantha_mei_letters.extend(sanskrit_mei_letters)
@@ -140,6 +140,7 @@ u"க"  ,u"கா"  ,u"கி"  ,u"கீ"  ,u"கு"  ,u"கூ"  ,u"கெ"  
 ,u"ள"  ,u"ளா"  ,u"ளி"  ,u"ளீ"  ,u"ளு"  ,u"ளூ"  ,u"ளெ"  ,u"ளே"  ,u"ளை"  ,u"ளொ"  ,u"ளோ"  ,u"ளௌ" 
  
 ##/* Sanskrit Uyir-Mei */
+,u"ஶ", 	u"ஶா", 	u"ஶி", 	u"ஶீ", u"ஶு", u"ஶூ", u"ஶெ", u"ஶே", u"ஶை", u"ஶொ", u"ஶோ", u"ஶௌ"
 ,u"ஜ"  ,u"ஜா"  ,u"ஜி"  ,u"ஜீ"  ,u"ஜு"  ,u"ஜூ"  ,u"ஜெ"  ,u"ஜே"  ,u"ஜை"  ,u"ஜொ"  ,u"ஜோ"  ,u"ஜௌ" 
 ,u"ஷ"  ,u"ஷா"  ,u"ஷி"  ,u"ஷீ"  ,u"ஷு"  ,u"ஷூ"  ,u"ஷெ"  ,u"ஷே"  ,u"ஷை"  ,u"ஷொ"  ,u"ஷோ"  ,u"ஷௌ" 
 ,u"ஸ"  ,u"ஸா"  ,u"ஸி"  ,u"ஸீ"  ,u"ஸு"  ,u"ஸூ"  ,u"ஸெ"  ,u"ஸே"  ,u"ஸை"  ,u"ஸொ"  ,u"ஸோ"  ,u"ஸௌ" 
@@ -494,6 +495,7 @@ def joinMeiUyir(mei_char, uyir_char):
 # வ வா வி வீ வு வூ வெ வே வை வொ வோ வௌ 
 # ழ ழா ழி ழீ ழு ழூ ழெ ழே ழை ழொ ழோ ழௌ
 # ள ளா ளி ளீ ளு ளூ ளெ ளே ளை ளொ ளோ ளௌ 
+# ஶ ஶா ஶி ஶீ 	ஶு 	ஶூ 	ஶெ 	ஶே 	ஶை ஶொ ஶோ ஶௌ
 # ஜ ஜா ஜி ஜீ ஜு ஜூ ஜெ ஜே ஜை ஜொ ஜோ ஜௌ 
 # ஷ ஷா ஷி ஷீ ஷு ஷூ ஷெ ஷே ஷை ஷொ ஷோ ஷௌ 
 # ஸ ஸா ஸி ஸீ ஸு ஸூ ஸெ ஸே ஸை ஸொ ஸோ ஸௌ 
