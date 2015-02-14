@@ -41,8 +41,8 @@ class Letters(unittest.TestCase):
         self.assertEqual( actual, len(letters) )
     
     def test_grantha( self ):
-        self.assertEqual( 22, len(utf8.grantha_mei_letters) )
-        self.assertEqual( 22, len(utf8.grantha_agaram_letters) )
+        self.assertEqual( 23, len(utf8.grantha_mei_letters) )
+        self.assertEqual( 23, len(utf8.grantha_agaram_letters) )
         
     def test_unicode_repr( self ):    
         print("********* unicode repr ******")
@@ -166,14 +166,18 @@ class Letters(unittest.TestCase):
             self.assertTrue( utf8.get_letters(rword)[0] == utf8.get_letters(word)[-1] )
         return
 
+    def test_shamikshu( self ):
+        word = u"க்ஷமிக்ஷூ"
+        self.assertTrue( all( map( utf8.istamil, utf8.get_letters(word))) )
+    
     def test_tamil_letter_sizes( self ):
-        assert( len(utf8.uyir_letters) == 12 )
-        assert( len(utf8.mei_letters) == 18 )
-        assert( len(utf8.uyir_letters) == (len(utf8.accent_symbols)-1) )
-        assert( len(utf8.uyirmei_letters) == 18*12 )
-        assert( len(utf8.sanskrit_letters) == 4 )
-        assert( len(utf8.tamil_letters) == 321 )
-
+        self.assertEqual( len(utf8.uyir_letters), 12 )
+        self.assertEqual( len(utf8.mei_letters) , 18 )
+        self.assertEqual( len(utf8.uyir_letters),  (len(utf8.accent_symbols)-1) )
+        self.assertEqual( len(utf8.uyirmei_letters) , 18*12 )
+        self.assertEqual( len(utf8.sanskrit_letters) , 5 )
+        self.assertEqual( len(utf8.tamil_letters) , 333 )
+    
     def test_get_letters2( self ):
         letters = utf8.get_letters(u"hello world  தெரிந்த அல்லது தெரியாத")
         assert( len(letters) == 27 )
