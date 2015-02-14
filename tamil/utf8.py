@@ -263,7 +263,7 @@ def is_normalized( text ):
     kaal = u"ா"
     sinna_kombu, periya_kombu = u"ெ", u"ே"
     kombugal = [sinna_kombu, periya_kombu]
-    print(TLEN,text)
+    
     def predicate( last_letter, prev_letter):
         if ((last_letter == kaal) and (prev_letter in kombugal)):
             return True
@@ -278,7 +278,6 @@ def is_normalized( text ):
     b = text[1]
     assert idx == 1
     while (idx < TLEN):
-        print(idx,a,b)
         if predicate(b,a):
             return False
         a=b
