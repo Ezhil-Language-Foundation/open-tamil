@@ -8,12 +8,19 @@
 from opentamiltests import *
 import tamil.utf8 as utf8 
 from tamil.tscii import TSCII
+import codecs
 
 if PYTHON3:
     class long(int):
         pass
 
 class Words(unittest.TestCase):
+    def test_titanic(self):
+        ta_parts = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
+        wlen_expected = [5, 5, 3, 2, 4, 2, 3, 2, 3, 8, 2, 5]
+        wlen = map( lambda x: len( tamil.utf8.get_letters( x) ), ta_parts)
+        self.assertEqual( wlen, wlen_expected )
+        
     def test_all_tamil( self ):
         self.assertTrue( tamil.utf8.all_tamil(u"சம்மதம்") )
         self.assertFalse( tamil.utf8.all_tamil(u"சம்மதம்1") )
@@ -415,6 +422,21 @@ class CodecTSCII(unittest.TestCase):
         with open("data/dumb.tscii") as fp: str = fp.read()
         output = tamil.tscii.convert_to_unicode( str )
         assert( output.find(u"அப்பா") >= 0 )
+    
+    def test_project_MADURAI( self ):
+        fname = "data/project_madurai_tscii.txt"
+        fexact = "data/project_madurai_utf8.txt"
+        
+        # expected 
+        with codecs.open( fexact , 'r', 'utf-8') as fileHandle:
+            exact = fileHandle.read()            
+        
+        # convert 
+        with codecs.open(fname,'r','utf-8') as fileHandle:
+            output = tamil.tscii.convert_to_unicode( fileHandle.read() )
+        self.maxDiff = None
+        
+        self.assertEqual( output, exact[:-1] )
 
 if __name__ == '__main__':        
     unittest.main()
