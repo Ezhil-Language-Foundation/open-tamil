@@ -151,7 +151,7 @@ def print_table():
 def convert_to_unicode( tscii_input ):
     """ convert a byte-ASCII encoded string into equivalent Unicode string
     in the UTF-8 notation."""
-    output = []
+    output = list()
     prev = None
     prev2x = None
     # need a look ahead of 2 tokens atleast
@@ -159,7 +159,7 @@ def convert_to_unicode( tscii_input ):
         ## print "%2x"%ord(char) # debugging
         if ord(char) < 128 :
             # base-ASCII copy to output
-            output = output + [char]
+            output.append( char )
             prev = None
             prev2x = None
             
@@ -171,7 +171,7 @@ def convert_to_unicode( tscii_input ):
                 curr_char = [TSCII[ord(char)]]
                 char = None
 
-            output = output + curr_char
+            output.extend( curr_char )
 
         elif ( (ord(char) in TSCII_POST_MODIFIER) ): 
             
@@ -185,7 +185,7 @@ def convert_to_unicode( tscii_input ):
                 else:
                     # nothing to delete here.. 
                     pass
-                output = output + [TSCII[prev], TSCII[prev2x]]
+                output.extend( [TSCII[prev], TSCII[prev2x]] )
             else:
                 print("Warning: malformed TSCII encoded file; skipping characters")
             

@@ -387,10 +387,15 @@ class CodecTSCII(unittest.TestCase):
         assert( TSCII[0x82] == u"ஶ்ரீ")
         assert( TSCII[0x83] == u"ஜ")
         assert( TSCII[0x84] == u"ஷ")
+    
+    def test_arivuri(self):
+        arivuri = '\x97\xC8\xA2\xD7\xC3\xA2'
+        uArivuri = tamil.tscii.convert_to_unicode( arivuri )
+        self.assertEqual( u"௮றிவுரி", uArivuri )
         
     def test_basic_lookup2UTF8( self ):
         TSCII = tamil.tscii.TSCII
-        assert( TSCII[0xAB]+TSCII[0xF4]+TSCII[0xC0]+TSCII[0xA1] == u"அப்பா" )
+        self.assertEqual( TSCII[0xAB]+TSCII[0xF4]+TSCII[0xC0]+TSCII[0xA1], u"அப்பா" )
 
     def test_TSCII_to_UTF8_part1( self ):
         if PYTHON3:
