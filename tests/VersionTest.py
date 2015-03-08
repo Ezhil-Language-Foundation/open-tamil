@@ -10,7 +10,6 @@ import tamil
 
 class VersionTester(unittest.TestCase):
     def test_version(self):        
-        print ( dir(tamil) )
         self.assertEqual(tamil.VERSION,'0.4')
 
 if __name__ == '__main__':    

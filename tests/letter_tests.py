@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) 2013 Muthiah Annamalai
+# (C) 2013-2015 Muthiah Annamalai
 # 
 # This file is part of 'open-tamil' package tests
 # 
@@ -19,6 +19,8 @@ class Words(unittest.TestCase):
         ta_parts = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
         wlen_expected = [5, 5, 3, 2, 4, 2, 3, 2, 3, 8, 2, 5]
         wlen = map( lambda x: len( tamil.utf8.get_letters( x) ), ta_parts)
+        if PYTHON3:
+            wlen = list(wlen)
         self.assertEqual( wlen, wlen_expected )
         
     def test_all_tamil( self ):
