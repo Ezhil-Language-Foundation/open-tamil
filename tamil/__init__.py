@@ -11,4 +11,5 @@ from . import txt2ipa
 from . import numeral
 from . import regexp
 
+VERSION = '0.4'
 __all__ = ['utf8','txt2unicode','num2tamilstr','txt2unicode','txt2ipa','numeral','regexp']
