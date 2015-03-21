@@ -11,3 +11,4 @@
 from . import LetterModels
 # from .WordModels import ...
 from . import Corpus
+from . import Distance
