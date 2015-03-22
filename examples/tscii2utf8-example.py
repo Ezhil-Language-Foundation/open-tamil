@@ -20,10 +20,10 @@ if __name__ == u"__main__":
         with open(source_file) as fileHandle:
             print("working on " + source_file + "\n")                
             output = tamil.tscii.convert_to_unicode( fileHandle.read() )
-            print( output )
+            #print( output )
             fi = open(destination_file,"w")
             fi.write(output.encode('utf-8'))
             fi.close()
         print("TSCII to UTF8 conversion completed. Check the file " + destination_file)
     except Exception as fileOrConvException:
-        print(u"tscii2utf8 error - file %s could not be processed due to - %s"%(fname,str(fileOrConvException)))
+        print(u"tscii2utf8 error - file %s could not be processed due to - %s"%(source_file,str(fileOrConvException)))
