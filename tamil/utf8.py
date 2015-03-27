@@ -248,7 +248,7 @@ def istamil( tchar ):
 def istamil_alnum( tchar ):
     """ check if the character is alphanumeric, or tamil.
     This saves time from running through istamil() check. """
-    return ( tchar.isalnum( ) or tchar.istamil( ) )
+    return ( tchar.isalnum( ) or istamil( tchar ) )
 
 def reverse_word( word ):
     """ reverse a Tamil word according to letters not unicode-points """
@@ -368,6 +368,14 @@ def get_tamil_words( letters ):
     tamil_only = True
     return get_words( letters, tamil_only )
 
+if PYTHON3:
+    def cmp( x, y):
+        if x == y:
+            return 0
+        if x > y:
+            return 1
+        return -1
+
 # answer if word_a ranks ahead of, or at same level, as word_b in a Tamil dictionary order...
 # for use with Python : if a > 0 
 def compare_words_lexicographic( word_a, word_b ):
@@ -389,11 +397,7 @@ def compare_words_lexicographic( word_a, word_b ):
                     #print  not( pos1 > pos2), pos1, pos2
                     return cmp(pos1, pos2)
 
-    if La == Lb:                
-            # both words are equal
-            return 0
-
-    # else result depends on if La is shorter than Lb
+    # result depends on if La is shorter than Lb, or 0 if La == Lb  i.e. cmp
     return cmp(La,Lb)
 
 # return a list of ordered-pairs containing positions

@@ -9,6 +9,14 @@ from __future__ import print_function
 from opentamiltests import *
 
 class Words(unittest.TestCase):
+    def test_lexico_compare( self ):
+        res = [0,1,-1]
+        self.assertEqual( list(map( lambda x: tamil.utf8.compare_words_lexicographic( u"சம்மத", x),[u"சம்மத",u"சம்த",u"தசம்"])),res)
+        
+    def test_isalnum( self ):
+        self.assertTrue( tamil.utf8.istamil_alnum('LiNuX') )
+        self.assertFalse( tamil.utf8.istamil_alnum('3.14159') )
+    
     def test_all_tamil( self ):
         non_norm = u"ப" +  u"ெ" + u"ா" + u"பொ"
         self.assertTrue( tamil.utf8.is_normalized(u"சம்மதம்") )
