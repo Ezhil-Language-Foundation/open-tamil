@@ -9,6 +9,6 @@
 # Ref: N-gram models https://en.wikipedia.org/wiki/N-gram
 
 from . import LetterModels
-# from .WordModels import ...
+from . import WordModels
 from . import Corpus
 from . import Distance
