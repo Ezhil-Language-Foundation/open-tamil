@@ -68,6 +68,13 @@ which supports unigram model at the moment. More complex language models are exp
 எழுத்து unigram அடிப்படை ஆதரவு, bigram மாதிரிகள், UTF-8 அடிப்படையில் சொற்கிடங்கின் பயன்படுத்தி தொகுப்பு ஆதரவு 'Ngram /'
 எந்த நேரத்தில் மாதிரி unigram ஆதரிக்கிறது. மிகவும் நுணுக்கமான மொழி மாதிரிகள் விரைவில் அபிவிருத்தி செய்யப்படும் என எதிர்பார்க்கப்படுகிறது.
 
+Installation
+==========
+Installation from Python Package Index is also recommended, following the commands,
+```
+$ pip install open-tamil
+```
+
 Examples (உதாரணங்கள்)
 ===================
 Open-Tamil is a set of Python libraries which can help your application - web, system software, GUI on desktop etc. support Tamil text processing, inputs etc.
