@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 # This file is part of open-tamil project, distributed as an example
-
+from __future__ import print_function
 import tamil
 
 import codecs
@@ -40,7 +40,7 @@ class WordlistFilter:
         self.frequency = frequency
     
     def __del__(self):
-        for l in sorted(self.frequency.iteritems(), key=operator.itemgetter(1)):
+        for l in sorted(self.frequency.items(), key=operator.itemgetter(1)):
             if l:
                 self.fout.write( "%s:%d\n"%(l[0],l[1]))
         print('total number of unique words = %d'%len(self.frequency))
