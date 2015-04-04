@@ -222,6 +222,18 @@ def istamil_prefix( word ):
             return True
     return False
 
+if not PYTHON3:
+    is_tamil_unicode_predicate = lambda x: x >= unichr(2946) and x <= unichr(3066)
+else:
+    is_tamil_unicode_predicate = lambda x: x >= chr(2946) and x <= chr(3066)
+def is_tamil_unicode( sequence ):
+    # Ref: languagetool-office-extension/src/main/java/org/languagetool/openoffice/TamilDetector.java    
+    if type(sequence) is list:
+        return list(map( is_tamil_unicode_predicate, sequence ))
+    if len(sequence) > 1:
+        return list(map( is_tamil_unicode_predicate, get_letters(sequence) ))
+    return is_tamil_unicode_predicate( sequence )
+
 def all_tamil( word_in ):
     """ predicate checks if all letters of the input word are Tamil letters """ 
     if isinstance(word_in,list):
