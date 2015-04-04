@@ -12,6 +12,8 @@ from __future__ import print_function
 import tamil
 import sys
 import codecs
+from transliterate import *
+import re
 
 from functools import cmp_to_key
 import operator
@@ -20,28 +22,27 @@ PYTHON3 = sys.version[0] > '2'
 if not PYTHON3:
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout)
 
+# use generators for better memory footprint -- 04/04/15
 class WordFrequency(object):
     # get words
     @staticmethod
-    def get_tamil_words( letters ):
+    def get_tamil_words_iterable( letters ):
         """ given a list of UTF-8 letters section them into words, grouping them at spaces """
         punctuations = u'-,+,/,*,>,<,_,],[,{,},(,)'.split(',')+[',']
         isspace_or_tamil = lambda x:  not x in punctuations  and tamil.utf8.istamil(x)
         
         # correct algorithm for get-tamil-words
-        words = []
         buf = []
         for idx,let in enumerate(letters):
             if tamil.utf8.istamil( let ):
                 buf.append( let )
             else:
                 if len(buf) > 0:
-                    words.append( u"".join( buf ) )
+                    yield  u"".join( buf )
                     buf = []
         if len(buf) > 0:
-            words.append(u"".join(buf))
-        return words
-                        
+            yield u"".join(buf)
+                              
     # sentinel
     def __init__(self,tatext=u''):
         object.__init__(self)       
@@ -60,12 +61,12 @@ class WordFrequency(object):
     
     # processor / core
     def tamil_words_process( self, taline ):
-        taletters = tamil.utf8.get_letters(taline)
+        taletters = tamil.utf8.get_letters_iterable(taline)
         # raw words
         #for word in re.split(u"\s+",tatext):
         #    print(u"-> ",word)    
         # tamil words only
-        for pos,word in enumerate(WordFrequency.get_tamil_words(taletters)):
+        for pos,word in enumerate(WordFrequency.get_tamil_words_iterable(taletters)):
             if len(word) < 1:
                 continue
             self.frequency[word] = 1 + self.frequency.get(word,0)
@@ -90,8 +91,11 @@ def demo_tamil_text_filter( file_urls ):
         file_urls = [file_urls]
     obj = WordFrequency( )
     for filepath in file_urls:
-        tatext = codecs.open(filepath,'r','utf-8').read()
-        obj.process(tatext)
+        try:
+            tatext = codecs.open(filepath,'r','utf-8').read()
+            obj.process(tatext)
+        except Exception as e:
+            sys.stderr.write("Skipping the file :"+filepath+" due to exception\n\t\t " + str(e)+"\n")
     obj.display()
     return obj
 
