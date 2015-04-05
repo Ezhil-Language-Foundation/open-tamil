@@ -7,6 +7,5 @@ install:
   - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install --use-mirrors ordereddict; fi
   - python setup.py install && pip install argparse
 script: ./unittest && cd ./C-tamil && make && ./tamil-letters && cd ..
-### language = C
   - cd ./C-tamil && make && make test
 
