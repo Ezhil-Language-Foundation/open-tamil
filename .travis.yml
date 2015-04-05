@@ -8,5 +8,5 @@ install:
   - python setup.py install && pip install argparse
 script: 
   - ./unittest
-  - cd ./C-tamil && make && make test && cd ..
+  - cd ./C-tamil && make all && make test && cd ..
 
