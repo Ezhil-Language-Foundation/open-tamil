@@ -215,11 +215,11 @@ def tamil( idx ):
 def istamil_prefix( word ):
     """ check if the given word has a tamil prefix. Returns
     either a True/False flag """
-    if ( word.isalpha() ):
-        return False
-    for letters in tamil_letters:
-        if ( word.find(letters) == 0 ):
+    for letter in tamil_letters:
+        if ( word.find(letter) == 0 ):
             return True
+        else:
+            print('did not find',letter)
     return False
 
 if not PYTHON3:

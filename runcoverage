@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# run coverage only if the unittests passed.
+cd tests/
+
+# 1) start from a clean state
+coverage erase
+
+# 2) run coverage tests
+for i in `ls *.py`
+do
+    echo Running coverage test $i
+    coverage run $i
+done
+
+# 3) report
+coverage html
+

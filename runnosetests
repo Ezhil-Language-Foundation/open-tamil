@@ -1,0 +1,4 @@
+#!/bin/bash
+cd ./tests
+nosetests --with-coverage --cover-html *.py
+

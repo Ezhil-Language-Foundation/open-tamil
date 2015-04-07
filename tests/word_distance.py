@@ -19,6 +19,7 @@ class WordsSimilarityLevenshtein(unittest.TestCase):
             v = items[2]
             self.assertEqual( ngram.Distance.edit_distance(k[0],k[1]),v)
         return
+    
     def test_Levenshtein_dist_matrix(self):
         val = [u"food",u"allergy",u"வார்த்தை",u"இது",u"ஒரு",u"ஒருங்குறி", u"வரிசை"]
         L = len(val)

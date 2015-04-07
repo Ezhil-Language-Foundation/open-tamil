@@ -14,6 +14,23 @@ if PYTHON3:
     class long(int):
         pass
 
+class Arichuvadi(unittest.TestCase):
+    def test_fcns(self):
+        self.assertEqual( utf8.mei(0), u"க்" )
+        self.assertEqual( utf8.uyir(0), u"அ" )
+        self.assertEqual( utf8.uyirmei_constructed(1,1), u"\u0b9a\u0bbe" )
+        self.assertEqual( utf8.agaram(0), u"க" )
+        self.assertEqual( utf8.istamil_prefix(u"not a tamil word"),False)
+        karuppan = utf8.uyirmei_constructed(1,1)+u"nottamil"
+        self.assertEqual( utf8.istamil_prefix(karuppan),True)
+        
+    def test_nos(self):
+        self.assertEqual(utf8.tamil_len(),345)
+        self.assertEqual(utf8.uyir_len(),12)
+        self.assertEqual(utf8.mei_len(),18)
+        self.assertEqual(utf8.agaram_len(),18)
+        self.assertEqual(utf8.accent_len(),13)
+        
 class Words(unittest.TestCase):
     def test_titanic(self):
         ta_parts = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
