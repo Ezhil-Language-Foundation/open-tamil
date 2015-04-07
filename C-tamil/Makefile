@@ -3,4 +3,5 @@ all: tamil-letters.c
 clean:
 	rm tamil-letters *~
 
-
+test: all
+	./tamil-letters

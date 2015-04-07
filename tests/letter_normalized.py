@@ -12,7 +12,39 @@ class Words(unittest.TestCase):
     def test_lexico_compare( self ):
         res = [0,1,-1]
         self.assertEqual( list(map( lambda x: tamil.utf8.compare_words_lexicographic( u"சம்மத", x),[u"சம்மத",u"சம்த",u"தசம்"])),res)
+    
+    def test_unicode_tamil(self):
+        val = []
+        str_in = u'LnX3.14-சம்மதசம்ததசம்'
+        for i in range(0,len(str_in)):
+            letter = str_in[i]
+            val.append( tamil.utf8.is_tamil_unicode( letter ) )
         
+        act = [False,
+               False,
+               False,
+               False,
+               False,
+               False,
+               False,
+               False,
+               True,
+               True,
+               True,
+               True,
+               True,
+               True,
+               True,
+               True,
+               True,
+               True,
+               True,
+               True,
+               True]
+        
+        self.assertEqual( val, act )
+        return
+    
     def test_isalnum( self ):
         self.assertTrue( tamil.utf8.istamil_alnum('LiNuX') )
         self.assertFalse( tamil.utf8.istamil_alnum('3.14159') )
