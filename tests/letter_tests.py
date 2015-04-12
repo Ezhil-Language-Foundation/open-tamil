@@ -30,7 +30,10 @@ class Arichuvadi(unittest.TestCase):
         self.assertEqual(utf8.mei_len(),18)
         self.assertEqual(utf8.agaram_len(),18)
         self.assertEqual(utf8.accent_len(),13)
+    def test_repr(self):
+        self.assertEqual( utf8.to_unicode_repr( u"அ" ), "u'\\u0b85'")
         
+    
 class Words(unittest.TestCase):
     def test_titanic(self):
         ta_parts = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
@@ -73,14 +76,11 @@ class Letters(unittest.TestCase):
     def test_unicode_repr( self ):    
         print("********* unicode repr ******")
         actual = utf8.to_unicode_repr(u'எழில்') 
-        if PYTHON3:
-            wanted = u"'\u0b8e\u0bb4\u0bbf\u0bb2\u0bcd'"
-        else:
-            wanted = "u'\\u0b8e\\u0bb4\\u0bbf\\u0bb2\\u0bcd'"
+        wanted = "u'\\u0b8e\\u0bb4\\u0bbf\\u0bb2\\u0bcd'"
         if ( LINUX ):
             print(wanted,actual)
             print(len(wanted),len(actual))
-        self.assertTrue( actual == wanted )
+        self.assertEqual( actual, wanted )
     
     def test_alltamil( self ):
         self.assertTrue( utf8.all_tamil(u"அஆஇஈஉ") )

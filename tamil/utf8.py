@@ -22,10 +22,11 @@ TA_UYIRMEI_LEN = 216
 TA_GRANTHA_UYIRMEI_LEN = 24*12
 TA_LETTERS_LEN = 247 + 6*12 + 22 + 4
 
-def to_unicode_repr( _letters ):
+def to_unicode_repr( _letter ):
     """ helpful in situations where browser/app may recognize Unicode encoding
         in the \u0b8e type syntax but not actual unicode glyph/code-point"""
-    return repr(_letters)
+    # Python 2-3 compatible
+    return u"u'"+ u"".join( [ u"\\u%04x"%ord(l) for l in _letter ] ) + u"'"
 
 def letters_to_py( _letters ):
         """ return list of letters e.g. uyir_letters as a Python list """
