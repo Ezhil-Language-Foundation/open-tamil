@@ -28,8 +28,8 @@ class WordFrequency(object):
     @staticmethod
     def get_tamil_words_iterable( letters ):
         """ given a list of UTF-8 letters section them into words, grouping them at spaces """
-        punctuations = u'-,+,/,*,>,<,_,],[,{,},(,)'.split(',')+[',']
-        isspace_or_tamil = lambda x:  not x in punctuations  and tamil.utf8.istamil(x)
+        #punctuations = u'-,+,/,*,>,<,_,],[,{,},(,)'.split(',')+[',']
+        #isspace_or_tamil = lambda x:  not x in punctuations  and tamil.utf8.istamil(x)
         
         # correct algorithm for get-tamil-words
         buf = []
