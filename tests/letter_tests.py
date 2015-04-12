@@ -23,13 +23,26 @@ class Arichuvadi(unittest.TestCase):
         self.assertEqual( utf8.istamil_prefix(u"not a tamil word"),False)
         karuppan = utf8.uyirmei_constructed(1,1)+u"nottamil"
         self.assertEqual( utf8.istamil_prefix(karuppan),True)
-        
+
+    def test_assertions(self):
+        ## some assertions, languages dont change fast.
+        self.assertEqual ( tamil.utf8.TA_ACCENT_LEN , len(tamil.utf8.accent_symbols) )
+        self.assertEqual ( tamil.utf8.TA_AYUDHA_LEN , 1 )
+        self.assertEqual (  tamil.utf8.TA_UYIR_LEN , len( tamil.utf8.uyir_letters ) )
+        self.assertEqual (  tamil.utf8.TA_MEI_LEN, len(  tamil.utf8.mei_letters ) )
+        self.assertEqual (  tamil.utf8.TA_AGARAM_LEN, len(  tamil.utf8.agaram_letters ) )
+        self.assertEqual (  tamil.utf8.TA_SANSKRIT_LEN, len(  tamil.utf8.sanskrit_letters )) 
+        self.assertEqual (  tamil.utf8.TA_UYIRMEI_LEN, len(  tamil.utf8.uyirmei_letters ) )
+        self.assertEqual (  tamil.utf8.TA_GRANTHA_UYIRMEI_LEN, len(  tamil.utf8.grantha_uyirmei_letters) )
+        self.assertEqual (  tamil.utf8.TA_LETTERS_LEN, len(  tamil.utf8.tamil_letters) )
+    
     def test_nos(self):
         self.assertEqual(utf8.tamil_len(),345)
         self.assertEqual(utf8.uyir_len(),12)
         self.assertEqual(utf8.mei_len(),18)
         self.assertEqual(utf8.agaram_len(),18)
         self.assertEqual(utf8.accent_len(),13)
+        self.assertEqual(utf8.ayudha_len(),1)
     def test_repr(self):
         self.assertEqual( utf8.to_unicode_repr( u"அ" ), "u'\\u0b85'")
         
@@ -132,23 +145,23 @@ class Letters(unittest.TestCase):
         for pos,letter in  enumerate(letters):
             if ( LINUX ): print(u"%d %s"%(pos,letter))
         assert( letters[-4] == u"a" )
-
+        
     def test_words(self):
         _str = u"உடனே random elevator jazz உடனே எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
         words = _str.split(u" ")
-
+        
         letters = utf8.get_letters( _str )
-        outWords = utf8.get_words( letters )
+        outWords = utf8.get_words( letters, tamil_only = False )
         if ( LINUX ):
             print( u"|".join(words) )
             print( u"|".join(outWords) )
-        assert( outWords == words )
+        self.assertEqual( outWords, words )
 
     def test_tamil_only_words(self):
         s = u"உடனே உடனே seventh heaven எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
         words = s.replace(u"seventh heaven ",u"").split(u" ")
         letters = utf8.get_letters( s )
-        outWords = utf8.get_tamil_words( letters )        
+        outWords = utf8.get_tamil_words( letters )
         if ( LINUX ):
             print( u"|".join(words) )
             print( u"|".join(outWords) )
@@ -195,6 +208,7 @@ class Letters(unittest.TestCase):
     def test_shamikshu( self ):
         word = u"க்ஷமிக்ஷூ"
         self.assertTrue( all( map( utf8.istamil, utf8.get_letters(word))) )
+        self.assertTrue( all( map( utf8.istamil_alnum, utf8.get_letters(word))) )
     
     def test_tamil_letter_sizes( self ):
         self.assertEqual( len(utf8.uyir_letters), 12 )

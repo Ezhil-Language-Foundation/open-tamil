@@ -150,17 +150,6 @@ u"க"  ,u"கா"  ,u"கி"  ,u"கீ"  ,u"கு"  ,u"கூ"  ,u"கெ"  
 
 grantha_uyirmei_letters = copy( tamil_letters[tamil_letters.index(u"கா")-1:] )
 
-## some assertions, languages dont change fast.
-assert ( TA_ACCENT_LEN == len(accent_symbols) )
-assert ( TA_AYUDHA_LEN == 1 )
-assert ( TA_UYIR_LEN == len( uyir_letters ) )
-assert ( TA_MEI_LEN == len( mei_letters ) )
-assert ( TA_AGARAM_LEN == len( agaram_letters ) )
-assert ( TA_SANSKRIT_LEN == len( sanskrit_letters )) 
-assert ( TA_UYIRMEI_LEN == len( uyirmei_letters ) )
-assert ( TA_GRANTHA_UYIRMEI_LEN == len( grantha_uyirmei_letters) )
-assert ( TA_LETTERS_LEN == len(tamil_letters) )
-
 ## length of the definitions
 def accent_len( ):
     return TA_ACCENT_LEN ## 13 = 12 + 1
@@ -367,19 +356,28 @@ def get_letters_iterable( word ):
             yield c
     raise StopIteration
 
-def get_words( letters, tamil_only=False ):
+def get_words(letters,tamil_only=False):
+    return [ word for word in get_words_iterable(letters,tamil_only) ]
+
+def get_words_iterable( letters, tamil_only=False ):
     """ given a list of UTF-8 letters section them into words, grouping them at spaces """
-    if ( tamil_only ):
-        isspace_or_tamil = lambda x: x.isspace() or istamil(x)
-        opstr = u"".join(filter( isspace_or_tamil, letters ))
-    else:
-        opstr = u"".join(letters)
-    return re.split(r'\s+',opstr)
+    
+    # correct algorithm for get-tamil-words
+    buf = []
+    for idx,let in enumerate(letters):
+        if not let.isspace():
+            if istamil(let) or (not tamil_only):
+                buf.append( let )
+        else:
+            if len(buf) > 0:
+                yield  u"".join( buf )
+                buf = []
+    if len(buf) > 0:
+        yield u"".join(buf)
 
 def get_tamil_words( letters ):
     """ reverse a Tamil word according to letters, not unicode-points """
-    tamil_only = True
-    return get_words( letters, tamil_only )
+    return [word for word in get_words_iterable( letters, tamil_only = True )]
 
 if PYTHON3:
     def cmp( x, y):
