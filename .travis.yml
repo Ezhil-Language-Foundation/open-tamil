@@ -7,12 +7,11 @@ install:
   - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install --use-mirrors ordereddict; fi
   - python setup.py install && pip install argparse
   - pip install .
-  - pip install -r dev_requirements.txt
   - pip install nose-cov
-script: 
+script:
   - cd ./C-tamil && make all && make test && cd ..
   - ./unittest #naked tests
-  - cd ./tests && nosetests  -sv --with-coverage --cover-package=open-tamil *.py && cd .. #with coverage
+#  - cd ./tests && nosetests  -sv --with-coverage --cover-package=open-tamil *.py && cd .. #with coverage
 after_success:
   - pip install coveralls
   - coveralls

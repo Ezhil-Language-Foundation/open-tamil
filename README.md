@@ -1,4 +1,4 @@
-open-tamil [![Build Status](https://travis-ci.org/arcturusannamalai/open-tamil.png)](https://travis-ci.org/arcturusannamalai/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/)] |coverage-status| (http://open-tamil.readthedocs.org/en/latest/)
+open-tamil [![Build Status](https://travis-ci.org/arcturusannamalai/open-tamil.png)](https://travis-ci.org/arcturusannamalai/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/)](http://open-tamil.readthedocs.org/en/latest/) [![Coverage Status](https://coveralls.io/repos/arcturusannamalai/open-tamil/badge.svg)](https://coveralls.io/r/arcturusannamalai/open-tamil)
 ==========
 
 Open Source Tamil Tools and Tamil Library for Python 2, 3
@@ -110,7 +110,3 @@ About (பற்றி)
 ==========
 Tamil is classical language primarily spoken in South India.
 தமிழ் முதன்மையாக தென் இந்தியாவில் பேசப்படும் பாரம்பரிய மொழி ஆகும்.
-
-.. |coverage-status| image:: https://coveralls.io/repos/arcturusannamalai/open-tamil/badge.svg
-   :target: https://coveralls.io/r/arcturusannamalai/open-tamil
-   :alt: Coveralls: code coverage status
