@@ -1,0 +1,23 @@
+# Tamil VU : தமிழ்நடைக் கையேடு -> http://www.tamilvu.org/library/lA432/html/lA432ind.ht
+# Dr. V. S. Rajam : Learning Tamil Grammar -> http://www.letsgrammar.org/
+
+
+# declension
+# Accusative form : வை
+# Instrumental form: வால்
+# Associative form: வோடு
+# Dative form: வுக்கு
+# genitive form: வின்
+# Possessive form: வுடைய
+# Locative form: வில்
+# Ablative form: விலிருந்து
+
+# Pronouns
+e.g. yen
+Accusative form: ை
+Instrumental form: ஆல்
+Associative form: ஓடு
+Dative form: உக்கு
+Possessive form: உடைய
+Locative form: இடம்
+Ablative form: இடமிருந்து
