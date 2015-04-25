@@ -6,6 +6,7 @@ misc/
 *.py[cod]
 *.dat
 *.ods
+MANIFEST
 *~
 *.*~
 # C extensions
