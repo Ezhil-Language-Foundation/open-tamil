@@ -1,0 +1,6 @@
+# (C) 2015 Muthiah Annamalai | Compiled for Open-Tamil project
+# விலங்குகளின் பெயர்ப் பட்டியல்
+# Ref: http://ta.wikipedia.org/wiki/விலங்குகளின்_பெயர்ப்_பட்டியல்
+# format is self-descriptive: '#' describes comments, 
+# '>>' start of category, and end of previous category
+# words are 1-word per line, terminal or start spaces to be ignored

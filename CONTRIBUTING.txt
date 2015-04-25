@@ -1,16 +1,16 @@
 You may have heard of open-tamil, the free Tamil text processing tools library for Python 2 and 3. If you want to join the project please follow the  directions.
 
-    Create a github account from www.github.com, and send me your handle via email (ezhillang -AT- gmail.com)
-    Learn about git - version control system (use Google if you don't follow anything)
-    Clone the repository from instructions at https://github.com/arcturusannamalai/open-tamil
-    You should be all setup now; cd to the repository and try to install open-tamil locally in your Python setup
-    Run the command, 'python setup.py build' first
-    Upon success run the command, 'python setup.py install'
-    You may have to use sudo permissions in Linux if you are not using virtualenv
+1.    Create a github account from www.github.com, and send me your handle via email (ezhillang -AT- gmail.com)
+2.    Learn about git - version control system (use Google if you don't follow anything)
+3.    Clone the repository from instructions at https://github.com/arcturusannamalai/open-tamil
+4.    You should be all setup now; cd to the repository and try to install open-tamil locally in your Python setup
+5.    Run the command, 'python setup.py build' first
+6.    Upon success run the command, 'python setup.py install'
+7.    You may have to use sudo permissions in Linux if you are not using virtualenv
 
 To use open-tamil, and understand the functions you may read the docs from blog post, and example code,
 
-    Blog post on open-tamil (most important functions) : https://ezhillang.wordpress.com/2014/01/26/open-tamil-text-processing-%E0%AE%89%E0%AE%B0%E0%AF%88-%E0%AE%AA%E0%AE%95%E0%AF%81%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AE%BE%E0%AE%AF%E0%AF%8D%E0%AE%B5%E0%AF%81/
-    Example code using open-tamil package - try example code in directory called examples under the root of repo : https://github.com/arcturusannamalai/open-tamil/tree/master/examples
+1.   Blog post on open-tamil (most important functions) : https://ezhillang.wordpress.com/2014/01/26/open-tamil-text-processing-%E0%AE%89%E0%AE%B0%E0%AF%88-%E0%AE%AA%E0%AE%95%E0%AF%81%E0%AE%AA%E0%AF%8D%E0%AE%AA%E0%AE%BE%E0%AE%AF%E0%AF%8D%E0%AE%B5%E0%AF%81/
+2.    Example code using open-tamil package - try example code in directory called examples under the root of repo : https://github.com/arcturusannamalai/open-tamil/tree/master/examples
 
 Hopefully you can get started on open-tamil with these resources. If not always leave a comment, drop an email @gmail.com for ezhillang, or tweet to me @ezhillang.
