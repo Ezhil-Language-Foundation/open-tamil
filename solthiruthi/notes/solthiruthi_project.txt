@@ -1,0 +1,59 @@
+
+Solthiruthi – A Multi-pass spell checker for Tamil language (Draft-1)
+
+Author: Muthiah Annamalai,  edited: April, 21, 2015
+Boston Marathon 2015, mainly SRR. (Ref: https://www.flickr.com/photos/tfxc/16609255733/in/ | CC by ND NC 2.0 )
+
+Boston Marathon 2015, mainly SRR. (Ref:
+https://www.flickr.com/photos/tfxc/16609255733/in/ | CC by ND NC 2.0 )
+
+Introduction
+
+Following compiler construction theory, we may write a multi-pass spell checker for Tamil language. Tamil falls under a linguistic classification  as a agglutinative language, and has a phonetic script.
+
+In this article I will present a conceptual framework, a proposal, for writing a multi-pass solthiruthi spell-checker. This effort is variation on theme of other spell checkers for Tamil created by projects myspell, hunspell, navi/vani, and languagetool respectively.
+
+N.B.: I invite interested individuals to contribute to this document, and collaborate with me, under usual open-source credit/attribution terms.
+
+Problem
+
+    Given a Tamil text, urai, we want to find out all spelling mistakes in the text
+    For words which are in error, we want to further provide alternatives
+    For Tamil language we have to apply santhi rules, puranchi vithigal, from grammar.
+    We also would like to provide context sensitive help like A.I.
+
+Solution Overview
+
+I propose a multi-pass spell checker comprised of N-levels. Each level upto the penunltimate (Level N-1) will continue to refine the words which are found in error; we call this analysis levels. The final level will form the suggestions for the words in error; we call this synthesis level. Such an algorithm can be built from 2-Level and upwards in the complexity.
+
+We use a dictionary of valid Tamil words, to validate the Incoming text is split into the form of words, and each word goes through the N-steps.
+
+Typical levels for analysis include, but not limited to,
+
+    Dictionary based white-list analysis for incorrectly spelled words
+    Morphological analysis via stemmer – this is a requirement of agglutinative languages
+    Clean up proper nouns words, peyarechcham,  using names of places, people, things
+    Bayesian classification of errors using bigram, trigram, N-gram letter probabilities
+    Context sensitive word suggestion by Bayesian classification using N-gram word probabilities
+    Keyboard models, Bamini, Tamil99, Anjal, layouts and common misspellings in these
+    Edit-distance based analysis for mistyped words
+    Santhi checker
+    Punarchi checker
+    Detect transliterated English words in Tamil and ignore
+
+Synthesis step is usually made from the following,
+
+     Norvig algorithm for spelling suggestions modified for Tamil arichuvadi
+     For Tamil we need to combine Santhi, and Punarchi rule based pruning of suggestions
+
+Pizhai : 2-Level spell checker
+
+Pizhai spell checker algorithm uses the 2 analysis steps of whitelisted dictionary and the bigram/trigram letter analysis to flag erroneous words. Finally we suggest word alternates to the user during synthesis.
+
+Solthiruthi : 3-Level spell checker
+
+Solthiruthi spell checker algorithm uses the 3 analysis steps of whitelisted dictionary and the bigram/trigram letter analysis to flag erroneous words, and includes a stemmer. Finally we suggest word alternates to the user during synthesis.
+
+Code
+
+All of these ideas can be implemented in Python using open-tamil project, today. We welcome enthusiastic contributors – linguists, language enthusiasts and developers.
