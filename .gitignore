@@ -4,7 +4,8 @@ tamilphonetic
 TODO
 misc/
 *.py[cod]
-
+*.dat
+*.ods
 *~
 *.*~
 # C extensions
