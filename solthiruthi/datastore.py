@@ -23,11 +23,43 @@ class TamilTrie:
     def mk_empty_trie(alpha_len):
         return [[False,None] for i in range(alpha_len)]
     
-    def __init__(self, get_idx = getidx, alphabet_len = utf8.TA_LETTERS_LEN):
+    @staticmethod
+    def buildEnglishTrie(nalpha=26):
+        # utility method
+        to_eng = lambda x: chr(x+ord('a'))
+        eng_idx = lambda x: ord(x) - ord('a')
+        obj = TamilTrie(eng_idx,to_eng,nalpha)
+        return obj
+        
+    def __init__(self, get_idx = getidx, invert_idx = utf8.tamil, alphabet_len = utf8.TA_LETTERS_LEN):
         self.L = alphabet_len
         self.trie = TamilTrie.mk_empty_trie(self.L)
         self.word_limits = TamilTrie.mk_empty_trie(self.L)
         self.getidx = get_idx
+        self.invertidx = invert_idx
+        
+    def getAllWords(self):
+        # list all words in the trie structure in DFS fashion
+        all_words = []
+        self.getAllWordsHelper(self.trie,self.word_limits,prefix=[],all_words=all_words)
+        return all_words
+        
+    def getAllWordsHelper(self,ref_trie,ref_word_limits,prefix,all_words):
+        for letter_pos in range(0,len(ref_trie)):
+            if ref_trie[letter_pos][0]:
+                letter = self.invertidx( letter_pos )
+                prefix.append( letter )
+                if ref_word_limits[letter_pos][0]:
+                    all_words.append( u"".join(prefix) )
+                if ref_trie[letter_pos][1]:
+                    # DFS
+                    self.getAllWordsHelper(ref_trie[letter_pos][1],ref_word_limits[letter_pos][1],prefix,all_words)
+                if len(prefix) > 0:
+                    prefix.pop()
+            else:
+                pass
+        return
+    
     def isWord(self,word):
         # see if @word is present in the current Trie; return True or False
         letters = utf8.get_letters(word)
@@ -67,23 +99,17 @@ class TamilTrie:
         #pprint( self.trie )
         #pprint( self.word_limits )
         
-def do_stuff_3letter():    
-    eng_idx = lambda x: ord(x) - ord('a')
-    obj = TamilTrie(eng_idx,3)
-    pprint( obj.trie )
-    [obj.add(w) for w in ['a','ab','abc','bbc']]#['apple','amma','appa','love','strangeness']]    
-    return obj
-
-def do_stuff():    
-    eng_idx = lambda x: ord(x) - ord('a')
-    obj = TamilTrie(eng_idx,26)
-    pprint( obj.trie )
+def do_stuff():
+    from pprint import pprint    
+    obj = TamilTrie.buildEnglishTrie()
+    #pprint( obj.trie )
     [obj.add(w) for w in ['apple','amma','appa','love','strangeness']]
     all_words = ['apple','amma','appa','love','strangeness','purple','yellow','tail','tuna','maki','ammama']
     print("###### fooooooooooooooooooooooooooooooo ################################")
     for w in all_words:
-        print(w,str(obj.isWord(w)))
+        print(w,str(obj.isWord(w)))    
     #pprint( obj.trie )
+    pprint( obj.getAllWords() )
     return obj
     
 if __name__ == u"__main__":
