@@ -68,7 +68,7 @@ class TamilTrie:
         ref_word_limits = self.word_limits
         for itr,letter in enumerate(letters):
             idx = self.getidx( letter )
-            print(idx, letter)
+            #print(idx, letter)
             if itr == (wLen-1):
                 break
             if not ref_trie[idx][1]:
@@ -86,7 +86,7 @@ class TamilTrie:
         ref_word_limits = self.word_limits
         for itr,letter in enumerate(letters):
             idx = self.getidx( letter )
-            #print(idx, letter)
+            #print(idx, itr)
             ref_trie[idx][0] = True
             if itr == (wLen-1):
                 break
