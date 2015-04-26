@@ -17,7 +17,7 @@ class Solthiruthi:
         # parse and get CLI options. Set do_parse = False for testing
         parser = argparse.ArgumentParser()
         parser.add_argument("-files",default='',nargs='*')
-        parser.add_argument("-dialects",default=[u'std'],nargs='*',choices=(u'std',u'kovai',u'nellai',u'chennai'))
+        parser.add_argument("-dialects",default=[u'std'],nargs='*',choices=(u'std',u'ceylon',u'kovai',u'nellai',u'chennai'))
         parser.add_argument("-Dictionary",default=[u'std'],nargs='*',choices=(u'std',u'wikipedia',u'madurai'))
         parser.add_argument("-nalt",default=10,type=int,help=u"number of alternative suggestions for wrong type") 
         parser.add_argument("-debug",default=False,help="enable debugging information on screen")
