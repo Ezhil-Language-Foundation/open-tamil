@@ -37,7 +37,7 @@ class Arichuvadi(unittest.TestCase):
         self.assertEqual (  tamil.utf8.TA_LETTERS_LEN, len(  tamil.utf8.tamil_letters) )
     
     def test_nos(self):
-        self.assertEqual(utf8.tamil_len(),345)
+        self.assertEqual(utf8.tamil_len(),323)
         self.assertEqual(utf8.uyir_len(),12)
         self.assertEqual(utf8.mei_len(),18)
         self.assertEqual(utf8.agaram_len(),18)
@@ -95,6 +95,10 @@ class Letters(unittest.TestCase):
             print(len(wanted),len(actual))
         self.assertEqual( actual, wanted )
     
+    def test_getidx_n_tamil(self):
+        for itr in range(0,utf8.tamil_len()):
+            self.assertEqual(itr,utf8.getidx(utf8.tamil(itr)))
+        
     def test_alltamil( self ):
         self.assertTrue( utf8.all_tamil(u"அஆஇஈஉ") )
         self.assertFalse( utf8.all_tamil(u"அஆஇNotTamilஈஉ") )
@@ -216,7 +220,7 @@ class Letters(unittest.TestCase):
         self.assertEqual( len(utf8.uyir_letters),  (len(utf8.accent_symbols)-1) )
         self.assertEqual( len(utf8.uyirmei_letters) , 18*12 )
         self.assertEqual( len(utf8.sanskrit_letters) , 6 )
-        self.assertEqual( len(utf8.tamil_letters) , 345 )
+        self.assertEqual( len(utf8.tamil_letters) , 323 )
     
     def test_get_letters2( self ):
         letters = utf8.get_letters(u"hello world  தெரிந்த அல்லது தெரியாத")

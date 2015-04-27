@@ -20,7 +20,7 @@ TA_AGARAM_LEN = 18
 TA_SANSKRIT_LEN = 6
 TA_UYIRMEI_LEN = 216
 TA_GRANTHA_UYIRMEI_LEN = 24*12
-TA_LETTERS_LEN = 247 + 6*12 + 22 + 4
+TA_LETTERS_LEN = 247 + 6*12 + 22 + 4 - TA_AGARAM_LEN - 4 #323
 
 def to_unicode_repr( _letter ):
     """ helpful in situations where browser/app may recognize Unicode encoding
@@ -112,10 +112,10 @@ u"ஃ",
 u"க்",u"ச்",u"ட்",u"த்",u"ப்",u"ற்",u"ஞ்",u"ங்",u"ண்",u"ந்",u"ம்",u"ன்",u"ய்",u"ர்",u"ல்",u"வ்",u"ழ்",u"ள்",
 
 ## /* Agaram */
-u"க",u"ச",u"ட",u"த",u"ப",u"ற",u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள",
+## u"க",u"ச",u"ட",u"த",u"ப",u"ற",u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள",
  
 ## /* Sanskrit (Vada Mozhi) */
-u"ஜ",u"ஷ", u"ஸ",u"ஹ",
+## u"ஜ",u"ஷ", u"ஸ",u"ஹ",
 
 ##/* Sanskrit (Mei) */
 u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்",
@@ -200,6 +200,13 @@ def tamil( idx ):
     """ retrieve Tamil letter at canonical index from array utf8.tamil_letters """
     assert ( idx >= 0 and idx < tamil_len() )
     return tamil_letters[idx]
+
+# companion function to @tamil()
+def getidx(letter):
+    for itr in range(0,tamil_len()):
+        if tamil_letters[itr] == letter:
+            return itr
+    raise Exception("Cannot find letter in Tamil arichuvadi")    
 
 ## useful part of the API:
 def istamil_prefix( word ):

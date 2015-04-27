@@ -4,18 +4,12 @@
 from __future__ import print_function
 
 import sys
-import copy
+import codecs
 import argparse
 from tamil import utf8
 from pprint import pprint
 
 PYTHON3 = (sys.version[0] == '3')
-
-def getidx(letter):
-    for itr in range(0,utf8.TA_LETTERS_LEN):
-        if utf8.tamil_letters[itr] == letter:
-            return itr
-    raise Exception("Cannot find letter in Tamil arichuvadi")    
     
 class TamilTrie:
     "Store a list of words into the Trie data structure"
@@ -31,12 +25,18 @@ class TamilTrie:
         obj = TamilTrie(eng_idx,to_eng,nalpha)
         return obj
         
-    def __init__(self, get_idx = getidx, invert_idx = utf8.tamil, alphabet_len = utf8.TA_LETTERS_LEN):
+    def __init__(self, get_idx = utf8.getidx, invert_idx = utf8.tamil, alphabet_len = utf8.TA_LETTERS_LEN):
         self.L = alphabet_len
         self.trie = TamilTrie.mk_empty_trie(self.L)
         self.word_limits = TamilTrie.mk_empty_trie(self.L)
         self.getidx = get_idx
         self.invertidx = invert_idx
+
+    def loadWordFile(self,filename):
+        # words will be loaded from the file into the Trie structure
+        with codecs.open(filename,'r','utf-8') as fp:
+            map( lambda word: self.add(word.strip()), fp.readlines() )
+        return
         
     def getAllWords(self):
         # list all words in the trie structure in DFS fashion
@@ -85,7 +85,10 @@ class TamilTrie:
         ref_trie = self.trie
         ref_word_limits = self.word_limits
         for itr,letter in enumerate(letters):
-            idx = self.getidx( letter )
+            try:
+                idx = self.getidx( letter )
+            except Exception as exp:
+                continue
             #print(idx, itr)
             ref_trie[idx][0] = True
             if itr == (wLen-1):
@@ -105,12 +108,18 @@ def do_stuff():
     #pprint( obj.trie )
     [obj.add(w) for w in ['apple','amma','appa','love','strangeness']]
     all_words = ['apple','amma','appa','love','strangeness','purple','yellow','tail','tuna','maki','ammama']
-    print("###### fooooooooooooooooooooooooooooooo ################################")
+    print("###### dostuff ################################")
     for w in all_words:
         print(w,str(obj.isWord(w)))    
     #pprint( obj.trie )
     pprint( obj.getAllWords() )
     return obj
     
+def do_load():
+    " 4 GB program - very inefficient "
+    obj = TamilTrie()
+    obj.loadWordFile('data/tamilvu_dictionary_words.txt')
+    print(len(obj.getAllWords()))
+
 if __name__ == u"__main__":
     do_stuff()

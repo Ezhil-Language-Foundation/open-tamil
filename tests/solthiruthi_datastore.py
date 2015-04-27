@@ -4,8 +4,18 @@
 from opentamiltests import *
 from solthiruthi.data_parser import *
 from solthiruthi.datastore import TamilTrie
+from solthiruthi.Ezhimai import *
 import sys
 
+class EzhimaiTest(unittest.TestCase):
+    def test_(self):
+        obj = PattiyalThiruthi('std')
+        in_words = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
+        rval = map( obj.process_word, in_words )
+        actual = [obj['is_error'] for obj in rval]
+        expected = [True,True,True,True,False,True,True,False,True,True,False,True]
+        self.assertEqual( actual, expected )
+    
 # Test the Trie data structure
 class EnglistTrieTest(unittest.TestCase):
     def test_stuff_3letter(self):
