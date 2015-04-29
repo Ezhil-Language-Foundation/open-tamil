@@ -1,7 +1,7 @@
 # (C) 2015 Muthiah Annamalai | Compiled for Open-Tamil project
 # Ref: ta.wikipedia.org/wiki/பன்னாட்டுத்_தலைநகரங்களின்_பட்டியல்
 # special formatting - country and capitals are tab delimited
->> நகரம் 	நாடு
+>> நகரம்-நாடு
 அபுதாபி 	 ஐக்கிய அரபு அமீரகம்
 அபுஜா 	 நைஜீரியா
 அக்ரா 	 கானா

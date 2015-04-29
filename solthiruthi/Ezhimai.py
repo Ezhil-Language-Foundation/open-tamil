@@ -9,6 +9,7 @@ import sys
 from tamil import utf8
 from pprint import pprint
 from . import WordSpeller
+from . import resources
 
 PYTHON3 = sys.version > '3'
 
@@ -16,9 +17,8 @@ class PattiyalThiruthi(WordSpeller.ISpeller):
     def __init__(self,option):
         """ spell checker based on whitelist agarathi """
         if option != 'std':
-            raise Exception(u'unknown dictionary specified %s'%option)
-        dirname, filename = os.path.split(os.path.abspath(__file__))
-        self.agarathi = PattiyalThiruthi.loadWordFile(dirname+'/data/tamilvu_dictionary_words.txt')
+            raise Exception(u'unknown dictionary specified %s'%option)        
+        self.agarathi = PattiyalThiruthi.loadWordFile(resources.DICTIONARY_DATA_FILES[u'tamilvu_dictionary_words'])
     
     def process_word(self,word):
         # {'word':word,'is_error':False,'alternatives':None}
