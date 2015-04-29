@@ -3,12 +3,14 @@
 
 from opentamiltests import *
 from solthiruthi.data_parser import *
-from solthiruthi.datastore import TamilTrie
+from solthiruthi.datastore import TamilTrie, DTrie
 from solthiruthi.Ezhimai import *
+from solthiruthi.resources import DICTIONARY_DATA_FILES
 import sys
+import copy
 
 class EzhimaiTest(unittest.TestCase):
-    def test_(self):
+    def test_pattiyal(self):
         obj = PattiyalThiruthi('std')
         in_words = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
         rval = map( obj.process_word, in_words )
@@ -16,6 +18,27 @@ class EzhimaiTest(unittest.TestCase):
         expected = [True,True,True,True,False,True,True,False,True,True,False,True]
         self.assertEqual( actual, expected )
     
+class DTrieTest(unittest.TestCase):
+    """ takes 6s to load 63000+ words inmemory + readout sorted via 
+        DTrie as implemented (includes file I/O time) """
+    def test_pattiyal(self):
+        obj = DTrie()
+        in_words = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
+        map( obj.add, in_words )
+        all_words_and_reverse = copy.copy(in_words)
+        all_words_and_reverse.extend( [utf8.reverse_word( word)  for word in in_words] )
+        actual = [obj.isWord(word) for word in all_words_and_reverse]
+        expected = [i<len(in_words) for i in range(0,2*len(in_words))]
+        self.assertEqual( actual, expected )
+    def test_load_dictionary(self):
+        obj = DTrie()
+        obj.loadWordFile(DICTIONARY_DATA_FILES['tamilvu_dictionary_words'])
+        self.assertEqual(len(obj.getAllWords()),63896)
+        count = 0
+        for word in obj.getAllWordsIterable():
+            count = count + 1
+        self.assertEqual(count,63896)
+
 # Test the Trie data structure
 class EnglistTrieTest(unittest.TestCase):
     def test_stuff_3letter(self):

@@ -25,7 +25,12 @@ class Trie:
     @abc.abstractmethod
     def getAllWords(self):
         return
-
+    
+    def getAllWordsIterable(self):
+        for word in self.getAllWords():
+            yield word
+        raise StopIteration
+    
     @staticmethod
     def mk_empty_trie(alpha_len):
         return [[False,None] for i in range(alpha_len)]
@@ -36,9 +41,76 @@ class Trie:
             map( lambda word: self.add(word.strip()), fp.readlines() )
         return
 
-class SlowTrie(Trie):
-    " deque trie where number of nodes grows with time "
-    pass
+class Node:
+    def __init__(self):
+        self.__dict__={'alphabets':{},'is_word':{}}
+    
+class DTrie(Trie):
+    """ trie where number of alphabets at each nodes grows with time; 
+        implementation uses a dictionary
+    """
+    def __init__(self):
+        self.trie = Node() #root node
+    
+    def isWord(self,word):
+        ref_trie = self.trie
+        letters = utf8.get_letters(word)
+        wLen = len(letters)
+        rval = False
+        for idx,letter in enumerate(letters):
+            #print(ref_trie.alphabets.get(letter,"?"))
+            rval = ref_trie.is_word.get(letter,False)
+            ref_trie = ref_trie.alphabets.get(letter,None)
+            if not ref_trie:
+                return False
+        return rval
+    
+    def add(self,word):
+        ref_trie = self.trie
+        letters = utf8.get_letters(word)
+        wLen = len(letters)
+        for idx,letter in enumerate(letters):                
+            value = ref_trie.alphabets.get(letter,None)
+            if not value:
+                ref_trie.alphabets[letter] = Node()
+                ref_trie.is_word[letter]=False
+            if idx < (wLen-1): 
+                ref_trie = ref_trie.alphabets[letter]
+        ref_trie.is_word[letter] = True
+        return
+    
+    def getAllWords(self):
+        # list all words in the trie structure in DFS fashion
+        all_words = []
+        self.getAllWordsHelper(self.trie,prefix=[],all_words=all_words)
+        return all_words
+        
+    def getAllWordsHelper(self,ref_trie,prefix,all_words):
+        for letter in sorted(ref_trie.alphabets.keys()):
+            prefix.append( letter )
+            if ref_trie.is_word[letter]:
+                all_words.append( u"".join(prefix) )
+            if ref_trie.alphabets[letter]:
+                # DFS
+                self.getAllWordsHelper(ref_trie.alphabets[letter],prefix,all_words)
+            prefix.pop()
+        return
+        
+    def getAllWordsIterable(self):
+        return self.getAllWordsIterableHelper(self.trie,[])
+        
+    def getAllWordsIterableHelper(self,ref_trie,prefix):
+        for letter in sorted(ref_trie.alphabets.keys()):
+            prefix.append( letter )
+            if ref_trie.is_word[letter]:
+                yield u"".join(prefix)
+            if ref_trie.alphabets[letter]:
+                # DFS
+                for word in self.getAllWordsIterableHelper(ref_trie.alphabets[letter],prefix):
+                    yield word
+            prefix.pop()
+        raise StopIteration
+        
     
 class TamilTrie(Trie):
     "Store a list of words into the Trie data structure"
@@ -74,10 +146,7 @@ class TamilTrie(Trie):
                 if ref_trie[letter_pos][1]:
                     # DFS
                     self.getAllWordsHelper(ref_trie[letter_pos][1],ref_word_limits[letter_pos][1],prefix,all_words)
-                if len(prefix) > 0:
-                    prefix.pop()
-            else:
-                pass
+                prefix.pop()
         return
     
     def isWord(self,word):
@@ -124,7 +193,7 @@ class TamilTrie(Trie):
         
 def do_stuff():
     from pprint import pprint    
-    obj = TamilTrie.buildEnglishTrie()
+    obj = DTrie() #TamilTrie.buildEnglishTrie()
     #pprint( obj.trie )
     [obj.add(w) for w in ['apple','amma','appa','love','strangeness']]
     all_words = ['apple','amma','appa','love','strangeness','purple','yellow','tail','tuna','maki','ammama']
@@ -134,12 +203,12 @@ def do_stuff():
     #pprint( obj.trie )
     pprint( obj.getAllWords() )
     return obj
-    
+
 def do_load():
     " 4 GB program - very inefficient "
-    obj = TamilTrie()
+    obj = DTrie() #TamilTrie()
     obj.loadWordFile('data/tamilvu_dictionary_words.txt')
     print(len(obj.getAllWords()))
 
 if __name__ == u"__main__":
-    do_stuff()
+    do_load()
