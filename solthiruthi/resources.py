@@ -5,13 +5,17 @@ from __future__ import print_function
 
 import os
 
+def _make_dict_with_path( srcfiles ):
+    return dict( [( srcfile.split(u".txt")[0], mk_path( srcfile ) ) \
+                      for srcfile in srcfiles] )
+
 def get_data_dir():
     dirname, filename = os.path.split(os.path.abspath(__file__))
     return os.path.sep.join([dirname,u'data'])
 
 def get_data_dictionaries( ):
     srcfiles = [u'tamilvu_dictionary_words.txt']
-    return {srcfile.split(u".txt")[0] : mk_path( srcfile ) for srcfile in srcfiles }
+    return _make_dict_with_path(srcfiles)
 
 def get_data_categories( ):
     srcfiles = [u'peyargal.txt',
@@ -21,7 +25,7 @@ def get_data_categories( ):
                 u'nagarangal.txt',
                 u'palam.txt',
                 u'vilangugal.txt']
-    return { srcfile.split(u".txt")[0] : mk_path( srcfile ) for srcfile in srcfiles }
+    return  _make_dict_with_path(srcfiles)
 
 DATADIR = get_data_dir()
 
