@@ -2,7 +2,7 @@
 ## (C) 2015 Muthiah Annamalai,
 ## 
 from __future__ import print_function
-
+import abc
 import sys
 import codecs
 import argparse
@@ -10,12 +10,38 @@ from tamil import utf8
 from pprint import pprint
 
 PYTHON3 = (sys.version[0] == '3')
+
+class Trie:
+    __metaclass__ = abc.ABCMeta
     
-class TamilTrie:
-    "Store a list of words into the Trie data structure"
+    @abc.abstractmethod
+    def add(self,word):
+        return
+    
+    @abc.abstractmethod
+    def isWord(self,word):
+        return
+    
+    @abc.abstractmethod
+    def getAllWords(self):
+        return
+
     @staticmethod
     def mk_empty_trie(alpha_len):
         return [[False,None] for i in range(alpha_len)]
+        
+    def loadWordFile(self,filename):
+        # words will be loaded from the file into the Trie structure
+        with codecs.open(filename,'r','utf-8') as fp:
+            map( lambda word: self.add(word.strip()), fp.readlines() )
+        return
+
+class SlowTrie(Trie):
+    " deque trie where number of nodes grows with time "
+    pass
+    
+class TamilTrie(Trie):
+    "Store a list of words into the Trie data structure"
     
     @staticmethod
     def buildEnglishTrie(nalpha=26):
@@ -27,16 +53,10 @@ class TamilTrie:
         
     def __init__(self, get_idx = utf8.getidx, invert_idx = utf8.tamil, alphabet_len = utf8.TA_LETTERS_LEN):
         self.L = alphabet_len
-        self.trie = TamilTrie.mk_empty_trie(self.L)
-        self.word_limits = TamilTrie.mk_empty_trie(self.L)
+        self.trie = Trie.mk_empty_trie(self.L)
+        self.word_limits = Trie.mk_empty_trie(self.L)
         self.getidx = get_idx
         self.invertidx = invert_idx
-
-    def loadWordFile(self,filename):
-        # words will be loaded from the file into the Trie structure
-        with codecs.open(filename,'r','utf-8') as fp:
-            map( lambda word: self.add(word.strip()), fp.readlines() )
-        return
         
     def getAllWords(self):
         # list all words in the trie structure in DFS fashion
@@ -94,8 +114,8 @@ class TamilTrie:
             if itr == (wLen-1):
                 break
             if not ref_trie[idx][1]:
-                ref_trie[idx][1] = TamilTrie.mk_empty_trie(self.L)
-                ref_word_limits[idx][1] = TamilTrie.mk_empty_trie(self.L)
+                ref_trie[idx][1] = Trie.mk_empty_trie(self.L)
+                ref_word_limits[idx][1] = Trie.mk_empty_trie(self.L)
             ref_trie = ref_trie[idx][1]
             ref_word_limits = ref_word_limits[idx][1]
         ref_word_limits[idx][0] = True
