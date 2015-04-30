@@ -293,6 +293,15 @@ def is_normalized( text ):
             b=text[idx]
     # reached end and nothing tripped us
     return True 
+    
+def _make_set(args):
+    if PYTHON3:
+        return frozenset(args)
+    return set(args)
+
+grantha_agaram_set = _make_set(grantha_agaram_letters)
+accent_symbol_set = _make_set(accent_symbols)
+uyir_letter_set   = _make_set(uyir_letters)
 
 ## Split a tamil-unicode stream into
 ## tamil characters (individuals).
@@ -305,13 +314,13 @@ def get_letters( word ):
     while (idx < WLEN):
         c = word[idx]
         #print(idx,hex(ord(c)),len(ta_letters))
-        if c in uyir_letters or c == ayudha_letter:
+        if c in uyir_letter_set or c == ayudha_letter:
             ta_letters.append(c)
             not_empty = True
-        elif c in grantha_agaram_letters:
+        elif c in grantha_agaram_set:
             ta_letters.append(c)
             not_empty = True
-        elif c in accent_symbols:
+        elif c in accent_symbol_set:
             if not not_empty:
                 # odd situation
                 ta_letters.append(c)
@@ -333,23 +342,25 @@ def get_letters( word ):
     
     return ta_letters
 
+
+_all_symbols = copy( accent_symbols )
+_all_symbols.extend( pulli_symbols )
+all_symbol_set = _make_set(_all_symbols)
+
 # same as get_letters but use as iterable
 def get_letters_iterable( word ):
     """ splits the word into a character-list of tamil/english
     characters present in the stream """
     WLEN,idx = len(word),0
     
-    all_symbols = copy( accent_symbols )
-    all_symbols.extend( pulli_symbols )
-    
     while (idx < WLEN):
         c = word[idx]
         #print(idx,hex(ord(c)),len(ta_letters))
-        if c in uyir_letters or c == ayudha_letter:
+        if c in uyir_letter_set or c == ayudha_letter:
             idx = idx + 1
             yield c
-        elif c in grantha_agaram_letters:
-            if idx + 1 < WLEN and word[idx+1] in all_symbols:
+        elif c in grantha_agaram_set:
+            if idx + 1 < WLEN and word[idx+1] in all_symbol_set:
                 c2 = word[idx+1]
                 idx = idx + 2
                 yield (c + c2)
