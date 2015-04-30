@@ -25,7 +25,8 @@ class Trie:
     @abc.abstractmethod
     def getAllWords(self):
         return
-    
+        
+    @abc.abstractmethod
     def getAllWordsIterable(self):
         for word in self.getAllWords():
             yield word
@@ -38,7 +39,9 @@ class Trie:
     def loadWordFile(self,filename):
         # words will be loaded from the file into the Trie structure
         with codecs.open(filename,'r','utf-8') as fp:
-            map( lambda word: self.add(word.strip()), fp.readlines() )
+            # 2-3 compatible
+            for word in fp.readlines():
+                self.add(word.strip())
         return
 
 class Node:
@@ -148,6 +151,11 @@ class TamilTrie(Trie):
                     self.getAllWordsHelper(ref_trie[letter_pos][1],ref_word_limits[letter_pos][1],prefix,all_words)
                 prefix.pop()
         return
+    
+    def getAllWordsIterable(self):
+        for word in self.getAllWords():
+            yield word
+        raise StopIteration
     
     def isWord(self,word):
         # see if @word is present in the current Trie; return True or False

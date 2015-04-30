@@ -24,12 +24,13 @@ class DTrieTest(unittest.TestCase):
     def test_pattiyal(self):
         obj = DTrie()
         in_words = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
-        map( obj.add, in_words )
+        list(map( obj.add, in_words )) # Python 2-3
         all_words_and_reverse = copy.copy(in_words)
         all_words_and_reverse.extend( [utf8.reverse_word( word)  for word in in_words] )
         actual = [obj.isWord(word) for word in all_words_and_reverse]
         expected = [i<len(in_words) for i in range(0,2*len(in_words))]
         self.assertEqual( actual, expected )
+    
     def test_load_dictionary(self):
         obj = DTrie()
         obj.loadWordFile(DICTIONARY_DATA_FILES['tamilvu_dictionary_words'])
