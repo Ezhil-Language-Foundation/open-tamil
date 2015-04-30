@@ -10,6 +10,7 @@ import operator
 import sys
 import re
 
+LINUX = not hasattr(sys,'getwindowsversion')
 PYTHON3 = sys.version > '3'
 
 # compute word intersection graph of the a wordlist
@@ -26,7 +27,7 @@ class WordlistFilter:
         
         
     def print_tamil_words( self, line ):
-        tatext = re.sub('\s+',' ',line)
+        tatext = re.sub(u'\s+',u' ',line)
         if len(tatext) < 1:
             return
         taletters = tamil.utf8.get_letters(tatext)
@@ -36,7 +37,7 @@ class WordlistFilter:
         if len(word) < 1:
             return
         frequency[word] = 1 + frequency.get(word,0)
-        print(1+frequency[word], word)
+        print(1+frequency[word],  LINUX and word or "<WINDOWS_DONT-PRINT_ThAmIl>")
         self.frequency = frequency
     
     def __del__(self):

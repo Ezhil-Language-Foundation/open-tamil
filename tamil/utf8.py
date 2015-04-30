@@ -215,8 +215,6 @@ def istamil_prefix( word ):
     for letter in tamil_letters:
         if ( word.find(letter) == 0 ):
             return True
-        else:
-            print('did not find',letter)
     return False
 
 if not PYTHON3:
