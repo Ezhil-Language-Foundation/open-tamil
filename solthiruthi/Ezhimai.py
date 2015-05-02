@@ -18,7 +18,7 @@ class PattiyalThiruthi(WordSpeller.ISpeller):
         """ spell checker based on whitelist agarathi """
         if option != 'std':
             raise Exception(u'unknown dictionary specified %s'%option)        
-        self.agarathi = PattiyalThiruthi.loadWordFile(resources.DICTIONARY_DATA_FILES[u'tamilvu_dictionary_words'])
+        self.agarathi = PattiyalThiruthi.loadWordFile(resources.DICTIONARY_DATA_FILES[u'tamilvu'])
     
     def process_word(self,word):
         # {'word':word,'is_error':False,'alternatives':None}

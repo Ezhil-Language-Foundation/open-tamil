@@ -33,7 +33,7 @@ class DTrieTest(unittest.TestCase):
     
     def test_load_dictionary(self):
         obj = DTrie()
-        obj.loadWordFile(DICTIONARY_DATA_FILES['tamilvu_dictionary_words'])
+        obj.loadWordFile(DICTIONARY_DATA_FILES['tamilvu'])
         self.assertEqual(len(obj.getAllWords()),63896)
         count = 0
         for word in obj.getAllWordsIterable():
