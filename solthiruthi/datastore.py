@@ -19,13 +19,18 @@ class Trie:
         return
     
     @abc.abstractmethod
-    def isWord(self,word):
+    def isWord(self,word,ret_ref_trie=False):
+        """ return a boolean as first output, and second output will be the reference trie """
         return
     
     @abc.abstractmethod
     def getAllWords(self):
         return
         
+    @abc.abstractmethod
+    def getAllWordsPrefix(self,prefix):
+        return
+
     @abc.abstractmethod
     def getAllWordsIterable(self):
         for word in self.getAllWords():
@@ -55,7 +60,7 @@ class DTrie(Trie):
     def __init__(self):
         self.trie = Node() #root node
     
-    def isWord(self,word):
+    def isWord(self,word,ret_ref_trie=False):
         ref_trie = self.trie
         letters = utf8.get_letters(word)
         wLen = len(letters)
@@ -66,6 +71,8 @@ class DTrie(Trie):
             ref_trie = ref_trie.alphabets.get(letter,None)
             if not ref_trie:
                 return False
+        if ret_ref_trie:
+            return rval,ref_trie
         return rval
     
     def add(self,word):
@@ -88,6 +95,15 @@ class DTrie(Trie):
         self.getAllWordsHelper(self.trie,prefix=[],all_words=all_words)
         return all_words
         
+    def getAllWordsPrefix(self,prefix):
+        all_words = []
+        val,ref_trie = self.isWord(prefix,ret_ref_trie=True)
+        # ignore val
+        if val: all_words.append( prefix )
+        prefix_letters = utf8.get_letters(prefix)
+        self.getAllWordsHelper( ref_trie, prefix_letters, all_words=all_words )
+        return all_words
+    
     def getAllWordsHelper(self,ref_trie,prefix,all_words):
         for letter in sorted(ref_trie.alphabets.keys()):
             prefix.append( letter )
@@ -157,7 +173,17 @@ class TamilTrie(Trie):
             yield word
         raise StopIteration
     
-    def isWord(self,word):
+    def getAllWordsPrefix(self,prefix):
+        raise Exception("NOT IMPLEMENTED RIGHT")
+        all_words = []
+        val,ref_trie,ref_word_limits = self.isWord(prefix,ret_ref_trie=True)
+        # ignore val
+        if val: all_words.append( prefix )
+        prefix_letters = utf8.get_letters(prefix)
+        self.getAllWordsHelper( ref_trie, ref_word_limits, prefix_letters, all_words)
+        return all_words
+
+    def isWord(self,word,ret_ref_trie=False):
         # see if @word is present in the current Trie; return True or False
         letters = utf8.get_letters(word)
         wLen = len(letters)
@@ -172,6 +198,9 @@ class TamilTrie(Trie):
                 return False #this branch of Trie did not exist
             ref_trie = ref_trie[idx][1]
             ref_word_limits = ref_word_limits[idx][1]
+
+        if ret_ref_trie:
+            return ref_word_limits[idx][0],ref_trie,ref_word_limits
         return ref_word_limits[idx][0]
         
     def add(self,word):

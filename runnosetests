@@ -1,4 +1,5 @@
 #!/bin/bash
-cd ./tests
-nosetests --with-coverage --cover-html *.py
+SRCDIR=`pwd`
+cd tests
+PYTHONPATH=$SRCDIR nosetests --with-coverage --cover-html *.py
 
