@@ -18,7 +18,7 @@ def get_letters(word):
 
 class Rule:
     __metaclass__ = abc.ABCMeta
-    
+
     @abc.abstractmethod
     def apply( self, word, ctx ):
         """ @word is just that. @ctx is a dict of NwordsPrevious, NwordsNext,
@@ -55,20 +55,20 @@ class AdjacentVowels(Rule):
 
 class Sequential:
     @staticmethod
-    def in_sequence( word, ref_set, ref_reason ):
-        """ ignore ctx information right now """
+    def in_sequence( word, ref_set, ref_reason, freq_threshold = 2 ):
+        """ ignore ctx information right now. If repetition/match length >= @freq_threshold then we flag-it """
         chars = get_letters(word)
         flag = True #no error assumed
         reason = None #no reason
-        prev_uyir = False
+        freq_count = 0
         for char in chars:
             if char in ref_set:
-                if prev_uyir:
+                freq_count += 1
+                if freq_count >= freq_threshold:
                     flag = False
                     break
-                prev_uyir = True
                 continue
-            prev_uyir = False # continue loop        
+            freq_count = 0 # continue loop
         if not flag:
             reason = ref_reason
         return flag,reason
