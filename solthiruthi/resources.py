@@ -14,8 +14,12 @@ def get_data_dir():
     return os.path.sep.join([dirname,u'data'])
 
 def get_data_dictionaries( ):
-    srcfiles = [u'tamilvu_dictionary_words.txt']
-    return _make_dict_with_path(srcfiles)
+    srcfiles = {u'tamilvu' : u'tamilvu_dictionary_words.txt',
+        u'projmad':u'proj-madurai-040415.txt',
+        u'wikipedia':u'wikipedia_full_text_032915.txt'}
+    for  k, v in srcfiles.items():
+        srcfiles[k] = mk_path( v )
+    return srcfiles
 
 def get_data_categories( ):
     srcfiles = [u'peyargal.txt',

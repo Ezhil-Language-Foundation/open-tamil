@@ -31,22 +31,36 @@ class DTrieTest(unittest.TestCase):
         expected = [i<len(in_words) for i in range(0,2*len(in_words))]
         self.assertEqual( actual, expected )
     
+    def test_stuff_3letter(self):
+        obj = DTrie()
+        actual_words = ['a','ab','abc','bbc']
+        [obj.add(w) for w in actual_words]
+        self.assertEqual( sorted(obj.getAllWords()),sorted(actual_words))
+        self.assertEqual( obj.getAllWordsPrefix('ab'), ['ab','abc'] )
+        return
+    
     def test_load_dictionary(self):
         obj = DTrie()
-        obj.loadWordFile(DICTIONARY_DATA_FILES['tamilvu_dictionary_words'])
+        obj.loadWordFile(DICTIONARY_DATA_FILES['tamilvu'])
         self.assertEqual(len(obj.getAllWords()),63896)
         count = 0
         for word in obj.getAllWordsIterable():
             count = count + 1
         self.assertEqual(count,63896)
+        words = obj.getAllWordsPrefix(u'பெரு')
+        #print(len(words))
+        #for w in words:
+        #    print(w)
+        self.assertEqual( len(words), 215 )
 
 # Test the Trie data structure
-class EnglistTrieTest(unittest.TestCase):
+class EnglishTrieTest(unittest.TestCase):
     def test_stuff_3letter(self):
         obj = TamilTrie.buildEnglishTrie(3)
         actual_words = ['a','ab','abc','bbc']
         [obj.add(w) for w in actual_words]
         self.assertEqual( sorted(obj.getAllWords()),sorted(actual_words))
+	#self.assertEqual( obj.getAllWordsPrefix('a'), ['ab','abc'] )
         return
     
     def test_letters_isword(self):
