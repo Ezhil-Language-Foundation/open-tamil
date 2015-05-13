@@ -3,7 +3,7 @@
 
 from opentamiltests import *
 from solthiruthi.data_parser import *
-from solthiruthi.datastore import TamilTrie, DTrie
+from solthiruthi.datastore import TamilTrie, DTrie, Queue
 from solthiruthi.Ezhimai import *
 from solthiruthi.resources import DICTIONARY_DATA_FILES
 import sys
@@ -89,6 +89,50 @@ class TamilTrieTest(unittest.TestCase):
         expected = [i < 5 for i in range(0,11)]
         self.assertEqual(actual,expected)
         return
+
+class QueueTest(unittest.TestCase):
+    def test_load(self):
+        q = Queue()
+        for i in range(0,10):
+            q.insert( i**2 )
+        # verify 10 elements are found in queue
+        self.assertEqual( len(q), 10)
+        self.assertEqual( q[0], 0)
+        self.assertEqual( q[9], 81)
+        self.assertEqual( q[-1], 81)
+        foundInExcept = False
+        try:
+            q[5]
+        except Exception as exp:
+            foundInExcept = str(exp).find(u"index") >= 0
+        self.assertEqual( foundInExcept, True )
+        
+        for i in range(len(q)):
+            self.assertEqual( q.pop(), i**2 )
+        print(len(q))
+                
+    def test_list_methods(self):
+        q = Queue()
+        found_exception = False
+        try:
+            q.append(5)
+        except Exception as e:
+            found_exception = str(e).find(u"Queue does not support") >= 0
+        self.assertEqual( found_exception, True)
     
+    def test_q(self):
+        q = Queue()
+        data = u"நெற்ஸ்கேப் பதிப்புகளில் இந்த செயலி தானிறங்கி எழுத்துரு இல்லாமையினால் முழுமையாக வேலைசெய்யாது என்பதை கருத்திலெடுக்கவும்."
+        words = data.split()
+        for word in words:
+            q.insert(word)
+        self.assertEqual(len(q),11)
+        datum_peek = q.peek()
+        self.assertEqual(words[0],datum_peek)
+        self.assertEqual(q.pop(),words[0])
+        [q.pop() for i in range(5)]
+        
+        self.assertEqual(q[-1],words[-1])
+        
 if __name__ == "__main__":
     unittest.main()
