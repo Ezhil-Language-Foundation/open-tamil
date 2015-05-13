@@ -11,6 +11,42 @@ from pprint import pprint
 
 PYTHON3 = (sys.version[0] == '3')
 
+class Queue(list):
+    ExceptionMsg = u"Queue does not support list method %s"
+    # implement a FIFO structure based on a list
+    def __init__(self):
+        super(Queue,self).__init__()
+    
+    def insert(self,obj):
+        super(Queue,self).insert(0,obj)
+    
+    def peek(self):
+        """ look at next imminent item """
+        return self[0]
+    
+    def __getitem__(self,pos):
+        LEN = self.__len__()
+        if pos != 0 and pos != -1 and pos != (LEN-1):
+            raise Exception(Queue.ExceptionMsg%u"index" + u" as invoked @ pos= %d"%pos)
+        if pos == -1:
+            pos = LEN-1
+        return super(Queue,self).__getitem__(LEN-1-pos)
+    
+    def reverse(self):
+        raise Exception(Queue.ExceptionMsg%"reverse")
+    
+    def __getslice__(self):
+        raise Exception(Queue.ExceptionMsg%"__getslice__")
+    
+    def remove(self):
+        raise Exception(Queue.ExceptionMsg%"remove")
+    
+    def sort(self):
+        raise Exception(Queue.ExceptionMsg%"sort")
+        
+    def append(self,obj):
+        raise Exception(Queue.ExceptionMsg%"append")
+    
 class Trie:
     __metaclass__ = abc.ABCMeta
     
