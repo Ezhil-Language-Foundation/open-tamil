@@ -19,7 +19,7 @@ class EzhimaiTest(unittest.TestCase):
         self.assertEqual( actual, expected )
     
 class DTrieTest(unittest.TestCase):
-    """ takes 6s to load 63000+ words inmemory + readout sorted via 
+    """ takes 6s to load 63000+ words in-memory + readout sorted via 
         DTrie as implemented (includes file I/O time) """
     def test_pattiyal(self):
         obj = DTrie()
@@ -31,10 +31,39 @@ class DTrieTest(unittest.TestCase):
         expected = [i<len(in_words) for i in range(0,2*len(in_words))]
         self.assertEqual( actual, expected )
     
+    def test_count(self):
+        obj = DTrie()
+        foundE = False
+        try:
+            self.assertEqual(obj.getWordCount('foo'),0)
+        except Exception as e:
+            foundE = str(e).find("does not exist in Trie") >= 0
+        self.assertTrue( foundE )
+        obj = DTrie()
+        words = ['foo','bar','bar','bar','baz']
+        [obj.add(w) for w in words]
+        self.assertEqual(obj.getWordCount('bar'),3)
+        self.assertEqual(obj.getWordCount('foo'),1)
+        self.assertEqual(obj.getWordCount('baz'),1)
+        
+    def test_trie_neg(self):
+        obj = DTrie()
+        self.assertEqual( obj.getAllWords(), [] )
+        self.assertEqual( obj.getAllWordsPrefix('none'), [] )
+        self.assertFalse( obj.isWord('fubar',True)[0] )
+        self.assertTrue( obj.isWord('fubar',True)[1] )
+    
     def test_stuff_3letter(self):
         obj = DTrie()
+        self.assertFalse( obj.isWord('apple') )
+        try:
+            obj.add('')
+        except AssertionError as exp: 
+            pass
         actual_words = ['a','ab','abc','bbc']
         [obj.add(w) for w in actual_words]
+        for w in actual_words:
+            self.assertTrue( obj.isWord(w) )
         self.assertEqual( sorted(obj.getAllWords()),sorted(actual_words))
         self.assertEqual( obj.getAllWordsPrefix('ab'), ['ab','abc'] )
         return
@@ -48,7 +77,7 @@ class DTrieTest(unittest.TestCase):
             count = count + 1
         self.assertEqual(count,63896)
         words = obj.getAllWordsPrefix(u'பெரு')
-        #print(len(words))
+        print(len(words))
         #for w in words:
         #    print(w)
         self.assertEqual( len(words), 215 )
@@ -106,11 +135,11 @@ class QueueTest(unittest.TestCase):
         except Exception as exp:
             foundInExcept = str(exp).find(u"index") >= 0
         self.assertEqual( foundInExcept, True )
-        
+        print(len(q))
         for i in range(len(q)):
             self.assertEqual( q.pop(), i**2 )
-        print(len(q))
-                
+        self.assertTrue( q.isempty() )
+        
     def test_list_methods(self):
         q = Queue()
         found_exception = False

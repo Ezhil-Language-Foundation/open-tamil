@@ -4,11 +4,11 @@
 from __future__ import print_function
 import abc
 import codecs
+import re
 
 from tamil import utf8
 
 from .datastore import Queue
-
 
 # DOM for documents
 class Position:
@@ -54,8 +54,16 @@ class Document(Queue):
     def __init__(self,filename):
         self.filename = filename
         with codecs.open(filename,'r','utf-8') as fileobj:
-            self.text = fileobj.read()
+            self.text = fileobj.readlines()
         super(Document,self).__init__()
         
     def tokenize(self):
-        pass
+        spc = re.compile('[\ \t\r]+')
+        idx = 1
+        LEN = len(self.text)
+        prev = None
+        for row,line in enumerate(self.text):
+            re.search() # looks useful
+        if self.isempty():
+            raise Exception("Empty File: Cannot be tokenized")
+        
