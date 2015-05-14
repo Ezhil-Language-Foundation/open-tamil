@@ -24,6 +24,9 @@ class Queue(list):
         """ look at next imminent item """
         return self[0]
     
+    def isempty(self):
+        return self.__len__() == 0
+    
     def __getitem__(self,pos):
         LEN = self.__len__()
         if pos != 0 and pos != -1 and pos != (LEN-1):
@@ -46,7 +49,7 @@ class Queue(list):
         
     def append(self,obj):
         raise Exception(Queue.ExceptionMsg%"append")
-    
+
 class Trie:
     __metaclass__ = abc.ABCMeta
     
@@ -87,42 +90,67 @@ class Trie:
 
 class Node:
     def __init__(self):
-        self.__dict__={'alphabets':{},'is_word':{}}
-    
+        self.__dict__={'alphabets':{},'is_word':{},'count':{}}
+    def __str__(self):
+        return str(self.__dict__)
+
 class DTrie(Trie):
     """ trie where number of alphabets at each nodes grows with time; 
-        implementation uses a dictionary
+        implementation uses a dictionary; it contains an attribute count for frequency of letter.
     """
     def __init__(self):
         self.trie = Node() #root node
     
     def isWord(self,word,ret_ref_trie=False):
+        rval,ref_trie = self.isWordAndTrie( word )
+        if ret_ref_trie:
+            return rval, ref_trie
+        return rval
+    
+    def isWordAndTrie(self,word):
         ref_trie = self.trie
         letters = utf8.get_letters(word)
         wLen = len(letters)
         rval = False
+        prev_trie = None
         for idx,letter in enumerate(letters):
-            #print(ref_trie.alphabets.get(letter,"?"))
+            #print(str(ref_trie))
             rval = ref_trie.is_word.get(letter,False)
+            prev_trie = ref_trie
             ref_trie = ref_trie.alphabets.get(letter,None)
             if not ref_trie:
-                return False
-        if ret_ref_trie:
-            return rval,ref_trie
-        return rval
+                break
+        
+        return rval,prev_trie
+    
+    def getWordCount(self,word):
+        isWord, ref_trie = self.isWord( word, ret_ref_trie = True)
+        if not isWord:
+            raise Exception(u"Word does not exist in Trie")
+        #pprint(str(ref_trie))
+        letters = utf8.get_letters( word )
+        return ref_trie.count[ letters[-1] ]
     
     def add(self,word):
         ref_trie = self.trie
         letters = utf8.get_letters(word)
         wLen = len(letters)
+        prev_trie = None
+        assert wLen >= 1
         for idx,letter in enumerate(letters):                
             value = ref_trie.alphabets.get(letter,None)
+            prev_trie = ref_trie
             if not value:
                 ref_trie.alphabets[letter] = Node()
                 ref_trie.is_word[letter]=False
-            if idx < (wLen-1): 
+                ref_trie.count[letter]=0
                 ref_trie = ref_trie.alphabets[letter]
-        ref_trie.is_word[letter] = True
+            else:
+                ref_trie = value
+        #print(str(prev_trie))
+        last_trie = prev_trie
+        last_trie.is_word[letter] = True
+        last_trie.count[letter] += 1
         return
     
     def getAllWords(self):
@@ -133,10 +161,12 @@ class DTrie(Trie):
         
     def getAllWordsPrefix(self,prefix):
         all_words = []
-        val,ref_trie = self.isWord(prefix,ret_ref_trie=True)
-        # ignore val
-        if val: all_words.append( prefix )
+        val,curr_trie = self.isWord(prefix,ret_ref_trie=True)
         prefix_letters = utf8.get_letters(prefix)
+        ref_trie = curr_trie.alphabets.get( prefix_letters[-1], curr_trie )
+        #print(ref_trie.__str__())
+        # ignore val
+        if val:    all_words.append( prefix )
         self.getAllWordsHelper( ref_trie, prefix_letters, all_words=all_words )
         return all_words
     
@@ -264,17 +294,43 @@ class TamilTrie(Trie):
         #pprint( self.trie )
         #pprint( self.word_limits )
         
+def do_stuff2():
+    obj = DTrie()
+    actual_words = ['a','ab','abc','abc','bbc']
+    [obj.add(w) for w in actual_words]
+    for w in actual_words:
+        obj.isWord(w)
+    print('######### sorted words   ##########')
+    pprint(sorted(obj.getAllWords()))
+    print('######### prefix with ab ##########')
+    pprint( obj.getAllWordsPrefix('ab') )
+    print(obj.getWordCount('abc'))
+    obj = DTrie()
+    list(map(obj.add,['foo','bar','bar','baz']))
+    print(obj.getWordCount('bar'),
+    obj.getWordCount('baz'),
+    obj.getWordCount('foo'))
+    
 def do_stuff():
     from pprint import pprint    
     obj = DTrie() #TamilTrie.buildEnglishTrie()
     #pprint( obj.trie )
-    [obj.add(w) for w in ['apple','amma','appa','love','strangeness']]
+    [obj.add(w) for w in ['apple','apple','amma','appa','love','strangeness']]
     all_words = ['apple','amma','appa','love','strangeness','purple','yellow','tail','tuna','maki','ammama']
     print("###### dostuff ################################")
+    #print( obj.trie )
     for w in all_words:
-        print(w,str(obj.isWord(w)))    
-    #pprint( obj.trie )
+        ret = obj.isWord(w,True)
+        print(w,str(ret[0]),str(ret[1]))    
+    pprint( obj.trie )
     pprint( obj.getAllWords() )
+    pprint( obj.getWordCount('apple'))
+    
+    obj = DTrie()
+    for i in range(3): obj.add('a')
+    for j in range(4): obj.add('b')
+    print(obj.trie.__str__())
+    
     return obj
 
 def do_load():
@@ -284,4 +340,4 @@ def do_load():
     print(len(obj.getAllWords()))
 
 if __name__ == u"__main__":
-    do_load()
+    do_stuff2()
