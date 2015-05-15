@@ -5,8 +5,6 @@ from __future__ import print_function
 import abc
 import sys
 import codecs
-import argparse
-from tamil import utf8
 from pprint import pprint
 
 PYTHON3 = (sys.version[0] == '3')

@@ -5,7 +5,6 @@ from __future__ import print_function
 import abc
 import sys
 import codecs
-import argparse
 from tamil import utf8
 from pprint import pprint
 
@@ -229,7 +228,6 @@ class TamilTrie(Trie):
         #pprint( self.word_limits )
         
 def do_stuff():
-    from pprint import pprint    
     obj = DTrie() #TamilTrie.buildEnglishTrie()
     #pprint( obj.trie )
     [obj.add(w) for w in ['apple','amma','appa','love','strangeness']]
