@@ -5,7 +5,6 @@ from __future__ import print_function
 import abc
 import sys
 import codecs
-import argparse
 from tamil import utf8
 from pprint import pprint
 
@@ -312,7 +311,6 @@ def do_stuff2():
     obj.getWordCount('foo'))
     
 def do_stuff():
-    from pprint import pprint    
     obj = DTrie() #TamilTrie.buildEnglishTrie()
     #pprint( obj.trie )
     [obj.add(w) for w in ['apple','apple','amma','appa','love','strangeness']]
