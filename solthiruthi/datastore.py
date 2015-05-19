@@ -151,7 +151,15 @@ class DTrie(Trie):
         last_trie.is_word[letter] = True
         last_trie.count[letter] += 1
         return
-    
+
+    def getAllWordsAndCount(self):
+        # less efficient method but quick-n-dirty
+        d = dict()
+        for word in self.getAllWordsIterable():
+            count = self.getWordCount(word)
+            d.update({word:count})
+        return d
+        
     def getAllWords(self):
         # list all words in the trie structure in DFS fashion
         all_words = []

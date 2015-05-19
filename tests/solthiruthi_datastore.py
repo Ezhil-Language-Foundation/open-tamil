@@ -46,6 +46,13 @@ class DTrieTest(unittest.TestCase):
         self.assertEqual(obj.getWordCount('foo'),1)
         self.assertEqual(obj.getWordCount('baz'),1)
         
+    def test_words_n_count(self):
+        obj = DTrie()
+        words = ['foo','bar','bar','bar','baz']
+        [obj.add(w) for w in words]
+        actual = {'foo':1,'bar':3,'baz':1}
+        self.assertEqual(obj.getAllWordsAndCount(),actual)
+        
     def test_trie_neg(self):
         obj = DTrie()
         self.assertEqual( obj.getAllWords(), [] )
