@@ -1,0 +1,1 @@
+gem build tamil.gemspec
