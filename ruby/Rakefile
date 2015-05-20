@@ -1,0 +1,12 @@
+require 'rake/testtask'
+#require 'tamil' #use the -I./lib option with rakefile
+
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.libs << "lib/tamil"
+end
+
+desc "Run tests"
+task :default => :test
+
+#Ref: http://guides.rubygems.org/make-your-own-gem/
