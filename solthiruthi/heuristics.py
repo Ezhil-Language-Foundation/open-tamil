@@ -117,3 +117,37 @@ class RepeatedLetters(Rule):
         if not flag:
             reason = RepeatedLetters.reason
         return flag,reason
+
+class BadIME(Rule):
+    """ donot allow vowels with kombu, thunaikaal etc in the word.
+        ஆாள் (originally intended as -> ஆள்) will be flagged
+    """
+    reason = u"சொல்லில் பிழை காரணம், இல்லாத தமிழ் எழுத்து.."
+    uyir_letters = set(utf8.uyir_letters)
+    
+    def apply(self, word, ctx=None):
+        """ ignore ctx information right now """
+        chars = get_letters(word)
+        flag = True #no error assumed
+        reason = None #no reason
+        prev_char = None
+        
+        for char in chars:
+            rule1,rule2,rule3 = False,False,False
+            # rule 1 : uyir followed by kombugal
+            rule1 = (char[-1] in utf8.accent_symbols) and (char[0] in utf8.uyir_letters)
+            if not rule1:
+                # rule 2 : two pullis adjacent to each other
+                rule2 = len(char) >= 2 and (char[-1] == utf8.pulli_symbols[0]) and (char[-2] == char[-1] )
+                if not rule2:
+                    # rule 3 : none of the accent symbols repeat
+                    # exclusions to rule 3 : non-standard Unicode encoding of periya kombu / siriya kombu with thunai kaal
+                    rule3 =  len(char) >= 2 and (char[-1] in utf8.accent_symbols) and (char[-2] in utf8.accent_symbols) \
+                    and not( char[-1] == u"ா" and char[-2] in [u"ெ",u"ே"])
+                
+            if rule1 or rule2 or rule3:
+                flag = False
+                reason = BadIME.reason
+                break
+            prev_char = char # continue loop
+        return flag,reason
