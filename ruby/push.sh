@@ -1,2 +1,2 @@
-gem push tamil-0.1.gem 
+gem push tamil-0.11.gem 
 gem list -r tamil

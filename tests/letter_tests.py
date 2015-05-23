@@ -72,6 +72,13 @@ class Words(unittest.TestCase):
         self.assertFalse( pos3 )
 
 class Letters(unittest.TestCase):
+    def test_odd_case(self):
+        # truly mal-formed inputs get mangled by get-letters
+        not_a_word = u"ஆாள்"
+        self.assertEqual(utf8.get_letters(not_a_word),[u"ஆா",u"ள்"])
+        not_a_word = u"ஆள்்ஆ"
+        self.assertEqual(utf8.get_letters(not_a_word),[u"ஆ",u"ள்்",u"ஆ"])
+        
     def test_word_length( self ):
         actual = 5
         letters = utf8.get_letters(u"மென்பொருள்")        

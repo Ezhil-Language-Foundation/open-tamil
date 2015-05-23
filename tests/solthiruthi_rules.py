@@ -2,7 +2,10 @@
 # (C) 2015 Muthiah Annamalai
 
 from opentamiltests import *
-from solthiruthi.heuristics import AdjacentVowels, AdjacentConsonants, RepeatedLetters
+from solthiruthi.heuristics import AdjacentVowels, AdjacentConsonants, RepeatedLetters, BadIME
+import re
+import codecs
+from tamil import utf8
 
 class AdjacentUyirgalTest(unittest.TestCase):
     def test_word_in_error(self):
@@ -20,6 +23,53 @@ class AdjacentUyirgalTest(unittest.TestCase):
         expected[2] = False
         expected[7] = False
         self.assertEqual( actual, expected )
+
+class BadIMETest(unittest.TestCase):
+    def test_invalid_word_det(self):
+        not_a_word = u"ஆாள்"
+        #print(utf8.get_letters(not_a_word))
+        obj = BadIME()
+        self.assertEqual( obj.apply(not_a_word),(False,BadIME.reason) )
+    
+    def test_invalid_word2(self):    
+        obj = BadIME()
+        not_a_word = u"தக்ஏூளா"
+        self.assertEqual( obj.apply(not_a_word),(False,BadIME.reason) )
+    
+    def test_invalid_word3(self):
+        obj = BadIME()
+        not_a_word = u"தூூக்"
+        self.assertEqual( obj.apply(not_a_word),(False,BadIME.reason) )
+        not_a_word = u"ஏூூளா"
+        self.assertEqual( obj.apply(not_a_word),(False,BadIME.reason) )
+        
+    def test_valid_word_det(self):
+        for a_word in [u"ஆள்",u"ஏனையோருக்கும்"]:
+            obj = BadIME()
+            #print(utf8.get_letters(a_word))
+            self.assertEqual( obj.apply(a_word), (True,None) )
+        return
+        
+    def test_all_valid(self):
+        data,DEBUG = [],False
+        with codecs.open("data/project_madurai_utf8.txt","r","utf-8") as f:
+            data = filter(lambda x: len(x)>2, f.readlines())
+        obj = BadIME()
+        for idx,line in enumerate(data):
+            for col,word in enumerate( re.split(u'\s+',line) ):
+                if DEBUG: 
+                    print(idx,col)
+                    print(utf8.get_letters(word))
+                self.assertEqual(obj.apply(word),(True,None))
+            pass
+        pass
+    
+    def test_invalid_pulli_seq(self):
+        not_a_word = u"ஆள்்ஆ"
+        #from tamil import utf8
+        #print(utf8.get_letters(not_a_word))
+        obj = BadIME()
+        self.assertEqual( obj.apply(not_a_word), (False,BadIME.reason) )
 
 class AdjacentMeiAgaram(unittest.TestCase):
     def test_word_in_error(self):
