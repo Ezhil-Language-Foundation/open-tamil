@@ -5,8 +5,8 @@ python:
   - "2.6"  #lack of OrderedDict. so install ordereddict only for python 2.6.
 before_install:
   - sudo apt-get update
-  - sudo apt-get install ruby  
-  - gem update
+#  - sudo apt-get install ruby  
+#  - gem update
   - echo `ruby -v` is the ruby version
 install:  
   - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install --use-mirrors ordereddict; fi
