@@ -1,3 +1,4 @@
+# encoding: utf-8
 # (C) 2015 Muthiah Annamalai
 require 'minitest/autorun'
 require 'tamil'
