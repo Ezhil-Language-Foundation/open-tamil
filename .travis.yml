@@ -18,6 +18,6 @@ script:
   - ./unittest #naked tests
 #  - cd ./tests && nosetests  -sv --with-coverage --cover-package=open-tamil *.py && cd .. #with coverage
 after_success:
-  - cd ./ruby && rake test && cd ..
+#  - cd ./ruby && rake test && cd ..
   - pip install coveralls
   - coveralls
