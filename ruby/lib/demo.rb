@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Foo
     @@agaram_letters = ["க","ச","ட","த","ப","ற","ஞ","ங","ண","ந","ம","ன","ய","ர","ல","வ","ழ","ள"]
     def do_agaram()
