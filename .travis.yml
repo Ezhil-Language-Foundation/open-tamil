@@ -3,6 +3,9 @@ python:
   - "3.3"  
   - "2.7"
   - "2.6"  #lack of OrderedDict. so install ordereddict only for python 2.6.
+before_install:
+  - sudo apt-get install ruby   
+  - echo `ruby -v` is the ruby version
 install:  
   - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install --use-mirrors ordereddict; fi
   - python setup.py install && pip install argparse
@@ -13,5 +16,6 @@ script:
   - ./unittest #naked tests
 #  - cd ./tests && nosetests  -sv --with-coverage --cover-package=open-tamil *.py && cd .. #with coverage
 after_success:
+  - cd ./ruby && rake test && cd ..
   - pip install coveralls
   - coveralls
