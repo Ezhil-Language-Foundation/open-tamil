@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# encoding: utf-8
 # (C) 2015 Muthiah Annamalai <ezhillang@gmail.com>
 
 class AssertionError < RuntimeError
