@@ -23,7 +23,23 @@ class Arichuvadi(unittest.TestCase):
         self.assertEqual( utf8.istamil_prefix(u"not a tamil word"),False)
         karuppan = utf8.uyirmei_constructed(1,1)+u"nottamil"
         self.assertEqual( utf8.istamil_prefix(karuppan),True)
-
+    
+    def test_watson(self):
+        """ elementary - watson """
+        parts = [letter for letter in utf8.get_letters_elementary_iterable(u'கழுதை')]
+        actual = [u'க்', u'அ', u'ழ்', u'உ', u'த்', u'ஐ']
+        self.assertEqual(parts,actual)
+        parts2 = utf8.get_letters_elementary(u'கழுதை')
+        self.assertEqual(parts2,actual)
+        
+    def test_split_uyirmei(self):
+        p1 = utf8.grantha_uyirmei_splits[u'ழு']
+        p2 = utf8.grantha_uyirmei_splits[u'தை']
+        a1 = [u'ழ்',u'உ']
+        a2 = [u'த்', u'ஐ']
+        self.assertEqual(p1,a1)
+        self.assertEqual(p2,a2)
+    
     def test_assertions(self):
         ## some assertions, languages dont change fast.
         self.assertEqual ( tamil.utf8.TA_ACCENT_LEN , len(tamil.utf8.accent_symbols) )
