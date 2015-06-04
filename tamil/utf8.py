@@ -193,8 +193,8 @@ def uyirmei_constructed( mei_idx, uyir_idx):
     """ construct uyirmei letter give mei index and uyir index """
     idx,idy = mei_idx,uyir_idx
     assert ( idy >= 0 and idy < uyir_len() )
-    assert ( idx >= 0 and idx < mei_len() )
-    return agaram_letters[mei_idx]+accent_symbols[uyir_idx]
+    assert ( idx >= 0 and idx < 6+mei_len() )
+    return grantha_agaram_letters[mei_idx]+accent_symbols[uyir_idx]
 
 def tamil( idx ):
     """ retrieve Tamil letter at canonical index from array utf8.tamil_letters """
@@ -371,6 +371,33 @@ def get_letters_iterable( word ):
             idx = idx + 1
             yield c
     raise StopIteration
+
+grantha_uyirmei_splits = {}
+for _uyir_idx in range(0,12):
+    for _mei_idx, _mei in enumerate(grantha_mei_letters):
+        _uyirmei = uyirmei_constructed( _mei_idx, _uyir_idx )
+        grantha_uyirmei_splits[_uyirmei] = [_mei,uyir_letters[_uyir_idx]]
+
+def get_letters_elementary_iterable(word):
+    for letter in get_letters_iterable(word):
+        letter_parts = grantha_uyirmei_splits.get(letter,None)
+        if letter_parts:
+            yield letter_parts[0]
+            yield letter_parts[1]
+        else:
+            yield letter
+    raise StopIteration
+
+def get_letters_elementary(word):
+    rval = []
+    for letter in get_letters(word):
+        letter_parts = grantha_uyirmei_splits.get(letter,None)
+        if letter_parts:
+            rval.append( letter_parts[0] )
+            rval.append( letter_parts[1] )
+        else:
+            rval.append( letter )
+    return rval
 
 def get_words(letters,tamil_only=False):
     return [ word for word in get_words_iterable(letters,tamil_only) ]
