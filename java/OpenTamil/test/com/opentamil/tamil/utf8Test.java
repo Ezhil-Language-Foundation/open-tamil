@@ -32,10 +32,13 @@ public class utf8Test extends TestCase {
     }
     
     public void testGetLength() {
-        String inputWord = "எழில்";
+        String inputWord = "எழில்",inputWord2 = "கட்டளை";
         
         HashMap<String,Object> actual = utf8.get_length(inputWord);
         TestCase.assertEquals((int)actual.get("length"), 3);
+        
+        actual = utf8.get_length(inputWord2);
+        TestCase.assertEquals((int)actual.get("length"), 4);
         
         List<String> expected = Arrays.asList(new String [] {"மெ","ன்","பொ","ரு","ள்"} );
         TestCase.assertEquals(utf8.get_length("மென்பொருள்").get("letters"),expected);
