@@ -6,13 +6,14 @@
 package com.opentamil.tamil;
 
 import junit.framework.TestCase;
-import java.lang.String;
 import java.util.Arrays;
 import java.util.List;
+import java.util.HashMap;
+
 
 /**
  *
- * @author muthu
+ * @author Muthu Annamalai
  */
 public class utf8Test extends TestCase {
     
@@ -28,6 +29,28 @@ public class utf8Test extends TestCase {
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();
+    }
+    
+    public void testGetLength() {
+        String inputWord = "எழில்";
+        
+        HashMap<String,Object> actual = utf8.get_length(inputWord);
+        TestCase.assertEquals((int)actual.get("length"), 3);
+        
+        List<String> expected = Arrays.asList(new String [] {"மெ","ன்","பொ","ரு","ள்"} );
+        TestCase.assertEquals(utf8.get_length("மென்பொருள்").get("letters"),expected);
+    }
+    
+    public void testGetLetters_TA() {
+        String inputWord = "எழில்";
+        List<String> expected = Arrays.asList(new String [] {"எ","ழி","ல்"} );
+        StringBuffer actual = new StringBuffer();
+        for(String t : utf8.get_letters(inputWord)) {
+            actual.append( t );
+        }
+        
+        TestCase.assertEquals(inputWord,actual.toString());
+        TestCase.assertEquals(utf8.get_letters("மென்பொருள்").size(),5);
     }
     
     public void testGetLetters_EN() {
