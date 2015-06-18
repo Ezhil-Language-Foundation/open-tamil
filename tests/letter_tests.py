@@ -321,7 +321,7 @@ class NumeralTestAmerican(unittest.TestCase):
         return
         
     def test_100s( self ):
-        hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு','ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
+        hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
         self.runTest( hundreds, range(100,1000,100) )
         return
         
@@ -398,7 +398,7 @@ class NumeralTest(unittest.TestCase):
         return
         
     def test_100s( self ):
-        hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு','ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
+        hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
         self.runTest( hundreds, range(100,1000,100) )
         return
         
@@ -444,6 +444,30 @@ class NumeralTest(unittest.TestCase):
             self.assertEqual(v,actual_v,k)
         return
 
+class NumeralNegTest(unittest.TestCase):
+    def runTest(self,var,nos):
+        for numerStr,num in zip(var,nos):
+            print('Testing ---> ',num)
+            self.assertEqual( numerStr, tamil.numeral.num2tamilstr( num ), num )
+        return
+    
+    def test_100s( self ):
+        hundreds = ( u'- நூறு', u'- இருநூறு', u'- முன்னூறு', u'- நாநூறு',u'- ஐநூறு', u'- அறுநூறு', u'- எழுநூறு', u'- எண்ணூறு', u'- தொள்ளாயிரம்') #100 - 900
+        self.runTest( hundreds, range(-100,-1000,-100) )
+        return
+
+    def test_USA(self):
+        ramanujan = -1729
+        gometra = tamil.numeral.num2tamilstr( ramanujan )
+        expected = u"- ஓர் ஆயிரத்தி எழுநூற்று இருபத்தி ஒன்பது"
+        self.assertEqual( gometra, expected )
+    
+    def test_VITHIVILAKKU(self):
+        with self.assertRaises(Exception):
+            tamil.numeral.num2tamilstr( complex(5,6) )
+        with self.assertRaises(Exception):
+            tamil.numeral.num2tamilstr( 'mannagatti' )
+        
 class CodecTSCII(unittest.TestCase):
     def test_vowels(self):
         assert( TSCII[0xAB] == u"அ" )

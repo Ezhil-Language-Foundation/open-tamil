@@ -13,16 +13,18 @@ def num2tamilstr( number ):
     """ work till l lakh crore - i.e 1e5*1e7 = 1e12. 
         turn number into a numeral, Indian style. """
     
-    if not any( filter( lambda T: isinstance( number, T), [int, long]) ) or number < 0:
-        raise Exception('num2tamilstr input has to be a positive, and long or integer')
+    if not any( filter( lambda T: isinstance( number, T), [int, long]) ) or isinstance(number,complex):
+        raise Exception('num2tamilstr input has to be a long or integer')
     if number > long(1e12):
         raise Exception('num2tamilstr input is too large')
-    
+    if number < 0:
+        return u"- "+num2tamilstr( -number )
+        
     units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
     teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19    
     tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
     tens_suffix = (u'இருபத்தி', u'முப்பத்தி', u'நாற்பத்தி', u'ஐம்பத்தி', u'அறுபத்தி', u'எழுபத்தி', u'எண்பத்தி', u'தொன்னூற்றி') # 10+-90+    
-    hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு','ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
+    hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
     hundreds_suffix = (u'நூற்றி', u'இருநூற்றி', u'முன்னூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
     
     one_thousand_prefix = u'ஓர்'
@@ -93,17 +95,18 @@ def num2tamilstr_american( number ):
     """ work till 1000 trillion  - 1 - i.e  = 1e12*1e3 - 1. 
         turn number into a numeral, Indian style. """
     
-    if not any( filter( lambda T: isinstance( number, T), [int, long]) ) or number < 0:
-        raise Exception('num2tamilstr_american input has to be a positive, and long or integer')
-    
+    if not any( filter( lambda T: isinstance( number, T), [int, long]) ) or isinstance(number,complex):
+        raise Exception('num2tamilstr_american input has to be long or integer')
     if number >= long(1e15):
         raise Exception('num2tamilstr input is too large')
+    if number < 0:
+        return u"- "+num2tamilstr_american( -number )
     
     units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
     teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19    
     tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
     tens_suffix = (u'இருபத்தி', u'முப்பத்தி', u'நாற்பத்தி', u'ஐம்பத்தி', u'அறுபத்தி', u'எழுபத்தி', u'எண்பத்தி', u'தொன்னூற்றி') # 10+-90+    
-    hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு','ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
+    hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
     hundreds_suffix = (u'நூற்றி', u'இருநூற்றி', u'முன்னூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
     
     one_thousand_prefix = u'ஓர்'
