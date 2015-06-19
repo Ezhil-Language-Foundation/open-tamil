@@ -462,6 +462,43 @@ class NumeralNegTest(unittest.TestCase):
         expected = u"- ஓர் ஆயிரத்தி எழுநூற்று இருபத்தி ஒன்பது"
         self.assertEqual( gometra, expected )
     
+    def test_3LKPLUS1(self):
+        x1 = 3e5 + 1
+        actual = tamil.numeral.num2tamilstr( x1 )
+        expected = u'மூன்று இலட்சத்தி ஒன்று'
+        self.assertEqual( actual, expected )
+    
+    @unittest.skipIf( PYTHON3, "Python3 has different rounding")
+    def test_PI(self):
+        from math import pi
+        pie = 3.1415
+        expected = u'மூன்று புள்ளி ஒன்று நான்கு ஒன்று ஐந்து'
+        actual = tamil.numeral.num2tamilstr(pie)
+        actual_USA = tamil.numeral.num2tamilstr_american(pie)
+        self.assertEqual(actual,expected)
+        self.assertEqual(actual_USA,expected)
+    
+    def test_PI_million(self):
+        pie = 3e6 + 0.1415
+        expected = u'மூன்று மில்லியன் புள்ளி ஒன்று நான்கு ஒன்று'
+        actual_USA = tamil.numeral.num2tamilstr_american(pie)
+        self.assertEqual(actual_USA[0:len(expected)],expected)
+    
+    def test_PI_lakshalu(self):
+        pie = 3e5+0.1415
+        expected = u'மூன்று இலட்சம் புள்ளி ஒன்று நான்கு ஒன்று ஐந்து'
+        actual_IN = tamil.numeral.num2tamilstr(pie)
+        self.assertEqual(actual_IN[0:len(expected)],expected)
+    
+    @unittest.skipIf( PYTHON3, "Python3 has different rounding")
+    def test_INFRAC(self):
+        exp2 = u'ஓர் ஆயிரத்தி ஒன்று புள்ளி நான்கு ஐந்து'
+        actual_IN2 = tamil.numeral.num2tamilstr(1001+0.45)
+        self.assertEqual(actual_IN2,exp2)
+        exp2 = u'ஓர் ஆயிரம் புள்ளி நான்கு ஐந்து'
+        actual_IN2 = tamil.numeral.num2tamilstr(1000+0.45)
+        self.assertEqual(actual_IN2,exp2)
+        
     def test_VITHIVILAKKU(self):
         with self.assertRaises(Exception):
             tamil.numeral.num2tamilstr( complex(5,6) )

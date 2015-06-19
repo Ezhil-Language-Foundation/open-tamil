@@ -13,13 +13,13 @@ def num2tamilstr( number ):
     """ work till l lakh crore - i.e 1e5*1e7 = 1e12. 
         turn number into a numeral, Indian style. """
     
-    if not any( filter( lambda T: isinstance( number, T), [int, long]) ) or isinstance(number,complex):
-        raise Exception('num2tamilstr input has to be a long or integer')
+    if not any( filter( lambda T: isinstance( number, T), [int, long, float]) ) or isinstance(number,complex):
+        raise Exception('num2tamilstr input has to be a long or integer or float')
     if number > long(1e12):
         raise Exception('num2tamilstr input is too large')
     if number < 0:
         return u"- "+num2tamilstr( -number )
-        
+    
     units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
     teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19    
     tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
@@ -34,12 +34,22 @@ def num2tamilstr( number ):
     lakh = (u'இலட்சம்',u'இலட்சத்தி')
     crore = (u'கோடி',u'கோடியே')
     
+    pulli = u'புள்ளி'
+    
     n_one = 1
     n_ten = 10
     n_hundred = 100
     n_thousand = 1000
     n_lakh = 100*n_thousand
     n_crore = long(100*n_lakh)
+    
+    # handle fractional parts
+    if number > 0.0 and number < 1.0:
+        rval = [pulli]
+        number_str = str(number).replace('0.','')
+        for digit in number_str:
+            rval.append( units[int(digit)] )
+        return u' '.join(rval)
     
     suffix_base = { n_crore: crore, n_lakh : lakh, n_thousand : thousands}
     
@@ -60,7 +70,12 @@ def num2tamilstr( number ):
         residue_number = number - n_base*quotient_number
         
         if n_base == n_one:
-            return units[number]
+            if isinstance(number,float):
+                int_part = long(number%10)
+                frac = number - float(int_part)
+                return units[int_part] +u' ' + num2tamilstr(frac)
+            else:
+                return units[number]
         elif n_base == n_ten:
             if residue_number == 0:
                 return tens[quotient_number-1]
@@ -81,7 +96,7 @@ def num2tamilstr( number ):
                 numeral = num2tamilstr( quotient_number )
         suffix = u''
         if n_base >= n_thousand:
-            suffix = suffix_base[n_base][long(residue_number > 0)]
+            suffix = suffix_base[n_base][long(residue_number >= 1)]
             if residue_number == 0:
                 return numeral + u' ' + suffix
             numeral = numeral + u' ' + suffix
@@ -95,7 +110,7 @@ def num2tamilstr_american( number ):
     """ work till 1000 trillion  - 1 - i.e  = 1e12*1e3 - 1. 
         turn number into a numeral, Indian style. """
     
-    if not any( filter( lambda T: isinstance( number, T), [int, long]) ) or isinstance(number,complex):
+    if not any( filter( lambda T: isinstance( number, T), [int, long, float]) ) or isinstance(number,complex):
         raise Exception('num2tamilstr_american input has to be long or integer')
     if number >= long(1e15):
         raise Exception('num2tamilstr input is too large')
@@ -145,6 +160,10 @@ def num2tamilstr_american( number ):
     
     all_bases = [n_trillion,n_billion, n_million, n_thousand, n_hundred, n_ten,n_one]
     allowed_bases = filter( lambda base: number >= base, all_bases )
+
+    # handle fractional parts
+    if number > 0.0 and number < 1.0:
+        return num2tamilstr(number)
     
     for n_base in allowed_bases:
         if number == n_base:
@@ -153,7 +172,12 @@ def num2tamilstr_american( number ):
         residue_number = number - n_base*quotient_number
         
         if n_base == n_one:
-            return units[number]
+            if isinstance(number,float):
+                int_part = long(number%10)
+                frac = number - float(int_part)
+                return units[int_part] +u' ' + num2tamilstr(frac)
+            else:
+                return units[number]
         elif n_base == n_ten:
             if residue_number == 0:
                 return tens[quotient_number-1]
@@ -174,7 +198,7 @@ def num2tamilstr_american( number ):
                 numeral = num2tamilstr( quotient_number )
         suffix = u''
         if n_base >= n_thousand:
-            suffix = suffix_base[n_base][long(residue_number > 0)]
+            suffix = suffix_base[n_base][long(residue_number >= 1)]
             if residue_number == 0:
                 return numeral + u' ' + suffix
             numeral = numeral + u' ' + suffix
