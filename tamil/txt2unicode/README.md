@@ -35,7 +35,9 @@ Available Tamil Encoding Converters
 | 23| டிஸ்கி |Tscii  |    tscii2unicode|   unicode2tscii|   
 | 24| வானவில் |  Vanavil  | vanavil2unicode  |  unicode2vanavil |
 | 25| வெப்உலகம்   | Webulagam | webulagam2unicode |  unicode2webulagam |
-| 26| **கண்டுபுடி**| **AutoFind**    | **auto2unicode**|       **unicode2auto**           |
+| 26| அனு   | Indica | indica2unicode |  indica2webulagam |
+| 27| அனு   | Anu | anu2unicode |  anu2webulagam |
+| 28| **கண்டுபுடி**| **AutoFind**    | **auto2unicode**|       **unicode2auto**           |
 
 Automatic Input Encoding & Conversion to Unicode
 ================================================
