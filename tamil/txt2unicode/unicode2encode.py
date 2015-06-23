@@ -28,7 +28,7 @@ from .encode2utf8 import anjal2utf8, bamini2utf8, boomi2utf8, \
     roman2utf8, tab2utf8, tam2utf8, tscii2utf8, pallavar2utf8, \
     indoweb2utf8, koeln2utf8, libi2utf8, oldvikatan2utf8, webulagam2utf8, \
     diacritic2utf8, shreelipi2utf8, softview2utf8, tace2utf8, vanavil2utf8, \
-    indica2utf8
+    indica2utf8, anu2utf8
 
 from .encode2unicode import _all_encodes_, _get_unique_ch, \
     _get_unique_common_encodes
@@ -40,7 +40,8 @@ __all__ = ['unicode2anjal', 'unicode2bamini', 'unicode2boomi',
     'unicode2indoweb', 'unicode2koeln', 'unicode2libi', 'unicode2oldvikatan',
     'unicode2webulagam', 'unicode2auto', 'unicode2dinamani', 
     'unicode2pallavar', 'unicode2diacritic', 'unicode2shreelipi',
-    'unicode2softview', 'unicode2tace', 'unicode2vanavil', 'unicode2indica']
+    'unicode2softview', 'unicode2tace', 'unicode2vanavil', 'unicode2indica',
+    'unicode2anu']
     
     
 def unicode2encode(text, charmap):
@@ -140,6 +141,9 @@ def unicode2vanavil(text):
 
 def unicode2indica(text):
     return unicode2encode(text, indica2utf8)
+
+def unicode2anu(text):
+    return unicode2encode(text, anu2utf8)
     
 def unicode2auto(unicode_text, encode_text):
     """
