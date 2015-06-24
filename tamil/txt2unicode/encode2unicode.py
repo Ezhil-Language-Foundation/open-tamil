@@ -37,7 +37,7 @@ from .encode2utf8 import anjal2utf8, bamini2utf8, boomi2utf8, \
     roman2utf8, tab2utf8, tam2utf8, tscii2utf8, pallavar2utf8, \
     indoweb2utf8, koeln2utf8, libi2utf8, oldvikatan2utf8, webulagam2utf8, \
     diacritic2utf8, shreelipi2utf8, softview2utf8, tace2utf8, vanavil2utf8, \
-    indica2utf8, anu2utf8
+    indica2utf8, anu2utf8, shreelipiavid2utf8
 
 __all__ = ['anjal2unicode', 'bamini2unicode', 'boomi2unicode', 
     'dinakaran2unicode', 'dinathanthy2unicode', 'kavipriya2unicode',
@@ -47,7 +47,7 @@ __all__ = ['anjal2unicode', 'bamini2unicode', 'boomi2unicode',
     'webulagam2unicode', 'auto2unicode', 'dinamani2unicode', 
     'pallavar2unicode', 'diacritic2unicode', 'shreelipi2unicode',
     'softview2unicode', 'tace2unicode', 'vanavil2unicode', 'indica2unicode',
-    'anu2unicode']
+    'anu2unicode', 'shreelipiavid2unicode']
     
 _all_encodes_ = OrderedDict([('anjal2utf8', anjal2utf8), 
      ('bamini2utf8', bamini2utf8), ('boomi2utf8', boomi2utf8), 
@@ -172,6 +172,9 @@ def indica2unicode(text):
 
 def anu2unicode(text):
     return encode2unicode(text, anu2utf8)
+
+def shreelipiavid2unicode(text):
+    return encode2unicode(text, shreelipiavid2utf8)
 
 def _get_unique_ch(text, all_common_encodes):
     """

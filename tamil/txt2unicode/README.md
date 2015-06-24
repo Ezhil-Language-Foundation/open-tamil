@@ -37,7 +37,8 @@ Available Tamil Encoding Converters
 | 25| வெப்உலகம்   | Webulagam | webulagam2unicode |  unicode2webulagam |
 | 26| அனு   | Indica | indica2unicode |  unicode2indica |
 | 27| அனு   | Anu | anu2unicode |  unicode2anu |
-| 28| **கண்டுபுடி**| **AutoFind**    | **auto2unicode**|       **unicode2auto**           |
+| 28| ஸ்ரீலிபி|Shreelipi (AVID)|shreelipiavid2unicode| unicode2shreelipiavid|
+| 29| **கண்டுபுடி**| **AutoFind**    | **auto2unicode**|       **unicode2auto**           |
 
 Automatic Input Encoding & Conversion to Unicode
 ================================================
