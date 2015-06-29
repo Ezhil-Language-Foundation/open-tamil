@@ -1,6 +1,6 @@
 # * coding: utf8 *
 # 
-# (C) 20132015 Muthiah Annamalai <ezhillang@gmail.com>
+# (C) 2013-2015 Muthiah Annamalai <ezhillang@gmail.com>
 # Library provides various encoding services for Tamil libraries
 
 from . import utf8
