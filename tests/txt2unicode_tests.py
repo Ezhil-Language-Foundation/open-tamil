@@ -47,6 +47,51 @@ class Valluvar(unittest.TestCase):
         tscii_words_from_unicode2tscii = unicode2tscii(uni_words)        
         self.assertTrue( tscii_words == tscii_words_from_unicode2tscii)
         if ( LINUX ): print("unicode2tscii_single test passed 'OK'")
+
+    def test_indica2unicode(self):
+        indica_words = """]Úk^”kÏ ∂ÚÑB ]Ú¬z≈^"""
+        uni_words = indica2unicode(indica_words)
+        indica_from_uni = unicode2indica(uni_words)
+        self.assertTrue(indica_words == indica_from_uni)
+        if ( LINUX ): print("indica2unicode test passed 'OK'")
+
+    def test_unicode2indica(self):
+        indica_words = """]Úk^”kÏ ∂ÚÑB ]Ú¬z≈^"""
+        uni_words = indica2unicode(indica_words)
+        indica_from_uni = unicode2indica(uni_words)
+        uni_from_indica = indica2unicode(indica_from_uni)
+        self.assertTrue(uni_words == uni_from_indica)
+        if ( LINUX ): print("unicode2indica test passed 'OK'")
+
+    def test_anu2unicode(self):
+        anu_words = """]òk^Ókì ¶ò¹B ]òÂzÅ^"""
+        uni_words = anu2unicode(anu_words)
+        anu_from_uni = unicode2anu(uni_words)
+        self.assertTrue(anu_words == anu_from_uni)
+        if ( LINUX ): print("anu2unicode test passed 'OK'")
+
+    def test_unicode2anu(self):
+        anu_words = """]òk^Ókì ¶ò¹B ]òÂzÅ^"""
+        uni_words = anu2unicode(anu_words)
+        anu_from_uni = unicode2anu(uni_words)
+        uni_from_anu = anu2unicode(anu_from_uni)
+        self.assertTrue(uni_words == uni_from_anu)
+        if ( LINUX ): print("unicode2anu test passed 'OK'")
+
+    def test_shreelipiavid2unicode(self):
+        shreelipiavid_words = """v¸ÁÒ™Áº A¸Î¯ v¸USÓÒ"""
+        uni_words = shreelipiavid2unicode(shreelipiavid_words)
+        shreelipiavid_from_uni = unicode2shreelipiavid(uni_words)
+        self.assertTrue(shreelipiavid_words == shreelipiavid_from_uni)
+        if ( LINUX ): print("shreelipiavid2unicode test passed 'OK'")
+
+    def test_unicode2shreelipiavid(self):
+        shreelipiavid_words = """v¸ÁÒ™Áº A¸Î¯ v¸USÓÒ"""
+        uni_words = shreelipiavid2unicode(shreelipiavid_words)
+        shreelipiavid_from_uni = unicode2shreelipiavid(uni_words)
+        uni_from_shreelipiavid = shreelipiavid2unicode(shreelipiavid_from_uni)
+        self.assertTrue(uni_words == uni_from_shreelipiavid)
+        if ( LINUX ): print("unicode2shreelipiavid test passed 'OK'")
         
 if __name__ == '__main__':
     unittest.main()

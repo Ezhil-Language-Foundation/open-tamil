@@ -27,10 +27,11 @@ from .encode2utf8 import anjal2utf8, bamini2utf8, boomi2utf8, \
     kavipriya2utf8, murasoli2utf8, mylai2utf8, nakkeeran2utf8, \
     roman2utf8, tab2utf8, tam2utf8, tscii2utf8, pallavar2utf8, \
     indoweb2utf8, koeln2utf8, libi2utf8, oldvikatan2utf8, webulagam2utf8, \
-    diacritic2utf8, shreelipi2utf8, softview2utf8, tace2utf8, vanavil2utf8
+    diacritic2utf8, shreelipi2utf8, softview2utf8, tace2utf8, vanavil2utf8, \
+    indica2utf8, anu2utf8, shreelipiavid2utf8
 
 from .encode2unicode import _all_encodes_, _get_unique_ch, \
-                                _get_unique_common_encodes
+    _get_unique_common_encodes
 
 __all__ = ['unicode2anjal', 'unicode2bamini', 'unicode2boomi', 
     'unicode2dinakaran', 'unicode2dinathanthy', 'unicode2kavipriya',
@@ -39,7 +40,8 @@ __all__ = ['unicode2anjal', 'unicode2bamini', 'unicode2boomi',
     'unicode2indoweb', 'unicode2koeln', 'unicode2libi', 'unicode2oldvikatan',
     'unicode2webulagam', 'unicode2auto', 'unicode2dinamani', 
     'unicode2pallavar', 'unicode2diacritic', 'unicode2shreelipi',
-    'unicode2softview', 'unicode2tace', 'unicode2vanavil']
+    'unicode2softview', 'unicode2tace', 'unicode2vanavil', 'unicode2indica',
+    'unicode2anu', 'unicode2shreelipiavid']
     
     
 def unicode2encode(text, charmap):
@@ -105,37 +107,46 @@ def unicode2tscii(text):
     return unicode2encode(text, tscii2utf8)
 
 def unicode2pallavar(text):
-    return encode2unicode(text, pallavar2utf8)
+    return unicode2encode(text, pallavar2utf8)
 
 def unicode2indoweb(text):
-    return encode2unicode(text, indoweb2utf8)
+    return unicode2encode(text, indoweb2utf8)
 
 def unicode2koeln(text):
-    return encode2unicode(text, koeln2utf8)
+    return unicode2encode(text, koeln2utf8)
 
 def unicode2libi(text):
-    return encode2unicode(text, libi2utf8)
+    return unicode2encode(text, libi2utf8)
 
 def unicode2oldvikatan(text):
-    return encode2unicode(text, oldvikatan2utf8)
+    return unicode2encode(text, oldvikatan2utf8)
 
 def unicode2webulagam(text):
-    return encode2unicode(text, webulagam2utf8)
+    return unicode2encode(text, webulagam2utf8)
 
 def unicode2diacritic(text):
-    return encode2unicode(text, diacritic2utf8)
+    return unicode2encode(text, diacritic2utf8)
 
 def unicode2shreelipi(text):
-    return encode2unicode(text, shreelipi2utf8)
+    return unicode2encode(text, shreelipi2utf8)
     
 def unicode2softview(text):
-    return encode2unicode(text, softview2utf8)
+    return unicode2encode(text, softview2utf8)
     
 def unicode2tace(text):
-    return encode2unicode(text, tace2utf8)
+    return unicode2encode(text, tace2utf8)
     
 def unicode2vanavil(text):
-    return encode2unicode(text, vanavil2utf8)
+    return unicode2encode(text, vanavil2utf8)
+
+def unicode2indica(text):
+    return unicode2encode(text, indica2utf8)
+
+def unicode2anu(text):
+    return unicode2encode(text, anu2utf8)
+
+def unicode2shreelipiavid(text):
+    return unicode2encode(text, shreelipiavid2utf8)
     
 def unicode2auto(unicode_text, encode_text):
     """
