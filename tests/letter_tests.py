@@ -468,9 +468,11 @@ class NumeralNegTest(unittest.TestCase):
         expected = u'மூன்று இலட்சத்தி ஒன்று'
         self.assertEqual( actual, expected )
     
-    @unittest.skipIf( PYTHON3, "Python3 has different rounding")
     def test_PI(self):
-        from math import pi
+        if PYTHON3:
+            print("Python3 has different rounding")
+            return
+            
         pie = 3.1415
         expected = u'மூன்று புள்ளி ஒன்று நான்கு ஒன்று ஐந்து'
         actual = tamil.numeral.num2tamilstr(pie)
@@ -490,8 +492,11 @@ class NumeralNegTest(unittest.TestCase):
         actual_IN = tamil.numeral.num2tamilstr(pie)
         self.assertEqual(actual_IN[0:len(expected)],expected)
     
-    @unittest.skipIf( PYTHON3, "Python3 has different rounding")
+    #@unittest.skipIf( PYTHON3, "Python3 has different rounding")
     def test_INFRAC(self):
+        if PYTHON3:
+            print("Python3 has different rounding")
+            return        
         exp2 = u'ஓர் ஆயிரத்தி ஒன்று புள்ளி நான்கு ஐந்து'
         actual_IN2 = tamil.numeral.num2tamilstr(1001+0.45)
         self.assertEqual(actual_IN2,exp2)
