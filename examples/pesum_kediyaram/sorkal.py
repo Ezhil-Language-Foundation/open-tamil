@@ -1,5 +1,5 @@
 # -*- coding: utf8 -*-
-#
+# This file is distributed under MIT License
 # 2015 Muthiah Annamalai <ezhillang@gmail.com>
 #
 units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10

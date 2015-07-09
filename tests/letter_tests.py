@@ -9,7 +9,7 @@ from opentamiltests import *
 import tamil.utf8 as utf8 
 from tamil.tscii import TSCII
 import codecs
-
+        
 if PYTHON3:
     class long(int):
         pass
@@ -496,7 +496,7 @@ class NumeralNegTest(unittest.TestCase):
     def test_INFRAC(self):
         if PYTHON3:
             print("Python3 has different rounding")
-            return        
+            return
         exp2 = u'ஓர் ஆயிரத்தி ஒன்று புள்ளி நான்கு ஐந்து'
         actual_IN2 = tamil.numeral.num2tamilstr(1001+0.45)
         self.assertEqual(actual_IN2,exp2)
@@ -505,6 +505,9 @@ class NumeralNegTest(unittest.TestCase):
         self.assertEqual(actual_IN2,exp2)
         
     def test_VITHIVILAKKU(self):
+        if PYTHON2_6:
+            # exception API is different in Python 2.6
+            return
         with self.assertRaises(Exception):
             tamil.numeral.num2tamilstr( complex(5,6) )
         with self.assertRaises(Exception):

@@ -11,6 +11,8 @@ open_tamil_path = (os.sep).join(os.getcwd().split(os.sep)[:-1])
 print(open_tamil_path) # library
 sys.path.insert(0,open_tamil_path)
 
+PYTHON2_7 = (sys.version[0:3] == '2.7')
+PYTHON2_6 = (sys.version[0:3] == '2.6')
 PYTHON3 = sys.version > '3'
 WINDOWS = (sys.platform.find('win') != -1)
 LINUX = not WINDOWS

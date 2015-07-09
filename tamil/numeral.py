@@ -9,9 +9,14 @@ if PYTHON3:
     class long(int):
         pass
 
-def num2tamilstr( number ):
+def num2tamilstr( *args ):
     """ work till l lakh crore - i.e 1e5*1e7 = 1e12. 
         turn number into a numeral, Indian style. """
+    number = args[0]
+    if len(args) < 2:
+        filenames = []
+    else:
+        filenames = args[1]
     
     if not any( filter( lambda T: isinstance( number, T), [int, long, float]) ) or isinstance(number,complex):
         raise Exception('num2tamilstr input has to be a long or integer or float')
@@ -46,15 +51,25 @@ def num2tamilstr( number ):
     # handle fractional parts
     if number > 0.0 and number < 1.0:
         rval = [pulli]
+        filenames.append( 'pulli' )
         number_str = str(number).replace('0.','')
         for digit in number_str:
+            filenames.append( "units_%d"%int(digit))
             rval.append( units[int(digit)] )
         return u' '.join(rval)
     
     suffix_base = { n_crore: crore, n_lakh : lakh, n_thousand : thousands}
+    suffix_file_map = {n_crore: "crore", n_lakh : "lakh", n_thousand : "thousands"}
+    
+    file_map = {n_crore :["one_prefix","crore_0"],
+                n_lakh : ["one_prefix","lakh_0"],
+                n_thousand :  ["one_thousand_prefix", "thousands_0"],
+               n_hundred : ["hundreds_0"], #special
+               n_ten : ["units_10"],
+               n_one : ["units_1"]}
     
     num_map = {n_crore : [one_prefix,crore[0]],
-               n_lakh  : [one_prefix,lakh[0]],
+               n_lakh  : [one_prefix,lakh[0]],               
                n_thousand : [one_thousand_prefix, thousands[0]],
                n_hundred : [hundreds[0]], #special
                n_ten : [units[10]],
@@ -65,6 +80,7 @@ def num2tamilstr( number ):
     
     for n_base in allowed_bases:
         if number == n_base:
+            filenames.extend(file_map[n_base])
             return u" ".join(num_map[n_base])
         quotient_number = long( number/n_base )
         residue_number = number - n_base*quotient_number
@@ -73,37 +89,50 @@ def num2tamilstr( number ):
             if isinstance(number,float):
                 int_part = long(number%10)
                 frac = number - float(int_part)
-                return units[int_part] +u' ' + num2tamilstr(frac)
+                filenames.append("units_%d"%int_part)
+                return units[int_part] +u' ' + num2tamilstr(frac,filenames)
             else:
+                filenames.append("units_%d"%number)
                 return units[number]
         elif n_base == n_ten:
             if residue_number == 0:
+                filenames.append("tens_%d"%(quotient_number-1))
                 return tens[quotient_number-1]
             if number < 20:
+                filenames.append("teens_%d"%(number-10-1))
                 return teens[number-10-1]
+            filenames.append( "tens_suffix_%d"%(quotient_number-2))
             numeral = tens_suffix[quotient_number-2]
         elif n_base == n_hundred:
             if residue_number == 0:
+                filenames.append("hundreds_%d"%(quotient_number-1))
                 return hundreds[quotient_number-1]
+            filenames.append("hundreds_suffix_%d"%(quotient_number-1))
             numeral = hundreds_suffix[quotient_number-1]
         else:
             if ( quotient_number == 1 ):
                 if n_base == n_thousand:
+                    filenames.append("one_thousand_prefix")
                     numeral = one_thousand_prefix
                 else:
+                    filenames.append("one_prefix")                
                     numeral = one_prefix
             else:
-                numeral = num2tamilstr( quotient_number )
+                numeral = num2tamilstr( quotient_number, filenames )
         suffix = u''
         if n_base >= n_thousand:
             suffix = suffix_base[n_base][long(residue_number >= 1)]
+            suffix_filename = "%s_%d"%(suffix_file_map[n_base],long(residue_number >= 1))
             if residue_number == 0:
+                filenames.append(suffix_filename)
                 return numeral + u' ' + suffix
+            filenames.append(suffix_filename)    
             numeral = numeral + u' ' + suffix
-        residue_numeral = num2tamilstr( residue_number )
+        residue_numeral = num2tamilstr( residue_number, filenames )
         return numeral+u' '+residue_numeral
     
     # number has to be zero
+    filenames.append("units_0")
     return units[0]
 
 def num2tamilstr_american( number ):
