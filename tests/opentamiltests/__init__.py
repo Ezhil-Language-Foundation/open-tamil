@@ -32,3 +32,21 @@ try:
     from test import test_support
 except ImportError as ex:
     from test import support as test_support
+
+#decorator
+def skip_python2_6(function):
+    def exclude_function_for_py2_6(*args):
+        if PYTHON2_6:
+            print("# skipping test %s for Python 2.6"%str(function))
+            # exception API is different in Python 2.6
+            return
+        return function(*args)
+    return exclude_function_for_py2_6
+
+def skip_python3(function):
+    def exclude_function_for_py3(*args):
+        if PYTHON3:
+            print("# skipping test %s for Python 3"%str(function))
+            return
+        return function(*args)
+    return exclude_function_for_py3

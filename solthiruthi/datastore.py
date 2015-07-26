@@ -300,24 +300,7 @@ class TamilTrie(Trie):
         ref_word_limits[idx][0] = True
         #pprint( self.trie )
         #pprint( self.word_limits )
-        
-def do_stuff2():
-    obj = DTrie()
-    actual_words = ['a','ab','abc','abc','bbc']
-    [obj.add(w) for w in actual_words]
-    for w in actual_words:
-        obj.isWord(w)
-    print('######### sorted words   ##########')
-    pprint(sorted(obj.getAllWords()))
-    print('######### prefix with ab ##########')
-    pprint( obj.getAllWordsPrefix('ab') )
-    print(obj.getWordCount('abc'))
-    obj = DTrie()
-    list(map(obj.add,['foo','bar','bar','baz']))
-    print(obj.getWordCount('bar'),
-    obj.getWordCount('baz'),
-    obj.getWordCount('foo'))
-    
+            
 def do_stuff():
     obj = DTrie() #TamilTrie.buildEnglishTrie()
     #pprint( obj.trie )
