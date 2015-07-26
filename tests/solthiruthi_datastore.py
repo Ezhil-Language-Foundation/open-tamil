@@ -74,7 +74,22 @@ class DTrieTest(unittest.TestCase):
         self.assertEqual( sorted(obj.getAllWords()),sorted(actual_words))
         self.assertEqual( obj.getAllWordsPrefix('ab'), ['ab','abc'] )
         return
-    
+
+    def test_trie_counts_and_prefix(self):
+        obj = DTrie()
+        actual_words = ['a','ab','abc','abc','bbc']
+        [obj.add(w) for w in actual_words]
+        for w in actual_words:
+            self.assertTrue(obj.isWord(w))
+        self.assertEqual(len(obj.getAllWords()),4)
+        self.assertEqual( obj.getAllWordsPrefix('ab'),['ab','abc'] )
+        self.assertEqual(obj.getWordCount('abc'),2)
+        obj = DTrie()
+        list(map(obj.add,['foo','bar','bar','baz']))
+        self.assertEqual((obj.getWordCount('bar'),\
+                         obj.getWordCount('baz'),\
+                         obj.getWordCount('foo')),(2,1,1))
+        
     def test_load_dictionary(self):
         obj = DTrie()
         obj.loadWordFile(DICTIONARY_DATA_FILES['tamilvu'])

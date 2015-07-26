@@ -25,17 +25,43 @@ class TestWordUtils(unittest.TestCase):
     def test_tamil_perms( self ):
         res = [u'தமிழ்',u'தழ்மி',u'மிதழ்',u'மிழ்த',u'ழ்தமி',u'ழ்மித']
         self.assertEqual( list(wordutils.permutations([u'த',u'மி',u'ழ்'])),res)
-        
+     
     def test_tamil_perms2( self ):
         res = [u'தமிழ்',u'தழ்மி',u'மிதழ்',u'மிழ்த',u'ழ்தமி',u'ழ்மித']
         self.assertEqual( list(wordutils.tamil_permutations(res[0])),res)
+    
+    @skip_python2_6
+    def test_anagram_xception(self):
+        mtObj = wordutils.DictionaryWithPredicate( False )
+        with self.assertRaises(Exception):
+            list( wordutils.anagrams( u'உபயொகிக்க!',mtObj) )
+    
+    def test_anagram_all_or_nothing(self):
+        # all words are in dictionary..
+        dictPred = wordutils.DictionaryWithPredicate(lambda x: True)
+        self.assertTrue( dictPred.isWord('not a word but OK to slack off!') )
         
+        res = [u'தமிழ்',u'தழ்மி',u'மிதழ்',u'மிழ்த',u'ழ்தமி',u'ழ்மித']
+        self.assertEqual( list(wordutils.anagrams(u'தமிழ்',dictPred)), res )
+        
+        # none of words match
+        negDictPred = wordutils.DictionaryWithPredicate(lambda x: False)
+        self.assertEqual( list(wordutils.anagrams(res[0],negDictPred)),[] )
+        
+    @skip_python2_6
     def test_perms_xception(self):
-        if PYTHON2_6:
-            # exception API is different in Python 2.6
-            return
         with self.assertRaises(Exception):
             list( wordutils.permutations( u'அது சரம் (str) வகையாக இருந்தால் tamil.utf8.get_letters() பயன்பாட்டை முதலில் உபயொகிக்க!' ) )
+    
+    def test_combinations(self):
+        word = u"சவால்";
+        self.assertEqual( len(list(filter(len,list(wordutils.combinations(word))))), 8-1 )
+
+    def test_palindrome(self):
+        words = [u"a",u"abba","xkcd","vinavi","1001",u"அதுஅ",u"சரம்ரச"]
+        expected = [u"a",u"abba","1001",u"அதுஅ",u"சரம்ரச"]
+        actual = list(filter(wordutils.palindrome,words))
+        self.assertEqual(actual,expected)
         
 if __name__ == '__main__':        
     unittest.main()
