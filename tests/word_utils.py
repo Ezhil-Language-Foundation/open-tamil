@@ -62,6 +62,22 @@ class TestWordUtils(unittest.TestCase):
         expected = [u"a",u"abba","1001",u"அதுஅ",u"சரம்ரச"]
         actual = list(filter(wordutils.palindrome,words))
         self.assertEqual(actual,expected)
+    
+    def test_ispalindrome(self):
+        expected = [u"a",u"abba","1001",u"அதுஅ",u"சரம்ரச"]
+        self.assertTrue( all(list(map(wordutils.is_palindrome,expected))) )
+    
+    def test_isanagram(self):
+        w1 = u'சவால்'
+        w2 = u'வாசல்'
+        self.assertTrue( wordutils.is_anagram(w1,w2) )
         
-if __name__ == '__main__':        
+        w3 = '123'
+        w4 = '213'
+        self.assertTrue( wordutils.is_anagram(w3,w4) )
+
+        self.assertFalse( wordutils.is_anagram(w3,w1) )
+        self.assertFalse( wordutils.is_anagram(w2,w4) )
+        
+if __name__ == '__main__':
     unittest.main()
