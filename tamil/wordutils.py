@@ -47,6 +47,9 @@ def tamil_permutations(inword):
         yield word
     raise StopIteration
 
+def is_palindrome(*args):
+    return palindrome(*args)
+    
 def palindrome(symbols_in):
     if isinstance(symbols_in,list):
         symbols = symbols_in
@@ -66,6 +69,9 @@ def anagrams(word,dictionary,permutations=tamil_permutations):
         if dictionary.isWord(anagram):
             yield anagram
     raise StopIteration
+
+def is_anagram(wordA,wordB):
+    return sorted(wordA)== sorted(wordB) 
 
 # combinations filtered by dictionary - yields all possible sub-words of a word.
 # e.g. 'bat' -> 'tab', 'bat', 'at', etc.
