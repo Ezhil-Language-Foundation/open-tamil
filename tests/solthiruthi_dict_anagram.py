@@ -31,6 +31,9 @@ class TestAnagramsWDict(unittest.TestCase):
         expected = 5;
         actual = list(wordutils.combinagrams(word,self.TVU))
         self.assertEqual( len(actual), expected )
+
+    def test_all_anagrams_of_dict(self):
+        wordutils.anagrams_in_dictionary(self.TVU)
         
 if __name__ == "__main__":
     unittest.main()
