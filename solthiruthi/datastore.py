@@ -202,8 +202,42 @@ class DTrie(Trie):
                     yield word
             prefix.pop()
         raise StopIteration
+
+# reverse trie : add words in reverse fashion for 'endswith' interface
+class RTrie(DTrie):
+    def __init__(self,is_tamil=False):
+        DTrie.__init__(self)
+        self.is_tamil = is_tamil
         
+    def reverse(self,word):
+        if self.is_tamil:
+            letters = utf8.get_letters(word)
+            letters.reverse()
+            rev_word = u''.join(letters)
+        else:
+            rev_word = word[::-1]
+        return rev_word
+        
+    def add(self,word):
+        rev_word = self.reverse(word)
+        #print('rev word --> %s'%rev_word)
+        DTrie.add(self,rev_word)
     
+    def getAllWordsIterable(self):
+        for word in DTrie.getAllWordsIterable(self):
+            yield word[::-1]
+        raise StopIteration
+    
+    def getAllWordsPrefix(self,pfx):
+        for word_pfx in DTrie.getAllWordsPrefix(self,self.reverse(pfx)):
+            yield word_pfx
+        raise StopIteration
+    
+    def getWordsEndingWith(self,sfx):
+        for word_sfx in self.getAllWordsPrefix(sfx):
+            yield word_sfx
+        raise StopIteration
+
 class TamilTrie(Trie):
     "Store a list of words into the Trie data structure"
     
