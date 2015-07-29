@@ -221,13 +221,15 @@ class RTrie(DTrie):
         DTrie.add(self,rev_word)
     
     def getAllWordsIterable(self):
+        # internal storage is in reverse order, but we insert/retrieve for
+        # user via regular word order.
         for word in DTrie.getAllWordsIterable(self):
             yield self.reverse(word)
         raise StopIteration
     
     def getAllWordsPrefix(self,pfx):
         for word_pfx in DTrie.getAllWordsPrefix(self,self.reverse(pfx)):
-            yield word_pfx
+            yield self.reverse(word_pfx)
         raise StopIteration
     
     def getWordsEndingWith(self,sfx):
