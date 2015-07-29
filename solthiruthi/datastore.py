@@ -211,21 +211,18 @@ class RTrie(DTrie):
         
     def reverse(self,word):
         if self.is_tamil:
-            letters = utf8.get_letters(word)
-            letters.reverse()
-            rev_word = u''.join(letters)
+            rev_word = utf8.reverse_word(word)
         else:
             rev_word = word[::-1]
         return rev_word
         
     def add(self,word):
         rev_word = self.reverse(word)
-        #print('rev word --> %s'%rev_word)
         DTrie.add(self,rev_word)
     
     def getAllWordsIterable(self):
         for word in DTrie.getAllWordsIterable(self):
-            yield word[::-1]
+            yield self.reverse(word)
         raise StopIteration
     
     def getAllWordsPrefix(self,pfx):

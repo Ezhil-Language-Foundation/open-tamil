@@ -68,5 +68,13 @@ class Words(unittest.TestCase):
         self.assertFalse(tamil.utf8.is_normalized( long_non_norm ) )
         return
 
+    def test_rev_words(self):
+        rhymie = [(u"மாங்குயில்",u"ல்யிகுங்மா"),(u"பூங்குயில்",u"ல்யிகுங்பூ"), (u"அல்லவா",u"வாலல்அ"),\
+                  (u"செல்வாயா",u"யாவால்செ"), (u"சொல்வாயா",u"யாவால்சொ")]
+        for k,v in rhymie:
+            self.assertEqual( tamil.utf8.reverse_word(k), v)
+            self.assertEqual( tamil.utf8.reverse_word(v), k)
+        return
+
 if __name__ == '__main__':        
     unittest.main()

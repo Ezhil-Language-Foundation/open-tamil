@@ -8,6 +8,7 @@ from solthiruthi.Ezhimai import *
 from solthiruthi.resources import DICTIONARY_DATA_FILES
 import sys
 import copy
+from pprint import pprint
 
 class EzhimaiTest(unittest.TestCase):
     def test_pattiyal(self):
@@ -122,39 +123,7 @@ class EnglishTrieTest(unittest.TestCase):
         expected = [i < 5 for i in range(0,11)]
         self.assertEqual(actual,expected)
         return
-        
-class RevTrieTest(unittest.TestCase):
-    def test_rev_trie(self):
-        rt = RTrie()
-        ing_words = [u'riding',u'booking',u'dashing']
-        list(map(rt.add,ing_words))
-        words_endwith_ing = list(rt.getAllWordsPrefix(u'ing'))
-        similar = list(rt.getWordsEndingWith(u'ing'))
-        from pprint import pprint
-        pprint(similar)
-        self.assertEqual(words_endwith_ing,similar)
-        self.assertEqual(sorted(words_endwith_ing),sorted(list(map(lambda x: x[::-1],ing_words))))
-        for x,y in zip(ing_words,words_endwith_ing):
-            print("%s|%s"%(x,y))
     
-    def test_missing(self):
-        rt = RTrie()
-        ing_words = [u'riding',u'booking',u'dashing','penny','farthing']
-        list(map(rt.add,ing_words))
-        similar = list(rt.getWordsEndingWith(u'---'))
-        from pprint import pprint
-        pprint(similar)
-        self.assertEqual(len(similar),0)
-        
-    def test_tamil_rhymes(self):
-        rt = RTrie(is_tamil=True)
-        rhymie = [u"மாங்குயில்" u"பூங்குயில்", u"அல்லவா", u"செல்வாயா", u"சொல்வாயா"]
-        list(map(rt.add,rhymie))
-        words_endwith_ing = list(rt.getWordsEndingWith(u"வாயா"))
-        similar = list(rt.getWordsEndingWith(u"குயில்"))
-        self.assertEqual(len(words_endwith_ing),2)
-        self.assertEqual(sorted([u"மாங்குயில்",u"பூங்குயில்"]),sorted(similar))
-        
 class TamilTrieTest(unittest.TestCase):
     def test_letter(self):
         obj = TamilTrie()
