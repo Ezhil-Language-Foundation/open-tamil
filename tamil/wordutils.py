@@ -116,5 +116,25 @@ def combinagrams(word,dictionary):
             yield valid_word
     raise StopIteration
 
+def rhymes_with(inword,reverse_dictionary):
+    if not all ([callable( getattr(reverse_dictionary,'isWord',[])),callable( getattr(reverse_dictionary,'getWordsEndingWith',[]))]):
+        raise Exception("reverse dictionary object has insufficient methods")
+    rhyming = list()
+    if isinstance(inword,list):
+        letters = inword
+    else:
+        letters = utf8.get_letters(inword)
+    
+    MAX = len(letters)*2
+    while len(rhyming) < MAX and len(letters) > 0:
+        partial_word = u"".join( letters )
+        matches = list( reverse_dictionary.getWordsEndingWith( partial_word ) )
+        #print "%d -> %d"%(len(letters),len(matches))
+        rhyming.extend( matches )
+        del letters[0]
+        
+    #rhyming = list(set(rhyming))
+    return set(rhyming[0:min(len(rhyming)-1,MAX)])
+
 # dummy dictionary interface for use with anagrams
 DictionaryWithPredicate = collections.namedtuple('DictionaryWithPredicate',['isWord'])

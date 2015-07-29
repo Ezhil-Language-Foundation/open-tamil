@@ -21,6 +21,10 @@ class Dictionary:
         return
     
     @abc.abstractmethod
+    def getWordsEndingWith(self,sfx):
+        return
+
+    @abc.abstractmethod
     def isWord(self,word):
         return
     
@@ -56,10 +60,21 @@ class Dictionary:
         return
 
 class Agarathi(Dictionary):
-    def __init__(self,dictionary_path):
+    def __init__(self,dictionary_path,reverse=False):
         self.dictionary_path = dictionary_path
-        self.store = datastore.DTrie()
         self.Finalized = False
+        self.reverse = reverse
+        if reverse:
+            self.store = datastore.RTrie()
+        else:
+            self.store = datastore.DTrie()
+        return
+    
+    # delegate to store
+    def getWordsEndingWith(self,sfx):
+        if not getattr(self.store,'getWordsEndingWith'):
+            raise Exception("getWordsEndingWith is not an accessible method")
+        return self.store.getWordsEndingWith(sfx)
     
     def add(self,word):
         if self.Finalized:
@@ -84,22 +99,39 @@ class Agarathi(Dictionary):
             yield word
         raise StopIteration
 
+def _reverse_dict(DictT):
+    def function_reverse_dict_type():
+        obj = DictT()
+        obj.reverse=True
+        obj.store = datastore.RTrie()
+        return obj
+    return function_reverse_dict_type
+
 class TamilVU(Agarathi):
     def __init__(self):
         Agarathi.__init__(self,resources.DICTIONARY_DATA_FILES['tamilvu'])
-        
+
+def reverse_TamilVU():
+    return _reverse_dict(TamilVU)()
+
 class Madurai(Agarathi):
     def __init__(self):
         Agarathi.__init__(self,resources.DICTIONARY_DATA_FILES['projmad'])
-        
+
+def reverse_Madurai():
+    return _reverse_dict(Madurai)()
+
 class Wikipedia(Agarathi):
     def __init__(self):
         Agarathi.__init__(self,resources.DICTIONARY_DATA_FILES['wikipedia'])
 
+def reverse_Wikipedia():
+    return _reverse_dict(Wikipedia)()
+
 # Methods for loading TamilVU, Wikipedia and Project Madurai cleaned up data
 class DictionaryBuilder:
     @staticmethod
-    def create(DType):
+    def create(DType,reverse=False):
         if not callable(DType):
             raise Exception(u"input @DType should be a class reference, or a factory function")
         obj = DType()
