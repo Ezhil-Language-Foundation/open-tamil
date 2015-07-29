@@ -19,7 +19,7 @@ class RevTrieTest(unittest.TestCase):
         similar = list(rt.getWordsEndingWith(u'ing'))
         #pprint(similar)
         self.assertEqual(words_endwith_ing,similar)
-        self.assertEqual(sorted(words_endwith_ing),sorted(list(map(lambda x: x[::-1],ing_words))))
+        self.assertEqual(sorted(words_endwith_ing),sorted(ing_words))
         #for x,y in zip(ing_words,words_endwith_ing):
         #    print("%s|%s"%(x,y))
         return
@@ -41,7 +41,7 @@ class TamilRevTrieTest(unittest.TestCase):
         self.rt = rt
         self.len = len(rhymie)
         
-        self.skipTest(u"not ready yet!")
+        #self.skipTest(u"not ready yet!")
         return
         
     def test_size(self):
@@ -52,16 +52,17 @@ class TamilRevTrieTest(unittest.TestCase):
         # solvaaya/selvayaa
         vayaa = set(rt.getWordsEndingWith(u"வாயா"))
         self.assertEqual(len(vayaa),2)
-        #self.assertEqual(sorted(vayaa),sorted([u"செல்வாயா", u"சொல்வாயா"]))
+        self.assertEqual(sorted(vayaa),sorted([u"செல்வாயா", u"சொல்வாயா"]))
         
     def test_tamil_rhymes_two(self):
         rt = self.rt
         # cuckoo koovum kuyil
+        kuyil_expected = [u"பூங்குயில்",u"மாங்குயில்"]
         kuyil = list(rt.getAllWordsPrefix(u"குயில்"))
         self.assertEqual(len(kuyil),2)
-        for word in [u"பூங்குயில்",u"மாங்குயில்"]:
-            #print(u"word -> 1")
-            self.assertTrue( word in kuyil)
+        for word in kuyil:
+            #print(u"word -> 1 %s"%word)
+            self.assertTrue( word in kuyil_expected)
         return
     
 class TamilDTriesForward(unittest.TestCase):
