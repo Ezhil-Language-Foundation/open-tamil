@@ -77,7 +77,11 @@ def anagrams_in_dictionary(dictionary):
     if not all ([callable( getattr(dictionary,'isWord',[])),callable( getattr(dictionary,'getAllWordsIterable',[]))]):
         raise Exception("dictionary object has insufficient methods")
     anagrams = dict()
-    anagrams_by_len = collections.Counter()
+    try:
+        anagrams_by_len = collections.Counter()
+    except AttributeError:
+        anagrams_by_len = dict()
+        
     for in_word in dictionary.getAllWordsIterable():
         word = utf8.get_letters(in_word)
         sword = u''.join(sorted(word))
@@ -85,21 +89,23 @@ def anagrams_in_dictionary(dictionary):
             equivs = anagrams[sword]
         except KeyError as ke:
             equivs = list() 
+            anagrams_by_len[sword] = 0
         equivs.append( in_word )
         anagrams[sword] = equivs
         anagrams_by_len[sword] += 1
-    items_to_del = filter(lambda a: a[1] == 1,anagrams_by_len.items())
+    items_to_del = copy.deepcopy(filter(lambda a: a[1] == 1,anagrams_by_len.items()))
     for itm,counts in items_to_del:
         del anagrams[itm]
         del anagrams_by_len[itm]
+    del items_to_del
     
     itr = 0
     from operator import itemgetter
     rval_anagram_count = sorted(anagrams_by_len.items(),key=itemgetter(1))
     for k,v in rval_anagram_count:
         itr = itr +  1
-        print("%d/ items #%d"%(itr,v))
-    
+        print(u"%d/ items #%d"%(itr,v))
+
     return rval_anagram_count,anagrams
 
 # combinations filtered by dictionary - yields all possible sub-words of a word.
