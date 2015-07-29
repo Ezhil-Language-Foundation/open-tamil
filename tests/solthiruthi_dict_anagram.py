@@ -5,6 +5,7 @@ from opentamiltests import *
 from solthiruthi.dictionary import *
 from tamil import wordutils, utf8
 import math
+from pprint import pprint
 
 class TestAnagramsWDict(unittest.TestCase):
     def setUp(self):
@@ -34,6 +35,18 @@ class TestAnagramsWDict(unittest.TestCase):
 
     def test_all_anagrams_of_dict(self):
         wordutils.anagrams_in_dictionary(self.TVU)
+
+class TestRevDictionary(unittest.TestCase):
+    def setUp(self):
+        self.ReverseTVU,self.VocabSize = DictionaryBuilder.create(reverse_TamilVU)
+        self.word = u"சவால்"
         
+    def test_rhymes_with(self):
+        words = wordutils.rhymes_with(self.word,self.ReverseTVU)
+        expected = set([u"வால்",u"சவால்",u"கொத்தவால்",u"அல்",u"நகாஅல்"])
+        #for idx,x in enumerate(words):
+        #   print(x)
+        self.assertEqual(words,expected)
+
 if __name__ == "__main__":
     unittest.main()
