@@ -56,15 +56,28 @@ class TestWordSplitter(unittest.TestCase):
         self.TMP,self.TMPVocabSize = DictionaryBuilder.createUsingWordList(['word','list','wo','rdli','st'])
         
     def test_word_split_TA(self):
-        self.skipTest(u"test word split TA"))
-        word = u"தமிழ்நாடு"
-        parts = [[u"தமிழ்",u"நாடு"]]
-        actual = wordutils.word_split(word,self.TVU)
-        self.assertEqual(parts,actual)
+        word_parts = ((u"தாய்நாடு", [u"தாய்",u"நாடு"]),
+                       (u"தமிழ்நாடு", [u"தமிழ்",u"நாடு"]),
+                       (u"தமிழ்நாடுஆமை",[u"தமிழ்",u"நாடு",u"ஆமை"]),
+                       (u"பாரதமாதா",[u"பா",u"ர",u"த",u"மாதா"]),
+                       (u"பல்கலைகழகம்",[u"பல்",u"கலை",u"கழகம்"])
+                      );
+        for word,parts in word_parts:
+            if LINUX:
+                print(u"######################## %s"%word)
+                print(u"/".join(parts))
+            actual = wordutils.greedy_split(word,self.TVU)
+            self.assertEqual(parts,actual)
+        return
+    
+    def test_word_split_TA2(self):
+        word2,parts2 = u"ஒருதலைகாதல்", [u"ஒருதலை",u"காதல்"]
+        actual2 = wordutils.greedy_split(word2,self.TVU)
+        self.assertTrue( u"காதல்" )
+        self.assertEqual(parts2,actual2)
         return
         
     def test_word_split_EN(self):
-        self.skipTest("")
         word = 'wordlist';
         parts = [['wo','rdli','st'],['word','list']]
         actual = wordutils.word_split(word,self.TMP)

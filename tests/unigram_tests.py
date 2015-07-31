@@ -26,20 +26,23 @@ class Letters(unittest.TestCase):
     def test_basic_unigram_counts(self):
         z = Corpus("data/ex.unicode")
         for letter in z.next_tamil_letter():
-            if ( LINUX ): print(letter)
+            #if ( LINUX ): print(letter)
+            pass
         # LetterModels
         q = Unigram( "data/ex.unicode" )
         q.frequency_model( )
         if not PYTHON3:
-            if ( LINUX ): print(unicode(q))
+            #if ( LINUX ):  print(unicode(q))
+            pass
         else:
-            if ( LINUX ): print( q )
+            #if ( LINUX ):  print( q )
+            pass
         self.assertEqual( q.letter[u"ஷை"] + q.letter[u"சி"] , q.letter[u"ந"] )
         del z, q
 
     def test_bigram_counts(self):
         q=Bigram("data/ex.unicode")
-        q.language_model(verbose=LINUX) #suppress output
+        q.language_model(verbose=(False and LINUX)) #suppress output
         self.assertEqual( q.letter2[u"த்"][u"து"] , 7 )
         self.assertEqual( q.letter2[u"சி"][u"சி"] , 0 )        
     
