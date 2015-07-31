@@ -25,6 +25,14 @@ class Dictionary:
         return
 
     @abc.abstractmethod
+    def hasWordsStartingWith(self,pfx):
+        return
+    
+    @abc.abstractmethod
+    def getWordsStartingWith(self,pfx):
+        return
+    
+    @abc.abstractmethod
     def isWord(self,word):
         return
     
@@ -75,6 +83,17 @@ class Agarathi(Dictionary):
         if not getattr(self.store,'getWordsEndingWith'):
             raise Exception("getWordsEndingWith is not an accessible method")
         return self.store.getWordsEndingWith(sfx)
+
+    # delegate to store
+    def getWordsStartingWith(self,pfx):
+        if not getattr(self.store,'getAllWordsPrefix'):
+            raise Exception("getWordsStartingWith is not an accessible method")
+        return self.store.getAllWordsPrefix(pfx)    
+    
+    def hasWordsStartingWith(self,pfx):
+        if not getattr(self.store,'hasWordPrefix'):
+            raise Exception("hasWordsStartingWith is not an accessible method")
+        return self.store.hasWordPrefix(pfx)
     
     def add(self,word):
         if self.Finalized:

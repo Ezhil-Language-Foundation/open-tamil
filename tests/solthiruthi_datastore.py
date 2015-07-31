@@ -142,6 +142,33 @@ class TamilTrieTest(unittest.TestCase):
         self.assertEqual(actual,expected)
         return
 
+class TriePrefixTest(unittest.TestCase):
+    def test_prefix(self):
+        obj = DTrie()
+        actual_words = ['abx','abc','abcd','bbc']
+        [obj.add(w) for w in actual_words]
+        for w in actual_words:
+            self.assertTrue(obj.isWord(w))
+        self.assertEqual(len(obj.getAllWords()),4)
+        
+        for w in actual_words:
+            self.assertFalse( obj.isWord( w+'NA' ) )
+            self.assertFalse( obj.isWord( w+'DA' ) )
+        
+        for pfx in ["ab","bb","bd"]:
+            self.assertFalse( obj.isWord( pfx ) )
+
+        for pfx in ['a','ab','b','bb']:
+            self.assertTrue( obj.hasWordPrefix(pfx) )
+        
+        val = []
+        for pfx in ['c','ac','ad','cb','z']:
+            #print("===> last/test ==> %s"%pfx)
+            val.append( obj.hasWordPrefix(pfx) )
+        self.assertFalse( any(val) )
+        
+        return
+
 class QueueTest(unittest.TestCase):
     def test_load(self):
         q = Queue()

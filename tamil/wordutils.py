@@ -104,8 +104,8 @@ def anagrams_in_dictionary(dictionary):
     rval_anagram_count = sorted(anagrams_by_len.items(),key=itemgetter(1))
     for k,v in rval_anagram_count:
         itr = itr +  1
-        print(u"%d/ items #%d"%(itr,v))
-
+        #print(u"%d/ items #%d"%(itr,v))
+    print(u"%d anagrams found"%itr)
     return rval_anagram_count,anagrams
 
 # combinations filtered by dictionary - yields all possible sub-words of a word.
@@ -136,6 +136,52 @@ def rhymes_with(inword,reverse_dictionary):
     #rhyming = list(set(rhyming))
     return set(rhyming[0:min(len(rhyming)-1,MAX)])
 
+def greedy_split(inword,dictionary):
+    if not all ([callable( getattr(dictionary,'isWord',[])),callable( getattr(dictionary,'getAllWordsIterable',[]))]):
+        raise Exception("dictionary object has insufficient methods")
+    
+    if isinstance(inword,list):
+        letters = inword
+    else:
+        letters = utf8.get_letters(inword)
+    #print u"||".join(letters)
+    solution = list()
+    
+    longest_idx = 0
+    prev_idx = 0
+    idx = 0
+    possible = True
+    while possible:
+        idx = prev_idx
+        prev_word = u""
+        while idx < len(letters):
+            #print("%d -> %d"%(idx,prev_idx))
+            word = u"".join(letters[prev_idx:idx+1])
+            choices = dictionary.getWordsStartingWith(word)
+            if len(choices) > 0:
+                if word in choices:
+                    prev_word = word
+                    #print("word => %s"%word)
+                    longest_idx = idx+1
+            else:
+                if len(prev_word) == 0:
+                    possible = False
+                    break
+            idx = idx + 1                
+        
+        prev_idx = longest_idx
+        #print(" \t --> word %s|%s|%d"%(prev_word,str(possible),prev_idx))
+        solution.append( prev_word )
+        
+        if prev_idx >= len(letters):
+            break
+    
+    #print(u"//".join(solution))
+    if possible:
+        return solution
+    
+    return list()
+
 def word_split(inword,dictionary):
     if not all ([callable( getattr(dictionary,'isWord',[])),callable( getattr(dictionary,'getAllWordsIterable',[]))]):
         raise Exception("dictionary object has insufficient methods")
@@ -152,22 +198,24 @@ def word_split(inword,dictionary):
     # simple greedy approach
     prev_idx = 0
     while prev_idx < len(letters):
-        print(u"reset--> @ %d"%prev_idx)
+        #print(u"reset--> @ %d"%prev_idx)
         prev_word = u"".join(letters[0:prev_idx+1])
         temp_sol = list()
         if dictionary.isWord(prev_word):
             temp_sol.append(prev_word)
             prev_idx = prev_idx + 1
+            pass
         else:
             prev_idx = prev_idx + 1
             continue
+        #print("===> prev_word %s"%prev_word)
         next_idx = prev_idx
         idx = prev_idx
         while idx < len(letters):
             curr_word = u"".join(letters[next_idx:idx+1])
-            print(idx,len(curr_word)) #,curr_word)
+            #print("\t %d -> %s\n"%(idx,curr_word))
             if dictionary.isWord(curr_word):
-                print("word %d"%len(curr_word))
+                #print(u"word => %s"%(curr_word))
                 # keep current word only if rest of the string is valuable.
                 temp_sol.append(curr_word)
                 next_idx = idx+1

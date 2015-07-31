@@ -41,7 +41,6 @@ class TamilRevTrieTest(unittest.TestCase):
         self.rt = rt
         self.len = len(rhymie)
         
-        #self.skipTest(u"not ready yet!")
         return
         
     def test_size(self):

@@ -70,6 +70,10 @@ class Trie:
         return
 
     @abc.abstractmethod
+    def hasWordPrefix(self,prefix):
+        return
+
+    @abc.abstractmethod
     def getAllWordsIterable(self):
         for word in self.getAllWords():
             yield word
@@ -99,6 +103,9 @@ class DTrie(Trie):
     """
     def __init__(self):
         self.trie = Node() #root node
+
+    def hasWordPrefix(self,wrd_prefix):
+        return self.isWordAndTrie( wrd_prefix, prefix=True )
     
     def isWord(self,word,ret_ref_trie=False):
         rval,ref_trie = self.isWordAndTrie( word )
@@ -106,19 +113,27 @@ class DTrie(Trie):
             return rval, ref_trie
         return rval
     
-    def isWordAndTrie(self,word):
+    def isWordAndTrie(self,word,prefix=False):
         ref_trie = self.trie
         letters = utf8.get_letters(word)
         wLen = len(letters)
         rval = False
+        is_prefix = False
         prev_trie = None
         for idx,letter in enumerate(letters):
             #print(str(ref_trie))
             rval = ref_trie.is_word.get(letter,False)
-            prev_trie = ref_trie
+            prev_trie = ref_trie            
             ref_trie = ref_trie.alphabets.get(letter,None)
             if not ref_trie:
                 break
+        
+        if  prefix:
+            if idx < (len(letters)-1):
+                return False
+            elif not ref_trie:
+                return False
+            return True
         
         return rval,prev_trie
     
@@ -288,6 +303,9 @@ class TamilTrie(Trie):
         prefix_letters = utf8.get_letters(prefix)
         self.getAllWordsHelper( ref_trie, ref_word_limits, prefix_letters, all_words)
         return all_words
+
+    def hasWordPrefix(self,prefix):
+        raise Exception("not implemented | X")
 
     def isWord(self,word,ret_ref_trie=False):
         # see if @word is present in the current Trie; return True or False
