@@ -107,10 +107,25 @@ def _reverse_dict(DictT):
         return obj
     return function_reverse_dict_type
 
+class EmptyAgarathi(Agarathi):
+    def __init__(self):
+        Agarathi.__init__(self,dictionary_path=None)
+    
 class TamilVU(Agarathi):
     def __init__(self):
         Agarathi.__init__(self,resources.DICTIONARY_DATA_FILES['tamilvu'])
 
+class EnglishLinux(Agarathi):
+    # use lower case
+    def __init__(self):
+        Agarathi.__init__(self,resources.DICTIONARY_DATA_FILES['english'])
+    
+    def isWord(self,word):
+        return Agarathi.isWord(self,word.lower())
+    
+    def add(self,word):
+        return Agarathi.add(self,word.lower())
+    
 def reverse_TamilVU():
     return _reverse_dict(TamilVU)()
 
@@ -131,9 +146,16 @@ def reverse_Wikipedia():
 # Methods for loading TamilVU, Wikipedia and Project Madurai cleaned up data
 class DictionaryBuilder:
     @staticmethod
-    def create(DType,reverse=False):
+    def create(DType):
         if not callable(DType):
             raise Exception(u"input @DType should be a class reference, or a factory function")
         obj = DType()
         obj.loadWordFile()
         return [obj,obj.getSize()]
+    
+    @staticmethod
+    def createUsingWordList(wlist):
+        obj = EmptyAgarathi()
+        for w in wlist:
+            obj.add(w)
+        return obj,obj.getSize()

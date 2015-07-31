@@ -136,5 +136,46 @@ def rhymes_with(inword,reverse_dictionary):
     #rhyming = list(set(rhyming))
     return set(rhyming[0:min(len(rhyming)-1,MAX)])
 
+def word_split(inword,dictionary):
+    if not all ([callable( getattr(dictionary,'isWord',[])),callable( getattr(dictionary,'getAllWordsIterable',[]))]):
+        raise Exception("dictionary object has insufficient methods")
+    
+    if isinstance(inword,list):
+        letters = inword
+    else:
+        letters = utf8.get_letters(inword)
+    
+    # bootstrap recursive algorithm
+    solutions = list()
+    
+    # TODO: ideally a recursive algorithm
+    # simple greedy approach
+    prev_idx = 0
+    while prev_idx < len(letters):
+        print(u"reset--> @ %d"%prev_idx)
+        prev_word = u"".join(letters[0:prev_idx+1])
+        temp_sol = list()
+        if dictionary.isWord(prev_word):
+            temp_sol.append(prev_word)
+            prev_idx = prev_idx + 1
+        else:
+            prev_idx = prev_idx + 1
+            continue
+        next_idx = prev_idx
+        idx = prev_idx
+        while idx < len(letters):
+            curr_word = u"".join(letters[next_idx:idx+1])
+            print(idx,len(curr_word)) #,curr_word)
+            if dictionary.isWord(curr_word):
+                print("word %d"%len(curr_word))
+                # keep current word only if rest of the string is valuable.
+                temp_sol.append(curr_word)
+                next_idx = idx+1
+            idx = idx + 1
+        if next_idx == len(letters):
+            solutions.append(temp_sol)
+        prev_idx = prev_idx + 1
+    return solutions
+
 # dummy dictionary interface for use with anagrams
 DictionaryWithPredicate = collections.namedtuple('DictionaryWithPredicate',['isWord'])
