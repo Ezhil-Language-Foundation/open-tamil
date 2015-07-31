@@ -3,6 +3,7 @@
 
 from opentamiltests import *
 from solthiruthi.dictionary import *
+from solthiruthi.datastore import DTrie
 from tamil import wordutils, utf8
 import math
 from pprint import pprint
@@ -47,6 +48,27 @@ class TestRevDictionary(unittest.TestCase):
         #for idx,x in enumerate(words):
         #   print(x)
         self.assertEqual(words,expected)
+
+class TestWordSplitter(unittest.TestCase):
+    def setUp(self):
+        self.TVU,self.VocabSize = DictionaryBuilder.create(TamilVU)
+        #self.TVU,self.VocabSize = DictionaryBuilder.createUsingWordList([u"தமிழ்",u"நாடு"])
+        self.TMP,self.TMPVocabSize = DictionaryBuilder.createUsingWordList(['word','list','wo','rdli','st'])
+        
+    def test_word_split_TA(self):
+        self.skipTest(u"test word split TA"))
+        word = u"தமிழ்நாடு"
+        parts = [[u"தமிழ்",u"நாடு"]]
+        actual = wordutils.word_split(word,self.TVU)
+        self.assertEqual(parts,actual)
+        return
+        
+    def test_word_split_EN(self):
+        self.skipTest("")
+        word = 'wordlist';
+        parts = [['wo','rdli','st'],['word','list']]
+        actual = wordutils.word_split(word,self.TMP)
+        self.assertEqual(parts,actual)
 
 if __name__ == "__main__":
     unittest.main()

@@ -16,7 +16,8 @@ def get_data_dir():
 def get_data_dictionaries( ):
     srcfiles = {u'tamilvu' : u'tamilvu_dictionary_words.txt',
         u'projmad':u'proj-madurai-040415.txt',
-        u'wikipedia':u'wikipedia_full_text_032915.txt'}
+        u'wikipedia':u'wikipedia_full_text_032915.txt',
+        u'english':u'english_dictionary_words.txt'}
     for  k, v in srcfiles.items():
         srcfiles[k] = mk_path( v )
     return srcfiles
