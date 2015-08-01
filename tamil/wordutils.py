@@ -137,14 +137,13 @@ def rhymes_with(inword,reverse_dictionary):
     return set(rhyming[0:min(len(rhyming)-1,MAX)])
 
 def greedy_split(inword,dictionary):
-    if not all ([callable( getattr(dictionary,'isWord',[])),callable( getattr(dictionary,'getAllWordsIterable',[]))]):
+    if not all ([callable( getattr(dictionary,'isWord',[])),callable( getattr(dictionary,'hasWordsStartingWith',[]))]):
         raise Exception("dictionary object has insufficient methods")
     
     if isinstance(inword,list):
         letters = inword
     else:
         letters = utf8.get_letters(inword)
-    #print u"||".join(letters)
     solution = list()
     
     longest_idx = 0
@@ -157,23 +156,32 @@ def greedy_split(inword,dictionary):
         while idx < len(letters):
             #print("%d -> %d"%(idx,prev_idx))
             word = u"".join(letters[prev_idx:idx+1])
-            choices = dictionary.getWordsStartingWith(word)
-            if len(choices) > 0:
-                if word in choices:
+            if dictionary.hasWordsStartingWith(word):
+                if dictionary.isWord(word):
                     prev_word = word
                     #print("word => %s"%word)
                     longest_idx = idx+1
+                elif word == inword:
+                    possible = False
+                    break
             else:
+                #print "prev_ word"
+                #pprint(prev_word)
+                #pprint(solution)
+                #pprint(idx)
                 if len(prev_word) == 0:
                     possible = False
                     break
-            idx = idx + 1                
+                
+            idx = idx + 1     
         
         prev_idx = longest_idx
+        
         #print(" \t --> word %s|%s|%d"%(prev_word,str(possible),prev_idx))
         solution.append( prev_word )
-        
-        if prev_idx >= len(letters):
+        do_brk = len(prev_word) == 0
+        if (prev_idx) >= len(letters) or do_brk:
+            possible = not do_brk
             break
     
     #print(u"//".join(solution))
@@ -183,7 +191,7 @@ def greedy_split(inword,dictionary):
     return list()
 
 def word_split(inword,dictionary):
-    if not all ([callable( getattr(dictionary,'isWord',[])),callable( getattr(dictionary,'getAllWordsIterable',[]))]):
+    if not callable( getattr(dictionary,'isWord',[])):
         raise Exception("dictionary object has insufficient methods")
     
     if isinstance(inword,list):
@@ -191,39 +199,26 @@ def word_split(inword,dictionary):
     else:
         letters = utf8.get_letters(inword)
     
-    # bootstrap recursive algorithm
     solutions = list()
     
-    # TODO: ideally a recursive algorithm
-    # simple greedy approach
-    prev_idx = 0
-    while prev_idx < len(letters):
-        #print(u"reset--> @ %d"%prev_idx)
-        prev_word = u"".join(letters[0:prev_idx+1])
+    idx = 0
+    while idx < len(letters)-1:
+        #print idx
+        prev_word = u"".join(letters[0:idx+1])
+        next_word = u"".join(letters[idx+1:])
         temp_sol = list()
-        if dictionary.isWord(prev_word):
-            temp_sol.append(prev_word)
-            prev_idx = prev_idx + 1
-            pass
-        else:
-            prev_idx = prev_idx + 1
-            continue
-        #print("===> prev_word %s"%prev_word)
-        next_idx = prev_idx
-        idx = prev_idx
-        while idx < len(letters):
-            curr_word = u"".join(letters[next_idx:idx+1])
-            #print("\t %d -> %s\n"%(idx,curr_word))
-            if dictionary.isWord(curr_word):
-                #print(u"word => %s"%(curr_word))
-                # keep current word only if rest of the string is valuable.
-                temp_sol.append(curr_word)
-                next_idx = idx+1
-            idx = idx + 1
-        if next_idx == len(letters):
-            solutions.append(temp_sol)
-        prev_idx = prev_idx + 1
+        #print prev_word,next_word
+        sol1 = greedy_split(prev_word,dictionary)
+        if len(sol1) > 0:
+            sol2 = greedy_split(next_word,dictionary)
+            if len(sol2) > 0:
+                tmpsol = list()
+                tmpsol.extend(sol1)
+                tmpsol.extend(sol2)
+                solutions.append(tmpsol)
+        idx = idx + 1
+    
     return solutions
-
+    
 # dummy dictionary interface for use with anagrams
 DictionaryWithPredicate = collections.namedtuple('DictionaryWithPredicate',['isWord'])

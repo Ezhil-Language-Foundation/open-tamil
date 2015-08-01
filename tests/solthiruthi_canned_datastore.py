@@ -31,7 +31,13 @@ class TestDictionary(unittest.TestCase):
 
     def tearDown(self):
         del self.TVU
-        
+
+    def test_wordlist_dictionary(self):
+        TMP,TMPVocabSize = DictionaryBuilder.createUsingWordList(['word','list','wo','rdli','st'])
+        self.assertEqual(TMPVocabSize,5)
+        self.assertTrue(TMP.isWord(u'word'))
+        self.assertFalse(TMP.isWord(u'wor'))
+    
     def test_factory_TVU(self):
         TVU_agarathi,size = self.TVU,self.TVU_size
         self.assertTrue(isinstance(TVU_agarathi,TamilVU))
