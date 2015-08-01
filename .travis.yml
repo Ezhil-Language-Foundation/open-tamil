@@ -1,9 +1,12 @@
 sudo: false
 language: python
 python:
+  - "3.5-dev"
   - "3.3"  
   - "2.7"
   - "2.6"  #lack of OrderedDict. so install ordereddict only for python 2.6.
+  - "pypy" #just for kicks
+  
 before_install:
   - echo `ruby -v` is the ruby version
 install:  
