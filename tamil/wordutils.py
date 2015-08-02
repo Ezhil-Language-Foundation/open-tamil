@@ -25,7 +25,8 @@ def combinations(symbols_in):
 
 def permutations(symbols):
     if not isinstance(symbols,list):
-        raise Exception(u'symbols என்ற உள்ளீடு iterable interface கொண்டதாக வேண்டும். அது சரம் (str) வகையாக இருந்தால் tamil.utf8.get_letters() பயன்பாட்டை முதலில் உபயொகிக்க!')
+        #        raise Exception(u'symbols என்ற உள்ளீடு iterable interface கொண்டதாக வேண்டும். அது சரம் (str) வகையாக இருந்தால் tamil.utf8.get_letters() பயன்பாட்டை முதலில் உபயொகிக்க!')
+        symbols = utf8.get_letters(symbols)
     
     if len(symbols) == 1:
         yield symbols[0]
@@ -114,6 +115,21 @@ def combinagrams(word,dictionary):
     for word_part in combinations(word):
         for valid_word in anagrams(word_part,dictionary,tamil_permutations):
             yield valid_word
+    raise StopIteration
+
+# permutations of a word filtered by dictionary - yields all possible sub-words of a word.
+# e.g. 'bullpen' -> 'pen' 'bull', 'ben' 'pull', 'pub' 'nell', 'nell' 'pub' .etc.    
+def permutagrams(word,dictionary):
+    matches = dict()
+    for perm_word in permutations(word):
+        if (perm_word in matches):
+           continue
+        matches[perm_word] = list()
+        actual_splits = word_split(perm_word,dictionary)
+        if len(actual_splits) > 0:
+            matches[perm_word].append(actual_splits)
+            yield actual_splits
+    del matches
     raise StopIteration
 
 def rhymes_with(inword,reverse_dictionary):
@@ -215,10 +231,21 @@ def word_split(inword,dictionary):
                 tmpsol = list()
                 tmpsol.extend(sol1)
                 tmpsol.extend(sol2)
-                solutions.append(tmpsol)
+                if not (tmpsol in solutions):
+                    solutions.append(tmpsol)
+                # try cross product of s1, and s2 computed recursively!
+                s1 = word_split(prev_word,dictionary)
+                s2 = word_split(next_word,dictionary)
+                for sols in s1:
+                    for sols2 in s2:
+                        l = list()
+                        l.extend(sols)
+                        l.extend(sols2)
+                        if not (l in solutions):
+                            solutions.append(l)
         idx = idx + 1
     
-    return solutions
+    return ((solutions))
     
 # dummy dictionary interface for use with anagrams
 DictionaryWithPredicate = collections.namedtuple('DictionaryWithPredicate',['isWord'])
