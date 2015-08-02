@@ -91,26 +91,11 @@ class TestWordSplitterEnglish(unittest.TestCase):
         actual = wordutils.word_split(word,self.ENG)
         self.assertEqual(parts,actual)
         
-class TestWordSplitter(unittest.TestCase):
+class TestGreedyWordSplitter(unittest.TestCase):
     def setUp(self):
         self.TVU,self.VocabSize = DictionaryBuilder.create(TamilVU)
-        self.TVU.add(u"ஆங்கிலம்நாடு")
-        self.TVU.add(u"ஆங்கிலம்")
-    
-    def test_word_split_TA0(self):
-        self.skipTest("not ready yet")
-        self.assertTrue(self.TVU.isWord(u"ஆங்கிலம்நாடு"))
-        word = u"ஆங்கிலம்ஆமை"
-        parts = [[u"ஆங்கிலம்நாடு",u"ஆமை"],[u"ஆங்கிலம்",u"நாடு",u"ஆமை"],[u"ஆங்கிலம்",u"ஆ",u"மை"]];
-        actual = wordutils.word_split(word,self.TVU)
-        pprint(actual)
-        self.assertEqual(len(parts),len(actual))
-        for lst in actual:
-            jn_wrd = u"".join(lst)
-            self.assertEqual( jn_wrd,word )
-        return
-    
-    def test_word_split_TA(self):
+        
+    def test_greedy_split_TA(self):
         word_parts = ((u"தாய்நாடு", [u"தாய்",u"நாடு"]),
                        (u"தமிழ்நாடு", [u"தமிழ்",u"நாடு"]),
                        (u"தமிழ்நாடுஆமை",[u"தமிழ்",u"நாடு",u"ஆமை"]),
@@ -120,18 +105,43 @@ class TestWordSplitter(unittest.TestCase):
         
         for word,parts in word_parts:
             if LINUX:
-                print(u"######################## %s"%word)
-                print(u"/".join(parts))
+                pass
+                #print(u"######################## %s"%word)
+                #print(u"/".join(parts))
             actual = wordutils.greedy_split(word,self.TVU)
             self.assertEqual(parts,actual)
         return
     
-    def test_word_split_TA2(self):
+    def test_greedy_split_TA2(self):
         word2,parts2 = u"ஒருதலைகாதல்", [u"ஒருதலை",u"காதல்"]
         actual2 = wordutils.greedy_split(word2,self.TVU)
         self.assertTrue( u"காதல்" )
         self.assertEqual(parts2,actual2)
         return
+
+class TestTotalWordSplitter(unittest.TestCase):
+    def setUp(self):
+        self.TVU,self.VocabSize = DictionaryBuilder.create(TamilVU)
+        self.TVU.add(u"ஆங்கிலம்நாடு")
+        self.TVU.add(u"ஆங்கிலம்")
         
+    def test_word_split_TA0(self):
+        self.assertTrue(self.TVU.isWord(u"ஆங்கிலம்நாடு"))
+        word = u"ஆங்கிலம்நாடுஆமை"
+        parts = [[u"ஆங்கிலம்நாடு",u"ஆ",u"மை"],[u"ஆங்கிலம்நாடு",u"ஆமை"],
+                 [u"ஆங்கிலம்",u"நாடு",u"ஆமை"],[u"ஆங்கிலம்",u"நாடு",u"ஆ",u"மை"]];
+        actual = wordutils.word_split(word,self.TVU)
+        self.assertEqual(sorted(parts),sorted(actual))
+        for lst in actual:
+            jn_wrd = u"".join(lst)
+            self.assertEqual( jn_wrd,word )
+        return
+    
+    def test_word_split_TA(self):
+        word=u"ஒருதலைகாதல்"
+        parts = [[u"ஒரு",u"தலை",u"காதல்"],[u"ஒருதலை",u"காதல்"]]
+        actual = wordutils.word_split(word,self.TVU)
+        self.assertEqual(parts,actual)
+    
 if __name__ == "__main__":
     unittest.main()

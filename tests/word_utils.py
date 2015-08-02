@@ -48,10 +48,9 @@ class TestWordUtils(unittest.TestCase):
         negDictPred = wordutils.DictionaryWithPredicate(lambda x: False)
         self.assertEqual( list(wordutils.anagrams(res[0],negDictPred)),[] )
         
-    @skip_python2_6
-    def test_perms_xception(self):
-        with self.assertRaises(Exception):
-            list( wordutils.permutations( u'அது சரம் (str) வகையாக இருந்தால் tamil.utf8.get_letters() பயன்பாட்டை முதலில் உபயொகிக்க!' ) )
+    def test_perms_as_string_is_OK(self):
+        actual = list( wordutils.permutations( u'அதுசரம்' ) )
+        self.assertEqual(len(actual),math.factorial(5))
     
     def test_combinations(self):
         word = u"சவால்";
