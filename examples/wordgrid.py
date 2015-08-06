@@ -24,8 +24,8 @@ class WordGrid:
     def compute(words,fill_letters):
         drv = WordGrid( words, fill_letters )
         drv.precompute()
-        drv.display()
-        print('###############')
+        #drv.display()
+        #print('###############')
         drv.generate( )
         drv.display()
         return
@@ -44,9 +44,15 @@ class WordGrid:
         del self.grid
     
     def display(self):
+        print(u"<html><head><title>word grids</title></head>\n<body>")
+        print(u"<table border='1'>")
         for row_idx in range(len(self.grid)):
-            row_data = " ".join( self.grid[row_idx][col_idx][0] for col_idx in range( len(self.grid[row_idx]) ) )
-            print(row_data)
+            row_data = u" ".join( u"<td>%s</td>"%self.grid[row_idx][col_idx][0] for col_idx in range( len(self.grid[row_idx]) ) )
+            print(u"<tr>%s</tr>"%row_data)
+        print(u"</table>")
+        print(u"</body></html>")
+        return
+        
         print("<= P =>")
         for row_idx in range(len(self.grid)):
             row_data = " ".join( str(self.grid[row_idx][col_idx][1])[0] for col_idx in range( len(self.grid[row_idx]) ) )
@@ -55,7 +61,7 @@ class WordGrid:
     
     def precompute(self):
         self.max_word_len = max( list(map(len,self.words)) )
-        self.grid_size = 2*self.max_word_len
+        self.grid_size = 1+self.max_word_len
         # sort words in order
         if PYTHON3:
             self.words = sorted( self.words, key=len )
@@ -92,12 +98,15 @@ class WordGrid:
     def generate(self):
         self.generate_horizontal()
     
-if __name__ == "__main__":
+def gen_grid():
     lang = ['EN','TA'][0]
     if lang == 'EN':
         wordlist = [u'food',u'water',u'shelter',u'clothing']
         fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
     else:
         wordlist = [u'உப்பு', u'நாற்பண்',u'பராபரம்', u'கான்யாறு', u'ஆறு', u'சன்னியாசி', u'நெல்லி']
-        fill_letters = tamil.utf8.tamil_letters
+        fill_letters = tamil.utf8.uyir_letters + tamil.utf8.mei_letters + tamil.utf8.agaram_letters
     WordGrid.compute( wordlist, fill_letters )
+
+if __name__ == u"__main__":
+    gen_grid()

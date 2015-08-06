@@ -5,6 +5,7 @@ from __future__ import print_function
 import abc
 import sys
 import codecs
+import pickle
 from tamil import utf8
 from pprint import pprint
 
@@ -90,7 +91,20 @@ class Trie:
             for word in fp.readlines():
                 self.add(word.strip())
         return
-
+    
+    @staticmethod
+    def serializeToFile(obj,filename):
+        with open(filename,u'wb') as fp:
+            pickle.dump(obj,fp)
+        return True
+        
+    @staticmethod
+    def deserializeFromFile(filename):
+        obj = None
+        with open(filename,u'rb') as fp:
+            obj = pickle.load(fp)
+        return obj
+    
 class Node:
     def __init__(self):
         self.__dict__={'alphabets':{},'is_word':{},'count':{}}

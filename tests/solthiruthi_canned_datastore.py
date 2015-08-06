@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
+import os
 from opentamiltests import *
 from solthiruthi.dictionary import *
+from solthiruthi.datastore import Trie
 
 # Test the canned English dictionary with data structure
 class TestEnglishDictionary(unittest.TestCase):
@@ -20,15 +22,40 @@ class TestEnglishDictionary(unittest.TestCase):
             self.assertTrue(self.ENG.isWord(w.lower()))
             self.assertTrue(self.ENG.isWord(w.upper()))
             self.assertTrue(self.ENG.isWord(w))
-            self.assertFalse(self.ENG.isWord(w+'31'))
+            self.assertFalse(self.ENG.isWord(w+'31'))    
+        return
+
+class TestDictionarySaveLoad(unittest.TestCase):
+    def setUp(self):
+        self.fname = 'data.dot'
+        self.wl = [u'abelian',u'commutative',u'monoid',u'rings',u'groups']
+        self.TMP,self.TMPVocabSize = DictionaryBuilder.createUsingWordList(self.wl)
+        Trie.serializeToFile(self.TMP,self.fname)
+                
+    def tearDown(self):
+        os.unlink(self.fname)
         
+    def test_wordlist_dictionary(self):
+        self.assertEqual(self.TMPVocabSize,len(self.wl))
+        self.assertTrue(self.TMP.isWord(u'groups'))
+        self.assertTrue(self.TMP.isWord(u'rings'))
+        self.assertFalse(self.TMP.isWord(u'trefoil'))
+ 
+    def test_load_n_save(self):
+        reloadTMP = Trie.deserializeFromFile(self.fname)
+        self.assertEqual(reloadTMP.getSize(),len(self.wl))
+        self.assertTrue(reloadTMP.isWord(u'groups'))
+        self.assertTrue(reloadTMP.isWord(u'rings'))
+        self.assertEqual(list(reloadTMP.getAllWords()),list(self.TMP.getAllWords()))
+        for wl in reloadTMP.getAllWords():
+            print(wl)
         return
     
 # Test the canned dictionary with data structure
 class TestDictionary(unittest.TestCase):
     def setUp(self):
         self.TVU,self.TVU_size = DictionaryBuilder.create(TamilVU)
-
+        
     def tearDown(self):
         del self.TVU
 
