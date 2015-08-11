@@ -1,6 +1,7 @@
 ## This Python file uses the following encoding: utf-8
 ##
 ## (C) 2015 Muthiah Annamalai <ezhillang@gmail.com>
+from __future__ import print_function, division
 import copy
 import collections
 from . import utf8
@@ -57,12 +58,23 @@ def palindrome(symbols_in):
     else:
         symbols = utf8.get_letters(symbols_in)
     N = len(symbols)
-    for fw in range(0,N):
+    for fw in range(0,N//2):
         rev = N-1 - fw
         if symbols[fw] != symbols[rev]:
             return False
     return True
-    
+
+def all_plaindromes(dictionary):
+    if not callable( getattr(dictionary,'isWord',[]) ):
+        raise Exception("@dictionary என்ற உள்ளீட்டில் isWord என்ற செயல்பாட்டு கூறு கிடையாது. இது விதிவிலக்கான நிலை")
+    if not callable( getattr(dictionary,'getAllWords',[]) ):
+        raise Exception("@dictionary என்ற உள்ளீட்டில் getAllWords என்ற செயல்பாட்டு கூறு கிடையாது. இது விதிவிலக்கான நிலை")
+        
+    for word in dictionary.getAllWords():
+        if  is_palindrome(word):
+            yield word
+    raise StopIteration
+
 def anagrams(word,dictionary,permutations=tamil_permutations):
     if not callable( getattr(dictionary,'isWord',[]) ):
         raise Exception("@dictionary என்ற உள்ளீட்டில் isWord என்ற செயல்பாட்டு கூறு கிடையாது. இது விதிவிலக்கான நிலை")
