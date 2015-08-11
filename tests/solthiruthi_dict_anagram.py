@@ -142,6 +142,15 @@ class TestTotalWordSplitter(unittest.TestCase):
         parts = [[u"ஒரு",u"தலை",u"காதல்"],[u"ஒருதலை",u"காதல்"]]
         actual = wordutils.word_split(word,self.TVU)
         self.assertEqual(parts,actual)
+
+class TestPalindromes(unittest.TestCase):
+    def setUp(self):
+        self.wlist = ["1","121","1331","14641","15AA51","1729"]
+        self.Dictionary,self.VocabSize = DictionaryBuilder.createUsingWordList(self.wlist)
     
+    def test_palindromes(self):
+        all = list(wordutils.all_plaindromes(self.Dictionary))
+        self.assertEqual(all,self.wlist[:-1])
+
 if __name__ == "__main__":
     unittest.main()

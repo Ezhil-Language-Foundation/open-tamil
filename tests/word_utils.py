@@ -62,6 +62,12 @@ class TestWordUtils(unittest.TestCase):
         actual = list(filter(wordutils.palindrome,words))
         self.assertEqual(actual,expected)
     
+    def test_palindrome_false(self):
+        words = [u"ab",u"abbax","xxkcd","xvinavi","103_301","10010",u"அxதுஅ",u"சரxம்xxரச"]
+        expected = ['103_301']
+        actual = list(filter(wordutils.palindrome,words))
+        self.assertEqual(actual,expected)
+    
     def test_ispalindrome(self):
         expected = [u"a",u"abba","1001",u"அதுஅ",u"சரம்ரச"]
         self.assertTrue( all(list(map(wordutils.is_palindrome,expected))) )
