@@ -24,7 +24,10 @@ def combinations(symbols_in):
         yield word_combo
     raise StopIteration
 
-def permutations(symbols):
+def default_true(*args):
+    return True
+
+def permutations(symbols,predicate=default_true,prefix=u""):
     if not isinstance(symbols,list):
         #        raise Exception(u'symbols என்ற உள்ளீடு iterable interface கொண்டதாக வேண்டும். அது சரம் (str) வகையாக இருந்தால் tamil.utf8.get_letters() பயன்பாட்டை முதலில் உபயொகிக்க!')
         symbols = utf8.get_letters(symbols)
@@ -34,9 +37,12 @@ def permutations(symbols):
     
     for idx in range(0,len(symbols)):
         new_list = copy.copy(symbols)
+        new_pfx = prefix+symbols[idx]
+        if not predicate(new_pfx):
+            continue
         del new_list[idx]
-        for vars in permutations(new_list):
-            yield symbols[idx]  + vars
+        for vars in permutations(new_list,predicate,new_pfx):
+            yield symbols[idx] + vars
         del new_list
     raise StopIteration
 
@@ -118,7 +124,7 @@ def anagrams_in_dictionary(dictionary):
     for k,v in rval_anagram_count:
         itr = itr +  1
         #print(u"%d/ items #%d"%(itr,v))
-    print(u"%d anagrams found"%itr)
+    #print(u"%d anagrams found"%itr)
     return rval_anagram_count,anagrams
 
 # combinations filtered by dictionary - yields all possible sub-words of a word.

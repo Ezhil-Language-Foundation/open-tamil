@@ -436,10 +436,11 @@ def compare_words_lexicographic( word_a, word_b ):
     """ compare words in Tamil lexicographic order """
     # sanity check for words to be all Tamil
     if ( not all_tamil(word_a) ) or (not all_tamil(word_b)) :
-        print("## ")
-        print(word_a)
-        print(word_b)
-        print("Both operands need to be Tamil words")
+        #print("## ")
+        #print(word_a)
+        #print(word_b)
+        #print("Both operands need to be Tamil words")
+        pass
     La = len(word_a)
     Lb = len(word_b)
     all_TA_letters = u"".join(tamil_letters)
