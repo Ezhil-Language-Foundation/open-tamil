@@ -27,15 +27,15 @@ class DataParser:
     
     @staticmethod
     def run(args):
-        print(u">> starting data processing for files <<")
-        print(u"|".join(args))
+        #print(u">> starting data processing for files <<")
+        #print(u"|".join(args))
         obj = DataParser( args )
         obj.process()
         return obj
     
     def parse_data(self,filename):
         cat = None
-        print(u">> file %s"%filename)
+        #print(u">> file %s"%filename)
         with codecs.open(filename,'r','utf-8') as fp:
             for line in fp.readlines():
                 if line.startswith('>>'):

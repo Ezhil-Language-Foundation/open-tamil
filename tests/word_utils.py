@@ -15,7 +15,24 @@ class TestWordUtils(unittest.TestCase):
     def test_perms( self ):
         res = [u'123',u'132',u'213',u'231',u'312',u'321']
         self.assertEqual( list(wordutils.permutations(u'1 2 3'.split(u' '))),res)
+    
+    def test_perms_with_prefix_filters( self ):
+        s = lambda x:x.startswith('1')
+        gen = list(tamil.wordutils.permutations('123'))
+        filt = list(tamil.wordutils.permutations('123',s))
         
+        self.assertEqual(len(gen),math.factorial(3))
+        self.assertEqual(filt,['123','132'])
+        
+        # filter perms that have second letter as '2' or '3'
+        def bigrams(x):
+            if len(x) >= 2:
+                return x[1] == '2' or x[1] == '3'
+            return True
+        filt2 = list(tamil.wordutils.permutations('123',bigrams))
+        
+        self.assertEqual(filt2,['123','132','231','321'])
+    
     def test_perms_length(self):
         count = 0
         for perm in wordutils.permutations('1 2 3 4 5 6'.split(' ')):
