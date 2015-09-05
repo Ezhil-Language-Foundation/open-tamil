@@ -61,16 +61,22 @@ class RemoveCaseSuffix(RemoveSuffix):
     def setSuffixes(self):
         self.possible_suffixes=[u"உக்கு",u"க்கு",u"ளை",u"கள்"]
 
+class RemovePluralSuffix(RemoveSuffix):        
+    def __init__(self):
+        super(RemovePluralSuffix,self).__init__()
+    def setSuffixes(self):
+        self.possible_suffixes=[u"ல்",u"கள்"]
+        
 def xkcd():
-    obj = RemoveCaseSuffix()
-    expected = [u"பதிவிற்",u"கட்டளைக",u"அவர்"]
-    words_list = [u"பதிவிற்க்கு",u"கட்டளைகளை",u"அவர்கள்"]
+    obj = RemovePluralSuffix()
+    expected = [u"பதிவி",u"கட்டளை",u"அவர்"]
+    words_list = [u"பதிவில்",u"கட்டளைகள்",u"அவர்கள்"]
     for w,x in zip(words_list,expected):
         rval = obj.removeSuffix(w)
         assert(rval[1])
         print(utf8.get_letters(w),'->',rval[1])
         assert(rval[0] == x)
     return
-    
+
 if __name__ == "__main__":
     xkcd()

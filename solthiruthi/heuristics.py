@@ -28,30 +28,6 @@ class Rule:
         """
         return False,None    
 
-class AdjacentVowels(Rule):
-    """ donot allow adjacent vowels in the word.
-        ஆஅக்காள் (originally -> அக்காள்) will be flagged
-    """
-    reason = u"ஒன்றைத்தொடர்ந்துஒன்று உயிரெழுத்துக்கள் வரக்கூடாது. இது பெரும்பாலும் பிழையாக இருக்கும்."
-    uyir_letters = set(utf8.uyir_letters)
-    
-    def apply(self, word, ctx=None):
-        """ ignore ctx information right now """
-        chars = get_letters(word)
-        flag = True #no error assumed
-        reason = None #no reason
-        prev_uyir = False
-        for char in chars:
-            if char in AdjacentVowels.uyir_letters:
-                if prev_uyir:
-                    flag = False
-                    break
-                prev_uyir = True
-                continue
-            prev_uyir = False # continue loop        
-        if not flag:
-            reason = AdjacentVowels.reason
-        return flag,reason
 
 class Sequential:
     @staticmethod
