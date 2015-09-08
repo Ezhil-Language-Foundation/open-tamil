@@ -15,12 +15,13 @@ class RemoveSuffix(object):
     __metaclass__ = abc.ABCMeta
     def __init__(self):
         self.possible_suffixes = None
+        self.replace_suffixes = {} #valid dictionary
         self.reversed_suffixes = []
-        
+    
     @abc.abstractmethod
     def setSuffixes(self):
         pass
-   
+    
     def prepareSuffixes(self):
         assert self.possible_suffixes
         # reverse the words in each letter.
@@ -50,9 +51,16 @@ class RemoveSuffix(object):
             continue
         if len(longest_match) > 0:
             removed = True
+            sfx = []
             for itr in range(len(utf8.get_letters(longest_match))):
-                word_lett.pop()
+                sfx.append( word_lett.pop() )
             word = u"".join(word_lett)
+            sfx.reverse()
+            sfx= u"".join(sfx)
+            # rule to replace suffix
+            alt_suffix = self.replace_suffixes.get(sfx,None)
+            if alt_suffix:
+                word = word + alt_suffix
         return word,removed
 
 class RemoveCaseSuffix(RemoveSuffix):        
@@ -65,7 +73,8 @@ class RemovePluralSuffix(RemoveSuffix):
     def __init__(self):
         super(RemovePluralSuffix,self).__init__()
     def setSuffixes(self):
-        self.possible_suffixes=[u"ல்",u"கள்"]
+        self.replace_suffixes = {u"ற்கள்":u"ல்",u"கள்":u"",u"ல்":u"", u"ட்கள்": u"ள்", u"ங்கள்":u"ம்"}
+        self.possible_suffixes=list(self.replace_suffixes.keys())
         
 def xkcd():
     obj = RemovePluralSuffix()
