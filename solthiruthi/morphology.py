@@ -63,6 +63,22 @@ class RemoveSuffix(object):
                 word = word + alt_suffix
         return word,removed
 
+# remove prefix using the suffix removal algorithm via reversal of word
+class RemovePrefix(RemoveSuffix):
+    def __init__(self):
+        super(RemovePrefix,self).__init__()
+        
+    def setSuffixes(self):
+        self.replace_suffixes = {u"மா":u"",u"பேர்":u"",u"அதி":u"",u"பெரிய":u"",u"பெரு":u"",u"சின்ன":u"",\
+                                 u"ஆதி":u"",u"சிறு":u"",u"அக்":u"",u"இக்":u"",u"எக்":u""}
+        self.possible_suffixes=[utf8.reverse_word(word) for word in self.replace_suffixes.keys()]
+    
+    def removePrefix(self,word):
+        word_lett = utf8.get_letters(word)
+        word_lett.reverse()
+        a,b = self.removeSuffix(u"".join(word_lett))
+        return [utf8.reverse_word(a),b]
+    
 class RemoveCaseSuffix(RemoveSuffix):        
     def __init__(self):
         super(RemoveCaseSuffix,self).__init__()
@@ -75,7 +91,7 @@ class RemovePluralSuffix(RemoveSuffix):
     def setSuffixes(self):
         self.replace_suffixes = {u"ற்கள்":u"ல்",u"கள்":u"",u"ல்":u"", u"ட்கள்": u"ள்", u"ங்கள்":u"ம்"}
         self.possible_suffixes=list(self.replace_suffixes.keys())
-        
+    
 def xkcd():
     obj = RemovePluralSuffix()
     expected = [u"பதிவி",u"கட்டளை",u"அவர்"]
