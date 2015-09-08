@@ -3,6 +3,7 @@
 
 from opentamiltests import *
 from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix
+from solthiruthi.morphology import RemovePrefix
 import re
 import codecs
 from tamil import utf8
@@ -23,12 +24,12 @@ class RemoveSuffixTest(unittest.TestCase):
 class RemovePluralTest(unittest.TestCase):
     def test_basic_plural_stripper(self):
         obj = RemovePluralSuffix()
-        expected = [u"பதிவி",u"கட்டளை",u"அவர்",u"ஜாதி",u"மரம்",u"சொல்"] 
-        words_list = [u"பதிவில்",u"கட்டளைகள்",u"அவர்கள்",u"ஜாதிகள்",u"மரங்கள்",u"சொற்கள்"]
+        expected = [u"பதிவி",u"கட்டளை",u"அவர்",u"ஜாதி",u"மரம்",u"சொல்",u"சிற்பம்"] 
+        words_list = [u"பதிவில்",u"கட்டளைகள்",u"அவர்கள்",u"ஜாதிகள்",u"மரங்கள்",u"சொற்கள்",u"சிற்பங்கள்"]
         for w,x in zip(words_list,expected):
             rval = obj.removeSuffix(w)
             self.assertTrue(rval[1])
-            if not PYTHON3: print(utf8.get_letters(w),u'->',rval[1])
+            #if not PYTHON3: print(utf8.get_letters(w),u'->',rval[1])
             self.assertEqual(rval[0], x)
         return
     
@@ -39,6 +40,37 @@ class RemovePluralTest(unittest.TestCase):
         #பெண்களை  -> பெண்கள்
         #ஆளுமைகளை  -> ஆளுமைகள்
         #சொற்களால் -> 
+        return
+
+class RemovePrefixTest(unittest.TestCase):
+    def test_basic_prefix_stripper(self):
+        obj = RemovePrefix()
+        #பேரின்பம் ->   இன்பம், 
+        #u"":u"",u"":u"",u"":u"",u"":u"",u"":u"",u"":u"",
+        prefix_removal_map = {u"எக்காலம்":u"காலம்",u"இக்காலம்":u"காலம்",u"அக்காலம்":u"காலம்",\
+                            u"மாமனிதன்":u"மனிதன்",u"சின்னஜமீன்":u"ஜமீன்",u"அதிவேகம்":u"வேகம்",\
+                            u"சிறுகுன்றம்":u"குன்றம்"}
+        
+        no_removal_map = {}
+        # update no-prefix-to-be-removed / no-change values
+        for v in prefix_removal_map.values():
+            no_removal_map[v] = v
+        
+        # prefix removal does not happen for these words
+        words_list = list(no_removal_map.keys())
+        for idx,w in enumerate(words_list):
+            rval = obj.removePrefix(w)
+            self.assertFalse(rval[1])
+            expected = no_removal_map[w]
+            self.assertEqual(rval[0], expected)
+        
+        # prefix removal to happen as expected
+        words_list = list(prefix_removal_map.keys())
+        for idx,w in enumerate(words_list):
+            rval = obj.removePrefix(w)
+            self.assertTrue(rval[1])
+            expected = prefix_removal_map[w]
+            self.assertEqual(rval[0], expected)
         return
     
 if __name__ == "__main__":
