@@ -49,7 +49,7 @@ class RemovePrefixTest(unittest.TestCase):
         #u"":u"",u"":u"",u"":u"",u"":u"",u"":u"",u"":u"",
         prefix_removal_map = {u"எக்காலம்":u"காலம்",u"இக்காலம்":u"காலம்",u"அக்காலம்":u"காலம்",\
                             u"மாமனிதன்":u"மனிதன்",u"சின்னஜமீன்":u"ஜமீன்",u"அதிவேகம்":u"வேகம்",\
-                            u"சிறுகுன்றம்":u"குன்றம்"}
+                            u"சிறுகுன்றம்":u"குன்றம்",u"மாமரம்":u"மரம்"}
         
         no_removal_map = {}
         # update no-prefix-to-be-removed / no-change values
