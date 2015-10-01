@@ -3,6 +3,7 @@
 # 2015 Muthiah Annamalai <ezhillang@gmail.com>
 #
 
+import datetime
 import time
 import os
 import sys
@@ -10,6 +11,14 @@ import tamil
 import winsound
 import wave
     
+def get_time():
+    time_as_string = time.ctime()
+    # access only the date
+    today = datetime.date.today()
+    dnt_now = datetime.datetime.now()
+    # access hour, minute, second and microsecond fields
+    return (dnt_now.hour, dnt_now.minute, dnt_now.second, dnt_now.microsecond)
+
 def concat_audio_files(infiles,outfile):
     data= []
     for infile in infiles:
@@ -24,7 +33,7 @@ def concat_audio_files(infiles,outfile):
     output.close()
     return
 
-def say_number_in_tamil(number,voice_gender='female'):
+def say_number_in_tamil(number,cleanup=False,voice_gender='female'):
     if number < 0:
         raise Exception("Negative numbers are not supported")
     
@@ -43,8 +52,24 @@ def say_number_in_tamil(number,voice_gender='female'):
     
     # 4) Play this newly created audio file
     winsound.PlaySound(outfile,winsound.SND_NOSTOP)
+    
+    # 5) Cleanup if requested
+    if cleanup:
+        os.unlink(outfile)
     return
 
+def say_time():
+    hh,mm,ss,us = get_time()
+    pos_data = ("hour","minute","sec","usec")
+    hr_data = (hh,mm,ss,us)
+    # murpagal/pirpagal / kalai/maalai
+    # skip microseconds data
+    for pos,hr in zip(pos_data[0:3],hr_data[0:3]):
+        say_number_in_tamil(hr,cleanup=True) #ayinthu, narpathi-ettu, aympathu 
+        #say_string_in_tamil(pos) #mani, nimidam, vinadigal
+    return
+
+say_time()
 while True:
     number = input(u'Enter a number >> ') 
     say_number_in_tamil( number )
