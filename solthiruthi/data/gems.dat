@@ -1,0 +1,18 @@
+# (C) 2015 Muthiah Annamalai | Compiled for Open-Tamil project
+# விலங்குகளின் பெயர்ப் பட்டியல்
+# Ref: http://ta.wikipedia.org/wiki/விலங்குகளின்_பெயர்ப்_பட்டியல்
+# format is self-descriptive: '#' describes comments, 
+# '>>' start of category, and end of previous category
+# words are 1-word per line, terminal or start spaces to be ignored
+# Ref: 
+>>நவரத்தினம்
+coral பவளம்
+pearl முத்து
+cats_eye கோமேதகம்
+emerald மரகதம்
+diamond வைரம்
+saphire நீலம்
+topaz புஷ்பராகம்
+ruby மாணிக்கம்
+lapis வயிடூரியம்
+# navaraththinam நவரத்தினம்
