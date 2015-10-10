@@ -78,7 +78,8 @@ def num2tamilstr( *args ):
     all_bases = [n_crore, n_lakh, n_thousand, n_hundred, n_ten,n_one]
     allowed_bases = filter( lambda base: number >= base, all_bases )
     
-    for n_base in allowed_bases:
+    if len(allowed_bases) >= 1:
+        n_base = allowed_bases[0] 
         if number == n_base:
             filenames.extend(file_map[n_base])
             return u" ".join(num_map[n_base])
@@ -194,7 +195,8 @@ def num2tamilstr_american( number ):
     if number > 0.0 and number < 1.0:
         return num2tamilstr(number)
     
-    for n_base in allowed_bases:
+    if len(allowed_bases) >= 1:
+        n_base = allowed_bases[0]
         if number == n_base:
             return u" ".join(num_map[n_base])
         quotient_number = long( number/n_base )
