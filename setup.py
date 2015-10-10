@@ -8,7 +8,7 @@ from distutils.core import setup
 from codecs import open
 
 setup(name='Open-Tamil',
-      version='0.4',
+      version='0.5',
       description='Tamil language text processing tools for Python v2, v3',
       author='M. Annamalai, T. Arulalan, T. Shrinivasan',
       author_email='ezhillang@gmail.com',
