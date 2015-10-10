@@ -189,7 +189,7 @@ def num2tamilstr_american( number ):
                n_one : [units[1]]}
     
     all_bases = [n_trillion,n_billion, n_million, n_thousand, n_hundred, n_ten,n_one]
-    allowed_bases = filter( lambda base: number >= base, all_bases )
+    allowed_bases = list(filter( lambda base: number >= base, all_bases ))
 
     # handle fractional parts
     if number > 0.0 and number < 1.0:
