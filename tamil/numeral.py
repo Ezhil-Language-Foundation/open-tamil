@@ -76,7 +76,7 @@ def num2tamilstr( *args ):
                n_one : [units[1]]}
     
     all_bases = [n_crore, n_lakh, n_thousand, n_hundred, n_ten,n_one]
-    allowed_bases = filter( lambda base: number >= base, all_bases )
+    allowed_bases = list(filter( lambda base: number >= base, all_bases ))
     
     if len(allowed_bases) >= 1:
         n_base = allowed_bases[0] 
