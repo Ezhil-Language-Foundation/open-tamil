@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry including="com/tamil/Numeral.java|com/tamil/NumeralInfo.java|com/tamil/TamilLetters.java|com/tamil/utf8.java" kind="src" path="src"/>
+	<classpathentry including="com/tamil/NumeralTest.java|com/tamil/utf8Test.java" kind="src" path="test"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

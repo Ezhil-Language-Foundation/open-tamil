@@ -302,13 +302,7 @@ class NumeralTestAmerican(unittest.TestCase):
     def test_units( self ):
         units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
         self.runTest( units, range(0,11) )
-        return
-
-        
-    def test_units( self ):
-        units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
-        self.runTest( units, range(0,11) )
-        return
+        return        
         
     def test_teens( self ):
         teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19    
@@ -376,12 +370,6 @@ class NumeralTest(unittest.TestCase):
             self.assertEqual( numerStr, tamil.numeral.num2tamilstr( num ), num )
         return
 
-    def test_units( self ):
-        units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
-        self.runTest( units, range(0,11) )
-        return
-
-        
     def test_units( self ):
         units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
         self.runTest( units, range(0,11) )
