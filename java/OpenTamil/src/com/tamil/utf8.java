@@ -3,9 +3,9 @@
  ** This program is part of open-tamil library
  ** You may use this code under MIT License
  */
-package com.opentamil.tamil;
-import java.lang.*;
+package com.tamil;
 import java.util.*;
+import com.tamil.TamilLetters;
 
 /**
  *
@@ -50,21 +50,19 @@ public class utf8 {
     "ள"  ,"ளா"  ,"ளி"  ,"ளீ"  ,"ளு"  ,"ளூ"  ,"ளெ"  ,"ளே"  ,"ளை"  ,"ளொ"  ,"ளோ"  ,"ளௌ"};
 
     
-    final static TreeSet<String> uyir_letter_set = new TreeSet( Arrays.asList(uyir_letters) );
-    final static TreeSet<String> grantha_agaram_set = new TreeSet( Arrays.asList(grantha_agaram_letters) );
-    final static TreeSet<String> accent_symbol_set = new TreeSet( Arrays.asList(accent_symbol_letters) );
+    final static TreeSet<String> uyir_letter_set = new TreeSet<String>( Arrays.asList(uyir_letters) );
+    final static TreeSet<String> grantha_agaram_set = new TreeSet<String>( Arrays.asList(grantha_agaram_letters) );
+    final static TreeSet<String> accent_symbol_set = new TreeSet<String>( Arrays.asList(accent_symbol_letters) );
     
-    public static HashMap<String,Object> get_length(String text) {
+    public static  TamilLetters get_length(String text) {
         List<String> letters = utf8.get_letters(text);
         int length = letters.size();
-        HashMap<String,Object> d = new HashMap();
-        d.put("length", length);
-        d.put("letters", letters);
+        TamilLetters d = new TamilLetters(letters,length);        
         return d;
     }
     
     public static List<String> get_letters(String text) {
-        List<String> letters = new ArrayList();
+        List<String> letters = new ArrayList<String>();
         int idx = 0, cp = 0;
         int [] cp_array = {0,0};
         String cp_as_letter;
