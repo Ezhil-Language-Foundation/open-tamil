@@ -1,3 +1,9 @@
+/*
+ ** (C) 2015 Muthiah Annamalai <ezhillang@gmail.com>
+ ** This program is part of open-tamil library
+ ** You may use this code under MIT License
+ */
+
 package com.tamil;
 
 import java.util.ArrayList;
