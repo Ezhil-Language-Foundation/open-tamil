@@ -106,11 +106,12 @@ class IndianNumeral {
 					
 			// handle fractional parts and exit
 		    if (( number > 0.0) && (number < 1.0)) {
-		        rval.filenames.add("pulli");
+		    	rval.add(IndianNumeral.pulli,IndianNumeral.pulli);
 		        String number_str = Double.toString(number).replace("0.","");
 		        for(int idx=0; idx < number_str.length(); idx++ ) {
-		        	char digit = number_str.charAt(idx);
-		            rval.add(  IndianNumeral.units[Integer.valueOf(digit)], "units_"+digit );		            
+		        	String digit = number_str.substring(idx,idx+1);		       
+		        	Log.log(Level.INFO, "dbl value frac/digit -> "+digit);
+		            rval.add(  IndianNumeral.units[Integer.valueOf(digit)%units.length], "units_"+digit );		            
 		        }
 		        return rval;		    
 		    };
@@ -160,9 +161,10 @@ class IndianNumeral {
 		    		boolean frac_is_zero = (Math.abs(frac) <= Double.MIN_NORMAL*50.0);
 		    		
 		    		if ( !frac_is_zero) {
-		    			// pure fractional
+		    			// pure fractional		    			
 		    			rval.add( IndianNumeral.units[integer_part] , "units_"+Integer.toString(integer_part) );		    		
-		    			IndianNumeral.toString(frac,rval);		    			
+		    			IndianNumeral.toString(frac,rval);
+		    			return rval;
 		    		} else {
 		    			//pure integer
 		    			rval.add( IndianNumeral.units[integer_part], "units_"+Integer.toString(integer_part));

@@ -9,7 +9,6 @@ package com.tamil;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import com.tamil.Numeral;
@@ -66,6 +65,13 @@ public class NumeralTest extends TestCase {
 		
 		super.assertTrue(Arrays.equals(tens, tens_actual));
 	}
+	
+	public void test_frac() throws Exception {
+		double inputNumber = 1.375;
+		String expected = "ஒன்று புள்ளி மூன்று ஏழு ஐந்து";
+		runTest(inputNumber,expected);				
+	}
+	
 	public void test_units() throws Exception {
 		//# 0 - 10
 		String [] units = {"பூஜ்ஜியம்", "ஒன்று", "இரண்டு", "மூன்று", "நான்கு","ஐந்து", "ஆறு", "ஏழு", "எட்டு", "ஒன்பது", "பத்து"};
