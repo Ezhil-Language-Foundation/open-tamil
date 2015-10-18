@@ -112,7 +112,7 @@ class IndianNumeral {
 					
 			// handle fractional parts and exit
 		    if (( number > 0.0) && (number < 1.0)) {
-		    	rval.add(IndianNumeral.pulli,IndianNumeral.pulli);
+		    	rval.add(IndianNumeral.pulli,"pulli");
 		        String number_str = Double.toString(number).replace("0.","");
 		        for(int idx=0; idx < number_str.length(); idx++ ) {
 		        	String digit = number_str.substring(idx,idx+1);		       
@@ -213,7 +213,7 @@ class IndianNumeral {
 		    	if ( n_base >= IndianNumeral.n_thousand ) {
 		    		String [] sfx_base_values = IndianNumeral.suffix_base.get(n_base_dbl);		    	
 		    		suffix = sfx_base_values[ (residue_number >= 1.0) ? 1 : 0 ];		    		
-		    		String suffix_filename = IndianNumeral.suffix_file_map.get( n_base_dbl ) +
+		    		String suffix_filename = IndianNumeral.suffix_file_map.get( n_base_dbl ) +"_"+
 		    						  Integer.toString( (residue_number >= 1) ? 1: 0 );
 		    		
 		    		rval.add(suffix,suffix_filename);
