@@ -3,12 +3,15 @@
  ** This program is part of open-tamil library
  ** You may use this code under MIT License
  */
-package com.opentamil.tamil;
+package com.tamil;
 
 import junit.framework.TestCase;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.HashMap;
+
+import com.tamil.utf8;
 
 
 /**
@@ -46,14 +49,14 @@ public class utf8Test extends TestCase {
     
     public void testGetLetters_TA() {
         String inputWord = "எழில்";
-        List<String> expected = Arrays.asList(new String [] {"எ","ழி","ல்"} );
+        //List<String> expected = Arrays.asList(new String [] {"எ","ழி","ல்"} );
         StringBuffer actual = new StringBuffer();
         for(String t : utf8.get_letters(inputWord)) {
             actual.append( t );
         }
         
         TestCase.assertEquals(inputWord,actual.toString());
-        TestCase.assertEquals(utf8.get_letters("மென்பொருள்").size(),5);
+        TestCase.assertEquals(utf8.get_letters("மென்பொருள்").size(),5);        
     }
     
     public void testGetLetters_EN() {
