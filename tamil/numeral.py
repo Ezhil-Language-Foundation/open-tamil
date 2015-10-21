@@ -100,7 +100,7 @@ def num2tamilstr( *args ):
                 filenames.append("tens_%d"%(quotient_number-1))
                 return tens[quotient_number-1]
             if number < 20:
-                filenames.append("teens_%d"%(number-10-1))
+                filenames.append("teens_%d"%(number-10))
                 return teens[number-10-1]
             filenames.append( "tens_suffix_%d"%(quotient_number-2))
             numeral = tens_suffix[quotient_number-2]

@@ -69,9 +69,15 @@ def say_time():
         #say_string_in_tamil(pos) #mani, nimidam, vinadigal
     return
 
-say_time()
+if len(sys.argv) >= 2:
+    say_time()
+
 while True:
-    number = input(u'Enter a number >> ') 
+    try:
+        number = input(u'Enter a number >> ') 
+    except Exception as e:
+        print("Exception => ",str(e))
+        continue
     say_number_in_tamil( number )
 
 sys.exit(0)
