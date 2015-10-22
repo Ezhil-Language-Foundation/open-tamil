@@ -8,6 +8,7 @@ package com.tamil;
 
 import java.util.HashMap;
 import java.util.List;
+import java.lang.Integer;
 
 public class TamilLetters extends HashMap<String,Object> {
 	/**
@@ -33,6 +34,6 @@ public class TamilLetters extends HashMap<String,Object> {
 	}
 	
 	public int getLength() {
-		return (int) this.get(key_length);
-	}	
+	    return Integer.valueOf(this.get(key_length).toString());
+	}
 }
