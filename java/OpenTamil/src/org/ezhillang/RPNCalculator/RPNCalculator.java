@@ -35,7 +35,7 @@ class Operator extends Token {
 }
 
 public class RPNCalculator {
-	boolean DEBUG = true;
+	boolean DEBUG = !true;
 	List<Token> m_toks;
 	Stack<Operand> operand_stack;
 	Stack<Operator> operator_stack;
@@ -102,7 +102,22 @@ public class RPNCalculator {
 			result = Math.sin(dbl_op_A);
 		} else if ( op_kind == Token.Kinds.COS_OP ) {
 			result = Math.cos(dbl_op_A);
-			
+		} else if ( op_kind == Token.Kinds.TAN_OP ) {
+			result = Math.tan(dbl_op_A);
+		} else if ( op_kind == Token.Kinds.ASIN_OP ) {
+			result = Math.asin(dbl_op_A);			
+		} else if ( op_kind == Token.Kinds.ACOS_OP ) {
+			result = Math.acos(dbl_op_A);
+		} else if ( op_kind == Token.Kinds.ATAN_OP ) {
+			result = Math.atan(dbl_op_A);		
+		} else if ( op_kind == Token.Kinds.INV_OP ) {
+			result = 1/dbl_op_A;
+		} else if ( op_kind == Token.Kinds.UNARY_MINUS_OP ) {
+			result = -1*dbl_op_A;
+		} else if ( op_kind == Token.Kinds.POWER_OP ) {
+			op_B = operand_stack.pop();
+			dbl_op_B = op_B.getNumericValue();
+			result = Math.pow(dbl_op_B, dbl_op_A);
 		} else if ( op_kind == Token.Kinds.PERC_OP ) {
 			op_B = operand_stack.pop();
 			dbl_op_B = op_B.getNumericValue();
@@ -177,10 +192,31 @@ public class RPNCalculator {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {		
-		 
+		
 		//basic trig: C^(0) + S^(0) =  1
-		String pi2str = Double.toString(Math.PI); 
-		test_pair( new String [] {"sin",pi2str,"*","sin",pi2str},0.0,!false);//verbose
+		String pi2str = Double.toString(Math.PI);
+		String quart_pi2str = Double.toString(Math.PI/4);
+		
+		//test_pair( new String [] {"2","^","3","^","2"},8.0);		
+		passing_tests();
+	}
+	
+	public static void passing_tests() throws Exception {
+		String pi2str = Double.toString(Math.PI);
+		String quart_pi2str = Double.toString(Math.PI/4);
+		
+		//associativity of power should add up
+		test_pair( new String [] {"2","^","3"},8.0);
+		test_pair( new String [] {"2","^","3","+","-1"},7.0);
+		test_pair( new String [] {"3","^","2"},9.0);
+		test_pair( new String [] {"3","^","2","+","1"},10.0);
+		
+		//tan
+		test_pair( new String [] {"tan",quart_pi2str,"*","tan",quart_pi2str},1.0,!true);//verbose		
+		test_pair( new String [] {"tan",pi2str},0.0,false);//verbos
+		
+		//basic trig: C^(0) + S^(0) =  1		
+		test_pair( new String [] {"sin",pi2str,"*","sin",pi2str},0.0);//verbose
 		test_pair( new String [] {"sin",pi2str,"*","sin",pi2str,"+","cos","3.1415","*","cos","3.1415"},1.0,false);//verbose
 		
 		//test brackets
@@ -200,7 +236,7 @@ public class RPNCalculator {
 		//String [] chunks = {"(","5","-","6",")","*","(","7","-","10",")"}; //3
 		
 		//% % and / are also left associative
-		test_pair(new String [] {"5","%","10","%","20"}, 250);
+		test_pair(new String [] {"5","%","10","%","20"}, 250);	
 	}
 	
 	static void test_pair(String [] chunks,double expected_val) throws Exception {
@@ -219,7 +255,7 @@ public class RPNCalculator {
 		if ( verbose || true )
 			System.out.println("Testing => "+chunks[0]+chunks[1]+"|actual =>"+actual+"| expected => "+expected_val);
 		
-		boolean isExact = Double.compare(actual, expected_val)!=0;
+		boolean isExact = Double.compare(actual, expected_val)==0;
 		boolean isAppx = (Math.abs(expected_val-actual) < 1e-6);
 		boolean neither_appx_nor_exact = !(isExact || isAppx);
 		

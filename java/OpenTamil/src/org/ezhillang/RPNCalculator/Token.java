@@ -48,6 +48,8 @@ public class Token {
 		
 		int rank_A = 0,rank_B=0;
 		if ( first == Kinds.RPAREN) {
+			rank_A = 12;
+		} else if(first == Kinds.POWER_OP ) {
 			rank_A = 11;
 	    } else if(first == Kinds.DIV_OP || first == Kinds.MUL_OP ) {
 			rank_A = 10;
@@ -62,6 +64,8 @@ public class Token {
 		}
 		
 		if ( second == Kinds.RPAREN ) {
+			rank_B = 12;
+		} else if(second == Kinds.POWER_OP ) {
 			rank_B = 11;
 	    } else if(second == Kinds.DIV_OP || second == Kinds.MUL_OP ) {
 			rank_B = 10;
@@ -140,6 +144,16 @@ public class Token {
 			return new Token(lean_chunk,Kinds.SIN_OP);		
 		} else if ( lean_chunk  == "cos" ) {
 			return new Token(lean_chunk,Kinds.COS_OP);
+		} else if ( lean_chunk == "tan" ) {
+			return new Token(lean_chunk,Kinds.TAN_OP);		
+		} else if ( lean_chunk == "asin" ) {
+			return new Token(lean_chunk,Kinds.ASIN_OP);		
+		} else if ( lean_chunk  == "acos" ) {
+			return new Token(lean_chunk,Kinds.ACOS_OP);
+		} else if ( lean_chunk == "atan" ) {
+			return new Token(lean_chunk,Kinds.ATAN_OP);		
+		} else if ( lean_chunk == "^" ) {
+			return new Token(lean_chunk,Kinds.POWER_OP);
 		}
 		
 		//LOG10_OP, EXP_OP,SIN_OP,COS_OP,TAN_OP,ASIN_OP,ATAN_OP,ACOS_OP
