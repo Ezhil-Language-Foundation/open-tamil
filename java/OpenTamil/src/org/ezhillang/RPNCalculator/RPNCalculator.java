@@ -35,7 +35,7 @@ class Operator extends Token {
 }
 
 public class RPNCalculator {
-	boolean DEBUG = !true;
+	boolean DEBUG = true;
 	List<Token> m_toks;
 	Stack<Operand> operand_stack;
 	Stack<Operator> operator_stack;
@@ -179,8 +179,9 @@ public class RPNCalculator {
 	public static void main(String[] args) throws Exception {		
 		 
 		//basic trig: C^(0) + S^(0) =  1
-		test_pair( new String [] {"sin","3.1415","*","sin","3.1415"},1,true);//verbose
-		test_pair( new String [] {"sin","3.1415","*","sin","3.1415","+","cos","3.1415","*","cos","3.1415"},1,true);//verbose
+		String pi2str = Double.toString(Math.PI); 
+		test_pair( new String [] {"sin",pi2str,"*","sin",pi2str},0.0,!false);//verbose
+		test_pair( new String [] {"sin",pi2str,"*","sin",pi2str,"+","cos","3.1415","*","cos","3.1415"},1.0,false);//verbose
 		
 		//test brackets
 		//test_pair(new String [] {"(","5","-","3",")","*","2"},4);
@@ -200,7 +201,6 @@ public class RPNCalculator {
 		
 		//% % and / are also left associative
 		test_pair(new String [] {"5","%","10","%","20"}, 250);
-	
 	}
 	
 	static void test_pair(String [] chunks,double expected_val) throws Exception {
@@ -216,10 +216,16 @@ public class RPNCalculator {
 		}
 		RPNCalculator rpnc = new RPNCalculator(toks);
 		double actual = rpnc.eval();
-		if ( verbose )
-			System.out.println("Testing => "+chunks[0]+chunks[1]+"|actual =>"+actual);
+		if ( verbose || true )
+			System.out.println("Testing => "+chunks[0]+chunks[1]+"|actual =>"+actual+"| expected => "+expected_val);
 		
-		assert actual == expected_val;
+		boolean isExact = Double.compare(actual, expected_val)!=0;
+		boolean isAppx = (Math.abs(expected_val-actual) < 1e-6);
+		boolean neither_appx_nor_exact = !(isExact || isAppx);
+		
+		if ( neither_appx_nor_exact ) {
+			throw new Exception("Failed testing => "+chunks[0]+chunks[1]+"|actual =>"+actual+"| expected => "+expected_val);
+		}
 	}
 
 }
