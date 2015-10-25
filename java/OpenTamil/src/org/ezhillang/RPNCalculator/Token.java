@@ -3,7 +3,7 @@ package org.ezhillang.RPNCalculator;
 public class Token {	
 	public static enum Kinds { NUMBER, LPAREN, RPAREN, FUNCTION, ADD_OP, SUB_OP, 
 		DIV_OP, MUL_OP, PERC_OP, LOG_OP, LOG10_OP, EXP_OP,SIN_OP,COS_OP,TAN_OP,
-		ASIN_OP,ATAN_OP,ACOS_OP,POWER_OP,UNARY_MINUS_OP,INV_OP,};
+		ASIN_OP,ATAN_OP,ACOS_OP,POWER_OP,UNARY_MINUS_OP};
 	protected Kinds m_kind;
 	protected String m_raw;
 	public static boolean DEBUG = false;
@@ -21,7 +21,7 @@ public class Token {
 	//number is not an OP
 	public static boolean isUnaryOp(Kinds k) {
 		final Kinds [] unary_ops = new Kinds [] { Kinds.LOG_OP, Kinds.LOG10_OP, Kinds.EXP_OP,Kinds.SIN_OP,Kinds.COS_OP,Kinds.TAN_OP,
-				Kinds.ASIN_OP,Kinds.ATAN_OP,Kinds.ACOS_OP, Kinds.UNARY_MINUS_OP, Kinds.INV_OP }; 
+				Kinds.ASIN_OP,Kinds.ATAN_OP,Kinds.ACOS_OP, Kinds.UNARY_MINUS_OP}; 
 		for( int itr=0; itr <unary_ops.length; itr++) {
 			if ( unary_ops[itr] == k)
 				return true;
@@ -120,9 +120,9 @@ public class Token {
 	
 	public static Token parseToken(String chunk) throws Exception {
 		String lean_chunk = chunk.trim().toLowerCase();
-		if (lean_chunk == "+") {
+		if (lean_chunk.equals( "+" ) ) {
 			return new Token(lean_chunk,Kinds.ADD_OP);
-		} else if ( lean_chunk == "-") {
+		} else if ( lean_chunk.equals("-") ) {
 			return new Token(lean_chunk,Kinds.SUB_OP);
 		} else if ( lean_chunk == "*") {
 			return new Token(lean_chunk,Kinds.MUL_OP);
@@ -152,10 +152,11 @@ public class Token {
 			return new Token(lean_chunk,Kinds.ACOS_OP);
 		} else if ( lean_chunk == "atan" ) {
 			return new Token(lean_chunk,Kinds.ATAN_OP);		
-		} else if ( lean_chunk == "^" ) {
+		} else if ( lean_chunk.equals("^") ) {
 			return new Token(lean_chunk,Kinds.POWER_OP);
 		}
 		
+		System.out.print(lean_chunk+"==?=="+lean_chunk.length());
 		//LOG10_OP, EXP_OP,SIN_OP,COS_OP,TAN_OP,ASIN_OP,ATAN_OP,ACOS_OP
 		
 		
@@ -165,7 +166,7 @@ public class Token {
 			return new Token(lean_chunk,dval);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception("Cannot find matching token! Functions are not supported yet");
+			throw new Exception("Cannot find matching token for '"+ lean_chunk+ "'! Functions are not supported yet");
 		}
 	}
 	

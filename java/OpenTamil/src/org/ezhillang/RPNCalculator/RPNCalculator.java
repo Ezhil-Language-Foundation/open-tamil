@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 //represent a token within the calculator
 
@@ -109,9 +110,7 @@ public class RPNCalculator {
 		} else if ( op_kind == Token.Kinds.ACOS_OP ) {
 			result = Math.acos(dbl_op_A);
 		} else if ( op_kind == Token.Kinds.ATAN_OP ) {
-			result = Math.atan(dbl_op_A);		
-		} else if ( op_kind == Token.Kinds.INV_OP ) {
-			result = 1/dbl_op_A;
+			result = Math.atan(dbl_op_A);
 		} else if ( op_kind == Token.Kinds.UNARY_MINUS_OP ) {
 			result = -1*dbl_op_A;
 		} else if ( op_kind == Token.Kinds.POWER_OP ) {
@@ -196,14 +195,27 @@ public class RPNCalculator {
 		//basic trig: C^(0) + S^(0) =  1
 		String pi2str = Double.toString(Math.PI);
 		String quart_pi2str = Double.toString(Math.PI/4);
-		
-		//test_pair( new String [] {"2","^","3","^","2"},8.0);		
-		passing_tests();
+						
+		test_patterns();
+		//passing_tests();
+	}
+	
+	public static void test_patterns() throws Exception {
+		Pattern p = Pattern.compile("\\s+");
+		String [] chunks = p.split("123 + 456 - 10 ^ 2");
+		for( String s : chunks ) {
+			System.out.println(s+"|"+s.length());
+		}		
+		test_pair(chunks,479.00,true);
+		//test_pair(chunks,100,true); 
 	}
 	
 	public static void passing_tests() throws Exception {
 		String pi2str = Double.toString(Math.PI);
 		String quart_pi2str = Double.toString(Math.PI/4);
+		
+		// 1 + 2^5 - 2 = 1  + 32 - 2 = 31
+		test_pair( new String [] {"1","+","2","^","5","-","2"},31);
 		
 		//associativity of power should add up
 		test_pair( new String [] {"2","^","3"},8.0);
