@@ -12,5 +12,5 @@ from . import numeral
 from . import regexp
 from . import wordutils
 
-VERSION = '0.4'
+VERSION = '0.51'
 __all__ = ['utf8','txt2unicode','num2tamilstr','txt2unicode','txt2ipa','numeral','regexp']

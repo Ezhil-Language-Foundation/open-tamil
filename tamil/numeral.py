@@ -11,7 +11,7 @@ if PYTHON3:
 
 def num2tamilstr( *args ):
     """ work till l lakh crore - i.e 1e5*1e7 = 1e12. 
-        turn number into a numeral, Indian style. """
+        turn number into a numeral, Indian style. Fractions upto 1e-30"""
     number = args[0]
     if len(args) < 2:
         filenames = []
@@ -91,7 +91,10 @@ def num2tamilstr( *args ):
                 int_part = long(number%10)
                 frac = number - float(int_part)
                 filenames.append("units_%d"%int_part)
-                return units[int_part] +u' ' + num2tamilstr(frac,filenames)
+                if abs(frac) > 1e-30:
+                    return units[int_part]+u' ' + num2tamilstr(frac,filenames)
+                else:
+                    return units[int_part]
             else:
                 filenames.append("units_%d"%number)
                 return units[number]
@@ -138,7 +141,7 @@ def num2tamilstr( *args ):
 
 def num2tamilstr_american( number ):
     """ work till 1000 trillion  - 1 - i.e  = 1e12*1e3 - 1. 
-        turn number into a numeral, Indian style. """
+        turn number into a numeral, American style. Fractions upto 1e-30. """
     
     if not any( filter( lambda T: isinstance( number, T), [int, long, float]) ) or isinstance(number,complex):
         raise Exception('num2tamilstr_american input has to be long or integer')
@@ -206,7 +209,10 @@ def num2tamilstr_american( number ):
             if isinstance(number,float):
                 int_part = long(number%10)
                 frac = number - float(int_part)
-                return units[int_part] +u' ' + num2tamilstr(frac)
+                if abs(frac) > 1e-30:
+                    return units[int_part]+u' ' + num2tamilstr(frac)
+                else:
+                    return units[int_part]
             else:
                 return units[number]
         elif n_base == n_ten:
