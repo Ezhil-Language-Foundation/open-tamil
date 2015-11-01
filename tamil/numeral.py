@@ -3,6 +3,7 @@
 # This file is part of open-tamil project
 
 import sys
+import math
 PYTHON3 = sys.version > '3'
 
 if PYTHON3:
@@ -50,7 +51,12 @@ def num2tamilstr( *args ):
     
     # handle fractional parts
     if number > 0.0 and number < 1.0:
-        rval = [pulli]
+        rval = []
+        #if len(filenames) < 1:
+        #    # input number is 0.xyz on first call itself
+        #    filenames.append( "units_0" )
+        #    rval.append( units[0] )
+        rval.append(pulli)
         filenames.append( 'pulli' )
         number_str = str(number).replace('0.','')
         for digit in number_str:
@@ -104,7 +110,12 @@ def num2tamilstr( *args ):
                 return tens[quotient_number-1]
             if number < 20:
                 filenames.append("teens_%d"%(number-10))
-                return teens[number-10-1]
+                residue_number = math.fmod(number,1)
+                teen_number = int(math.floor(number - 10));
+                if residue_number > 1e-30:
+                    return teens[teen_number-1] +u' ' + num2tamilstr(residue_number,filenames)
+                else:
+                    return teens[teen_number-1]
             filenames.append( "tens_suffix_%d"%(quotient_number-2))
             numeral = tens_suffix[quotient_number-2]
         elif n_base == n_hundred:
@@ -132,6 +143,9 @@ def num2tamilstr( *args ):
                 return numeral + u' ' + suffix
             filenames.append(suffix_filename)    
             numeral = numeral + u' ' + suffix
+        #if number < 20 and number >= 11:
+        #    # juvenile number
+        #    return numeral
         residue_numeral = num2tamilstr( residue_number, filenames )
         return numeral+u' '+residue_numeral
     
