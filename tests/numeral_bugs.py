@@ -9,14 +9,39 @@ from opentamiltests import *
 import tamil.utf8 as utf8 
 from tamil.tscii import TSCII
 import codecs
+import random
+import os
 
+class NumeralStressTest(unittest.TestCase):
+    def setUp(self):
+        random.seed(os.urandom(5))
+    
+    def test_rnd(self):
+        for kitr in range(0,1000):
+            k = random.randint(0,1e6)
+            fns = []
+            print('verifying => no %g '%k)
+            v = tamil.numeral.num2tamilstr(k,fns)
+            #print('int/file -> /  @ %g -> %s'%(k,u"-".join(fns)))
+            
+        return
+
+    def test_float_rnd(self):
+        for kitr in range(0,1000):
+            k = float(random.randint(0,1e6))/5.55
+            fns = []
+            print('float/verifying => no %10g '%k)
+            v = tamil.numeral.num2tamilstr(k,fns)
+            #print('float/file -> %g ->  @ %s'%(k,u"-".join(fns)))            
+        return
+        
 class NumeralBugsTest(unittest.TestCase):
     def runTest(self,var,nos):
         for numerStr,num in zip(var,nos):
             print('Testing ---> ',num)
             self.assertEqual( numerStr, tamil.numeral.num2tamilstr( num ), num )
         return
-
+    
     def test_numerals(self):
         var = {0.5:u"புள்ளி ஐந்து", #பூஜ்ஜியம்
         3060.5:u"மூன்று ஆயிரத்தி அறுபது புள்ளி ஐந்து",
@@ -53,7 +78,7 @@ class NumeralBugsTest(unittest.TestCase):
             print('verifying => # %g /  @ %s'%(k,u"-".join(fns)))
             self.assertEqual(v,actual_v,k)
         return
-    
+            
     def test_float_USA(self):
         # used to convert with actual numeral + suffix "பூஜ்ஜியம்"
         aspen = int('1234')
