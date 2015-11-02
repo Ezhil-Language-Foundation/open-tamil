@@ -10,6 +10,10 @@ import tamil.utf8 as utf8
 from tamil.tscii import TSCII
 import codecs
 
+if PYTHON3:
+    class long(int):
+        pass
+
 class NumeralTestAmerican(unittest.TestCase):
     def runTest(self,var,nos):
         for numerStr,num in zip(var,nos):
