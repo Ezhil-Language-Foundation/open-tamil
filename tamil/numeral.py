@@ -3,6 +3,7 @@
 # This file is part of open-tamil project
 
 import sys
+import math
 PYTHON3 = sys.version > '3'
 
 if PYTHON3:
@@ -11,7 +12,7 @@ if PYTHON3:
 
 def num2tamilstr( *args ):
     """ work till l lakh crore - i.e 1e5*1e7 = 1e12. 
-        turn number into a numeral, Indian style. """
+        turn number into a numeral, Indian style. Fractions upto 1e-30"""
     number = args[0]
     if len(args) < 2:
         filenames = []
@@ -41,16 +42,21 @@ def num2tamilstr( *args ):
     
     pulli = u'புள்ளி'
     
-    n_one = 1
-    n_ten = 10
-    n_hundred = 100
-    n_thousand = 1000
-    n_lakh = 100*n_thousand
-    n_crore = long(100*n_lakh)
+    n_one = 1.0
+    n_ten = 10.0
+    n_hundred = 100.0
+    n_thousand = 1000.0
+    n_lakh = 100.0*n_thousand
+    n_crore = (100.0*n_lakh)
     
     # handle fractional parts
     if number > 0.0 and number < 1.0:
-        rval = [pulli]
+        rval = []
+        #if len(filenames) < 1:
+        #    # input number is 0.xyz on first call itself
+        #    filenames.append( "units_0" )
+        #    rval.append( units[0] )
+        rval.append(pulli)
         filenames.append( 'pulli' )
         number_str = str(number).replace('0.','')
         for digit in number_str:
@@ -86,30 +92,53 @@ def num2tamilstr( *args ):
         quotient_number = long( number/n_base )
         residue_number = number - n_base*quotient_number
         
+        #if quotient_number == 1 and residue_number < 1.0:            
+        #    p1 = num2tamilstr( math.floor(number), filenames)
+        #    return p1 + u" "+ num2tamilstr( residue_number, filenames )
+        
         if n_base == n_one:
             if isinstance(number,float):
                 int_part = long(number%10)
                 frac = number - float(int_part)
                 filenames.append("units_%d"%int_part)
-                return units[int_part] +u' ' + num2tamilstr(frac,filenames)
+                if abs(frac) > 1e-30:
+                    return units[int_part]+u' ' + num2tamilstr(frac,filenames)
+                else:
+                    return units[int_part]
             else:
                 filenames.append("units_%d"%number)
                 return units[number]
         elif n_base == n_ten:
-            if residue_number == 0:
+            if residue_number < 1.0:
                 filenames.append("tens_%d"%(quotient_number-1))
-                return tens[quotient_number-1]
-            if number < 20:
-                filenames.append("teens_%d"%(number-10-1))
-                return teens[number-10-1]
-            filenames.append( "tens_suffix_%d"%(quotient_number-2))
-            numeral = tens_suffix[quotient_number-2]
+                if residue_number == 0.0:
+                    return tens[quotient_number-1]
+                else:
+                    numeral = tens[quotient_number-1]
+            elif number < 20:
+                filenames.append("teens_%d"%(number-10))
+                residue_number = math.fmod(number,1)
+                teen_number = int(math.floor(number - 10));
+                if residue_number > 1e-30:
+                    return teens[teen_number-1] +u' ' + num2tamilstr(residue_number,filenames)
+                else:
+                    return teens[teen_number-1]
+            if residue_number < 1.0:
+                filenames.append( "tens_%d"%(quotient_number-1) )
+                numeral = tens[quotient_number-1]
+            else:
+                filenames.append( "tens_suffix_%d"%(quotient_number-2) )
+                numeral = tens_suffix[quotient_number-2]
         elif n_base == n_hundred:
             if residue_number == 0:
                 filenames.append("hundreds_%d"%(quotient_number-1))
                 return hundreds[quotient_number-1]
-            filenames.append("hundreds_suffix_%d"%(quotient_number-1))
-            numeral = hundreds_suffix[quotient_number-1]
+            if residue_number < 1.0:
+                filenames.append( "hundreds_%d"%(quotient_number-1) )
+                numeral = hundreds[quotient_number-1]
+            else:
+                filenames.append("hundreds_suffix_%d"%(quotient_number-1))
+                numeral = hundreds_suffix[quotient_number-1]
         else:
             if ( quotient_number == 1 ):
                 if n_base == n_thousand:
@@ -129,6 +158,7 @@ def num2tamilstr( *args ):
                 return numeral + u' ' + suffix
             filenames.append(suffix_filename)    
             numeral = numeral + u' ' + suffix
+
         residue_numeral = num2tamilstr( residue_number, filenames )
         return numeral+u' '+residue_numeral
     
@@ -138,7 +168,7 @@ def num2tamilstr( *args ):
 
 def num2tamilstr_american( number ):
     """ work till 1000 trillion  - 1 - i.e  = 1e12*1e3 - 1. 
-        turn number into a numeral, Indian style. """
+        turn number into a numeral, American style. Fractions upto 1e-30. """
     
     if not any( filter( lambda T: isinstance( number, T), [int, long, float]) ) or isinstance(number,complex):
         raise Exception('num2tamilstr_american input has to be long or integer')
@@ -192,7 +222,7 @@ def num2tamilstr_american( number ):
     allowed_bases = list(filter( lambda base: number >= base, all_bases ))
 
     # handle fractional parts
-    if number > 0.0 and number < 1.0:
+    if number > 0.0 and number <= 1000.0:
         return num2tamilstr(number)
     
     if len(allowed_bases) >= 1:
@@ -202,23 +232,8 @@ def num2tamilstr_american( number ):
         quotient_number = long( number/n_base )
         residue_number = number - n_base*quotient_number
         
-        if n_base == n_one:
-            if isinstance(number,float):
-                int_part = long(number%10)
-                frac = number - float(int_part)
-                return units[int_part] +u' ' + num2tamilstr(frac)
-            else:
-                return units[number]
-        elif n_base == n_ten:
-            if residue_number == 0:
-                return tens[quotient_number-1]
-            if number < 20:
-                return teens[number-10-1]
-            numeral = tens_suffix[quotient_number-2]
-        elif n_base == n_hundred:
-            if residue_number == 0:
-                return hundreds[quotient_number-1]
-            numeral = hundreds_suffix[quotient_number-1]
+        if n_base < n_thousand:
+            raise Exception("This can never happen")
         else:
             if ( quotient_number == 1 ):
                 if n_base == n_thousand:
