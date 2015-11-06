@@ -2,7 +2,7 @@
  * (c) 2015, Muthiah Annamalai
  */
 
-package org.ezhillang.RPNCalculator;
+package com.ezhillang.RPNCalculator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -197,7 +197,7 @@ public class RPNCalculator {
 		String quart_pi2str = Double.toString(Math.PI/4);
 						
 		test_patterns();
-		//passing_tests();
+		passing_tests();
 	}
 	
 	public static void test_patterns() throws Exception {

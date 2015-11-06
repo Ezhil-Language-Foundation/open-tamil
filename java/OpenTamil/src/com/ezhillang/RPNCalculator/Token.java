@@ -1,4 +1,4 @@
-package org.ezhillang.RPNCalculator;
+package com.ezhillang.RPNCalculator;
 
 public class Token {	
 	public static enum Kinds { NUMBER, LPAREN, RPAREN, FUNCTION, ADD_OP, SUB_OP, 
@@ -156,7 +156,7 @@ public class Token {
 			return new Token(lean_chunk,Kinds.POWER_OP);
 		}
 		
-		System.out.print(lean_chunk+"==?=="+lean_chunk.length());
+		System.out.println(lean_chunk+"==?=="+lean_chunk.length());
 		//LOG10_OP, EXP_OP,SIN_OP,COS_OP,TAN_OP,ASIN_OP,ATAN_OP,ACOS_OP
 		
 		
