@@ -1,7 +1,7 @@
 # This Python file uses the following encoding: utf-8
 # (C) 2015 Muthiah Annamalai
 # This file is part of open-tamil project
-
+from __future__ import print_function
 import time
 import sys
 PYTHON3 = sys.version > '3'
@@ -15,9 +15,9 @@ if PYTHON3:
 class BasicTamilTimeFormat:
     @staticmethod
     def format(year,month,month_day,week_day,hour,minute,second):
-        print DateUtils.tamil_month(month),month
-        print DateUtils.tamil_weekday(week_day), week_day
-        print DateUtils.get_hour_prefix(hour),hour
+        print(DateUtils.tamil_month(month),month)
+        print(DateUtils.tamil_weekday(week_day), week_day)
+        print(DateUtils.get_hour_prefix(hour),hour)
     
 #
 # Index Attribute       Values
@@ -124,9 +124,9 @@ class DateUtils:
 
 if __name__ ==  u"__main__":
     for hr in range(0,25):
-        print hr,DateUtils.get_hour_prefix(hr)
+        print(hr,DateUtils.get_hour_prefix(hr))
     for wkday_EN, wkday_TA in DateUtils.WEEKDAYS.items():
-        print wkday_EN, '->', wkday_TA
+        print(wkday_EN, '->', wkday_TA)
     for wkday_EN, wkday_TA in DateUtils.MONTHS.items():
-        print wkday_EN, '->', wkday_TA
+        print(wkday_EN, '->', wkday_TA)
     DateUtils.get_time(time.localtime())
