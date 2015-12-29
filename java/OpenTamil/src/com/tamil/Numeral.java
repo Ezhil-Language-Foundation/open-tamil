@@ -185,7 +185,7 @@ class IndianNumeral {
 		    		}
 		    		
 		            if ( number < 20.0 ) {		                
-		                rval.add(IndianNumeral.teens[(int)number-10-1],"teens_"+Integer.toString((int)number-10));
+		                rval.add(IndianNumeral.teens[(int)number-10-1],"teens_"+Integer.toString((int)number-10-1));
 		                return rval;
 		            }
 		            
