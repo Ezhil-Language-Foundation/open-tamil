@@ -1,5 +1,5 @@
-open-tamil [![Build Status](https://travis-ci.org/arcturusannamalai/open-tamil.png)](https://travis-ci.org/arcturusannamalai/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/)](http://open-tamil.readthedocs.org/en/latest/) [![Coverage Status](https://coveralls.io/repos/arcturusannamalai/open-tamil/badge.svg)](https://coveralls.io/r/arcturusannamalai/open-tamil)
-==========
+open-tamil [![Build Status](https://travis-ci.org/arcturusannamalai/open-tamil.png)](https://travis-ci.org/arcturusannamalai/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/)](http://open-tamil.readthedocs.org/en/latest/)
+====================
 
 Open Source Tamil Tools and Tamil Library for Python 2, 3
 திற மூல தமிழ் கருவிகள்
