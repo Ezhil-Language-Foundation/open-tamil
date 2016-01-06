@@ -184,6 +184,16 @@ class Letters(unittest.TestCase):
             print( u"|".join(outWords) )
         self.assertEqual( outWords, words )
 
+    def test_tamil_only_words2(self):
+        text = u'கல்பாக்கத்தை சேர்ந்தவர் தற்போது'
+        expected = [u'கல்பாக்கத்தை', u'சேர்ந்தவர்', u'தற்போது']
+        actual = tamil.utf8.get_tamil_words(tamil.utf8.get_letters(text))
+        self.assertEqual(actual,expected)
+
+    def test_get_words_neg(self):
+        text = u'கல்பாக்கத்தை சேர்ந்தவர் தற்போது'
+        self.assertRaises(Exception,lambda : tamil.utf8.get_tamil_words(text))
+
     def test_tamil_only_words(self):
         s = u"உடனே உடனே seventh heaven எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
         words = s.replace(u"seventh heaven ",u"").split(u" ")
@@ -244,7 +254,7 @@ class Letters(unittest.TestCase):
         self.assertEqual( len(utf8.uyirmei_letters) , 18*12 )
         self.assertEqual( len(utf8.sanskrit_letters) , 6 )
         self.assertEqual( len(utf8.tamil_letters) , 323 )
-    
+
     def test_get_letters2( self ):
         letters = utf8.get_letters(u"hello world  தெரிந்த அல்லது தெரியாத")
         assert( len(letters) == 27 )
