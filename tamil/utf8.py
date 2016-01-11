@@ -426,6 +426,8 @@ def get_words_iterable( letters, tamil_only=False ):
 
 def get_tamil_words( letters ):
     """ reverse a Tamil word according to letters, not unicode-points """
+    if not isinstance(letters,list):
+        raise Exception("metehod needs to be used with list generated from 'tamil.utf8.get_letters(...)'")
     return [word for word in get_words_iterable( letters, tamil_only = True )]
 
 if PYTHON3:
