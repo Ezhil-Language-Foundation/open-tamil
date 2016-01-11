@@ -1,8 +1,12 @@
 ## This Python file uses the following encoding: utf-8
 ##
-## (C) 2007, 2008, 2013, 2015 Muthiah Annamalai <ezhillang@gmail.com>
-## Licensed under GPL Version 3
+## (C) 2007, 2008, 2013, 2015, 2016 Muthiah Annamalai <ezhillang@gmail.com>
 ## (C) 2013 msathia <msathia@gmail.com>
+## 
+## This file is dual licensed - originally GPL v3 from Ezhil, and
+## then as part of open-tamil package in MIT license.
+## 
+## Licensed under GPL Version 3
 
 from sys import version
 from copy import copy
