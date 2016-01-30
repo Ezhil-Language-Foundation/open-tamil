@@ -4,9 +4,9 @@
 
 import copy, random
 import tamil
-
-from sys import version
-PYTHON3 = version > '3'
+import sys
+import codecs
+PYTHON3 = sys.version > '3'
         
 # Vertical / Horizontal Word Grids
 
@@ -21,13 +21,13 @@ class WordGrid:
         return -1
     
     @staticmethod
-    def compute(words,fill_letters):
+    def compute(words,fill_letters,outputfile=None):
         drv = WordGrid( words, fill_letters )
         drv.precompute()
         #drv.display()
         #print('###############')
         drv.generate( )
-        drv.display()
+        drv.display(outputfile)
         return
     
     def __init__(self,words,letters):
@@ -43,20 +43,23 @@ class WordGrid:
         del self.words
         del self.grid
     
-    def display(self):
-        print(u"<html><head><title>word grids</title></head>\n<body>")
-        print(u"<table border='1'>")
+    def display(self,output):
+        if not output:
+            output = sys.stdout
+        
+        output.write(u"<html><meta charset=\"UTF-8\" /><head><title>word grids</title></head>\n<body>")
+        output.write(u"<table border='1'>")
         for row_idx in range(len(self.grid)):
             row_data = u" ".join( u"<td>%s</td>"%self.grid[row_idx][col_idx][0] for col_idx in range( len(self.grid[row_idx]) ) )
-            print(u"<tr>%s</tr>"%row_data)
-        print(u"</table>")
-        print(u"</body></html>")
+            output.write(u"<tr>%s</tr>"%row_data)
+        output.write(u"</table>")
+        output.write(u"</body></html>")
         return
         
-        print("<= P =>")
+        output.write("<= P =>")
         for row_idx in range(len(self.grid)):
             row_data = " ".join( str(self.grid[row_idx][col_idx][1])[0] for col_idx in range( len(self.grid[row_idx]) ) )
-            print(row_data)
+            output.write(row_data)
         return
     
     def precompute(self):
@@ -99,14 +102,22 @@ class WordGrid:
         self.generate_horizontal()
     
 def gen_grid():
-    lang = ['EN','TA'][0]
-    if lang == 'EN':
-        wordlist = [u'food',u'water',u'shelter',u'clothing']
-        fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
+    if len(sys.argv) < 2:
+        lang = ['EN','TA'][0]
+        if lang == 'EN':
+            wordlist = [u'food',u'water',u'shelter',u'clothing']
+            fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
+        else:
+            wordlist = [u'உப்பு', u'நாற்பண்',u'பராபரம்', u'கான்யாறு', u'ஆறு', u'சன்னியாசி', u'நெல்லி']
+            fill_letters = tamil.utf8.uyir_letters + tamil.utf8.mei_letters + tamil.utf8.agaram_letters        
+        WordGrid.compute( wordlist, fill_letters)
     else:
-        wordlist = [u'உப்பு', u'நாற்பண்',u'பராபரம்', u'கான்யாறு', u'ஆறு', u'சன்னியாசி', u'நெல்லி']
-        fill_letters = tamil.utf8.uyir_letters + tamil.utf8.mei_letters + tamil.utf8.agaram_letters
-    WordGrid.compute( wordlist, fill_letters )
-
+        data = codecs.open(sys.argv[1],"r","utf-8").readlines()
+        wordlist = [line.strip() for line in data]
+        fill_letters = tamil.utf8.get_letters( u"".join(wordlist) ) + tamil.utf8.uyir_letters + tamil.utf8.agaram_letters
+        with codecs.open("output.html","w","utf-8") as fp:
+            WordGrid.compute( wordlist, fill_letters, fp )
+    return
+    
 if __name__ == u"__main__":
     gen_grid()
