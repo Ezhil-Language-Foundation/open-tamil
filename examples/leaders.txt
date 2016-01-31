@@ -1,0 +1,11 @@
+lincoln
+martin
+johnson
+kennedy
+gandhi
+nehru
+churchill
+lenin
+stalin
+hitler
+mussolini
