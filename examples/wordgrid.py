@@ -6,6 +6,7 @@ import copy, random
 import tamil
 import sys
 import codecs
+from math import sqrt
 PYTHON3 = sys.version > '3'
 
 # Vertical / Horizontal Word Grids
@@ -82,7 +83,7 @@ text-align : center;
         output.write(u"<hr/>\n")
         output.write(u"<table>\n")
         for row_idx in range(len(self.grid)):
-            row_data = u" ".join( u"<td>%s</td>"%(self.grid[row_idx][col_idx][1] and u'X' or u'\u0b86') for col_idx in range( len(self.grid[row_idx]) ) )
+            row_data = u" ".join( u"<td>%s</td>"%(self.grid[row_idx][col_idx][1] and u'X' or u'\u25A0') for col_idx in range( len(self.grid[row_idx]) ) )
             output.write(u"<tr>%s</tr>\n"%row_data)
         output.write(u"</table>\n")
         #style=\"border: 1px solid black;\"
@@ -97,8 +98,8 @@ text-align : center;
     
     def precompute(self):
         # grid rows = no of words
-        # grid size = no of columns
-        self.max_word_len = max( list(map(len,self.words)) )
+        # grid size = no of columns        
+        self.max_word_len = int(2+sqrt(sum( list(map(len,self.words)) )))
         self.grid_size = self.max_word_len
         # sort words in order
         if PYTHON3:
@@ -106,7 +107,8 @@ text-align : center;
         else:
             self.words.sort( cmp = WordGrid.sorter )
         # prepare a random grid of dim [#words x #max-word-length]
-        for itr_r in range( len(self.words) ):
+        # len(self.words)
+        for itr_r in range( self.grid_size ):
             self.grid.append( [[random.choice( self.fill_letters ),False] for i in range(self.grid_size)] )
         return
     
@@ -114,7 +116,7 @@ text-align : center;
         # grid rows = no of words
         # grid size = no of columns
         # prepare a random grid of dim [#words x #max-word-length]
-        for idx in xrange( 0, len(self.words) ):
+        for idx in xrange( 0, self.grid_size ):
             for idy in range( 0, self.grid_size ):
                 self.grid[idx][idy][1] = False
                 self.grid[idx][idy][0] = random.choice( self.fill_letters )
@@ -131,7 +133,7 @@ text-align : center;
         grid_new = list()
         for itr in range( len(self.grid[0]) ):
             grid_new.append( list(range( len(self.grid))) )
-        for itr_r in range( len(self.grid) ):
+        for itr_r in range( self.grid_size ):
             for itr_c in range( len(self.grid[0]) ):
                 grid_new[itr_c][itr_r] = self.grid[itr_r][itr_c]
         self.grid = grid_new
@@ -231,7 +233,7 @@ text-align : center;
         pos = None
         directions = ['\\','/','-','|']
         seed_sites = list()
-        for idx in xrange( 0, len(self.words) ):
+        for idx in xrange( 0, self.grid_size ):
             for idy in range( 0, self.grid_size ):
                 # can't use this position as a seed
                 if self.grid[idx][idy][1]:
@@ -274,7 +276,7 @@ text-align : center;
     
 def gen_grid():
     if len(sys.argv) < 2:
-        lang = ['EN','TA'][0]
+        lang = ['EN','TA'][1]
         if lang == 'EN':
             wordlist = [u'food',u'water',u'shelter',u'clothing']
             fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
@@ -284,12 +286,17 @@ def gen_grid():
         WordGrid.compute( wordlist, fill_letters)
     else:
         data = codecs.open(sys.argv[1],"r","utf-8").readlines()
-        wordlist = [line.strip() for line in data]
-        fill_letters = tamil.utf8.get_letters( u"".join(wordlist) ) 
+        wordlist = [line.strip() for line in data] 
+        wordlist = map( lambda x: x.strip(), wordlist)
+        wordlist = filter( lambda w: w.find(u"#") == -1, wordlist )
+        fill_letters = tamil.utf8.get_letters( u"".join(wordlist) )
         if tamil.utf8.all_tamil(wordlist[0]):
             fill_letters  += tamil.utf8.uyir_letters + tamil.utf8.agaram_letters
         else:
-            fill_letters  += [chr(i) for i in range(97,97+26)]
+            wordlist =[ word.upper() for word in wordlist ]
+            fill_letters  += [chr(i).upper() for i in range(97,97+26)]
+        # from pprint import pprint
+        # pprint(wordlist)
         with codecs.open("output.html","w","utf-8") as fp:
             WordGrid.compute( wordlist, fill_letters, fp )
     return
