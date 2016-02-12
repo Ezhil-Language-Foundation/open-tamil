@@ -10,4 +10,3 @@ with codecs.open(u'demo.txt','w','utf-8') as fp:
         v = ag2[k]
         fp.write(u'%03d) %s\n'%(itr,u' | '.join(v)))
         itr += 1
-    

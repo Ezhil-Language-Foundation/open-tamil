@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# (C) 2015 Muthiah Annamalai
+# (C) 2015-2016 Muthiah Annamalai
 
 import copy, random
 import tamil
