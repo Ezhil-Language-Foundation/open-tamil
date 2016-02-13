@@ -1,0 +1,19 @@
+# (C) 2016 Muthiah Annamalai | Compiled for Open-Tamil project
+# This data is released under public domain
+# format is self-descriptive: '#' describes comments, 
+# '>>' start of category, and end of previous category
+# words are 1-word per line, terminal or start spaces to be ignored
+>> vegetables
+Pea பயிறு , பட்டாணி  
+Cauliflower பூக்கோசு , பூக்கோவா  
+Broccoli பச்சைப் பூக்கோசு  
+Celery ஓம இலை  
+Cluster Beans கொத்தவரங்காய்  
+Chickpea கொண்டைக் கடலை  
+Peanut நிலக்கடலை  
+Groundnut வேர்க்கடலை  
+Peppermint புதினா  
+Pumpkin பரங்கிக்காய்  
+Spinach பசலைக்கீரை , முளைக்கீரை  
+Yam சேனைக்கிழங்கு 
+Tapioca மரவள்ளிக்கிழங்கு 

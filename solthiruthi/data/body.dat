@@ -1,0 +1,25 @@
+# (C) 2016 Muthiah Annamalai | Compiled for Open-Tamil project
+# This data is released under public domain
+# format is self-descriptive: '#' describes comments, 
+# '>>' start of category, and end of previous category
+# words are 1-word per line, terminal or start spaces to be ignored
+>>உடல் உறுப்புக்கள்
+Eye கண் , விழி
+Nose   மூக்கு , வாசனையறி Lip   உதடு , இதழ் 
+Lens   வில்லை , விழிவில்லை , கண்வில்லை , விழியாடி 
+Nasal   மூக்கொலி 
+Oesophagus   உணவுக் குழாய், உணவுக்குழல் , அன்னக்குழாய் 
+Throat   மிடறு , தொண்டை , குரல்வளை , மூச்சுக்குழல் , கழுத்தூட்டி 
+Lungs   நுரையீரல் , வெள்ளீரல் , சுவாசப்பை , சுவாசாசயம் 
+Bronchus   கிளைமூச்சுக்குழாய் , மூச்சுக்கிளைக் குழல் 
+Bronchioles   மூச்சு நுண்குழாய் , மூச்சுக்கிளைச் சிறுக்குடல் 
+Stomach   இரைப்பை , வயிறு , அகடு , சார்பொருக்கம், தாங்குரம் , உணவுப்பை  
+Pancreas   கணையம் , கணையநீர் 
+Liver   ஈரற்குலை , ஈரல் , கல்லீரல் 
+Gall Bladder   பித்தப்பை 
+Small Intestine   சிறுங்குடல் 
+Large Intestine   பெருங்குடல் 
+Spine   முள்ளந்தண்டு , தண்டெலும்பு , முதுகெலும்பு , முள்ளெலும்பு , வளைமுள், முள்ளந்தண்டு , முதுகுத்தண்டு 
+Kidney   சிறுநீரகம் , மூத்திரக்காய் , சிறுநீர் வடிப்பி , மூத்திர கோசம் 
+Blood   இரத்தம் , குருதி , உதிரம் , சோரி 
+Bone   எலும்பு , எண்பு

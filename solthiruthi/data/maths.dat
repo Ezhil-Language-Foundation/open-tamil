@@ -1,0 +1,28 @@
+# (C) 2016 Muthiah Annamalai | Compiled for Open-Tamil project
+# This data is released under public domain
+# format is self-descriptive: '#' describes comments, 
+# '>>' start of category, and end of previous category
+# words are 1-word per line, terminal or start spaces to be ignored
+>>கணித_கூறுகள்
+algebra இயற்கணிதம் , அட்சர கணிதம் , குறிக் கணக்கியல்
+logarithm மடக்கை 
+base_of_a_logarithm மடக்கை அடி , மகை அடி 
+quadratic_equation இருபடிச் சமன்பாடு 
+geometry வடிவியல் , கேத்திர கணிதம் 
+differentiation வகையீட்டல் ,  பகுத்தல் 
+index_number குறியீட்டு எண் , குறிப்பெண் 
+simultaneous_equations ஒருங்கமைச் சமன்பாடுகள் 
+tangent  தொடுகோடு 
+axis_of_symmetry சமச்சீரச்சு 
+angle கோணம் 
+intersection :குறுக்கீட்டுச் சந்திப்பு 
+derivative சார்பியம் ,வழிச்சொல் 
+radius அரைவிட்டம் , ஆரம்  
+gradient சரிவு , வாட்டம்  
+sector வட்டகோணப்பகுதி 
+frequency அதிர்வெண் 
+arc வளைவு , வில் 
+perpendicular_bisector செங்குத்தான இருசமவெட்டு 
+right_angle செங்கோணம் 
+degree பாகை 
+obtuse_angle விகோணம்
