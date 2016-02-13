@@ -10,7 +10,7 @@ import tamil
 import sys
 import codecs 
 
-TVU_dict,_ = DictionaryBuilder.create(TamilVU)
+TVU_dict = None
 user_dict = set()
 
 def speller(filename):
@@ -29,10 +29,12 @@ def speller(filename):
                 # take user input.
                 # FIXME: User optiions to include DONTREPLACE/KEEP, DELETE WORD, etc.
                 option_str = u",".join( [ u"%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
+                print(u"In line, \"%s\""%line.strip())
+                
                 print(u" Replace word %s \n\t Options => %s\n"%(word, option_str))
                 try:
-                    choice = raw_input(u"option [0-%d] (-1 to ignore/add to local dictionary"%(len(suggs)-1))
-                    if choice == -1:                        
+                    choice = input(u"option [-1 ignore, 0-%d replace]: "%(len(suggs)-1))
+                    if choice == -1:
                         print(u"Not replacing word")
                         option = word
                         user_dict.add(word)
@@ -57,6 +59,9 @@ def check_word_and_suggest( word ):
     if in_user_dict or TVU_dict.isWord(word):
         return (True,[])
     
+    # Consider splitting the word and see if it has 2 sub-words
+    # e.g. செயல்பட => செயல் + பட
+        
     # suggestions at edit distance 1
     norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, None, 1))
     combinagram_suggests = list(tamil.wordutils.combinagrams(word,TVU_dict)) 
@@ -66,12 +71,17 @@ def check_word_and_suggest( word ):
     options = norvig_suggests
     options.extend( combinagram_suggests )
     options.extend( pfx_options )
-
+    
     return (False, options )
+
+def initialize():
+    global TVU_dict
+    TVU_dict,_ = DictionaryBuilder.create(TamilVU)
 
 if __name__ == u'__main__':
     if len(sys.argv) < 2:
         print(u"usage: python spell.py <filename 1>  ... <filename n>")
         sys.exit(0)
-    for file_name in sys.argv[1:]:
+    initialize()
+    for file_name in sys.argv[1:]:        
         speller(file_name)
