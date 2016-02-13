@@ -11,8 +11,10 @@ import sys
 import codecs 
 
 TVU_dict,_ = DictionaryBuilder.create(TamilVU)
+user_dict = set()
 
 def speller(filename):
+    global user_dict
     new_document = []
     data = codecs.open(filename,u"r",u"utf-8")
     lines = data.readlines()
@@ -29,8 +31,13 @@ def speller(filename):
                 option_str = u",".join( [ u"%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
                 print(u" Replace word %s \n\t Options => %s\n"%(word, option_str))
                 try:
-                    choice = raw_input(u"option [0-%d]"%(len(suggs)-1))
-                    option = suggs[choice]
+                    choice = raw_input(u"option [0-%d] (-1 to ignore/add to local dictionary"%(len(suggs)-1))
+                    if choice == -1:                        
+                        print(u"Not replacing word")
+                        option = word
+                        user_dict.add(word)
+                    else:
+                        option = suggs[choice]
                 except Exception as ie:
                     print (str(ie))
                 print(u" replacing word %s -> %s\n"%(word,option))
@@ -44,8 +51,10 @@ def speller(filename):
 
 def check_word_and_suggest( word ): 
     global TVU_dict
+    global user_dict
     letters = tamil.utf8.get_letters(word)
-    if TVU_dict.isWord(word):
+    in_user_dict = word in user_dict
+    if in_user_dict or TVU_dict.isWord(word):
         return (True,[])
     
     # suggestions at edit distance 1
@@ -60,9 +69,9 @@ def check_word_and_suggest( word ):
 
     return (False, options )
 
-if __name__ == '__main__':
+if __name__ == u'__main__':
     if len(sys.argv) < 2:
-        print("usage: python spell.py <filename 1>  ... <filename n>")
+        print(u"usage: python spell.py <filename 1>  ... <filename n>")
         sys.exit(0)
     for file_name in sys.argv[1:]:
         speller(file_name)

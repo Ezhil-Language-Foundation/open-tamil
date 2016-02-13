@@ -32,3 +32,13 @@ def norvig_suggestor(word,alphabets=None,nedits=1):
     ta_inserts    = [a + c + b     for a, b in ta_splits for c in alphabets]
     # TODO: add a normalizing pass word words in vowel+consonant forms to eliminate dangling ligatures
     return set(ta_deletes + ta_transposes + ta_replaces + ta_inserts)
+
+def mayangoli_suggestor():
+    """ 
+    Rules:
+      ண, ன - mayakkam
+      ல, ழ, ள - mayakkam
+      ர, ற - mayakkam
+    ivattrilum ithan uyirmei varisayilum mayakkangalai kaanalaam.
+    """
+    pass
