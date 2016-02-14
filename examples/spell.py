@@ -5,11 +5,11 @@
 # 
 from __future__ import print_function
 from solthiruthi.suggestions import norvig_suggestor
-from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbeSuffixTense, CaseFilter
+from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
 from solthiruthi.dictionary import DictionaryBuilder, TamilVU
 import tamil
 import sys
-import codecs 
+import codecs
 
 class Speller(object):
     TVU_dict = None
@@ -40,10 +40,10 @@ class Speller(object):
                     option = suggs[0]
                     # take user input.
                     # FIXME: User optiions to include DONTREPLACE/KEEP, DELETE WORD, etc.
-                    option_str = u",".join( [ u"%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
+                    option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
                     print(u"In line, \"%s\""%line.strip())
                     
-                    print(u" Replace word %s \n\t Options => %s\n"%(word, option_str))
+                    print(u" Replace word %s with\n\t => %s\n"%(word, option_str))
                     try:
                         choice = input(u"option [-1 ignore, 0-%d replace]: "%(len(suggs)-1))
                         if choice == -1:
@@ -54,13 +54,13 @@ class Speller(object):
                             option = suggs[choice]
                     except Exception as ie:
                         print (str(ie))
-                        print(u" replacing word %s -> %s\n"%(word,option))
-                        new_document.append( unicode(option) )
+                    print(u" replacing word %s -> %s\n"%(word,option))
+                    new_document.append( unicode(option) )
                 else:
-                        new_document.append( word )
+                    new_document.append( word )
         new_document.append(u"\n")
         print(u"*********** cleaned up document **********")
-        print(u" ".join(new_document))        
+        print(u"\n".join(new_document))        
         
     def isWord(self, word):
         # Plain old dictioary checks
@@ -70,7 +70,7 @@ class Speller(object):
         
     def check_word_and_suggest( self,word ):         
         letters = tamil.utf8.get_letters(word)
-        
+        TVU_dict = Speller.get_dictionary()        
         # plain old dictionary + user dictionary check
         if self.isWord(word):
             return (True,word)
@@ -89,7 +89,7 @@ class Speller(object):
             return (False, alt)
         
         # TODO: Noun Declension - ticket-
-    
+        
         # suggestions at edit distance 1
         norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, None, 1))
         combinagram_suggests = list(tamil.wordutils.combinagrams(word,TVU_dict)) 

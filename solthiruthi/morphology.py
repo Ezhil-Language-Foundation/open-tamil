@@ -104,14 +104,14 @@ class RemoveCaseSuffix(RemoveSuffix):
         ablative=u"இடமிருந்து"
         self.possible_suffixes=[u"உக்கு",u"க்கு",u"ளை",u"கள்",
                                 accusative,instrumental,associative,
-                                dative,genitive,possesive,locative,ablative]
+                                dative,genitive,possessive,locative,ablative]
 
 class RemoveHyphenatesNumberDate(RemoveCaseSuffix):
     """ Done correctly (மேல்) 65536-மேல்,
         ivan paritchayil இரண்டாவது, 2-வது """
     pass
 
-class RemoveVerbeSuffixTense(RemoveCaseSuffix):
+class RemoveVerbSuffixTense(RemoveCaseSuffix):
     def __init__(self):
         super(RemoveCaseSuffix,self).__init__()
         self.tenses = { "present" :u"கிற்",
