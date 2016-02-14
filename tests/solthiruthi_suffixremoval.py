@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# (C) 2015 Muthiah Annamalai
+# (C) 2015-2016 Muthiah Annamalai
 
 from opentamiltests import *
 from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix
-from solthiruthi.morphology import RemovePrefix
+from solthiruthi.morphology import RemovePrefix, CaseFilter
 import re
 import codecs
 from tamil import utf8
@@ -72,6 +72,18 @@ class RemovePrefixTest(unittest.TestCase):
             expected = prefix_removal_map[w]
             self.assertEqual(rval[0], expected)
         return
-    
+
+class CaseFilterTest(unittest.TestCase):
+    def test_basic_case_(self):
+        obj = RemovePluralSuffix()
+        objf = CaseFilter(obj)
+        expected = [u"பதிவி",u"கட்டளை",u"அவர்"]
+        words_list = [u"பதிவில்",u"கட்டளைகள்",u"அவர்கள்"]
+        for w,x in zip(words_list,expected):
+            rval = obj.removeSuffix(w)
+            trunc_word = objf.apply( w )
+            self.assertEqual( trunc_word ,rval[0] )
+        return
+        
 if __name__ == "__main__":
     unittest.main()

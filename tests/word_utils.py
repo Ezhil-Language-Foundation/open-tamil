@@ -46,7 +46,13 @@ class TestWordUtils(unittest.TestCase):
     def test_tamil_perms2( self ):
         res = [u'தமிழ்',u'தழ்மி',u'மிதழ்',u'மிழ்த',u'ழ்தமி',u'ழ்மித']
         self.assertEqual( list(wordutils.tamil_permutations(res[0])),res)
-    
+        
+    def test_greedy_split( self ):
+        twoDict = wordutils.DictionaryFixedWordList([u"செயல்",u"பட"])
+        word = u"செயல்பட"
+        parts = tamil.wordutils.greedy_split(word,twoDict)
+        self.assertEqual( parts, [u"செயல்",u"பட"] )
+        
     @skip_python2_6
     def test_anagram_xception(self):
         mtObj = wordutils.DictionaryWithPredicate( False )

@@ -1,4 +1,5 @@
-# (C) 2015 Muthiah Annamalai
+## -*- coding: utf-8 -*-
+# (C) 2015-2016 Muthiah Annamalai
 #  <ezhillang@gmail.com>
 # 
 # This function provides a list of alternatives for downstream use as suggestor in
@@ -36,9 +37,9 @@ def norvig_suggestor(word,alphabets=None,nedits=1):
 def mayangoli_suggestor():
     """ 
     Rules:
-      ண, ன - mayakkam
-      ல, ழ, ள - mayakkam
-      ர, ற - mayakkam
+      à®£, à®© - mayakkam
+      à®², à®´, à®³ - mayakkam
+      à®°, à®± - mayakkam
     ivattrilum ithan uyirmei varisayilum mayakkangalai kaanalaam.
     """
     pass

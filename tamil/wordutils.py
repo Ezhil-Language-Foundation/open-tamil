@@ -267,3 +267,15 @@ def word_split(inword,dictionary):
     
 # dummy dictionary interface for use with anagrams
 DictionaryWithPredicate = collections.namedtuple('DictionaryWithPredicate',['isWord'])
+
+# Utility class
+class DictionaryFixedWordList(object):
+    def __init__(self,wlist):
+        self.wlist = wlist        
+        object.__init__(self)
+    
+    def isWord(self,word):
+        return word in self.wlist
+    
+    def hasWordsStartingWith(self,pfx):
+        return any( [ w.startswith(pfx) for w in self.wlist ] )

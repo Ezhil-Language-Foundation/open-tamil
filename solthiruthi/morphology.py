@@ -21,6 +21,10 @@ class RemoveSuffix(object):
     @abc.abstractmethod
     def setSuffixes(self):
         pass
+
+    @abc.abstractmethod
+    def apply(self,word):
+        pass
     
     def prepareSuffixes(self):
         assert self.possible_suffixes
@@ -72,6 +76,9 @@ class RemovePrefix(RemoveSuffix):
         self.replace_suffixes = {u"மா":u"",u"பேர்":u"",u"அதி":u"",u"பெரிய":u"",u"பெரு":u"",u"சின்ன":u"",\
                                  u"ஆதி":u"",u"சிறு":u"",u"அக்":u"",u"இக்":u"",u"எக்":u""}
         self.possible_suffixes=[utf8.reverse_word(word) for word in self.replace_suffixes.keys()]
+
+    def apply(self,word):
+        return self.removePrefix(word)
     
     def removePrefix(self,word):
         word_lett = utf8.get_letters(word)
@@ -82,22 +89,44 @@ class RemovePrefix(RemoveSuffix):
 class RemoveCaseSuffix(RemoveSuffix):        
     def __init__(self):
         super(RemoveCaseSuffix,self).__init__()
+    
+    def apply(self,word):
+        return self.removeSuffix(word)
+    
     def setSuffixes(self):
         self.possible_suffixes=[u"உக்கு",u"க்கு",u"ளை",u"கள்"]
 
 class RemovePluralSuffix(RemoveSuffix):        
     def __init__(self):
         super(RemovePluralSuffix,self).__init__()
+
+    def apply(self,word):
+        return self.removeSuffix(word)
+    
     def setSuffixes(self):
         self.replace_suffixes = {u"ற்கள்":u"ல்",u"கள்":u"",u"ல்":u"", u"ட்கள்": u"ள்", u"ங்கள்":u"ம்"}
         self.possible_suffixes=list(self.replace_suffixes.keys())
+
+class CaseFilter(object):
+    def __init__(self,*filter_obj_list):
+        object.__init__(self)
+        self.filters = filter_obj_list
+        
+    def apply(self,word_in):
+        word = [word_in,None]
+        for filter_obj in self.filters:
+            word = filter_obj.apply( word[0] )
+        return word[0]
     
 def xkcd():
     obj = RemovePluralSuffix()
+    objf = CaseFilter(obj)
     expected = [u"பதிவி",u"கட்டளை",u"அவர்"]
     words_list = [u"பதிவில்",u"கட்டளைகள்",u"அவர்கள்"]
     for w,x in zip(words_list,expected):
         rval = obj.removeSuffix(w)
+        trunc_word = objf.apply( w )
+        assert( trunc_word == rval[0] )
         assert(rval[1])
         print(utf8.get_letters(w),'->',rval[1])
         assert(rval[0] == x)
