@@ -5,7 +5,7 @@
 # 
 from __future__ import print_function
 from solthiruthi.suggestions import norvig_suggestor
-from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, CaseFilter
+from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbeSuffixTense, CaseFilter
 from solthiruthi.dictionary import DictionaryBuilder, TamilVU
 import tamil
 import sys
@@ -17,7 +17,7 @@ class Speller(object):
         object.__init__(self)
         self.filename = filename
         self.user_dict = set()
-        self.case_filter = CaseFilter( RemovePluralSuffix(), RemoveCaseSuffix(), RemovePrefix() )
+        self.case_filter = CaseFilter( RemovePluralSuffix(), RemoveVerbeSuffixTense(), RemoveCaseSuffix(), RemovePrefix() )
         self.spellcheck(self.filename)
     
     @staticmethod
@@ -61,25 +61,33 @@ class Speller(object):
         new_document.append(u"\n")
         print(u"*********** cleaned up document **********")
         print(u" ".join(new_document))        
-
-    def check_word_and_suggest( self,word ): 
-        TVU_dict = Speller.get_dictionary()
-        letters = tamil.utf8.get_letters(word)
-
+        
+    def isWord(self, word):
         # Plain old dictioary checks
-        in_user_dict = word in self.user_dict
-        if in_user_dict or TVU_dict.isWord(word):
-            return (True,[],None)
+        TVU_dict = Speller.get_dictionary()
+        in_user_dict = word in self.user_dict or TVU_dict.isWord(word)
+        return in_user_dict
+        
+    def check_word_and_suggest( self,word ):         
+        letters = tamil.utf8.get_letters(word)
+        
+        # plain old dictionary + user dictionary check
+        if self.isWord(word):
+            return (True,word)
         
         # Remove case and redo the dictionary + user check
-        word = self.case_filter.apply( word )
+        word_nocase = self.case_filter.apply( word )
+        if ( self.isWord( word_nocase ) ):
+            return (True,word_nocase)
+        else:
+            word = word_nocase
         
         # Consider splitting the word and see if it has 2 sub-words
         # e.g. செயல்பட => செயல் + பட
         alt = tamil.wordutils.greedy_split(word,TVU_dict)
         if len(alt) >= 1:
             return (False, alt)
-
+        
         # TODO: Noun Declension - ticket-
     
         # suggestions at edit distance 1

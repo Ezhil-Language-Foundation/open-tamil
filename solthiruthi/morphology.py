@@ -85,7 +85,7 @@ class RemovePrefix(RemoveSuffix):
         word_lett.reverse()
         a,b = self.removeSuffix(u"".join(word_lett))
         return [utf8.reverse_word(a),b]
-    
+
 class RemoveCaseSuffix(RemoveSuffix):        
     def __init__(self):
         super(RemoveCaseSuffix,self).__init__()
@@ -94,19 +94,48 @@ class RemoveCaseSuffix(RemoveSuffix):
         return self.removeSuffix(word)
     
     def setSuffixes(self):
-        self.possible_suffixes=[u"உக்கு",u"க்கு",u"ளை",u"கள்"]
+        accusative = u"ை"
+        instrumental =u"ஆல்"
+        associative=u"ஓடு"
+        dative=u"க்கு"
+        genitive=u"இன்"
+        possessive=u"உடைய"
+        locative=u"இடம்"
+        ablative=u"இடமிருந்து"
+        self.possible_suffixes=[u"உக்கு",u"க்கு",u"ளை",u"கள்",
+                                accusative,instrumental,associative,
+                                dative,genitive,possesive,locative,ablative]
 
+class RemoveHyphenatesNumberDate(RemoveCaseSuffix):
+    """ Done correctly (மேல்) 65536-மேல்,
+        ivan paritchayil இரண்டாவது, 2-வது """
+    pass
+
+class RemoveVerbeSuffixTense(RemoveCaseSuffix):
+    def __init__(self):
+        super(RemoveCaseSuffix,self).__init__()
+        self.tenses = { "present" :u"கிற்",
+                        "past" : u"த",
+                        "future" : u"வ" }
+        
+    def setSuffixes(self):
+        """
+        
+        """
+        tense_endings = [u"ஏன்",u"ஆய்",u"ஆர்",u"ஆன்",u"ஆள்",u"அது",u"ஓம்", u"அன"] 
+        self.possible_suffixes=tense_endings
+        
 class RemovePluralSuffix(RemoveSuffix):        
     def __init__(self):
         super(RemovePluralSuffix,self).__init__()
-
+        
     def apply(self,word):
         return self.removeSuffix(word)
-    
+        
     def setSuffixes(self):
         self.replace_suffixes = {u"ற்கள்":u"ல்",u"கள்":u"",u"ல்":u"", u"ட்கள்": u"ள்", u"ங்கள்":u"ம்"}
         self.possible_suffixes=list(self.replace_suffixes.keys())
-
+        
 class CaseFilter(object):
     def __init__(self,*filter_obj_list):
         object.__init__(self)
