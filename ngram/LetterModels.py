@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 # 
 # (C) முத்தையா அண்ணாமலை 2013-2015
@@ -8,7 +7,6 @@
 import tamil
 import copy
 from .Corpus import Corpus
-
 
 class Letters:
     def __init__(self,filename):
@@ -30,23 +28,24 @@ class Letters:
         print(max(self.letter.values()))
         return op
 
-
 class Unigram(Letters):
+    def __init__(self,filename):
+        Letters.__init__(self,filename)
+        
     def frequency_model( self ):
         """ build a letter frequency model for Tamil letters from a corpus """
         # use a generator in corpus
         for next_letter in self.corpus.next_tamil_letter():
             # update frequency from corpus
             self.letter[next_letter] = self.letter[next_letter] + 1
-
-
+        
 class Bigram(Unigram):
     def __init__(self,filename):
         Unigram.__init__(self,filename)
         self.letter2 = dict()
         for k in tamil.utf8.tamil_letters:
             self.letter2[k] = copy.copy( self.letter )
-
+    
     def language_model(self,verbose=True):
         """ builds a Tamil bigram letter model """
         # use a generator in corpus

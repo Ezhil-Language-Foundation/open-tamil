@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # (C) 2016 Muthiah Annamalai
 # 
-# This file is part of 'open-tamil' package tests
+# This file is part of 'open-tamil' package
+# It implements a data-driven spell checker for Tamil language
 # 
 from __future__ import print_function
 from solthiruthi.suggestions import norvig_suggestor
@@ -17,7 +18,7 @@ class Speller(object):
         object.__init__(self)
         self.filename = filename
         self.user_dict = set()
-        self.case_filter = CaseFilter( RemovePluralSuffix(), RemoveVerbeSuffixTense(), RemoveCaseSuffix(), RemovePrefix() )
+        self.case_filter = CaseFilter( RemovePluralSuffix(), RemoveVerbSuffixTense(), RemoveCaseSuffix(), RemovePrefix() )
         self.spellcheck(self.filename)
     
     @staticmethod
@@ -41,8 +42,7 @@ class Speller(object):
                     # take user input.
                     # FIXME: User optiions to include DONTREPLACE/KEEP, DELETE WORD, etc.
                     option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
-                    print(u"In line, \"%s\""%line.strip())
-                    
+                    print(u"In line, \"%s\""%line.strip())                   
                     print(u" Replace word %s with\n\t => %s\n"%(word, option_str))
                     try:
                         choice = input(u"option [-1 ignore, 0-%d replace]: "%(len(suggs)-1))
