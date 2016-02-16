@@ -1,0 +1,26 @@
+# This data is in public domain
+#Ref: http:/ www.thozhilnutpam.com
+>>categories
+automobile தானியங்கி
+aviation பறப்பியல்
+birds பறவைகள்
+botany தாவரவியல்
+cricket துடுப்பாட்டம்
+finance நிதியியல்
+fish மீன்
+flowers பூ
+fruits பழங்கள்
+herbs மூலிகைகள்
+immigration குடிநுழைவு
+law சட்டம்
+mathematics கணிதம்
+pcb design சுற்றுப்பலகையியல்
+periodic table தனிம அட்டவணை
+physics இயற்பியல்
+physiology உடலியல்
+railways இருப்புப்பாதை
+rf வானலையியல்
+shipping கப்பலியல்
+vegetables காய்கறிகள்
+vlsi ஒருங்கிணைப்பியல்
+zoology விலங்கியல்

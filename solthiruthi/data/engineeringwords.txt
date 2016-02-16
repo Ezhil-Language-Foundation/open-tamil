@@ -1,0 +1,695 @@
+# This data is in public domain
+#Ref: http:/ www.thozhilnutpam.com
+# தமிழ் மின்னியல் மின்னணுவியல் கணினியியல் சொல்லகராதி/
+# TAMIL ELECTRICAL, ELECTRONICS & COMPUTER ENGINEERING GLOSSARY
+>>மின்னியல்,மின்னணுவியல்,கணினியியல்
+numeric - எண் வரிசை
+3-phase circuit - மும்முனைச் சுற்று, முத்தறுவாய் சுற்று
+8b10b encoding - எட்டுக்குப்பத்து குறியாக்கம் - dvb-asi, sas, sata, pci-express போன்ற பல செந்தரங்களில் பயனாகும் குறியாக்கம், இதில் கடிகை உட்பதிந்துள்ளது; துணுக்கோடை (bitstream) எட்டு துணுக்கு குறிகளாக பிரிக்கப்பட்டு ஒவ்வொரு குறியும் பத்து துணுக்கு குறியாக 1 0 சமஎண்ணிக்கையாக அமையும்படி மாற்றப்படுகிதது
+ac current - ஆடலோட்டம், மாறுதிசை மின்னோட்டம்
+ac voltage - மாறுதிசை மின்னழுத்தம்
+acoustic coupler - கேட்பொலிப் பிணைப்பி
+acoustics - கேட்பொலியியல்
+active device - செயல்படுச் சாதனம்
+admittance - விடுப்பு - ஒரு உயிர்பற்ற மின்சுற்றின் (passive electric cicuit) மாறுதிசையோட்டம் கடத்தும் தன்மை; மறுப்பின் தலைகீழ்; இது கடத்தம் மற்றும் ஏற்பு ஆகியவற்றின் கூட்டு காவி மதிப்பு; g + j(bc-bl) மதிப்பு கொண்டுள்ளது; ஒருதிசையோட்ட கடத்தத்திற்கு நிகரானது
+active load - செயல்படு சுமை
+aliasing, alias frequency - புனைவு, புனையலைவெண் - ஒரு மாதிரியெடுப்பு முறைமையில் போதுமற்ற மாதிரிவிகிதத்தால் உள்ளீடு குறிகையை (உதாரணமாக கேட்பொலி, ஒளிதோற்றம்) மறுமீட்கும்போது உயர் அலைவெண்களில் முதலிருந்த குறிகை (ஒலி, ஒளி வகையறா) தவறாக தாழ் அலைவெண்ணாக பெறும் நிலை
+algorithm - படிமுறை
+amplidyne - மிகைப்பி மின்னாக்கி
+amplitude shift keying - வீச்சு பெயர்வு இணைத்தல் - சங்கேத குறியீடுகளை பல்வேறு வீச்சுகளாக பிரதிபலிக்கும் இலக்க பண்பேற்ற முறை
+analog electronics - ஒப்புமை மின்னணுவியல், ஒப்புமையியல்
+analysis - பகுப்பாய்வு
+analyzer - பகுப்பி
+and gate - உம்மை வாயில்
+anisotropic antenna - ஒருதிசை அலைக்கம்பம்
+anode - நேர்முனை
+antenna - அலைக்கம்பம் - மின்காந்த வானலையை மின்குறிகையாக அல்லது எதிர்மறையாக ஆக்கும் சாதனம்
+antenna coupler - அலைக்கம்பப் பிணைப்பி - அலைக்கம்பம் மற்றும் செலுத்தி அல்லது பெறுவி இடையே அமையும் மின்மறுப்பு பொறுத்தும் (impedence matching) சாதனம்
+apparent power - தோற்றத் திறன் - எதிர்வினை உறுப்பு (reactive element) கொண்ட மின்சுற்றில் செலவாகும் மின்திறன்; கண மின்னோட்டம் மற்றும் கண மின்னழுத்தம் ஆகியவற்றின் பெருக்கு; p = vinst x iinst
+argon - இலியன்
+armature - மின்னகம்
+arsenic - பிறாக்காண்டம்
+attenuation, attenuator - மெலிப்பு, மெலிப்பி
+atomic instruction - அணுநிலை ஆணை
+auto-correlation - தன் ஒட்டுறவு - ஒரு குறிகையில் தன்னுடனையே உள்ள ஒட்டுறவு; இக்கெழு அக்குறிகையின் சுழல் தன்மையை பிரதிபலிக்கிறது
+automatic gain control (agc) - தானியங்கு மிகைப்பு கட்டுப்பாடு - ஒரு மிகைப்பி அமைப்பு, இதில் தன் மிகைப்பை தேவைக்கேற்ப மாற்றி அதன் மீது வழங்கப்படும் உள்ளீடுகளின் வீச்சளவு வரம்புகளுக்கிடையே ஒரே வெளியீடு வீச்சளவை உற்பத்தி செய்யும்
+auto pilot - தானோட்டி
+auto router - தானியங்குத் திசைவி
+average current - சராசரி ஓட்டம்
+averager - சராசரிப்படுத்தி
+axiom - அடிகோள்
+azimuth - திசை ரேகை - கிடைத்தளத்தில் வலஞ்சுழி கோண அளவு
+balun (balanced-to-unbalanced transformer) - சமனிலாச்சமனி
+bandpass filter - பட்டைவிடு வடிப்பி
+bandstop filter - பட்டைத்தடை வடிப்பி
+bandwidth - பட்டை அகலம்
+battery - மின்கலம்
+beacon (= aeronautical beacon) - சுழலொளி - விமானங்களுக்கு அடையாளம் தெரிவிக்கும் தரையமைந்த தொடர் அல்லது சிமிட்டும் ஒளி
+beam (of light, electrons etc.) - கற்றை
+biasing - சாருகையிடுதல் - ஒரு திரிதடையத்தை (பொதுவாக மிகைப்பியாக) செயல்படுத்த, அதன் தளவாய் மீது ஒருதிசை மின்னழுத்தம் ஏற்படுத்துதல்
+bias voltage - சாருகை மின்னழுத்தம் - ஒரு திரிதடையம் செயல்படும்போது, தன் தளவாய் மீது ஏற்படுத்தப்படும் ஒருதிசை மின்னழுத்தம்
+bias current - சாருகை மின்னோட்டம் - ஒரு திரிதடையம் செயல்படும்போது, தன் தளவாய்-உமிழ்வாய் சந்தியில் பாயும் ஒருதிசை மின்னோட்டம்
+binary - இருமம்
+bit (data) - துணுக்கு (தரவு)
+bit rate - துகள் வீதம்
+blanking - மறைத்தல் - ஒரு பரவல் காட்சியின் (rastor display) மீள்வரைவு (retrace) காட்சித் திரையில் காணாமல் இருப்பதற்க்கு செருகப்படும் துடுப்புகள்; இவை நெடு மீள்வரைவு (vertical retrace), கிடை மீள்வரைவு (horizontal retrace) என வகைப்படுகின்றன
+bootstrap, bootstrapping, bootstrap circuit - ஈடேற்று, ஈடேற்றம், ஈடேற்றுச் சுற்று - மாறுமின்னழுத்தத்திற்கு அதிகாக மின்மறுப்பு தரும் ஒரு வகை சாருகை முறை
+broadband - அகலப்பட்டை, அகண்ட அலைவரிசை
+broadside array (antenna) - முகமியக்க அணி (அலைக்கம்பம்)
+bus (data) - பாட்டை (தரவு)
+bromine - நெடியம்
+bronze - வெண்கலம்
+buffer, buffer amplifer - இடையகம், இடையக மிகைப்பி
+buried via - மறைந்த வழிமம் - ஒரு சுற்றுப்பலகையில் இரு முகங்களை எட்டாத வழிமம்; இது ஒரு முகத்தை எட்டும் அல்லது உள்ளடுக்குகளில் மறைந்திருக்கும்
+busy, busy state - வேலயாக, வேலையான நிலை
+byte (= octet) - எண்ணெண்
+ 
+cable - வடம்
+cable modem- வடப் பண்பேற்றிறக்கி
+cache memory - இடைமாற்று நினைவகம் - பலமுறை அணுகப்படும் தரவுகளுக்கு ஒதுக்கப்படும் ஒரு விரைவு நினைவகம்
+calculator - கணிப்பான்
+calculus - நுண்கணிதம்
+camcorder - நிகழ்பதிவி
+capacitor - மின்தேக்கி, கொண்மி
+capacitive reactance - கொண்ம எதிர்வினைப்பு
+capillary action - புழை இயக்கம்
+carrier signal - சுமப்பி குறிகை
+cartridge - பொதியுறை
+cascade - ஓடையிணைப்பு
+catalyst - வினையூக்கி
+cathode - எதிர்முனை
+cdrom - படிப்பு குறுவட்டு
+cd read write - எழுதுப்படிப்புக் குறுவட்டு
+cd recordable - பதிவுக் குறுவட்டு
+cell phone (mobile phone) - கைபேசி (நகர்பேசி)
+centre of gravity - ஈர்ப்பு மையம்
+centre of mass - பொருண்மை மையம்
+charecteristic - சிறப்பியல்பு
+charecteristic impedence - சிறப்பு மின்மறுப்பு - ஒரு செலுத்துதடத்தில் ஏதேனும் இருப்பிடத்தின் மின்னழுத்தம்-மின்னோட்டம் விகிதம்
+charge - மின்னூட்டு
+charger - மின்னூட்டி
+chassis ground - சட்டநிலம்
+chipset - சில்லுத்தொகுதி
+chord (in a circle) - நாண்
+chord (music) - பன்னிசை
+chroma / chrominance - நிறப்பொலிவு
+circumference - பரிதி
+clock signal - கடிகாரக் குறிகை
+clock buffer - கடிகார இடையகம்
+coax(ial) cable - ஓரச்சு வடம்
+coaxial lenses - ஓரச்சு வில்லைகள்
+cobalt - மென்வெள்ளி
+codec - புரிப்பு
+collector (transistor) - ஏற்புவாய்
+combination, combination group - சேர்வு, சேர்வுக் குலம்
+composite video - கலவை ஒளிதோற்றம் - ஒளிர்மை (luma), நிறமை (chroma) மற்றும் நேரவிவரம் (timing) கலந்த ஒளிதோற்றக் குறிகை; தொலைகாட்சி பெட்டிகளில் இந்த உள்ளீடு வழக்கமாக ஒரு மஞ்சள் நிற இணைப்பியாக (yellow connector) அமையும்
+computer - கணிப்பொறி, கணிணி
+concave lens - குழிவில்லை
+commutator - திசைமாற்றி மின்னோடிகளில் மின்னோட்டத்தின் திசையை காலசுழற்சியில் திசைமாற்றும் சாதனம்
+computer - கணிப்பொறி, கணிணி
+concave mirror - குழியாடி
+conductance - கடத்தம் - ஒரு பொருளின் ஒருதிசை மின்சாரம் கடத்தும் தன்மை; g = i/v என்கிற மதிப்புடையது, அதாவது தடையத்தின் தலைகீழ்
+cone - கூம்பு
+configurable programmable logic device (cpld) - உள்ளமை நிரல்படு தருக்கச் சாதனம்
+configuration - உள்ளமைவு
+constant - மாறா, மாறிலி
+continuos function - தொடர்ச்சியுள்ள சார்வு
+convex lens - குவிவில்லை
+convex mirror - குவியாடி
+convolution - சுருளல்
+coordinate - ஆயம்
+correlation - ஒட்டுறவு
+crystal - படிகம்
+crystal oscillator - படிக அலைவி/அலைப்பி
+cube - கன சதுரம்
+current - மின்னோட்ட்ம், ஓட்டம்
+cyclotron - சுழற்சியலைவி
+ 
+dc current - நேரோட்டம்
+data - தரவு
+datasheet - தரவுத்தாள்
+dc current - நேரோட்டம், ஒருதிசை மின்னோட்டம்
+dc voltage - ஒருதிசை மின்னழுத்தம்
+decode, decoding, decoder - குறிவிலக்கு, குறிவிலக்கம், குறிவிலக்கி
+decimate, decimation - வீதக்குறை, வீதக்குறைவு - மாதிரித் தரவுகளை அதிக வீதத்திலிருந்து குறைந்த வீதத்திற்கு மாற்றுதல்; இடையுள்ள மாதிரிகள் விடப்படுகின்றன
+decrypt - மறைவிலக்கு
+demodulation - பண்பிறக்கம்
+descrambling - கலர்விலக்கம்
+detector - உணர்வி
+diac (diode for ac) - மாறுமின் இருமுனையம் மாறுமின்னோட்ட கட்டுப்பாட்டிற்கு பயனாகும் சாதனம்
+diameter - விட்டம்
+differential, differentiation, differentiator - வகையீட்டு, வகையீட்டல், வகையீட்டி
+diffraction - அலைவளைவு
+diffraction grating - அலைவளைவுக் கீற்றணி
+diode - இருமுனையம்
+directional antenna - திசைவு அலைக்கம்பம்
+directional coupler - திசைவுப் பிணைப்பி
+discreet values - தனித்த அளவுகள்
+discharge (electric) - மின்னிறக்கம்
+discriminator - பிரித்துணர்வி
+distorsion - உருக்குலைவு
+disc - வட்டு
+dish antenna - அலைக்கம்பா
+double-stub (impedence) matching - இருமுளை (மின் மறுப்புப்) பொறுத்தம்
+driver (software) - இயக்கமென்பொருள்
+dynamo - மின்னாக்கி
+ 
+earth ground - புவி நிலம்
+earthing - புவியிடுதல்
+earth wire - புவிக் கம்பி
+eddy current - சுழலோட்டம்
+egress - வெளிவாய்
+electric field - மின்புலம்
+electricity - மின்சாரம்
+electrocardiograph - மின் இதயத்துடிப்பு வரைவி
+electron - எதிர்மின்னி
+electrode - மின்வாய்
+electromagnetic interference (emi) - மின்காந்த இடையீடு
+electromagnetic wave - மின்காந்த அலை
+electromagnetics - மின்காந்தவியல்
+electrostatics - நிலைமின்னியல்
+electrostatic discharge (esd) - நிலைமின்னிறக்கம் - இரு மின்னூட்டமுடைய பொருட்கள் அருகில் நெருங்கும்போது ஏற்படும் மின்னிறக்கம்
+electrostatic sensitive (=esd sensitive) - நிலைமின்பாதிக்கப்படத்தக்க(து)
+electron - எதிர்மின்னி
+electronics - மின்னணுவியல்
+element - தனிமம்
+emitter - உமிழ்வாய்
+emulation - போன்மம்
+end-fire array (antenna) - முனையியக்க அணி (அலைக்கம்பம்)
+engine - பொறி
+entity - உருபொருள்
+elevation - உயர்வு ரேகை
+ethernet - தூயவெளியம், தூயவெளி வலை
+ethernet card - தூயவெளி அட்டை
+ 
+fabrication - கட்டுருவாக்கம்
+factorial - தொடர்பெருக்கு
+fall time - விழுநேரம்
+falling edge - விழுவிளிம்பு
+fan-in - வீச்சு சுருக்கம்
+fan out - வீச்சு விரிப்பு
+far-field region - தொலைபுல மண்டலம்
+fiducial - நம்பகப்புள்ளி - மின்சுற்றுப்பலகைகளின் தானியங்குத் தொகுத்தலில் உறுப்புகளை பொறுக்கியமைக்கும் இயந்திரத்திற்கு மேற்கோள்ளாக உதவும் (சுற்றுப்பலகைகளிலிலுள்ள) புள்ளிகள்
+feed horn - அலையூட்டுக் குழல்
+fetch cycle - கொணர் சுழர்ச்சி
+fibre-optic cable - ஒளியிழைவடம்
+fidelity - மெய்நிலை
+field - புலம்
+field programmable gate array - களம் நிரல்படு வாயிலணி
+field effect transistor (fet) - புலவிளைவுத் திரிதடையம்
+file - கோப்பு
+file allocation table (fat) - கோப்பு பிரிப்பு அட்டவணை
+finline - துடுப்புத்தடம் - மின்சுற்றுப்பலகைகளின் துளைகளில் (vias) அச்சிடப்பட்ட மின்தடங்கள்
+finite impulse response (=fir) filter - முடிவு கணத்தாக்க மறுமொழி விடிப்பி - பின்னூட்டம் உடைய இலக்க வட்ப்பி (digital filter); இவை நேரியல் கட்ட சிறப்பியல்வு (குறிகையில் உருக்குலைவு ஏற்படுத்தாத தன்மை) கொண்டவை
+flat panel display (fpd) - தட்டைப் பலகக் காட்சி
+flow chart - பாய்வுப்படம்
+forward bias - முன்னோக்கு சாருகை - ஒரு இருமுனையத்தின் p-முனையை சார்பான (relative) நிறைமின்னழுத்தத்திற்கும் n-முனையை குறைமின்னழுத்தத்திற்கும் இணைத்தல்; இவ்விணைப்பினால் திரிதடையத்தில் கடத்தம் ஏற்படும்
+frequency hopping - அலைவெண் துள்ளல்
+frequency modulation - அலைவெண் பண்பேற்றம்
+frequency shift keying - அலைவெண் பெயர்வு இணைத்தல்
+full adder - முழுக்கூட்டி
+function (mathematical) - சார்பு
+function (subroutine, subprogram) - துணைநிரல்
+functionality - செயல்கூறு
+fuse - உருகி
+fuzzy logic - இடைநிலை தருக்கம், இடைநிலை ஏரணம்
+ 
+gain - பெருக்கம்
+galvanometer - கல்வனோமானி
+gallium - மென்தங்கம்
+gate - வாயில்
+gate (in f.e.t.) - வாயில்வாய் (புலவிளைவு திரிதடையத்தில்)
+gate array - வாயிலணி, வாயில் அணி
+gateway - நுழைவாயில்
+gang, ganging - கூட்டியங்கு, கூட்டியங்குதல்
+general purpose register - பொதுப்பயன் பதிவகம்
+generator - மின்னியற்றி
+glitch - தடுமாற்றம்
+global positioning system - உலக இடம் காட்டும் அமைப்பு
+grating - கீற்றணி
+grid (electric) - மின்தொகுப்பு
+grounding - நிலமிடுதல்
+ground current - நிலஓட்டம்
+ground plane - நிலத் தளம்
+ground wave - நிலஅலை
+ground wire - நிலக் கம்பி
+ 
+half adder - அரைக்கூட்டி
+halogen - உப்பீனி
+hard disk - நிலைவட்டு
+hardware - வன்பொருள்
+harmonic(s) - இசையம்(ங்கள்)
+helical antenna - சுருள் அலைக்கம்பம்
+helium - எல்லியம்
+hetrodyne, hetrodyning - கலக்கிப்பிரி, கலக்கிப்பிரிப்பு - கலப்பி மற்றும் உள்ளிட அலைவி ஆகியவை கொண்டு வானலையை இடையலை ஆக்குதல் அல்லது எதிர்மாறாக
+hex number - பதின்அறும எண்
+hexode - அறுமுனையம்
+high pass filter - உயர்பட்டை வடிப்பி
+holography - ஒளிப்படவியல்
+homogenious - ஒருபடித்தான
+horizontal line - கிடை வரைவு - பரவல் காட்சியில் மின்னிக் கற்றையின் இடது-வலது பெயர்வு
+horizontally polarized wave - கிடை முனைவாக்கப்பட்ட அலை - மின்புலம் கிடைதளத்திலேயே அமையும் ஒளி அல்லது வானலை
+host - விருந்தோம்பி
+hue - வண்ணச்சாயல்
+hub - குவியன்
+hyperbola - அதிபரவளையம்
+ideal - கருதியல்
+idle, idle state - பயனிலான, பயனில் நிலை
+identity - முற்றொருமை
+impedence - மறுப்பு - ஒரு உயிர்பற்ற மின்சுற்றின் (passive electric cicuit) மாறுதிசையோட்டம் எதிர்ப்புத் தன்மை; விடுப்பின் தலைகீழ்; இது தடையம் மற்றும் எதிர்வினைப்பு ஆகியவற்றின் கூட்டு காவி மதிப்பு; z = r + j(xl-xc) மதிப்பு கொண்டுள்ளது
+impedence matching - மின் எதிர்ப்பு பொறுத்தம்
+impulse - கணத்தாக்கம்
+impulse response - கணத்தாக்க மறுமொழி
+incidence (light) - ஒளிப்படுகை
+inderminate - தேரா, தேரப்பெறாத
+indium - அவுரியம்
+inductive reactance - தூண்ட எதிர்வினைப்பு
+inertia - சடத்துவம், ஜடத்துவம்
+infinite impulse response (=iir) filter - முடிவற்ற கணத்தாக்க மறுமொழி வடிப்பி - பின்னூட்டு கொண்ட இலக்க வடிப்பி; இவை கொடுத்த மறுமொழியை செயல்படுத்த சிக்கனமானவை
+infinity - முடிவிலி
+ingress - உள்வாய்
+initiator - துவக்கி
+initialization - முன்னமைவு
+instrument landing system - தரையிறங்கு கருவி அமைப்பு - விமானம் தரையிறங்க பாதை மற்றும் வழிகாணலை அறிவிக்கும் தரையமைந்த துள்ளியமான கருவி
+insulate, insulation - மின்காப்பிடுதல், மின்காப்பு
+insulated - மின்காப்பிடப்பட்ட(து)
+intelligence - நுண்ணறிவு
+integer - முழு எண்
+integral, integration, integrator - தொகையிடு, தொகையீட்டல், தொகையீட்டி
+interlace - தொடர்பின்னல்
+interlaced scanning - பின்னிய துருவுதல்
+intermediate frequency (if) - இடைநிலை அலைவெண், இடையலை
+interference - இடையீடு
+interpolate, interpolation (dsp) - வீதமேற்று, வீதமேற்றம் - மாதிரித் தரவுகளை குறைந்த வீதத்திலிருந்து அதிக வீதத்திற்கு மாற்றுதல்; புதிதாக செருகப்படும் தரவுகள் சராசரி அல்லது பூச்சியமாக கருதப்படுகின்றன
+interpolate, interpolation (statistics) - இடைச்செருகு, இடைச்செருகல்
+interrupt - குறுக்கீடு
+invariant, invariance - மாற்றமுறாதது, மாற்றமுறாமை
+inverter - மாறுதிசையாக்கி - ஒருதிசை மின்னோட்டத்தை மாறுதிசையாக மாற்றும் சாதனம்
+inverse square law - எதிர் வர்க்க விதி
+involute, involution - சுருட்சிவரை, சுருட்சி
+isolation - தனிமையாக்கம் - குறிகைகள், சாதனங்கள் ஆகியவை இடையே மின் அல்லது காந்த தொடர்பை தடுத்தல்
+iridium - உறுதியம்
+irregularity - ஒழுங்கின்மை
+iron loss - இறும்பு இழப்பு
+isa - industry standard architecture - தொழிலக நெறிக் கட்டமைப்பு
+ 
+jacket - உறை
+jam - நெரிசல்
+jaw - தாடை
+job - பணி
+jump - தாவு
+junction - சந்தி
+junction diode - சந்திப்பு இருமுனையம்
+junction transistor - சந்திப்புத் திரிதடையம்
+joystick - இயக்குப்பிடி
+ 
+key bounce - விசைத் துள்ளல்
+keyboard (computer, typewriter) - விசைப்பலகை
+keyboard (music) - இசைப்பலகை
+key bounce - சாவித் துள்ளல், விசைத் துள்ளல்
+key way - சாவித் துளை
+kinetic energy - இயக்க ஆற்றல்
+klystron, klyston oscillator - மின் கற்றையலைக் குழல், மின் கற்றையலைவி/கற்றையலைப்பி - நுண்ணலைகளை எற்படுத்தும் ஒரு சாதனம்
+knob - குமிழ்
+knee point - திருப்பும் முனை
+keying - இணைத்தல்
+krypton - மறைவியம் - நிறமற்ற மந்த வளிமம்; சூழலில் 1ppm அளவுடையது; குழல்விளக்குகளில் (fluorescent lamps) பயன்பெறுகிறது
+ 
+laser - ஊடொளி
+laser diode - ஊடொளி இருமுனையம்
+latch - தாழ்ப்பாள்
+latency - சுணக்கம்
+latent heat - உள்ளுறை வெப்பம்
+lattice - உருபொருள்
+layout (ic, pcb) - மனையமைவு
+light emitting diode - ஒளி உமிழ் இருமுனையம்
+linear (particle) accelerator - நேரியல் (துகள்) முடுக்கி
+linear ic - நேரியல் ஒருங்கிணைச்சுற்று
+linker - தொடுப்பி
+liquid crystal display (lcd) - திரவப் படிகக் காட்சி
+lithium - மென்னியம் - குறையளவு எடைக்கொண்ட உலோகம்; வெள்ளி நிறமானது; கத்தியால் வெட்டக்கூடியது
+load, load (v.), loading - சுமை, சுமைக்கொடு, சுமைக்கொடுத்தல்
+locus - நியமாப்பாதை
+log in - புகுபதிகை
+log out - விடுபதிகை
+logic - தருக்கம், ஏரணம்
+logic element- தருக்கத் தனிமம்
+logarithm - மடக்கை
+logic design - தருக்க வடிவமைப்பு
+logic lock region - தருக்கம் அடைப்பு மண்டலம்
+longitude - நெட்டாங்கு
+low drop out regulator - தாழ்வீழ்ச்சி சீர்ப்படுத்தி, தாழ்வீழ்ச்சி சீர்ப்பி
+low pass filter - தாழ்பட்டை வடிப்பி
+low noise - தாழ் இரைச்சல்
+low noise block downconverter (lnb) - தாழ்விறைச்சல் பட்டை கீழ்மாற்றி (பட்டைமாற்றி) - செயற்கைக்கோள் குறிகையை l-பட்டை இடையலையாக மாற்றும் சாதனம்
+luminance - ஒளிர்மை
+lumped circuit elements - திரண்ட சுற்றுருப்புக்கள் - வானலை குறிகைப்பாதையில் போலி சுற்றுருப்புக்கள் - மின்தடையம், மின்தேக்கம் மற்றும் மின்தூண்டல் ஆகியவற்றை கருதியல் மின்தடங்களுடன் (ideal conductors) தனத்தனியான சுற்றுருப்புக்களாக பிரதிபலிக்க இயலும்; இச்சுற்றுருப்புக்கள் திரண்ட சுற்றுருப்புகள் எனப்படுகின்றன
+ 
+macro - குறுநிரல்
+magnetograph - காந்தவரைவி
+magnetometer - காந்தமானி
+magnetron - காந்த அலைவி
+magnification - உருப்பெருக்கம்
+magnitude - வீச்சளவு
+mantissa - அடிஎண்
+mass - நிறை
+master clock - முதன்மைக் கடிகாரம்
+mass storage - திரள் சேமிப்பகம்
+math coprocessor - கணித இணைச்செயலி
+matrix - அணி
+memory address - நினைவக முகவரி
+memory allocation - நினைவக ஒதுக்கீடு
+metal layer - உலோக அடுக்கு
+metallization - உலோகப்பூசு, உலோகப்பூசல்
+microphone - ஒலிவாங்கி
+microstrip - நுண்கீற்று - மின்சுற்றுப்பலகைகளில் வெளி அடுக்குகளில் அச்சிடப்பட்ட மின்தடங்கள்
+microwave oven - நுண்ணலை அடுப்பு
+mixer - கலப்பி
+model - மாதிரியுரு
+modem - இணக்கி
+modulation index - பண்பேற்ற குறியெண்
+modulator - பண்பேற்றி
+moment - திருப்பம்
+momentum - உந்தம்
+motherboard - தாய்ப்பலகை
+motor - மின்னோடி
+multimedia - பன்னூடகம்
+multimeter - பன்னளவி
+multiprocessor system - பல்செயலி முறைமை
+multirate system - பல்வீத அமைப்பு - பல மாதியெடுப்பு வீதங்கள் கோண்ட அமப்பு; ஒரு மாதியெடுப்பு வீதத்திலுள்ள தரவு வேறொரு வீதத்தில் எதிர்ப்பார்க்கும் அமைப்பிற்கு அளிக்கும் போது, ஒரு பல்வீத அமைப்பு தேவைப்படுகிறது
+multiswitch - பன்னிலைமாற்றி - ஒரு செயற்கைக்கோள் பெறு அமைப்பில் பல செயற்கைக்கோள் குறிகைகளை தனிமையோடு பல மேலமர்வுப் பெட்டிகளுக்கு தேர்வு செய்யும் சாதனம். இது கிண்ண அலைக்கம்பத்திற்கும் மேலமர்வுப் பெட்டி(களு)க்கிடையே அமைந்திருக்கும்
+multistage amplifier - பலகூற்று மிகைப்பி 
+nand gate - இல்-உம்மை வாயில்
+navigational aid (=navaid) - வழிகாணுதவி - பார்வை அல்லது தரவு மூலமாக விமானப் பாதையை தெரிவிக்கும் தரை அல்லது வானமைந்த கருவி
+near-field region - அருகுபுல மண்டலம்
+network - பிணையம்
+network analysis - பிணையப் பகுப்பாய்வு
+neutron - நொதுமின்னி
+nibble - நாலெண்
+nickel - வன்வெள்ளி
+no load charecteristic - சுமையில் சிறப்பியல்பு
+no load current - சுமையிலோட்டம்
+node - கணு
+noise - இரைச்சல்
+noise figure, noise factor - இரைச்சல் அளவெண், இரைச்சல் காரணி - ஒரு செயல்படு சாதனத்தின் வெப்ப இரைச்சல் அளிப்பு தனது வெளியீட்டில் குறிப்பிடும் அளவு; உண்மை மிகைப்பியின் வெளி வெப்ப இரைச்சல்/கருதியல் மிகைப்பியின் வெளி வெப்ப இரைச்சல் என்ற விகிதம், db அளவில்
+noise resistance - இரைச்சல் மின்தடை
+noise suppression - இரைச்சல் நீக்கம் 
+objective lens - பொருள்நோக்கு வில்லை
+observer - நோக்காளன்
+oblique - சாய்வான
+octet (= byte) - எண்ணெண்
+omnidirectional antenna - சமதிசை அலைக்கம்பம் - எல்லா திசைகளிலும் சமமாக மின்காந்த ஆற்றலை கதிர்வீசும் கருதியல் அலைக்கம்பம்
+open circuit - திறந்த மின்சுற்று, திறந்த மின்பாதை
+open loop gain - திறந்த வளையப் பெருக்கம்
+operating range - இயக்க நெடுக்கம்
+operational amplifier (op-amp) - செயல்படு மிகைப்பி (செய்மிகைப்பி)
+or gate - அல்லது வாயில்
+orbit - சுற்றுப்பாதை
+orientation - திசையமைவு
+oscillation - அலைவு
+oscilloscope - அலை(வு)நோக்கி
+overflow - வழிவு
+overshoot - மேல்பாய்வு 
+panaromic - அகலப் பரப்பு
+parabolic reflector - பரவளைய எதிரொலிப்பி
+parallax - இடமாறு தோற்றம்
+parallel conncetion - பக்க இணைப்பு
+parallellogram - இணைகரம்
+para-magnet - இணைக்காந்தம்
+parameter - கூறளவு
+parasitic antenna - போலி அலைக்கம்பம்
+parasitic capacitance - போலி மின்தேக்கம், போலி மின்கொண்மம்
+parasitic inductance - போலி மின்தூண்டம்
+parasitic impedence - போலி மின் மறுப்பு
+parity bit - சமநிலைத் துகள் - தரவு பரப்புகைப்போது, கூடுதலாக சேர்க்கப்பட்ட துகள்; இவை, பெற்ற தகவல் தரவுத்துகள்களில் பிழைகள் உள்ளதா என அறிவிக்கவும் அல்லது பிழை இருப்பின், அவைகளை நீக்கவும் இயல்கின்றன
+parity check - சமநிலை சரிபார்ப்பு
+pass band - கடத்துப் பட்டை
+passive load - உயிர்ப்பில் சுமை, உயிர்பற்றச் சுமை
+patch cord - எளிதிணைப்பு வடம்
+peer - ஒப்பி
+peer-peer transfer - ஒப்பி-ஒப்பி பரிமாற்றம்
+pentode - ஐம்முனையம்
+periodic table - தனிம அட்டவணை
+peripheral component interconnect (pci) - புறக்கருவி இணைமுகம்
+permeability - காந்த உட்புகு திறன்
+permittivity - மின் தற்கோள் திறன்
+permutation, permutation group - வரிசைமாற்றம், வரிசைமாற்றக் குலம்
+phase (angular) - கட்டம்
+phase (eg. 3-phase circuit) - தறுவாய்
+phased array radar - கட்டஅணி கதிரலைக் கும்பா
+phase locked loop (pll) - கட்டமடைவு வளையம்
+phase shift keying (psk) - கட்டப் பெயர்வு இணைத்தல் - சங்கேத குறியீடுகளை பல்வேறு அலைக்கட்டங்களாக பிரதிபலிக்கும் இலக்க பண்பேற்ற முறை
+phosphorous - தீமுறி, பிரகாசிதம்
+photon - ஒளித்துகள்
+photosphere - ஒளிமண்டலம்
+picture tube - படக் குழாய்
+pick-up - அலையெடுப்பி
+piezo-electric crystal - அமுக்கமின் பளிங்கு
+place and route - இடவமைவு-திசைவு
+placement - இடவமைவு
+plane polarized wave - தள முனைவாக்கப்பட்ட அலை
+plasma - மின்மம்
+platinum - வெண்தங்கம்
+plotter - வரைவி
+plug - செருகி
+plutonium - அயலாம்
+pole (north/south) - முனை
+pole (of a transfer function) - முனைமம் - ஒரு மாற்றுச்சார்பின் வகுக்கோவையின் மூலங்கள்
+polar axes - துருவ அச்சுக்கள், முனையச்சுக்கள்
+polar coordinates - துருவ ஆயங்கள், முனை ஆயங்கள்
+polarimeter - முனைவாக்கமானி - ஒளி அல்லது மின்காந்த அலையின் முனைவாக்க நிலையை கண்டறியும் சாதனம்
+polarity (positve/negative; north/south) - கதிர்வு
+polarizer, polaroid - முனைவாக்கி - முனைவாக்கமற்ற ஒளி அல்லது மின்காந்த அலையை முனைவாக்கப்பட்ட ஒளி அல்லது மின்காந்த அலையாக மாற்றும் கண்ணாடி உட்பொருள்
+power plane - திறன் தளம்
+power spectrum - திறனிறமாலை
+power spectral density - திறனிறமாலை அடர்வு - ஒரு குறிகையின் திறன் பரவல், அலைவெண்ணின் சார்பாக; இதன் மதிப்பு அக்குறிகையின் தன்னொட்டுறவின் ஃபுரியர் உருமாற்ற வீச்சளவின் இருபடியாகும் (square of magnitude of auto-correlation)
+probe - தேட்டி
+prism - அரியம், பட்டகம்
+probability - நிகழ்தகவு
+probability density function - நிகழ்தகவு அடர்சார்பு
+programmer - நிரலி (device), நிரலர் (person)
+programmable logic device - நிரல்படு தருக்கக் கருவி
+propogation - பரப்புகை
+proton - நேர்முன்னி
+pulse amplifier - துடிப்பு மிகைப்பி
+pulse code modulation - துடிப்பு சங்கேத பண்பேற்றம் - நிகழ்நேர (real-time) தரவுகளை இணைநிலை இலக்கமாக்கி (parallelized digital) செலுத்துதல்
+pulse counter - துடிப்பு எண்ணி
+pulse generator - துடிப்பாக்கி
+pulse shaper - துடிப்பு உருமாற்றி
+pulse transformer - துடிப்பு மின்மாற்றி
+pump - எக்கி
+pyramid - கூம்பகம் 
+q (quality) factor - தரக் காரணி
+quadrature phase shift keying (qpsk) - பரப்புக்காண் கட்டப் பெயர்வு இணைத்தல் - சங்கேத குறியீடுகளை பல்வேறு வீச்சு மற்றும் அலைக்கட்டம் சேர்வாக பிரதிபலிக்கும் இலக்க பண்பேற்ற முறை
+quadrilateral - நாற்கரம்
+quantization - சொட்டாக்கம் - தொடர்ச்சியுள்ள அளவுக் கணத்தை தனித்த அளவுக் கணமாக தோராயப்படுத்தி மாற்றுத்துதல்ல்; உதாரணமாக ஒரு ஒப்புமைக் குறிகையை ஒரு குறிப்பிட்ட படிநிலைகளில் இலக்கப்படுத்துதல்
+quantization level - சொட்டாக்க படிநிலை
+quantizer - சொட்டாக்கி
+quantum - துளிமம்
+quarter wave antenna - கால் அலைக்கம்பம்
+quartz - பளிங்கு 
+radar - கதிரலைக் கும்பா
+radian - ஆரகம்
+radiation pattern - கதிர்வீச்சு உருபடிவம்
+radiator - கதிர்வீசி
+radio activity - கதிரியக்கம்
+radio beacon - வழிக்காணலை - விமானம் வழிகாணலுக்கான தரையமைந்த செலுத்தி எல்லா திசைகளிலும் கதிர்வீசும் வானலை
+radio beacon (transmitter) - வழிகாணலை செலுத்தி
+radio channel - வானலைத் அலைவரிசை
+radium - கருகன் - உற்பத்தியாகுபோது வெள்ளி நிறமாகவும், காற்றில் பட்டதும் உடனே கருக்கும் கதிரியக்க உலோகம்
+radius - ஆரம்
+radon - ஆரகன்
+random variable - சமவாய்ப்பு மாறி
+rating - செயல்வரம்பு
+reactance - எதிர்வினைப்பு - ஒரு மின்தேக்கி அல்லது மின்தூண்டியின் மாறுதிசையோட்டம் எதிர்க்கும் தன்மை; மின்தூண்டியில் jwl மற்றும் மின்தேக்கியில் 1/jwc என்கிற மதிப்புகள் கொண்டுள்ளது
+reactive component - எதிர்வினை உறுப்பு
+reciprocal, reciprocity - ஏற்றெதிர், ஏற்றெதிர்மை
+reconfiguration - மீள்உள்ளமைவு
+rectifier - (மின்)திருத்தி
+receiver - பெறுவி
+reflex klystron oscillator - எதிர்வினை மின் கற்றையலைவி/கற்றையலைப்பி
+refract - திரிபுறு
+refraction - ஒளித்திரிபு
+refractive index - ஒளித்திரிபுக் கெழு
+reflection (light, images) - எதிரொளி
+reflection (electric signals) - எதிரலை - முடிப்பு மின்தடை மற்றும் மின்செலுத்துத்தடங்களின் சிறப்பு மின்தடையம் பொறுந்தாததால் செலுத்தும் குறிகைக்கு எதிர்திசையில் குறிகைககள் எழும்பப்படுதல்
+relative motion - சார்பியக்கம்
+relativity theory - சார்பியல் கோட்பாடு
+relay - அஞ்சல் சுருள்
+reset - மீளமை, மீளமைவு
+resistance - தடையம் - ஒரு பொருளின் ஒருதிசை மின்சாரம் எதிர்க்கும் தன்மை; r = v/i என்கிற மதிப்புடையது
+resolution - பிரித்திறண்
+resonance - ஒத்திசை
+resonator - ஒத்திசைவி
+retrace - மீள்வரைவு - ஒரு பரவல் காட்சியில் (rastor display) மின்னி கற்றை திரையின் விளிம்பை எட்டியதும் விரைவாக அதன் துவங்கிடத்திற்கு வரைவாக பின் செல்லுதல்; கிடை மீள்வரைவு (horizontal retrace), நெடு மீள்வரைவு (vertical retrace) என வகைப்படுகிறது
+reverse bias - பின்னோக்கு சாருகை - ஒரு இருமுனையத்தின் p-முனையை சார்பான (relative) குறைமின்னழுத்தத்திற்கும் n-முனையை நிறைமின்னழுத்தத்திற்கும் இணைத்தல்; இவ்விணைப்பினால் திரிதடையத்தில் தடையம் ஏற்படும்
+revolution - சுற்று
+rf (radio frequency) - வானொலி அலை, வானலை
+rf engineering - வானலையியல்
+rf frequency - வானலைவெண்
+rf ground - வானலை நிலம்
+rheostat - தடைமாற்றி
+rhombus - சாய்வுசதுரம்
+ripple - குறுவலை - மாறுதிசையை மின்னோட்டத்தை ஒருதிசை மின்னோட்டமாக மாற்றும்போது, திகழும் மாறுதிசையோட்டத்தில் தோன்றும் ஏற்றத்தாழ்வுகள்
+rise time - எழுநேரம்
+rising edge - எழுவிளிம்பு
+rotation - சுழற்சி
+rotor - சுற்றகம்
+sample - மாதிரி
+sampling - மாதிரி எடுத்தல்
+sampling rate, sampling frequency - மாதிரி வீதம் - ஒரு மாதிரியெடுப்பு முறைமையில் ஒரு குறிப்பிட்ட காலகட்டத்தில் மாதிரியெடுப்பின் எண்ணிக்கை
+sampling theorem - மாதிரி எடுப்புத் தேற்றம் - ஒரு மாதிரியெடுப்பு முறைமையில் ஒரு குறிகையின் (கருதியலான) இழப்பின்றி மறுமீட்பிற்கு குறைந்தபட்ச மாதிரி வீதம் அக்குறிகையின் அதிக அலைவெண்ணின் இருபடியாவது இருத்தல் வேண்டிய நிபந்தனை
+sandpaper - மண்காகிதம்
+saturation - தெவிட்டு நிலை
+satellite - செயற்கைக் கோள்
+scanner - வருடி
+scattering parameters (s-parameters) - சிதறல் பண்பளவுகள் - ஒரு பலதுறை பிணையத்திற்கு (multi-port network) வழங்கும் அளிப்பு திறனின் எதிரொளிப்பு/பரப்புகை பண்புகளை (reflected/transmission charecteristics of power applied) விவரிக்கும் பண்பளவுகள்; இது அணியாக (matrix) வகைக்குறிக்கப்படுகிறது
+scrambling - கலரீடு
+sensor - உணரி
+serdes - இயைப்பி
+series connection - தொடர்நிலை இணைப்பு
+server - வழங்கி
+set - கணம்
+set top box - மேலமர்வுப் பெட்டி - மறையிடப்பட்ட வடம் அல்லது செயற்கைக்கோள் குறிகைகளை தொலைக்காட்சியில் பெற இயலும் சாதனம்
+short circuit - குறுக்கு மின்பாதை, குறுக்கிணைப்பு
+short circuit (fault, accident) - மின்கசிவு
+shot noise - மாது இரைச்சல் - ஒரு முடிவுறு எண்ணிக்கை துகள், எ.டு. கடத்திகளில் மின்னிகள், அல்லது ஒளியின் துளிமங்கள் ஆற்றலை ஏற்றிச்செல்லும்போது ஏற்படும் இரைச்சல்; இது அளவையில் புள்ளியியல் ஏற்றிறக்கங்களை அளிக்கிறது.
+side band - பக்கப்பட்டை - ஒரு சுமைப்பி குறிகையின் பண்பேற்றத்தால் சுமைப்பியின் அலைவெண்ணிற்கு இருபுறமும் உருவாகும் அலைவெண் பட்டைகள்--இவைகளில் ஒன்று
+signal - குறிகை
+signal integrity - குறிகை மெய்மை
+silicon - மண்ணியம்
+simulation - பாவனை
+simulator - பாவிப்பி
+single phase - ஒற்றைத் தறுவாய்
+single side band (ssb) modulation - ஒருபக்கப்பட்டைப் பண்பேற்றம் - வீச்சுப் பண்பேற்றத்தில் இரண்டில் ஒரு பக்கப்பட்டை நீக்கப்பட்ட வீச்சு பண்பேற்றம்; தொலைகாட்சி ஒளிபரப்பில் பயனாகிறது
+single-stub (impedence) matching - ஒருமுளை (மின் மறுப்பு) பொறுத்தம்
+skew - இடைச்சுணக்கம் - இரு/பல (இணைக்)குறிகைகளுக்கிடையே உள்ள பரப்புகையில் கால வேறுபாடு
+skin effect - பரிதி விளைவு - உயர் மாறுதிசை அலைவெண்களில், மின்னோட்டம் ஒரு கடத்தியின் மேல்பரப்பில் மட்டும் கட்டுப்படுதல்
+skyscraper - வானளாவி
+skywave - விண்ணலை
+socket - பொறுந்துவாய்
+sodium - உவர்மம்
+solid angle - திண்மக் கோணம்
+solder flux - சூட்டிணை மெழுகு
+solder iron - சூட்டிணைக் கோல்
+solder lead - சூட்டிணை உருகுகம்பி
+sonar - ஊடொலிக் கும்பா
+sound card - ஒலி அட்டை
+source code - மூலக் குறியீடு
+speaker - ஒலிபெருக்கி, ஒலிபரப்பி
+spectrometer - நிறமாலைமானி
+spectrum analyzer - நிறமாலைப் பகுப்பி
+sphere - கோளம்
+spread spectrum - பரவல் நிறமாலை
+spreadsheet - விரிவுத்தாள்
+stability - நிலைப்புத்தன்மை
+stability condition - நிலைப்பு நிபந்தனை - ஒரு முறைமையின் நிலைப்பை உறுதிபடுத்த அதன் மாற்றுச்சார்பின் கதிர்களின் (poles) இருப்பிடத்தை (குறிப்பாக s-தளத்தின் வலது பாதியில் அமைவது) நிர்ணயிக்கும் நிபந்தனை
+standing wave - நிலையலை
+standing wave ratio (swr) - நிலையலை (மின்னழுத்த) விகிதம்; காண்க voltage standing wave ratio
+static electricity - நிலைமின்சாரம் - ஒரு மின்காக்கும் பொருளில் சேரக்ரிக்கப்படும் மின்னூட்டம்
+stop band - தடைப் பட்டை
+strain - திரிபு, விகாரம்
+stream (of bits, data etc.) - தாரை
+stress - தகைவு
+stripline - கீற்றுத்தடம் - மின்சுற்றுப் பலகைகளில் உள்ளடுக்குகளில் அச்சிடப்பட்ட மின்தடங்கள்
+stub - முளை - ஒரு குறிப்பிட்ட நீளத்திலுள்ள திறந்த அல்லது குறுக்கிணைந்த (short-circuited) பரப்புத் தடம்
+subsystem - துணைமுறைமை, துணையமைப்பு
+superposition theorem - மேல்படி தேற்றம் - ஒரு நேரியல் அமைப்பில் பல உள்ளீடுகளின் உடன்பாடாக ஏற்படும் வெளியீடு, அவைகளின் தனித்தனியாக ஏற்படும் வெளியீடுகளின் கூட்டுத்தொகைக்கு சமம்
+supply voltage - வழங்கல் மின்னழுத்தம்
+surge - எழுச்சி
+surface mount component - மேல்பரப்பு உறுப்பு - மின்சுற்றுப் பலகைகளில் மேல்புறத்தில் பிணைக்கப்பட்ட உறுப்பு
+susceptance - ஏற்பு - ஒரு மின்தேக்கி அல்லது மின்தூண்டியின் மாறுதிசையோட்டம் கடத்தும் தன்மை; மின்தூண்டியில் 1/jwl மற்றும் மின்தேக்கியில் jwc என்கிற மதிப்புகள் கொண்டுள்ளது
+switch, switching - நிலைமாற்றி, நிலைமாற்றம்
+switcher, switching regulator - நிலைமாற்றுச் சீர்ப்படுத்தி
+synchronization - ஒத்தியக்கம்
+synch charecter - இசைவு உரு - ஒரு அமைப்பு மற்றொன்றுடன் ஒத்தியங்க செலுத்தப்படும் (இணை அல்லது தொடர்வரிசை) தரவு உருபடிவம் (data pattern)
+synchronous - ஒத்தியங்கு
+synthesis - இணைபடுத்தல்
+synthesizer - இணைபடுத்தி 
+tachometer - சுழற்சிமானி, சுழற்சி அளவி
+tangent - தொடுகோடு
+tank circuit - தொட்டிச் சுற்று
+tantallum - இஞ்சாயம்
+tape recorder - நாடாப் பதிவி
+target (in a bus etc.) - இலக்கு
+telescope - தொலைநோக்கி
+tension - இழுவிசை
+terminate (transmission lines) - முடித்துவிடு - எதிரலைகளை கட்டுப்படுத்த மின்தடையங்களை பரப்புத் தடங்களில் சேர்த்தல்
+termination resistor, termination resistance - முடிப்பு மின்தடை, முடிப்பு மின்தடையம் - எதிரலைகள் ஏற்படுதலை தடுக்க மின் தடங்களின் சேர்க்கப்படும் அல்லது தற்செயலாக திகழும் மின்தடையம்
+terrestrial, terrestrially - புவிப்பரவு, புவிப்பரவாக
+test bench - சோதனை மேடை
+tetrode - நான்முனையம்
+thermistor - வெப்பத்தடையம்
+thermal noise - வெப்ப இரைச்சல் - ஒரு கடத்தியில் மின்னிகளின் துள்ளலால் ஏற்படும் இரைச்சல்
+thermocouple - வெப்ப இரட்டை
+thermodynamics - வெப்ப இயக்கியல்
+thick film - தடிபடலம்
+thick lens - தடிவில்லை
+thin film - மென்படலம்
+thin lens - மென்வில்லை
+thorium - இடியம்
+through-hole component - துளைப்புகு உறுப்பு - மின் சுற்றுப்ப்லகைகளில் துளை வழிமங்கள் (through-hole vias) மூலம் பிணைக்கப்பட்ட உறுப்புக்கள்
+through-hole via - துளை வழிமம் - ஒரு சுற்றுப்பலகையின் இரு முகங்களையும் எட்டும் வழிமம்
+throughput - செய்வீதம்
+thyratron - வளிமும்முனையம்
+timebase - காலவடி
+titanium - வெண்வெள்ளி
+tone - தொனி
+toroid(al coil) - நங்கூரச்சுருள்
+transponder - செலுத்துவாங்கி - வானலைக் குறிகையை ஒரு நிர்ணயிக்கப்பட்ட அலைவெண்ணில் பெற்று இன்னொரு நிர்ணயிக்கப்பட்ட அலைவெண்ணில் திரும்ப அக்குறிகையை செலுத்தும் சாதனம்; செயற்கைக்கோள்கள், விமானங்கள், கப்பல்கள் ஆகியவற்றில் இவை பொறுத்தப்படுகின்றன
+transfer function - மாற்றச் சார்பு
+transform - உருமாற்று, உருமாற்றம்
+transceiver - செலுத்துப்பெறுவி
+transient - மாறுநிலை
+transmission line - பரப்புத் தடம், செலுத்துத் தடம்
+transmitter - செலுத்தி
+travelling wave tube (twt) - இயங்குஅலைக் குழல் - நுண்ணலையை ஏற்படுத்தும் ஒரு சாதனம்
+triac (triode for ac) - மாறுமின் மும்முனையம் - மாறுமின்னோட்ட கட்டுப்பாட்டிற்கு பயனாகும் சாதனம்; இது தொராயமாக இரண்டு பின்பிணைந்த (back-to-back) மண்ணியத் திருத்திகளுக்கு (scr) சமம்
+triode - மும்முனையம்
+trigger(ing) - குதிரை(யிடல்)
+trippler - மும்மடங்காக்கி
+troposhere - அடிவளிமண்டலம்
+truth table - மெய் அட்டவணை
+tuner - இசைப்பி
+tuned - ஒத்தியைந்த, சுரம்கூட்டிய
+tuned amplifier - இசைப்புறு மிகைப்பி
+tunnel diode - சுரங் இருமுனையம், சுரங்கி
+tungsten - மெல்லிழையம்
+turbine - சுழலி
+tweeter - மேல்சுர ஒலிபெருக்கி
+twinax cable - ஈரச்சு வடம் 
+ultraviolet - புறஊதா
+ultra high frequency (uhf) - அதிஉயர் அலைவெண்
+ultrasonic - கேளாஒலி
+ultrasound - ஊடொலி
+underflow - குறைப்பாய்வு
+undershoot - கீழ்பாய்வு
+uniform quantization - சீரானச் சொட்டாக்கம் - உள்ளீட்டுக் குறிகை வீச்சை சீரான படிநிலைகளாக பிரிக்கும் சொட்டாக முறை
+uranium - அடரியம் - அதிகளவு அடர்த்தியான கதிரியக்க உலோகம்; வெள்ளி நிறமானது 
+vanadium - பழீயம்
+variance - மாறுபாட்டெண்
+vector quantization - நெறிமச் சொட்டாக்கம் - நெறிமங்களை வகைக்குறிக்கும் சொட்டாக முறை; உள்ளீடு குறிகையை ஒரு நெறிம வெளியை (vector space) சேர்ந்ததாக கருதினால், அதை குறைந்த நெறிமங்களில் தோராயப்படுத்தும் சொட்டாக்க முறை
+velocity - திசைவேகம்
+vertically polarized wave - செங்குத்து/நெடு முனைவாக்கப்பட்ட அலை - மின்புலம் நெடுதளத்திலேயே அமையும் ஒளி அல்லது வானலை
+vestigial side-band modulation - எச்சத்தக்கப் பக்கப்பட்டை பண்பேற்றம் - ஒரு வகையான வீச்சு பண்பேற்றம்; இதில் ஒரு பக்கப் பட்டையின் ஒரு பகுதியும் மற்றது முழுமையாகவும் செலுத்தப்படுகிறது; தொலைகாட்சி ஒளிபரப்பில் பயனாகிறது
+via - வழிமம் - ஒரு பன்னடுக்கு மின் சுற்றுப்பலகையில், மின் தடம் ஒரு அடுக்கிலிருந்து மற்ற அடுக்கிற்கு கடப்பதற்கு அமைக்கபடும் சிறுதுளை
+video - ஒளிதோற்றம்
+video recorder - ஒளிதோற்றப் பதிவி
+voltage regulator - மின்னழுத்தச் சீர்ப்பி
+voltage stabilizer - மின்னழுத்த நிலைப்பி
+voltage standing wave ratio (vswr) - நிலையலை (மின்னழுத்த) விகிதம் - எதிரலையின் வலுமையை குறிப்படும் அளவு; இது 1 அருகில் இருப்பதே சிறந்தது; அதிக அளவு என்பது முனைப்படுத்தல் மின்தடையத்தின் பொறுந்தாநிலை; நிலையலையின் அதிகபட்ச-குறந்தபட்ச மின்னழுத்த விகிதம்
+wafer - சீவல்
+wave front - அலை முகப்பு
+wave propagation- அலைப் பரவுதல்
+waveguide - அலையடை, அலைவழிகாட்டி, அலைவழிபடுத்தி
+waveform - அலைவடிவம், அலைப்படம்
+waypoint - பாதைப்புள்ளி - கடல், தரை அல்லது வான வழிக்காட்டலுக்கு மேற்கோள்ளாக பயன்படுத்தும் ஒரு குறிப்பிட்ட புவி இருப்பிடம்; இது உலக இடம் காட்டும் அமைப்பில் (gps) பயனாகிறது
+weather radar - வானிலை கதிரலைக் கும்பா
+white noise - வெண்ணிறைச்சல்
+wireless fidelity (wi-fi) - கம்பியில்லா மெய்நிலை
+woofer - அடிச்சுர ஒலிபெருக்கி
+word - ஈரெண்ணெண்
+double-byte - ஈரெண்ணெண்
+x-ray - ஊடுக்கதிர்
+yoke - நுகம்
+zero (of a transfer function) - சுழியம் - ஒரு மாற்றுச்சார்பின் வகுபடுக் கோவையின் மூலங்கள்

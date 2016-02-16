@@ -1,0 +1,1392 @@
+#Collected list of Tamil computer words for Open-Tamil project
+#This work is in public domain; relevant references are listed
+#Ref: http://tamilelibrary.org/teli/cwords.html
+>>கணினி
+address	முகவரி, விலாசம்
+addons நீட்சிகள்
+border	கரைகள்
+brackets அைடப்புக்குறிகள்
+brochure குறிப்பு
+browser	உலாவி
+center	மையம், மத்தி, நடு
+change	மாற்றல், மாற்று
+character எழுத்து
+click சொடுக்கு, சொடுக்குதல்
+clipboard மறைப்பலகை
+client வாடிக்கையாளர்
+customer வாடிக்கையாளர்
+colour வண்ணம், நிறம்
+command கட்டளை
+comments விளக்கக் குறிப்பு
+compress அடிக்கிஅமுக்கு
+computer கணினி, கணிப்பொறி
+computer கணிப் பொறியாளர்
+computer கணினி இயல்
+contact தொடர்பு
+copy பிரதி, நகல்
+create உருவாக்கு
+crop செதுக்கு
+cursor ஏவல்
+cyberspace கணினியகம்
+decompress விரிவாக்கு
+desktopcomputer	மேசைக் கணினி
+desktop மேசைப் பிரசுரம்
+dictionary அகராதி
+directory கட்டு, கட்டை
+distribute வினியோகி, வினியோகப்படுத்து
+document ஆவணம்
+download இழுத்துவை
+#-ref:-http://www.panippulam.com/index.php?option=com_content&view=article&id=3359:computer-terms-in-tamil-&catid=67:art&Itemid=392
+access    அணுக்கம்
+accuracy    துல்லியம்           
+action    செயல்           
+activate    இயக்கு           
+activecell    இயங்கு கலன்           
+activefile    நடப்புக் கோப்பு           
+activity    செயல்பாடு           
+adaptercard    பொருத்து அட்டை           
+adaptor    பொருத்தி           
+address    முகவரி           
+addressbus    முகவரி பாட்டை           
+addressmodification    முகவரி மாற்றம்           
+addressing    முகவரியிடல்           
+administrator    நிர்வாகி           
+album    தொகுப்பு           
+algorithmlanguage    நெறிப்பாட்டு மொழி           
+algorithm    நெறிமுறை           
+alignment    இசைவு           
+allocation    ஒதுக்கீடு           
+alphatesting    முதற்கட்ட சோதனை           
+alphabet    அகரவரிசை/நெடுங்கணக்கு           
+alphabetical    அகர வரிசைப்படி           
+alphanumeric    எண்ணெழுத்து           
+ambiguation    கவர்படுநிலை            
+amplified    பெருக்கப்பட்ட           
+analogrepresentation    ஒப்புமை மீள்வடிவாக்கம்           
+analog    ஒப்புமை           
+analytical-engine    பகுப்பாய்வு பொறி           
+animation    அசைவூட்டம்           
+anonymous    அநாமதேய           
+anti-virus    நச்சுநிரற்கொல்லி/நச்சுநிரல் எதிர்ப்பான்           
+appearance    தோற்றம்           
+append    பின்சேர்           
+applet    குறுநிரல்           
+application-level    பயன்பாட்டு நிலை           
+application-programmer    பயன்பாட்டு நிரலாளர்           
+application-programming    பயன்பாட்டு நிரலாக்கம்           
+application-programs    பயன்பாட்டு நிரல்கள்           
+application-service-provider    பயன்பாட்டுச் சேவை வழங்குனர்           
+application-software    பயன்பாட்டு மென்பொருள்           
+application    செயலி           
+architecture    கட்டமைப்பு           
+archive-file    காப்பகக் கோப்பு           
+archive-gateway    காப்பக நுழைவாயில்           
+archive    காப்பகம்           
+archiving    காப்பகப்படுத்தல்           
+area-search    பரப்பில் தேடல்           
+arithmetic    எண் கணிதம்           
+array-processor    அணிச் செயலி           
+array    அணி           
+arrow-key    திசை விசை/திசை குறி           
+artificial-intelligence    செயற்கை நுண்ணறிவு           
+assembler    பொறிமொழியாக்கி           
+assembly-language    பொறி மொழி           
+audio-blog    ஒலிதப்பதிவு           
+audio    ஒலிதம்           
+auto-block    தானியங்கித் தடை           
+auto-restart    தானியக்க மீள்தொடக்கம்           
+automated-data-processing    தன்னியக்கத் தரவுச் செயலாக்கம்           
+automatic    தன்னியக்க           
+auxiliary-equipments    துணைக்கருவிகள்           
+auxiliary-function    துணைச்செயற்கூறு           
+auxiliary-memory    துணை நினைவகம்           
+auxiliary-operation    துணை செயல்பாடு           
+auxiliary-storage    துணை தேக்கம்           
+availability    கிடைத்தல்           
+axes    அச்சுகள்           
+backup    காப்புநகல்/காப்புநகலெடு           
+background    பின்னணி           
+backspace    பின்நகர்வு           
+bar-chart    பட்டை வரைப்படம்           
+bar-code    பட்டைக்குறிமுறை           
+barcode-scanner    பட்டைக்குறிமுறை வருடி           
+bar-printer    பட்டை அச்சுப்பொறி           
+basic    அடிப்படை           
+batch-processing    தொகுதிச்செயலாக்கம்           
+beta    அறிமுகப் பதிப்பு           
+binarycode    இரும குறிமுறை           
+binary-device    இருமக் கருவி           
+binarydigit    இரும இலக்கம்
+bit            இரும இலக்கம்
+binarynumber    இரும எண்           
+binary-operation    இரும செயற்பாடு           
+binar-ysystem     இரும கட்டகம்           
+bitmap-display    நுண் படக் காட்சி           
+bitmap-scanning    நுண் பட வருடி           
+bitmapped-screen    நுண் பட திரை           
+bit-values    நுண்மியின் மதிப்புகள்           
+bit    நுண்மி           
+bitmap    நுண் படம்           
+bit-mapped-font    நுண் பட எழுத்துரு           
+blank-character    வெற்றுரு           
+blank-page    வெற்றுப்பக்கம்           
+blanking    வெறுமைப்படுத்தல்           
+block    தடை           
+blog    வலைப்பதிவு           
+blog-info    வலைப்பதிவு தகவல்கள்           
+blog-tools    வலைப்பதிவுக் கருவிகள்           
+blogger    வலைப்பதிவர்           
+blogger-circle    வலைப்பதிவர் வட்டம்           
+blogging    வலைப்பதிதல்           
+bookmark    புத்தகக் குறி           
+boot    தொடக்கு           
+border    கரைகள்           
+branching    கிளைப்பிரிதல்           
+bridge    இணைவி           
+broadband    அகலப்பட்டை           
+browser    உலாவி           
+browsing    உலாவுதல்           
+buddy    நண்பர்           
+bug    வழு           
+bug-report    வழு அறிக்கை           
+bus    பாட்டை           
+cache    தேக்கம்           
+calculating    கணக்கிடல்           
+calculation    கணக்கீடு           
+calculator-mode    கணிப்பான் நிலை           
+calculator    கணிப்பான்           
+cancel    தவிர்           
+capacity    கொள்திறன்           
+carriage-return    ஏந்தி மீளல்           
+catalog    விவரப்பட்டியல்           
+category    பக்கவகை           
+CD-burning    குறுவட்டு எரித்தல்           
+CD-player    இறுவட்டு இயக்கி           
+center    மையம்/நடுவம்           
+central-processing-unit    மையச் செயலகம்
+CPU                        மையச் செயலகம்
+central-processor    மையச் செயலி           
+chain-printer    தொடர்ப்பதிப்பான்           
+change    மாற்றல்/மாற்று           
+channel    தடம்           
+character    வரியுரு           
+character-code    வரியுருக் குறி           
+character-map    வரியுரு வரைப்படம்           
+character-recognition    வரியுரு அறிதல்           
+character-set    வரியுருக்கணம்           
+character-string    வரியுருச்சரம்           
+chart    வரைப்படம்           
+chat    அரட்டை           
+checkbox    தேர்வுப்பெட்டி           
+chips    சில்லுகள்           
+clear    துடை           
+click    சொடுக்கு           
+clipboard    மறைப்பலகை           
+close    மூடு           
+closed-file    மூடப்பட்ட கோப்பு           
+cloud-computing    முகிலக் கணிப்பு           
+collection    திரட்டல்           
+color-coding    வண்ணக் குறிமுறை           
+color-graphics    வண்ன வரைகலை           
+color    வண்ணம்/நிறம்           
+column-split    நெடுவரிசைப் பிரிப்பு           
+column    நெடுவரிசை           
+command-key    கட்டளை விசை           
+command    கட்டளை/ஆணை           
+comment    கருத்துரை/பின்னூட்டம்/முன்னிகை           
+comments-moderation    கருத்துரை மட்டுறுத்தல்           
+common-storage    பொதுத்தேக்கம்           
+common    பொது           
+communication-link    தொடர்பு இணைப்பு           
+communication-processor    தொடர்பு செயலகம்           
+communication-satellite    தொடர்பு செயற்கைக்கோள்           
+communication-software    தொடர்பு மென்பொருள்           
+communication-protocols    தொடர்பு நெறிமுறைகள்           
+community-portal    சமுதாய வலைவாசல்           
+compact-disc cd    குறுவட்டு/இறுவட்டு           
+comparative-operator    ஒப்பீட்டு இயக்கி           
+compare    ஒப்பிடு           
+comparison    ஒப்பிடுதல்           
+compilation    தொகுப்பு           
+compiler    தொகுப்பி           
+complier-language    தொகுப்பு மொழி           
+component    உறுப்புக்கூறு           
+compress    அழுத்து/அமுக்கு           
+computer-engineer    கணிப் பொறியாளர்           
+computer-game    கணினி விளையாட்டு           
+computer-graphic    கணினி வரைகலை           
+computer-language    கணினி நிரல் மொழி           
+computer-motherboard    கணினி தாய்பலகை           
+computer-network    கணினி வலையமைப்பு           
+computer operation    கணினிச் செயல்பாடுகள்           
+computer-program    கணனி நிரல்           
+computer-resources    கணினி வளங்கள்           
+computer-user    கணினி பயனர்           
+computer-utility    கணனி பயனமைப்பு           
+computer    கணினி           
+computerization    கணினிமயமாக்கல்           
+computerized-data-base    கணினிமய தரவு தளம்           
+computerized-data-processing    கணினிமய தரவு செயலாக்கம்           
+computing    கணினிப்பணி           
+condition    நிபந்தனை/நிலை           
+configuration    அமைவடிமம்           
+connectors    இணைப்பான்கள்           
+console    முனையம்           
+constants    மாறிலிகள்           
+content-policy    உள்ளடக்கக் கொள்கை           
+contributions    பங்களிப்புகள்           
+contributor    பங்களிப்பாளர்/பங்களிப்போர்           
+control-key    கட்டுப்பாட்டு விசை           
+control-panel    கட்டுபாட்டு பலகை/கட்டுப்பாட்டகம்           
+control-program    கட்டுப்பாட்டு நிரல்           
+control-statement    கட்டுப்பாட்டுக்கூற்று           
+control-structure    கட்டுப்பாட்டு உருவம்           
+control-system    கட்டுப்பாட்டு கட்டகம்           
+control-unit    கட்டுப்பாட்டு பிரிவு           
+conversion    மாற்றம்           
+convert    மாற்று           
+cookie    நினைவி           
+copy-protection    நகல் காப்பு           
+copy    பிரதி/நகல்           
+copyright-status    பதிப்புரிமை நிலை           
+copyright    பதிப்புரிமை           
+core-storage    வளையத் தேக்கம்           
+cost-analysis    விலைப் பகுப்பாய்வு           
+cost-benefit-analysis    விலை பயன் பகுப்பாய்வு           
+cost-effectiveness    விலை பயன் திறன்           
+create    உருவாக்கு           
+crop    செதுக்கு           
+current-events    நடப்பு நிகழ்வுகள்           
+cursor    சுட்டி           
+curve-fitting    வளைக்கோட்டுப் பொருத்தம்           
+custom-software    தனிப்பயன் மென்பொருள்           
+customize    விருப்பமை/தனிப்பயனாக்கு           
+cut    வெட்டு           
+cyber    மின்வெளி           
+dashboard    கட்டுப்பாட்டகம்           
+data    தரவு           
+data-catalog    தரவு விவரப்பட்டியல்           
+data-flow    தரவுப் பொழிவு           
+data-processing    தரவுச் செயலாக்கம்           
+database    தரவுத்தளம்           
+decimal-digit    பதின்ம இலக்கம்           
+decimal-number    பதின்ம எண்           
+decimal-point    பதின்ம புள்ளி            
+decimal    பதின்மம்           
+decode    குறிமுறை நீக்கு/நீக்கி           
+decompress    விரிவாக்கு           
+default    முன்னிருப்பு/இயல்பிருப்பு           
+definite    திட்டமிட்ட/தெளிவான           
+delete    அழி           
+deletion    அழித்தல்           
+description    விவரணம்/விளக்கம்           
+design    வடிவமைப்பு           
+desktop-computer    மேசை கணினி           
+desktop    முகத்திரை           
+destination    அடையுமிடம்           
+developer    மேம்படுத்துனர்           
+device    கருவி           
+diagram    விளக்கப்படம்           
+digital    எண்மின்           
+disambiguated    தெளிவாக்கிய/தெளிவுப்படுத்திய           
+disambiguation    தெளிவாக்கம்/தெளிவாக்கல்           
+discovery    கண்டறி/கண்டறிதல்           
+discuss    கலந்தாலோசி           
+disk-drive    வட்டு இயக்கி           
+display-name    தோற்றப்பெயர்           
+distribute    வினியோகி/வினியோகப்படுத்து           
+dns    கொப்பெகம் [கொற்றப்பெயர்க்கட்டகம்]           
+document    ஆவணம்           
+documentation    ஆவணமாக்கம்           
+domain    கொற்றம்/ஆள்களமையம்           
+domain-name-system    கொற்றப் பெயர்க் கட்டகம்           
+double-click    இரட்டைச் சொடுக்கு           
+download    பதிவிறக்கம்           
+drag    இழு           
+driver    இயக்கி           
+drum-plotter    உருளை வரைவு           
+drum-printer    உருளை அச்சுப்பொறி           
+drum-scanner    உருளை வருடி           
+e-book    மென்நூல்           
+edit    தொகு/மாற்று           
+edit-profile    சுயவிபரத்தை மாற்று           
+editor    தொகுப்பாளர்           
+educational-software    அறிவியல் மென்பொருள்           
+effective    பயன்விளையத்தக்க           
+effects    விளைவுகள்           
+e-governance    மின்-அரசாண்மை           
+electrical-signal    மின் சமிக்ஞை           
+electronic    மின்னணு           
+e-mail    மின்னஞ்சல்           
+embedded    பொதிந்துள்ள           
+emulation    போலச்செய்தல்           
+encoding    குறியாக்கம்           
+encyclopedia    கலைக்களஞ்சியம்           
+end    முடிவு           
+equation    சமன்பாடு           
+erase    அழி           
+eraser    அழிப்பான்           
+expansion-slots    விரிவாக்க செருகுவாய்கள்           
+expiry    கெடுமுடிவு/காலாவதி           
+extended-info    விரிவாக்கப்பட்ட தகவல்           
+external-links    வெளி இணைப்புகள்           
+external-search-engine    வெளித்தேடுபொறி           
+faq     அடிக்கடி கேட்கப்படும் கேள்விகள்           
+features    அம்சங்கள்           
+field    புலம்           
+file    கோப்பு           
+file-management    கோப்பு மேலாண்மை           
+file-share    கோப்பு பகிர்வான்           
+file-sharing    கோப்பு பகிர்தல்           
+find    கண்டறி/தேடு           
+firewall    தீயரண்           
+firmware    நிலைப்பொருள்           
+flat-monitor    தட்டை திரையகம்           
+floppy-drive    நெகிழ் வட்டு           
+flow-chart    நெறிமுறை விளக்கப்படம்           
+folder    கோப்புறை           
+font    எழுத்துரு           
+font-and-word-processor    எழுத்துருவும் சொல் செயலாக்கியும்           
+font-name    எழுத்துரு பெயர்           
+footer    அடிப்பாகம்           
+formal-language    வடிவ மொழி           
+format    வடிவம்/வடிவூட்டம்           
+formatting    வடிவமைத்தல்           
+formula    சூத்திரம்           
+free-software    இலவச மென்பொருள்           
+function    செயற்கூறு/செயற்பாடு           
+gallery    காட்சியகம்           
+gateway    நுழைவாயில்           
+global-dashboard    கோளக் கட்டுப்பாட்டகம்           
+global-positioning-system    கோள இருப்பிடக் கட்டகம்           
+grammar-checker    இலக்கணத் திருத்தி           
+graphic    வரையியல்/வரைகலை           
+group    குழுமம்           
+guest    விருந்தினர்           
+hand-held-devices    கையடக்கக் கருவிகள்           
+hand-held-scanner    கையடக்க வருடுபொறி           
+handwriting-recognition    கையெழுத்து அறிதல்           
+hard-disc    வன்வட்டு           
+hardware    வன்பொருள்           
+header    தலைப்பு           
+help-center    உதவி மையம்           
+help-group    உதவி குழுமம்           
+high-speed-computer    அதிவேகக் கணினி           
+higher-level-language    உயர்நிலை மொழி           
+home    முகப்பு           
+homepage    முகப்புப்பக்கம்           
+horizontal-line    கிடைக்கோடு           
+host-computer    புரவலர் கணினி           
+hyphenation    சொல் பிரித்தல்           
+icon    உருச்சின்னம்/படவுரு           
+identity    அடையாளம்           
+idns    வலைக்கொற்றப் பெயர்க் கட்டகம்           
+idomain    வலைக்கொற்றம்           
+ignore    புறக்கணி           
+image    படிமம்           
+import    இறக்கம்           
+incompatible    முரண்பாடு           
+indefinite    திட்டமிடாத           
+index    சுட்டெண்           
+index-variable    சுட்டுமாறி           
+information    தகவல்           
+information-data    தகவல் தரவு           
+information-super-highways    தகவல் மீப் பெருவழிகள்           
+information-technology    தகவல் தொழில்நுட்பம்           
+input-unit    உள்ளீட்டுப் பகுதி           
+insert    உள்ளிடு/செருகு           
+install    நிறுவு           
+installation    நிறுவுதல்           
+integrated-chips    சுற்றமைப்புச் சில்லுகள்           
+integrated-circuit-chips    ஒருங்கிணைப்பு சுற்றமைப்புச் சில்லுகள்           
+inter-language    மொழியிடை           
+interactive-sites    ஊடாட்ட தளங்கள்           
+interests    ஆர்வங்கள்           
+interface    இடைமுகம்/இடைமுகப்பு           
+internal    உள்ளக           
+internal-error    உள்ளகத் தவறு           
+international    பன்னாட்டு           
+international dns    பன்னாட்டுக் கொப்பெகம்           
+internet    இணையம்
+internet-explorer இண்டெர்நெட் எக்ஸ்ப்ளோரர்
+internet-protocol-address    இணைய நெறிமுறை முகவரி           
+internet-protocol ip    இணைய நெறிமுறை           
+internet-service-provider isp    இணையச் சேவை வழங்குனர்           
+interpreter    வரிமொழிமாற்றி/இடைமாற்று           
+invalid    செல்லாத/செல்லுபடியாகாத           
+invention    கண்டுப்பிடிப்பு           
+italic-text    சாய்வெழுத்து           
+iteration    பன்முறைச் செய்தல்           
+java-script    ஜாவா ஆணைத்தொகுதி           
+key    விசை           
+keyboard    விசைப்பலகை/தட்டச்சுப்பலகை           
+keypad    விசைத்தளம்           
+keyword    குறிப்புச்சொல்           
+landscape    அகலவாக்கி           
+laptop-computer    மடிக்கணினி           
+layout    தளவமைப்பு           
+lcd-monitor liquid-crystal-display    திரவ பளிங்குத் திரையகம்           
+left-click    இடதுச் சொடுக்கு           
+lexing-error    தொகுத்தல் தவறு           
+license    உரிமம்           
+light-pen    எழுதுகோல்           
+line    கோடு/வரி           
+link    இணைப்பு/தொடுப்பு           
+list    பட்டியல்           
+live    நேரடி           
+log-in    புகுபதி/உற்புகு           
+log out    விடுபதி/வெளியேறு           
+machine-language    பொறிமொழி           
+machine-translation    எந்திர மொழிபெயர்ப்பு           
+magnetic-disk    காந்த வட்டு           
+magnetic-tape    காந்தா நாடா           
+main-page    முகப்புப்பக்கம்/முதற்பக்கம்           
+maintenance-page    மேலாண்மைப் பக்கம்           
+management    ஆளுமை/முகாமைத்துவம்           
+mechanical-calculator    எந்திர கணிப்பான்           
+media    ஊடகம்           
+media-player    ஊடக இயக்கி           
+memory-unit    நினைவகப் பகுதி           
+memory    நினைவகம்           
+menu    பட்டியல்           
+metadata    தரவு விவரம்           
+micro-processor    நுண் செயலி           
+microphone    ஒலிவாங்கி
+microsoft-office மைக்ரோசாப்ட் ஆபீஸ்
+modem    இணக்கி           
+moderation    மட்டுறுத்தல்           
+moderator    மட்டுறுத்துனர்           
+monetize    மதிப்புடைச்செய்           
+monitor    கணித்திரை/திரையகம்           
+more-features    கூடுதல் அம்சங்கள்           
+motherboard    தாய்ப்பலகை           
+mouse    சொடுக்கி           
+multimedia    பல்லூடகம்           
+multitasking    பல்பணியாக்கம்           
+my-account    எனது கணக்கு           
+natural-language    இயற்கை மொழி           
+navigation    வழிசெலுத்தல்           
+negative    எதிர்வு           
+network    பிணையம்/வலையமைப்பு           
+networking    வலைப்பின்னல்           
+neutral-point of-view    நடுநிலைநோக்கு           
+new-post    புதிய இடுகை           
+non-terminals    முடியா முனையங்கள்           
+notation    குறிமானம்           
+note    குறிப்பு           
+number    எண்           
+numeral    எண் முறை           
+object    பொருள்           
+offline    இணைப்பறு/இணைப்பின் வெளியே           
+online    இணைப்பில்           
+operating-system    இயங்குக் கட்டகம்           
+option    தேர்வு           
+orphaned-pages    உறவிலிப் பக்கங்கள்           
+other-languages    பிறமொழிகள்/ஏனைய மொழிகள்           
+outsourcing    அயலாக்கம்           
+package    பொதி           
+packets    பொட்டலங்கள/பொதிகள்           
+page-layout    பக்க வடிவமைப்பு           
+page-views    பக்கப் பார்வைகள்           
+page    பக்கம்           
+panel    பலகை           
+paperless office    தாளில்லா அலுவலகம்           
+paragraph    பந்தி           
+parallel-processing-computers    இணைச் செயலாக்க கணினிகள்           
+parent-category    முதன்மை பக்கவகை           
+password    கடவுச்சொல்           
+paste    ஒட்டு           
+patch    பொருத்து           
+peripherals    உபகரணங்கள்           
+permission    அனுமதி           
+personal-computer    தனி கணினி           
+photograph    புகைப்படம்           
+picture    படம்           
+piracy    களவுநகலாக்கம்           
+plug-in    சொருகு/சொருகி           
+pointer    சுட்டு           
+portable-printer    கையடக்க அச்சுப்பொறி           
+portal    வலைவாசல்           
+post    இடுகை           
+posting    இடுகையிடல்           
+posts    இடுகைகள்           
+preferences    விருப்புத்தேர்வுகள்           
+presentation    அளிக்கை           
+press    அமுக்கு           
+preview    முன்தோற்றம்           
+principals    கோட்பாடு           
+print    அச்சிடு           
+printer    அச்சுப்பொறி           
+privacy    தனிக்காப்பு/தனிமறைவு           
+problem    சிக்கல்/பிரச்சினை           
+processor    செயலி           
+program    நிரல்           
+programmers    நிரலர்கள்           
+programming-language    நிரலாக்க மொழி           
+prompt    தூண்டி           
+protect    காப்புச்செய்           
+protection-log    தடைப்பதிகை           
+protocols    நெறிமுறைகள்           
+proxy-server    பதில் சேவையகம்           
+public-domain    பொதுக்கொற்றம்/பொதுக்களம்           
+publications    வெளியீடுகள்           
+publish    பதிவிடு/வெளியிடு           
+publisher    பதிப்பாளர்           
+publishing    பதிப்பிடல்           
+query    வினா/வினவல்           
+ram random-access-memory    நினைவகம்           
+random-page    ஒழுங்கிலாப் பக்கம்           
+recent-changes    அண்மைய மாற்றங்கள்           
+recovery-tool    மீட்சி கருவி           
+redirects    வழிமாற்றிகள்           
+redo    செய்தது தவிர்/திரும்பச்செய்           
+reference-desk    எடுகோள் மேடை           
+reference    எடுகோள்           
+refresh    புதுப்பி           
+reinstall    மீள்நிறுவு           
+release    வெளியீடு           
+remember-me    என்னை நினைவில் வை           
+removal    அகற்றல்           
+remove    அகற்று           
+replace    மீள்வை           
+reprogramming    மறுநிரலாக்கம்           
+required    வேண்டப்பட்ட/தேவைப்பட்ட           
+reset    மீட்டமை           
+restore    மீள வை/ மீள்வி           
+result    விளைவு           
+review    மீளாய்வு           
+revision    புதிபித்தல்/திருத்தம்           
+right-click    வலச்சொடுக்கு           
+root    மூலம்           
+root-directory    மூல அடைவு           
+router    வழிச்செயலி           
+row    குறுக்கு வரிசை/நிரை           
+rule    விதி/விதிமுறை           
+save    சேமி           
+save-as    என சேமி           
+scanner    வருடுபொறி           
+screensaver    திரைக்காப்பு           
+search    தேடு/தேடல்           
+search-engine    தேடு பொறி           
+search-query    தேடல் வினா           
+search    தேடல்/தேடு           
+section    பகுதி           
+see-also    இவற்றையும் பார்           
+select    தேர்வுசெய்           
+sensor    உணரி           
+server    வழங்கி           
+sessions    அமர்வுகள்           
+setting    அமைப்புகள்           
+share-my-profile    எனது சுயவிவரத்தை பகிர்           
+shared-files    பகிரப்பட்ட கோப்புகள்           
+shareware    பகிர்மானம்           
+shortcut    குறுவழி/குறுக்குவழி           
+show-all    எல்லாம் காண்பி           
+shutdown    அணை/மூடு           
+sign-in    புகுபதிகை/புகுபதிவு           
+sign off    விடுபதிகை/விடுபதி           
+sign out    வெளியேறு           
+single-click    தனிச் சொடுக்கு           
+sister-projects    பிற திட்டங்கள்           
+site-feed    தள ஓடை           
+socket    பொருத்துவாய்           
+software    மென்பொருள்           
+software-package    மென்பொருள் பொதி           
+sorting-algorithms    தீர்வு நெறிகள்           
+sorting-and-searching    வரிசையாக்கமும் தேடலும்           
+sound-card    ஒலிக்கிரமி           
+source-code    மூலவரைவு
+skype     ஸ்கைப்
+webcam வெப்கேமரா
+source    மூலம்           
+space    வெளி/இடைவெளி           
+spacing    இடைவெளியிடல்           
+spam    எரிதம்           
+speaker    ஒலிப்பெருக்கி           
+special-pages    சிறப்பு பக்கங்கள்           
+specification    விவர வரையறை           
+spell-checker    எழுத்துப் பிழை திருத்தி           
+split    பிரிப்பு           
+spooler    சுருளி           
+spreadsheet    விரித்தாள்           
+standard    நியமம்/தரப்பாடு           
+standardisation    தரப்படுத்துதல்           
+stats    புள்ளிவிவரங்கள்           
+string-literals    சர மதிப்புருக்கள்           
+structured-programming    கட்டுரு நிரலாக்கம்           
+stub    குறுங்கட்டுரை           
+subtitle    துணையுரை           
+suffix    பின்னொட்டு           
+super-computer    மிகுவேகக் கணினி/மீக்கணினி           
+support    உதவி           
+syntax-error    தொடரமைப்புத் தவறு           
+sysop    முறைமைச் செயற்படுத்துனர்           
+system-operator    கட்டக இயக்குநர்           
+system-programmer    கட்டக நிரலாளர்           
+system    கட்டகம்           
+tab    தத்தல்           
+technology    தொழில் நுட்பம்           
+template    வார்ப்புரு           
+terminal    முனையம்           
+terms-of-service    சேவை விதிமுறைகள்           
+text-formatting    உரை வடிவம்           
+text-to-speech    உரையை பேச்சாக்குதல்           
+text-to-voice    உரையைக் குரலாக்குதல்           
+theme    தோற்றக்கரு           
+theory    தேற்றை           
+thesis    தேற்று           
+time-zone    நேரவலையம்           
+title    தலைப்பு           
+toolbar    கருவிப்பட்டை           
+top-level-domain    உயர் மட்டக் கொற்றம்           
+transistor    திரிதடையம்           
+trash    குப்பை           
+uncategorized    வகைப்படுத்தப்படாதவை           
+undo    செய்தவிர்/செய்ததைத் தவிர்           
+unit    பிரிவு           
+update    இற்றைப்படுத்து           
+upgrade    மேம்படுத்து/மேம்படுத்தல்           
+upload    பதிவேற்று           
+url    இணைய முகவரி           
+user    பயனர்           
+user-account    பயனர் கணக்கு           
+users-guide    பயனர் வழிக்காட்டி           
+utility    பயனமைப்பு           
+vandalism    நாசவேலை           
+variable    மாறி/மாறுப்படுகிற           
+version    பதிப்பு           
+video-blog    ஒளிதப் பதிவு           
+video    ஒளிதம்/காணொளி           
+view-profile    சுயவிவரம் காண்பி           
+view    பார்வை           
+viewer    பார்வையாளர்           
+virtual-server    மெய்நிகர்ச் சேவையகம்           
+virus    நச்சுநிரல்           
+visitor    வருகையாளர்           
+voice-mail    குரலஞ்சல்           
+voice-recognition    குரலறிதல்           
+volume    ஒலியளவு           
+watch-list    கவனிப்புப் பட்டியல்           
+watch    கவனி           
+website    இணையத்தளம்           
+window    சாளரம்           
+wireless    கம்பியில்லா           
+wish-list    விருப்பப்பட்டியல்           
+wizard    வழிகாட்டி           
+word-processor    சொற் செயலி           
+working-environment    பணிச்சூழல்           
+worksheet    பணித்தாள்           
+workstation    பணிநிலையம்           
+world-wide-web    வைய விரிவு வலை
+www               வைய விரிவு வலை
+wallpaper         மேசைப்பின்னணி
+# Ref: https://yarl.wordpress.com/2009/05/26/%E0%AE%95%E0%AE%A3%E0%AE%BF%E0%AE%A9%E0%AE%BF-%E0%AE%95%E0%AE%B2%E0%AF%88%E0%AE%9A%E0%AF%8D-%E0%AE%9A%E0%AF%8A%E0%AE%B1%E0%AF%8D%E0%AE%95%E0%AE%B3%E0%AF%8D/
+absolute address  தனி முகவரி
+absolute cell address  தனித்த நுண்ணறை முகவரி வழங்கல்
+access   அணுக்கம், அணுகல்
+accuracy   துல்லியம்
+action   செயல்
+active cell   இயங்கு கலன்
+address modification   முகவரி மாற்றம்
+address   முகவரி
+addressing   முகவரியிடல்
+album   தொகுப்பு
+algorithm    வழிமுறை
+algorithm    நெறி முறை
+algorithmic language    நெறிப்பாட்டு மொழி
+alignment    இசைவு
+allocation    ஒதுக்கீடு
+alphabetic string    எழுத்துச் சரம்
+alphameric    எண்ணெழுத்து
+alphanumeric sort    எண்ணெழுத்து வரிசையாக்கம்
+alphanumeric    எண்ணெழுத்து
+alphanumeric    எண்ணெழுத்து
+AND gate    உம்மை வாயில்
+animation    அசைவூட்டம்
+animation    அசைவூட்டம்
+anti virus    நச்சு நிரற் கொல்லி
+append    பின் தொடர், பின்சேர்
+apperarance    தோற்றம்
+application    செயலி
+application    பயன்பாடு
+applications-oriented-language    பயன்பாட்டு நோக்கு மொழி
+applications-program பயன்பாட்டு நிரல்கள்
+applications-programmer    பயன்பாட்டு நிரலர்
+applications-programming    பயன்பாட்டு நிரலாக்கம்
+applications-software    பயன்பாட்டு மென்பொருள்
+architecture    கட்டமைப்பு
+archive    பெட்டகம்
+archive   ஆவணக்காப்பகம்
+area-search   பரப்பில் தேடல்
+arithmetic-expression    எண்கணிதக் கோவை
+arithmetic-operation  எண்கணித வினை
+arithmetic operator    எண்கணித வினைக்குறி
+array    வரிசை, அணி
+arrow keydirection key    திசைப் பொத்தான்
+artificial intelligence  செயற்கை நுண்ணறிவு
+assembler    பொறிமொழியாக்கி
+assembly language  பொறி மொழி
+audio   ஒலி
+audio    ஒலியுணர்
+automated data processing    தன்னியக்கத் தரவுச் செயலாக்கம்
+automatic    தன்னியக்க
+autopilot    தன்னியக்க வலவன்
+auxiliary function    துணைச் செயல் கூறு
+axes    அச்சுகள்
+background    பின்னணி
+backspace பின்னழிக்க, பின்வெளி
+backspace    பின்நகர்வு
+bad sector    கெட்ட துண்டம்
+bar chart    பட்டை வரைபடம்
+bar code பட்டைக் குறிமுறை
+bar printer பட்டை அச்சுப்பொறி
+bar-code scanner    பட்டைக் குறிமுறை வருடி
+batch processing    தொகுதிச் செயலாக்கம்
+bebugging    பிழைவிதைத்தல்
+bill    விலைப்பட்டியல்
+binary device    இரும நிலைக் கருவி
+binary digit    இரும இலக்கம்
+binary number    இரும எண்
+binary operation    இருமச்செயற்பாடு
+binary system    இரும எண்முறை
+binary    இரும
+bit map    பிட்டுப்படம்
+bit mapped screen பிட்டுப் படத்திரை
+bit    நுண்மி, துணு, பிட்டு
+blank character    வெற்றுரு
+block diagram    கட்ட வரைபடம்
+block   கட்டம், தொகுதி
+blog   வலைப்பதிவு
+boolean    பூலியன்
+boot   தொடக்கு
+Brennen-    எரிக்க
+browser   உலாவி
+browsing மேலோடல்
+buttonkey பொத்தான்
+byte    எண்பிட்டு, எண்ணுண்மி
+cache memory   பதுக்கு நினைவகம்
+caculations    கணக்கீடுகள்
+caculations    கணக்கீடுகள்
+caculator    கணிப்பான்
+caculator    கணிப்பான்
+calculating    கணக்கிடல்
+calculating    கணக்கிடல்
+calculator mode    கணிப்பான் நிலை
+calculator mode    கணிப்பான் நிலை
+cancel    நீக்கு
+cancel    நீக்கு
+capacity    கொள்திறன்
+capacity    கொள்திறன்
+caps lock    மேலெழுத்துப் பூட்டு
+caps lock    மேலெழுத்துப் பூட்டு
+carriage returnCR   ஏந்தி மீளல்
+carriage returnCR   ஏந்தி மீளல்
+catalog    அடைவு
+catalog    அடைவு
+CD player   குறுவட்டு இயக்கி
+cell pointer    நுண்ணறைச்சுட்டி
+cell pointer    நுண்ணறைச்சுட்டி
+cell    சிற்றறை, நுண்ணறை
+cell    சிற்றறை, நுண்ணறை
+center    மையம், மையப்படுத்து
+center    மையம், மையப்படுத்து
+central processing unitCPU    மைய செயலகம்
+central processing unitCPU    மைய செயலகம்
+central processor    மையச் செயலி
+central processor    மையச் செயலி
+channel    தடம்
+channel    தடம்
+character code    உருக்குறிமுறை
+character code    உருக்குறிமுறை
+character generator    உரு ஆக்கி
+character generator    உரு ஆக்கி
+character map    உரு விவரப்படம்
+character map    உரு விவரப்படம்
+character recognition    உரு அறிதல்
+character recognition    உரு அறிதல்
+character set    உருக்கணம்
+character set    உருக்கணம்
+character string    உருச்சரம்
+character string    உருச்சரம்
+character வரியுரு
+character    உரு
+character    உரு
+characteristic    படி
+characteristic    படி
+chart    வரைபடம்
+chart    வரைபடம்
+clear துடை
+clear    துடை
+clear    துடை
+click சொடுக்கு
+click    ‘கிளிக்’, அழுத்து
+click    ‘கிளிக்’, அழுத்து
+client    சேவைக்கான பயன்பாடு.
+client வாங்கி
+clone    நகலி, போலிகை
+clone    நகலி, போலிகை
+close    மூடு
+close    மூடு
+closed file    மூடிய கோப்பு
+closed file    மூடிய கோப்பு
+coaxial cable    அச்சு ஒன்றிய வடம்
+coaxial cable    அச்சு ஒன்றிய வடம்
+code   நிரற்தொடர்
+code    குறிமுறை
+code    குறிமுறை
+collection    திரட்டல்
+collection    திரட்டல்
+color coding    வண்ணக் குறிமுறை
+color coding    வண்ணக் குறிமுறை
+color graphics  வண்ண வரைவியல்
+color graphics  வண்ண வரைவியல்
+column split    நெடுவரிசைப் பிரிப்பு
+column split    நெடுவரிசைப் பிரிப்பு
+column நிரல், நெடுவரிசை
+column    நெடுவரிசை
+column    நெடுவரிசை
+command key    கட்டளைத்திறவு, கட்டளைப்பொத்தான்
+command key    கட்டளைத்திறவு, கட்டளைப்பொத்தான்
+command    கட்டளை, ஆணை
+command    கட்டளை, ஆணை
+comment    குறிப்புரை
+comment    குறிப்புரை
+common storage    பொதுத் தேக்கம்
+common storage    பொதுத் தேக்கம்
+communication    தொடர்பு
+communication    தொடர்பு
+communications link    தொடர்பு இணைப்பு
+communications link    தொடர்பு இணைப்பு
+communications processor  தொடர்பு செயலகம்
+communications processor  தொடர்பு செயலகம்
+communications satellite    தொடர்பு செயற்கைக்கோள்
+communications satellite    தொடர்பு செயற்கைக்கோள்
+communications software    தொடர்பு மென்பொருள்
+communications software    தொடர்பு மென்பொருள்
+compact disc CD  இறுவட்டு
+compaction    நெருக்கம்
+compaction    நெருக்கம்
+comparative operator    ஒப்பீட்டு இயக்கி
+comparative operator    ஒப்பீட்டு இயக்கி
+compare    ஒப்பிடு
+compare    ஒப்பிடு
+comparison    ஒப்பீடு
+comparison    ஒப்பீடு
+compilation    தொகுத்தல்
+compilation    தொகுத்தல்
+compiler language    தொகுப்பு மொழி
+compiler language    தொகுப்பு மொழி
+compiler    தொகுப்பி
+compiler    தொகுப்பி
+component    உறுப்புக்கூறு
+component    உறுப்புக்கூறு
+compuserve    கணிச்சேவை
+compuserve    கணிச்சேவை
+computation    கணிப்பு
+computation    கணிப்பு
+computer code    கணிப்பொறி நிரல்
+computer code    கணிப்பொறி நிரல்
+computer game    கணிப்பொறி விளையாட்டு
+computer game    கணிப்பொறி விளையாட்டு
+computer graphics    கணிப்பொறி வரைவியல்
+computer graphics    கணிப்பொறி வரைவியல்
+computer network    கணிப்பொறி வலையமைப்பு
+computer network    கணிப்பொறி வலையமைப்பு
+computer operations    கணிப்பொறி சார் செயல்பாடுகள்
+computer operations    கணிப்பொறி சார் செயல்பாடுகள்
+computer user    கணிப்பொறி பயனர்
+computer utility    கணிப்பொறிப் பயனமைப்பு
+computer    கணிப்பொறி
+computer    கணிப்பொறி
+computer-aided manufacturing  கணிப்பொறிவலய உற்பத்தி
+computerised data processing    கணிப்பொறி வழித்தரவுசெயலாக்கம்
+computerization    கணிப்பொறிமயமாக்கல்
+computerized database    கணிப்பொறித் தரவுத் தளம்
+computing    கணிப்பு
+computing    கணிப்பு
+condition    நிபந்தனை, நிலை
+condition    நிபந்தனை, நிலை
+configuration   அமைவடிவம்
+console   முனையம்
+continuous scrolling    தொடர் உருளல்
+continuous scrolling    தொடர் உருளல்
+control key    கட்டுப்பாட்டுத்திறவுகோல், கட்டுப்பாட்டுப் பொத்தான்
+control key    கட்டுப்பாட்டுத்திறவுகோல், கட்டுப்பாட்டுப் பொத்தான்
+control program    கட்டுப்பாட்டு நிரல்
+control program    கட்டுப்பாட்டு நிரல்
+control statement    கட்டுப்பாட்டுக் கூற்று
+control statement    கட்டுப்பாட்டுக் கூற்று
+control system    கட்டுப்பாட்டு அமைப்பு
+control system    கட்டுப்பாட்டு அமைப்பு
+conversion    மாற்றம்
+conversion    மாற்றம்
+convert    மாற்று
+convert    மாற்று
+cookie நினைவி
+coordinates    ஆயத்தொலைவுகள்
+copy holder    நகல் தாங்கி
+copy protection    நகல் காப்பு
+copy    நகல்
+cordless   தொடுப்பில்லா
+core-storage    வளையத் தேக்கம்
+cost-analysis    விலை பகுப்பாய்வு
+cost-benefit-analysis    விலை பயன் பகுப்பாய்வு
+cost-effectiveness    விலை பயன் திறன்
+costing    விலையிடல்
+costing    விலையிடல்
+counter    எண்ணி
+counter    எண்ணி
+create    படை படைப்பு
+create    படை படைப்பு
+cursor-control    சுட்டிக் கட்டுப்பாடு
+cursor-control    சுட்டிக் கட்டுப்பாடு
+cursor-key    சுட்டிப்பொத்தான்
+cursor-key    சுட்டிப்பொத்தான்
+cursor-tracking    சுட்டி பின் தொடரல்
+cursor-tracking    சுட்டி பின் தொடரல்
+cursor    சுட்டி
+cursor    சுட்டி
+curve-fitting    வளைகோட்டுப் பொருத்தம்
+curve-fitting    வளைகோட்டுப் பொருத்தம்
+custom-software    தனிப்பயன் மென்பொருள்
+custom-software    தனிப்பயன் மென்பொருள்
+customize    தனிப்பயனாக்கு
+customize    தனிப்பயனாக்கு
+cut   வெட்டுக
+cut    வெட்டு
+cut    வெட்டு
+cyber   மின்வெளி
+data   தரவு
+delete   அழிக்க
+design   வடிவமைப்பு
+digital   எண்முறை
+discovery   கண்டறிதல்
+driver   இயக்கி
+DRM:    காப்புரிமை
+edit   தொகுக்க
+firewall   அரண்
+floppy   நெகிழ்வட்டு
+folder   உறை
+format   வடிவூட்டம், வடிவூட்டு
+function   செயற்பாடு
+gallery   காட்சியகம்
+graphics   வரைகலை
+guest   வருனர்
+home   முகப்பு, அகம்
+homepage   வலையகம், வலைமனை
+icon   படவுரு
+information   தகவல்
+interface   இடைமுகப்பு
+interpreter   வரிமொழிமாற்றி
+invention   கண்டுபிடிப்பு
+IRC   இணையத் தொடர் அரட்டை
+LAN   உள்ளகப் பிணையம்
+license   உரிமம்
+link   இணைப்பு, தொடுப்பு, சுட்டி
+live   cd நிகழ் வட்டு
+log-in   புகுபதிகை, புகுபதி
+log-off   விடுபதிகை, விடுபதி
+media-player   ஊடக இயக்கி
+menu   பட்டியல்
+microphone   ஒலிவாங்கி
+network   பிணையம், வலையம்
+object   பொருள்
+offline   இணைப்பறு
+online   இணைப்பில்
+package   பொதி
+password   கடவுச்சொல்
+paste   ஒட்டுக
+patch   பொருத்து
+plugin   சொருகு, சொருகி
+pointer   சுட்டி
+portal   வலை வாசல்
+preferences   விருப்பத்தேர்வுகள்
+preview   முன்தோற்றம்
+processor   முறைவழியாக்கி
+program   நிரல்
+proprietary   தனியுரிம
+RAM   நினைவகம்
+redo   திரும்பச்செய்க
+refresh   மீளேற்று
+release   வெளியீடு
+repository   களஞ்சியம்
+row   நிரை, குறுக்குவரிசை
+screensaver   திரைக்காப்பு
+server   வழங்கி
+settings   அமைப்பு
+shortcut   குறுக்குவழி
+shutdown   அணை
+sign-in   புகுபதிகை, புகுபதி
+sign-off   விடுபதிகை, விடுபதி
+skin   ஆடை
+space   வெளி, இடைவெளி
+speaker   ஒலிபெருக்கி
+spreadsheet   விரி தாள்
+subtitle   உரைத்துணை, துணையுரை
+system   கணினி
+tab   தத்தல்
+table   அட்டவணை
+terminal   முனையம்
+theme   கருத்தோற்றம், தோற்றக்கரு
+thumbnail   சிறுபடம்
+undo   திரும்பப்பெறுக
+update   இற்றைப்படுத்தல், இற்றைப்படுத்து
+upgrade   மேம்படுத்து, மேம்படுத்தல்
+URL   முகவரி
+version   பதிப்பு
+video   நிகழ் படம்
+view   பார்க்க
+virus   நச்சு நிரல்
+volume   ஒலியளவு
+wallpaper   மேசைப்பின்னணி
+window   சாளரம்
+wireless   கம்பியில்லா
+wizard   வழிகாட்டி
+worksheet   பணித் தாள்
+# Tamil Wikipedia words
+alphabetical   அகர-முதல
+recent-changes   அண்மைய-மாற்றங்கள்
+access   அணுக்கம்
+bureaucrat   அதிகாரி
+village-pump   ஆலமரத்தடி
+cache   இடைமாற்று
+cache   இடைத்தேக்கி
+interface   இடைமுகம்
+link   இணைப்பு
+website   இணையத்தளம்
+taget-article   இலக்குக்-கட்டுரை
+see-also   இவற்றையும்-பார்க்கவும்
+update   இற்றைப்படுத்து
+import   இறக்கம்
+browser   உலாவி
+browse   உலவு
+internal   உள்ளக
+internal-error   உள்ளகத்-தவறு
+orphaned-page   உறவிலிப்-பக்கங்கள்
+media   ஊடகம்
+negative   எதிர்மதிப்பு
+free-encyclopedia   கட்டற்ற-கலைக்களஞ்சியம்
+article   கட்டுரை
+password   கடவுச்-சொல்
+comment   கருத்துரை
+encyclopedia   கலைக்களஞ்சியம்
+ambiguation   கவர்படுநிலை
+watch   கவனி
+watch-list   கவனிப்புப்-பட்டியல்
+protect   காப்புச்-செய்
+protection-log   காப்புப்-பதிகை
+horizontal-line   கிடைக்-கோடு
+random-page   குறிப்பில்வழி-பக்கம்
+stub   குறுங்கட்டுரை
+file   கோப்பு
+community-portal   சமுதாய-வலைவாசல்
+italic-text   சாய்வெழுத்து
+special-pages   சிறப்புப்-பக்கங்கள்
+link   சுட்டி
+function   செயற்கூறு
+string-literals   சர-மதிப்புருக்கள்
+invalid   செல்லாத
+invalid   செல்லுபடியாகாத
+save   சேமி
+information   தகவல்
+bold-letter   தடித்த-எழுத்து
+block   தடை
+block-log   தடைப்பதிகை
+data   தரவு
+database   தரவுத்தளம்
+current-events   தற்போதைய-நிகழ்வுகள்
+autoblock   தானியங்கித்-தடை
+revision   திருத்தம்
+cache   தேக்கம்
+cache   இடைத்தேக்கி
+search   தேடல்
+search-query   தேடல்-வினவல்
+edit   தொகு
+syntax-error   தொடரமைப்புத்-தவறு
+dead-end-page   தொடராப்-பக்கம்
+current-events   நடப்பு-நிகழ்வுகள்
+update   நிகழ்நிலைப்படுத்து
+administrator   நிர்வாகி
+delete   நீக்கு
+positive   நேர்மதிப்பு
+time-zone   நேர-வலயம்
+contributor   பங்களிப்பாளர்
+contributions   பங்களிப்புகள்
+image   படிமம்
+author   படைப்பாளி
+log   பதிகை
+version   பதிப்பு
+copyright-status   பதிப்புரிமை-நிலை
+download   பதிவிறக்கம்
+log   பதிவு
+upload   பதிவேற்று
+user   பயனர்
+tutorial   பயிற்சிக்குறிப்புகள்
+maintenance-page   பராமரிப்புப்-பக்கம்
+manual-of-style   பாணி-தொடர்பான-கையேடு
+sister-projects   பிற-திட்டங்கள்
+log-in   புகுபதிகை
+naming-convention   பெயரிடல்-மரபு
+talk-page   பேச்சுப்பக்கம்
+embedded   பொதிந்துள்ள
+public-domain   பொதுக்-களம்
+sand-box   மணல்-தொட்டி
+email   மின்னஞ்சல்
+mediawiki   மீடியாவிக்கி
+revert   மீள்வி
+expiry-end   முடிவு
+main-page   முதற்-பக்கம்
+system-operator முறைமைச்-செயற்படுத்துனர்
+sysop   முறைமைச்-செயற்படுத்துனர்
+preview   முன்தோற்றம்
+preferences   முன்னுரிமைகள்
+default   முன்னிருப்பு
+interlanguage   மொழிகளிடை
+uncategorized   வகைப்படுத்தப்படாத
+server   வழங்கன்
+navigation   வழிசெலுத்தல்
+redirects   வழிமாற்றிகள்
+bug-report   வழு-அறிக்கை
+interwiki   விக்கியிடை
+cancel   விடு
+log-out   விடுபதிகை
+query   வினவல்
+external-links   வெளி-இணைப்புகள்
+blanking   வெறுமைப்படுத்தல்
+flash-drive    ஃப்ளாஷ்-டிரைவ்
+broadband    அகலப்பட்டை-இணைப்பு
+office-application-like-ms-word    அலுவலகப்-பயன்பாடு
+deletion,-removal    அழித்தல்
+eraser    அழிப்பான்,-எரேசர்
+permission    அனுமதி
+documents    ஆவணங்கள்
+internet-explorer    இண்டெர்நெட்-எக்ஸ்ப்ளோரர்
+web-operating-system    இணைய-இயங்குதளம்
+drivers    இயக்கிகளை
+windows-xp    இயங்குதளங்களிலும்
+operating-system    இயங்குதளம்
+browser    உலவி
+web-browser    உலவி
+digital-rights-management    எண்முறை-உரிமைகள்-முகாமைத்துவம்
+icon    ஐகான்
+head-phone-with-mic    ஒலிப்பான்+ஒலிவாங்கி
+compact-disk    ஒலிவட்டுகள்
+lichtleiter    ஒளியிழைகளைக்கான
+password    கடவுச்சொல்
+credit-card    கடனட்டை
+video    காணொளி
+shortcut    குறுக்கு-தட்டாச்சு
+pda    கையடக்கக்-கணினி-கருவிகள்
+file    கோப்பு
+files    கோப்புகள்
+file-sharing    கோப்புப்பகிர்வான்
+cd-burning    சிடியில்-எரித்தல்
+links    சுட்டிகளில்
+program    செயலியை
+mobile-cell-phone    செல்பேசி
+klick    சொடுக்கி
+team-viewer    டீம்வியூவர்
+information,-data    தகவல்
+updates    தர-முயர்த்திகளையும்
+download    தரவிறக்கம்
+database    தரவுத்தளமாக
+installation    நிறுவுதல்
+memory-ram    நினைவகம்
+firefox-add-ons    நீட்சிகள்
+shared-files    பகிரப்பட்ட-கோப்புகள்
+working-environment    பணிச்சூழல்
+software-applications    பயன்பாடுகள்
+user-account    பயனர்-கணக்கு
+read    பார்க்க
+beta    பீட்டா
+boot-startup    பூட்
+pen-drive    பென்-டிரைவ்
+paypal    பேபால்
+laptop    மடிக்கணினி
+laptop    மடிக்கணினி
+virtual    மாய
+edit    மாற்றியமைக்க
+recovery-tool    மீட்பான்
+incompatible    முரண்பாடு
+source-code    மூலவரைவு
+e-book    மென்நூல்
+software-application    மென்பொருள்
+microsoft-office    மைக்ரோசாப்ட்-ஆபீஸ்
+micro-processor    மைக்ரோப்ராசசர்
+live    லைவ்
+yearly-fee    வருடச்-சந்தா
+graphics    வரைகலை
+hardware    வன்பொருள்
+hard-disk    வன்வட்டு
+hard-disk    வன்வட்டு
+voice-mail    வாய்ஸ்-மெயில்
+windows-vista    விண்டோஸ்-விஸ்டா
+windows விண்டோஸ்
+linux லினக்ஸ்
+apple ஆப்பிள்
+mac  மேக்
+home-pc வீட்டுக்கணினி
+home-based-fixed-wired    வீட்டுத்-தொலைபேசி
+web-camera    வெப்கேமரா
+fast-internet-connection    வேகமான-இணைய-இணைப்பு
+skype    ஸ்கைப்
+skype-in    ஸ்கைப்-உள்ளே
+skype-out    ஸ்கைப்-வெளியே
+access    அணுக்கம்
+administrator    ஆளுநர்,-நிர்வாகி,-ஆள்வினைஞர்
+alphabet    அகர-வரிசை,-நெடுங்கணக்கு
+alphabetical    அகர-வரிசைப்படி
+ambiguation    குழப்பம்,-பொருள்மயக்கம்,-கவர்படுநிலை-தெளிவற்ற-நிலை-இருபொருள்படுநிலை
+anonymous    அடையாளமற்ற,-பெயரற்ற,-முகவரியற்ற-அநாமதேய-அடையாளம்-காட்டாத/முகமறியா
+article    கட்டுரை
+archive    சேமகம்
+archived    சேமப்பட்ட அடை 
+author    படைப்பாளி-எழுத்தாளி/இயற்றி(யோர்)
+autoblock    தானியங்கித்-தடை
+back-up  காப்புநகல்,காப்புநகலெடு
+blanking வெறுமைப்பாடு,-வெறுமைப்படுத்தல்
+block    தடை
+block-log    தடைப்பதிகை
+blog    பதிவு
+bold-letter    தடியெழுத்து,-தடிமன்-எழுத்து,-தடித்த-எழுத்து
+bot    தானியங்கி
+browse    உலவு,-உலாவு
+browser    உலாவி
+bug-report    வழு-அறிக்கை
+bureaucrat    அதிகாரி
+cache    தேக்கம்,-இடைத்தேக்கம்,-இடைமாற்று
+cancel    கழி,-விடு,-நீக்கு
+category    வகை,-பக்க-வகை,-கட்டுக்-கூற்று
+click    சொடுக்கு
+column    நெடுவரிசை
+comment    கருத்துரை,-குறிப்புரை
+community-portal    சமுதாய-வலைவாசல்
+contact-us    எம்மை-அணுகவும்,-எங்களைத்-தொடர்பு-கொள்ளுங்கள்
+contingency-page    அவசர-காலப்பக்கம்
+contributions    பங்களிப்புகள்
+contributor    பங்களிப்பாளர்,-பங்களிப்போர்
+copyright-status    பதிப்புரிமை-நிலை,-காப்புரிமை-நிகழ்நிலை
+current-events-,-,    நடப்பு-நிகழ்வுகள்-இன்றைநிகழ்வுகள்,-இற்றைநிகழ்வுகள்,-நிகழ்கால-நிகழ்வுகள்-தற்போதைய-நிகழ்வுகள்
+data    தரவு,-அறிமம்,-தெரிமம்
+database    தரவுத்தளம்,-அறிமகம்,-அறிமத்தொகை,-தெரிமகம்
+dead-end-page    முட்டுப்பக்கம்,-தொடராப்-பக்கம்,-ப்பக்கத்தின்-முடிவு
+default    முன்னிருப்பு,-இயல்பிருப்பு
+delete    நீக்கு
+developer-,    உருவாக்குனர்-மேம்படுத்துனர்
+disambiguated    தெளிவாக்கிய,-தெளிவுபடுத்திய
+disambiguation    தெளிவாக்கம்,-தெளிவாக்கல்,-தெளிவுபடுத்தல்,-கவர்படுநிலைதீர்
+download    பெறவு,-பதிவிறக்கம்
+edit-,    தொகு-மாற்று
+email    மின்னஞ்சல்
+embedded    பொதிந்துள்ள
+encyclopedia    கலைக்களஞ்சியம்
+equation    சமன்பாடு,-ஈடுகோள்,-ஈடுகூற்று
+expiry    முடிவு,-கெடுமூய்வு,-கெடுமுடிவு,-கெடுமுற்று
+external-links    வெளி-இணைப்புகள்
+external-search-engine    வெளித்தேடன்,-வெளித்தேடி,-வெளித்தேடுபொறி,-புறத்துழாவி
+faq    அடிக்கடி-கேட்கும்-கேள்விகள்
+faux-paus    பிழை,-தவறு,-பிசகு,-ஒழுங்குப்-பிறழ்வுகள்
+feature-request    சிறப்பு-பயன்பாட்டு-வேண்டுகோள்-பண்புக்-கூறு-வேண்தடுகோள்
+file    கோப்பு
+free-encyclopedia    கட்டற்ற-கலைக்களஞ்சியம்
+font    எழுத்துரு,
+format    வடிவம்
+formula-,    சூத்திரம்-வாய்ப்பாடு
+function    செயல்,-செயற்கூறு
+gnu-free-documentation-license    கனூ-கட்டற்ற-ஆவண-அனுமதி
+guest    விருந்தினர்
+help-desk    உதவி-மன்றம்/அரங்கம்-உசாத்துணை-பக்கம்-ஒத்தாசை-பக்கம்
+horizontal-line    கிடைக்-கோடு
+icon    உரு
+information    அறிமானம்,-செய்தி,-தகவல்
+interface    இடைமுகம்
+interlanguage    இடைமொழி,-மொழியிடை,-மொழிகளிடை
+interwiki    விக்கியிடை
+image    படிமம்,-உருவம்
+import    இறக்கம்
+internal-,    உள்ளக-உள்ளமை
+internal-error-,    உட்பிழை,-உள்ளகத்-தவறு-உள்ளமைப்பிழை
+invalid    செல்லாத,-பொருந்தாத,-செல்லுபடியாகாத
+ip-address    ஐ.பி-முகவரி
+italic-text    சாய்வெழுத்து
+keyword-,-(keyword-is-a-word-or-concept-with-special-significance)    சிறப்புச்சொல்,-குறிப்புச்சொல்-முதன்மைச்சொல்
+lexing-error    தொகுத்தல்-தவறு
+link    சுட்டி,-இணைப்பு,தொடுப்பு
+log    பதிவு-பதிகை
+log-in    புகுபதிகை-உட்புகு
+log-out    விடுபதிகை-வெளியேறு
+mailing-list    அஞ்சல்-பட்டியல்-அஞ்சல்-வரிசை
+main-page  தலைப்பக்கம்,-முதற்-பக்கம்-இல்லம்
+maintenance-page பேணல்    பராமரிப்புப்-பக்கம்-பக்கம்
+manual-of-style    பாணிக்கையேடு,-பாணிநெறி,-பாந்தக்கையேடு
+media    ஊடகம்
+metadata    தரவு-விவரம்
+mediawiki    மீடியாவிக்கி
+management    ஆளுமை,-முகாமைத்துவம்
+meetings    கூட்டங்கள்
+name-space    பெயர்மண்டலம்,-பெயர்வெளி
+naming-convention    பெயரிடல்-மரபு,-பெயரீட்டுவழக்கு,-பெயரீட்டுநெறி
+navigation    வழிசெலுத்தல்
+negative எதிர்வு,-எதிர்மாறு,-எதிர்மதிப்பு;-எதிர்வான,-எதிர்மாறான,-எதிர்மதிப்பான
+neutral-point-of-view    நடுநிலைநோக்கு,-நடுநிலைக்கருத்து
+orphaned-page    உறவிலிப்-பக்கங்கள்
+other-languages    பிறமொழிகள்,-ஏனைய-மொழிகள்,-ஏனைமொழிகள்
+page-views    பக்கக்-காட்சிகள்,-பக்கப்-பார்வைகள்
+parent-category    முதன்மை-பக்க-வகை-முன்னோடி-பக்க-வகை-மூலக்-கட்டுக்-கூறு
+parse    பாகுபடுத்தல்
+password    கடவுச்-சொல்
+positive    நேர்முறை,-நேர்மதிப்பு;-நேர்முறையான,-நேர்மதிப்பான
+preferences    விருப்பங்கள்,-பிடித்தங்கள்,-முன்னுரிமைகள்
+preview    முன்தோற்றம்
+privacy    மறைவு,-ஒடுக்கம்,-தனிக்காப்பு,-தனிமறைவு
+program    நிரல்
+protect    தடு,-காப்புச்செய்,காத்திடு
+protection-log    தடைப்பதிகை,-காப்புப்-பதிகை
+public-domain    பொதுக்-களம்
+purge    கழி,-நீக்கு
+query    வினா,-வினவல்
+random-page    குறிப்பில்வழி-பக்கம்,-அறவட்டான-பக்கம்
+recent-changes    அண்மைய-மாற்றங்கள்
+redirects    வழிமாற்றிகள்
+reference-desk    கேள்வி-மன்றம்-ஆலோசனை-மேடை
+refresh-,    புதுப்பி-புதுப்பிக்கவும்-புதுக்கல்
+reset-,    மீட்டமை-நிலை-மீட்டல்
+restore    முன்னிலைக்கு-மீள்வி
+revert    மீள்வி,-மீள்-திருத்தம்
+revision    திருத்தம்,-மீள்பார்வை
+sand-box    மணல்-தொட்டி
+save    சேமி-சேமிக்கவும்
+search-(வினை)-(பெயர்)தேடல்    தேடு;
+search-query    தேடல்-வினா
+see-also    இவற்றையும்-பார்க்கவும்
+select    தேர்,-தேர்க,-தேரவும்,-தெரிவு-செய்
+server    வழங்கன்,வழங்கி
+session    அமர்வுகள்,-பிணையத்-தொடர்
+shortcut    குறுக்கு-வழி
+skin    தோல்
+software    மென்பொருள்
+special-pages    சிறப்புப்-பக்கங்கள்
+stub    குறுங்கட்டுரை
+sysop    முறைமைச்-செயற்படுத்துனர்
+sister-projects    இணைத்திட்டங்கள்,-பிற-திட்டங்கள்
+string-literals    சர-மதிப்புருக்கள்
+syntax-error    தொடரமைப்புத்-தவறு
+tag    காட்டி
+talk-page    பேச்சுப்பக்கம்
+taget-article    இலக்குக்-கட்டுரை
+text-formatting    உரை-அலங்காரம்-உரை-ஒப்பனை
+time-zone    நேர-வலயம்
+tutorial    பயிற்சிக்குறிப்புகள்
+uncategorized    வகைப்படுத்தாத
+update    நடப்பாக்கு,-நிகழ்நிலைப்படுத்து-இற்றைப்படுத்து
+upload    பதிவேற்று,-தரவேற்று
+user    பயனர்
+users-guide    பயனர்-கையேடு
+vandalism    நாசவேலை,-ஆக்கிரமிப்பு-போக்கிரித்தனம்
+version    பதிப்பு
+viewer    பார்ப்பான்,-பார்வையாளன்
+village-pump    ஆலமரத்தடி
+visitor    வருனர்-வருகையாளர்
+votes-for-deletion    நீக்குவதற்கான-வாக்கெடுப்பு
+watch-list    கவனிப்புப்-பட்டியல்
+website    இணையத்தளம்
