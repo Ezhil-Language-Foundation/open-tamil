@@ -7,14 +7,17 @@
 from __future__ import print_function
 from solthiruthi.suggestions import norvig_suggestor
 from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
-from solthiruthi.dictionary import DictionaryBuilder, TamilVU
+from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
 import tamil
 import sys
 import re
 import codecs
 import threading
 import time
+import string
+import argparse
 
+# Make Bi-Lingual dictionary
 
 # save 6s for the code on a old machine
 class LoadDictionary(threading.Thread):
@@ -26,16 +29,24 @@ class LoadDictionary(threading.Thread):
     def run(self):
         start = time.time()
         Speller.get_dictionary()
+        Speller.get_english_dictionary()
         if LoadDictionary.DEBUG: print("LOADED DICTIONARY in  %g (s)"%(time.time() - start))
         return
 
 class Speller(object):
     TVU_dict = None
-    def __init__(self,filename=None):
+    ENL_dict = None
+    def __init__(self,filename=None,lang="ta"):
         object.__init__(self)
+        self.lang = lang
         self.filename = filename
         self.user_dict = set()
         self.case_filter = CaseFilter( RemovePluralSuffix(), RemoveVerbSuffixTense(), RemoveCaseSuffix(), RemovePrefix() )
+        if self.lang == u"en":
+            self.alphabets = [a for a in string.ascii_lowercase]
+        else:
+            self.alphabets = None
+        
         if not self.filename:            
             self.interactive()
         else:
@@ -49,14 +60,32 @@ class Speller(object):
         LoadDictionary.lock.release()
         return Speller.TVU_dict
     
+    @staticmethod
+    def get_english_dictionary():
+        LoadDictionary.lock.acquire()
+        if not Speller.ENL_dict:
+            Speller.ENL_dict,_ = DictionaryBuilder.create(EnglishLinux)
+        LoadDictionary.lock.release()
+        return Speller.ENL_dict    
+    
+    def language(self):
+        if self.lang == "ta":
+            return "tamil"
+        return "english"
+        
+    def checklang(self,word):
+        if self.lang == "ta":
+            return tamil.utf8.all_tamil(word)
+        return all( [w in string.ascii_lowercase for w in word.lower()]) 
+    
     def interactive(self):
         try:
             while( True ):
                 word = raw_input(u">> ")
                 word = word.decode("utf-8").strip()
                 word = re.sub(u"\s+","",word)
-                if not tamil.utf8.all_tamil(word):
-                    print(u"EXCEPTION \"%s\" is not a Tamil Word"%word)
+                if not self.checklang(word):
+                    print(u"EXCEPTION \"%s\" is not a %s Word"%(word,self.language()))
                     continue
                 ok,suggs = self.check_word_and_suggest( word )
                 if not ok:
@@ -107,15 +136,22 @@ class Speller(object):
         print(u"*********** cleaned up document **********")
         print(u" ".join(new_document))
         
+    def get_lang_dictionary(self):
+        if self.lang == u"en":
+            return Speller.get_english_dictionary()
+        return Speller.get_dictionary()
+        
     def isWord(self, word):
         # Plain old dictioary checks
-        TVU_dict = Speller.get_dictionary()
-        in_user_dict = word in self.user_dict or TVU_dict.isWord(word)
+        LANG_dict = self.get_lang_dictionary()
+        is_dict_word = LANG_dict.isWord(word)
+        
+        in_user_dict = word in self.user_dict or is_dict_word
         return in_user_dict
         
     def check_word_and_suggest( self,word ):         
         letters = tamil.utf8.get_letters(word)
-        TVU_dict = Speller.get_dictionary()        
+        TVU_dict = self.get_lang_dictionary()        
         # plain old dictionary + user dictionary check
         if self.isWord(word):
             return (True,word)
@@ -138,7 +174,7 @@ class Speller(object):
         # TODO: Noun Declension - ticket-
         
         # suggestions at edit distance 1
-        norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, None, 1,limit=50))
+        norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 1,limit=50))
         combinagram_suggests = list(tamil.wordutils.combinagrams(word,TVU_dict,limit=50)) 
         pfx_options = TVU_dict.getWordsStartingWith( u"".join( letters[:-1] ) )
         
@@ -154,14 +190,26 @@ class Speller(object):
         
         return (False, options )
 
-if __name__ == u'__main__':
-    if len(sys.argv) < 2:
-        print(u"usage: python spell.py [<filename 1>  ... <filename n> | -i[nteractive] ]")
-        sys.exit(0)
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(u"files",nargs='*',default=[])
+    parser.add_argument(u"-debug",action=u"store_true",\
+                        default=False,\
+                        help=u"enable debugging information on screen")
+    parser.add_argument(u"-l",u"--lang",default=u"TA",choices=(u"TA",u"EN"),\
+                        help=u"option to specify English or Tamil (default) language")
+    parser.add_argument(u"-i",u"--interactive",help=u"use the interactive mode",\
+                        default=False,action=u"store_true")
+    args = parser.parse_args()
+    
     LoadDictionary().start()
-    if sys.argv[1].find("-i") == 0:
-        Speller()
+    if args.interactive:
+        lang = args.lang.lower()
+        Speller(filename=None,lang=lang)
         sys.exit(0)
     else:
-        for file_name in sys.argv[1:]:
-            Speller(file_name)
+        for file_name in args.files:
+            Speller(file_name,lang="ta")
+
+if __name__ == u'__main__':
+    main()
