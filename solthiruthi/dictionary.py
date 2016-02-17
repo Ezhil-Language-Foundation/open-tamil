@@ -85,10 +85,10 @@ class Agarathi(Dictionary):
         return self.store.getWordsEndingWith(sfx)
 
     # delegate to store
-    def getWordsStartingWith(self,pfx):
+    def getWordsStartingWith(self,pfx,limit=float("inf")):
         if not getattr(self.store,'getAllWordsPrefix'):
             raise Exception("getWordsStartingWith is not an accessible method")
-        return self.store.getAllWordsPrefix(pfx)    
+        return self.store.getAllWordsPrefix(pfx)
     
     def hasWordsStartingWith(self,pfx):
         if not getattr(self.store,'hasWordPrefix'):

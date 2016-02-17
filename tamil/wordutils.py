@@ -129,9 +129,13 @@ def anagrams_in_dictionary(dictionary):
 
 # combinations filtered by dictionary - yields all possible sub-words of a word.
 # e.g. 'bat' -> 'tab', 'bat', 'at', etc.
-def combinagrams(word,dictionary):
+def combinagrams(word,dictionary,limit=float("inf")):
+    count = 0
     for word_part in combinations(word):
         for valid_word in anagrams(word_part,dictionary,tamil_permutations):
+            count = count + 1
+            if count > limit:
+                raise StopIteration
             yield valid_word
     raise StopIteration
 

@@ -10,7 +10,7 @@ from tamil.utf8 import tamil_letters, get_letters, mei_letters, agaram_letters, 
 sanskrit_mei_letters, uyir_letters
 
 from pprint import pprint
-def norvig_suggestor(word,alphabets=None,nedits=1):
+def norvig_suggestor(word,alphabets=None,nedits=1,limit=float("inf")):
     if not alphabets:
         alphabets = mei_letters +  uyir_letters
     if not type(word) is list:
@@ -21,8 +21,10 @@ def norvig_suggestor(word,alphabets=None,nedits=1):
     # recursive method for edit distance > 1
     if nedits > 1:
         result = []
-        for nAlternate in norvig_suggestor(wordL,alphabets,nedits-1):
-            result.extend( norvig_suggestor(nAlternate,alphabets,1) )
+        for nAlternate in norvig_suggestor(wordL,alphabets,nedits-1,limit-len(result)):
+            if len(result) > limit:
+                break
+            result.extend( norvig_suggestor(nAlternate,alphabets,1,limit-len(result)) )
         return set(result)
        
     ta_splits     = [ [u"".join(wordL[:idx]),u"".join(wordL[idx:])] for idx in range(len(wordL) + 1)]
@@ -37,9 +39,15 @@ def norvig_suggestor(word,alphabets=None,nedits=1):
 def mayangoli_suggestor():
     """ 
     Rules:
-      à®£, à®© - mayakkam
-      à®², à®´, à®³ - mayakkam
-      à®°, à®± - mayakkam
+   ண, ன     - mayakkam
+   ல, ழ, ள    - mayakkam
+   ர, ற   - mayakkam
     ivattrilum ithan uyirmei varisayilum mayakkangalai kaanalaam.
+    """
+    pass
+
+def kombu_suggestor():
+    """
+    
     """
     pass
