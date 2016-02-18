@@ -202,7 +202,11 @@ def main():
                         default=False,action=u"store_true")
     args = parser.parse_args()
     
+    if not args.interactive and len(args.files) < 1:
+        parser.print_help()
+        sys.exit(0)
     LoadDictionary().start()
+    
     if args.interactive:
         lang = args.lang.lower()
         Speller(filename=None,lang=lang)
