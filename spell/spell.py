@@ -140,7 +140,7 @@ class Speller(object):
         if self.lang == u"en":
             return Speller.get_english_dictionary()
         return Speller.get_dictionary()
-        
+     
     def isWord(self, word):
         # Plain old dictioary checks
         LANG_dict = self.get_lang_dictionary()
@@ -186,7 +186,10 @@ class Speller(object):
         # score by 
         
         # sort the options
-        options = sorted( options, cmp=tamil.utf8.compare_words_lexicographic )
+        if self.lang == u"en":
+            options.sort()
+        else:
+            options = sorted( options, cmp=tamil.utf8.compare_words_lexicographic )
         
         return (False, options )
 
