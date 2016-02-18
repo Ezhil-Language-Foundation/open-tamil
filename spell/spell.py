@@ -16,6 +16,7 @@ import threading
 import time
 import string
 import argparse
+import json
 
 # Make Bi-Lingual dictionary
 
@@ -36,7 +37,7 @@ class LoadDictionary(threading.Thread):
 class Speller(object):
     TVU_dict = None
     ENL_dict = None
-    def __init__(self,filename=None,lang="ta"):
+    def __init__(self,filename=None,lang="ta",mode="non-web"):
         object.__init__(self)
         self.lang = lang
         self.filename = filename
@@ -47,6 +48,9 @@ class Speller(object):
         else:
             self.alphabets = None
         
+        if mode == "web":
+            return
+            
         if not self.filename:            
             self.interactive()
         else:
@@ -77,7 +81,14 @@ class Speller(object):
         if self.lang == "ta":
             return tamil.utf8.all_tamil(word)
         return all( [w in string.ascii_lowercase for w in word.lower()]) 
-    
+    # Ref: https://www.tinymce.com/docs/plugins/spellchecker/
+    def REST_interface(self,word):
+        # returns JSON data in TinyMCE format
+        ok,suggs = self.check_word_and_suggest( word )
+        if ok:
+            return ok, ""
+        return ok, json.dumps( { word : suggs })
+        
     def interactive(self):
         try:
             while( True ):
@@ -151,7 +162,7 @@ class Speller(object):
         
     def check_word_and_suggest( self,word ):         
         letters = tamil.utf8.get_letters(word)
-        TVU_dict = self.get_lang_dictionary()        
+        TVU_dict = self.get_lang_dictionary()
         # plain old dictionary + user dictionary check
         if self.isWord(word):
             return (True,word)
