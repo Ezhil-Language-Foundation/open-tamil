@@ -153,7 +153,7 @@ class Speller(object):
         return Speller.get_dictionary()
      
     def isWord(self, word):
-        # Plain old dictioary checks
+        # Plain old dictionary checks
         LANG_dict = self.get_lang_dictionary()
         is_dict_word = LANG_dict.isWord(word)
         
@@ -201,6 +201,14 @@ class Speller(object):
             options.sort()
         else:
             options = sorted( options, cmp=tamil.utf8.compare_words_lexicographic )
+        
+        # remove dupes in list
+        options2 = []
+        prev = None
+        for val in options:
+            if val.strip() != prev:
+                options2.append(val.strip())
+            prev = val.strip()
         
         return (False, options )
 

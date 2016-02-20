@@ -1,0 +1,22 @@
+<!doctype html>
+<title>Spell check Open-Tamil</title>
+<body>
+<form method="POST">
+ <select name="lang" value="TA">
+  <option>TA</option>
+  <option>EN</option>
+ </select>
+{% if solution %}
+ <input name="word" value="{{ word }}"></input>
+{% else %}
+ <input name="word" value="தமில்"></input>
+{% endif %}
+ <button type="submit">Check</button>
+</form>
+{% if solution %}
+<BR />
+{{ HTML | safe}}
+{% endif %}
+
+</body>
+ 
