@@ -161,6 +161,7 @@ class Speller(object):
         return in_user_dict
         
     def check_word_and_suggest( self,word ):         
+        word = word.strip()
         letters = tamil.utf8.get_letters(word)
         TVU_dict = self.get_lang_dictionary()
         # plain old dictionary + user dictionary check
