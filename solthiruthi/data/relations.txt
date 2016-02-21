@@ -1,0 +1,15 @@
+>>பெண்பால்
+she அவள்
+he அவன்
+man	 ஆண்
+woman	 பெண்
+father	 தந்தை
+mother	 தாய்
+brother	 சகோதரன்
+sister	 சகோதரி
+uncle	சிற்றப்பா, பெரியப்பா
+aunt	அத்தை, சித்தி, பெரியம்மா
+bull	 காளை
+cow	 பசு
+boy	 சிறுவன்
+girl	 சிறுமி

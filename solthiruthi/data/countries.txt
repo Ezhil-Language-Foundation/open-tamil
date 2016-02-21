@@ -1,0 +1,20 @@
+>>நாடுகள்
+Australia	 ஆஸ்திரேலியா
+Cambodia	 கம்போடியா
+Canada	 கனடா
+China	 சீனா
+Egypt	 எகிப்து
+England	 இங்கிலாந்து
+France	 பிரான்ஸ்
+Germany	 ஜெர்மனி
+Greece	 கிரேக்கம்
+India	 இந்தியா
+Indonesia	 இந்தோனீசியா
+Italy	 இத்தாலி
+Japan	 ஜப்பான்
+Mexico	 மெக்சிகோ
+Morocco	 மொராக்கோ
+Peru	 பெரு
+Spain	 ஸ்பெயின்
+Thailand	 தாய்லாந்து
+USA	 ஐக்கிய அமெரிக்க 

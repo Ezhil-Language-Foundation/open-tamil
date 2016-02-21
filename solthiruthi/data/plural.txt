@@ -1,0 +1,9 @@
+>>plural
+ book	புத்தகம்
+books	புத்தகங்கள்
+daughter	மகள்
+daughters	மகள்கள்
+I எனக்கு
+we  எங்களுக்கு
+his  அவரின்
+their  அவர்களின்

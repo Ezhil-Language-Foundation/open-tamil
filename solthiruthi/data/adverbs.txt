@@ -1,0 +1,59 @@
+# Data released in public domain
+# Adverbs data
+>>கால வினை உரிச்சொற்கள்
+yesterday	 நேற்று
+today	 இன்று
+tomorrow	 நாளை
+now	 இப்பொழுது
+then	 அப்பொழுது
+later	 பிறகு
+tonight	 இன்றிரவு
+right now	 இப்பொழுதே
+last night	 நேற்றிரவு
+this morning	inru  இன்று காலை
+next week	aduththa  அடுத்த வாரம்
+already	 ஏற்கெனவே
+recently	 அண்மையில்
+lately	sirithu kaalaththirku  சிறிது காலத்திற்கு முன்
+soon	 விரைவில்
+immediately	 உடனடியாய்
+still	 இன்னும்
+yet	 ஆயினும்
+ago	 முன்னர்
+>>இட வினை உரிச்சொற்கள்
+here	 இவ்விடம்
+there	 அவ்விடம்
+over there	atho  அதோ தொலைவிலுள்ள
+everywhere	yella  எல்ல இடங்களிலும்
+anywhere	yendha  எந்த இடத்திலாவது
+nowhere	 எங்குமின்றி
+home	 வீடு
+away	 தொலைவில்
+out	 வெளியே
+>>வகை வினை உரிச்சொற்கள்
+very	 மிகவும்
+quite	 முற்றிலும்
+pretty	azhaku  அழகு வாய்ந்த
+really	 உண்மையாக
+fast	 வேகமாக
+well	 நன்கு
+hard	 கடினமாக
+quickly	 வேகமாக
+slowly	 மெதுவாக
+carefully	 கவனமாக
+hardly	 அபூர்வமாக
+barely	pothum  போதும் போதாமல்
+mostly	 பெரும்பாலும்
+almost	 அநேகமாக
+absolutely	 முற்றிலுமாக
+together	 ஒன்றாய்
+alone	 தன்னந்தனியாக
+>>அடிக்கடி நிகழ்கிற வினை உரிச்சொல்
+always	 எப்பொழுதும்
+frequently	 அடிக்கடி
+usually	 வழக்கமாக
+sometimes	sila  சில சமயம்
+occasionally	 எப்பொழுதாவது
+seldom	 அபூர்வமாய்
+rarely	 அரிதாய்
+never	 என்றும் இல்லாத நிலையில்

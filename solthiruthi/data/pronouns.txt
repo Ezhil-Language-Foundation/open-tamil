@@ -1,0 +1,30 @@
+# This data is part of open-tamil project
+# Data released in public domain
+# Pronouns data
+>>pronouns
+# Pronouns	idap peyarchsorkal - இடப் பெயர்ச்சொற்கள்
+I  நான்
+you நீ
+you நீங்கள்
+she	அவள்
+we	 நாங்கள்
+they அவர்கள், அவைகள்
+his	அவனுடையது
+her  அவளுடையது
+ours எங்களுடையது
+theirs அவர்களுடையது, அவைகளுடையது
+me எனக்கு
+you	உனக்கு, உங்களுக்கு
+him	அவனுக்கு
+he	அவன்
+his	அவனின்
+her	அவளின்
+our	எங்களின்
+their அவர்களின்,அவைகளின்
+mine என்னுடையது
+yours உன்,உன்னுடையது,உங்களுடையது
+her	அவளுக்கு
+us	எங்களுக்கு,நாங்கள்
+them அவர்களுக்கு, அவைகளுக்கு
+my	எனது
+your  உனது,உங்களது

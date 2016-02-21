@@ -17,8 +17,13 @@ import time
 import string
 import argparse
 import json
+import functools
 
 # Make Bi-Lingual dictionary
+
+PYTHON3 = ( sys.version_info[0] == 3 )
+if PYTHON3:
+    unicode = str
 
 # save 6s for the code on a old machine
 class LoadDictionary(threading.Thread):
@@ -51,7 +56,7 @@ class Speller(object):
         if mode == "web":
             return
             
-        if not self.filename:            
+        if not self.filename:
             self.interactive()
         else:
             self.spellcheck(self.filename)
@@ -92,8 +97,11 @@ class Speller(object):
     def interactive(self):
         try:
             while( True ):
-                word = raw_input(u">> ")
-                word = word.decode("utf-8").strip()
+                if PYTHON3:
+                    word = input(u">> ")
+                else:
+                    word = raw_input(u">> ")
+                    word = word.decode("utf-8").strip()
                 word = re.sub(u"\s+","",word)
                 if not self.checklang(word):
                     print(u"EXCEPTION \"%s\" is not a %s Word"%(word,self.language()))
@@ -127,10 +135,12 @@ class Speller(object):
                     # take user input.
                     # FIXME: User optiions to include DONTREPLACE/KEEP, DELETE WORD, etc.
                     option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
-                    print(u"In line, \"%s\""%line.strip())                   
+                    print(u"In line, \"%s\""%line.strip())
                     print(u" Replace word %s with\n\t => %s\n"%(word, option_str))
                     try:
                         choice = input(u"option [-1 ignore, 0-%d replace]: "%(len(suggs)-1))
+                        if PYTHON3:
+                            choice = int(choice)
                         if choice == -1:
                             print(u"Not replacing word")
                             option = word
@@ -191,7 +201,7 @@ class Speller(object):
         pfx_options = TVU_dict.getWordsStartingWith( u"".join( letters[:-1] ) )
         
         # FIXME: score  the options
-        options = norvig_suggests
+        options = list(norvig_suggests)
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
         
@@ -201,7 +211,10 @@ class Speller(object):
         if self.lang == u"en":
             options.sort()
         else:
-            options = sorted( options, cmp=tamil.utf8.compare_words_lexicographic )
+            if PYTHON3:
+                options = sorted( options, key=functools.cmp_to_key(tamil.utf8.compare_words_lexicographic) )
+            else:
+                options = sorted( options, cmp=tamil.utf8.compare_words_lexicographic )
         
         # remove dupes in list
         options2 = []

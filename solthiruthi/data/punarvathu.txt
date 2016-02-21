@@ -1,0 +1,79 @@
+>>punarvu
+about	 குறித்து
+above	 மேலே
+across	 குறுக்காக
+after	 பிறகு
+against	 எதிராக
+among	 இடையில்
+around	சுற்றி, ஏறத்தாழ
+as	ஒப்பாக, அவ்வண்ணம், அதுபோலவே
+at	இல்,இடத்தில்,அருகில்
+before	எதிரே, முன்பாக
+behind	 பின்னால்
+below	 கீழே
+beneath	கீழே, அடியில்
+beside	மேலும், பக்கத்தில், அருகில்
+between	 இடையே
+beyond	 அப்பால்
+but	 ஆனால்
+by	ஆல், அருகில்
+despite	 ஆயினும்
+down	 கீழே
+during	காலத்தில்/வேளையில்/பொழுதில்
+except	 தவிர
+for	காரணமாய், குறித்து, ஏனென்றால்
+from	தொடங்கி, முதலாய்/இருந்து
+in	இல், உள்ளே, அருகே
+inside	உள்ளே, உட்பக்கம்
+into	உள்ளே, உள்நோக்கி
+near	 அருகில்
+next	 அடுத்து
+of	இல், இன், உடைய
+on	 மேலே
+opposite	எதிரான, முற்றிலும் மாறான
+out	 வெளியே
+outside	வெளியே, வெளிப்புறத்தில்
+over	 மேலே, அதிகமாய், முடிவுற்ற நிலையில்
+per	 வழியாய், மூலமாய்
+plus	 கூட
+round	வட்டமான, உருண்டையான, சுற்று
+since	அப்பொழுதிலிருந்து, ஆகையால்
+than	காட்டிலும், விட
+through	குறுக்கே, மூலமாய்
+till	 வரையில்
+to	 வரையில்
+toward	பொருட்டு, நோக்கி, நாடி
+under	கீழே, அடியில்
+unlike	போலில்லாத, வேறு மாதிரியான
+until	 வரையிலும்
+up	 மேலே
+via	 வழியாக
+with	ஆல், ஓடு, உடன்
+within	 உள்ளே
+without	 இன்றி, இல்லாமல்
+two-words	இரண்டு வார்த்தைகள்
+according-to	 இணங்க
+because-of	 காரணமாக
+close-to	பக்கத்தில், அருகில்
+due-to	 காரணமாய்
+except-for	 தவிர
+far-from-illave  இல்லவே இல்லை
+inside-of	 உள்ளே
+instead-of	 பதிலாக
+near-to	 அருகில்
+next-to	 பக்கத்தில்
+outside-of	 வெளியே
+prior-to	 முன்பாக
+three-words	மூன்று வார்த்தைகள்
+as-far-as	குறித்து, வரையில்
+as-well-as	 மேலும், அதே போன்று
+in-addition-to	 மேலும்
+in-front-of	 முன்னால்
+in-spite-of	 இருந்தபோதிலும்
+on-behalf-of	 சார்பாய்
+on-top-of	  மேல், அதற்கு மேல்
+>>demonstrative prepositions சுட்டு முன்விபக்தி
+this	 இது
+that	 அது
+these	 இவைகள்
+those	 அவைகள்

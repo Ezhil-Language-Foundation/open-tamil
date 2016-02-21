@@ -1,0 +1,13 @@
+>>time-and-date
+Days	 நாட்கள்
+Monday	 திங்கட்கிழமை
+Tuesday	 செவ்வாய்கிழமை
+Wednesday	 புதன்கிழமை
+Thursday	 வியாழக்கிழமை
+Friday	 வெள்ளிக்கிழமை
+Saturday	 சனிக்கிழமை
+Sunday	 ஞாயிற்றுக்கிழமை
+time	 நேரம்
+hour	 மணி
+minute	 நிமிடம்
+second	 வினாடி

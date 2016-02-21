@@ -1,0 +1,58 @@
+>>household objects
+objects	 பொருட்கள்
+bathroom	 குளியலறை
+bed	 படுக்கை
+bedroom	padukkai  படுக்கை அறை
+ceiling	 உட்கூறை
+chair	 நாற்காலி
+clothes	 துணிகள்
+coat	 மேற்சட்டை
+cup	 கின்னம்
+desk	 மேசை
+dress	 உடை
+floor	 தரை
+fork	 கவைமுள்
+furniture	 அறைகலன்
+glass	 கண்ணாடி
+hat	 தொப்பி
+house	 வீடு
+ink	 மை
+jacket	 சிறியசட்டை
+kitchen	 சமயலறை
+knife	 கத்தி
+lamp	 விளக்கு
+letter	 கடிதம்
+map	 வரைபடம்
+newspaper	 செய்தித்தாள்
+notebook	 குறிப்பேடு
+pants	 கால்சட்டை
+paper	 காகிதம்
+pen	 பேனா
+pencil	 பென்சில்
+pharmacy	 மருந்தகம்
+picture	 படம்
+plate	 தட்டு
+refrigerator	kuzhir saathanap  குழிர் சாதனப் பெட்டி
+restaurant	 சிற்றுண்டிசாலை
+roof	 கூறை
+room	 அறை
+rug	tharai virippuk  தரை விரிப்புக் கம்பளம்
+scissors	 கத்தரிக்கோல்
+shampoo	 கழுவான்
+shirt	 சட்டை
+shoes	 காலணி
+soap	 சோப்
+socks	 காலுறைகள்
+spoon	 கரண்டி
+table	 மேசை
+toilet	 கழிவறை
+toothbrush	pal  பல் தூரிகை
+toothpaste	pal thulakkum  பல் துலக்கும் பசை
+towel	 துண்டு
+umbrella	 குடை
+underwear	 உள்ளாடை
+wall	 சுவர்
+wallet	 பணப்பை
+window	 சன்னல்
+telephone	 தொலைபேசி
+

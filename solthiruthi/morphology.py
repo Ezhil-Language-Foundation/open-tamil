@@ -105,6 +105,10 @@ class RemoveCaseSuffix(RemoveSuffix):
         self.possible_suffixes=[u"உக்கு",u"க்கு",u"ளை",u"கள்",
                                 accusative,instrumental,associative,
                                 dative,genitive,possessive,locative,ablative]
+        self.replace_suffixes = dict()
+        for w in  self.possible_suffixes:
+            self.replace_suffixes[w] = u""
+        return
 
 class RemoveHyphenatesNumberDate(RemoveCaseSuffix):
     """ Done correctly (மேல்) 65536-மேல்,
@@ -124,8 +128,9 @@ class RemoveVerbSuffixTense(RemoveCaseSuffix):
         """
         tense_endings = [u"ஏன்",u"ஆய்",u"ஆர்",u"ஆன்",u"ஆள்",u"அது",u"ஓம்", u"அன"] 
         self.possible_suffixes=tense_endings
+        self.replace_suffixes = tense_endings
         
-class RemovePluralSuffix(RemoveSuffix):        
+class RemovePluralSuffix(RemoveSuffix):
     def __init__(self):
         super(RemovePluralSuffix,self).__init__()
         
@@ -135,7 +140,15 @@ class RemovePluralSuffix(RemoveSuffix):
     def setSuffixes(self):
         self.replace_suffixes = {u"ற்கள்":u"ல்",u"கள்":u"",u"ல்":u"", u"ட்கள்": u"ள்", u"ங்கள்":u"ம்"}
         self.possible_suffixes=list(self.replace_suffixes.keys())
+
+class RemoveNegationSuffix(RemoveCaseSuffix):        
+    def __init__(self):
+        super(RemoveNegationSuffix,self).__init__()
         
+    def setSuffixes(self):
+        self.replace_suffixes = {u"கே":u"",u"ல்லை":u"",u"ாதே":u"", u"ாமல்":u""}
+        self.possible_suffixes=list(self.replace_suffixes.keys())
+         
 class CaseFilter(object):
     def __init__(self,*filter_obj_list):
         object.__init__(self)
@@ -150,8 +163,8 @@ class CaseFilter(object):
 def xkcd():
     obj = RemovePluralSuffix()
     objf = CaseFilter(obj)
-    expected = [u"பதிவி",u"கட்டளை",u"அவர்"]
-    words_list = [u"பதிவில்",u"கட்டளைகள்",u"அவர்கள்"]
+    expected = [u"பதிவி",u"கட்டளை",u"அவர்",u"பள்ளி"]
+    words_list = [u"பதிவில்",u"கட்டளைகள்",u"அவர்கள்",u"பள்ளிகள்"]
     for w,x in zip(words_list,expected):
         rval = obj.removeSuffix(w)
         trunc_word = objf.apply( w )

@@ -1,0 +1,16 @@
+>>Languages-மொழிகள்
+Arabic	  அரபு மொழி
+Chinese	  சீன மொழி
+English	 ஆங்கிலம்
+French	  பிரெஞ்சு மொழி
+German	  ஜெர்மன் மொழி
+Greek	  கிரேக்க மொழி
+Hebrew	  ஹீப்ரூ மொழி
+Hindi	 இந்தி
+Italian	  இத்தாலிய மொழி
+Japanese	  ஜப்பானிய மொழி
+Korean	  கொரிய மொழி
+Latin	 இலத்தீன்
+Russian	  ரஷ்ய மொழி
+Spanish	  ஸ்பானிய மொழி
+Urdu	 உருது மொழி
