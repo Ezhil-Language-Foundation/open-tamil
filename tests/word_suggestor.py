@@ -14,7 +14,7 @@ class WordsSuggestor(unittest.TestCase):
         word = u"ஆங்கிலம்"
         opts1 = norvig_suggestor( word, None, 1)
         opts2 = norvig_suggestor( word, None, 2)
-        self.assertEqual( list( map(len,[opts1, opts2])),  [337,55423] )
+        self.assertEqual( list( map(len,[opts1, opts2])),  [5150, 11175362] )
         return
 
 if __name__ == '__main__':
