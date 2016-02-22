@@ -7,10 +7,19 @@
 # setup the paths
 from __future__ import print_function
 from opentamiltests import *
-from tamil import wordutils
+from tamil import wordutils, tweetparser
 
 import math
 
+class TestTweetParse(unittest.TestCase):
+    def test_tweety( self ):
+        tweet = u"ஈர்ப்பு அலைகள் உருவாக்கும் அலைகள் #LIGO #tamil @nsf | SBS Your Language http://www.sbs.com.au/yourlanguage/tamil/ta/content/iirppu-alaikll-uruvaakkum-alaikll?language=ta"
+        tobj = tweetparser.TamilTweetParser(timeline_owner = "@ezhillang",tweet=tweet)
+        self.assertEqual(tobj.Hashtags[0],"#LIGO")
+        self.assertEqual(tobj.Hashtags[1],"#tamil")
+        self.assertTrue(tobj.URLs[0].find("sbs.com.au") >= 0 )
+        self.assertTrue(u"அலைகள்" in tobj.TAWords)
+        
 class TestWordUtils(unittest.TestCase):
     def test_perms( self ):
         res = [u'123',u'132',u'213',u'231',u'312',u'321']

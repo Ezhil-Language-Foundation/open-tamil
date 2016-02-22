@@ -5,6 +5,7 @@
 
 from . import utf8
 from . import tscii
+from . import tweetparser
 
 from . import txt2unicode
 from . import txt2ipa
