@@ -1,4 +1,4 @@
-open-tamil [![Build Status](https://travis-ci.org/arcturusannamalai/open-tamil.png)](https://travis-ci.org/arcturusannamalai/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/)](http://open-tamil.readthedocs.org/en/latest/)
+open-tamil [![Build Status](https://travis-ci.org/Ezhil-Language-Foundation/open-tamil.png)](https://travis-ci.org/Ezhil-Language-Foundation/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/)](http://open-tamil.readthedocs.org/en/latest/)
 ====================
 
 Open Source Tamil Tools and Tamil Library for Python 2, 3
