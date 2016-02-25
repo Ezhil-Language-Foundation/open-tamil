@@ -15,6 +15,22 @@
 {% endif %}
  <button type="submit">Check</button>
 </form>
+
+<!----- Spell Checker Portion ------------>
+<form method="POST" action="/spellchecker">
+ <select name="lang" value="ta_IN">
+  <option>ta_IN</option>
+  <option>en_IN</option>
+ </select>
+{% if solution %}
+ <input name="text" value="{{ word }}"></input>
+{% else %}
+ <input name="text" value="தமில்"></input>
+{% endif %}
+ <button type="submit">Check</button>
+</form>
+
+
 {% if solution %}
 <BR />
 {{ HTML | safe}}

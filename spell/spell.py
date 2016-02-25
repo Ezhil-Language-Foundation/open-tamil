@@ -91,8 +91,8 @@ class Speller(object):
         # returns JSON data in TinyMCE format
         ok,suggs = self.check_word_and_suggest( word )
         if ok:
-            return ok, ""
-        return ok, json.dumps( { word : suggs })
+            return ok, {}
+        return ok, suggs
         
     def interactive(self):
         try:

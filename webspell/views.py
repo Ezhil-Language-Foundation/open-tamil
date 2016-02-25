@@ -1,9 +1,12 @@
 ## -*- coding: utf-8 -*-
 ## (C) 2016 Muthiah Annamalai,
-
+from __future__ import print_function
 from webspell import app
 import json
 import codecs
+import sys
+import re
+import pprint
 
 from flask import request, render_template, redirect, url_for
 from spell import Speller, LoadDictionary
@@ -11,7 +14,7 @@ from spell import Speller, LoadDictionary
 @app.route('/')
 @app.route('/index')
 def index():
-    return "Hello, World!"
+    return redirect('/static/tinymce/index.html')
 
 #/spell?word=%E0%AE%B5%E0%AE%B0%E0%AF%81%E0%AE%95&lang=ta
 # 
@@ -53,7 +56,7 @@ def spell_get_only():
         ok,suggs = Speller(lang=lang,mode="web").REST_interface(word)
         if ok:
             return "<B style='color:green;'>OK!</B>"
-        data_suggs = json.loads(suggs)
+        data_suggs = suggs
         data_suggs2 = u"<br/>\n".join( [u"%d %s"%(itr+1,s_word) for itr,s_word in enumerate( data_suggs.values()[0])])
         return "<B style='color:red;'>Not OK!</B><br />"+data_suggs2+"\n<br/>"+suggs
     return 'spell check with ?word=$word&lang=en'
@@ -61,9 +64,21 @@ def spell_get_only():
 @app.route('/spellchecker',methods=['GET','POST'])
 def spellchecker():
     if request.method == 'POST':
-        method = request.form['method']
+        print(request.form.keys(),file=sys.stderr)
+        print(request.form['lang'],file=sys.stderr)
         lang = request.form['lang']
         text = request.form['text']
-        return "None!"
+        if lang != "ta_IN":
+            return json.dumps({'error':'Language '+lang+' is not supported; only takes Tamil (code ta_IN))'})
+        lang = "TA"
+        spell_checker = Speller(lang=lang,mode="web")
+        result_dict = {'words':{}}
+        for word in filter(len,re.split('\s+',text)):
+            if word.find("<") >= 0: #HTML Tags, skip
+                continue
+            ok,suggs = spell_checker.REST_interface(word)
+            if not ok:
+                result_dict['words'][word] = suggs    
+        return json.dumps(result_dict)
     else:
-        return "Spell Checker!"
+        return "RPC interface for TinyMCE Spell Checker!"
