@@ -6,26 +6,35 @@
 <head>
 <title>Open-Tamil Spell Checker integration</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script src="js/jquery/jquery-1.12.1.min.js"></script>
 <script src="js/tinymce/tinymce.dev.js"></script>
+<script src="js/tinymce/tinymce.jquery.js"></script>
 <script>
 function ta_spellchecker_cb(method, text, success, failure) {
       console.log(method);
       console.log(text);
+      var words_to_check = text; //text.match(this.getWordCharPattern());
+      console.log( words_to_check );
       console.log(success);
-      tinymce.util.JSONRequest.sendRPC({
+      
+      var request = $.ajax({
             url: "/spellchecker",
-            method: "spellcheck",
-            params: {
+            method: "POST",
+            dataType: "json",
+            data: {
               lang: 'ta_IN', /*this.getLanguage()*/
-              text: text.match(this.getWordCharPattern())
-            },
-            success: function(result) {
-              success(result);
-            },
-            error: function(error, xhr) {
-              failure("Spellcheck error:" + xhr.status);
-            }
-     });
+              text: words_to_check
+            }});
+       
+       request.done( 
+        function(result) {
+          success(result);
+        });
+            
+      request.fail( function(xhr,errorStatus) {
+              failure("Spellcheck error:" + errorStatus);
+            });
+            
 };
 
 /* Ref: https://www.tinymce.com/docs/plugins/spellchecker/ */

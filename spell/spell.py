@@ -172,6 +172,11 @@ class Speller(object):
         
     def check_word_and_suggest( self,word ):         
         word = word.strip()
+        # remove punctuation
+        for x in string.punctuation:
+            word = word.replace(x,u"")
+        # remove digits
+        word = re.sub('\d+','',word)
         letters = tamil.utf8.get_letters(word)
         TVU_dict = self.get_lang_dictionary()
         # plain old dictionary + user dictionary check

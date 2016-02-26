@@ -73,9 +73,11 @@ def spellchecker():
         lang = "TA"
         spell_checker = Speller(lang=lang,mode="web")
         result_dict = {'words':{}}
+        
         for word in filter(len,re.split('\s+',text)):
             if word.find("<") >= 0: #HTML Tags, skip
                 continue
+            
             ok,suggs = spell_checker.REST_interface(word)
             if not ok:
                 result_dict['words'][word] = suggs    
