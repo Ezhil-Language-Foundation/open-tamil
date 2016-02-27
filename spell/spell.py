@@ -18,6 +18,8 @@ import string
 import argparse
 import json
 import functools
+import operator
+from ngram.Distance import Dice_coeff
 
 # Make Bi-Lingual dictionary
 
@@ -194,9 +196,11 @@ class Speller(object):
         # e.g. செயல்பட => செயல் + பட
         alt = tamil.wordutils.greedy_split(word,TVU_dict)
         if len(alt) >= 1:
-            results = [u" ".join(alt)]
-            results.extend(alt)
-            return (False, results )
+            greedy_results = [u" ".join(alt),u"-".join(alt)]
+            greedy_results.extend(alt)
+        #return (False, results )
+        else:
+            greedy_results = list()
         
         # TODO: Noun Declension - ticket-
         
@@ -206,11 +210,10 @@ class Speller(object):
         pfx_options = TVU_dict.getWordsStartingWith( u"".join( letters[:-1] ) )
         
         # FIXME: score  the options
-        options = list(norvig_suggests)
+        options = greedy_results
+        options.extend( list(norvig_suggests))
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
-        
-        # score by 
         
         # sort the options
         if self.lang == u"en":
@@ -228,6 +231,20 @@ class Speller(object):
             if val.strip() != prev:
                 options2.append(val.strip())
             prev = val.strip()
+        del options
+        
+        # score by Dice coefficients
+        options_score = [0.0 for i in range(len(options2))]
+        for itr,sugg_word in enumerate(options2):
+            options_score[itr] = Dice_coeff( word, sugg_word )
+        options = zip( options2, options_score)
+        
+        # limit options by score
+        options = sorted(options,key=operator.itemgetter(1),reverse=True)
+        options = [word_pair[0] for word_pair in options]
+        
+        # limit to first 100 only which is toomuch anyway!
+        options = options[0:min(len(options),100)]
         
         return (False, options )
 
