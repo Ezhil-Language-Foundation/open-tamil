@@ -46,7 +46,7 @@ class Speller(object):
     ENL_dict = None
     def __init__(self,filename=None,lang="ta",mode="non-web"):
         object.__init__(self)
-        self.lang = lang
+        self.lang = lang.lower()
         self.filename = filename
         self.user_dict = set()
         self.case_filter = CaseFilter( RemovePluralSuffix(), RemoveVerbSuffixTense(), RemoveCaseSuffix(), RemovePrefix() )
@@ -55,14 +55,13 @@ class Speller(object):
         else:
             self.alphabets = None
         
-        if mode == "web":
-            return
-            
-        if not self.filename:
-            self.interactive()
-        else:
-            self.spellcheck(self.filename)
-
+        if mode != "web":
+            if not self.filename:
+                self.interactive()
+            else:
+                self.spellcheck(self.filename)
+        pass
+    
     @staticmethod
     def get_dictionary():        
         LoadDictionary.lock.acquire()
@@ -87,7 +86,11 @@ class Speller(object):
     def checklang(self,word):
         if self.lang == "ta":
             return tamil.utf8.all_tamil(word)
-        return all( [w in string.ascii_lowercase for w in word.lower()]) 
+        for w in word.lower():
+            if not ( w in string.ascii_lowercase ):
+                return False
+        return True
+    
     # Ref: https://www.tinymce.com/docs/plugins/spellchecker/
     def REST_interface(self,word):
         # returns JSON data in TinyMCE format
@@ -178,9 +181,16 @@ class Speller(object):
         for x in string.punctuation:
             word = word.replace(x,u"")
         # remove digits
-        word = re.sub('\d+','',word)
+        word = re.sub(u'\d+',u'',word)
         letters = tamil.utf8.get_letters(word)
         TVU_dict = self.get_lang_dictionary()
+        
+        if not self.checklang(word):
+            return (False,[u''])
+        
+        if len(word) < 1:
+            return (False,[u''])
+        
         # plain old dictionary + user dictionary check
         if self.isWord(word):
             return (True,word)
@@ -205,7 +215,7 @@ class Speller(object):
         # TODO: Noun Declension - ticket-
         
         # suggestions at edit distance 1
-        norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 1,limit=50))
+        norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 2,limit=50))
         combinagram_suggests = list(tamil.wordutils.combinagrams(word,TVU_dict,limit=50)) 
         pfx_options = TVU_dict.getWordsStartingWith( u"".join( letters[:-1] ) )
         
@@ -223,6 +233,11 @@ class Speller(object):
                 options = sorted( options, key=functools.cmp_to_key(tamil.utf8.compare_words_lexicographic) )
             else:
                 options = sorted( options, cmp=tamil.utf8.compare_words_lexicographic )
+        
+        # remove replacements with single-letter words
+        WL = len(tamil.utf8.get_letters(word))
+        if WL > 3:
+            options = filter( lambda x:  len(tamil.utf8.get_letters(x)) > 2, options )
         
         # remove dupes in list
         options2 = []
@@ -243,8 +258,9 @@ class Speller(object):
         options = sorted(options,key=operator.itemgetter(1),reverse=True)
         options = [word_pair[0] for word_pair in options]
         
-        # limit to first 100 only which is toomuch anyway!
-        options = options[0:min(len(options),100)]
+        L = 20
+        # limit to first top -L=20 only which is good enough
+        options = options[0:min(len(options),L)]
         
         return (False, options )
 
