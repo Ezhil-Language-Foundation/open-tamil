@@ -459,11 +459,11 @@ def compare_words_lexicographic( word_a, word_b ):
     for itr in range(0,min(La,Lb)):
             pos1 = all_TA_letters.find( word_a[itr] )
             pos2 = all_TA_letters.find( word_b[itr] )
-
+            
             if pos1 != pos2 :
                     #print  not( pos1 > pos2), pos1, pos2
                     return cmp(pos1, pos2)
-
+            
     # result depends on if La is shorter than Lb, or 0 if La == Lb  i.e. cmp
     return cmp(La,Lb)
 

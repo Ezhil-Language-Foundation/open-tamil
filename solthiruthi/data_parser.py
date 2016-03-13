@@ -1,9 +1,13 @@
 #!/usr/bin/python
-# (C) 2015 - Muthiah Annamalai
+# (C) 2015-2106 - Muthiah Annamalai
 # parse data files for Tamil proper nouns
 from __future__ import print_function
 import codecs
 import sys
+import json
+import tamil
+import re
+import pprint
 
 class WordList:
     # data structure for a WordList containing only one category
@@ -47,7 +51,9 @@ class DataParser:
                 elif line.startswith('#'):
                     continue
                 elif cat:
-                    cat.add( line )        
+                    word = u"".join(re.split('\s+',line)[1:])
+                    if len(word) > 0 :
+                        cat.add( word )        
         if cat:
            self.categories.append( cat ) 
         return
@@ -58,11 +64,11 @@ class DataParser:
         word_count = []
         for cat in self.categories:
             cat_wlen = len(cat.words)
-            r['dict'][cat.category] = cat_wlen
+            r['dict'][cat.category] = list(cat.words)
             word_count.append( cat_wlen )
         r['total'] = sum(word_count)
         return r
-    
+                
     def __unicode__(self):
         "print the statistics of the wordlist etc"
         rep = (u"# categories = %d"%len(self.categories))
@@ -81,4 +87,9 @@ if __name__ == u"__main__":
         sys.exit(-1)
     obj = DataParser.run(sys.argv[1:])
     r = obj.analysis()
+    # if you wanted to save the results to JSON
+    with codecs.open("ref.json","w","utf-8") as fp:
+        #pprint.pprint( json.dumps(r), fp )
+        fp.write(json.dumps(r))
+    
     print(u"cat %d / total words %d"%(r['catlen'],r['total']))
