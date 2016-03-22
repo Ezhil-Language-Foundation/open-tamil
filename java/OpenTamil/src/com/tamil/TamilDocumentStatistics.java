@@ -85,7 +85,7 @@ public class TamilDocumentStatistics {
         long prev_count = (prev_count_long == null) ? 0 : prev_count_long.longValue();
         m_wordFrequency.put(w,prev_count+1);
         
-        System.out.println("Added word => "+w+" @ #"+prev_count+1);
+        //System.out.println("Added word => "+w+" @ #"+prev_count+1);
         
         //keep reference to top word
         if ( prev_count > m_max_word_freq ) {
