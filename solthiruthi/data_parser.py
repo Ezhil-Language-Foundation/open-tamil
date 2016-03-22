@@ -53,7 +53,10 @@ class DataParser:
                 elif cat:
                     word = u"".join(re.split('\s+',line)[1:])
                     if len(word) > 0 :
-                        cat.add( word )        
+                        cat.add( word )
+                    else:
+                        #odd looking line - we'll keep it anyway
+                        cat.add(line.strip())
         if cat:
            self.categories.append( cat ) 
         return
