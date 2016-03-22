@@ -1,7 +1,5 @@
 package com.tamil;
 
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -34,7 +32,7 @@ import java.util.SortedMap;
 */
 public class TamilDocumentStatistics {
     private boolean m_complete = false;
-    private long m_nLines = 0;
+    private long m_nLines = 1;//you are by default on line 1
     private long m_nWords = 0;
     private long m_nLetters = 0;
     private long m_nEnglishLetters = 0;
@@ -44,6 +42,7 @@ public class TamilDocumentStatistics {
 
     public TamilDocumentStatistics() {
         m_wordFrequency = new HashMap<String, Long>();
+        m_max_word = new String();
     }
 
     public long getTotalWords() {
@@ -53,7 +52,10 @@ public class TamilDocumentStatistics {
     long getTotalLetters() {
         return m_nLetters;
     }
-
+    long getEnglishLetters() {
+        return m_nEnglishLetters;
+    }
+    
     long getTotalLines() {
         return m_nLines;
     }
@@ -66,7 +68,7 @@ public class TamilDocumentStatistics {
         return m_max_word;
     }
 
-    TamilDocumentStatistics begin() {
+    TamilDocumentStatistics reset() {
         m_complete = false;
         m_nLetters = 0;
         m_nLines =0 ;
@@ -80,15 +82,18 @@ public class TamilDocumentStatistics {
 
     private void update_word(String w) {
         Long prev_count_long = m_wordFrequency.get(w);
-        long prev_count = prev_count_long == null ? 0 : prev_count_long.longValue();
+        long prev_count = (prev_count_long == null) ? 0 : prev_count_long.longValue();
         m_wordFrequency.put(w,prev_count+1);
-
+        
+        System.out.println("Added word => "+w+" @ #"+prev_count+1);
+        
         //keep reference to top word
         if ( prev_count > m_max_word_freq ) {
             m_max_word = w;
             m_max_word_freq += 1;
         }
     }
+    
     public class WordFrequency  {
         public String word;
         public long frequency;
@@ -100,6 +105,10 @@ public class TamilDocumentStatistics {
     }
 
     public class WordFrequencyComparator implements java.util.Comparator<WordFrequency> {
+        boolean m_sort_descending;
+        WordFrequencyComparator() {
+            m_sort_descending = true;
+        }
         @Override
         public int compare(WordFrequency a, WordFrequency b) {
             long freq_a = m_wordFrequency.get(a.word);
@@ -110,7 +119,11 @@ public class TamilDocumentStatistics {
             b.frequency = freq_b;
 
             if ( freq_a != freq_b) {
-                return ( freq_a > freq_b) ? 1: -1;
+                int result = ( freq_a < freq_b) ? 1: -1;
+                if ( !m_sort_descending ) {
+                    result = -result;
+                }
+                return result;
             }
             return 0;
         }
@@ -119,11 +132,11 @@ public class TamilDocumentStatistics {
     public ArrayList<WordFrequency> getAllWordsByFrequency() {
         Iterator<String> all_words = m_wordFrequency.keySet().iterator();
         ArrayList<WordFrequency> wordfreq = new ArrayList<WordFrequency>();
-
+        
         while(all_words.hasNext()) {
             wordfreq.add( new WordFrequency(all_words.next()));
         }
-
+        
         Collections.sort(wordfreq, new WordFrequencyComparator());
         return wordfreq;
     }
@@ -135,20 +148,13 @@ public class TamilDocumentStatistics {
         boolean word_boundary = false;
         StringBuilder curr_word = new StringBuilder();
         int codept;
-        String val;
+        String val = null;
         while(itr.hasNext()) {
             val = itr.next();
             if (val.isEmpty())
                 continue;
 
-            //count as char for anything
-            m_nLetters++;
             codept = val.codePointAt(0);
-
-            //see if it could be English letters
-            if (codept <= 'z' && codept >= 'A') {
-                m_nEnglishLetters++;
-            }
 
             if (val.equalsIgnoreCase("\n") || val.equalsIgnoreCase("\r\n")) {
                 m_nLines++;
@@ -156,7 +162,13 @@ public class TamilDocumentStatistics {
             } else if (val.matches("\\s+")) {
                 word_boundary = true;
             } else {
+                //see if it could be English letters
+                if (codept <= 'z' && codept >= 'A') {
+                    m_nEnglishLetters++;
+                }
                 curr_word.append(val);
+                //count as char for anything
+                m_nLetters++;
             }
 
             if (word_boundary) {
@@ -168,10 +180,20 @@ public class TamilDocumentStatistics {
 
                 update_word(_w);
                 m_nWords++;
-                curr_word.delete(0,_w.length()-1);
+                curr_word = new StringBuilder();
             }
         }
-
+        
+        //last letter is not a empty space like word_boundary delimiter
+        //we force one to take better calculations
+        if (val!=null && !val.matches("\\s")) {
+            String _w = curr_word.toString();
+            if (!_w.isEmpty()) {
+                update_word(_w);
+                m_nWords++;
+            }
+        }
+        
         return this;
     }
 }
