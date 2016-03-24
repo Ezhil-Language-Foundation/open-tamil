@@ -1,6 +1,7 @@
 # This Python file uses the following encoding: utf-8
 # (C) 2015 Muthiah Annamalai
 # This file is part of open-tamil project
+
 from __future__ import print_function
 import time
 import sys
@@ -9,8 +10,6 @@ PYTHON3 = sys.version > '3'
 if PYTHON3:
     class long(int):
         pass
-
-# Ref: Tamil Calendar article from Tamil Wikipedia
 
 class BasicTamilTimeFormat:
     @staticmethod
@@ -98,14 +97,14 @@ class DateUtils:
         month = local_time.tm_mon
         week_day =local_time.tm_wday
         year_day = local_time.tm_yday            
-        hour,minute,second = local_time.tm_hour,local_time.tm_min,local_time.tm_sec
+        hour,minute,second = local_time.tm_hour,local_time.tm_min,local_time.tm_
         
         fmt.format(year,month,month_day,week_day,hour,minute,second)
         return None
     
     @staticmethod
     def get_hour_prefix(hour):
-        assert ( hour >= 0 and hour <= 24), "hour variable should be in [0,24] range"
+        assert ( hour >= 0 and hour <= 24)# "hour variable should be in [0,24] c
         if (hour <= 3) or (hour  >= 12+11):
             prefix = u"நள்ளிரவு" #u"nalliravu"
         elif hour <= 6:
