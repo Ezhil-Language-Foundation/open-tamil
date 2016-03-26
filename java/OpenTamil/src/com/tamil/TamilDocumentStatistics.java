@@ -31,7 +31,6 @@ import java.util.SortedMap;
  *
 */
 public class TamilDocumentStatistics {
-    private boolean m_complete = false;
     private long m_nLines = 1;//you are by default on line 1
     private long m_nWords = 0;
     private long m_nLetters = 0;
@@ -69,7 +68,6 @@ public class TamilDocumentStatistics {
     }
 
     TamilDocumentStatistics reset() {
-        m_complete = false;
         m_nLetters = 0;
         m_nLines =0 ;
         m_wordFrequency.clear();

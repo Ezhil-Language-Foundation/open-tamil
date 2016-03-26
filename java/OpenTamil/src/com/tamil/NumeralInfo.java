@@ -30,6 +30,11 @@ public class NumeralInfo {
 		this.use_spc = " ";
 	}
 	
+       @Override
+       public String toString() {
+           return getNumeral(); 
+       }
+       
 	public List<String> getFilenames() {
 		return filenames;
 	}
