@@ -32,6 +32,16 @@ public class TamilStringTest extends TestCase {
         super.tearDown();
     }
 
+    public void testRotateRight() {
+        TamilString obj = new TamilString("123");
+        obj.rotate_right();
+        assertEquals(obj.toString(),"231");
+        // fluent x 2
+        obj = new TamilString("1234");
+        obj.rotate_right().rotate_right();
+        assertEquals(obj.toString(),"3412");
+    }
+    
     /**
      * Test of toString method, of class TamilString.
      */

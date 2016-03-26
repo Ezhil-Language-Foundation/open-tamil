@@ -18,13 +18,32 @@ package com.tamil;
   Naal  : marchu : 3-vathu vaaram : sani kizhamai : 19-aam thethi, 2016
   */
 public class DateTimeLiteral {
-    public static String getUtteranceDate(byte day_of_week, byte day, byte date, byte month, int year) throws Exception {
+    public static String getLocalTime() throws Exception {
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
+        byte hr = (byte) now.getHour();
+        byte min = (byte) now.getMinute();
+        byte sec = (byte) now.getSecond();
+        return getUtteranceTime(hr,min,sec);
+    }
+    
+    public static String getLocalDate() throws Exception {
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
+        byte day_of_week = (byte) (now.getDayOfWeek().getValue()-1);
+        byte day = (byte) now.getDayOfMonth();
+        int year = now.getYear();
+        byte month = (byte) (now.getMonthValue() - 1);
+        return getUtteranceDate(day_of_week,day,month,year);
+    }
+    
+    // @day_of_week - 0 - 6 (Mon - Sunday)
+    // @day - 
+    public static String getUtteranceDate(byte day_of_week, byte day, byte month, int year) throws Exception {
          // Naal  : marchu : 3-vathu vaaram : sani kizhamai : 19-aam thethi, 2016
         StringBuffer sb = new StringBuffer();
         sb.append("நாள் ");
         sb.append(getMonth(month)+" மாதம் ");
-        int week = 1+date/7;
-        sb.append(Numeral.num2tamilstr(week).toString()+" வாரம் ");
+        int week = 1+day/7;
+        sb.append(Numeral.num2tamilstr(week).toString()+" ஆம் வாரம் ");
         sb.append(getDayOfWeek(day_of_week).toString()+" கிழமை ");
         sb.append(Numeral.num2tamilstr(day).toString()+" தேதி ");
         sb.append(Numeral.num2tamilstr(year).toString()+" ஆம் வருடம்");
@@ -34,6 +53,10 @@ public class DateTimeLiteral {
        //   Neram : Kalai    : 10 -a- kaal mani 30 vinadigal
        StringBuffer sb = new StringBuffer(); 
        String pozhuthu = getPozhuthu(hour);
+       if (hour > 12) {
+           hour = (byte) (hour - 12);
+       }
+       
        sb.append("இப்பொழுது "+pozhuthu+" நேரம்");
        if ( hour > 0 ) {
         sb.append( " "+Numeral.num2tamilstr(hour).toString() );

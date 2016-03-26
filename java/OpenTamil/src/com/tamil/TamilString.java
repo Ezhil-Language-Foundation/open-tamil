@@ -39,15 +39,48 @@ public class TamilString extends ArrayList<String> {
         super(utf8.get_letters(obj));
         m_orig_string = obj;
     }
+    //copy c-tor
+    public TamilString(TamilString cc) {
+        super(cc);
+        m_orig_string = cc.m_orig_string;    
+    }
     
     @Override
     public String toString() {
-        return m_orig_string;
+        return java.lang.String.join("", this);
     }
     
     // return the index of letter @ position 'pos' within the tamil letters array 
     int letterIndexOf(int pos) {
         return utf8.all_tamil_letters.indexOf(get(pos));
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if  (o instanceof TamilString) {
+            TamilString ref_obj = (TamilString) o;
+            int minL = Math.min(ref_obj.length(), this.length());
+            for(int itr=0; itr<minL;itr++) {
+                if ( get(itr).compareTo( ref_obj.get(itr) ) != 0 )
+                    return false;
+            }
+            return minL == length();
+        }
+        return false;
+    }
+    
+    public TamilString rotate_right() {
+        if (length() < 2)
+            return this;
+        String prev = this.get(0);
+        int itr = 1;
+        while( itr < length() ) {
+            String next = this.get(itr);
+            this.set(itr-1,next);
+            itr++;
+        }
+        this.set(length()-1,prev);
+        return this;
     }
     
     public int length() {
