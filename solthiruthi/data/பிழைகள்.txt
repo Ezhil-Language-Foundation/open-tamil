@@ -1,0 +1,3 @@
+# non-word error - type 1
+# word ambiguity error - type 2
+முதலில் தள்ளுவடியில் சென்று 10 பைசாவிற்கு ஐஸ் கிரீம் விற்றார். 
