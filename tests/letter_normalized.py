@@ -8,11 +8,32 @@
 from __future__ import print_function
 from opentamiltests import *
 
+class Utf8Normalized(unittest.TestCase):
+    def test_simple_check_normalized(self):
+        self.assertFalse( tamil.utf8.is_normalized(u"தொ") ) #த ெ ா 
+        self.assertTrue( tamil.utf8.is_normalized(u"தொ")) # த ொ
+    
+    def test_next_check_normalized(self):
+        self.assertFalse( tamil.utf8.is_normalized(u"கெள"))  #க ெ ள -> கெள
+        self.assertTrue( tamil.utf8.is_normalized(u"கௌ")) #க ௌ
+    
+    def test_simple_split(self):
+        l,r = u"த்",u"ஒ"
+        #non-normalized case
+        a,b=tamil.utf8.splitMeiUyir(u"தொ")
+        self.assertEqual( (a,b) , (l,r) )
+        
+    def test_simple_split_regular(self):
+        l,r = u"த்",u"ஒ"
+        #normalized case
+        a1,b1 = tamil.utf8.splitMeiUyir(u"தொ")
+        self.assertEqual( (a1,b1) , (l,r) )
+
 class Words(unittest.TestCase):
     def test_lexico_compare( self ):
         res = [0,1,-1]
         self.assertEqual( list(map( lambda x: tamil.utf8.compare_words_lexicographic( u"சம்மத", x),[u"சம்மத",u"சம்த",u"தசம்"])),res)
-    
+
     def test_unicode_tamil(self):
         val = []
         str_in = u'LnX3.14-சம்மதசம்ததசம்'

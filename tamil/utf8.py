@@ -276,13 +276,18 @@ def reverse_word( word ):
 ## find out if the letters like, "பொ" are written in canonical "ப + ொ"" graphemes then
 ## return True. If they are written like "ப + ெ + ா" then return False on first occurrence
 def is_normalized( text ):
+    #print(text[0],text[1],text[2],text[-1],text[-2])
     TLEN,idx = len(text),1
     kaal = u"ா"
+    Laa = u"ள"
     sinna_kombu, periya_kombu = u"ெ", u"ே"
     kombugal = [sinna_kombu, periya_kombu]
     
+    # predicate measures if the normalization is violated
     def predicate( last_letter, prev_letter):
-        if ((last_letter == kaal) and (prev_letter in kombugal)):
+        if ((kaal == last_letter) and (prev_letter in kombugal)):
+            return True
+        if ((Laa == last_letter) and (prev_letter == sinna_kombu)):
             return True
         return False
     if TLEN < 2:
@@ -291,17 +296,16 @@ def is_normalized( text ):
         if predicate( text[-1], text[-2] ):
             return False
         return True
-    a = text[0]
-    b = text[1]
-    assert idx == 1
-    while (idx < TLEN):
+    idx = TLEN
+    a = text[idx-2]
+    b = text[idx-1]
+    while (idx >= 0):
         if predicate(b,a):
             return False
-        a=b
-        idx = idx + 1
-        if idx < TLEN:
-            b=text[idx]
-    # reached end and nothing tripped us
+        b=a
+        idx = idx - 1
+        if idx >= 0:
+            a=text[idx]
     return True 
     
 def _make_set(args):
@@ -482,6 +486,27 @@ def word_intersection( word_a, word_b ):
                 positions.append( (idx, idy) )
     return positions
 
+def unicode_normalize(cplxchar):
+    Laa = u"ள"
+    kaal = u"ா"
+    sinna_kombu_a = u"ெ"
+    periya_kombu_aa = u"ே"
+    sinna_kombu_o = u"ொ"
+    periya_kombu_oo = u"ோ"
+    kombu_ak = u"ௌ"
+    
+    lcplx = len(cplxchar)
+    if lcplx>=3 and cplxchar[-1] == Laa:
+        if cplxchar[-2] == sinna_kombu_a:
+            return ( cplxchar[:-2] + kombu_ak )
+    if lcplx >= 2 and cplxchar[-1] == kaal:
+        if cplxchar[-2] == sinna_kombu_a:
+            return ( cplxchar[:-2]+sinna_kombu_o )
+        if cplxchar[-2] == periya_kombu_aa:
+            return ( cplxchar[:-2]+periya_kombu_oo )
+    # no-op
+    return cplxchar
+    
 def splitMeiUyir(uyirmei_char):    
     """
     This function split uyirmei compound character into mei + uyir characters
@@ -503,10 +528,14 @@ def splitMeiUyir(uyirmei_char):
 
     if uyirmei_char in uyir_letters:
         return uyirmei_char   
- 
-    if uyirmei_char not in grantha_uyirmei_letters: 
+     
+    if uyirmei_char not in grantha_uyirmei_letters:
+        if not is_normalized( uyirmei_char ):
+            norm_char = unicode_normalize(uyirmei_char)
+            rval = splitMeiUyir( norm_char )
+            return rval
         raise ValueError("Passed input letter '%s' is not tamil letter" % uyirmei_char)
- 
+        
     idx = grantha_uyirmei_letters.index(uyirmei_char)
     uyiridx = idx % 12
     meiidx = int((idx - uyiridx)/ 12)
