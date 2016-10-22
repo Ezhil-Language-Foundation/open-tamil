@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # 
-# (C) 2013-2015 முத்தையா அண்ணாமலை 
+# (C) 2013-2016 முத்தையா அண்ணாமலை 
 # open-tamil project
 
 from distutils.core import setup
 from codecs import open
 
 setup(name='Open-Tamil',
-      version='0.6',
+      version='0.65',
       description='Tamil language text processing tools for Python v2, v3',
       author='M. Annamalai, T. Arulalan, and other contributors',
       author_email='ezhillang@gmail.com',
