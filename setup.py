@@ -12,7 +12,7 @@ setup(name='Open-Tamil',
       description='Tamil language text processing tools for Python v2, v3',
       author='M. Annamalai, T. Arulalan, and other contributors',
       author_email='ezhillang@gmail.com',
-      url='https://github.com/arcturusannamalai/open-tamil',
+      url='https://github.com/Ezhil-Language-Foundation/open-tamil',
       packages=['tamil','transliterate','ngram','tamil.txt2ipa','tamil.txt2unicode','tamil.utils', 'solthiruthi','spell'],
       package_dir={'solthiruthi': 'solthiruthi'},
       package_data={'solthiruthi': ['data/*.txt']},
@@ -26,5 +26,5 @@ setup(name='Open-Tamil',
     'Programming Language :: Python :: 3.3',
     'Programming Language :: Python :: 3.4'],
       long_description=open('README.md','r','UTF-8').read(),
-      download_url='https://github.com/arcturusannamalai/open-tamil/archive/master.zip',#pip
+      download_url='https://github.com/Ezhil-Language-Foundation/open-tamil/archive/master.zip',#pip
       )
