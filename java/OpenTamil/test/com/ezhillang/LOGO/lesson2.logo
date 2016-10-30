@@ -1,3 +1,5 @@
+;; This file was taken from the FMS Logo examples
+;; Ref: http://fmslogo.sourceforge.net/workshop/
 REPEAT 4 [ FORWARD 100 RIGHT 90 ]
 REPEAT 100 [ FORWARD REPCOUNT * 2 RIGHT 90 ]
 

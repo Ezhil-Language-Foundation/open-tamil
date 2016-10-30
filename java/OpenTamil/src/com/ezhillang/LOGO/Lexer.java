@@ -1,6 +1,6 @@
-/*
- * (C) 2016 Muthu Annamalai <ezhillang@gmail.com>
- */
+/* This file maybe distributed under terms of MIT License.
+* Copyright (c) 2016, முத்தையா அண்ணாமலை,
+*/
 package com.ezhillang.LOGO;
 
 import java.io.IOException;
@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 import java.util.Queue;
-/**
- *
- */
+
 public class Lexer {
     Queue<Token> m_tokens;
     String m_contents;

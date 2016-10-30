@@ -1,3 +1,7 @@
+/* This file maybe distributed under terms of MIT License.
+* Copyright (c) 2016, முத்தையா அண்ணாமலை,
+*/
+
 /*
 * Parse tree objects representing LOGO language objects
 */

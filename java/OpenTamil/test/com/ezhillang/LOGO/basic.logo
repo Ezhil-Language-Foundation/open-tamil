@@ -1,3 +1,5 @@
+;; This file was taken from the FMS Logo examples
+;; Ref: http://fmslogo.sourceforge.net/workshop/
 FD 100
 BK 100
 RT 90

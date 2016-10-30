@@ -1,27 +1,21 @@
-package com.ezhillang.LOGO;
+/* This file maybe distributed under terms of MIT License.
+* Copyright (c) 2016, முத்தையா அண்ணாமலை, 
+*/
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package com.ezhillang.LOGO;
 
 /**
  *
  * @author muthu
  */
 public class TamilLexer {
-/**
- * 
- * REPEAT - மீண்டும்
-FD - முன்
-BK - பின்
-RT - வலது
-LT - இடது
-PU - எடு - penup
-PD - வை - pendown
-HOME - வீடு
-CS - அழி - clear screen
-* 
- */    
+final static String REPEAT = "மீண்டும்";
+final static String FD = "முன்";
+final static String BK = "பின்";
+final static String RT = "வலது";
+final static String LT = "இடது";
+final static String PU = "எடு"; // - penup
+final static String PD = "வை"; // - pendown
+final static String HOME = "வீடு"; //
+final static String CS = "அழி"; // - clear screen
 }

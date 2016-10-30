@@ -1,3 +1,5 @@
+;; This file was taken from the FMS Logo examples
+;; Ref: http://fmslogo.sourceforge.net/workshop/
 to spiral :w :a :x :c :ww
   if :c = 0 [stop]
   penwidth :ww

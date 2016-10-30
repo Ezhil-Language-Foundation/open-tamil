@@ -1,3 +1,5 @@
+;; This file was taken from the FMS Logo examples
+;; Ref: http://fmslogo.sourceforge.net/workshop/
 ;; make a simple verbose square
 FD 45+45
 RT 90

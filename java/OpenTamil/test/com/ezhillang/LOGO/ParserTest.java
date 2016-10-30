@@ -1,8 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* This file maybe distributed under terms of MIT License.
+* Copyright (c) 2016, முத்தையா அண்ணாமலை, 
+*/
 package com.ezhillang.LOGO;
 
 import java.io.File;
