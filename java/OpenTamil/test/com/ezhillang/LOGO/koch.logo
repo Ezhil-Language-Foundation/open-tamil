@@ -1,0 +1,20 @@
+to line :count :length
+ ifelse :count = 1 [fw :length] 
+ [
+   make "count :count -1 
+   line :count :length
+   lt 60 line :count :length
+   rt 120 line :count :length
+   lt 60 line :count :length
+  ]
+end
+
+to koch :count :length
+  rt 30 line :count :length
+  rt 120 line :count :length
+  rt 120 line :count :length
+end
+
+reset
+setxy  45 370
+koch 5 5

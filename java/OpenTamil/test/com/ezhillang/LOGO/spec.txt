@@ -1,0 +1,182 @@
+Ref: http://logo.twentygototen.org/6vcsCHOg
+
+Quick reference logo guide:
+
+Stuff should work in lower or upper case.
+
+Types:
+
+WORDS:          FW BW ....
+NUMBERS:        0, 0.1, 20
+LISTS:          [1 2 3 5]
+SYMBOLS:        "foo "bar
+VARIABLES:      :foo :bar 
+FUNCTION CALLS: COMMAND arg arg arg ...
+                (COMMAND arg arg arg ...)
+
+Supported Commands:
+
+RESET           Clear the screen, move home.
+
+
+Turtle Movement:
+
+FORWARD n       Move the turtle forward n pixels
+FW n    
+
+BACKWARD n      Move the turtle backward n pixels
+
+RIGHT n         Move the turtle left or right n degrees
+RT n
+LEFT n
+LT n
+
+SETX x          Set the co-ordinates of the turtle
+SETY y
+SETXY x y
+
+HOME            Move the turtle to the home position
+
+
+Drawing:
+
+CLEARSCREEN     Clear the screen
+CLEAR
+CS
+
+CIRCLE r        Draw a Circle of radius r around the turtle
+
+ARC r d         Draw an arc of radius r for d degrees
+
+PENUP           Lift the pen up and down
+PU
+PENDOWN
+PD
+
+COLOR [r g b]   Set the pen color
+
+PENWIDTH w      Set the pen width
+
+
+Text:
+
+PRINT "foo          Prints "foo"
+PR "foo
+PRINT ["foo "bar]   Prints "foo bar"
+PR ["foo "bar]
+
+CLEARTEXT           Clears previously printed text
+CT
+
+
+Arithmetic:
+
+1 + 2                   1 * 2
+SUM 1 2                 PRODUCT 1 2
+(SUM 1 2 3 ...)         (PRODUCT 1 2 3 ...)
+
+1 - 2                   1 / 2
+DIFFERENCE 1 2          DIVIDE 1 2
+
+1 % 2
+MOD 1 2
+
+RANDOM n        Return a integer in [0,n)
+RAND n
+
+RERANDOM s      Set the random seed value
+SRAND s
+
+
+INT n
+ROUND n
+POWER e m
+EXP n
+LN n
+LOG10 n
+
+
+
+SIN, COS
+RADSIN,RADCOS
+
+ARCTAN
+RADARCTAN
+
+
+
+List Operators (experimental):
+These functions may break silently at the moment.
+
+FIRST, HEAD             Return the first item in a list
+BUTFIRST, TAIL          Return the everything but the first item in a list
+LAST                    Return the last item in a list
+BUTLAST                 Return everything but the last item in a list
+
+FPUT item list  Return a new list with item at the front
+LPUT item list  Return a new list with item at the back
+
+ITEM index list                 Retrieve the indexed item
+SETITEM index list value        Set the indexed item
+
+EMPTY? list     Return true if list is empty
+EMPTYP list 
+
+Logical and Comparison:
+
+1 = 1
+EQUAL? 1 1
+EQUALP 1 1
+
+1 < 2                1 <= 2
+LESS? 1 2               LESSEQUAL? 1 2
+LESSP 1 2               LESSEQUALP 1 2
+
+2 > 1                2 > 1
+GREATER? 2 1            GREATEREQUAL? 2 1
+GREATERP 2 1            GREATEREQUALP 2 1
+
+AND TRUE FALSE          OR FALSE TRUE
+
+Conditionals:
+
+IF COND [IF_TRUE] 
+IF 2 > 1 [FW 100]
+
+IFELSE COND [IF_TRUE] [IF_FALSE]
+IFELSE 2 > 1 [FW 100 RT 90] [BW 100 LT 90]
+
+
+Setting and getting:
+
+Set x to 1:             make "x 1
+Adding :n to :x         :n + :x
+Setting :x to :n + :x   make "x :x + :n
+
+Looping:
+
+REPEAT n [COMMANDS ...]
+
+STOP    - Stop the current Repeat or function.
+
+OUTPUT f  - Return f.
+OP f
+
+
+Defining and Calling:
+
+TO FOO :ARG1 :ARG2 BODY END
+
+TO SQUARE :length 
+REPEAT 4 [FW :length RT 90]
+END
+
+SQUARE :10
+
+TO POLYGON :length :sides
+REPEAT :sides [FW :length RT 360/:sides]
+END
+
+POLYGON 5 10
+
+Note: Simple Tail recursion is supported.

@@ -1,0 +1,17 @@
+to spiral :w :a :x :c :ww
+  if :c = 0 [stop]
+  penwidth :ww
+  color [255-:w*2 0 :w*2]
+  lt :x
+  fw :w
+  pu
+  bw :w
+  rt :x
+  fw :w ;comment!
+  pd 
+  rt :a
+  spiral :w +1 :a :x+0.7 :c -1 :ww + 0.1
+end
+
+reset
+spiral 1 30 10 90 1

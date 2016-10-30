@@ -1,0 +1,15 @@
+to program :step
+cs
+repeat 4 [
+ make "degree 0
+ repeat 100 [
+  forward 15
+  left :degree
+  make "degree (:degree + :step)
+  ]
+]
+end
+
+reset 
+program 2.5
+program 5.2

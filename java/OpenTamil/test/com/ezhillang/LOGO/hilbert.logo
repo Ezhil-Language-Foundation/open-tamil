@@ -1,0 +1,55 @@
+to x :count :length
+   ifelse :count = 0
+   [
+   ]
+   [
+      make "count :count - 1
+      make "half :length / 2
+      right 90
+      y :count :length
+      forward :length
+      left 90
+      x :count :length
+      forward :length
+      x :count :length
+      left 90
+      forward :length
+      y :count :length
+      right 90
+   ]
+end
+
+to y :count :length
+   ifelse :count = 0
+   [
+   ]
+   [
+      make "count :count - 1
+      make "half :length / 2
+      left 90
+      x :count :length
+      forward :length
+      right 90
+      y :count :length
+      forward :length
+      y :count :length
+      right 90
+      forward :length
+      x :count :length
+      left 90
+   ]
+end
+
+to hilbert :iterations :length
+   setxy 25 475
+   make "k power 2 (:iterations - 2)
+   make "m :k * 3 + :k - 1
+   make "length :length / ( :m )
+   x :iterations :length
+end
+
+clearscreen
+home
+make "length 450
+make "iterations 4
+hilbert :iterations :length
