@@ -44,6 +44,8 @@ public class LexerTest extends TestCase {
         doLexerTest("spiral.logo",84);
         doLexerTest("basic.logo",18);
         doLexerTest("lesson1.logo",229);
+        doLexerTest("basicsquare.logo",25);
+        doLexerTest("square.logo",10);
     }
     
     public void doLexerTest(String file, int expResult) throws IOException {

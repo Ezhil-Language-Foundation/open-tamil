@@ -1,0 +1,9 @@
+;; make a simple verbose square
+FD 45+45
+RT 90
+FD 60 + 30
+RT 90
+FD 120-30
+RT 90
+FD 20+80-10
+HOME

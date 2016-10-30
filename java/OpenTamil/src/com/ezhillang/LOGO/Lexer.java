@@ -20,6 +20,7 @@ public class Lexer {
     String m_filename;
     String TO = "TO";
     String REPEAT = "REPEAT";
+    boolean m_comment = false;
     
     public Lexer(String filename) {
         m_tokens = new java.util.ArrayDeque<Token>();
@@ -57,13 +58,14 @@ public class Lexer {
     public int scan() throws IOException, Exception {
         List<String> lines = Files.readAllLines( FileSystems.getDefault().getPath(m_filename) );
         for(String line : lines) {
+            m_comment = false; //reset
             line = line.trim();
             String[] parts = line.split("\\s+");
             for(String part : parts) {
                 part = part.trim();
                 recognizeToken(part.trim());
                 // skip rest of comment
-                if ( part.startsWith(";") )
+                if ( m_comment )
                     break;
             }
         }
@@ -108,6 +110,7 @@ FUNCTION CALLS: COMMAND arg arg arg ...
           if ( rest_chunk != null) 
                recognizeToken( rest_chunk.trim() );
         } else if ( c == ';') {
+         m_comment = true;
          // beginning of a comment. skip the whole thing!
          return;
         } else if ( chunk.equalsIgnoreCase("+") ) {

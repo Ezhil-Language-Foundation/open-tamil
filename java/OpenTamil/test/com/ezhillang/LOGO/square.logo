@@ -1,0 +1,4 @@
+;; make a simple square succinctly
+CLEAR
+REPEAT 4 [ FD 90 RT 90 ]
+HOME

@@ -4,23 +4,78 @@
 package com.ezhillang.LOGO;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class AST {
+    void visit(Visitor v) throws Exception {
+       v.visit(this);
+    }
 }
 
+// always binary operators for now
 class Expr extends AST {
+    AST m_lhs;
+    AST m_rhs;
+    TokenKind m_op;
+
+   Expr( TokenKind kind, AST lhs, AST rhs) {
+       m_lhs = lhs;
+       m_rhs = rhs;
+       m_op = kind;
+   }
+   boolean isBinaryExpr() {
+       return m_lhs != null && m_rhs != null;
+   }
+   
+   boolean isUnaryExpr() {
+       return m_lhs != null && m_rhs == null;
+   }
+   
+   boolean isArithmeticExpr() {
+        if ( m_op != TokenKind.ADD 
+         && m_op != TokenKind.SUB 
+         && m_op != TokenKind.PROD 
+         && m_op != TokenKind.DIV ) {
+            return false;
+        }
+        return true;
+   }
 }
 
-class ExprCall extends Expr {
-    ExprCall () {
+class Number extends AST {
+    double m_val;
+    
+    Number(double val) {
         super();
+        m_val = val;
+    }
+}
+
+class Variable extends AST {
+    String m_var;
+    
+    Variable(String val) {
+        super();
+        m_var = val;
+    }
+}
+
+// define a function invocation with arguments
+class ExprCall extends AST {
+    ListAST m_args;
+    String m_function;
+
+    ExprCall(String word_name, ListAST args) {
+        super();
+        m_args = args;
+        m_function = word_name;
     }
 }
 
 class Word extends AST {
     int m_args = 0;
     String m_word_name = null;
-    String m_alias = null; //sometimes we like to have the Tamil name here
+    String [] m_alias = null; //sometimes we like to have the Tamil name here
     boolean m_builtin = true;
     
    static Word buildUserWord(String wordname, int args, String alias) {
@@ -44,11 +99,27 @@ class Word extends AST {
    Word(String wordname, int args, String alias) {
         m_word_name = wordname;
         m_args = args;
-        m_alias = alias;
+        m_alias = new String [] { alias };
     }
    
+    Word(String wordname, int args, String [] alias) {
+        m_word_name = wordname;
+        m_args = args;
+        m_alias = alias;
+    }
+    
    boolean matches(String other_word) {
-       return m_word_name.equalsIgnoreCase(other_word) || (m_alias != null  && m_alias.equalsIgnoreCase(other_word));
+       
+       if ( m_word_name.equalsIgnoreCase(other_word) )
+           return true;
+       
+       if (m_alias != null) {  
+           for(String alt_name: m_alias) {
+               if ( alt_name.equalsIgnoreCase(other_word))
+                   return true;
+           }
+       }
+       return false;
    }
 }
 
@@ -81,12 +152,43 @@ class Function extends AST {
     }
 }
 
+class Repeat extends AST {
+    ListAST m_body;
+    AST m_times;
+    
+    Repeat(AST times, ListAST body) {
+        m_times = times;
+        m_body = body;
+    }
+}
+
 class ListAST extends AST {
     private ArrayList<AST> m_array;
     
     ListAST() {
         super();
         m_array = new ArrayList<AST>();
+    }
+    
+    AST peek(int pos) {
+        return m_array.get(pos);
+    }
+
+    AST remove(int pos) {
+        return m_array.remove(pos);
+    }
+
+    AST removeLast() {
+        int pos = m_array.size() - 1;
+        return m_array.remove(pos);
+    }
+    
+    ListIterator<AST> getIterator() {
+        return m_array.listIterator();
+    }
+    
+    int size() {
+        return m_array.size();
     }
     
     void add(AST ref) {
