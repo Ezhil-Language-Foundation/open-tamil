@@ -4,6 +4,7 @@
 package com.ezhillang.LOGO;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,8 +17,8 @@ public class Lexer {
     Queue<Token> m_tokens;
     String m_contents;
     String m_filename;
-    String TO = "TO";
-    String REPEAT = "REPEAT";
+    static String TO = "TO";
+    static String REPEAT = "REPEAT";
     boolean m_comment = false;
     
     public Lexer(String filename) {
@@ -54,14 +55,15 @@ public class Lexer {
     
     //returns number of tokens scanned from driver method
     public int scan() throws IOException, Exception {
-        List<String> lines = Files.readAllLines( FileSystems.getDefault().getPath(m_filename) );
+        List<String> lines = Files.readAllLines( FileSystems.getDefault().getPath(m_filename), Charset.forName("UTF-8") );
         for(String line : lines) {
             m_comment = false; //reset
             line = line.trim();
             String[] parts = line.split("\\s+");
             for(String part : parts) {
                 part = part.trim();
-                recognizeToken(part.trim());
+                // System.out.println(" ===> "+part);
+                recognizeToken(part);
                 // skip rest of comment
                 if ( m_comment )
                     break;
@@ -83,7 +85,7 @@ FUNCTION CALLS: COMMAND arg arg arg ...
     
     //skip first letter and recognizeToken for rest of trimmed string
     void checkAndProceed(String chunk) throws Exception {
-        if ( chunk.length() > 1) 
+        if ( chunk.length() > 1)
               recognizeToken( chunk.substring(1).trim() );
     }
     
@@ -124,6 +126,8 @@ FUNCTION CALLS: COMMAND arg arg arg ...
         } else if ( c == ')' ) {
           addToken( c.toString(), TokenKind.CLOSE_PAREN );
           checkAndProceed( chunk );
+        } else if ( chunk.equalsIgnoreCase("END") ) {
+          addToken( chunk, TokenKind.END );
         } else if ( c == '(' ) {
           addToken( c.toString(), TokenKind.OPEN_PAREN );
           checkAndProceed( chunk );
@@ -141,17 +145,9 @@ FUNCTION CALLS: COMMAND arg arg arg ...
           if ( chunk.length() > 1) 
               recognizeToken( chunk.substring(1).trim() );
         } else if ( Character.isAlphabetic(c) ) {
-            int idx = 1;
-            String rest_chunk = null;
-            while( idx < chunk.length() ) {
-                if ( !Character.isAlphabetic( chunk.charAt(idx) ) ) {
-                    rest_chunk = chunk.substring(idx);
-                    chunk = chunk.substring(0,idx);
-                    break;
-                }
-                idx++;
-            }
-           
+           String [] parts_rval = getAlphabetString(chunk);
+           chunk = parts_rval[0];
+           String rest_chunk = parts_rval[1];
            addToken( chunk, TokenKind.STRING );
            if ( rest_chunk != null) 
                recognizeToken( rest_chunk.trim() );
@@ -162,6 +158,23 @@ FUNCTION CALLS: COMMAND arg arg arg ...
             // most likely an error
             throw new Exception("failed.. lexing file "+ m_filename +" at '"+chunk+"'");
         }
+    }
+    
+    String [] getAlphabetString(String chunk) {
+            String [] rval = new String[2];
+            int idx = 1;
+            String rest_chunk = null;
+            while( idx < chunk.length() ) {
+                if ( !Character.isAlphabetic( chunk.charAt(idx) ) ) {
+                    rest_chunk = chunk.substring(idx);
+                    chunk = chunk.substring(0,idx);
+                    break;
+                }
+                idx++;
+            }
+           rval[0] = chunk;
+           rval[1] = rest_chunk;
+           return rval;
     }
     
     void addToken( String val, TokenKind kind) {

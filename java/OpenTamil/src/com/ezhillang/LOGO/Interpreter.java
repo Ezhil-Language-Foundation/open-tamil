@@ -60,10 +60,10 @@ public class Interpreter {
     }
     
     private void loadBuiltIns() {
-        m_word_map.addWord("RT",1,"வலது");
-        m_word_map.addWord("LT",1,"இடது");
+        m_word_map.addWord("RT",1, new String [] { "வலது", "RIGHT" } );
+        m_word_map.addWord("LT",1,new String [] { "இடது", "LEFT" } );
         m_word_map.addWord("FW",1,new String [] {"முன்","FD","FORWARD"});
-        m_word_map.addWord("BW",1,new String [] {"பின்","BK","BACKWARD"});
+        m_word_map.addWord("BW",1,new String [] {"பின்","BK","BACK","BACKWARD"});
         m_word_map.addWord("RESET",0,new String [] {"அழி","CLEAR","CLS"});
         m_word_map.addWord("STOP",0,"நிறுத்து");
         m_word_map.addWord("CS",0,"அழி");

@@ -21,5 +21,6 @@ public enum TokenKind {
    SUB, //-
    PROD, //*
    DIV,// '/'
-   EQ // '='
+   EQ, // '='
+   END // 'END'
 }

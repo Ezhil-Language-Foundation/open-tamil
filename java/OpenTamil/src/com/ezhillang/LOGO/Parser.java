@@ -66,7 +66,7 @@ public class Parser {
    }
    
    // TO part is already used.
-   private void parseFunction() {
+   private void parseFunction() throws Exception {
        ArgList args = null;
        assert m_lexer.match(m_lexer.TO);
        Token fname = m_lexer.getNext();
@@ -75,12 +75,12 @@ public class Parser {
        if ( iscolon.m_kind == TokenKind.COLON ) {
             args = parseAnyArgList();
        }
-       Object functionBody = null;
        m_int.addUserDefinedWord( fname.m_value, args);
        // anticipate the recursive function parsing and enter this function into the interpreter table
-       // parseFunctionBody();
-       // build a function
+       ListAST functionBody = parseBody();
+        // build a function
        // attach to the expr list
+       m_lexer.match("END");
        Function fcn = new Function( fname.m_value, args, functionBody );
        m_ast.add(fcn);
    }
@@ -219,5 +219,32 @@ public class Parser {
             System.out.println( idx+" -> "+itr.next());
             idx++;
         }
+    }
+
+   // body is basically a list without the '[' and ']' start/end tokens
+   private ListAST parseBody() throws Exception {
+        ListAST list = new ListAST();
+        while( m_lexer.hasNext() ) {
+           AST rval = null;
+           Token token = m_lexer.peek();
+           if ( token.m_kind == TokenKind.OPEN_SQBR) {
+               rval = parseList(); // support nested lists
+           } else if ( token.m_value.equalsIgnoreCase("END") ) {
+               break;
+           } else if ( token.m_value.equalsIgnoreCase("REPEAT") ) {
+               parseRepeat();
+               rval = m_ast.removeLast();
+           } else {
+               Interpreter.KnownWordFound isKnownWord = m_int.isKnownWord( token );
+               if ( isKnownWord.found ) {
+                  parseKnownWord( token, isKnownWord.nargs );
+                  rval = m_ast.removeLast();
+               } else {
+                   rval = parseExpr();
+               }
+           }
+           list.add(rval);
+        }
+        return list;
     }
 }
