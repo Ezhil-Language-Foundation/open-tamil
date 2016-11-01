@@ -216,7 +216,7 @@ public class Parser {
         ListIterator<AST> itr = m_ast.getIterator();
         int idx = 1;
         while( itr.hasNext() ) {
-            System.out.println( idx+" -> "+itr.next());
+            System.out.println( idx+" -> "+itr.next().toString());
             idx++;
         }
     }

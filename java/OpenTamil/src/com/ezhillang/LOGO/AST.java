@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 public class AST {
+    @Override
+    public String toString() {
+        return "AST Object";
+    }
+    
     void visit(Visitor v) throws Exception {
        v.visit(this);
     }
@@ -22,6 +27,11 @@ class Expr extends AST {
     AST m_rhs;
     TokenKind m_op;
 
+   @Override
+   public String toString() {
+       return m_lhs.toString() + " "+m_op+" "+ m_rhs.toString();
+   }
+    
    Expr( TokenKind kind, AST lhs, AST rhs) {
        m_lhs = lhs;
        m_rhs = rhs;
@@ -49,6 +59,11 @@ class Expr extends AST {
 class Number extends AST {
     double m_val;
     
+   @Override
+   public String toString() {
+       return String.valueOf(m_val);
+   }
+   
     Number(double val) {
         super();
         m_val = val;
@@ -57,7 +72,12 @@ class Number extends AST {
 
 class Variable extends AST {
     String m_var;
-    
+   
+   @Override
+   public String toString() {
+       return m_var;
+   }
+   
     Variable(String val) {
         super();
         m_var = val;
@@ -69,6 +89,20 @@ class ExprCall extends AST {
     ListAST m_args;
     String m_function;
 
+   @Override
+   public String toString() {
+       StringBuffer sb = new StringBuffer(m_function);
+       sb.append("( ");
+       ListIterator<AST> itr = m_args.getIterator();
+       while( itr.hasNext() ) {
+           sb.append(itr.next().toString());
+           if ( itr.hasNext() )
+               sb.append(",");
+       }
+       sb.append(")");
+       return sb.toString();
+   }
+   
     ExprCall(String word_name, ListAST args) {
         super();
         m_args = args;
@@ -81,7 +115,12 @@ class Word extends AST {
     String m_word_name = null;
     String [] m_alias = null; //sometimes we like to have the Tamil name here
     boolean m_builtin = true;
-    
+
+   @Override
+   public String toString() {
+       return m_word_name;
+   }
+   
    static Word buildUserWord(String wordname, int args, String alias) {
        Word user_word = new Word( wordname, args,alias);
        user_word.m_builtin = false;
@@ -151,6 +190,12 @@ class Function extends AST {
     ArgList m_args;
     String m_name;
     
+   @Override
+   public String toString() {
+       return "TO "+ m_name + " "+(m_args != null ? m_args.toString(): "") + "  "+ 
+               ((m_function_body != null) ? m_function_body.toString() : "") +"\n END";
+   }
+   
     Function(String m_value, ArgList args, Object functionBody) {
         
     }
@@ -159,7 +204,12 @@ class Function extends AST {
 class Repeat extends AST {
     ListAST m_body;
     AST m_times;
-    
+
+   @Override
+   public String toString() {
+       return "REPEAT "+ m_times.toString() + "  ["+ m_body.toString() +"]";
+   }
+   
     Repeat(AST times, ListAST body) {
         m_times = times;
         m_body = body;
@@ -190,7 +240,19 @@ class ListAST extends AST {
     ListIterator<AST> getIterator() {
         return m_array.listIterator();
     }
-    
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        ListIterator<AST> itr = getIterator();
+        while ( itr.hasNext() ) {
+            sb.append( itr.next().toString() );
+            sb.append("\n");
+        }
+        
+        return sb.toString();
+    }
+   
     int size() {
         return m_array.size();
     }

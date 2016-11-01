@@ -29,7 +29,7 @@ final static String TO = "செய்"; // TO
     String [] getAlphabetString(String ta_chunk) {
         String [] rval = new String[2];
         int idx = 0;
-        String actual = null;
+        String actual = ta_chunk;
         String rest_chunk = null;
         System.out.println(" ==> "+ ta_chunk);
         List<String> chunk = com.tamil.utf8.get_letters(ta_chunk);
