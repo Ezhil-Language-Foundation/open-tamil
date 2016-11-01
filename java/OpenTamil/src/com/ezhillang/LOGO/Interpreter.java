@@ -71,6 +71,7 @@ public class Interpreter {
         m_word_map.addWord("HOME",0,"வீடு");
         m_word_map.addWord("PD",0,"வை");
         m_word_map.addWord("COLOR",1);
+        m_word_map.addWord("REPCOUNT", 0, new String [] {"முறை"});
         m_word_map.addWord("PENWIDTH",1);
         m_word_map.addWord("PRINT",1);
     }

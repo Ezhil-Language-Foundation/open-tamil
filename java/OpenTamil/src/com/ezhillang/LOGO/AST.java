@@ -186,18 +186,20 @@ class ArgList extends AST {
 }
 
 class Function extends AST {
-    ArrayList<AST> m_function_body;
+    ListAST m_function_body;
     ArgList m_args;
     String m_name;
     
    @Override
    public String toString() {
-       return "TO "+ m_name + " "+(m_args != null ? m_args.toString(): "") + "  "+ 
+       return "TO "+ m_name + " "+(m_args != null ? m_args.toString(): "") + "\n"+ 
                ((m_function_body != null) ? m_function_body.toString() : "") +"\n END";
    }
    
-    Function(String m_value, ArgList args, Object functionBody) {
-        
+    Function(String fname, ArgList args, ListAST functionBody) {
+        m_name = fname;
+        m_args = args;
+        m_function_body = functionBody;
     }
 }
 

@@ -69,7 +69,7 @@ public class Parser {
    private void parseFunction() throws Exception {
        ArgList args = null;
        assert m_lexer.match(m_lexer.TO);
-       Token fname = m_lexer.getNext();
+       Token fname = m_lexer.peek();
        assert m_lexer.match(TokenKind.STRING);
        Token iscolon = m_lexer.peek();
        if ( iscolon.m_kind == TokenKind.COLON ) {
@@ -122,6 +122,7 @@ public class Parser {
    private AST parseExprFactor() throws Exception {
        AST rval = null;
        Token token = m_lexer.peek();
+       Interpreter.KnownWordFound isKnownWord = m_int.isKnownWord( token );
        if ( token.m_kind == TokenKind.NUMBER ) {
            m_lexer.match(TokenKind.NUMBER);
            rval = new Number( token.getNumericValue() );
@@ -137,6 +138,10 @@ public class Parser {
            rval = parseExpr();
            m_lexer.match(TokenKind.CLOSE_PAREN);
            return rval;
+       } else if ( isKnownWord.found ) {
+               parseKnownWord( token, isKnownWord.nargs );
+               rval = m_ast.removeLast();
+               return rval;
        }
        throw new Exception("malformed expression at "+token);
    }
@@ -144,9 +149,18 @@ public class Parser {
    private AST parseExpr() throws Exception {
        AST rval;
        Token token = m_lexer.peek();
+       
+       Interpreter.KnownWordFound isKnownWord = m_int.isKnownWord( token );
        if ( token.m_kind == TokenKind.NUMBER || 
-          token.m_kind == TokenKind.COLON ) {
-           AST lhs = parseExprTerm();
+          token.m_kind == TokenKind.COLON || 
+          isKnownWord.found ) {
+           AST lhs = null;
+           if ( isKnownWord.found ) {
+               parseKnownWord( token, isKnownWord.nargs );
+               lhs = m_ast.removeLast();
+            } else {
+                lhs = parseExprTerm();
+            }
            if ( !m_lexer.hasNext() )
                return lhs;
            token = m_lexer.peek();
