@@ -8,6 +8,7 @@
 package com.ezhillang.LOGO;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ListIterator;
 
 public class AST {
@@ -191,6 +192,21 @@ class ArgList extends AST {
     int size() {
         return m_args.size();
     }
+    
+    void add(AST obj) {
+        m_args.add(obj);
+    }
+    
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        Iterator<AST> itr = m_args.iterator();
+        while(itr.hasNext()) {
+            sb.append(" :"+itr.next().toString());
+        }
+        return sb.toString();
+    }
+    
     ArgList() {
         super();
         m_args = new ArrayList<AST>();

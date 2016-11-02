@@ -58,11 +58,13 @@ public class Parser {
    
    // to function_name ==> :var1 :var2 ... :varN <=
    private ArgList parseAnyArgList() {
-       Token iscolon = m_lexer.peek();
-       if ( iscolon.m_kind == TokenKind.COLON ) {
-       
+       ArgList args = new ArgList();
+       while( m_lexer.hasNext() && (m_lexer.peek().m_kind == TokenKind.COLON) ) {
+           m_lexer.match(TokenKind.COLON);
+           Token token = m_lexer.getNext();
+           args.add(new Variable(token.getStringValue()));
        }
-       return new ArgList();
+       return args;
    }
    
    // TO part is already used.
