@@ -100,7 +100,7 @@ public class Parser {
    private AST parseExprTerm() throws Exception {
        AST rval = null;
        rval = parseExprFactor();
-       if ( !m_lexer.hasNext() )
+       if ( !m_lexer.hasNext() || m_lexer.peek().isCloseParenOrSQBR()  )
            return rval;
        Token token = m_lexer.peek();
        // production to factor
@@ -110,10 +110,10 @@ public class Parser {
        }
        
        AST lhs = rval;
-       AST rhs = parseExprTerm();
        token = m_lexer.getNext();
        if ( token.m_kind == TokenKind.PROD 
           || token.m_kind == TokenKind.DIV ) {
+          AST rhs = parseExprTerm();
           return new Expr( token.m_kind, lhs, rhs );
        }
        throw new Exception("malformed expression at "+token);
@@ -147,7 +147,7 @@ public class Parser {
    }
    
    private AST parseExpr() throws Exception {
-       AST rval;
+       AST rval = null;
        Token token = m_lexer.peek();
        
        Interpreter.KnownWordFound isKnownWord = m_int.isKnownWord( token );
@@ -155,12 +155,7 @@ public class Parser {
           token.m_kind == TokenKind.COLON || 
           isKnownWord.found ) {
            AST lhs = null;
-           if ( isKnownWord.found ) {
-               parseKnownWord( token, isKnownWord.nargs );
-               lhs = m_ast.removeLast();
-            } else {
-                lhs = parseExprTerm();
-            }
+           lhs = parseExprTerm();
            if ( !m_lexer.hasNext() )
                return lhs;
            token = m_lexer.peek();
@@ -169,14 +164,18 @@ public class Parser {
                token = m_lexer.getNext();
                AST rhs = parseExpr();
               return new Expr(token.m_kind,lhs,rhs); 
-           }
+           } 
+           
            return lhs;
        } else if ( token.m_kind == TokenKind.OPEN_SQBR ) {
            m_lexer.match(TokenKind.OPEN_SQBR);
            return parseList();
-       } 
+       } else if ( token.m_kind == TokenKind.QUOTE ) {
+           m_lexer.match(TokenKind.QUOTE);
+           token = m_lexer.getNext();
+           return new Deref(token.m_value);
+       }
        throw new Exception("cannot find any suitable expression at "+token);
-       //return null;
    }
    
    // e.g. FD 90
@@ -211,6 +210,9 @@ public class Parser {
                rval = parseList(); // support nested lists
            } else if ( token.m_kind == TokenKind.CLOSE_SQBR) {
                break;
+           } else if ( token.m_value.equalsIgnoreCase( m_lexer.REPEAT ) ) {
+               parseRepeat();
+               rval = m_ast.removeLast();
            } else {
                Interpreter.KnownWordFound isKnownWord = m_int.isKnownWord( token );
                if ( isKnownWord.found ) {

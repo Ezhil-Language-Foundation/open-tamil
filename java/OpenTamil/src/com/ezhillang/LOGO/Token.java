@@ -42,4 +42,9 @@ public class Token {
         }
         return false;
     }
+
+    boolean isCloseParenOrSQBR() {
+        return (m_kind == TokenKind.CLOSE_PAREN) || 
+                (m_kind == TokenKind.CLOSE_SQBR); 
+    }
 }

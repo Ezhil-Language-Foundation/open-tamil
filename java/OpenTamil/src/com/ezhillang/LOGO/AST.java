@@ -110,6 +110,18 @@ class ExprCall extends AST {
     }
 }
 
+class Deref extends AST {
+    String m_var;
+    Deref(String var) {
+        m_var = var;
+    }
+    
+    @Override
+    public String toString() {
+        return "\""+m_var;
+    }
+}
+
 class Word extends AST {
     int m_args = 0;
     String m_word_name = null;
