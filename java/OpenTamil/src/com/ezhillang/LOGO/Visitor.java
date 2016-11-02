@@ -9,7 +9,11 @@ package com.ezhillang.LOGO;
  */
 public class Visitor {
     public void visit(AST obj) throws Exception {
-        throw new Exception("method not implemented!");
+        throw new Exception("method not implemented for object => " + obj.toString() +"!");
+    }
+    
+    public void visit(Deref obj) throws Exception {
+        obj.visit(this);
     }
     
     public void visit(Word obj) throws Exception {

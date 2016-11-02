@@ -45,6 +45,10 @@ public class EvalVisitor extends Visitor {
         obj.visit(this);
     }
     
+    public void visit(Deref obj) throws Exception {
+        obj.visit(this);
+    }
+    
     public void visit(UserWord obj) throws Exception {
         obj.visit(this);
     }
