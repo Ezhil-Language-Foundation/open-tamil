@@ -98,6 +98,15 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
         // do something - update the state of the interpreter
         System.out.println("Evaluate function => "+function+ ( nargs > 0 ? " with args "+ ( args[0].toString()) : ""));
     }
+
+    Object getIdentifier(String m_var) {
+        System.out.println("ID read =>"+m_var);
+        return m_var;
+    }
+
+    void setInterpreter(AST idname, Object pop) {
+        System.out.println("Create interpreter variable => " + idname.toString() + " = "+pop.toString());
+    }
     
     public class KnownWordFound {
         public boolean found;

@@ -36,15 +36,29 @@ class EvalVisitor extends Visitor {
     }
     
     public void visit(ArgList obj) throws Exception {
-        obj.visit(this);
+        if ( obj == null)
+            return;
+                
+        // create identifiers of the name in arglist with values on the stack
+        for(int itr=obj.size()-1; itr >= 0; itr--) {
+            AST arg_var = obj.m_args.get(itr);
+            m_int.setInterpreter(arg_var,m_int.pop());
+        }
     }
     
     public void visit(Function obj) throws Exception {
-        obj.visit(this);
+        /* evaluate function () code
+            if ( obj.m_args != null )
+                obj.m_args.visit(this);
+            obj.m_function_body.visit(this);
+        */
+        // copy this function body into list of known functions for interpreter.
+        System.out.println("Registering function => "+obj.m_name);
     }
     
     public void visit(Deref obj) throws Exception {
-        obj.visit(this);
+        m_int.push( m_int.getIdentifier( obj.m_var ) );
+        return;
     }
     
     public void visit(UserWord obj) throws Exception {
