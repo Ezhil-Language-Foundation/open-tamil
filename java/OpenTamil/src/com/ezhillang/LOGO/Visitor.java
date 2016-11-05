@@ -3,29 +3,31 @@
 */
 package com.ezhillang.LOGO;
 
+import java.util.ListIterator;
+
 /**
  *
  * @author muthu
  */
 public class Visitor {
     public void visit(AST obj) throws Exception {
-        throw new Exception("method not implemented for object => " + obj.toString() +"!");
+        throw new Exception("visit method not implemented for objects of type"+obj.getClass().toString());
     }
     
     public void visit(Deref obj) throws Exception {
-        obj.visit(this);
+        //obj.visit(this);
     }
     
     public void visit(Word obj) throws Exception {
-        obj.visit(this);
+        //obj.visit(this);
     }
     
     public void visit(ArgList obj) throws Exception {
-        obj.visit(this);
+        //obj.visit(this);
     }
     
     public void visit(Function obj) throws Exception {
-        obj.visit(this);
+        //obj.visit(this);
     }
     
     public void visit(UserWord obj) throws Exception {
@@ -33,26 +35,30 @@ public class Visitor {
     }
     
     public void visit(ExprCall obj) throws Exception {
-        obj.visit(this);
+        //pass
     }
         
     public void visit(Number obj) throws Exception {
-        obj.visit(this);
+        //obj.visit(this);
     }
     
     public void visit(Variable obj) throws Exception {
-        obj.visit(this);
+        //obj.visit(this);
     }
     
     public void visit(Expr obj) throws Exception {
-        obj.visit(this);
+        //obj.visit(this);
     }
+    
     public void visit(ListAST obj) throws Exception {
-        obj.visit(this);
+       ListIterator<AST> itr = obj.getIterator();
+       while( itr.hasNext() ) {
+           itr.next().visit(this);
+       }
     }
  
     public void visit(Repeat obj) throws Exception {
-        obj.visit(this);
+        //pass
     }
  
 }

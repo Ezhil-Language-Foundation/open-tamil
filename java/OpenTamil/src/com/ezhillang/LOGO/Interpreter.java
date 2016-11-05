@@ -38,21 +38,27 @@ class WordMap extends HashMap<String,Word> {
     }
 }
 
-public class Interpreter {
+public class Interpreter extends EvalVisitor implements IRuntimeFunction {
     //map of known words and implementations
     WordMap m_word_map;
     WordMap m_userdef_map;
     Stack<Object> m_stack;
-  
+    
     public Interpreter() {
         m_word_map = new WordMap();
         m_userdef_map = new WordMap();
         m_stack = new Stack();
         loadBuiltIns();
+        init(this);
     }
     
     Object pop() {
         return m_stack.pop();
+    }
+    
+    // start the evaluator
+    void evaluate(ListAST ast) throws Exception {
+        visit(ast);
     }
     
     void push(Object obj) {
@@ -66,20 +72,33 @@ public class Interpreter {
         m_word_map.addWord("BW",1,new String [] {"பின்","BK","BACK","BACKWARD"});
         m_word_map.addWord("RESET",0,new String [] {"அழி","CLEAR","CLS"});
         m_word_map.addWord("STOP",0,"நிறுத்து");
-        m_word_map.addWord("CS",0,"அழி");
-        m_word_map.addWord("PU",0,"எடு");
+        m_word_map.addWord("CS",0,new String [] {"CLEAR","CLEARSCREEN","CLS","RESET","அழி"});
+        m_word_map.addWord("PU",0,new String [] {"penup","எடு"});
         m_word_map.addWord("HOME",0,"வீடு");
-        m_word_map.addWord("PD",0,"வை");
-        m_word_map.addWord("COLOR",1);
+        m_word_map.addWord("PD",0,new String [] {"pendown","வை"});
+        m_word_map.addWord("COLOR",1,new String [] {"நிரம்","வண்ணம்"});
         m_word_map.addWord("REPCOUNT", 0, new String [] {"முறை"});
-        m_word_map.addWord("PENWIDTH",1);
-        m_word_map.addWord("PRINT",1);
+        m_word_map.addWord("PENWIDTH",1,"அகலம்");
+        m_word_map.addWord("PRINT",1,"அச்சிடு");
+        m_word_map.addWord("Random",1,"யூகி");
+        m_word_map.addWord("MAKE",2,"செய்");
     }
 
     void addUserDefinedWord(String m_value, ArgList args) {
         m_userdef_map.addWord(m_value, (args != null) ? args.size() : 0);
     }
 
+    // function
+    @Override
+    public void evaluate(Interpreter m_int, String function, Object[] args) {
+        int nargs = 0;
+        if ( args != null) {
+            nargs = args.length;
+        }
+        // do something - update the state of the interpreter
+        System.out.println("Evaluate function => "+function+ ( nargs > 0 ? " with args "+ ( args[0].toString()) : ""));
+    }
+    
     public class KnownWordFound {
         public boolean found;
         public int nargs;

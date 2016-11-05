@@ -9,21 +9,19 @@ import java.util.ListIterator;
  *
  * @author muthu
  */
-/**
- *
- * @author muthu
- */
-public class EvalVisitor extends Visitor {
+
+class EvalVisitor extends Visitor {
     Interpreter m_int;
-    public static void evaluate(AST root, Interpreter ref) throws Exception {
-        EvalVisitor evaluator = new EvalVisitor(ref);
-        root.visit(evaluator);
-    }
     
-    public EvalVisitor(Interpreter interpreter) {
+    void init(Interpreter interpreter) {
         m_int = interpreter;
         assert( m_int != null);
     }
+    
+    public EvalVisitor() {
+        super();
+    }
+    
     /////////// evaluator implementation ////////////////////
     public void visit(ListAST obj) throws Exception {
         ListIterator<AST> itr = obj.getIterator();
@@ -55,12 +53,21 @@ public class EvalVisitor extends Visitor {
     
     // make function call: eval args and push onto call-stack, fetch the body, return value push onto call stack
     public void visit(ExprCall obj) throws Exception {
-        obj.visit(this);
+        Object [] args = null;
+        if ( obj.m_args != null)
+            args = new Object[obj.m_args.size()];
+        // visit the args for the call
+        visit( obj.m_args );
+        for( int itr= obj.m_args.size() - 1; itr >= 0; itr--) {
+            args[itr] = m_int.pop();
+        }
+        m_int.evaluate(m_int, obj.m_function, args);
     }
    
     // this is a constant
     public void visit(Number obj) throws Exception {
-        obj.visit(this);
+        m_int.push(new Double(obj.m_val));
+        return;
     }
     
     //access sym table and return the value pointed by variable

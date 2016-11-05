@@ -11,23 +11,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-public class AST {
-    @Override
-    public String toString() {
-        return "AST Object";
-    }
-    
-    void visit(Visitor v) throws Exception {
-       v.visit(this);
-    }
+public abstract interface AST {    
+    public void visit(Visitor v) throws Exception;
 }
 
 // always binary operators for now
-class Expr extends AST {
+class Expr implements AST {
     AST m_lhs;
     AST m_rhs;
     TokenKind m_op;
 
+   public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
+   
    @Override
    public String toString() {
        return m_lhs.toString() + " "+m_op+" "+ m_rhs.toString();
@@ -57,9 +54,13 @@ class Expr extends AST {
    }
 }
 
-class Number extends AST {
+class Number implements AST {
     double m_val;
     
+   public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
+   
    @Override
    public String toString() {
        return String.valueOf(m_val);
@@ -71,9 +72,13 @@ class Number extends AST {
     }
 }
 
-class Variable extends AST {
+class Variable implements AST {
     String m_var;
    
+    public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
+    
    @Override
    public String toString() {
        return m_var;
@@ -86,10 +91,14 @@ class Variable extends AST {
 }
 
 // define a function invocation with arguments
-class ExprCall extends AST {
+class ExprCall implements AST {
     ListAST m_args;
     String m_function;
 
+    public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
+    
    @Override
    public String toString() {
        StringBuffer sb = new StringBuffer(m_function);
@@ -109,13 +118,18 @@ class ExprCall extends AST {
         m_args = args;
         m_function = word_name;
     }
+    
 }
 
-class Deref extends AST {
+class Deref implements AST {
     String m_var;
     Deref(String var) {
         m_var = var;
     }
+    
+    public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
     
     @Override
     public String toString() {
@@ -123,7 +137,7 @@ class Deref extends AST {
     }
 }
 
-class Word extends AST {
+class Word implements AST {
     int m_args = 0;
     String m_word_name = null;
     String [] m_alias = null; //sometimes we like to have the Tamil name here
@@ -132,6 +146,10 @@ class Word extends AST {
    @Override
    public String toString() {
        return m_word_name;
+   }
+   
+   public void visit(Visitor v) throws Exception {
+       v.visit(this);
    }
    
    static Word buildUserWord(String wordname, int args, String alias) {
@@ -181,14 +199,24 @@ class Word extends AST {
 
 class UserWord extends Word {
     Function m_ref_impl = null;
+   
+    public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
+    
     UserWord(String wordname, int arg) {
         super(wordname,arg);
         m_builtin = false;
     }
 }
 
-class ArgList extends AST {
+class ArgList implements AST {
     ArrayList<AST> m_args;
+    
+    public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
+    
     int size() {
         return m_args.size();
     }
@@ -213,10 +241,14 @@ class ArgList extends AST {
     }
 }
 
-class Function extends AST {
+class Function implements AST {
     ListAST m_function_body;
     ArgList m_args;
     String m_name;
+    
+    public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
     
    @Override
    public String toString() {
@@ -231,10 +263,14 @@ class Function extends AST {
     }
 }
 
-class Repeat extends AST {
+class Repeat implements AST {
     ListAST m_body;
     AST m_times;
 
+    public void visit(Visitor v) throws Exception {
+       v.visit(this);
+   }
+    
    @Override
    public String toString() {
        return "REPEAT "+ m_times.toString() + "  ["+ m_body.toString() +"]";
@@ -246,9 +282,15 @@ class Repeat extends AST {
     }
 }
 
-class ListAST extends AST {
+class ListAST implements AST {
     private ArrayList<AST> m_array;
     
+    public void visit(Visitor v) throws Exception {
+        for(AST ast_obj : m_array ) {
+            ast_obj.visit(v);
+        }
+   }
+   
     ListAST() {
         super();
         m_array = new ArrayList<AST>();
