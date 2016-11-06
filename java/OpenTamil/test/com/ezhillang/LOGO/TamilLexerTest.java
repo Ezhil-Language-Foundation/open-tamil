@@ -3,6 +3,7 @@
 */
 package com.ezhillang.LOGO;
 
+
 // added ability to have line comments initiated by ';' 
 import java.io.File;
 import java.io.IOException;
@@ -10,16 +11,17 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Queue;
+import static junit.framework.Assert.assertEquals;
 import junit.framework.TestCase;
 
 /**
  *
  * @author muthu
  */
-public class LexerTest extends TestCase {    
+public class TamilLexerTest extends TestCase {    
     private static File resourcesDirectory = null;
     
-    public LexerTest(String testName) {
+    public TamilLexerTest(String testName) {
         super(testName);
     }
     
@@ -35,20 +37,21 @@ public class LexerTest extends TestCase {
     }
     
     public void testLexer() throws IOException {
+        doLexerTest("ta_basic.logo",18);
+        /*
         doLexerTest("dynspiral.logo",38);
         doLexerTest("hilbert.logo",197);
         doLexerTest("koch.logo",87);
         doLexerTest("spiral.logo",84);
-        doLexerTest("basic.logo",17);
         doLexerTest("lesson1.logo",229);
         doLexerTest("basicsquare.logo",25);
-        doLexerTest("square.logo",10);
+        doLexerTest("square.logo",10); */
     }
     
     public void doLexerTest(String file, int expResult) throws IOException {
         Path p = java.nio.file.FileSystems.getDefault().getPath( resourcesDirectory.getAbsolutePath()
                  ,file);
-        Lexer instance = new Lexer(p.toAbsolutePath().toString());
+        TamilLexer instance = new TamilLexer(p.toAbsolutePath().toString());
         int result = -1;
         
         try {
@@ -62,3 +65,18 @@ public class LexerTest extends TestCase {
         assertEquals(expResult, result);
     }
 }
+
+/**
+ * 
+ * 		BufferedReader in = new BufferedReader(
+		   new InputStreamReader(
+                      new FileInputStream(fileDir), "UTF8"));
+
+		String str;
+
+		while ((str = in.readLine()) != null) {
+		    System.out.println(str);
+		}
+                * 
+                * 
+ */

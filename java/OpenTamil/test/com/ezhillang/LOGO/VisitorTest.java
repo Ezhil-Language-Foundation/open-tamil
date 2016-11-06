@@ -6,12 +6,16 @@ package com.ezhillang.LOGO;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ListIterator;
+import java.util.Queue;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import junit.framework.TestCase;
 
-public class ParserTest extends TestCase {    
+public class VisitorTest extends TestCase {    
     private static File resourcesDirectory = null;
     
-    public ParserTest(String testName) {
+    public VisitorTest(String testName) {
         super(testName);
     }
     
@@ -26,27 +30,29 @@ public class ParserTest extends TestCase {
         super.tearDown();
     }
     
-    public void testParser2() throws Exception {
-        doParserTest("lesson1.logo");    
+    public void testVisitor() throws IOException, Exception {
+        doVisitorTest("basicsquare.logo");
+        doVisitorTest("square.logo");
+        doVisitorTest("basic.logo");
+        doVisitorTest("squarefunction.logo");
+        doVisitorTest("lesson1.logo");
+        doVisitorTest("lesson2.logo");
+        doVisitorTest("house.logo");
+        doVisitorTest("recursive.logo");
     }
     
-    public void testParser() throws IOException, Exception {        
-        doParserTest("basicsquare.logo");
-        doParserTest("square.logo");
-        doParserTest("basic.logo");
-        doParserTest("squarefunction.logo");
-        doParserTest("lesson2.logo");
-        doParserTest("house.logo");
-        doParserTest("recursive.logo");
-    }
-    
-    public void doParserTest(String file) throws IOException, Exception {
+    public void doVisitorTest(String file) throws IOException, Exception {
         Path p = java.nio.file.FileSystems.getDefault().getPath( resourcesDirectory.getAbsolutePath()
                  ,file);
         System.out.println("Parsing file => "+file);
         Interpreter m_int = new Interpreter();
         Parser m_parser = new Parser( p.toAbsolutePath().toString(), m_int);
-        m_parser.startParsing();
-        m_parser.print();
+        try {
+            m_parser.startParsing();
+            Visitor v = new Visitor();
+            v.visit( m_parser.m_ast );
+        } catch(Exception e) {
+            // pass
+        }
     }
 }

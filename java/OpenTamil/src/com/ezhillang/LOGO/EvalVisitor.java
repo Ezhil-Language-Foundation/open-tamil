@@ -10,13 +10,8 @@ import java.util.ListIterator;
  * @author muthu
  */
 
-class EvalVisitor extends Visitor {
-    Interpreter m_int;
-    
-    void init(Interpreter interpreter) {
-        m_int = interpreter;
-        assert( m_int != null);
-    }
+abstract class EvalVisitor extends Visitor {
+    abstract Interpreter getInterpreter();
     
     public EvalVisitor() {
         super();
@@ -42,7 +37,7 @@ class EvalVisitor extends Visitor {
         // create identifiers of the name in arglist with values on the stack
         for(int itr=obj.size()-1; itr >= 0; itr--) {
             AST arg_var = obj.m_args.get(itr);
-            m_int.setInterpreter(arg_var,m_int.pop());
+            getInterpreter().setInterpreter(arg_var,getInterpreter().pop());
         }
     }
     
@@ -57,7 +52,7 @@ class EvalVisitor extends Visitor {
     }
     
     public void visit(Deref obj) throws Exception {
-        m_int.push( m_int.getIdentifier( obj.m_var ) );
+        getInterpreter().push( getInterpreter().getIdentifier( obj.m_var ) );
         return;
     }
     
@@ -73,14 +68,14 @@ class EvalVisitor extends Visitor {
         // visit the args for the call
         visit( obj.m_args );
         for( int itr= obj.m_args.size() - 1; itr >= 0; itr--) {
-            args[itr] = m_int.pop();
+            args[itr] = getInterpreter().pop();
         }
-        m_int.evaluate(m_int, obj.m_function, args);
+        getInterpreter().evaluate(getInterpreter(), obj.m_function, args);
     }
    
     // this is a constant
     public void visit(Number obj) throws Exception {
-        m_int.push(new Double(obj.m_val));
+        getInterpreter().push(new Double(obj.m_val));
         return;
     }
     
@@ -91,7 +86,18 @@ class EvalVisitor extends Visitor {
     
    public void visit(Repeat obj) throws Exception {
         obj.m_times.visit(this);
-        obj.m_body.visit(this);
+        double repeats = (Double)getInterpreter().pop();
+        double start = 0.0, rep = start;
+        getInterpreter().m_repeat_count.push(start);
+        boolean entered = false;
+        while( rep < repeats ) {
+            entered = true;
+            getInterpreter().m_repeat_count.pop();
+            getInterpreter().m_repeat_count.push(++rep);
+            obj.m_body.visit(this);
+        }
+        if ( entered )
+            getInterpreter().m_repeat_count.pop();
     }
     
     //evaluate the expression: unary binary etc etc.
@@ -101,10 +107,13 @@ class EvalVisitor extends Visitor {
         }
 
         obj.m_lhs.visit(this);
+        if ( obj.isUnaryExpr() )
+           return;
+        
         obj.m_rhs.visit(this);
         
-        Double rhs = (Double) m_int.pop();
-        Double lhs = (Double) m_int.pop();
+        Double rhs = (Double) getInterpreter().pop();
+        Double lhs = (Double) getInterpreter().pop();
         double d_rhs = rhs.doubleValue();
         double d_lhs = lhs.doubleValue();
         double d_res = 0.0;
@@ -122,6 +131,6 @@ class EvalVisitor extends Visitor {
                 d_res = d_lhs / d_rhs;                
                 break;
         }
-        m_int.push(new Double(d_res));
+        getInterpreter().push(new Double(d_res));
     }
 }

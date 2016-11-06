@@ -23,12 +23,14 @@ public class Parser {
    
    public boolean startParsing() throws Exception {
        int n_tokens = m_lexer.scan();
+       System.out.println("tokens => "+n_tokens);
        parse();
        return true;
    }
    
    // recursive descent parser for the LOGO code
    private void parse() throws Exception {
+       m_lexer.print();
        while ( m_lexer.hasNext() ) {      
         Token token = m_lexer.peek();
         if ( check(token,m_lexer.TO) ) {
@@ -49,7 +51,7 @@ public class Parser {
    
    private void parseRepeat() throws Exception {
        Repeat repeatAST = null;
-       m_lexer.match(m_lexer.REPEAT);
+       m_lexer.matchValue(m_lexer.REPEAT);
        AST times_expr = parseExpr();
        ListAST listAST = this.parseList();
        repeatAST = new Repeat(times_expr,listAST);
@@ -60,7 +62,7 @@ public class Parser {
    private ArgList parseAnyArgList() {
        ArgList args = new ArgList();
        while( m_lexer.hasNext() && (m_lexer.peek().m_kind == TokenKind.COLON) ) {
-           m_lexer.match(TokenKind.COLON);
+           m_lexer.matchKind(TokenKind.COLON);
            Token token = m_lexer.getNext();
            args.add(new Variable(token.getStringValue()));
        }
@@ -70,19 +72,22 @@ public class Parser {
    // TO part is already used.
    private void parseFunction() throws Exception {
        ArgList args = null;
-       assert m_lexer.match(m_lexer.TO);
-       Token fname = m_lexer.peek();
-       assert m_lexer.match(TokenKind.STRING);
+       m_lexer.matchValue(m_lexer.TO);
+       Token fname = m_lexer.getNext();
+       assert fname.m_kind == TokenKind.STRING;
+       String fname_value = fname.m_value;
        Token iscolon = m_lexer.peek();
        if ( iscolon.m_kind == TokenKind.COLON ) {
             args = parseAnyArgList();
+       } else {
+           System.out.println("No arguments to function : "+fname_value);
        }
-       m_int.addUserDefinedWord( fname.m_value, args);
+       m_int.addUserDefinedWord( fname_value, args);
        // anticipate the recursive function parsing and enter this function into the interpreter table
        ListAST functionBody = parseBody();
-        // build a function
+       // build a function
        // attach to the expr list
-       m_lexer.match("END");
+       m_lexer.matchValue("END");
        Function fcn = new Function( fname.m_value, args, functionBody );
        m_ast.add(fcn);
    }
@@ -126,19 +131,19 @@ public class Parser {
        Token token = m_lexer.peek();
        Interpreter.KnownWordFound isKnownWord = m_int.isKnownWord( token );
        if ( token.m_kind == TokenKind.NUMBER ) {
-           m_lexer.match(TokenKind.NUMBER);
+           m_lexer.matchKind(TokenKind.NUMBER);
            rval = new Number( token.getNumericValue() );
            return rval;
        } else if ( token.m_kind == TokenKind.COLON ) {
            // var expr
-           m_lexer.match(TokenKind.COLON);
+           m_lexer.matchKind(TokenKind.COLON);
            token = m_lexer.getNext();
            rval = new Variable( token.getStringValue() );
            return rval;
        } else if ( token.m_kind == TokenKind.OPEN_PAREN )  {
-           m_lexer.match(TokenKind.OPEN_PAREN);
+           m_lexer.matchKind(TokenKind.OPEN_PAREN);
            rval = parseExpr();
-           m_lexer.match(TokenKind.CLOSE_PAREN);
+           m_lexer.matchKind(TokenKind.CLOSE_PAREN);
            return rval;
        } else if ( isKnownWord.found ) {
                parseKnownWord( token, isKnownWord.nargs );
@@ -170,10 +175,10 @@ public class Parser {
            
            return lhs;
        } else if ( token.m_kind == TokenKind.OPEN_SQBR ) {
-           m_lexer.match(TokenKind.OPEN_SQBR);
+           m_lexer.matchKind(TokenKind.OPEN_SQBR);
            return parseList();
        } else if ( token.m_kind == TokenKind.QUOTE ) {
-           m_lexer.match(TokenKind.QUOTE);
+           m_lexer.matchKind(TokenKind.QUOTE);
            token = m_lexer.getNext();
            return new Deref(token.m_value);
        }
@@ -190,7 +195,7 @@ public class Parser {
    
    // parse a known word startin @ token with arguments of 'intValue'
    private void parseKnownWord(Token token, int intValue) throws Exception {
-       m_lexer.match(TokenKind.STRING);
+       m_lexer.matchKind(TokenKind.STRING);
        String word_name = token.getStringValue();
        ListAST args = new ListAST();
        parseExprCallArgs(args,intValue);
@@ -204,7 +209,7 @@ public class Parser {
 
     private ListAST parseList() throws Exception {
         ListAST list = new ListAST();
-        m_lexer.match(TokenKind.OPEN_SQBR);
+        m_lexer.matchKind(TokenKind.OPEN_SQBR);
         while( m_lexer.hasNext() ) {
            AST rval = null;
            Token token = m_lexer.peek();
@@ -226,7 +231,7 @@ public class Parser {
            }
            list.add(rval);
         }
-        m_lexer.match(TokenKind.CLOSE_SQBR);
+        m_lexer.matchKind(TokenKind.CLOSE_SQBR);
         return list;
     }
 

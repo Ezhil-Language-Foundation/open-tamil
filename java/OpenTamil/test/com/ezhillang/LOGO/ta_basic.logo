@@ -1,0 +1,9 @@
+;; This file was taken from the FMS Logo examples
+;; Ref: http://fmslogo.sourceforge.net/workshop/
+முன் 100
+பின் 100
+வலது 90
+இடது 90
+அழி
+வீடு
+மீண்டும் 3 [ முன் 100 வலது 120 ]

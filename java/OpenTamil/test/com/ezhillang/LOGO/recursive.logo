@@ -1,0 +1,5 @@
+TO recfun :x :y
+  ;; if [:x < 0] [stop]
+   make "temp 1 + :x / :y ;;make is a known word
+   recfun :x - 1 :y -1
+END

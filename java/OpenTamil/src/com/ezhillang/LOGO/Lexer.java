@@ -36,16 +36,20 @@ public class Lexer {
         return m_tokens.peek();
     }
     
-    public boolean match(TokenKind knd) {
+    public boolean matchKind(TokenKind knd) {
+        System.out.println("matching -> "+knd);
         return getNext().m_kind == knd;
     }
     
-    public boolean match(String tokval) {
+    public boolean matchValue(String tokval) {
+        System.out.println("matching(2) -> "+tokval);
         return getNext().m_value.equalsIgnoreCase(tokval);
     }
     
     public Token getNext() {
-        return m_tokens.remove();
+        Token rval = m_tokens.remove();
+        System.out.println( "getNext is => "+rval.toString());
+        return rval;
     }
     
     // get tokens

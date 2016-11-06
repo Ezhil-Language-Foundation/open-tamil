@@ -3,45 +3,8 @@
 */
 package com.ezhillang.LOGO;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Stack;
-
-/**
- *
- * @author muthu
- */
-class WordMap extends HashMap<String,Word> {
-    WordMap() {
-        super();
-    }
-   
-    void addWord(Word w) {
-       put(w.m_word_name,w);
-   }
-   
-   void addWord(String wrd, int arg) {
-        put(wrd, new Word(wrd,arg));
-    }
-    void addWord(String wrd, int arg, String alias) {
-        put(wrd, new Word(wrd,arg,alias));
-    }
-    void addWord(String wrd, int arg, String [] alias) {
-        put(wrd, new Word(wrd,arg,alias));
-    }
-    
-    Word findWord(String ref_name) {
-       Word ref = null;
-       for(Word itr: this.values()) {
-           if ( itr.matches( ref_name ) ) {
-               ref = itr;
-               break;
-           }
-       }
-       return ref;
-    }
-}
 
 public class Interpreter extends EvalVisitor implements IRuntimeFunction {
     //map of known words and implementations
@@ -49,15 +12,29 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
     WordMap m_userdef_map;
     Stack<Object> m_stack;
     ITurtleGraphics m_turtle;
-    Word word_fw, word_bw, word_home, word_rt, word_lt, word_cls;
+    Word word_fw, word_bw, word_home, word_rt, word_lt, word_cls, word_repcount;
+    Stack<Double> m_repeat_count;
+    boolean m_add_delay;
+    
+    // utility
+    void parseEval(Parser p) throws Exception {
+        p.startParsing();
+        evaluate(p.m_ast);
+    }
     
     public Interpreter() {
+        super();
+        m_add_delay = false; //change it later
         m_turtle = null;
         m_word_map = new WordMap();
         m_userdef_map = new WordMap();
-        m_stack = new Stack();
+        m_stack = new Stack<Object>();
+        m_repeat_count = new Stack<Double>();
         loadBuiltIns();
-        init(this);
+    }
+    
+    Interpreter getInterpreter() {
+        return this;
     }
     
     Object pop() {
@@ -102,7 +79,10 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
         
         m_word_map.addWord("PD",0,new String [] {"pendown","வை"});
         m_word_map.addWord("COLOR",1,new String [] {"நிரம்","வண்ணம்"});
-        m_word_map.addWord("REPCOUNT", 0, new String [] {"முறை"});
+        
+        word_repcount = new Word("REPCOUNT", 0, new String [] {"முறை"});
+        m_word_map.addWord(word_repcount);
+        
         m_word_map.addWord("PENWIDTH",1,"அகலம்");
         m_word_map.addWord("PRINT",1,"அச்சிடு");
         m_word_map.addWord("Random",1,"யூகி");
@@ -122,6 +102,13 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
         }
         // do something - update the state of the interpreter
         System.out.println("Evaluate function => "+function+ ( nargs > 0 ? " with args "+ ( args[0].toString()) : ""));
+        
+        // evaluate repcount function here
+        if ( word_repcount.matches(function) ) {
+            push( m_repeat_count.peek() );
+            return;
+        }
+        
         if ( m_turtle != null ) { 
             if ( word_rt.matches(function) ) {
                 m_turtle.rotate_right( (Double) args[0]);
@@ -140,10 +127,12 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
             }
         }
 
-        try {
-            Thread.sleep(250); //0.25s pause between actions make for nice slow drawing
-        } catch(Exception e) {
-            //ignore
+        if ( m_add_delay ) {
+            try {
+                Thread.sleep(250); //0.25s pause between actions make for nice slow drawing
+            } catch(Exception e) {
+                //ignore
+            }
         }
     }
 
@@ -185,5 +174,40 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
        // return the nargs
        int nargs = (ref != null) ? (ref.m_args) : 0;
        return new KnownWordFound( ref != null, nargs);
+    }
+}
+
+/**
+ *
+ * @author muthu
+ */
+class WordMap extends HashMap<String,Word> {
+    WordMap() {
+        super();
+    }
+   
+    void addWord(Word w) {
+       put(w.m_word_name,w);
+   }
+   
+   void addWord(String wrd, int arg) {
+        put(wrd, new Word(wrd,arg));
+    }
+    void addWord(String wrd, int arg, String alias) {
+        put(wrd, new Word(wrd,arg,alias));
+    }
+    void addWord(String wrd, int arg, String [] alias) {
+        put(wrd, new Word(wrd,arg,alias));
+    }
+    
+    Word findWord(String ref_name) {
+       Word ref = null;
+       for(Word itr: this.values()) {
+           if ( itr.matches( ref_name ) ) {
+               ref = itr;
+               break;
+           }
+       }
+       return ref;
     }
 }

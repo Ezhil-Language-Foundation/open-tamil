@@ -5,7 +5,7 @@
  */
 package com.ezhillang.LOGO;
 
-
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Group;
@@ -20,7 +20,7 @@ import javafx.stage.Stage;
  *
  * @author muthu
  */
-public class FxTurtleGraphics extends Application implements ITurtleGraphics {
+public class FxTurtleGraphics implements ITurtleGraphics {
     // co-ords
     double m_x, m_y;
     boolean m_penup;
@@ -41,7 +41,6 @@ public class FxTurtleGraphics extends Application implements ITurtleGraphics {
         m_angle = 90.0; //facing north :-)
     }
     
-    @Override
     public void start(Stage primaryStage) {
         init();
         primaryStage.setTitle("Drawing Operations Test");
@@ -54,6 +53,7 @@ public class FxTurtleGraphics extends Application implements ITurtleGraphics {
         root.getChildren().add(canvas);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        
     }
 
     @Override

@@ -111,6 +111,7 @@ END
 
 SQUAREFLOWER
 
+;; warn about overwriting square definition
 TO SQUARE
   REPEAT 4 [ FORWARD 100 RIGHT 90 ]
 END
@@ -126,4 +127,5 @@ RIGHT   90
 FORWARD 100
 RIGHT   90
 
+REPEAT 14 [ FORWARD 30 RIGHT 360/14 ]
 ;; comment

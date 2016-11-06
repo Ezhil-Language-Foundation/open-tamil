@@ -1,5 +1,5 @@
 /*
- ** (C) 2015 Muthiah Annamalai <ezhillang@gmail.com>
+ ** (C) 2015-2016 Muthiah Annamalai <ezhillang@gmail.com>
  ** This program is part of open-tamil library
  ** You may use this code under MIT License
  */
@@ -180,6 +180,15 @@ public class utf8 {
         return utf8.mei_len();
     }
     public static TamilCompare comparator = new TamilCompare();
+
+    public static boolean is_tamil_letter(String instr) {
+        for(int idx=0; idx < tamil_letters.length; idx++) {
+            if( instr.contains(tamil_letters[idx]) ) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 class TamilCompare implements Comparator<String> {
