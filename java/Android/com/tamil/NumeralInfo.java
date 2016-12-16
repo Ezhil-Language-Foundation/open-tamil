@@ -1,5 +1,5 @@
 /*
- ** (C) 2015 Muthiah Annamalai <ezhillang@gmail.com>
+ ** (C) 2015-2016 Muthiah Annamalai <ezhillang@gmail.com>
  ** This program is part of open-tamil library
  ** You may use this code under MIT License
  */
