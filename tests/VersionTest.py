@@ -10,7 +10,7 @@ import tamil
 
 class VersionTester(unittest.TestCase):
     def test_version(self):        
-        self.assertEqual(tamil.VERSION,'0.51')
+        self.assertEqual(tamil.VERSION,'0.67')
 
 if __name__ == '__main__':    
     unittest.main()
