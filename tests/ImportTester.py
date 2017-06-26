@@ -14,7 +14,7 @@ class ImportTester(unittest.TestCase):
     def test_import_num2tamilstr(self):
         from tamil.numeral import num2tamilstr, num2tamilstr_american
         for key in ['num2tamilstr','num2tamilstr_american']:
-            assert locals().has_key(key)
+            assert locals()[key]
         
 if __name__ == '__main__':    
     unittest.main()
