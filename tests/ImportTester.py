@@ -12,7 +12,7 @@ class ImportTester(unittest.TestCase):
         import tamil; import ngram; import transliterate
     
     def test_import_num2tamilstr(self):
-        from tamil.numeral import *
+        from tamil.numeral import num2tamilstr, num2tamilstr_american
         for key in ['num2tamilstr','num2tamilstr_american']:
             assert locals().has_key(key)
         
