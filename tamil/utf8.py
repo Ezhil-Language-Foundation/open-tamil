@@ -199,6 +199,14 @@ def uyirmei( idx ):
     assert( idx >= 0 and idx < uyirmei_len() )
     return uyirmei_letters[idx]
 
+def mei_to_agaram(in_syllable):
+    if in_syllable in grantha_mei_letters:
+        mei_pos = grantha_mei_letters.index(in_syllable)
+        agaram_a_pos = 0
+        syllable = uyirmei_constructed(mei_pos,agaram_a_pos)
+        return syllable
+    return in_syllable
+
 def uyirmei_constructed( mei_idx, uyir_idx):
     """ construct uyirmei letter give mei index and uyir index """
     idx,idy = mei_idx,uyir_idx

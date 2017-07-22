@@ -173,6 +173,10 @@ class Letters(unittest.TestCase):
             if ( LINUX ): print(u"%d %s"%(pos,letter))
         assert( letters[-4] == u"a" )
         
+    def test_mei_to_agaram(self):
+        na = utf8.mei_to_agaram(u"ன்")
+        self.assertEqual( na, u"ன" )
+        
     def test_words(self):
         _str = u"உடனே random elevator jazz உடனே எழுதினால் செய்திப் பத்திரிகை போஆகிவிடும் அசோகமித்திரன் நேர்காணல்"
         words = _str.split(u" ")
