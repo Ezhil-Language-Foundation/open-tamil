@@ -9,7 +9,7 @@ from opentamiltests import *
 from ngram.Corpus import Corpus
 from ngram.LetterModels import *
 from ngram.WordModels import *
-
+import os
 import tamil.utf8 as utf8
 
 class WordsNGram(unittest.TestCase):
@@ -39,12 +39,28 @@ class Letters(unittest.TestCase):
             pass
         self.assertEqual( q.letter[u"ஷை"] + q.letter[u"சி"] , q.letter[u"ந"] )
         del z, q
-
+    
     def test_bigram_counts(self):
         q=Bigram("data/ex.unicode")
         q.language_model(verbose=(False and LINUX)) #suppress output
         self.assertEqual( q.letter2[u"த்"][u"து"] , 7 )
         self.assertEqual( q.letter2[u"சி"][u"சி"] , 0 )        
+    
+    def test_bigram_save(self):
+        filename = "demo_bigram.txt"
+        q = Bigram("data/ex.unicode")
+        q.language_model(verbose=False)
+        q.save(filename)
+        self.assertTrue( os.path.exists(filename))
+        os.unlink(filename)
+    
+    def test_unigram_save(self):
+        filename = "demo_unigram.txt"
+        q = Unigram("data/ex.unicode")
+        q.frequency_model()
+        q.save(filename)
+        self.assertTrue( os.path.exists(filename))
+        os.unlink(filename)
     
 if __name__ == '__main__':    
     unittest.main()

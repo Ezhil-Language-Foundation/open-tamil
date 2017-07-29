@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
-# 
-# (C) முத்தையா அண்ணாமலை 2013-2015
+# This file is part of open-tamil ngrams package
+# (C) முத்தையா அண்ணாமலை 2013-2015,2017
 # 
 # N-gram language model for Tamil letters
 
 import tamil
 import copy
 from .Corpus import Corpus
+import codecs
+import operator
 
 class Letters:
     def __init__(self,filename):
@@ -28,6 +30,9 @@ class Letters:
         print(max(self.letter.values()))
         return op
 
+    def save(self,filename):
+        raise Exception('Not implemented')
+    
 class Unigram(Letters):
     def __init__(self,filename):
         Letters.__init__(self,filename)
@@ -38,7 +43,15 @@ class Unigram(Letters):
         for next_letter in self.corpus.next_tamil_letter():
             # update frequency from corpus
             self.letter[next_letter] = self.letter[next_letter] + 1
-        
+    
+    def save(self,filename):
+        with codecs.open(filename,"w","utf-8") as fp:
+            for k,v in sorted(self.letter.items(),key=operator.itemgetter(1),reverse=True):
+                if v == 0:
+                    continue
+                fp.write(u"%s - %d\n"%(k,v))
+        return True
+    
 class Bigram(Unigram):
     def __init__(self,filename):
         Unigram.__init__(self,filename)
@@ -60,3 +73,15 @@ class Bigram(Unigram):
                     print( self.letter2[prev][next_letter] )
             prev = next_letter #update always
         return
+        
+    def save(self,filename):
+        with codecs.open(filename,"w","utf-8") as fp:
+            d = {}
+            for k,v in self.letter2.items():
+                for k2,v2 in v.items():
+                    if v2 == 0:
+                        continue
+                    d[k+k2] = v2
+            for k,v in sorted(d.items(),key=operator.itemgetter(1),reverse=True):
+                fp.write(u"%s - %d\n"%(k,v))
+        return True
