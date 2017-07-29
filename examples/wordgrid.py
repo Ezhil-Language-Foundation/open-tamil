@@ -286,7 +286,7 @@ def gen_grid():
         WordGrid.compute( wordlist, fill_letters)
     else:
         data = codecs.open(sys.argv[1],"r","utf-8").readlines()
-        wordlist = [line.strip() for line in data] 
+        wordlist = [line.split("-")[0].strip() for line in data] 
         wordlist = map( lambda x: x.strip(), wordlist)
         wordlist = filter( lambda w: w.find(u"#") == -1, wordlist )
         fill_letters = tamil.utf8.get_letters( u"".join(wordlist) )

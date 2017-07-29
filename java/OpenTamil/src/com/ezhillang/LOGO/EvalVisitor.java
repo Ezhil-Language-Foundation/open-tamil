@@ -9,7 +9,6 @@ import java.util.ListIterator;
  *
  * @author muthu
  */
-
 abstract class EvalVisitor extends Visitor {
     abstract Interpreter getInterpreter();
     

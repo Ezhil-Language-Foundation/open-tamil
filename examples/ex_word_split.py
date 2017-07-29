@@ -3,6 +3,7 @@
 
 from solthiruthi.dictionary import *
 from tamil import wordutils, utf8
+from ngram import edit_distance
 import math
 from pprint import pprint
 

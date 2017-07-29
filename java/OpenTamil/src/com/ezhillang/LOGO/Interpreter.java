@@ -12,6 +12,8 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
     WordMap m_userdef_map;
     Stack<Object> m_stack;
     ITurtleGraphics m_turtle;
+    
+    //builtins
     Word word_fw, word_bw, word_home, word_rt, word_lt, word_cls, word_repcount;
     Stack<Double> m_repeat_count;
     boolean m_add_delay;
@@ -44,6 +46,7 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
     void setGraphicsInterface(ITurtleGraphics tgraphics) {
         m_turtle = tgraphics;
     }
+    
     // start the evaluator
     void evaluate(ListAST ast) throws Exception {
         initialize();
@@ -95,7 +98,7 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
 
     // function
     @Override
-    public void evaluate(Interpreter m_int, String function, Object[] args) {
+    public void evaluate(Interpreter m_int, String function, Object[] args) throws Exception {
         int nargs = 0;
         if ( args != null) {
             nargs = args.length;
@@ -127,6 +130,17 @@ public class Interpreter extends EvalVisitor implements IRuntimeFunction {
             }
         }
 
+        // possibly a user defined function
+        // FIXME
+        Word udef_function = m_userdef_map.findWord(function);
+        if ( udef_function instanceof UserWord ) {
+            UserWord uw = (UserWord) udef_function;
+            uw.m_ref_impl.visit(this);
+        } else if ( udef_function != null ) {
+           // System.out.println( "We plan to extract function ["+udef_function.m_word_name+"] from the interpreter and run it");
+           // pass
+        }
+        
         if ( m_add_delay ) {
             try {
                 Thread.sleep(250); //0.25s pause between actions make for nice slow drawing

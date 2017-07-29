@@ -40,7 +40,7 @@ public class LexerTest extends TestCase {
         doLexerTest("koch.logo",87);
         doLexerTest("spiral.logo",84);
         doLexerTest("basic.logo",17);
-        doLexerTest("lesson1.logo",229);
+        doLexerTest("lesson1.logo",239);
         doLexerTest("basicsquare.logo",25);
         doLexerTest("square.logo",10);
     }
