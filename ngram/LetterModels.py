@@ -85,3 +85,30 @@ class Bigram(Unigram):
             for k,v in sorted(d.items(),key=operator.itemgetter(1),reverse=True):
                 fp.write(u"%s - %d\n"%(k,v))
         return True
+
+class Trigram(Unigram):
+    def __init__(self,filename):
+        Unigram.__init__(self,filename)
+        self.letter3 = dict()
+    
+    def language_model(self,verbose=True):
+        """ builds a Tamil bigram letter model """
+        # use a generator in corpus
+        p2 = None
+        p1 = None
+        for next_letter in self.corpus.next_tamil_letter():
+            # update frequency from corpus
+            if p2:
+                trig = p2+p1+next_letter
+                self.letter3[trig] = 1 + self.letter3.get(trig,0)
+            p2 = p1
+            p1 = next_letter #update always
+        return
+        
+    def save(self,filename):
+        with codecs.open(filename,"w","utf-8") as fp:
+            for k,v in sorted(self.letter3.items(),key=operator.itemgetter(1),reverse=True):
+                if v == 0:
+                    continue
+                fp.write(u"%s - %d\n"%(k,v))
+        return True
