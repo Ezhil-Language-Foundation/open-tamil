@@ -5,10 +5,7 @@
 # It implements a data-driven spell checker for Tamil language
 # 
 from __future__ import print_function
-from solthiruthi.suggestions import norvig_suggestor
-from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
-from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
-import tamil
+
 import sys
 import re
 import codecs
@@ -17,6 +14,13 @@ import time
 import string
 import argparse
 import json
+
+import tamil
+
+from solthiruthi.suggestions import norvig_suggestor
+from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
+from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
+from ngram.Distance import Dice_coeff
 
 # Make Bi-Lingual dictionary
 
@@ -89,6 +93,31 @@ class Speller(object):
             return ok, ""
         return ok, json.dumps( { word : suggs })
         
+    @staticmethod
+    def dice_comparison(ref_word,word):
+        """ use this class method for SORTED"""
+        val = Dice_coeff(ref_word,word)
+        if ( val == 1 ):
+            return 0
+        return (2*(val - 0.5) > 0) and 1 or -1
+        
+    def suggestion_policy(self,word,suggs):
+        # pick suggestions that are only +/- 2 letter length different
+        filter_suggs = []
+        ref_wl = len(word)
+        accept_min_max = [max(ref_wl-2,1),ref_wl+1]
+        filter_suggs = filter(lambda w: len(w) >= accept_min_max[0] and len(w) <= accept_min_max[1], suggs)
+        # sort the suggestions by Dice coefficient
+        filter_suggs = set(filter_suggs)
+        if len(filter_suggs) == 0:
+            # guess!
+            filter_suggs = suggs
+            filter_suggs=sorted(filter_suggs,cmp=Speller.dice_comparison)
+            filter_suggs[min(10,len(filter_suggs)-1):]=[]
+            return filter_suggs
+        filter_suggs=sorted(filter_suggs,cmp=Speller.dice_comparison)
+        return filter_suggs
+    
     def interactive(self):
         try:
             while( True ):
@@ -99,6 +128,7 @@ class Speller(object):
                     print(u"EXCEPTION \"%s\" is not a %s Word"%(word,self.language()))
                     continue
                 ok,suggs = self.check_word_and_suggest( word )
+                suggs = self.suggestion_policy(word,suggs)
                 if not ok:
                     option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
                     print(u"SUGGESTIONS for \"%s\"\n\t %s"%(word,option_str))

@@ -5,7 +5,7 @@ from webspell import app
 import json
 import codecs
 
-from flask import request, render
+from flask import request, render_template
 from spell import Speller, LoadDictionary
 
 @app.route('/')
