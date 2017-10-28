@@ -5,10 +5,7 @@
 # It implements a data-driven spell checker for Tamil language
 # 
 from __future__ import print_function
-from solthiruthi.suggestions import norvig_suggestor
-from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
-from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
-import tamil
+
 import sys
 import re
 import codecs
@@ -17,8 +14,14 @@ import time
 import string
 import argparse
 import json
+
 import functools
 import operator
+import tamil
+
+from solthiruthi.suggestions import norvig_suggestor
+from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
+from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
 from ngram.Distance import Dice_coeff
 
 # Make Bi-Lingual dictionary
@@ -55,12 +58,16 @@ class Speller(object):
         else:
             self.alphabets = None
         
-        if mode != "web":
-            if not self.filename:
-                self.interactive()
-            else:
-                self.spellcheck(self.filename)
-        pass
+        if mode == "web":
+            return
+            
+        if not self.filename:            
+            self.interactive()
+        else:
+            self.spellcheck(self.filename)
+
+    def in_tamil_mode(self):
+        return self.lang != u"en"
     
     @staticmethod
     def get_dictionary():        
@@ -99,6 +106,37 @@ class Speller(object):
             return ok, {}
         return ok, suggs
         
+    @staticmethod
+    def dice_comparison(ref_word,word):
+        """ use this class method for SORTED"""
+        val = Dice_coeff(ref_word,word)
+        if ( val == 1 ):
+            return 0
+        return (2*(val - 0.5) > 0) and 1 or -1
+        
+    def suggestion_policy(self,word,suggs):
+        # pick suggestions that are only +/- 2 letter length different
+        filter_suggs = []
+        tamil_length = lambda w: len(tamil.utf8.get_letters(w))
+        ref_wl = tamil_length(word)
+        accept_min_max = [max(ref_wl-2,1),ref_wl+1]
+        filter_suggs = filter(lambda w: tamil_length(w) >= accept_min_max[0] and len(w) <= accept_min_max[1], suggs)
+        # sort the suggestions by Dice coefficient
+        filter_suggs = set(filter_suggs)
+        if len(filter_suggs) == 0:
+            # guess!
+            filter_suggs = suggs
+            filter_suggs=sorted(filter_suggs,cmp=tamil.utf8.compare_words_lexicographic)
+            filter_suggs[min(10,len(filter_suggs)-1):]=[]
+            return filter_suggs
+        filter_suggs=sorted(filter_suggs,cmp=Speller.dice_comparison)
+        return filter_suggs
+    
+    def str_suggestions(self,word):
+        if self.in_tamil_mode():
+            return u"சொல் \"%s\" மாற்றங்கள்"%word
+        return u"SUGGESTIONS for \"%s\""%word
+    
     def interactive(self):
         try:
             while( True ):
@@ -108,21 +146,28 @@ class Speller(object):
                     word = raw_input(u">> ")
                     word = word.decode("utf-8").strip()
                 word = re.sub(u"\s+","",word)
+                
+                # skip empty words
+                if len(word) < 1:
+                    continue
+                
                 if not self.checklang(word):
                     print(u"EXCEPTION \"%s\" is not a %s Word"%(word,self.language()))
                     continue
                 ok,suggs = self.check_word_and_suggest( word )
+                suggs = self.suggestion_policy(word,suggs)
                 if not ok:
-                    option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
-                    print(u"SUGGESTIONS for \"%s\"\n\t %s"%(word,option_str))
+                    words_per_row = 4
+                    option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) + ((itr > 0 and itr%words_per_row == 0) and u"\n" or u"") for itr,wrd in enumerate(suggs)] )
+                    print(u"%s\n\t %s"%(self.str_suggestions(word),option_str))                    
                 else:
-                    print(u"OK")
+                    print(self.in_tamil_mode() and  u"சரி" or u"OK")
         except KeyboardInterrupt as ke:
             pass
         except EOFError as eof:
             pass
         finally:
-            print("\nBYE!")
+            print(self.in_tamil_mode() and  u"\nவணக்கம்!" or "\nBYE!")
         return
     
     def spellcheck(self,filename):

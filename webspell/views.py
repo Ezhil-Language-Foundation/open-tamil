@@ -8,9 +8,9 @@ import sys
 import re
 import pprint
 
+
 from flask import request, render_template, redirect, url_for
 from spell import Speller, LoadDictionary
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -84,3 +84,4 @@ def spellchecker():
         return json.dumps(result_dict)
     else:
         return "RPC interface for TinyMCE Spell Checker!"
+
