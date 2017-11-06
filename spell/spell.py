@@ -16,6 +16,7 @@ import argparse
 import json
 
 import functools
+import itertools
 import operator
 import tamil
 
@@ -43,6 +44,33 @@ class LoadDictionary(threading.Thread):
         Speller.get_english_dictionary()
         if LoadDictionary.DEBUG: print("LOADED DICTIONARY in  %g (s)"%(time.time() - start))
         return
+    
+
+class Mayangoli:
+    varisai = [[ u"ல", u"ழ",u"ள"],[u"ர", u"ற"],[u"ந",u"ன",u"ண"],[u"ங",u"ஞ"]]#வரிசை.
+    
+    @staticmethod
+    def find_matches(word):
+        return []
+    
+    @staticmethod
+    def find_correspondents(mayangoli_ezhuthu):
+        return []
+    
+    @staticmethod
+    def generate_combinations(*classes):
+        l = list(itertools.product(classess))
+        return []
+    
+    # TBD
+    @staticmethod
+    def generate_word_alternates(*args):
+        # find matches in mayangoli classess
+        # if there are no mayangoli matches then we return []
+        # for each match we find the class and find corresponding uyirmei alternates
+        # generate the combinations of these alternates in the said word positions
+        # we filter the new word alternates based on substituting these correspondents
+        return []
 
 class Speller(object):
     TVU_dict = None
@@ -53,24 +81,24 @@ class Speller(object):
         self.filename = filename
         self.user_dict = set()
         self.case_filter = CaseFilter( RemovePluralSuffix(), RemoveVerbSuffixTense(), RemoveCaseSuffix(), RemovePrefix() )
-        if self.lang == u"en":
+        if not self.in_tamil_mode():
             self.alphabets = [a for a in string.ascii_lowercase]
         else:
             self.alphabets = None
         
         if mode == "web":
             return
-            
-        if not self.filename:            
+        
+        if not self.filename:
             self.interactive()
         else:
             self.spellcheck(self.filename)
-
+    
     def in_tamil_mode(self):
         return self.lang != u"en"
     
     @staticmethod
-    def get_dictionary():        
+    def get_dictionary():
         LoadDictionary.lock.acquire()
         if not Speller.TVU_dict:
             Speller.TVU_dict,_ = DictionaryBuilder.create(TamilVU)
@@ -86,12 +114,12 @@ class Speller(object):
         return Speller.ENL_dict    
     
     def language(self):
-        if self.lang == "ta":
+        if self.in_tamil_mode():
             return "tamil"
         return "english"
         
     def checklang(self,word):
-        if self.lang == "ta":
+        if self.in_tamil_mode():
             return tamil.utf8.all_tamil(word)
         for w in word.lower():
             if not ( w in string.ascii_lowercase ):
@@ -137,6 +165,9 @@ class Speller(object):
             return u"சொல் \"%s\" மாற்றங்கள்"%word
         return u"SUGGESTIONS for \"%s\""%word
     
+    def mayangoli_suggestions(self,word):
+        return []
+        
     def interactive(self):
         try:
             while( True ):
@@ -159,7 +190,7 @@ class Speller(object):
                 if not ok:
                     words_per_row = 4
                     option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) + ((itr > 0 and itr%words_per_row == 0) and u"\n" or u"") for itr,wrd in enumerate(suggs)] )
-                    print(u"%s\n\t %s"%(self.str_suggestions(word),option_str))                    
+                    print(u"%s\n\t %s"%(self.str_suggestions(word),option_str))
                 else:
                     print(self.in_tamil_mode() and  u"சரி" or u"OK")
         except KeyboardInterrupt as ke:
@@ -208,15 +239,14 @@ class Speller(object):
         print(u" ".join(new_document))
         
     def get_lang_dictionary(self):
-        if self.lang == u"en":
+        if not self.in_tamil_mode():
             return Speller.get_english_dictionary()
         return Speller.get_dictionary()
-     
+    
     def isWord(self, word):
         # Plain old dictionary checks
         LANG_dict = self.get_lang_dictionary()
         is_dict_word = LANG_dict.isWord(word)
-        
         in_user_dict = word in self.user_dict or is_dict_word
         return in_user_dict
         
@@ -269,9 +299,10 @@ class Speller(object):
         options.extend( list(norvig_suggests))
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
+        options.extend( self.mayangoli_suggestions(word))
         
         # sort the options
-        if self.lang == u"en":
+        if not self.in_tamil_mode():
             options.sort()
         else:
             if PYTHON3:
