@@ -67,7 +67,10 @@ class Mayangoli:
     
     def find_letter_positions(self):
         for idx,letter in enumerate(self.letters):
-            mei,uyir = tamil.utf8.get_letters_elementary(letter)
+            p = tamil.utf8.splitMeiUyir(letter)
+            if len(p) == 1:
+                continue
+            mei,uyir=p
             for r in range(0,len(Mayangoli.varisai)):
                 for c in range(0,len(Mayangoli.varisai[r])):
                     if mei == Mayangoli.varisai[r][c]:
@@ -77,7 +80,7 @@ class Mayangoli:
     def find_correspondents(self):
         for pos,r,c in self.matches_and_positions:
             src_letter  = self.letters[pos]
-            _,src_uyir = tamil.utf8.get_letters_elementary(src_letter)
+            _,src_uyir = tamil.utf8.splitMeiUyir(src_letter)
             alt_letters = []
             for alternate_mei in Mayangoli.variasi[r]:
                 alt_letters.append( tamil.utf8.joinMeiUyir(alternate_mei,src_uyir) )
