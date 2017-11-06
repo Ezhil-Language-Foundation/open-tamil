@@ -6,18 +6,20 @@
 # 
 from __future__ import print_function
 
-import sys
-import re
-import codecs
-import threading
-import time
-import string
 import argparse
-import json
-
+import copy
+import codecs
 import functools
 import itertools
+import json
 import operator
+import pprint
+import re
+import string
+import sys
+import threading
+import time
+
 import tamil
 
 from solthiruthi.suggestions import norvig_suggestor
@@ -82,7 +84,7 @@ class Mayangoli:
             src_letter  = self.letters[pos]
             _,src_uyir = tamil.utf8.splitMeiUyir(src_letter)
             alt_letters = []
-            for alternate_mei in Mayangoli.variasi[r]:
+            for alternate_mei in Mayangoli.varisai[r]:
                 alt_letters.append( tamil.utf8.joinMeiUyir(alternate_mei,src_uyir) )
             self.pos_classes.append(alt_letters)
         return True
@@ -99,8 +101,11 @@ class Mayangoli:
         # based on substituting these correspondents
         for position_sub in self._generate_combinations():
             alt_letters = copy.copy(self.letters)
-            for idx,pos,r,c in enumerate(self.matches_and_positions):
+            pprint.pprint(position_sub)
+            idx =0
+            for pos,r,c in self.matches_and_positions:
                 alt_letters[pos] = position_sub[idx]
+                idx += 1
             word_alt = u''.join(alt_letters)
             self.alternates.append(word_alt)
         return True
