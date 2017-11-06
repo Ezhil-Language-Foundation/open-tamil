@@ -25,13 +25,15 @@ import tamil
 from solthiruthi.suggestions import norvig_suggestor
 from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
 from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
-from ngram.Distance import Dice_coeff
+from ngram.Distance import Dice_coeff, edit_distance
 
 # Make Bi-Lingual dictionary
 
 PYTHON3 = ( sys.version_info[0] == 3 )
 if PYTHON3:
     unicode = str
+
+_DEBUG = False
 
 # save 6s for the code on a old machine
 class LoadDictionary(threading.Thread):
@@ -101,7 +103,7 @@ class Mayangoli:
         # based on substituting these correspondents
         for position_sub in self._generate_combinations():
             alt_letters = copy.copy(self.letters)
-            pprint.pprint(position_sub)
+            if _DEBUG: pprint.pprint(position_sub)
             idx =0
             for pos,r,c in self.matches_and_positions:
                 alt_letters[pos] = position_sub[idx]
@@ -168,10 +170,13 @@ class Speller(object):
     def REST_interface(self,word):
         # returns JSON data in TinyMCE format
         ok,suggs = self.check_word_and_suggest( word )
+        if _DEBUG:
+            print("REST => %d"%ok)
+            pprint.pprint(suggs)
         if ok:
             return ok, {}
         return ok, suggs
-        
+    
     @staticmethod
     def dice_comparison(ref_word,word):
         """ use this class method for SORTED"""
@@ -205,7 +210,11 @@ class Speller(object):
     
     def mayangoli_suggestions(self,word):
         alternates = Mayangoli.run(word)
-        return alternates
+        alternates = filter(lambda w: w != word, alternates)
+        if _DEBUG:
+            for idx,w in enumerate(alternates):
+                pprint.pprint(["Myangoli",idx,w])
+        return copy.copy(alternates)
     
     def interactive(self):
         try:
@@ -253,7 +262,7 @@ class Speller(object):
                 if not ok:
                     option = suggs[0]
                     # take user input.
-                    # FIXME: User optiions to include DONTREPLACE/KEEP, DELETE WORD, etc.
+                    # FIXME: User options to include DONTREPLACE/KEEP, DELETE WORD, etc.
                     option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
                     print(u"In line, \"%s\""%line.strip())
                     print(u" Replace word %s with\n\t => %s\n"%(word, option_str))
@@ -291,6 +300,7 @@ class Speller(object):
         
     def check_word_and_suggest( self,word ):         
         word = word.strip()
+        orig_word = u'%s'%word
         # remove punctuation
         for x in string.punctuation:
             word = word.replace(x,u"")
@@ -300,9 +310,11 @@ class Speller(object):
         TVU_dict = self.get_lang_dictionary()
         
         if not self.checklang(word):
+            print("Word is not in desired language!")
             return (False,[u''])
         
         if len(word) < 1:
+            print("Word is too small")
             return (False,[u''])
         
         # plain old dictionary + user dictionary check
@@ -339,8 +351,8 @@ class Speller(object):
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
         if self.in_tamil_mode():
-            options.extend( self.mayangoli_suggestions(word))
-        
+            options.extend( self.mayangoli_suggestions(orig_word) )
+            
         # sort the options
         if not self.in_tamil_mode():
             options.sort()
@@ -363,21 +375,31 @@ class Speller(object):
                 options2.append(val.strip())
             prev = val.strip()
         del options
+        if _DEBUG:
+            print("@deduplication")
+            pprint.pprint(options2)
         
-        # score by Dice coefficients
+        # score by Dice or Edit-Distance coefficients
         options_score = [0.0 for i in range(len(options2))]
         for itr,sugg_word in enumerate(options2):
-            options_score[itr] = Dice_coeff( word, sugg_word )
+            #options_score[itr] = Dice_coeff( word, sugg_word )
+            options_score[itr] = (len(word)-edit_distance(word,sugg_word))/(1.0*len(orig_word)) + Dice_coeff( word, sugg_word )/3.0 #dice coeff is weighted down
         options = zip( options2, options_score)
         
         # limit options by score
         options = sorted(options,key=operator.itemgetter(1),reverse=True)
         options = [word_pair[0] for word_pair in options]
-        
-        L = 20
+        L = 40
         # limit to first top -L=20 only which is good enough
         options = options[0:min(len(options),L)]
+        if _DEBUG: 
+            pprint.pprint("@after scoring/sorting")
+            pprint.pprint(options)
         
+        # Due to suggestion policy we may have words which are found in error but we dont have
+        # replacements for them!
+        
+        # TBD: options should not have the 'word'!
         return (False, options )
 
 def main():
@@ -407,3 +429,4 @@ def main():
 
 if __name__ == u'__main__':
     main()
+#TBD: colors, cities, places, countries, currencies to be added

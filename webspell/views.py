@@ -78,7 +78,11 @@ def spellchecker():
             if word.find("<") >= 0: #HTML Tags, skip
                 continue
             print("checking word %d"%itr,file=sys.stderr)
-            ok,suggs = spell_checker.REST_interface(word)
+            try:
+                ok,suggs = spell_checker.REST_interface(word)
+            except Exception as ioe:
+                ok = True
+                pprint.pprint(ioe)
             if not ok:
                 result_dict['words'][word] = suggs    
         return json.dumps(result_dict)
