@@ -44,34 +44,64 @@ class LoadDictionary(threading.Thread):
         Speller.get_english_dictionary()
         if LoadDictionary.DEBUG: print("LOADED DICTIONARY in  %g (s)"%(time.time() - start))
         return
-    
 
 class Mayangoli:
-    varisai = [[ u"ல", u"ழ",u"ள"],[u"ர", u"ற"],[u"ந",u"ன",u"ண"],[u"ங",u"ஞ"]]#வரிசை.
+    varisai = [[ u"ல்", u"ழ்",u"ள்"],[u"ர்", u"ற்"],[u"ந்",u"ன்",u"ண்"],[u"ங்",u"ஞ்"]]#வரிசை.
     
+    def __init__(self,word):
+        self.word = word
+        self.letters = tamil.utf8.get_letters(word)
+        self.matches_and_positions = []
+        self.alternates = []
+        self.pos_classes = []
+        
     @staticmethod
-    def find_matches(word):
-        return []
+    def run(word):
+        obj = Mayangoli(word)
+        obj.find_letter_positions()
+        if len(obj.matches_and_positions) == 0:
+            return []
+        obj.find_correspondents()
+        obj.generate_word_alternates()
+        return obj.alternates
     
-    @staticmethod
-    def find_correspondents(mayangoli_ezhuthu):
-        return []
+    def find_letter_positions(self):
+        for idx,letter in enumerate(self.letters):
+            mei,uyir = tamil.utf8.get_letters_elementary(letter)
+            for r in range(0,len(Mayangoli.varisai)):
+                for c in range(0,len(Mayangoli.varisai[r])):
+                    if mei == Mayangoli.varisai[r][c]:
+                        self.matches_and_positions.append((idx,r,c))
+        return len(self.matches_and_positions) > 0
     
-    @staticmethod
-    def generate_combinations(*classes):
-        l = list(itertools.product(classess))
-        return []
+    def find_correspondents(self):
+        for pos,r,c in self.matches_and_positions:
+            src_letter  = self.letters[pos]
+            _,src_uyir = tamil.utf8.get_letters_elementary(src_letter)
+            alt_letters = []
+            for alternate_mei in Mayangoli.variasi[r]:
+                alt_letters.append( tamil.utf8.joinMeiUyir(alternate_mei,src_uyir) )
+            self.pos_classes.append(alt_letters)
+        return True
     
-    # TBD
-    @staticmethod
-    def generate_word_alternates(*args):
-        # find matches in mayangoli classess
-        # if there are no mayangoli matches then we return []
+    def _generate_combinations(self):
+        return itertools.product(*self.pos_classes)
+    
+    def generate_word_alternates(self):
+        # find matches in Mayangoli classes
+        # if there are no Mayangoli matches then we return []
         # for each match we find the class and find corresponding uyirmei alternates
         # generate the combinations of these alternates in the said word positions
-        # we filter the new word alternates based on substituting these correspondents
-        return []
-
+        # caller will filter the new word alternates (returned)
+        # based on substituting these correspondents
+        for position_sub in self._generate_combinations():
+            alt_letters = copy.copy(self.letters)
+            for idx,pos,r,c in enumerate(self.matches_and_positions):
+                alt_letters[pos] = position_sub[idx]
+            word_alt = u''.join(alt_letters)
+            self.alternates.append(word_alt)
+        return True
+    
 class Speller(object):
     TVU_dict = None
     ENL_dict = None
@@ -166,8 +196,9 @@ class Speller(object):
         return u"SUGGESTIONS for \"%s\""%word
     
     def mayangoli_suggestions(self,word):
-        return []
-        
+        alternates = Mayangoli.run(word)
+        return alternates
+    
     def interactive(self):
         try:
             while( True ):
@@ -299,7 +330,8 @@ class Speller(object):
         options.extend( list(norvig_suggests))
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
-        options.extend( self.mayangoli_suggestions(word))
+        if self.in_tamil_mode():
+            options.extend( self.mayangoli_suggestions(word))
         
         # sort the options
         if not self.in_tamil_mode():
