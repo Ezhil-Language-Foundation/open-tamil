@@ -350,6 +350,12 @@ class Speller(object):
         options.extend( list(norvig_suggests))
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
+        
+        # filter the options against a dictionary!
+        options = filter(TVU_dict.isWord,options )
+        if PYTHON3:
+            options = list(options)
+        
         if self.in_tamil_mode():
             options.extend( self.mayangoli_suggestions(orig_word) )
             
@@ -378,23 +384,26 @@ class Speller(object):
         if _DEBUG:
             print("@deduplication")
             pprint.pprint(options2)
-        
+                
         # score by Dice or Edit-Distance coefficients
         options_score = [0.0 for i in range(len(options2))]
         for itr,sugg_word in enumerate(options2):
             #options_score[itr] = Dice_coeff( word, sugg_word )
-            options_score[itr] = (len(word)-edit_distance(word,sugg_word))/(1.0*len(orig_word)) + Dice_coeff( word, sugg_word )/3.0 #dice coeff is weighted down
+            options_score[itr] = (len(word)-edit_distance(word,sugg_word))/(1.0*len(orig_word))*Dice_coeff( word, sugg_word )/3.0 #dice coeff is weighted down
         options = zip( options2, options_score)
         
         # limit options by score
         options = sorted(options,key=operator.itemgetter(1),reverse=True)
         options = [word_pair[0] for word_pair in options]
-        L = 40
+        #L = 40
         # limit to first top -L=20 only which is good enough
-        options = options[0:min(len(options),L)]
+        #options = options[0:min(len(options),L)]
         if _DEBUG: 
             pprint.pprint("@after scoring/sorting")
             pprint.pprint(options)
+        
+        # eliminate single letter options
+        options = filter(lambda x : not( x in tamil.utf8.tamil_letters), options)
         
         # Due to suggestion policy we may have words which are found in error but we dont have
         # replacements for them!
@@ -430,3 +439,4 @@ def main():
 if __name__ == u'__main__':
     main()
 #TBD: colors, cities, places, countries, currencies to be added
+#TBD: proper nouns common names etc.
