@@ -18,7 +18,14 @@ class SpellTestTamil(unittest.TestCase):
         for w in [u"உள்ளமது",u"அச்சமின்றி",u"கணிதமழகு",u"காலமானாலும்"]:#u"செயல்படு"]:
             ok,alt = self.speller.check_word_and_suggest(w)
             self.assertTrue(ok)
-        
+
+    def test_words_with_numeral(self):
+        data = [("900",u"தொள்ளாயிரம்"),("1000001.5",u"பத்து இலட்சத்தி ஒன்று புள்ளி ஐந்து"),("-10.5",u"கழித்தல் பத்து புள்ளி ஐந்து")]
+        for w,sugg in data:
+            not_ok,suggs = self.speller.check_word_and_suggest(w)
+            self.assertFalse(not_ok)
+            self.assertTrue(sugg in suggs)
+
     def test_words_with_hyphen(self):
         not_ok,suggs = self.speller.check_word_and_suggest(u"வெத்து-வேட்டு")
         self.assertFalse(not_ok)
@@ -26,7 +33,7 @@ class SpellTestTamil(unittest.TestCase):
         
     def test_words_with_dates(self):
         # test if all the words are in the dictionary
-        for w in [u"1989-ஆம்;",u"தரம்",u"2000"]:
+        for w in [u"1989-ஆம்;",u"தரம்",u"1497-இல்"]:
             ok,_ = self.speller.check_word_and_suggest(w)
             self.assertTrue( ok, w )
         return

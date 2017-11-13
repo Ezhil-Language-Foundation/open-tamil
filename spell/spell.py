@@ -338,15 +338,32 @@ class Speller(object):
         # skip known punctuations at end of line
         if any(map(word.endswith,string.punctuation)):
             word = word[:-1]
+
+        # is number then we propose a numeral
+        if self.in_tamil_mode():
+            if re.match(u'[+|-]*[\d]+',word):
+                try:
+                    num = float(word)
+                    posnum = num
+                    if num < 0:
+                        posnum = -1*num
+                    numeral_form = tamil.numeral.num2tamilstr(posnum)
+                    if num < 0:
+                        numeral_form = u"கழித்தல் "+numeral_form
+                    return (False,[numeral_form])
+                except Exception as ioe:
+                    pass
             
-        # dates are okay
-        if re.search('^\d+',word):
-            return (True,word) #word is okay
+            # dates are okay
+            if any(map(word.endswith,[u"-இல்",u"-ஆம்",u"-இலிருந்து", u"-வரை"])):
+                if re.search('^\d+',word):
+                    return (True,word) #word is okay
         
         # hyphens are not okay
         if word.find(u"-") >= 0:
             return (False,[word.replace(u"-",u" ")])#re.sub(u"^w"," ",word))
         orig_word = u"%s"%word
+        
         
         # remove digits
         word = re.sub(u'\d+',u'',word)
@@ -490,5 +507,7 @@ def main():
 
 if __name__ == u'__main__':
     main()
-#TBD: colors, cities, places, countries, currencies to be added
+#TBD: dieties, divinity, language, people, places, personalities to be added.
+#TBD: colors, cities, places, countries, currencies to be added.
 #TBD: proper nouns common names etc.
+#Find bugs in TinyMCE where spell module does not highlight all the mentioned words.
