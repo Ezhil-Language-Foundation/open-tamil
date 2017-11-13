@@ -49,6 +49,42 @@ class LoadDictionary(threading.Thread):
         if LoadDictionary.DEBUG: print("LOADED DICTIONARY in  %g (s)"%(time.time() - start))
         return
 
+class OttruSplit:
+    """ யாரிகழ்ந்து = [ய்  + ஆரிகழ்ந்து], [யார், இகழ்ந்து] ,[யாரிக், அழ்ந்து], [யாரிகழ்ந்த்,உ]"""
+    def __init__(self,word):
+        self.word = word
+        self.letters = tamil.utf8.get_letters(word)
+        self.results = list()
+        
+    def run(self,lexicon):
+        return False
+        self.generate_splits()
+        return self.filter(lexicon)
+        
+    def generate_splits(self):
+        """
+            யாரிகழ்ந்து = 
+                [['ய்', 'ஆரிகழ்ந்து'],
+                 ['யார்', 'இகழ்ந்து'],
+                 ['யாரிக்', 'அழ்ந்து'],
+                 ['யாரிகழ்ந்த்', 'உ']]
+        """
+        L = len(self.letters)-1
+        for idx,letter in enumerate(self.letters):
+            if not( letter in tamil.utf8.grantha_uyirmei_letters):
+                continue
+            muthal = idx == 0 and u"" or u"".join(self.letters[0:idx])
+            meethi = idx == L and u"" or u"".join(self.letters[idx+1:])
+            mei,uyir = tamil.utf8.splitMeiUyir(letter)
+            muthal = muthal + mei
+            meethi = uyir + meethi
+            self.results.append([muthal,meethi])
+        return len(self.results) > 0
+
+    def filter(self,lexicon):
+        self.results = list( filter(lambda x: all( map(lexicon.isWord,x) ),self.results) )
+        return self.results
+    
 class Mayangoli:
     varisai = [[ u"ல்", u"ழ்",u"ள்"],[u"ர்", u"ற்"],[u"ந்",u"ன்",u"ண்"],[u"ங்",u"ஞ்"]]#வரிசை.
     
@@ -85,7 +121,7 @@ class Mayangoli:
         for pos,r,c in self.matches_and_positions:
             src_letter  = self.letters[pos]
             _,src_uyir = tamil.utf8.splitMeiUyir(src_letter)
-            alt_letters = []
+            alt_letters = list()
             for alternate_mei in Mayangoli.varisai[r]:
                 alt_letters.append( tamil.utf8.joinMeiUyir(alternate_mei,src_uyir) )
             self.pos_classes.append(alt_letters)
@@ -338,6 +374,16 @@ class Speller(object):
         else:
             greedy_results = list()
         
+        # ottru splitting for Tamil language mode
+        ottru_options = []
+        if self.in_tamil_mode():
+            # discover words like யாரிகழ்ந்து are accepted.
+            ottru = OttruSplit(word)
+            ottru.run(TVU_dict)
+            if len(ottru.results) > 0:
+                return True
+            ottru_options = ottru.results
+        
         # TODO: Noun Declension - ticket-
         
         # suggestions at edit distance 1
@@ -347,7 +393,8 @@ class Speller(object):
         
         # FIXME: score  the options
         options = greedy_results
-        options.extend( list(norvig_suggests))
+        options.extend( ottru_options )
+        options.extend( list(norvig_suggests) )
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
         
