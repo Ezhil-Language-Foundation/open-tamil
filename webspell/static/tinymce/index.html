@@ -28,6 +28,7 @@ function ta_spellchecker_cb(method, text, success, failure) {
        
        request.done( 
         function(result) {
+          console.log(result);
           success(result);
         });
             

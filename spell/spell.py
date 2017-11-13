@@ -57,7 +57,6 @@ class OttruSplit:
         self.results = list()
         
     def run(self,lexicon):
-        return False
         self.generate_splits()
         return self.filter(lexicon)
         
@@ -336,15 +335,23 @@ class Speller(object):
         
     def check_word_and_suggest( self,word ):         
         word = word.strip()
-        orig_word = u'%s'%word
-        # remove punctuation
-        for x in string.punctuation:
-            word = word.replace(x,u"")
+        # skip known punctuations at end of line
+        if any(map(word.endswith,string.punctuation)):
+            word = word[:-1]
+            
+        # dates are okay
+        if re.search('^\d+',word):
+            return (True,word) #word is okay
+        
+        # hyphens are not okay
+        if word.find(u"-") >= 0:
+            return (False,[word.replace(u"-",u" ")])#re.sub(u"^w"," ",word))
+        orig_word = u"%s"%word
+        
         # remove digits
         word = re.sub(u'\d+',u'',word)
         letters = tamil.utf8.get_letters(word)
         TVU_dict = self.get_lang_dictionary()
-        
         if not self.checklang(word):
             print("Word is not in desired language!")
             return (False,[u''])
@@ -352,7 +359,6 @@ class Speller(object):
         if len(word) < 1:
             print("Word is too small")
             return (False,[u''])
-        
         # plain old dictionary + user dictionary check
         if self.isWord(word):
             return (True,word)
@@ -367,12 +373,11 @@ class Speller(object):
         # Consider splitting the word and see if it has 2 sub-words
         # e.g. செயல்பட => செயல் + பட
         alt = tamil.wordutils.greedy_split(word,TVU_dict)
+        greedy_results = list()
         if len(alt) >= 1:
             greedy_results = [u" ".join(alt),u"-".join(alt)]
             greedy_results.extend(alt)
-        #return (False, results )
-        else:
-            greedy_results = list()
+            #return (False, greedy_results )
         
         # ottru splitting for Tamil language mode
         ottru_options = []
@@ -381,14 +386,14 @@ class Speller(object):
             ottru = OttruSplit(word)
             ottru.run(TVU_dict)
             if len(ottru.results) > 0:
-                return True
+                return (True,word)
             ottru_options = ottru.results
         
         # TODO: Noun Declension - ticket-
         
         # suggestions at edit distance 1
-        norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 2,limit=50))
-        combinagram_suggests = list(tamil.wordutils.combinagrams(word,TVU_dict,limit=50)) 
+        norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 2,limit=25))
+        combinagram_suggests = list(tamil.wordutils.combinagrams(word,TVU_dict,limit=25))
         pfx_options = TVU_dict.getWordsStartingWith( u"".join( letters[:-1] ) )
         
         # FIXME: score  the options
@@ -431,7 +436,7 @@ class Speller(object):
         if _DEBUG:
             print("@deduplication")
             pprint.pprint(options2)
-                
+        
         # score by Dice or Edit-Distance coefficients
         options_score = [0.0 for i in range(len(options2))]
         for itr,sugg_word in enumerate(options2):

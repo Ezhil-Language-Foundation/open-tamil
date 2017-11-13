@@ -83,6 +83,7 @@ def spellchecker():
             except Exception as ioe:
                 ok = True
                 pprint.pprint(ioe)
+            pprint.pprint(suggs)
             if not ok:
                 result_dict['words'][word] = suggs    
         return json.dumps(result_dict)

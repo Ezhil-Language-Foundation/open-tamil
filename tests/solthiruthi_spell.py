@@ -10,6 +10,33 @@ from tamil import utf8
 class SpellTestTamil(unittest.TestCase):
     def setUp(self):
         self.speller =  Speller(lang=u"TA",mode="web")
+    
+    def test_tamil_mode(self):
+        self.assertTrue(self.speller.in_tamil_mode())
+        
+    def test_words_split(self):
+        for w in [u"உள்ளமது",u"அச்சமின்றி",u"கணிதமழகு",u"காலமானாலும்"]:#u"செயல்படு"]:
+            ok,alt = self.speller.check_word_and_suggest(w)
+            self.assertTrue(ok)
+        
+    def test_words_with_hyphen(self):
+        not_ok,suggs = self.speller.check_word_and_suggest(u"வெத்து-வேட்டு")
+        self.assertFalse(not_ok)
+        self.assertTrue(u"வெத்து வேட்டு" in suggs)
+        
+    def test_words_with_dates(self):
+        # test if all the words are in the dictionary
+        for w in [u"1989-ஆம்;",u"தரம்",u"2000"]:
+            ok,_ = self.speller.check_word_and_suggest(w)
+            self.assertTrue( ok, w )
+        return
+
+    def test_words_with_punctuation(self):
+        # test if all the words are in the dictionary
+        for w in [u"சவால்!",u"மகதம்;",u"ஆரதம்,"]:#, u"பல்லவன் ;",u"பாதம்:",u"கவணம்/", u"செயல்_"]:
+            ok,_ = self.speller.check_word_and_suggest(w)
+            self.assertTrue( ok, w )
+        return
         
     def test_words_in_dictionary(self):
         # test if all the words are in the dictionary
@@ -48,10 +75,10 @@ class SpellTestTamil(unittest.TestCase):
         self.assertEqual(alt,expect)
     
     def test_mayangoli_suggests_notsimple(self):
-        expect_l = 3
-        for w in [u"கண்ணன்",u"அப்பளம்"]:
+        expect_l = [3,3,3*3*2*3]
+        for idx,w in enumerate([u"கண்ணன்",u"அப்பளம்",u"எழுத்தாளருமான"]):
             alt = Mayangoli.run(w)
-            self.assertEqual(len(alt),expect_l)
+            self.assertEqual(len(alt),expect_l[idx])
         
     def test_mayangoli_suggests_none(self):
         expect_l = 0
