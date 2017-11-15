@@ -21,7 +21,7 @@ import threading
 import time
 
 import tamil
-
+from transliterate import azhagi, jaffna, combinational, algorithm
 from solthiruthi.suggestions import norvig_suggestor
 from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
 from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
@@ -150,6 +150,7 @@ class Mayangoli:
 class Speller(object):
     TVU_dict = None
     ENL_dict = None
+    punctuation = string.punctuation+'()[]{}'
     def __init__(self,filename=None,lang="ta",mode="non-web"):
         object.__init__(self)
         self.lang = lang.lower()
@@ -362,13 +363,19 @@ class Speller(object):
             numerals.extend(wordset)
         for word in numerals:
             lexicon.add(word)
+    
+    @staticmethod
+    def scrub_ws(word):
+        return re.sub(u'[\s{}()\[\]]+',u'',word)
         
     def check_word_and_suggest( self,word ):         
         word = word.strip()
-        # skip known punctuations at end of line
-        if any(map(word.endswith,string.punctuation)):
+        # skip known punctuation at end of line
+        while len(word) >= 1 and any(map(word.endswith,Speller.punctuation)):
             word = word[:-1]
-
+        while len(word) >= 1 and any(map(word.startswith,string.whitespace)):
+            word = word[1:]
+        
         # is number then we propose a numeral
         if self.in_tamil_mode():
             numword = word.replace(u',',u'')
@@ -384,10 +391,25 @@ class Speller(object):
                     return (False,[numeral_form])
                 except Exception as ioe:
                     pass
+            
             # dates are okay
             if any(map(word.endswith,[u"-இல்",u"-ஆம்",u"-இலிருந்து", u"-வரை"])):
                 if re.search('^\d+',word):
                     return (True,[word]) #word is okay
+               
+            # check if words are transliterated
+            if any(filter(lambda x: x in string.letters,tamil.utf8.get_letters(word))):
+                # letter-sequence only
+                en_word = Speller.scrub_ws(word)
+                EN_Lexicon = Speller.get_english_dictionary()
+                if EN_Lexicon.isWord(en_word):
+                    return (False,['']) #English word - nosub- yet until we have parallel dictionaries or translation. TBD.
+                
+                #is english letter
+                ta = algorithm.Iterative.transliterate(jaffna.Transliteration.table,en_word)
+                # TBD: potential for having ANN to tell if english text is pure English word
+                # or a romanized Tamil word. Output of classifier can be useful here.
+                return (False,[ta])
             
             # check if it matches Tamil numeral and has close match.
             # propose suggestions from that list.
@@ -396,6 +418,8 @@ class Speller(object):
         # hyphens are not okay
         if word.find(u"-") >= 0:
             return (False,[word.replace(u"-",u" ")])#re.sub(u"^w"," ",word))
+        # replace other spurious ()[] punctuations by concatenation
+        #word = u"".join(filter(lambda l: not( l in Speller.punctuation), tamil.utf8.get_letters(word)))
         orig_word = u"%s"%word
         
         
@@ -547,3 +571,6 @@ if __name__ == u'__main__':
 #TBD: proper nouns common names etc.
 #Find bugs in TinyMCE where spell module does not highlight all the mentioned words.
 #TBD: Rank options by scoring bigram models
+#TBD: Deletion and insertion errors are not searched.
+#     e.g. இருபட்து -> இருபது
+#     

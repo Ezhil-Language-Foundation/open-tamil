@@ -7,7 +7,7 @@ import codecs
 import sys
 import re
 import pprint
-
+import re
 
 from flask import request, render_template, redirect, url_for
 from spell import Speller, LoadDictionary
@@ -86,8 +86,8 @@ def spellchecker():
                 pprint.pprint(ioe)
             
             if not ok:
+                word = Speller.scrub_ws(word)
                 result_dict['words'][word] = suggs    
         return json.dumps(result_dict)
     else:
         return "RPC interface for TinyMCE Spell Checker!"
-
