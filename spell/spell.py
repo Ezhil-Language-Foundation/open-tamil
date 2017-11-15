@@ -341,9 +341,10 @@ class Speller(object):
 
         # is number then we propose a numeral
         if self.in_tamil_mode():
-            if re.match(u'[+|-]*[\d]+',word):
+            numword = word.replace(u',',u'')
+            if re.match(u'[+|-]*[\d]+',numword):
                 try:
-                    num = float(word)
+                    num = float(numword)
                     posnum = num
                     if num < 0:
                         posnum = -1*num
@@ -353,12 +354,15 @@ class Speller(object):
                     return (False,[numeral_form])
                 except Exception as ioe:
                     pass
-            
             # dates are okay
             if any(map(word.endswith,[u"-இல்",u"-ஆம்",u"-இலிருந்து", u"-வரை"])):
                 if re.search('^\d+',word):
                     return (True,word) #word is okay
-        
+            
+            # check if it matches Tamil numeral and has close match.
+            # propose suggestions from that list.
+            # TBD
+            
         # hyphens are not okay
         if word.find(u"-") >= 0:
             return (False,[word.replace(u"-",u" ")])#re.sub(u"^w"," ",word))
@@ -511,3 +515,4 @@ if __name__ == u'__main__':
 #TBD: colors, cities, places, countries, currencies to be added.
 #TBD: proper nouns common names etc.
 #Find bugs in TinyMCE where spell module does not highlight all the mentioned words.
+#TBD: Rank options by scoring bigram models

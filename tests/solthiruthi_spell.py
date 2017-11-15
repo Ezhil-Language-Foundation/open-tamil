@@ -7,12 +7,24 @@ from pprint import pprint
 import os
 from tamil import utf8
 
+
 class SpellTestTamil(unittest.TestCase):
     def setUp(self):
         self.speller =  Speller(lang=u"TA",mode="web")
     
     def test_tamil_mode(self):
         self.assertTrue(self.speller.in_tamil_mode())
+
+    def test_comma_numbers(self):
+        alt = u"பத்து ஆயிரம்"
+        not_ok,sugg = self.speller.check_word_and_suggest(u"10,000")
+        self.assertFalse(not_ok)
+        self.assertTrue(alt in sugg)
+        
+    def test_iyalbu_punarchi(self):
+        for w in [ u"பொன்மலை", u"பொன்மாலை", u"மாமரம்"]:
+            ok,alt = self.speller.check_word_and_suggest(w)
+            self.assertTrue(ok)
         
     def test_words_split(self):
         for w in [u"உள்ளமது",u"அச்சமின்றி",u"கணிதமழகு",u"காலமானாலும்"]:#u"செயல்படு"]:

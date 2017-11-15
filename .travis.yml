@@ -10,7 +10,7 @@ python:
 before_install:
   - echo `ruby -v` is the ruby version
 install:  
-  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install --use-mirrors ordereddict; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == 2.6 ]]; then pip install --use-mirrors ordereddict; echo "Cool" | wc -l; fi
   - python setup.py install && pip install argparse
   - pip install .
   - pip install nose-cov
