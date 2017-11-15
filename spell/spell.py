@@ -398,7 +398,7 @@ class Speller(object):
                     return (True,[word]) #word is okay
                
             # check if words are transliterated
-            if any(filter(lambda x: x in string.letters,tamil.utf8.get_letters(word))):
+            if any(filter(lambda x: x in string.ascii_letters,tamil.utf8.get_letters(word))):
                 # letter-sequence only
                 en_word = Speller.scrub_ws(word)
                 EN_Lexicon = Speller.get_english_dictionary()
