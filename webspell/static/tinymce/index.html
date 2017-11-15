@@ -11,11 +11,9 @@
 <script src="js/tinymce/tinymce.jquery.js"></script>
 <script>
 function ta_spellchecker_cb(method, text, success, failure) {
-      console.log(method);
-      console.log(text);
-      var words_to_check = text; //text.match(this.getWordCharPattern());
-      console.log( words_to_check );
-      console.log(success);
+      var words_to_check = text.split(/\s/);
+      //debug
+      console.log( words_to_check.join('|\n') );
       
       var request = $.ajax({
             url: "/spellchecker",
@@ -23,7 +21,7 @@ function ta_spellchecker_cb(method, text, success, failure) {
             dataType: "json",
             data: {
               lang: 'ta_IN', /*this.getLanguage()*/
-              text: words_to_check
+              text: words_to_check.join('\n')
             }});
        
        request.done( 
@@ -62,7 +60,7 @@ init();
         <h3>தமிழ் திருத்தி</h3>
         <div>
             <div id="container1">
-                <textarea id="elm1" name="elm1" rows="7" cols="80" style="width: 80%" class="editable">
+                <textarea id="elm1" name="elm1" rows="25" cols="80" style="width: 80%" class="editable">
                          கல்பூரம் அவர்கல் இழிள் புகழ காடல் காதால் காதல் கதால்    
                 </textarea>
             </div>

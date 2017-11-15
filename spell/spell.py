@@ -333,6 +333,36 @@ class Speller(object):
         in_user_dict = word in self.user_dict or is_dict_word
         return in_user_dict
         
+    def add_numeral_words(self,lexicon):
+        if not self.in_tamil_mode():
+            return
+        
+        units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
+        teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19    
+        tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
+        tens_suffix = (u'இருபத்து', u'முப்பத்து', u'நாற்பத்து', u'ஐம்பத்து', u'அறுபத்து', u'எழுபத்து', u'எண்பத்து', u'தொன்னூத்து') # 10+-90+    
+        hundreds = ( u'நூறு', u'இருநூறு', u'முந்நூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
+        hundreds_suffix = (u'நூற்றி', u'இருநூற்றி', u'முந்நூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
+        one_thousand_prefix = (u'ஓர்')
+        thousands = (u'ஆயிரம்',u'ஆயிரத்தி')
+    
+        one_prefix = (u'ஒரு')
+        lakh = (u'இலட்சம்',u'இலட்சத்தி')
+        crore = (u'கோடி',u'கோடியே')
+        
+        mil = (u'மில்லியன்')
+        bil = (u'பில்லியன்')
+        tril = (u'டிரில்லியன்')
+        
+        if lexicon.isWord(tril[0]):
+            return
+        
+        numerals = list()
+        for wordset in [units,tens,teens,tens_suffix,hundreds,hundreds_suffix,one_thousand_prefix,thousands,one_prefix,lakh,crore,mil,bil,tril]: 
+            numerals.extend(wordset)
+        for word in numerals:
+            lexicon.add(word)
+        
     def check_word_and_suggest( self,word ):         
         word = word.strip()
         # skip known punctuations at end of line
@@ -373,6 +403,7 @@ class Speller(object):
         word = re.sub(u'\d+',u'',word)
         letters = tamil.utf8.get_letters(word)
         TVU_dict = self.get_lang_dictionary()
+        self.add_numeral_words(TVU_dict)
         if not self.checklang(word):
             print("Word is not in desired language!")
             return (False,[u''])
