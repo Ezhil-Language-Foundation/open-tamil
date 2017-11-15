@@ -37,7 +37,14 @@ class SpellTestTamil(unittest.TestCase):
             not_ok,suggs = self.speller.check_word_and_suggest(w)
             self.assertFalse(not_ok)
             self.assertTrue(sugg in suggs)
-
+    # # 1024 512 256 எல்லாமே இரண்டின் பெருக்குகள்
+    def test_numeral_input(self):
+        data = [("900",u"தொள்ளாயிரம்"),("1000001.5",u"பத்து இலட்சத்தி ஒன்று புள்ளி ஐந்து"),("-10.5",u"கழித்தல் பத்து புள்ளி ஐந்து")]
+        for _,words in data:
+            for word in words.split(u" "):
+                ok,suggs = self.speller.check_word_and_suggest(word)
+                self.assertTrue(ok)
+        
     def test_words_with_hyphen(self):
         not_ok,suggs = self.speller.check_word_and_suggest(u"வெத்து-வேட்டு")
         self.assertFalse(not_ok)

@@ -387,7 +387,7 @@ class Speller(object):
             # dates are okay
             if any(map(word.endswith,[u"-இல்",u"-ஆம்",u"-இலிருந்து", u"-வரை"])):
                 if re.search('^\d+',word):
-                    return (True,word) #word is okay
+                    return (True,[word]) #word is okay
             
             # check if it matches Tamil numeral and has close match.
             # propose suggestions from that list.
