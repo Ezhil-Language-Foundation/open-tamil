@@ -49,6 +49,18 @@ class LoadDictionary(threading.Thread):
         if LoadDictionary.DEBUG: print("LOADED DICTIONARY in  %g (s)"%(time.time() - start))
         return
 
+class DeletionFilter:
+    @staticmethod
+    def get_suggestions(letters,lexicon):
+        rval = []
+        L = len(letters)
+        for idx,letter in enumerate(letters):
+            muthal = idx == 0 and u"" or u"".join(letters[0:idx])
+            meethi = idx == L and u"" or u"".join(letters[min(L-1,idx+2):])
+            walt = muthal + meethi
+            if (lexicon.isWord(walt)): rval.append(walt)
+        return rval
+    
 class OttruSplit:
     """ யாரிகழ்ந்து = [ய்  + ஆரிகழ்ந்து], [யார், இகழ்ந்து] ,[யாரிக், அழ்ந்து], [யாரிகழ்ந்த்,உ]"""
     def __init__(self,word):
@@ -344,16 +356,16 @@ class Speller(object):
         tens_suffix = (u'இருபத்து', u'முப்பத்து', u'நாற்பத்து', u'ஐம்பத்து', u'அறுபத்து', u'எழுபத்து', u'எண்பத்து', u'தொன்னூத்து') # 10+-90+    
         hundreds = ( u'நூறு', u'இருநூறு', u'முந்நூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
         hundreds_suffix = (u'நூற்றி', u'இருநூற்றி', u'முந்நூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
-        one_thousand_prefix = (u'ஓர்')
+        one_thousand_prefix = (u'ஓர்',)
         thousands = (u'ஆயிரம்',u'ஆயிரத்தி')
     
-        one_prefix = (u'ஒரு')
+        one_prefix = (u'ஒரு',)
         lakh = (u'இலட்சம்',u'இலட்சத்தி')
         crore = (u'கோடி',u'கோடியே')
         
-        mil = (u'மில்லியன்')
-        bil = (u'பில்லியன்')
-        tril = (u'டிரில்லியன்')
+        mil = (u'மில்லியன்',)
+        bil = (u'பில்லியன்',)
+        tril = (u'டிரில்லியன்',)
         
         if lexicon.isWord(tril[0]):
             return
@@ -361,6 +373,8 @@ class Speller(object):
         numerals = list()
         for wordset in [units,tens,teens,tens_suffix,hundreds,hundreds_suffix,one_thousand_prefix,thousands,one_prefix,lakh,crore,mil,bil,tril]: 
             numerals.extend(wordset)
+        #with codecs.open("numerals.json","w","utf-8") as fp:
+        #    fp.write(json.dumps(numerals))
         for word in numerals:
             lexicon.add(word)
     
@@ -435,9 +449,11 @@ class Speller(object):
         if len(word) < 1:
             print("Word is too small")
             return (False,[u''])
+        
         # plain old dictionary + user dictionary check
         if self.isWord(word):
             return (True,word)
+        
         
         # Remove case and redo the dictionary + user check
         word_nocase = self.case_filter.apply( word )
@@ -454,6 +470,15 @@ class Speller(object):
             greedy_results = [u" ".join(alt),u"-".join(alt)]
             greedy_results.extend(alt)
             #return (False, greedy_results )
+        
+        # if there are no other suggestions than deletion filter, we return
+        # in presence of other suggestions we can just return suggestions
+        suggs = DeletionFilter.get_suggestions(letters,TVU_dict)
+        if len(suggs) > 0:
+            if len(greedy_results) == 0:
+                return (False,suggs)
+            else:
+                greedy_results.extend(suggs)
         
         # ottru splitting for Tamil language mode
         ottru_options = []
@@ -571,6 +596,6 @@ if __name__ == u'__main__':
 #TBD: proper nouns common names etc.
 #Find bugs in TinyMCE where spell module does not highlight all the mentioned words.
 #TBD: Rank options by scoring bigram models
-#TBD: Deletion and insertion errors are not searched.
+#TBD: Insertion errors are not searched.
 #     e.g. இருபட்து -> இருபது
-#     
+#

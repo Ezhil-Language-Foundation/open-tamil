@@ -14,7 +14,13 @@ class SpellTestTamil(unittest.TestCase):
     
     def test_tamil_mode(self):
         self.assertTrue(self.speller.in_tamil_mode())
-
+    
+    def test_drop_letter(self):
+        word,alt = u"இருபட்து",u"இருபது"
+        not_ok,sugg = self.speller.check_word_and_suggest(word)
+        self.assertFalse(not_ok)
+        self.assertTrue(alt in sugg)
+        
     def test_comma_numbers(self):
         alt = u"பத்து ஆயிரம்"
         not_ok,sugg = self.speller.check_word_and_suggest(u"10,000")
