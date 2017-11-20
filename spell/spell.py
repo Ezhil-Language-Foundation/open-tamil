@@ -25,6 +25,7 @@ from transliterate import azhagi, jaffna, combinational, algorithm
 from solthiruthi.suggestions import norvig_suggestor
 from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix, RemovePrefix, RemoveVerbSuffixTense, CaseFilter
 from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
+from solthiruthi.heuristics import BadIME,  AdjacentConsonants, AdjacentVowels
 from ngram.Distance import Dice_coeff, edit_distance
 
 # Make Bi-Lingual dictionary
@@ -158,7 +159,19 @@ class Mayangoli:
             word_alt = u''.join(alt_letters)
             self.alternates.append(word_alt)
         return True
-    
+
+class Typographical:
+    @staticmethod
+    def checkFormErrors(word,errmsg=None):
+        r1=BadIME()
+        r2=AdjacentConsonants(freq=4)
+        r3=AdjacentVowels()
+        item0 = operator.itemgetter(0)
+        if errmsg and r1.apply(word)[0]:
+            errmsg.append(u"BadIME")
+            print("Bad IME")
+        return any(list(map(lambda obj: not item0(obj.apply(word)),[r1,r2,r3])))
+        
 class Speller(object):
     TVU_dict = None
     ENL_dict = None
@@ -382,7 +395,7 @@ class Speller(object):
     def scrub_ws(word):
         return re.sub(u'[\s{}()\[\]]+',u'',word)
         
-    def check_word_and_suggest( self,word ):         
+    def check_word_and_suggest( self,word, errmsg = None ):         
         word = word.strip()
         # skip known punctuation at end of line
         while len(word) >= 1 and any(map(word.endswith,Speller.punctuation)):
@@ -436,15 +449,19 @@ class Speller(object):
         #word = u"".join(filter(lambda l: not( l in Speller.punctuation), tamil.utf8.get_letters(word)))
         orig_word = u"%s"%word
         
-        
         # remove digits
         word = re.sub(u'\d+',u'',word)
         letters = tamil.utf8.get_letters(word)
         TVU_dict = self.get_lang_dictionary()
         self.add_numeral_words(TVU_dict)
+        
+        # Check if this 'word' is any common kind of error 
+        if Typographical.checkFormErrors(word,errmsg):
+            if errmsg: errmsg.append("TypographicalError")
+
         if not self.checklang(word):
             print("Word is not in desired language!")
-            return (False,[u''])
+            return (False,[u""])
         
         if len(word) < 1:
             print("Word is too small")
@@ -453,8 +470,7 @@ class Speller(object):
         # plain old dictionary + user dictionary check
         if self.isWord(word):
             return (True,word)
-        
-        
+                
         # Remove case and redo the dictionary + user check
         word_nocase = self.case_filter.apply( word )
         if ( self.isWord( word_nocase ) ):

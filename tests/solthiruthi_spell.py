@@ -7,7 +7,6 @@ from pprint import pprint
 import os
 from tamil import utf8
 
-
 class SpellTestTamil(unittest.TestCase):
     def setUp(self):
         self.speller =  Speller(lang=u"TA",mode="web")
@@ -120,5 +119,56 @@ class SpellTestTamil(unittest.TestCase):
         alt = Mayangoli.run(w)
         self.assertEqual(len(alt),expect_l)
         
+class SpellBadIMETest(unittest.TestCase):
+    def setUp(self):
+        self.speller =  Speller(lang=u"TA",mode="web")
+    
+    def test_invalid_word_det(self):
+        not_a_word = u"ஆாள்"
+        self.assertFalse( self.speller.check_word_and_suggest(not_a_word)[0] )
+    
+    def test_invalid_word3(self):
+        not_a_word = u"தூூக்"
+        self.assertFalse( self.speller.check_word_and_suggest(not_a_word)[0] )
+        not_a_word = u"ஏூூளா"
+        self.assertFalse( self.speller.check_word_and_suggest(not_a_word)[0] )
+        
+    def test_valid_word_det(self):
+        for word in [u"ஆள்",u"ஏனை",u"எந்திரம்",u"செயல்"]:
+            self.assertTrue( self.speller.check_word_and_suggest(word)[0] )
+        return
+
+    @unittest.skip("ignore")
+    def test_all_valid(self):
+        data,DEBUG = [],False
+        with codecs.open("data/project_madurai_utf8.txt","r","utf-8") as f:
+            data = filter(lambda x: len(x)>2, f.readlines())
+        obj = BadIME()
+        for idx,line in enumerate(data):
+            for col,word in enumerate( re.split(u'\s+',line) ):
+                if DEBUG: 
+                    print(idx,col)
+                    print(utf8.get_letters(word))
+                self.assertEqual(obj.apply(word),(True,None))
+            pass
+        pass
+    
+    def test_invalid_pulli_seq(self):
+        not_a_word = u"ஆள்்ஆ"
+        class List:
+            def __init__(self):
+                self.L = list()
+            def append(self,obj):
+                self.L.append(obj)
+        errmsgs = List() 
+        self.assertFalse( self.speller.check_word_and_suggest(not_a_word,errmsgs)[0] )
+        self.assertEqual(errmsgs.L,[u"TypographicalError"])
+    
+    def test_drop_letter(self):
+        word,alt = u"இருபட்து",u"இருபது"
+        not_ok,sugg = self.speller.check_word_and_suggest(word)
+        self.assertFalse(not_ok)
+        self.assertTrue(alt in sugg)
+
 if __name__ == "__main__":
     unittest.main()

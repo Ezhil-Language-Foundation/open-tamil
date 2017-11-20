@@ -67,12 +67,15 @@ class AdjacentConsonants(Rule):
     reason = u"ஒன்றைத்தொடர்ந்துஒன்று மெய் எழுத்துக்கள் வரக்கூடாது. இது பெரும்பாலும் பிழையாக இருக்கும்."
     mei_letters = set(utf8.mei_letters)
     agaram_letters = set(utf8.agaram_letters)
-    
+    def __init__(self,freq=2):
+        Rule.__init__(self)
+        self.freq_threshold = freq
+        
     def apply(self, word, ctx=None):
         """ ignore ctx information right now """
-        flag,reason = Sequential.in_sequence(word,AdjacentConsonants.mei_letters,AdjacentConsonants.reason)
+        flag,reason = Sequential.in_sequence(word,AdjacentConsonants.mei_letters,AdjacentConsonants.reason,self.freq_threshold)
         if flag:
-            flag,reason = Sequential.in_sequence(word,AdjacentConsonants.agaram_letters,AdjacentConsonants.reason)
+            flag,reason = Sequential.in_sequence(word,AdjacentConsonants.agaram_letters,AdjacentConsonants.reason,self.freq_threshold)
         return flag,reason
 
 class RepeatedLetters(Rule):
@@ -126,4 +129,5 @@ class BadIME(Rule):
                 reason = BadIME.reason
                 break
             prev_char = char # continue loop
+        #print([flag,reason])
         return flag,reason
