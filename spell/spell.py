@@ -597,5 +597,3 @@ if __name__ == u'__main__':
 #Find bugs in TinyMCE where spell module does not highlight all the mentioned words.
 #TBD: Rank options by scoring bigram models
 #TBD: Insertion errors are not searched.
-#     e.g. இருபட்து -> இருபது
-#

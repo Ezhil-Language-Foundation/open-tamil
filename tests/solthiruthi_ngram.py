@@ -6,12 +6,30 @@ from solthiruthi.data_parser import *
 from solthiruthi.datastore import TamilTrie, DTrie, Queue
 from solthiruthi.Ezhimai import *
 from solthiruthi.resources import DICTIONARY_DATA_FILES
+from solthiruthi.scoring import bigram_scores, unigram_score
+
 import sys
 import copy
 import re
 from pprint import pprint
 
-class DTrieNGram(unittest.TestCase):
+class ScoringNGram(unittest.TestCase):
+    def test_unigram_bigram_scoring(self):
+        input_words = u"டைட்டானிக் படத்தில் ஜேக் மற்றும் ரோஸ் தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
+        data = []
+        data2 = []
+        ref_data = [-10.699,-8.196,-2.6212,-7.18,-8.013,-2.930,-5.40,-14.88,-3.95,-9.17]
+        ref_data2 = [-16.297,-12.947,-4.0,-10.32,-4.0,-2.747,-6.599,-21.1337,-3.10847,-13.83320]
+        for word in input_words:
+            letters = utf8.get_letters(word)
+            data.append( unigram_score(letters) )
+            data2.append( max(bigram_scores(letters)) ) 
+        #pprint(data2)
+        for idx in range(0,len(data)):
+            self.assertAlmostEqual(data[idx],ref_data[idx],places=2)
+            self.assertAlmostEqual(data2[idx],ref_data2[idx],places=2)
+
+class DTrieNGram(unittest.TestCase):        
     def test_ngram(self):
         with codecs.open("data/gettysburg.txt","r","utf-8") as f:
             data = f.readlines()
