@@ -14,6 +14,8 @@ from pprint import pprint
 from . import resources
 
 PYTHON3 = (sys.version[0] == '3')
+if PYTHON3:
+    from functools import reduce
 
 class NGStats:
     def __init__(self):
