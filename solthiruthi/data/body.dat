@@ -5,7 +5,8 @@
 # words are 1-word per line, terminal or start spaces to be ignored
 >>உடல் உறுப்புக்கள்
 eye கண் , விழி
-nose   மூக்கு , வாசனையறி lip   உதடு , இதழ் 
+nose   மூக்கு , வாசனையறி
+lip   உதடு , இதழ் 
 lens   வில்லை , விழிவில்லை , கண்வில்லை , விழியாடி 
 nasal   மூக்கொலி 
 oesophagus   உணவுக் குழாய், உணவுக்குழல் , அன்னக்குழாய் 
@@ -27,7 +28,7 @@ arm	 கை
 back	 முதுகு
 cheeks	 கன்னங்கள்
 chest	 மார்பு
-chin	mukavaaik  முகவாய்க் கட்டை
+chin	 முகவாய்க் கட்டை
 ear	 காது
 elbow	 முழங்கை
 eye	 கண்
@@ -45,12 +46,12 @@ lip	 உதடு
 mouth	 வாய்
 neck	 கழுத்து
 nose	 மூக்கு
-shoulder	 தோள்
+shoulder தோள்
 stomach	 வயிறு
 teeth	 பற்கள்
 thigh	 தொடை
 throat	 தொண்டை
 thumb	 கட்டைவிரல்
-toe	kaal  கால் விரல்
+toe	 கால் விரல்
 tongue	 நாக்கு
 tooth	 பல்

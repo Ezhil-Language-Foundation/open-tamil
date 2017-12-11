@@ -12,7 +12,7 @@ cats	 பூனைகள்
 cow	 பசு
 cows	 பசுக்கள்
 deer	 மான்
-many deer	pala  பல மான்கள்
+many deer  பல மான்கள்
 dog	 நாய்
 dogs	 நாய்கள்
 donkey	 கழுதை
