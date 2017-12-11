@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 # (C) 2016 Muthiah Annamalai
-# 
+#
 # This file is part of 'open-tamil' package
 # It implements a data-driven spell checker for Tamil language
-# 
+#
 from __future__ import print_function
 
 import argparse
@@ -42,7 +42,7 @@ class LoadDictionary(threading.Thread):
     lock = threading.Lock()
     def __init__(self):
         threading.Thread.__init__(self,name="LoadDictionaryInBackground")
-        
+
     def run(self):
         start = time.time()
         Speller.get_dictionary()
@@ -61,21 +61,21 @@ class DeletionFilter:
             walt = muthal + meethi
             if (lexicon.isWord(walt)): rval.append(walt)
         return rval
-    
+
 class OttruSplit:
     """ யாரிகழ்ந்து = [ய்  + ஆரிகழ்ந்து], [யார், இகழ்ந்து] ,[யாரிக், அழ்ந்து], [யாரிகழ்ந்த்,உ]"""
     def __init__(self,word):
         self.word = word
         self.letters = tamil.utf8.get_letters(word)
         self.results = list()
-        
+
     def run(self,lexicon):
         self.generate_splits()
         return self.filter(lexicon)
-        
+
     def generate_splits(self):
         """
-            யாரிகழ்ந்து = 
+            யாரிகழ்ந்து =
                 [['ய்', 'ஆரிகழ்ந்து'],
                  ['யார்', 'இகழ்ந்து'],
                  ['யாரிக்', 'அழ்ந்து'],
@@ -96,17 +96,17 @@ class OttruSplit:
     def filter(self,lexicon):
         self.results = list( filter(lambda x: all( map(lexicon.isWord,x) ),self.results) )
         return self.results
-    
+
 class Mayangoli:
     varisai = [[ u"ல்", u"ழ்",u"ள்"],[u"ர்", u"ற்"],[u"ந்",u"ன்",u"ண்"],[u"ங்",u"ஞ்"]]#வரிசை.
-    
+
     def __init__(self,word):
         self.word = word
         self.letters = tamil.utf8.get_letters(word)
         self.matches_and_positions = []
         self.alternates = []
         self.pos_classes = []
-        
+
     @staticmethod
     def run(word):
         obj = Mayangoli(word)
@@ -116,7 +116,7 @@ class Mayangoli:
         obj.find_correspondents()
         obj.generate_word_alternates()
         return obj.alternates
-    
+
     def find_letter_positions(self):
         for idx,letter in enumerate(self.letters):
             p = tamil.utf8.splitMeiUyir(letter)
@@ -128,7 +128,7 @@ class Mayangoli:
                     if mei == Mayangoli.varisai[r][c]:
                         self.matches_and_positions.append((idx,r,c))
         return len(self.matches_and_positions) > 0
-    
+
     def find_correspondents(self):
         for pos,r,c in self.matches_and_positions:
             src_letter  = self.letters[pos]
@@ -138,10 +138,10 @@ class Mayangoli:
                 alt_letters.append( tamil.utf8.joinMeiUyir(alternate_mei,src_uyir) )
             self.pos_classes.append(alt_letters)
         return True
-    
+
     def _generate_combinations(self):
         return itertools.product(*self.pos_classes)
-    
+
     def generate_word_alternates(self):
         # find matches in Mayangoli classes
         # if there are no Mayangoli matches then we return []
@@ -171,7 +171,7 @@ class Typographical:
             errmsg.append(u"BadIME")
             print("Bad IME")
         return any(list(map(lambda obj: not item0(obj.apply(word)),[r1,r2,r3])))
-        
+
 class Speller(object):
     TVU_dict = None
     ENL_dict = None
@@ -186,18 +186,18 @@ class Speller(object):
             self.alphabets = [a for a in string.ascii_lowercase]
         else:
             self.alphabets = None
-        
+
         if mode == "web":
             return
-        
+
         if not self.filename:
             self.interactive()
         else:
             self.spellcheck(self.filename)
-    
+
     def in_tamil_mode(self):
         return self.lang != u"en"
-    
+
     @staticmethod
     def get_dictionary():
         LoadDictionary.lock.acquire()
@@ -205,20 +205,20 @@ class Speller(object):
             Speller.TVU_dict,_ = DictionaryBuilder.create(TamilVU)
         LoadDictionary.lock.release()
         return Speller.TVU_dict
-    
+
     @staticmethod
     def get_english_dictionary():
         LoadDictionary.lock.acquire()
         if not Speller.ENL_dict:
             Speller.ENL_dict,_ = DictionaryBuilder.create(EnglishLinux)
         LoadDictionary.lock.release()
-        return Speller.ENL_dict    
-    
+        return Speller.ENL_dict
+
     def language(self):
         if self.in_tamil_mode():
             return "tamil"
         return "english"
-        
+
     def checklang(self,word):
         if self.in_tamil_mode():
             return tamil.utf8.all_tamil(word)
@@ -226,7 +226,28 @@ class Speller(object):
             if not ( w in string.ascii_lowercase ):
                 return False
         return True
-    
+
+    # full-text interface driver for unittest @ Dec 10, 2017
+    def noninteractive_spellcheck(self,text):
+        nwords = 0
+        npass = 0
+        nfail = 0
+        fail_n_suggs = dict()
+        for word in re.split('\s+',text):
+            if len(word) < 1:
+                continue
+            nwords += 1
+            result,suggs = self.REST_interface(word)
+            nfail += int(not result)
+            npass += int(result)
+            if not result:
+                fail_n_suggs[word] = suggs
+        obj = {'total':nwords,
+        'correct_words':npass,
+        'wrong_words':nfail,
+        'word_suggestions':fail_n_suggs}
+        return obj
+
     # Ref: https://www.tinymce.com/docs/plugins/spellchecker/
     def REST_interface(self,word):
         # returns JSON data in TinyMCE format
@@ -237,7 +258,7 @@ class Speller(object):
         if ok:
             return ok, {}
         return ok, suggs
-    
+
     @staticmethod
     def dice_comparison(ref_word,word):
         """ use this class method for SORTED"""
@@ -245,7 +266,7 @@ class Speller(object):
         if ( val == 1 ):
             return 0
         return (2*(val - 0.5) > 0) and 1 or -1
-        
+
     def suggestion_policy(self,word,suggs):
         # pick suggestions that are only +/- 2 letter length different
         filter_suggs = []
@@ -263,12 +284,12 @@ class Speller(object):
             return filter_suggs
         filter_suggs=sorted(filter_suggs,cmp=Speller.dice_comparison)
         return filter_suggs
-    
+
     def str_suggestions(self,word):
         if self.in_tamil_mode():
             return u"சொல் \"%s\" மாற்றங்கள்"%word
         return u"SUGGESTIONS for \"%s\""%word
-    
+
     def mayangoli_suggestions(self,word):
         alternates = Mayangoli.run(word)
         alternates = filter(lambda w: w != word, alternates)
@@ -276,7 +297,7 @@ class Speller(object):
             for idx,w in enumerate(alternates):
                 pprint.pprint(["Myangoli",idx,w])
         return copy.copy(alternates)
-    
+
     def interactive(self):
         try:
             while( True ):
@@ -286,11 +307,11 @@ class Speller(object):
                     word = raw_input(u">> ")
                     word = word.decode("utf-8").strip()
                 word = re.sub(u"\s+","",word)
-                
+
                 # skip empty words
                 if len(word) < 1:
                     continue
-                
+
                 if not self.checklang(word):
                     print(u"EXCEPTION \"%s\" is not a %s Word"%(word,self.language()))
                     continue
@@ -309,7 +330,7 @@ class Speller(object):
         finally:
             print(self.in_tamil_mode() and  u"\nவணக்கம்!" or "\nBYE!")
         return
-    
+
     def spellcheck(self,filename):
         new_document = []
         data = codecs.open(filename,u"r",u"utf-8")
@@ -346,63 +367,63 @@ class Speller(object):
             new_document.append(u"\n")
         print(u"*********** cleaned up document **********")
         print(u" ".join(new_document))
-        
+
     def get_lang_dictionary(self):
         if not self.in_tamil_mode():
             return Speller.get_english_dictionary()
         return Speller.get_dictionary()
-    
+
     def isWord(self, word):
         # Plain old dictionary checks
         LANG_dict = self.get_lang_dictionary()
         is_dict_word = LANG_dict.isWord(word)
         in_user_dict = word in self.user_dict or is_dict_word
         return in_user_dict
-        
+
     def add_numeral_words(self,lexicon):
         if not self.in_tamil_mode():
             return
-        
+
         units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
-        teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19    
+        teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19
         tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
-        tens_suffix = (u'இருபத்து', u'முப்பத்து', u'நாற்பத்து', u'ஐம்பத்து', u'அறுபத்து', u'எழுபத்து', u'எண்பத்து', u'தொன்னூத்து') # 10+-90+    
+        tens_suffix = (u'இருபத்து', u'முப்பத்து', u'நாற்பத்து', u'ஐம்பத்து', u'அறுபத்து', u'எழுபத்து', u'எண்பத்து', u'தொன்னூத்து') # 10+-90+
         hundreds = ( u'நூறு', u'இருநூறு', u'முந்நூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
         hundreds_suffix = (u'நூற்றி', u'இருநூற்றி', u'முந்நூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
         one_thousand_prefix = (u'ஓர்',)
         thousands = (u'ஆயிரம்',u'ஆயிரத்தி')
-    
+
         one_prefix = (u'ஒரு',)
         lakh = (u'இலட்சம்',u'இலட்சத்தி')
         crore = (u'கோடி',u'கோடியே')
-        
+
         mil = (u'மில்லியன்',)
         bil = (u'பில்லியன்',)
         tril = (u'டிரில்லியன்',)
-        
+
         if lexicon.isWord(tril[0]):
             return
-        
+
         numerals = list()
-        for wordset in [units,tens,teens,tens_suffix,hundreds,hundreds_suffix,one_thousand_prefix,thousands,one_prefix,lakh,crore,mil,bil,tril]: 
+        for wordset in [units,tens,teens,tens_suffix,hundreds,hundreds_suffix,one_thousand_prefix,thousands,one_prefix,lakh,crore,mil,bil,tril]:
             numerals.extend(wordset)
         #with codecs.open("numerals.json","w","utf-8") as fp:
         #    fp.write(json.dumps(numerals))
         for word in numerals:
             lexicon.add(word)
-    
+
     @staticmethod
     def scrub_ws(word):
         return re.sub(u'[\s{}()\[\]]+',u'',word)
-        
-    def check_word_and_suggest( self,word, errmsg = None ):         
+
+    def check_word_and_suggest( self,word, errmsg = None ):
         word = word.strip()
         # skip known punctuation at end of line
         while len(word) >= 1 and any(map(word.endswith,Speller.punctuation)):
             word = word[:-1]
         while len(word) >= 1 and any(map(word.startswith,string.whitespace)):
             word = word[1:]
-        
+
         # is number then we propose a numeral
         if self.in_tamil_mode():
             numword = word.replace(u',',u'')
@@ -418,12 +439,12 @@ class Speller(object):
                     return (False,[numeral_form])
                 except Exception as ioe:
                     pass
-            
+
             # dates are okay
             if any(map(word.endswith,[u"-இல்",u"-ஆம்",u"-இலிருந்து", u"-வரை"])):
                 if re.search('^\d+',word):
                     return (True,[word]) #word is okay
-               
+
             # check if words are transliterated
             if any(filter(lambda x: x in string.ascii_letters,tamil.utf8.get_letters(word))):
                 # letter-sequence only
@@ -431,53 +452,53 @@ class Speller(object):
                 EN_Lexicon = Speller.get_english_dictionary()
                 if EN_Lexicon.isWord(en_word):
                     return (False,['']) #English word - nosub- yet until we have parallel dictionaries or translation. TBD.
-                
+
                 #is english letter
                 ta = algorithm.Iterative.transliterate(jaffna.Transliteration.table,en_word)
                 # TBD: potential for having ANN to tell if english text is pure English word
                 # or a romanized Tamil word. Output of classifier can be useful here.
                 return (False,[ta])
-            
+
             # check if it matches Tamil numeral and has close match.
             # propose suggestions from that list.
             # TBD
-            
+
         # hyphens are not okay
         if word.find(u"-") >= 0:
             return (False,[word.replace(u"-",u" ")])#re.sub(u"^w"," ",word))
         # replace other spurious ()[] punctuations by concatenation
         #word = u"".join(filter(lambda l: not( l in Speller.punctuation), tamil.utf8.get_letters(word)))
         orig_word = u"%s"%word
-        
+
         # remove digits
         word = re.sub(u'\d+',u'',word)
         letters = tamil.utf8.get_letters(word)
         TVU_dict = self.get_lang_dictionary()
         self.add_numeral_words(TVU_dict)
-        
-        # Check if this 'word' is any common kind of error 
+
+        # Check if this 'word' is any common kind of error
         if Typographical.checkFormErrors(word,errmsg):
             if errmsg: errmsg.append("TypographicalError")
 
         if not self.checklang(word):
             print("Word is not in desired language!")
             return (False,[u""])
-        
+
         if len(word) < 1:
             print("Word is too small")
             return (False,[u''])
-        
+
         # plain old dictionary + user dictionary check
         if self.isWord(word):
             return (True,word)
-                
+
         # Remove case and redo the dictionary + user check
         word_nocase = self.case_filter.apply( word )
         if ( self.isWord( word_nocase ) ):
             return (True,word_nocase)
         else:
             word = word_nocase
-        
+
         # Consider splitting the word and see if it has 2 sub-words
         # e.g. செயல்பட => செயல் + பட
         alt = tamil.wordutils.greedy_split(word,TVU_dict)
@@ -486,7 +507,7 @@ class Speller(object):
             greedy_results = [u" ".join(alt),u"-".join(alt)]
             greedy_results.extend(alt)
             #return (False, greedy_results )
-        
+
         # if there are no other suggestions than deletion filter, we return
         # in presence of other suggestions we can just return suggestions
         suggs = DeletionFilter.get_suggestions(letters,TVU_dict)
@@ -495,7 +516,7 @@ class Speller(object):
                 return (False,suggs)
             else:
                 greedy_results.extend(suggs)
-        
+
         # ottru splitting for Tamil language mode
         ottru_options = []
         if self.in_tamil_mode():
@@ -505,29 +526,29 @@ class Speller(object):
             if len(ottru.results) > 0:
                 return (True,word)
             ottru_options = ottru.results
-        
+
         # TODO: Noun Declension - ticket-
-        
+
         # suggestions at edit distance 1
         norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 2,limit=25))
         combinagram_suggests = list(tamil.wordutils.combinagrams(word,TVU_dict,limit=25))
         pfx_options = TVU_dict.getWordsStartingWith( u"".join( letters[:-1] ) )
-        
+
         # FIXME: score  the options
         options = greedy_results
         options.extend( ottru_options )
         options.extend( list(norvig_suggests) )
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
-        
+
         # filter the options against a dictionary!
         options = filter(TVU_dict.isWord,options )
         if PYTHON3:
             options = list(options)
-        
+
         if self.in_tamil_mode():
             options.extend( self.mayangoli_suggestions(orig_word) )
-            
+
         # sort the options
         if not self.in_tamil_mode():
             options.sort()
@@ -536,12 +557,12 @@ class Speller(object):
                 options = sorted( options, key=functools.cmp_to_key(tamil.utf8.compare_words_lexicographic) )
             else:
                 options = sorted( options, cmp=tamil.utf8.compare_words_lexicographic )
-        
+
         # remove replacements with single-letter words
         WL = len(tamil.utf8.get_letters(word))
         if WL > 3:
             options = filter( lambda x:  len(tamil.utf8.get_letters(x)) > 2, options )
-        
+
         # remove dupes in list
         options2 = []
         prev = None
@@ -553,30 +574,30 @@ class Speller(object):
         if _DEBUG:
             print("@deduplication")
             pprint.pprint(options2)
-        
+
         # score by Dice or Edit-Distance coefficients
         options_score = [0.0 for i in range(len(options2))]
         for itr,sugg_word in enumerate(options2):
             #options_score[itr] = Dice_coeff( word, sugg_word )
             options_score[itr] = (len(word)-edit_distance(word,sugg_word))/(1.0*len(orig_word))*Dice_coeff( word, sugg_word )/3.0 #dice coeff is weighted down
         options = zip( options2, options_score)
-        
+
         # limit options by score
         options = sorted(options,key=operator.itemgetter(1),reverse=True)
         options = [word_pair[0] for word_pair in options]
         #L = 40
         # limit to first top -L=20 only which is good enough
         #options = options[0:min(len(options),L)]
-        if _DEBUG: 
+        if _DEBUG:
             pprint.pprint("@after scoring/sorting")
             pprint.pprint(options)
-        
+
         # eliminate single letter options
         options = filter(lambda x : not( x in tamil.utf8.tamil_letters), options)
-        
+
         # Due to suggestion policy we may have words which are found in error but we dont have
         # replacements for them!
-        
+
         # TBD: options should not have the 'word'!
         return (False, options )
 
@@ -591,12 +612,12 @@ def main():
     parser.add_argument(u"-i",u"--interactive",help=u"use the interactive mode",\
                         default=False,action=u"store_true")
     args = parser.parse_args()
-    
+
     if not args.interactive and len(args.files) < 1:
         parser.print_help()
         sys.exit(0)
     LoadDictionary().start()
-    
+
     if args.interactive:
         lang = args.lang.lower()
         Speller(filename=None,lang=lang)
