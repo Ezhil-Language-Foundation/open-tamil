@@ -164,7 +164,8 @@ class Typographical:
     @staticmethod
     def checkFormErrors(word,errmsg=None):
         r1=BadIME()
-        r2=AdjacentConsonants(freq=4)
+        freq=4
+        r2=AdjacentConsonants(freq)
         r3=AdjacentVowels()
         item0 = operator.itemgetter(0)
         if errmsg and r1.apply(word)[0]:

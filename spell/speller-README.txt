@@ -1,5 +1,14 @@
 Measures of a spelling checker:
 -------------------------------
+Dec 12, 2017
+1) Atom editor has spell check module which can be integ target.
+2) Punarchi removal can be part of the setup.
+3) Case conjugation rules are important to be added
+4) Homebrew stemmer is also important
+5) Final product can be deployed as webserver
+6) Configuration for DICTIONARY/word-list is useful.
+
+-------------------------------
 0) Need language statistical data.
 
 1) non-word error : word does not exist in dictionary:
@@ -22,7 +31,7 @@ e.g. "he lives ink the house"
 7) Spell checkers introduce a real-word error inplace of a detected non-word error.
 
 8) Error model of spelling errors in Tamil (any language) is key to detect the patterns
-of mistake generation, and coming with a strategy 
+of mistake generation, and coming with a strategy
 to resolve the same.
 
 Ref: P. Samanta, B. Chaudhari, "A simple real-word error detection and correction using local word

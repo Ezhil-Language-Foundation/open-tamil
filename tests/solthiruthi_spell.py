@@ -38,6 +38,17 @@ class SpellTestFiles(unittest.TestCase):
         filename = "data/doc1.spell"
         self._tester(filename,obj)
 
+    def test_rest(self):
+        for f in [2,3,4,5,6,7,8,9,11,12]:
+            self._test_simple("data/doc%d.spell"%f)
+        
+    def _test_simple(self,filename):
+        with codecs.open(filename,"r","utf-8") as fp:
+            data = self.speller.noninteractive_spellcheck(fp.read())
+        self.assertTrue( data['total'] > 0 )
+        self.assertTrue( data['wrong_words'] > 0 )
+        self.assertTrue( data['correct_words'] > 0 )
+
     def _tester(self,filename,ref_obj):
         with codecs.open(filename,"r","utf-8") as fp:
             data = self.speller.noninteractive_spellcheck(fp.read())
