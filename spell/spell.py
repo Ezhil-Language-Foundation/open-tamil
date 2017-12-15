@@ -164,8 +164,8 @@ class Typographical:
     @staticmethod
     def checkFormErrors(word,errmsg=None):
         r1=BadIME()
-        freq=4
-        r2=AdjacentConsonants(freq)
+        r2=AdjacentConsonants()
+        r2.freq_threshold=4
         r3=AdjacentVowels()
         item0 = operator.itemgetter(0)
         if errmsg and r1.apply(word)[0]:
@@ -342,6 +342,8 @@ class Speller(object):
                 # FIXME : handle punctuation
                 #word = filter( tamil.utf8.is_tamil_unicode_predicate, word )
                 ok,suggs = self.check_word_and_suggest( word )
+                if PYTHON3 and not ok:
+                    suggs = list(suggs)
                 if not ok:
                     option = suggs[0]
                     # take user input.
