@@ -347,26 +347,45 @@ class Speller(object):
                     # take user input.
                     # FIXME: User options to include DONTREPLACE/KEEP, DELETE WORD, etc.
                     option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
-                    print(u"In line, \"%s\""%line.strip())
-                    print(u" Replace word %s with\n\t => %s\n"%(word, option_str))
+                    if self.in_tamil_mode():
+                        print(u"வரி \"%s\""%line.strip())
+                        print(u"'%s' சொல் கொண்டு\n\t சொல் '%s' மாற்றிடு\n"%(option_str,word))
+                    else:
+                        print(u"Line, \"%s\""%line.strip())
+                        print(u" Replace word %s with\n\t => %s\n"%(word, option_str))
                     try:
-                        choice = input(u"option [-1 ignore, 0-%d replace]: "%(len(suggs)-1))
+                        if self.in_tamil_mode():
+                            choice_str="விருப்பம் [-1 புறக்கணி, 0-%d மாற்றவும்]:"
+                        else:
+                            choice_str=u"option [-1 ignore, 0-%d replace]: "
+                        choice = input(choice_str%(len(suggs)-1))
                         if PYTHON3:
                             choice = int(choice)
                         if choice == -1:
-                            print(u"Not replacing word")
+                            if self.in_tamil_mode():
+                                print(u"வார்த்தை மாறாத இருந்தது")
+                            else:
+                                print(u"Not replacing word")
+
                             option = word
                             self.user_dict.add(word)
                         else:
                             option = suggs[choice]
                     except Exception as ie:
                         print (str(ie))
-                    print(u" replacing word %s -> %s\n"%(word,option))
+                    if self.in_tamil_mode():
+                        replace_msg=u"வார்த்தை %s -> %s இதற்காக மாற்றவும்\n"
+                    else:
+                        replace_msg = u" replacing word %s -> %s\n"
+                    print(replace_msg%(word,option))
                     new_document.append( unicode(option) )
                 else:
                     new_document.append( word )
             new_document.append(u"\n")
-        print(u"*********** cleaned up document **********")
+        if self.in_tamil_mode():
+            print(u"*********** ஆவணத்தில் உள்ள பிழைகளை திருத்தி *********")
+        else:
+            print(u"*********** cleaned up document **********")
         print(u" ".join(new_document))
 
     def get_lang_dictionary(self):
