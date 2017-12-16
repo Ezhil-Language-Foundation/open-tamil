@@ -83,7 +83,13 @@ class GrepTests(unittest.TestCase):
     def setUp(self):
         self.data = codecs.open('data/richmond.txt','r','utf-8').readlines()
         print("\ndata size = %d L"%len(self.data))
-    
+    def cleanUp(self):
+        if self.data:
+            try:
+                self.data.close()
+            except:
+                pass
+        
     def search_test(self,pattern,expected):
         return self.match_test(pattern,expected,fcn=re.search)
     

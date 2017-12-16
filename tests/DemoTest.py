@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
-import tamil
 import codecs
 
 # setup the paths
 from opentamiltests import *
+import tamil
 from ngram.Corpus import Corpus
 from ngram import LetterModels
 

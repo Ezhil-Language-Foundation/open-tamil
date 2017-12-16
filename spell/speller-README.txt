@@ -1,5 +1,16 @@
 Measures of a spelling checker:
 -------------------------------
+Dec 15, 2017
+1) Posted to thamizha group. Plan to get some attention to this project FWIW.
+2) Need a rule based spell-checker
+3) Need to port rules from Affix files of Hunspell/Aspell
+4) Need to port stemmer from snowball code
+5) [OPTIM] reduce the number of times tamil.utf8.get_letters is called by speller
+6) [OPTIM] profile the code to see performance of Norvig suggestor; it maybe slowing us down! Potentially update Norvig suggestor using the non-alpha but stats suggested uni/bigram order of alternative searches
+7) Pursue ML related discrimination of word alternates
+   ML problem 1: Is this given sequence of Tamil letters represent an English word transliterated ? [Y/N]
+   ML problem 2: Is this sequence of Tamil letters represent a suffix/acceptable punarchi ?
+
 Dec 12, 2017
 1) Atom editor has spell check module which can be integ target.
 2) Punarchi removal can be part of the setup.

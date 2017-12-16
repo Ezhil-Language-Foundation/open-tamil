@@ -25,4 +25,4 @@ class Corpus:
         for letter in utf8.get_letters_iterable(self.handle.read()):
             if ( utf8.istamil( letter ) ):
                 yield letter
-        raise StopIteration
+        return

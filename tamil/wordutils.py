@@ -22,7 +22,7 @@ def combinations(symbols_in):
         filter_symbol = lambda idx: bin_rep[idx] == '1' and uniq_symbols[idx] or u''
         word_combo = u''.join( map(filter_symbol, range(0,N)) )
         yield word_combo
-    raise StopIteration
+    return
 
 def default_true(*args):
     return True
@@ -44,7 +44,7 @@ def permutations(symbols,predicate=default_true,prefix=u""):
         for vars in permutations(new_list,predicate,new_pfx):
             yield symbols[idx] + vars
         del new_list
-    raise StopIteration
+    return
 
 def tamil_permutations(inword):
     if isinstance(inword,list):
@@ -53,7 +53,7 @@ def tamil_permutations(inword):
         letters = utf8.get_letters(inword)
     for word in permutations( letters ):
         yield word
-    raise StopIteration
+    return
 
 def is_palindrome(*args):
     return palindrome(*args)
@@ -79,7 +79,7 @@ def all_plaindromes(dictionary):
     for word in dictionary.getAllWords():
         if  is_palindrome(word):
             yield word
-    raise StopIteration
+    return
 
 def anagrams(word,dictionary,permutations=tamil_permutations):
     if not callable( getattr(dictionary,'isWord',[]) ):
@@ -87,7 +87,7 @@ def anagrams(word,dictionary,permutations=tamil_permutations):
     for anagram in permutations(word):
         if dictionary.isWord(anagram):
             yield anagram
-    raise StopIteration
+    return
 
 def is_anagram(wordA,wordB):
     return sorted(wordA)== sorted(wordB) 
@@ -135,9 +135,9 @@ def combinagrams(word,dictionary,limit=float("inf")):
         for valid_word in anagrams(word_part,dictionary,tamil_permutations):
             count = count + 1
             if count > limit:
-                raise StopIteration
+                return
             yield valid_word
-    raise StopIteration
+    return
 
 # permutations of a word filtered by dictionary - yields all possible sub-words of a word.
 # e.g. 'bullpen' -> 'pen' 'bull', 'ben' 'pull', 'pub' 'nell', 'nell' 'pub' .etc.    
@@ -152,7 +152,7 @@ def permutagrams(word,dictionary):
             matches[perm_word].append(actual_splits)
             yield actual_splits
     del matches
-    raise StopIteration
+    return
 
 def rhymes_with(inword,reverse_dictionary):
     if not all ([callable( getattr(reverse_dictionary,'isWord',[])),callable( getattr(reverse_dictionary,'getWordsEndingWith',[]))]):

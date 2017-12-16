@@ -53,7 +53,7 @@ class Dictionary:
     def getAllWordsIterable(self):
         for word in self.getAllWords():
             yield word
-        raise StopIteration
+        return
     
     def loadWordFile(self,pre_processor=None):
         filename = self.getDictionaryPath()
@@ -116,7 +116,7 @@ class Agarathi(Dictionary):
     def getAllWordsIterable(self):
         for word in self.store.getAllWordsIterable():
             yield word
-        raise StopIteration
+        return
 
 def _reverse_dict(DictT):
     def function_reverse_dict_type():

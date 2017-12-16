@@ -78,7 +78,7 @@ class Trie:
     def getAllWordsIterable(self):
         for word in self.getAllWords():
             yield word
-        raise StopIteration
+        return
     
     @staticmethod
     def mk_empty_trie(alpha_len):
@@ -230,7 +230,7 @@ class DTrie(Trie):
                 for word in self.getAllWordsIterableHelper(ref_trie.alphabets[letter],prefix):
                     yield word
             prefix.pop()
-        raise StopIteration
+        return
 
 # reverse trie : add words in reverse fashion for 'endswith' interface
 class RTrie(DTrie):
@@ -254,17 +254,17 @@ class RTrie(DTrie):
         # user via regular word order.
         for word in DTrie.getAllWordsIterable(self):
             yield self.reverse(word)
-        raise StopIteration
+        return
     
     def getAllWordsPrefix(self,pfx):
         for word_pfx in DTrie.getAllWordsPrefix(self,self.reverse(pfx)):
             yield self.reverse(word_pfx)
-        raise StopIteration
+        return
     
     def getWordsEndingWith(self,sfx):
         for word_sfx in self.getAllWordsPrefix(sfx):
             yield word_sfx
-        raise StopIteration
+        return
 
 class TamilTrie(Trie):
     "Store a list of words into the Trie data structure"
@@ -306,7 +306,7 @@ class TamilTrie(Trie):
     def getAllWordsIterable(self):
         for word in self.getAllWords():
             yield word
-        raise StopIteration
+        return
     
     def getAllWordsPrefix(self,prefix):
         raise Exception("NOT IMPLEMENTED RIGHT")

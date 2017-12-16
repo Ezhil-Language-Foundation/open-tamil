@@ -392,7 +392,7 @@ def get_letters_iterable( word ):
         else:
             idx = idx + 1
             yield c
-    raise StopIteration
+    return
 
 grantha_uyirmei_splits = {}
 for _uyir_idx in range(0,12):
@@ -408,7 +408,7 @@ def get_letters_elementary_iterable(word):
             yield letter_parts[1]
         else:
             yield letter
-    raise StopIteration
+    return
 
 def get_letters_elementary(word):
     rval = []
