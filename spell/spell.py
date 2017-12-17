@@ -64,9 +64,11 @@ class DeletionFilter:
 
 class OttruSplit:
     """ யாரிகழ்ந்து = [ய்  + ஆரிகழ்ந்து], [யார், இகழ்ந்து] ,[யாரிக், அழ்ந்து], [யாரிகழ்ந்த்,உ]"""
-    def __init__(self,word):
+    def __init__(self,word,letters):
         self.word = word
-        self.letters = tamil.utf8.get_letters(word)
+        if word != u"".join(letters):
+            letters = tamil.utf8.get_letters(word)
+        self.letters = letters
         self.results = list()
 
     def run(self,lexicon):
@@ -100,16 +102,18 @@ class OttruSplit:
 class Mayangoli:
     varisai = [[ u"ல்", u"ழ்",u"ள்"],[u"ர்", u"ற்"],[u"ந்",u"ன்",u"ண்"],[u"ங்",u"ஞ்"]]#வரிசை.
 
-    def __init__(self,word):
+    def __init__(self,word,letters):
         self.word = word
-        self.letters = tamil.utf8.get_letters(word)
+        if word != u"".join(letters):
+            letters = tamil.utf8.get_letters(word)
+        self.letters = letters
         self.matches_and_positions = []
         self.alternates = []
         self.pos_classes = []
 
     @staticmethod
-    def run(word):
-        obj = Mayangoli(word)
+    def run(word,letters):
+        obj = Mayangoli(word,letters)
         obj.find_letter_positions()
         if len(obj.matches_and_positions) == 0:
             return []
@@ -291,8 +295,8 @@ class Speller(object):
             return u"சொல் \"%s\" மாற்றங்கள்"%word
         return u"SUGGESTIONS for \"%s\""%word
 
-    def mayangoli_suggestions(self,word):
-        alternates = Mayangoli.run(word)
+    def mayangoli_suggestions(self,word,letters):
+        alternates = Mayangoli.run(word,letters)
         alternates = filter(lambda w: w != word, alternates)
         if _DEBUG:
             for idx,w in enumerate(alternates):
@@ -543,7 +547,7 @@ class Speller(object):
         ottru_options = []
         if self.in_tamil_mode():
             # discover words like யாரிகழ்ந்து are accepted.
-            ottru = OttruSplit(word)
+            ottru = OttruSplit(word,letters)
             ottru.run(TVU_dict)
             if len(ottru.results) > 0:
                 return (True,word)
@@ -569,7 +573,7 @@ class Speller(object):
             options = list(options)
 
         if self.in_tamil_mode():
-            options.extend( self.mayangoli_suggestions(orig_word) )
+            options.extend( self.mayangoli_suggestions(orig_word,letters) )
 
         # sort the options
         if not self.in_tamil_mode():

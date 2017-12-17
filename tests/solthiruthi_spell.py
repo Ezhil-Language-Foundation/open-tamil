@@ -41,7 +41,7 @@ class SpellTestFiles(unittest.TestCase):
     def test_rest(self):
         for f in [2,3,4,5,6,7,8,9,11,12]:
             self._test_simple("data/doc%d.spell"%f)
-        
+
     def _test_simple(self,filename):
         with codecs.open(filename,"r","utf-8") as fp:
             data = self.speller.noninteractive_spellcheck(fp.read())
@@ -144,12 +144,13 @@ class SpellTestTamil(unittest.TestCase):
 
     def test_ottru_split(self):
         expect = [[u"ய்",u"ஆரிகழ்ந்து"], [u"யார்",u"இகழ்ந்து"] , [u"யாரிக்",u"அழ்ந்து"], [u"யாரிகழ்ந்த்",u"உ"]]
-        ottru = OttruSplit(u"யாரிகழ்ந்து")
+        word = u"யாரிகழ்ந்து"
+        ottru = OttruSplit(word,tamil.utf8.get_letters(word))
         ottru.generate_splits()
         self.assertEqual(ottru.results,expect)
 
     def test_mayangoli_suggests_simple(self):
-        alt = Mayangoli.run(u"பளம்")
+        alt = Mayangoli.run(u"பளம்",[u"ப",u"ள",u"ம்"])
         expect = [u"பளம்",u"பழம்",u"பலம்"]
         alt = sorted(alt)
         expect = sorted(expect)
@@ -159,13 +160,13 @@ class SpellTestTamil(unittest.TestCase):
     def test_mayangoli_suggests_notsimple(self):
         expect_l = [3,3,3*3*2*3]
         for idx,w in enumerate([u"கண்ணன்",u"அப்பளம்",u"எழுத்தாளருமான"]):
-            alt = Mayangoli.run(w)
+            alt = Mayangoli.run(w,tamil.utf8.get_letters(w))
             self.assertEqual(len(alt),expect_l[idx])
 
     def test_mayangoli_suggests_none(self):
         expect_l = 0
         w = u"குதிகால்"
-        alt = Mayangoli.run(w)
+        alt = Mayangoli.run(w,tamil.utf8.get_letters(w))
         self.assertEqual(len(alt),expect_l)
 
 class SpellBadIMETest(unittest.TestCase):
