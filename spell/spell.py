@@ -351,7 +351,7 @@ class Speller(object):
                     option_str = u", ".join( [ u"(%d) %s"%(itr,wrd) for itr,wrd in enumerate(suggs)] )
                     if self.in_tamil_mode():
                         print(u"வரி \"%s\""%line.strip())
-                        print(u"'%s' சொல் கொண்டு\n\t சொல் '%s' மாற்றிடு\n"%(option_str,word))
+                        print(u"'%s' சொல்லை கொண்டு\n\t சொல்லை '%s' மாற்றிடு\n"%(option_str,word))
                     else:
                         print(u"Line, \"%s\""%line.strip())
                         print(u" Replace word %s with\n\t => %s\n"%(word, option_str))
@@ -385,7 +385,7 @@ class Speller(object):
                     new_document.append( word )
             new_document.append(u"\n")
         if self.in_tamil_mode():
-            print(u"*********** ஆவணத்தில் உள்ள பிழைகளை திருத்தி *********")
+            print(u"*********** ஆவணத்தில் உள்ள பிழைகளை திருத்திய பின் *********")
         else:
             print(u"*********** cleaned up document **********")
         print(u" ".join(new_document))
