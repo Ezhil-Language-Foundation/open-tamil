@@ -21,7 +21,7 @@ class Letters(unittest.TestCase):
         il = utf8.splitMeiUyir(u"ல்")
         self.assertEqual(il,u"ல்")
         il,ee = utf8.splitMeiUyir(u"லி")
-        self.assertTrue((il,ee),(u"ல்",u"இ"))
+        self.assertEqual((il,ee),(u"ல்",u"இ"))
 
 if __name__ == '__main__':
     unittest.main()
