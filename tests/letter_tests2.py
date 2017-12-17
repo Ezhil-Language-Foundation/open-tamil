@@ -23,5 +23,17 @@ class Letters(unittest.TestCase):
         il,ee = utf8.splitMeiUyir(u"லி")
         self.assertEqual((il,ee),(u"ல்",u"இ"))
 
+    def test_classifier(self):
+        expected = []
+        expected.extend(['english']*3)
+        expected.extend(['digit']*4)
+        expected.extend(['kuril','nedil','uyirmei','vallinam','uyirmei'])
+        data = list(map(utf8.classify_letter,utf8.get_letters(u"abc1230அஆரெட்டை")))
+        self.assertEqual(data,expected)
+    
+    def test_classified_except(self):
+        with self.assertRaises(ValueError) as ve:
+            utf8.classify_letter(u'.')
+
 if __name__ == '__main__':
     unittest.main()

@@ -533,7 +533,7 @@ def splitMeiUyir(uyirmei_char):
 
     if uyirmei_char in mei_letters or uyirmei_char in uyir_letters or uyirmei_char in ayudha_letter:
         return uyirmei_char
-    
+
     if uyirmei_char not in grantha_uyirmei_letters:
         if not is_normalized( uyirmei_char ):
             norm_char = unicode_normalize(uyirmei_char)
@@ -576,6 +576,34 @@ def joinMeiUyir(mei_char, uyir_char):
     # calculate uyirmei index
     uyirmeiidx = meiidx*12 + uyiridx
     return grantha_uyirmei_letters[uyirmeiidx]
+
+def classify_letter(letter):
+    if not isinstance(letter, PYTHON3 and str or unicode):
+        raise TypeError("Input'%s' must be unicode, not just string" % letter)
+    kinds = [u'kuril',u'nedil',u'ayudham',u'vallinam',u'mellinam',u'idayinam',u'uyirmei',u'tamil_or_grantham']
+    if letter in uyir_letters:
+        if letter in kuril_letters:
+            return u'kuril'
+        elif letter in nedil_letters:
+            return u'nedil'
+        elif letter == ayudha_letter:
+            return 'ayudham'
+    if letter in mei_letters:
+        if letter in mellinam_letters:
+            return 'mellinam'
+        elif letter in vallinam_letters:
+            return 'vallinam'
+        elif letter in idayinam_letters:
+            return 'idayinam'
+    if letter in uyirmei_letters:
+        return 'uyirmei'
+    if letter in tamil_letters:
+        return 'tamil_or_grantham'
+    if letter.isalpha():
+        return 'english'
+    elif letter.isdigit():
+        return 'digit'
+    raise ValueError("Unknown letter '%s' neither Tamil nor English or number"%letter)
 
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ
