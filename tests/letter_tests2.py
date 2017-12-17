@@ -30,7 +30,11 @@ class Letters(unittest.TestCase):
         expected.extend(['kuril','nedil','uyirmei','vallinam','uyirmei'])
         data = list(map(utf8.classify_letter,utf8.get_letters(u"abc1230அஆரெட்டை")))
         self.assertEqual(data,expected)
-    
+
+    def demo(self):
+        for l in utf8.get_letters_iterable(u"இதுதாண்டாபோலிசு"):
+            print("%s - %s"%(l,utf8.classify_letter(l)))
+        
     def test_classified_except(self):
         with self.assertRaises(ValueError) as ve:
             utf8.classify_letter(u'.')
