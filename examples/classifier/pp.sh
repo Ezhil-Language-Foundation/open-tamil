@@ -1,0 +1,1 @@
+python preprocess.py tamilvu_dictionary_words.txt english_dictionary_words.jaffna english_dictionary_words.azhagi english_dictionary_words.combinational
