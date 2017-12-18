@@ -30,11 +30,7 @@ class Feature:
         F = Feature()
         F.nletters = len(letters)*1.0
         for l in letters:
-            try:
-                kind = utf8.classify_letter(l)
-            except Exception as ioe:
-                print("SKIPPING => ",ioe.message)
-                continue
+            kind = utf8.classify_letter(l)
             if kind == 'kuril':
                 F.kurils += 1
             elif kind == 'nedil':
@@ -80,7 +76,11 @@ def process(fname):
     with codecs.open(fname,"r","utf-8") as fp:
         for idx,line in enumerate(fp.readlines()):
             w = line.strip()
-            f = Feature.get(w)
+            try:
+                f = Feature.get(w)
+            except Exception as ioe:
+                print("SKIPPING => ",ioe.message)
+                continue
             ofp.writerow(f.data())
     #ofp.close()
     
