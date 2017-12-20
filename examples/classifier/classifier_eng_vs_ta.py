@@ -21,21 +21,25 @@ def combinational_transliterate(eng_string):
     tamil_tx = algorithm.Iterative.transliterate(combinational.Transliteration.table,eng_string)
     return tamil_tx
 
-# 3 forms of Tamil transliteration for English word
-jfile = codecs.open('english_dictionary_words.jaffna','w','utf-8')
-cfile = codecs.open('english_dictionary_words.combinational','w','utf-8')
-afile = codecs.open('english_dictionary_words.azhagi','w','utf-8')
+def operations():
+    # 3 forms of Tamil transliteration for English word
+    jfile = codecs.open('english_dictionary_words.jaffna','w','utf-8')
+    cfile = codecs.open('english_dictionary_words.combinational','w','utf-8')
+    afile = codecs.open('english_dictionary_words.azhagi','w','utf-8')
 
-with codecs.open('english_dictionary_words.txt','r') as engf:
-    for idx,w in enumerate(engf.readlines()):
-        w = w.strip()
-        if len(w) < 1:
-            continue
-        print(idx)
-        jfile.write(u"%s\n"%jaffna_transliterate(w))
-        cfile.write(u"%s\n"%combinational_transliterate(w))
-        afile.write(u"%s\n"%azhagi_transliterate(w))
+    with codecs.open('english_dictionary_words.txt','r') as engf:
+        for idx,w in enumerate(engf.readlines()):
+            w = w.strip()
+            if len(w) < 1:
+                continue
+            print(idx)
+            jfile.write(u"%s\n"%jaffna_transliterate(w))
+            cfile.write(u"%s\n"%combinational_transliterate(w))
+            afile.write(u"%s\n"%azhagi_transliterate(w))
 
-jfile.close()
-cfile.close()
-afile.close()
+    jfile.close()
+    cfile.close()
+    afile.close()
+
+if __name__ == "__main__":
+    operations()

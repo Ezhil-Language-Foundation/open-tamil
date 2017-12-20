@@ -5,6 +5,7 @@
 import numpy as np
 import random
 from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import accuracy_score
 
 def data1(filename):
     x = np.loadtxt(open(filename,"r"),delimiter=",")
@@ -17,7 +18,7 @@ def data0(filename):
     return (x,y)
 
 DEBUG = False
-N = 25000  #training set
+N = 10000  #training set
 
 ta_x1,ta_y1 = data1("tamilvu_dictionary_words.txt.csv")
 x1 = ta_x1.copy()
@@ -71,7 +72,7 @@ if DEBUG:
 
 ###########
 ## Build training set for the model
-nn = MLPClassifier(solver='sgd',alpha=1e-5,activation='logistic',hidden_layer_sizes=(100,100,50),random_state=1,max_iter=1000)
+nn = MLPClassifier(solver='sgd',alpha=1e-5,activation='logistic',hidden_layer_sizes=(100,50,10,1),random_state=1,max_iter=10000)
 X = np.concatenate((x0,x1),axis=0)
 Y = np.concatenate((y0,y1),axis=0)
 Y = Y.ravel()
@@ -87,7 +88,8 @@ for idx in range(validate_X.shape[0],validate_X.shape[0]):
         validate_X[idx,idcol] = validate_x0[idx-validate_X.shape[0],idcol]
     validate_Y[idx,0] = validate_y0[idx-validate_X.shape[0],0]
     
-y_valid = nn.predict(validate_x1)
-score = nn.score( validate_X, validate_Y )
+y_valid = nn.predict(validate_X)
+print(" accuracy => ",accuracy_score(y_valid.ravel(),validate_Y.ravel()))
+score = nn.score( validate_X, validate_Y.ravel() )
 print("Score => ")
 print(score)

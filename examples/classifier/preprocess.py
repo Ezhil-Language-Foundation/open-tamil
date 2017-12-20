@@ -2,6 +2,15 @@ from tamil import utf8
 import sys
 import codecs
 import csv
+from transliterate import jaffna
+
+jaffnatable = jaffna.Transliteration.table
+rev_jaffnatable = {}
+for k,v in jaffnatable.items():
+    rev_jaffnatable[v] = k
+
+def reverse_transliterate(letter):
+    return algorithm.Iterative.transliterate(rev_jaffnatable,u"%s"%letter)
 
 class Feature:
     def __init__(self):
@@ -14,10 +23,11 @@ class Feature:
         self.idayinams = 0.0
         self.granthams = 0.0
         self.first = 0.0
-        self.last = 0.0 
-
+        self.last = 0.0
+        self.vowels = 0.0
+        
     def __str__(self):
-        return u"(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)"%(self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last)
+        return u"(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)"%(self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels)
     
     def data(self):
         return (self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last)
@@ -30,6 +40,13 @@ class Feature:
         F = Feature()
         F.nletters = len(letters)*1.0
         for l in letters:
+            try:
+                rtl = reverse_transliterate(l)
+                if any( [rtl.startswith(l) for l  in ['a','e','i','o','u'] ] ):
+                    F.vowels += 1.0
+            except Exception as ioe:
+                pass
+            
             kind = utf8.classify_letter(l)
             if kind == 'kuril':
                 F.kurils += 1
@@ -43,9 +60,11 @@ class Feature:
                 F.mellinams += 1
             elif kind == 'idayinam':
                 F.idayinams += 1
-            else:
+            elif kind in ['english','digit']:
+                continue
+            elif kind == 'tamil_or_grantham':
                 F.granthams += 1
-
+        
         F.kurils /= F.nletters
         F.nedils /= F.nletters
         F.ayudhams /= F.nletters
@@ -54,20 +73,22 @@ class Feature:
         F.mellinams /= F.nletters
         F.idayinams /= F.nletters
         F.granthams /= F.nletters
+        F.vowels /= F.nletters
         
         if letters[0] in utf8.uyir_letters:
-            F.first += 0.1
+            F.first += 1.0
         if letters[0] in utf8.mei_letters:
             F.first += F.first + 0.25
         if letters[0] in utf8.uyirmei_letters:
-            F.first += F.first + 0.5
-
+            F.first += F.first + 0.05
+        
         if letters[-1] in utf8.uyir_letters:
-            F.last += 0.1
+            F.last += 1.0
         if letters[-1] in utf8.mei_letters:
             F.last += F.last + 0.25
         if letters[-1] in utf8.uyirmei_letters:
-            F.last += F.last + 0.5
+            F.last += F.last + 0.05
+        
         return F
 
 def process(fname):
