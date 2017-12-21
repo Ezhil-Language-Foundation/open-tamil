@@ -9,6 +9,13 @@ from opentamiltests import *
 
 from transliterate import azhagi, jaffna, combinational, algorithm
 
+class GreedyTests(unittest.TestCase):
+    def test_vanakkam(self):
+        tamil_word = u"வணக்கம்"
+        for eng_string in ["vaNakkam","vanakkam"]:
+            top_match,greedy = algorithm.Greedy.transliterate(jaffna.Transliteration.table,eng_string)
+            self.assertTrue( tamil_word in greedy.options )
+    
 class Yazhpanam(unittest.TestCase):
     def test_vandemataram(self):     
         tamil_words = u"வந்தே மாதரம்"

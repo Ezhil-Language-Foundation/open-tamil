@@ -1,46 +1,143 @@
 ## -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
-# 
+#
 # Implementation of transliteration algorithm flavors
 # and later used in TamilKaruvi (2007) by your's truly.
-# 
+#
+import tamil
 
 # BlindIterative Algorithm from TamilKaruvi - less than optimal -
 class BlindIterative:
-    
+
     @staticmethod
     def transliterate(table,english_str):
         """ @table - has to be one of Jaffna or Azhagi etc.
             @english_str - """
-# 
+#
 # -details-
-# 
+#
 # While text remains:
 #   Lookup the English part in anywhere in the string position
 #   If present:
 #   	  Lookup the Corresponding Tamil Part & Append it to the string.
-#   Else: 
+#   Else:
 #         Continue
-# 
+#
         out_str = english_str
 
         # for consistent results we need to work on sorted keys
         eng_parts = list(table.keys())
         eng_parts.sort()
         eng_parts.reverse()
-        
+
         for eng_part in eng_parts:
             tamil_equiv = table[eng_part]
             parts = out_str.split( eng_part )
             out_str = tamil_equiv.join( parts )
-        
+
         return out_str
 
+# Basically english_str can be transliterated to many possible Tamil words
+# First condition is all english letters need to be used.
+# Secondly all generated Tamil words from the englist_str will have to be
+# scored by their bigram score.
+# Return the highest scoring string
+class Greedy:
+    def __init__(self,table,lexicon=None):
+        self.table = table
+        self.options = []
+        self.scores = [0.0]
+        self.lexicon = lexicon
+        self.full_search = False
+    
+    def score(self):
+        max_idx = 0
+        for idx,op in enumerate(self.options):
+            prev = ''
+            n_ending_uyir = 0
+            n_consequetive_mei = 0
+            for letter in tamil.utf8.get_letters_iterable(op):
+                if (letter in tamil.utf8.mei_letters) and (prev in tamil.utf8.mei_letters ):
+                    n_consequetive_mei += 1
+                prev = letter
+            if prev in tamil.utf8.uyir_letters:
+                n_ending_uyir = 1
+            w_score = len(op) - 2*n_consequetive_mei - 2*n_ending_uyir
+            if w_score > self.scores[max_idx]:
+                max_idx = idx
+            self.scores.append( w_score )
+        return max_idx
+    
+    #check if level=0 and letter is mei, then return False
+    #all other cases return True
+    def skip_mei(self,level,letter):
+        if level > 0:
+            return True
+        return not( letter in tamil.utf8.mei_letters)
+    
+    def generate(self,english_str,partial='',level=0):
+        if len(english_str) == 0:
+            self.options.append(partial)
+            return
+        if level >= 1 and len(partial) == 0:
+            return
+        
+        for itr,s in enumerate(english_str):
+            curr = s
+            if itr < len(english_str)-1:
+                nxt = english_str[itr+1]
+            else:
+                nxt = ''
+            
+            w1 = self.table.get(curr,None)
+            if w1: self.skip_mei(level,w1) and self.generate(english_str[itr+1:],partial+w1,level+1)
+            
+            w2 = self.table.get(curr.upper()+nxt,None)
+            if w2: self.skip_mei(level,w2) and self.generate(english_str[itr+2:],partial+w2,level+1)
+            
+            #w2 = self.table.get(prev+curr,None)
+            #if w2: self.generate(english_str[itr+1:],partial+w2)
+            w3 = self.table.get(curr+nxt,None)
+            if w3: self.skip_mei(level,w3) and self.generate(english_str[itr+2:],partial+w3,level+1)
+
+            #w4 = self.table.get(curr.upper()+nxt.upper(),None)
+            #if w4: self.skip_mei(level,w4) and self.generate(english_str[itr+2:],partial+w4,level+1)
+            
+            #w4 = self.table.get(prev+curr+nxt,None)
+            #if w4: self.generate(english_str[itr+2:],partial+w4)
+            prev = curr
+            if ( not self.full_search ):
+                break
+        
+        return
+        
+    def pick_dictionary_words(self):
+        if not self.lexicon:
+            return
+        self.options = list(filter(self.lexicon.isWord,self.options))
+        
+    def run(self,english_str):
+        self.generate(english_str)
+        self.pick_dictionary_words()
+        idx = self.score()
+        best = self.options[idx]
+        self.options = set(self.options)
+        #for w in self.options:
+        #    print(w)
+        #print(u'Total choices => ',len(self.options))
+        #print(u'Best => %s'%best)
+        return best
+    
+    @staticmethod
+    def transliterate(table,english_str,lexicon=None):
+        g = Greedy(table,lexicon)
+        return g.run(english_str),g
+    
 # Azhagi has a many-to-one mapping - using a Tamil language model and Baye's conditional probabilities
-# to break the tie when two or more Tamil letters have the same English syllable. Currently 
+# to break the tie when two or more Tamil letters have the same English syllable. Currently
 # this predictive transliterator is not available in this package. Also such an algorithm could be
 # used with any table.
-# 
+#
 # challenge use a probabilistic model on Tamil language to score the next letter,
 # instead of using the longest/earliest match
 # http://www.mazhalaigal.com/tamil/learn/keys.php
@@ -52,45 +149,45 @@ class Predictive:
 
 # Sequential Iterative Algorithm modified from TamilKaruvi
 class Iterative:
-    
+
     @staticmethod
     def transliterate(table,english_str):
         """ @table - has to be one of Jaffna or Azhagi etc.
             @english_str - """
-# 
+#
 # -details-
-# 
+#
 # While text remains:
 #   Lookup the First-Matching-Longest-English part
 #   If present:
 #   	  Lookup the Corresponding Tamil Part & Append it.
-#   Else: 
+#   Else:
 #         Continue
-# 
+#
         out_str = english_str
 
         # for consistent results we need to work on sorted keys
         eng_parts = list(table.keys())
         eng_parts.sort()
         eng_parts.reverse()
-        
+
         MAX_ITERS_BEFORE_YOU_DROP_LETTER = max(list(map(len,eng_parts)))
-        
+
         remaining = len(english_str)
         out_str = ''
         pos = 0
         while pos < remaining:
-            
+
             # try to find the longest prefix in input from L->R in greedy fashion
             iters = MAX_ITERS_BEFORE_YOU_DROP_LETTER
             success = False
-            
+
             while iters >= 0:
                 curr_prefix = english_str[pos:min(pos+iters-1,remaining)]
                 curr_prefix_lower = None
-                if ( len(curr_prefix) >= 2 ):                    
+                if ( len(curr_prefix) >= 2 ):
                     curr_prefix_lower = curr_prefix[0].lower() + curr_prefix[1:]
-                
+
                 ## print curr_prefix
                 iters = iters - 1
                 if ( curr_prefix in eng_parts ):
@@ -103,11 +200,11 @@ class Iterative:
                     pos = pos + len( curr_prefix_lower )
                     success = True
                     break;
-                
+
             # replacement was a success
             if ( success ):
                 continue
-            
+
             # too-bad we didn't find a replacement - just copy char to output
             ## print "concatennate the unmatched =>",english_str[pos],"<="
             if ord(english_str[pos]) < 128:
@@ -115,7 +212,7 @@ class Iterative:
             else:
                 rep_char = "?"
             out_str = out_str + rep_char
-            
+
             pos = pos + 1
-        
+
         return out_str

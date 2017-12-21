@@ -3,6 +3,7 @@ tscii2utf8
 tamilphonetic
 TODO
 misc/
+*.pkl
 *.py[cod]
 *.dat
 *.ods

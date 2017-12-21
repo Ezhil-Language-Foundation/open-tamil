@@ -2,6 +2,6 @@
 from . import jaffna
 from . import azhagi
 from . import combinational
-from .algorithm import Iterative
+from .algorithm import Iterative, Greedy
 
 iterative_transliterate = Iterative.transliterate
