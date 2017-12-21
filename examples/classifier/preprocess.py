@@ -3,6 +3,8 @@ import sys
 import codecs
 import csv
 from transliterate import jaffna
+from solthiruthi.scoring import bigram_scores, unigram_score
+#bigram_scores(tamil.utf8.get_letters(op)) #use the module solthiruthi ngram to score it
 
 jaffnatable = jaffna.Transliteration.table
 rev_jaffnatable = {}
@@ -25,12 +27,14 @@ class Feature:
         self.first = 0.0
         self.last = 0.0
         self.vowels = 0.0
+        self.unigscore = 0.0 #unigram score
+        self.bigscore = 0.0 #bigram score
         
     def __str__(self):
-        return u"(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)"%(self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels)
+        return u"(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)"%(self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels,self.unigrscore,self.bigscore)
     
     def data(self):
-        return (self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last)
+        return (self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels,self.unigscore,self.bigscore)
     
     @staticmethod
     def get(word):
@@ -39,6 +43,8 @@ class Feature:
         letters = utf8.get_letters(word)
         F = Feature()
         F.nletters = len(letters)*1.0
+        F.unigscore = unigram_score(letters)
+        F.bigscore = max(bigram_scores(letters))
         for l in letters:
             try:
                 rtl = reverse_transliterate(l)
