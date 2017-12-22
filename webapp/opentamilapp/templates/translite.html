@@ -1,0 +1,62 @@
+{% extends "main.html" %}
+{% block title %}Tamil Number{% endblock %}
+
+{% block content %}
+<section id="translite">
+<div class="page-header">
+  <h1>Transliterator</h1>
+</div>
+<p>This application helps you to transliterate text from any Indian language to any other Indian language. Enter the text for transliteration in the below text area. Language of each  word will be detected. You can give the text in any language and even with mixed language. For Tamil alone, English->Tamil, Transliteration is available.</p>
+
+
+       <form action="" class="form-horizontal">
+    <div class="form-group">
+        <textarea name='input_text' id='txt3' rows="10" cols="80" class="" placeholder="Type here english text"></textarea>
+    </div>
+    
+</form>
+<center>
+<p id="disp3" class="important">
+	
+</p>
+</center>
+<div class="well">
+    <h3>Transliterator JSON API</h3>
+    <p>
+        This service provides tamil phonetics for a given english letters
+        <ul>
+            <li>Input data: English words or letters
+                <ul>
+                    <li>Return : equivalent tamil words </li>
+                </ul>
+            </li>
+        </ul>
+
+        Sample usage is given below.
+      
+  <pre>
+        http://open-tamil.herokuapp.com/translite/ammaa
+        Result: '{"result": "அம்மா"}'
+      </pre>
+    </p>
+</div>
+</section>
+<script type="text/javascript">
+	$(document).ready(function () {
+	$('#txt3').keyup(function(){
+    var dat = $('#txt3').val()
+    $.ajax({
+    	url: '/translite/'+dat,
+    	success: function(data){
+        $('#disp3').show()
+        $('#disp3').text(data.result)
+    	}
+    })
+if ($('#txt3').val()==''){
+$('#disp3').hide()
+}
+  	})
+	})
+
+</script>
+{% endblock %}

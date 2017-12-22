@@ -1,0 +1,86 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}- Indic Language Computing Platform </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Indian Language Computing Platform">
+    <meta name="author" content="Open Tamil Developers">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/jquery.ime.css' %}"  />
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"  />
+
+<style type="text/css">
+        .important { color: #336699;font-size:25px }
+    </style>
+  </head>
+  <body>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery.ime.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <div class="navbar navbar-inverse navbar-fixed-top silpa-navbar" role="navigation">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li><a class="navbar-brand" href="/">Open Tamil Web</a></li>
+         
+          
+        </ul>
+        <ul class="nav navbar-nav pull-right hidden-xs">
+          <li><a href="https://github.com/Ezhil-Language-Foundation/open-tamil">Documentation</a></li>
+        </ul>
+      </div> <!-- container -->
+    </div> <!-- navbar -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="sidebar-nav">
+            <!-- side bar goes here -->
+            <ul class="nav nav-tabs nav-stacked" role="navigation">
+              <li class="navbar-brand">Applications</li>
+              
+              <li><a href="/number">Tamil Number</a></li>
+              
+              <li><a href="/keechu">Word Count</a></li>
+              
+              <li><a href="/translite">Transliteration</a></li>
+              
+              <li><a href="/spell">Tamil Spell Checker</a></li>
+              
+              <li><a href="/tsci">Unicode Converter</a></li>
+              
+              <li><a href="/ngram">Tamil N-gram</a></li>
+              
+              <li><a href="/unigram">Tamil Unigram</a></li>
+              
+              <li><a href="/anagram">Tamil Anagram</a></li>
+              <li><a href="/revers">Reverse Words</a></li>
+
+
+            </ul>
+          </div>
+        </div>
+<div id="content" class="col-sm-9">{% block content %}{% endblock %}</div></div></div>
+<footer role="contentinfo" class="footer">
+      <div class="container">
+        <p>All rights reserved. &copy2014-2017, Open Tamil Web Team</p>
+        <p>Code licensed under <a href="http://www.fsf.org/licensing/licenses/agpl-3.0.html" target="_blank">GNU Affero General Public License.</a></p>
+        <ul class="footer-links">
+          <li><a href="https://github.com/abuvanth/open-tamil-web-interface">Source Code</a></li>
+          <li class="muted">·</li>
+          <li><a href="http://www.glug-madurai.org/pages/mailing-list.html">Mailing List</a></li>
+          <li class="muted">·</li>
+          <li><a href="https://pypi.python.org/pypi/Open-Tamil/0.65">Credits</a></li>
+          <li class="muted">·</li>
+          <li><a href="#">License</a></li>
+          <li class="muted">·</li>
+          <li><a href="mailto:tshrinivasan@gmail.com">Contact</a></li>
+        </ul>
+      </div>
+    </footer>
+
+</body>
+</html>
