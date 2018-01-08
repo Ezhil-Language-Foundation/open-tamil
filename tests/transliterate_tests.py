@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) 2013 Muthiah Annamalai
+# (C) 2013-2018 Muthiah Annamalai
 # 
 # This file is part of 'open-tamil' package tests
 # 
@@ -7,9 +7,16 @@
 # setup the paths
 from opentamiltests import *
 
-from transliterate import azhagi, jaffna, combinational, algorithm
+from transliterate import azhagi, jaffna, combinational, UOM, algorithm
 
 class GreedyTests(unittest.TestCase):
+    def test_UOM(self):
+        # University of Madras Lexicon style transliteration standard
+        tamil_word = u"வணக்கம்"
+        for eng_string in ["vnikkim"]:
+            top_match,greedy = algorithm.Greedy.transliterate(UOM.Transliteration.table,eng_string)
+            self.assertTrue( tamil_word in greedy.options)
+        
     def test_vanakkam(self):
         tamil_word = u"வணக்கம்"
         for eng_string in ["vaNakkam","vanakkam"]:

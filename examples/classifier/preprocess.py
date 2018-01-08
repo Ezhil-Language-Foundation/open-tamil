@@ -4,7 +4,6 @@ import codecs
 import csv
 from transliterate import jaffna
 from solthiruthi.scoring import bigram_scores, unigram_score
-#bigram_scores(tamil.utf8.get_letters(op)) #use the module solthiruthi ngram to score it
 
 jaffnatable = jaffna.Transliteration.table
 rev_jaffnatable = {}

@@ -120,6 +120,8 @@ class Greedy:
         self.generate(english_str)
         self.pick_dictionary_words()
         idx = self.score()
+        if len(self.options) < 1:
+            return english_str
         best = self.options[idx]
         self.options = set(self.options)
         #for w in self.options:
