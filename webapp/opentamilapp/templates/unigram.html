@@ -1,0 +1,47 @@
+{% extends "main.html" %}
+{% block title %}Tamil Number{% endblock %}
+{% block content %}
+<section id="home">
+<div class="col-sm-9">
+<div class="page-header">
+    <h1>Unigram</h1>
+</div>
+<center>
+<input type="text" name="word" id="txt4" placeholder="Enter the word"/><br>
+<input type="text" name="word1" id="txt3" placeholder="Enter the number"/><br>
+<button id="btn4" class="btn btn-success">submit</button>
+<div id="progress" class="alert alert-info silpa-hide"></div>
+<p id="disp" class='important'>
+</p>
+</center>
+</div>
+</section>
+<script type="text/javascript">
+	$(document).ready(function () {
+	$('#btn4').click(function(){
+    var dat = $('#txt4').val()
+    var n = $('#txt3').val()
+    var id_result = $('#disp'),
+        id_progress = $('#progress')
+    $.ajax({
+    	url: '/unigram/'+dat+'?n='+n,
+beforeSend:function(){
+                    id_result.empty().hide();
+                    id_progress.html("making unigram. Please Wait...").show();
+                },
+    	success: function(data){
+        id_progress.hide()
+    		var str=''
+    		for(var i=0;i<data.length;i++){
+          var t='<span>'+data[i]+'&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp'+'<span>'
+    		str+=t
+    		}
+        $('#disp').html(str)
+        id_result.show();
+    	}
+    })
+  	})
+	})
+
+</script>
+{% endblock %}

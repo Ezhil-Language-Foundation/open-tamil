@@ -1,0 +1,52 @@
+{% extends "main.html" %}
+{% block title %}Tamil Number{% endblock %}
+
+{% block content %}
+<section id="spell">
+<div class="col-sm-9">
+<div class="page-header">
+    <h1>Spellchecker</h1>
+</div>
+<p>This is a demo of spellcheck service of . In this page, you can enter a word for checking the spelling and just get the result.</p>
+<p>For using open tamil web spellcheck service in your web or desktop applications</p>
+	<center>
+        
+            <input type="text" name="word" id="txt4" placeholder="enter the tamil word"/>
+<button id="btn4" class="btn btn-success">Check Spelling</button>
+<div id="progress" class="alert alert-info silpa-hide"></div>
+   
+<div id="disp4" class="important">
+	
+</div>
+
+</center>
+</div>
+</section>
+<script type="text/javascript">
+	$(document).ready(function () {
+	$('#btn4').click(function(){
+    var dat = $('#txt4').val()
+                id_result = $('#disp4'),
+                id_progress = $('#progress')
+    $.ajax({
+    	url: '/spell/'+dat+'/',
+beforeSend:function(){
+                    id_result.empty().hide();
+                    id_progress.html("checking spelling. Please Wait...").show();
+                },
+    	success: function(data){
+           id_progress.hide()
+    		var str=''
+    		for(var i=0;i<data.length;i++){
+          var t='<span>'+data[i]+'&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp'+'<span>'
+    		str+=t
+    		}
+        $('#disp4').html(str)
+        id_result.show();
+    	}
+    })
+  	})
+	})
+
+</script>
+{% endblock %}

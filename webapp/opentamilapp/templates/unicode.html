@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+{% block title %}Unicode Convertor{% endblock %}
+
+{% block content %}
+<section id="t2u">
+<div class="col-sm-9">
+<div class="page-header">
+    <h1>Tscii to Unicode</h1>
+</div>
+<textarea id='txt1' rows="5" cols="50" class="important"></textarea> <br>
+<div class="row">
+  <div class="col-xs-4">
+<select name="tp" id="st" class="form-control">
+<option value="t2u">Tscii to Unicode
+</option>
+<option value="u2t">Unicode to Tscii
+</option>
+</select>
+</div>
+<center>
+<input type="button" class="btn btn-success" value="Convert" id="btn1">
+<p id="disp1" class="important" style="padding-top:50px;font-size: 20px">
+	
+</p>
+<div id="errormessage" class="alert alert-danger silpa-hide"></div>
+
+</center>
+</div>
+</div>
+
+</section>
+<script type="text/javascript">
+	$(document).ready(function () {
+	$('#btn1').click(function(){
+    var dat = $('#txt1').val()
+    var st = $('#st').val(),
+            id_result = $('#disp'),
+            id_error = $('#errormessage'),
+            id_progress = $('#progress')
+    $.ajax({
+    	url: '/tsci/'+dat+"?cod="+st,
+        beforeSend:function(){
+                id_result.hide();
+                id_error.hide();
+                id_progress.html("Converting. Please Wait...").show();
+            },
+    	success: function(data){
+        id_result.show();
+        $('#disp1').text(data.result)
+    	},
+        error: function(msg) {
+                id_progress.hide();
+                id_error.html("Something went wrong. Please try again!").show();
+            }
+    })
+  	})
+	})
+
+</script>
+{% endblock %}

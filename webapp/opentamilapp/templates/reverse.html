@@ -1,0 +1,43 @@
+{% extends "main.html" %}
+{% block title %}Reverse{% endblock %}
+
+{% block content %}
+<section id="translite">
+<div class="col-sm-9">
+<div class="page-header">
+  <h1>Reverse Words</h1>
+</div>
+
+
+       <form action="" class="form-horizontal">
+    <div class="form-group">
+        <textarea name='input_text' id='txt3' rows="10" cols="80" class="" placeholder="Type here text"></textarea>
+    </div>
+    
+</form>
+<center>
+<p id="disp3" class="important">
+	
+</p>
+</center>
+</div>
+</section>
+<script type="text/javascript">
+	$(document).ready(function () {
+	$('#txt3').keyup(function(){
+    var dat = $('#txt3').val()
+    $.ajax({
+    	url: '/revers/'+dat+'/',
+    	success: function(data){
+        $('#disp3').show()
+        $('#disp3').text(data)
+    	}
+    })
+if ($('#txt3').val()==''){
+$('#disp3').hide()
+}
+  	})
+	})
+
+</script>
+{% endblock %}
