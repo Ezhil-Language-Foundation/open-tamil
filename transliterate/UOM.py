@@ -1,6 +1,7 @@
 ## -*- coding: utf-8 -*-
 # (C) 2018 Muthiah Annamalai
 
+# சென்னை பல்கலைக்கழக தமிழ் பேரகராதி
 # University of Madras standard - Ref: http://dsal.uchicago.edu/dictionaries/tamil-lex/
 # Twitter comment by Jean-Luc Chevilliard @JLC1956:
 # 'There is no "umlaut" (umlaut would be ä, ü or ö, as in German). The #TranslitteratedTamil alphabet is: a ā i ī u ū e ē ai o ō au ḵ k ṅ c ñ ṭ ṇ t n p m y r l v ḻ ḷ ṟ ṉ.
