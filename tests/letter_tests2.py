@@ -15,6 +15,12 @@ if PYTHON3:
         pass
 
 class Letters(unittest.TestCase):
+    def test_digit_letters(self):
+        from operator import itemgetter
+        first = itemgetter(0)
+        numbers = list(map(first,tamil.utf8.tamil_digits))
+        self.assertEqual(sum(numbers), 1155)
+        self.assertTrue( numbers,[0,1,2,3,4,5,6,7,8,9,10,100,1000])        
     def test_uyir_mei_split(self):
         ak = utf8.splitMeiUyir(u"ஃ")
         self.assertEqual(ak,u"ஃ")

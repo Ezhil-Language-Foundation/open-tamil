@@ -37,8 +37,7 @@ def letters_to_py( _letters ):
         return u"[u'"+u"',u'".join( _letters )+u"']"
 
 # List of letters you can use
-uyir_letters = [u"அ",u"ஆ",u"இ",
-    u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ"]
+uyir_letters = [u"அ",u"ஆ",u"இ",u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ"]
 ayudha_letter = u"ஃ"
 
 kuril_letters = [u"அ", u"இ", u"உ", u"எ", u"ஒ"]
@@ -94,6 +93,9 @@ u"ள"  ,u"ளா"  ,u"ளி"  ,u"ளீ"  ,u"ளு"  ,u"ளூ"  ,u"ளெ"  
 tamil_digit_1to10 = [u"௦", u"௧", u"௨",u"௩",u"௪",u"௫",u"௬",u"௭",u"௮",u"௯",u"௰"]
 tamil_digit_100 = u"௱"
 tamil_digit_1000 = u"௲"
+
+tamil_digits = [(num,digit) for num,digit in zip(range(0,11),tamil_digit_1to10)]
+tamil_digits.extend( [(100,tamil_digit_100),(1000,tamil_digit_1000)] )
 
 # tamil symbols
 _day = u"௳"
