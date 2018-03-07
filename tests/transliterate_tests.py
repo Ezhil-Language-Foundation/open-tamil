@@ -9,6 +9,18 @@ from opentamiltests import *
 
 from transliterate import azhagi, jaffna, combinational, UOM, algorithm
 
+class ReverseTransliterationTests(unittest.TestCase):
+    def test_tamil2en_1(self):
+        tamil_str = u"வணக்கம்"
+        azhagi_table = azhagi.Transliteration.table
+        eng_str = algorithm.Tamil2English.transliterate(azhagi_table,tamil_str)
+        self.assertEqual( eng_str,u"vaNackham")
+
+        tamil_str = u"அன்னம்"
+        azhagi_table = azhagi.Transliteration.table        
+        eng_str = algorithm.Tamil2English.transliterate(azhagi_table,tamil_str)
+        self.assertEqual( eng_str, u"annam")
+        
 class GreedyTests(unittest.TestCase):
     def test_UOM(self):
         # University of Madras Lexicon style transliteration standard

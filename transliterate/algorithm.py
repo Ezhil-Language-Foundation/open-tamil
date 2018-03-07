@@ -6,6 +6,20 @@
 #
 import tamil
 
+def reverse_transliteration_table(table_in):
+    table_out = {}
+    for k,v in table_in.items():
+        table_out[v] = k
+    return table_out
+
+class Tamil2English:
+    @staticmethod
+    def transliterate(table,tamil_str):
+        letters = tamil.utf8.get_letters(tamil_str)
+        ta2en_map = reverse_transliteration_table(table)
+        eng_transliterated = u"".join([ta2en_map.get(tl,tl) for tl in letters])
+        return eng_transliterated
+
 # BlindIterative Algorithm from TamilKaruvi - less than optimal -
 class BlindIterative:
 
@@ -196,12 +210,12 @@ class Iterative:
                     out_str = out_str + table[curr_prefix]
                     pos = pos + len( curr_prefix)
                     success = True
-                    break;
+                    break
                 elif ( curr_prefix_lower in eng_parts ):
                     out_str = out_str + table[curr_prefix_lower]
                     pos = pos + len( curr_prefix_lower )
                     success = True
-                    break;
+                    break
 
             # replacement was a success
             if ( success ):
