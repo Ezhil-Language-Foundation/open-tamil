@@ -14,6 +14,15 @@ if PYTHON3:
     class long(int):
         pass
 
+class NumeralStringLimitTests(unittest.TestCase):
+    def test_case_basic(self):
+        self.assertEqual(u"புள்ளி மூன்று மூன்று",tamil.numeral.num2tamilstr('0.33'))
+        self.assertEqual(u"புள்ளி ஒன்பது எட்டு ஏழு ஆறு",tamil.numeral.num2tamilstr('0.9876'))
+        
+    def test_case_american(self):
+        self.assertEqual(u"புள்ளி மூன்று மூன்று",tamil.numeral.num2tamilstr_american('0.33'))
+        self.assertEqual(u"புள்ளி ஒன்பது எட்டு ஏழு ஆறு",tamil.numeral.num2tamilstr_american('0.9876'))
+            
 class NumeralTestAmerican(unittest.TestCase):
     def runTest(self,var,nos):
         for numerStr,num in zip(var,nos):
