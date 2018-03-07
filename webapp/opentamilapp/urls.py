@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^anagram/$', anag,name="anagram"),
     url(r'^unigram/$', unig,name="unigram"),
     url(r'^ngram/$', ngra,name="ngram"),
+    url(r'^vaypaadu/$',vaypaadu,name="multiplication"),
     url(r'^number/(?P<num>\d+)/$', numstr,name="numstr"),
     url(r'^tsci/(?P<tsci>.+?)/$', unicod,name="unicod"),
     url(r'^keechu/(?P<k1>.+?)/$', keech,name="keech"),
@@ -36,15 +37,4 @@ urlpatterns = [
     url(r'^anagram/(?P<word>.+?)/$', anagram,name="ta_anagram"),
     url(r'^unigram/(?P<word>.+?)/$', test_basic,name="ta_unigram"),
     url(r'^revers/(?P<word>.+?)/$', revers,name="ta_revers"),
-
-
-
-    
-
-
-
-
-
-
-
 ]

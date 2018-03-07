@@ -1,0 +1,74 @@
+{% extends "main.html" %}
+{% block title %}Tamil Number{% endblock %}
+
+{% block content %}
+<section id="translite">
+<div class="page-header">
+  <h1>வாய்பாடு - Multiplication Tables</h1>
+</div>
+<p>This application helps you to generate multiplication tables in Tamil</p>
+
+
+<center>
+<form class="form-group">
+    <div class="form-group">
+        <label for="word">Number</label>
+    </div>
+    <p class="important">Multiplication table for number (enter input):</p>
+    <input type="text" name="source_multiplier" id="txt" class="form-control" placeholder="Please Enter the Number" style="border: 1px solid blue;
+															   border-radius: 10px;"/>
+    <input type="text" name="source_length" id="txt2" value="20" class="form-control" placeholder="Please Enter the Number" style="border: 1px solid blue;"/>
+    <input type="button" value="calc" id="calc" />
+</form>
+<div id="disp" style="padding-top:60px">
+</div>
+</center>
+<div class="well">
+    <h3>JSON API</h3>
+    <p>
+        This service provides tamil phonetics for a given english letters
+        <ul>
+            <li>Input data: TBD
+                <ul>
+                    <li>Return : equivalent tamil multiplication table </li>
+                </ul>
+            </li>
+        </ul>
+        Sample usage is given below.    
+      <pre>
+	TBD
+      </pre>
+    </p>
+</div>
+</section>
+<script type="text/javascript">
+  var getTamilString = function ( num ) {
+  var num_result;
+  $.ajax({url:'/number/'+String(num)+'?type=IN',
+  async:false,
+  success:function (data) {
+  num_result = data.result;
+  console.log(num_result);},
+  failure:function (data,status) { console.log('error=>'+String(status)) }});
+  return num_result;
+  };
+
+	$(document).ready(function () {
+	   $('#calc').click(function(){
+	   if ($('#txt').val()==''){
+	       $('#disp').hide();
+ 	   } else {
+              var y = Number( $('#txt2').val() );
+	      var x = Number( $('#txt').val() );
+	      $('#disp').html('')
+	      $('#disp').show();
+	      var i = 0;
+	      for( i = 0; i < y; i++ ) {
+ 	          var data = getTamilString(x) + ' x ' + getTamilString(i+1) + ' = ' + getTamilString(x*(i+1));
+	          $('#disp').html($('#disp').html()+'\n<div stype=\'align:left;\'>'+data+'</div>\n');
+	       }
+           }
+	   })
+        })
+</script>
+{% endblock %}

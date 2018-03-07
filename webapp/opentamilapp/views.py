@@ -24,6 +24,8 @@ from tamil.txt2unicode import *
 import tamil.utf8 as utf8
 def index(request):
     return render(request,'first.html',{})
+def vaypaadu(request):
+    return render(request,'vaypaadu.html',{})
 def trans(request):
      return render(request,'translite.html',{})
 def uni(request):
@@ -118,7 +120,6 @@ def anagram(request,word):
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response 
 def test_basic(request,word):
-        #WordModels
     n=request.GET.get("n")
     t=get_ngram_groups( word, int(n))
     json_string = json.dumps(t,ensure_ascii = False)
@@ -126,10 +127,8 @@ def test_basic(request,word):
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response  
 def revers(request,word):
-        #WordModels
     t=tamil.utf8.reverse_word(word)
     json_string = json.dumps(t,ensure_ascii = False)
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
-
