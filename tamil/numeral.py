@@ -7,6 +7,7 @@ import math
 PYTHON3 = sys.version > '3'
 
 if PYTHON3:
+    unicode = str
     class long(int):
         pass
 
@@ -23,7 +24,7 @@ def num2tamilstr( *args ):
         raise Exception('num2tamilstr input has to be a long or integer or float')
     if float(number) > long(1e12):
         raise Exception('num2tamilstr input is too large')
-    if number < 0:
+    if float(number) < 0:
         return u"- "+num2tamilstr( -number )
 
     units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
@@ -235,7 +236,7 @@ def num2tamilstr_american( *args ):
                n_one : [units[1]]}
 
     all_bases = [n_trillion,n_billion, n_million, n_thousand, n_hundred, n_ten,n_one]
-    allowed_bases = list(filter( lambda base: number >= base, all_bases ))
+    allowed_bases = list(filter( lambda base: float(number) >= base, all_bases ))
 
     # handle fractional parts
     if float(number) > 0.0 and float(number) <= 1000.0:
