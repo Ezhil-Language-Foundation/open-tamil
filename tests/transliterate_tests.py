@@ -14,12 +14,12 @@ class ReverseTransliterationTests(unittest.TestCase):
         tamil_str = u"வணக்கம்"
         azhagi_table = azhagi.Transliteration.table
         eng_str = algorithm.Tamil2English.transliterate(azhagi_table,tamil_str)
-        self.assertEqual( eng_str,u"vaNackham")
+        self.assertEqual( eng_str,u"vaNacKam")
 
         tamil_str = u"அன்னம்"
         azhagi_table = azhagi.Transliteration.table        
         eng_str = algorithm.Tamil2English.transliterate(azhagi_table,tamil_str)
-        self.assertEqual( eng_str, u"annam")
+        self.assertEqual( eng_str, u"annHam")
         
 class GreedyTests(unittest.TestCase):
     def test_UOM(self):

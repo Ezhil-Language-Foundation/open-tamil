@@ -8,7 +8,11 @@ import tamil
 
 def reverse_transliteration_table(table_in):
     table_out = {}
-    for k,v in table_in.items():
+    keys = table_in.keys()
+    keys = sorted(keys)
+    keys.reverse()
+    for k in keys:
+        v = table_in[k]
         table_out[v] = k
     return table_out
 
