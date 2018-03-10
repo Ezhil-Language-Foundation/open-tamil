@@ -15,6 +15,17 @@ if PYTHON3:
         pass
 
 class Letters(unittest.TestCase):
+    def test_issue132(self):
+        x=u"வரு'க"
+        y=tamil.utf8.get_letters(x)
+        y_eq = [u'\u0bb5', u'\u0bb0\u0bc1', u"'", u'\u0b95']
+        self.assertEqual(y,y_eq)
+        for a in [u"ரிஷ’",u"ரஸ“மா" , u"ரஹ“மான்"]:
+            b=tamil.utf8.get_letters(a)
+            b_eq = []
+            #self.assertEqual(b,b_eq)
+        
+
     def test_digit_letters(self):
         from operator import itemgetter
         first = itemgetter(0)
