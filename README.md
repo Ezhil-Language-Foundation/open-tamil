@@ -27,8 +27,8 @@ open-tamil provides Python package 'tamil' with ability to,
 #txt2unicode
 Tamil Text Encode to Unicode Converter and vice versa.
 If you Don't you know what your Tamil text encoding, don't worry; the '''tamil.txt2unicode.auto2unicode''' function will find it and convert to unicode for you.
-யுனிகோட் மாற்றி மற்றும் மாறாகவும் தமிழ் உரை குறியாக்கம்.
-நீங்கள் என்ன உங்கள் தமிழ் உரை குறியீட்டு தெரியாது என்றால், கவலைப்பட வேண்டாம்; '' 'tamil.txt2unicode.auto2unicode' '' செயல்பாடு அது கண்டுபிடிக்கும் & நீங்கள் யுனிகோட் மாற்ற வேண்டும்.
+யுனிகோட் மாற்றி மற்றும் மாறாகவும் தமிழ் உரைக் குறியாக்கம்.
+உங்களது தமிழ் உரைக் குறியீடு என்னவென்று தெரியாதெனில், நீங்கள் கவலை கொள்ளத் தேவையில்லை; '' 'tamil.txt2unicode.auto2unicode' '' செயல்பாடு இதனைக் கண்டறியும் மற்றும் இதனை யுனிகோடுக்கு மாற்றும்.
 
 Right now, it supports with 25 Tamil encodes. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of `auto2unicode` and `unicode2auto`
 இப்போது, அது 25 தமிழ் குறியாக்கம் கொண்ட ஆதரிக்கிறது. 'auto2unicode' மற்றும் 'unicode2auto' என்ற [txt2unicode](tamil/txt2unicode/README.md) மற்றும் [குறைபாடு](examples/txt2unicode/encodes_chars/README.md) பற்றி மேலும் விவரங்களை படிக்க
@@ -36,7 +36,7 @@ Right now, it supports with 25 Tamil encodes. Read more details about [txt2unico
 #txt2ipa
 Tamil Unicode Text to International Phonetic Alphabet (IPA) converter
 Read more details about [txt2ipa](tamil/txt2ipa/README.md)
-சர்வதேச (ஐபிஏ) மாற்றி, தமிழ் யுனிகோட் உரை; பற்றி மேலும் விவரங்களை படிக்க [இங்கு சொடுக்கவும்](tamil/txt2ipa/README.md).
+சர்வதேச (ஐபிஏ) மாற்றி, தமிழ் யுனிகோட் உரை; மேலும் விபரங்களுக்கு -> படிக்க [இங்கு சொடுக்கவும்](tamil/txt2ipa/README.md).
 
 #transliterate
 the python package `transliterate` provides for commonly used transliteration
