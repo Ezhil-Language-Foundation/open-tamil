@@ -8,7 +8,7 @@ Software ( மென்பொருள் )
 =====================
 Python  Packages ( பைதான் தொகுப்புகள்  )
 ===================================
-'tamil' என்ற பைத்தன் தொகுப்பை வழங்குகிரோம்
+'tamil' என்ற பைதான் தொகுப்பை வழங்குகிறோம்
 
 #tamil
 open-tamil provides Python package 'tamil' with ability to,
