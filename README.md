@@ -8,7 +8,7 @@ Software ( மென்பொருள் )
 =====================
 Python  Packages ( பைதான் தொகுப்புகள்  )
 ===================================
-'tamil' என்ற பைத்தன் தொகுப்பை வழங்குகிரோம்
+'tamil' என்ற பைதான் தொகுப்பை வழங்குகிறோம்
 
 #tamil
 open-tamil provides Python package 'tamil' with ability to,
@@ -27,16 +27,16 @@ open-tamil provides Python package 'tamil' with ability to,
 #txt2unicode
 Tamil Text Encode to Unicode Converter and vice versa.
 If you Don't you know what your Tamil text encoding, don't worry; the '''tamil.txt2unicode.auto2unicode''' function will find it and convert to unicode for you.
-யுனிகோட் மாற்றி மற்றும் மாறாகவும் தமிழ் உரை குறியாக்கம்.
-நீங்கள் என்ன உங்கள் தமிழ் உரை குறியீட்டு தெரியாது என்றால், கவலைப்பட வேண்டாம்; '' 'tamil.txt2unicode.auto2unicode' '' செயல்பாடு அது கண்டுபிடிக்கும் & நீங்கள் யுனிகோட் மாற்ற வேண்டும்.
+யுனிகோட் மாற்றி மற்றும் மாறாகவும் தமிழ் உரைக் குறியாக்கம்.
+உங்களது தமிழ் உரைக் குறியீடு என்னவென்று தெரியாதெனில், நீங்கள் கவலை கொள்ளத் தேவையில்லை; '' 'tamil.txt2unicode.auto2unicode' '' செயல்பாடு இதனைக் கண்டறியும் மற்றும் இதனை யுனிகோடுக்கு மாற்றும்.
 
 Right now, it supports with 25 Tamil encodes. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of `auto2unicode` and `unicode2auto`
-இப்போது, அது 25 தமிழ் குறியாக்கம் கொண்ட ஆதரிக்கிறது. 'auto2unicode' மற்றும் 'unicode2auto' என்ற [txt2unicode](tamil/txt2unicode/README.md) மற்றும் [குறைபாடு](examples/txt2unicode/encodes_chars/README.md) பற்றி மேலும் விவரங்களை படிக்க
+தற்சமயம், இது 25 தமிழ் குறியாக்கம் கொண்ட எழுத்துருக்களை ஆதரிக்கிறது. 'auto2unicode' மற்றும் 'unicode2auto' என்ற [txt2unicode](tamil/txt2unicode/README.md) மற்றும் [குறைபாடு] (examples/txt2unicode/encodes_chars/README.md) மேலும் விவரங்களுக்கு இதனை படிக்க.
 
 #txt2ipa
 Tamil Unicode Text to International Phonetic Alphabet (IPA) converter
 Read more details about [txt2ipa](tamil/txt2ipa/README.md)
-சர்வதேச (ஐபிஏ) மாற்றி, தமிழ் யுனிகோட் உரை; பற்றி மேலும் விவரங்களை படிக்க [இங்கு சொடுக்கவும்](tamil/txt2ipa/README.md).
+சர்வதேச (ஐபிஏ) மாற்றி, தமிழ் யுனிகோட் உரை; மேலும் விபரங்களுக்கு -> படிக்க [இங்கு சொடுக்கவும்](tamil/txt2ipa/README.md).
 
 #transliterate
 the python package `transliterate` provides for commonly used transliteration
@@ -48,7 +48,7 @@ phonetic schemes like,
 
 where you can supply English text, which phonetically encodes Tamil, and then receive Unicode encoded, in a best-effort algorithm for the longest phonetic match.
 
-`transliterate` தொகுப்பு பொதுவாக பயன்படுத்தப்படும் ஒலிபெயர்ப்பு வழங்குகிறது; மூன்று வகையானவை
+`transliterate` தொகுப்பு பொதுவாக பயன்படுத்தப்படும் ஒலிபெயர்ப்புகளை வழங்குகிறது; அவை,
 1. அழகி - தமிழ் கடிதங்கள் ஒலிப்பு வரைபடங்கள் - பல -> ஒரு ஆதரவு பல வடிவம் உள்ளீடுகள்
 2. யாழ்ப்பாண நூலகம் - தமிழ் கடிதங்கள் ஒலிப்பு வரைபடங்கள் - ஒன்று> ஒரு
 3. பலதரப்பட்ட அமைப்பு - உயிர் + மெய் உச்சரிப்பு மேப்பிங் அடிப்படையில்
@@ -83,7 +83,9 @@ Open-Tamil is still a basic collection of tools - its not complete yet. We have 
 
 Examples for using Python Open-Tamil are found [here](tests/).
 
-உள்ளீடுகள் முதலியன டெஸ்க்டாப் வலை அமைப்பு மென்பொருள், வரைகலை ஆதரவு தமிழ் உரை செயலாக்க - ஓபன் தமிழ் பைதான் உங்கள் விண்ணப்பத்தை உதவும் தொகுப்பு. திறந்த தமிழ் இன்னும் கருவிகள் ஒரு அடிப்படை தொகுப்பு ஆகும் - அதன் இன்னமும் முடிவடையவில்லை. நாம், UTF-8, என்-கிராம் மொழி மாதிரிகள், transliterators முதலியன பழைய முறையை மாற்ற விசைப்பலகை அமைப்பு, மாற்றிகள் வேண்டும். பைதான் ஓபன் தமிழ் பயன்படுத்தி உதாரணங்கள் [இங்கு](tests/) காணப்படுகின்றன.
+
+ஓபன்-தமிழ் என்பது தொகுக்கப்பட்ட பைதான் நூலகமாகும், உங்கள் வலை, கணினி நிரல், முகத்திரை வரைகலை மற்றும் பல தமிழ் எழுத்துரு செயற்பாடுகளுக்கு மிகவும் உதவியாக இருக்கும். 
+ஓபன்-தமிழ் என்பது அடிப்படை தொகுப்புக்களை மட்டுமே கொண்ட கருவிகளாகும், இது இன்னும் முழுமை பெறவில்லை. இதில் UTF-8, என்-கிராம் மொழி மாதிரிகள், transliterators முதலியன பழைய முறையை மாற்ற விசைப்பலகை அமைப்பு, மாற்றிகள் உள்ளன. பைதான் ஓபன் தமிழ் பயன்படுத்தி உதாரணங்கள் [இங்கு](tests/) காணப்படுகின்றன.
 
 Goals
 =====
