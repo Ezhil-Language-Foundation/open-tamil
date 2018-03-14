@@ -11,6 +11,7 @@
 from sys import version
 from copy import copy
 import re
+import operator
 
 PYTHON3 = version > '3'
 del version
@@ -606,6 +607,23 @@ def classify_letter(letter):
     elif letter.isdigit():
         return 'digit'
     raise ValueError("Unknown letter '%s' neither Tamil nor English or number"%letter)
+
+def print_tamil_words( tatext, use_frequencies = False ):
+    taletters = get_letters(tatext)
+    #for word in re.split(u"\s+",tatext):
+    #    print(u"-> ",word)    
+    # tamil words only
+    frequency = {}
+    for pos,word in enumerate(get_tamil_words(taletters)):
+        frequency[word] = 1 + frequency.get(word,0)
+    #for key in frequency.keys():
+    #    print(u"%s : %s"%(frequency[key],key))
+    # sort words by descending order of occurence
+    for l in sorted(frequency.iteritems(), key=operator.itemgetter(1)):
+        if use_frequencies:
+            print(u"%d -> %s"%(l[1],l[0]))
+        else:
+            print(u"%s"%l[0])
 
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ
