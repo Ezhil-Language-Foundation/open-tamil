@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+# -*- coding: utf-8 -*-
 # MIT License
 #
 # Copyright (c) 2018 சுரேந்தர் இரவிச்சந்திரன்
@@ -24,7 +24,6 @@
 
 from tamil import utf8 as tamil
 import argparse, sys
-
 
 class Text:
     def __init__(self, content, lineonly=True, wordonly=True, charonly=True):
@@ -75,13 +74,13 @@ def print_file_stats(filename):
     print(file_stats)
 
 
-def add_to_total_stats(txtobj: Text):
+def add_to_total_stats(txtobj): #Text
     total_stats.line_toll += txtobj.line_toll
     total_stats.word_toll += txtobj.word_toll
     total_stats.letter_toll += txtobj.letter_toll
 
 
-def construct_file_stats(textobj: Text, name = ""):
+def construct_file_stats(textobj, name = ""): #Text
     file_stat_display = ""
 
     if attribs["line"]:
@@ -94,7 +93,6 @@ def construct_file_stats(textobj: Text, name = ""):
     file_stat_display += " {}".format(name)
 
     return file_stat_display
-
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-w',action='store_true', help='Count Words')
