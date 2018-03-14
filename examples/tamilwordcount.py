@@ -23,7 +23,9 @@
 # SOFTWARE.
 
 from tamil import utf8 as tamil
-import argparse, sys
+import argparse
+import codecs
+import sys
 
 class Text:
     def __init__(self, content, lineonly=True, wordonly=True, charonly=True):
@@ -56,10 +58,9 @@ class Text:
     def __valid(self):
         return True
 
-
 def print_file_stats(filename):
     try:
-        fileobj = open(filename, 'r')
+        fileobj = codecs.open(filename, 'r','utf-8')
     except FileNotFoundError as e:
         print("File {} not found".format("\"" + filename + "\""))
         return
@@ -116,7 +117,10 @@ total_stats = Text("")
 
 if len(options.files) > 0:
     for file in options.files:
-        print_file_stats(file)
+        try:
+            print_file_stats(file)
+        except Exception as ioe:
+            print(u"Cannot process file %s\n    %s"%(file,str(ioe)))
     if len(options.files) > 1:
         total = construct_file_stats(total_stats, "total")
         print(total)
