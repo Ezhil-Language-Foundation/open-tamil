@@ -15,7 +15,6 @@ def num2tamilstr( *args ):
     """ work till l lakh crore - i.e 1e5*1e7 = 1e12.
         turn number into a numeral, Indian style. Fractions upto 1e-30"""
     number = args[0]
-    print number
     if len(args) < 2:
         filenames = []
     else:
@@ -55,8 +54,6 @@ def num2tamilstr( *args ):
     n_thousand = 1000.0
     n_lakh = 100.0*n_thousand
     n_crore = (100.0*n_lakh)
-    print 58
-    print tweens
     # handle fractional parts
     if float(number) > 0.0 and float(number) < 1.0:
         rval = []
@@ -106,8 +103,6 @@ def num2tamilstr( *args ):
 
     all_bases = [n_crore, n_lakh, n_thousand, n_hundred, n_ten,n_one]
     allowed_bases = list(filter( lambda base: number >= base, all_bases ))
-    print 108
-    print allowed_bases
     if len(allowed_bases) >= 1:
         n_base = allowed_bases[0]
         if number == n_base:
@@ -119,12 +114,9 @@ def num2tamilstr( *args ):
                 return units_suffix[long(number%10)]
         quotient_number = long( number/n_base )
         residue_number = number - n_base*quotient_number
-        print number, n_base, quotient_number, residue_number, tweens
-        print 119
+        #print number, n_base, quotient_number, residue_number, tweens
         if n_base == n_one:
-            print 121
             if isinstance(number,float):
-                print 119
                 int_part = long(number%10)
                 frac = number - float(int_part)
                 filenames.append("units_%d"%int_part)
@@ -139,13 +131,10 @@ def num2tamilstr( *args ):
                     else:
                         return units_suffix[int_part]
             else:
-                print 134
                 if tweens==False:
-                    print 135
                     filenames.append("units_%d"%number)
                     return units[number]+u' '
                 else:
-                    print 140
                     filenames.append("units_%d"%number)
                     return units_suffix[number]
 
@@ -169,14 +158,12 @@ def num2tamilstr( *args ):
                 numeral = tens[quotient_number-1]+u' '
             else:
                 if residue_number in tween:
-                    print "setting here"
                     filenames.append( "tens_prefix_%d"%(quotient_number-2) )
                     numeral = tens_prefix[quotient_number-2]
                     tweens=True
                 else:
                     filenames.append( "tens_prefix_%d"%(quotient_number-2) )
                     numeral = tens_full_prefix[quotient_number-2]+u' '
-                    #tweens= False
         elif n_base == n_hundred:
             if residue_number == 0:
                 filenames.append("hundreds_%d"%(quotient_number-1))
@@ -187,7 +174,6 @@ def num2tamilstr( *args ):
             else:
                 filenames.append("hundreds_suffix_%d"%(quotient_number-1))
                 numeral = hundreds_suffix[quotient_number-1]+u' '
-            #tweens=False
         else:
             if ( quotient_number == 1 ):
                 if n_base == n_thousand:
@@ -198,7 +184,6 @@ def num2tamilstr( *args ):
                     numeral = one_prefix+u' '
             else:
                 numeral = num2tamilstr( quotient_number, filenames )
-            tweens=False;
         if n_base >= n_thousand:
             suffix = suffix_base[n_base][long(residue_number >= 1)]
             suffix_filename = "%s_%d"%(suffix_file_map[n_base],long(residue_number >= 1))
@@ -210,7 +195,6 @@ def num2tamilstr( *args ):
         residue_numeral = num2tamilstr( residue_number, filenames, tweens)
         #return numeral+u' '+residue_numeral
         return numeral+residue_numeral
-    print 207
     # number has to be zero
     filenames.append("units_0")
     return units[0]
