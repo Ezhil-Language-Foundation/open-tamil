@@ -25,7 +25,7 @@ class GreedyTests(unittest.TestCase):
     def test_UOM(self):
         # University of Madras Lexicon style transliteration standard
         tamil_word = u"வணக்கம்"
-        for eng_string in ["vnikkim"]:
+        for eng_string in [u"vaṇaikkaim"]:
             top_match,greedy = algorithm.Greedy.transliterate(UOM.Transliteration.table,eng_string)
             self.assertTrue( tamil_word in greedy.options)
         
