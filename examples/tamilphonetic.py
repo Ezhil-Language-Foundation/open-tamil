@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!python
 # -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
 

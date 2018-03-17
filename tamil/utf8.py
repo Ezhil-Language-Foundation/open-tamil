@@ -11,6 +11,7 @@
 from sys import version
 from copy import copy
 import re
+import operator
 
 PYTHON3 = version > '3'
 del version
@@ -38,6 +39,18 @@ def letters_to_py( _letters ):
 
 # List of letters you can use
 uyir_letters = [u"அ",u"ஆ",u"இ",u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ"]
+vowel_a  = u"அ"
+vowel_aa = u"ஆ"
+vowel_i  = u"இ"
+vowel_ii = u"ஈ"
+vowel_u  = u"உ"
+vowel_uu = u"ஊ"
+vowel_e  =  u"எ"
+vowel_ee = u"ஏ"
+vowel_ai = u"ஐ"
+vowel_o  = u"ஒ"
+vowel_oo = u"ஓ"
+vowel_au = u"ஔ"
 ayudha_letter = u"ஃ"
 
 kuril_letters = [u"அ", u"இ", u"உ", u"எ", u"ஒ"]
@@ -53,11 +66,43 @@ mei_letters = [u"க்",u"ச்",u"ட்",u"த்",u"ப்",u"ற்",
 
 accent_symbols = [u"",u"ா",u"ி",u"ீ",u"ு",u"ூ",
           u"ெ",u"ே",u"ை",u"ொ",u"ோ",u"ௌ",u"ஃ"]
+accent_aa = accent_symbols[1]
+accent_i  = accent_symbols[2]
+accent_u  = accent_symbols[3]
+accent_uu = accent_symbols[4]
+accent_e  = accent_symbols[5]
+accent_ee = accent_symbols[6]
+accent_ai = accent_symbols[7]
+accent_o  = accent_symbols[8]
+accent_oo = accent_symbols[9]
+accent_au = accent_symbols[10]
+
 pulli_symbols = [u"்"]
 
 agaram_letters = [u"க",u"ச",u"ட",u"த",u"ப",u"ற",
           u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",
           u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள"]
+consonant_ka = u"க"
+consonant_nga = u"ங"
+consonant_ca = u"ச"
+consonant_ja = u"ஜ"
+consonant_nya = u"ஞ"
+consonant_tta = u"ட"
+consonant_nna = u"ண"
+consonant_nnna = u"ன"
+consonant_ta = u"த"
+consonant_tha = u"த"
+consonant_na = u"ந"
+consonant_pa = u"ப"
+consonant_ma = u"ம"
+consonant_ya = u"ய"
+consonant_ra = u"ர"
+consonant_rra = u"ற"
+consonant_la = u"ல"
+consonant_lla = u"ள"
+consonant_llla = u"ழ"
+consonant_zha = u"ழ"
+consonant_va = u"வ"
 
 sanskrit_letters = [u"ஶ",u"ஜ",u"ஷ", u"ஸ",u"ஹ",u"க்ஷ"]
 sanskrit_mei_letters =[u"ஶ்",u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்",u"க்ஷ்"]
@@ -363,7 +408,6 @@ def get_letters( word ):
                     ta_letters.append(c)
                     not_empty = True
         idx = idx + 1
-
     return ta_letters
 
 
@@ -606,6 +650,23 @@ def classify_letter(letter):
     elif letter.isdigit():
         return 'digit'
     raise ValueError("Unknown letter '%s' neither Tamil nor English or number"%letter)
+
+def print_tamil_words( tatext, use_frequencies = False ):
+    taletters = get_letters(tatext)
+    #for word in re.split(u"\s+",tatext):
+    #    print(u"-> ",word)
+    # tamil words only
+    frequency = {}
+    for pos,word in enumerate(get_tamil_words(taletters)):
+        frequency[word] = 1 + frequency.get(word,0)
+    #for key in frequency.keys():
+    #    print(u"%s : %s"%(frequency[key],key))
+    # sort words by descending order of occurence
+    for l in sorted(frequency.iteritems(), key=operator.itemgetter(1)):
+        if use_frequencies:
+            print(u"%d -> %s"%(l[1],l[0]))
+        else:
+            print(u"%s"%l[0])
 
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ
