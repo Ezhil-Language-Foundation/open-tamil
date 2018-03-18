@@ -1,6 +1,7 @@
 ## This Python file uses the following encoding: utf-8
 import codecs
 import tamil
+import sys
 from pprint import pprint
 
 def safe_splitMeiUyir(arg):
@@ -18,10 +19,11 @@ def safe_splitMeiUyir(arg):
     return (u'',u'')
 
 class FilterDictionary:
-    def __init__(self):
+    def __init__(self,matchtype='ANY'):
         # show all words containing only given letter series
         self.fn=u"tamilvu_dictionary_words.txt"
         self.db = []
+        self.type = matchtype.lower()
         self.criteria_options = {}
         with codecs.open(self.fn,"r","utf-8") as fp:
             self.db = map(lambda l: l.strip(),fp.readlines())
@@ -58,20 +60,30 @@ class FilterDictionary:
         for w in self.db:
             Ll = tamil.utf8.get_letters(w)
             count = 0
-            if True: #self.type == 'ANY':
-                for l in Ll:
-                    if not self.is_in_sequence(l):
-                        break
-                    count = count + 1
+            for l in Ll:
+                if not self.is_in_sequence(l):
+                    break
+                count = count + 1
             if count == len(Ll):
-                choices.append( w )
+                if self.type == 'any':
+                    choices.append( w )
+                elif self.type == 'all':
+                    #scoreboard
+                    rmatches = { x:False  for x in self.criteria_options.keys() }
+                    for letter in Ll:
+                        for ol in self.criteria_options.keys():
+                            if letter in self.criteria_options[ol]:
+                                rmatches[ol] = rmatches[ol] or True
+                    if all(rmatches.values()):
+                        choices.append(w)
+                else:
+                    raise Exception("Incorrect type")
         return choices
-
 
 while True:
     choices = raw_input(u">> ").decode("UTF-8") #u"அக"
-    options = FilterDictionary().select(choices)
+    matchtype = len(sys.argv)> 1 and sys.argv[1] or "all"
+    options = FilterDictionary(matchtype).select(choices)
     for w in options:
         print(u"%s"%w)
     continue
-
