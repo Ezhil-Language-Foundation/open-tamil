@@ -20,9 +20,9 @@ def num2tamilstr( *args ):
     else:
         filenames = args[1]
     if len(args) ==3:
-        tweens = args[2]
+        tensSpecial = args[2]
     else:
-        tweens=False
+        tensSpecial='BASIC'
     if not any( filter( lambda T: isinstance( number, T), [str,unicode,int, long, float]) ) or isinstance(number,complex):
         raise Exception('num2tamilstr input has to be a long or integer or float')
     if float(number) > long(1e12):
@@ -32,13 +32,14 @@ def num2tamilstr( *args ):
 
     units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
     units_suffix = (u'பூஜ்ஜியம்', u'தொன்று', u'திரண்டு', u'மூன்று', u'நான்கு', u'தைந்து', u'தாறு', u'தேழு', u'தெட்டு', u'தொன்பது', u'பத்து') # 0-10
+    units_suffix_nine = (u'பூஜ்ஜியம்', u'றொன்று', u'றிரண்டு', u'மூன்று', u'நான்கு', u'றைந்து', u'றாறு', u'றேழு', u'றெட்டு', u'றொன்பது', u'பத்து') # 0-10
     tween = [1.0,2.0,5.0,6.0,7.0,8.0,9.0]
-    teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19
+    teens = (u'பதினொன்று', u'பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19
     tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
     tens_full_prefix = (u'இருபத்து', u'முப்பத்து', u'நாற்பத்து', u'ஐம்பத்து', u'அறுபத்து', u'எழுபத்து', u'எண்பத்து', u'தொன்னூற்று') # 10+-90+
-    tens_prefix = (u'இருபத்', u'முப்பத்', u'நாற்பத்', u'ஐம்பத்', u'அறுபத்', u'எழுபத்', u'எண்பத்', u'தொன்னூற்று') # 10+-90+
+    tens_prefix = (u'இருபத்', u'முப்பத்', u'நாற்பத்', u'ஐம்பத்', u'அறுபத்', u'எழுபத்', u'எண்பத்', u'தொன்னூற்') # 10+-90+
     hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
-    hundreds_suffix = (u'நூற்றி', u'இருநூற்றி', u'முன்னூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
+    hundreds_suffix = (u'நூற்றி', u'இருநூற்று', u'முன்னூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
 
     one_thousand_prefix = u'ஓர்'
     thousands = (u'ஆயிரம்',u'ஆயிரத்து')
@@ -106,34 +107,45 @@ def num2tamilstr( *args ):
     if len(allowed_bases) >= 1:
         n_base = allowed_bases[0]
         if number == n_base:
-            if tweens==False:
+            if tensSpecial=='BASIC':
                 filenames.extend(file_map[n_base])
                 return u" ".join(num_map[n_base])
+            elif tensSpecial=='NINES':
+                filenames.extend(file_map[n_base])
+                return units_suffix_nine[long(number%10)]
             else:
                 filenames.extend(file_map[n_base])
                 return units_suffix[long(number%10)]
         quotient_number = long( number/n_base )
         residue_number = number - n_base*quotient_number
-        #print number, n_base, quotient_number, residue_number, tweens
+        #print number, n_base, quotient_number, residue_number, tensSpecial
         if n_base == n_one:
             if isinstance(number,float):
                 int_part = long(number%10)
                 frac = number - float(int_part)
                 filenames.append("units_%d"%int_part)
                 if abs(frac) > 1e-30:
-                    if tweens==False:
+                    if tensSpecial=='BASIC':
                         return units[int_part]+u' ' + num2tamilstr(frac,filenames)
+                    elif tensSpecial=='NINES':
+                        return units_suffix_nine[int_part]+u' ' + num2tamilstr(frac,filenames)
                     else:
                         return units_suffix[int_part]+u' ' + num2tamilstr(frac,filenames)
+
                 else:
-                    if tweens==False:
-                        return units[int_part]+u' '
+                    if tensSpecial=='BASIC':
+                        return units[int_part]
+                    elif tensSpecial=='NINES':
+                        return units_suffix_nine[int_part]
                     else:
                         return units_suffix[int_part]
             else:
-                if tweens==False:
+                if tensSpecial=='BASIC':
                     filenames.append("units_%d"%number)
-                    return units[number]+u' '
+                    return units[number]
+                elif tensSpecial=='NINES':
+                    filenames.append("units_%d"%number)
+                    return units_suffix_nine[number]
                 else:
                     filenames.append("units_%d"%number)
                     return units_suffix[number]
@@ -148,7 +160,7 @@ def num2tamilstr( *args ):
             elif number < 20:
                 filenames.append("teens_%d"%(number-10))
                 residue_number = math.fmod(number,1)
-                teen_number = int(math.floor(number - 10));
+                teen_number = int(math.floor(number - 10))
                 if residue_number > 1e-30:
                     return teens[teen_number-1] +u' ' + num2tamilstr(residue_number,filenames)
                 else:
@@ -160,7 +172,9 @@ def num2tamilstr( *args ):
                 if residue_number in tween:
                     filenames.append( "tens_prefix_%d"%(quotient_number-2) )
                     numeral = tens_prefix[quotient_number-2]
-                    tweens=True
+                    tensSpecial='SPECIAL'
+                    if (quotient_number==9):
+                        tensSpecial = 'NINES'
                 else:
                     filenames.append( "tens_prefix_%d"%(quotient_number-2) )
                     numeral = tens_full_prefix[quotient_number-2]+u' '
@@ -178,10 +192,10 @@ def num2tamilstr( *args ):
             if ( quotient_number == 1 ):
                 if n_base == n_thousand:
                     filenames.append("one_thousand_prefix")
-                    numeral = one_thousand_prefix+u' '
+                    numeral = one_thousand_prefix
                 else:
                     filenames.append("one_prefix")
-                    numeral = one_prefix+u' '
+                    numeral = one_prefix
             else:
                 numeral = num2tamilstr( quotient_number, filenames )
         if n_base >= n_thousand:
@@ -192,7 +206,7 @@ def num2tamilstr( *args ):
                 return numeral + u' ' + suffix+u' '
             filenames.append(suffix_filename)
             numeral = numeral + u' ' + suffix+u' '
-        residue_numeral = num2tamilstr( residue_number, filenames, tweens)
+        residue_numeral = num2tamilstr( residue_number, filenames, tensSpecial)
         #return numeral+u' '+residue_numeral
         return numeral+residue_numeral
     # number has to be zero
@@ -212,11 +226,7 @@ def num2tamilstr_american( *args ):
         return u"- "+num2tamilstr_american( -float(number) )
 
     units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
-    teens = (u'பதினொன்று', u' பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19
-    tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
-    tens_suffix = (u'இருபத்து', u'முப்பத்து', u'நாற்பத்து', u'ஐம்பத்து', u'அறுபத்து', u'எழுபத்து', u'எண்பத்து', u'தொன்னூற்று') # 10+-90+
     hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
-    hundreds_suffix = (u'நூற்றி', u'இருநூற்றி', u'முன்னூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
 
     one_thousand_prefix = u'ஓர்'
     thousands = (u'ஆயிரம்',u'ஆயிரத்து')
@@ -290,12 +300,11 @@ def num2tamilstr_american( *args ):
         else:
             if ( quotient_number == 1 ):
                 if n_base == n_thousand:
-                    numeral = one_thousand_prefix
+                    numeral = one_thousand_prefix+u' '
                 else:
-                    numeral = one_prefix
+                    numeral = one_prefix+u' '
             else:
                 numeral = num2tamilstr( quotient_number )
-        suffix = u''
         if n_base >= n_thousand:
             suffix = suffix_base[n_base][long(residue_number >= 1)]
             if residue_number == 0:
