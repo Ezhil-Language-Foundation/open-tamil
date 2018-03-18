@@ -67,7 +67,12 @@ def print_file_stats(filename):
     except OSError as err:
         print("OS error: {0}".format(err))
         return
-    file_text = Text(fileobj.read(), lineonly=attribs["line"], wordonly=attribs["word"], charonly=attribs["char"])
+    file_text = Text(
+            fileobj.read(), 
+            lineonly=attribs["line"],
+            wordonly=attribs["word"],
+            charonly=attribs["char"]
+            )
     fileobj.close()
 
     file_stats = construct_file_stats(file_text, filename)
