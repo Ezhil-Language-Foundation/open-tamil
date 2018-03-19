@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +41,7 @@
           <div class="sidebar-nav">
             <!-- side bar goes here -->
             <ul class="nav nav-tabs nav-stacked" role="navigation">
-              <li class="navbar-brand">Applications</li>
+              <li class="navbar-brand">{% trans 'Applications' % }</li>
               
               <li><a href="/number">Tamil Number</a></li>
               <li><a href="/vaypaadu">Tamil Multiplication Tables</a></li>
