@@ -42,7 +42,9 @@
 	$('#btn2').click(function(){
     var dat = $('#txt2').val()
     $.ajax({
-    	url: '/sandhi-check/'+dat,
+        type:"POST",
+        data:{"tamiltext":dat},
+    	url: '/sandhi-checker/',
     	success: function(data){
             console.log(data)
     	$('#disp2').text()

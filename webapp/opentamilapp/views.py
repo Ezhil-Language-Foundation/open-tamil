@@ -1,5 +1,8 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import tamil
 import codecs
 import sys
@@ -23,6 +26,9 @@ from ngram.WordModels import *
 from tamil.txt2unicode import *
 import tamil.utf8 as utf8
 from .sandhi_checker import *
+if sys.version_info[0]<3:
+   reload(sys)  
+   sys.setdefaultencoding('utf8')
 def index(request):
     return render(request,'first.html',{})
 def vaypaadu(request):
@@ -84,8 +90,8 @@ def keech(request,k1):
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
-def call_sandhi_check(request,k1):
-    print (k1)
+def call_sandhi_check(request):
+    k1= request.POST.get('tamiltext',u'அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ')
     dic={}
     dic['old']=k1
     text,res=check_sandhi(k1)
