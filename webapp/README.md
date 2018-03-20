@@ -8,6 +8,8 @@ cd open-tamil/webapp
 
 sudo pip install -r requirements.txt
 
+python manage.py compilemessages
+
 python manage.py runserver
 
 # for tamil translation of website
