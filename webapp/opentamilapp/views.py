@@ -22,6 +22,7 @@ from ngram.LetterModels import *
 from ngram.WordModels import *
 from tamil.txt2unicode import *
 import tamil.utf8 as utf8
+from .sandhi_checker import *
 def index(request):
     return render(request,'first.html',{})
 def vaypaadu(request):
@@ -44,6 +45,8 @@ def unig(request):
      return render(request,'unigram.html',{})
 def ngra(request):
      return render(request,'ngram.html',{})
+def sandhi_check(request):
+     return render(request,'sandhi_check.html',{})
 def numstr(request,num):
     typ=request.GET.get("type")
     if num.find(".")==-1:
@@ -77,6 +80,16 @@ def keech(request,k1):
             idx_len = len( get_letters(kk) )
             #print('w# ',idx, idx_len )
             dic[idx]=idx_len
+    json_string = json.dumps(dic,ensure_ascii = False)
+    #creating a Response object to set the content type and the encoding
+    response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
+    return response
+def call_sandhi_check(request,k1):
+    print (k1)
+    dic={}
+    dic['old']=k1
+    text,res=check_sandhi(k1)
+    dic['new']=u" ".join(text)
     json_string = json.dumps(dic,ensure_ascii = False)
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
