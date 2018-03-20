@@ -1,25 +1,26 @@
 {% extends "main.html" %}
+{% load i18n %}
 {% load staticfiles %}
 {% block title %}Tamil Number{% endblock %}
 {% block content %}
 <section id="home">
 <div class="page-header">
-    <h1>Tamil Number</h1>
+    <h1>{% trans "Tamil Number" %}</h1>
 </div>
 <center>
 <form class="form-group">
     <div class="form-group">
         <label for="word">Number</label>
     </div>
-<p class="important">Numeral - convert a given number (integer or float) into a numeral in Indian or American based system.</p>
-        <input type="text" name="word" id="txt" class="form-control" placeholder="Please Enter the Number" style="border: 1px solid blue;
+<p class="important">{% trans "Numeral - convert a given number (integer or float) into a numeral in Indian or American based system." %}</p>
+        <input type="text" name="word" id="txt" class="form-control" placeholder="{% trans 'Please Enter the Number' %}" style="border: 1px solid blue;
             border-radius: 10px;"/>
 </form>
 <select name="tp" id="st" class="form-control" style="border: 1px solid blue;
             border-radius: 10px;">
-<option value="IN">Indian Standard
+<option value="IN">{% trans "Indian Standard" %}
 </option>
-<option value="US">American Standard
+<option value="US">{% trans "American Standard" %}
 </option>
 </select>
 <p id="disp" class='important' style="padding-top:60px">

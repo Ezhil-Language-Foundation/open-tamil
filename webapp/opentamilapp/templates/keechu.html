@@ -1,14 +1,15 @@
 {% extends "main.html" %}
+{% load i18n %}
 {% block title %}Tamil Number{% endblock %}
 {% block content %}
 
 <section id="keechu">
 <div class="page-header">
-    <h1>Word Count</h1>
+    <h1>{% trans "Word Count" %}</h1>
 </div>
 	<center>
 <textarea rows="10" cols="80" name="word" id="txt2"></textarea>
-<button id="btn2" class="btn btn-success">Count</button>
+<button id="btn2" class="btn btn-success">{% trans "Count" %}</button>
 
 <p id="disp2">
 	
@@ -50,7 +51,7 @@
     			count+=1
     			
     	}
-    	$('#disp2').text('No of Word is '+' '+count+' '+' and No of letter is '+' '+len)
+    	$('#disp2').text("{% trans 'No of Word is ' %}"+' '+count+' '+"{% trans 'and No of letter is '%}"+' '+len)
     	}
     })
   	})

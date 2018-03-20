@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: opentamilweb/urls.py:27
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-19 22:37+0000\n"
+"POT-Creation-Date: 2018-03-20 08:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,14 +19,203 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: opentamilapp/templates/anagram.html:3 opentamilapp/templates/main.html:52
+#: opentamilapp/templates/number.html:8
+msgid "Tamil Number"
+msgstr "தமிழ் எண்கள்"
+
+#: opentamilapp/templates/anagram.html:7
+msgid "Anagram"
+msgstr "அனாகிராம்"
+
+#: opentamilapp/templates/anagram.html:12
+msgid "Check"
+msgstr "சரி பார்"
+
+#: opentamilapp/templates/anagram.html:28
+msgid "cheking anagrams. Please Wait..."
+msgstr "அனாகிராம் சரிபார்க்கப் படுகிறது, காத்திருக்கவும்..."
+
 #: opentamilapp/templates/first.html:7
 msgid "Welcome to OPEN TAMIL WEB!"
+msgstr "திறமூல தமிழ் வலைதளம் தங்களை வரவேற்கிறது!"
+
+#: opentamilapp/templates/first.html:10
+msgid ""
+"Open Tamil Web is a web platform to host Free Software language processing "
+"applications. It consists of a web framework and a set of applications for "
+"processing Tamil language. It is a platform for porting existing and "
+"upcoming language processing applications to the web."
 msgstr ""
 
-#: opentamilweb/settings.py:109
-msgid "English"
+#: opentamilapp/templates/first.html:11
+msgid ""
+"open tamil can also be used as a python library or as a webservice from "
+"other applications. Open tamil is currently under development. If you are "
+"interested in contributing contact"
 msgstr ""
+"ஓப்பன் தமிழ் பைத்தான் மொழியின் ஒரு நூலகமாகவோ அல்லது இணையசேவையாகவோ வேரொரு "
+"பயன்பாடுகளிலும் உபயோகிக்கலாம். ஓப்பன் தமிழ் தற்பொழுது மேம்பாட்டில் உள்ளது. மேம்பாட்டில் "
+"பங்களிக்க விருப்பம் உடையவர்கள் தொடர்பு கொள்ளவும் "
+
+#: opentamilapp/templates/first.html:12
+msgid "the developers"
+msgstr "மேம்படுத்துபவர்கள்"
+
+#: opentamilapp/templates/first.html:14
+msgid "Read the project announcement"
+msgstr "திட்ட அறிக்கையை வாசிக்கவும்"
+
+#: opentamilapp/templates/keechu.html:8 opentamilapp/templates/main.html:54
+msgid "Word Count"
+msgstr "வார்தை எண்ணி"
+
+#: opentamilapp/templates/keechu.html:12
+msgid "Count"
+msgstr "எண்ணு"
+
+#: opentamilapp/templates/keechu.html:54
+msgid "No of Word is "
+msgstr "மொத்த் வார்த்தைகள்"
+
+#: opentamilapp/templates/keechu.html:54
+msgid "and No of letter is "
+msgstr "மற்றும் மொத்த எழுத்துக்கள்"
+
+#: opentamilapp/templates/main.html:50
+msgid "Applications"
+msgstr "பயன்பாடுகள்"
+
+#: opentamilapp/templates/main.html:53
+msgid "Tamil Multiplication Tables"
+msgstr "பெருக்கல் அட்டவணை"
+
+#: opentamilapp/templates/main.html:56
+msgid "Transliteration"
+msgstr "ஒலிபெயர்ப்பி"
+
+#: opentamilapp/templates/main.html:58
+msgid "Tamil Spell Checker"
+msgstr "தமிழ் எழுத்துப் பிழை திருத்தி"
+
+#: opentamilapp/templates/main.html:60
+msgid "Unicode Converter"
+msgstr "யுனிகோட் மாற்றி"
+
+#: opentamilapp/templates/main.html:62
+msgid "Tamil N-gram"
+msgstr "தமிழ் N-கிராம்"
+
+#: opentamilapp/templates/main.html:64
+msgid "Tamil Unigram"
+msgstr "தமிழ் யுனிகிராம்"
+
+#: opentamilapp/templates/main.html:66
+msgid "Tamil Anagram"
+msgstr "தமிழ் அனாகிராம்"
+
+#: opentamilapp/templates/main.html:67 opentamilapp/templates/reverse.html:9
+msgid "Reverse Words"
+msgstr "வார்த்தை திருப்பி"
+
+#: opentamilapp/templates/ngram.html:26
+msgid "making ngram Please Wait..."
+msgstr "N-கிராம் உருவாக்கப் படுகிறது காத்திருக்கவும்"
+
+#: opentamilapp/templates/number.html:15
+msgid ""
+"Numeral - convert a given number (integer or float) into a numeral in Indian "
+"or American based system."
+msgstr "கொடுக்கப்பட்ட எண்ணிற்கு இணையான தமிழ் வார்த்தைகள் கொடுக்கப்படும்"
+
+#: opentamilapp/templates/number.html:16
+#: opentamilapp/templates/vaypaadu.html:19
+msgid "Please Enter the Number"
+msgstr "எண்களை அழுத்தவு"
+
+#: opentamilapp/templates/number.html:21
+msgid "Indian Standard"
+msgstr "இந்திய தரநிலை"
+
+#: opentamilapp/templates/number.html:23
+msgid "American Standard"
+msgstr "அமெரிக்க தரநிலை"
+
+#: opentamilapp/templates/spell.html:9
+msgid "Spellchecker"
+msgstr "எழுத்துப் பிழை திருத்தி"
+
+#: opentamilapp/templates/spell.html:11
+msgid ""
+"This is a demo of spellcheck service of . In this page, you can enter a word "
+"for checking the spelling and just get the result."
+msgstr ""
+
+#: opentamilapp/templates/spell.html:12
+msgid ""
+"For using open tamil web spellcheck service in your web or desktop "
+"applications"
+msgstr ""
+
+#: opentamilapp/templates/spell.html:16
+msgid "Check Spelling"
+msgstr "எழுத்துப் பிழை சரி பார்"
+
+#: opentamilapp/templates/spell.html:36
+msgid "checking spelling. Please Wait..."
+msgstr "எழுத்துப் பிழை சரிபார்க்கப் படுகிற"
+
+#: opentamilapp/templates/translite.html:8
+msgid "Transliterator"
+msgstr "ஒலிபெயர்ப்பி"
+
+#: opentamilapp/templates/translite.html:10
+msgid ""
+"This application helps you to transliterate text from any Indian language to "
+"any other Indian language. Enter the text for transliteration in the below "
+"text area. Language of each  word will be detected. You can give the text in "
+"any language and even with mixed language. For Tamil alone, English->Tamil, "
+"Transliteration is available."
+msgstr ""
+
+#: opentamilapp/templates/unicode.html:9
+msgid "Tscii to Unicode"
+msgstr "யுனிகோட் மாற்றி"
+
+#: opentamilapp/templates/unigram.html:8
+msgid "Unigram"
+msgstr "யுனிகிராம்"
+
+#: opentamilapp/templates/unigram.html:31
+#, fuzzy
+#| msgid "making ngram Please Wait..."
+msgid "making unigram. Please Wait..."
+msgstr "N-கிராம் உருவாக்கப் படுகிறது காத்திருக்கவும்"
+
+#: opentamilapp/templates/vaypaadu.html:8
+msgid "வாய்பாடு - Multiplication Tables"
+msgstr ""
+
+#: opentamilapp/templates/vaypaadu.html:10
+msgid "This application helps you to generate multiplication tables in Tamil"
+msgstr "இந்த பயன்பாடு உங்களுக்கு பெருக்கல் அட்டவணையை தமிழ் மொழியில் உருவாக்க உதவி செய்யும்"
+
+#: opentamilapp/templates/vaypaadu.html:16
+msgid "Number"
+msgstr "எண்"
+
+#: opentamilapp/templates/vaypaadu.html:18
+msgid "Multiplication table for number (enter input):"
+msgstr ""
+
+#: opentamilapp/templates/vaypaadu.html:21
+msgid "please Enter the Number"
+msgstr "எண்ணை அழுத்தவும்"
 
 #: opentamilweb/settings.py:110
+msgid "English"
+msgstr "ஆங்கிலம்"
+
+#: opentamilweb/settings.py:111
 msgid "Tamil"
-msgstr ""
+msgstr "தமிழ்"

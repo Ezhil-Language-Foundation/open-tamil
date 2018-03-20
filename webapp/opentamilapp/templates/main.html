@@ -30,6 +30,12 @@
           
         </ul>
         <ul class="nav navbar-nav pull-right hidden-xs">
+          {% if LANGUAGE_CODE|stringformat:"s" == "en"  %}
+    <li><a onclick="document.setLangTamil.submit();return false;">தமிழ் </a></li>
+       
+         {% else %}
+   <li><a onclick="document.setLangEnglish.submit();return false;">Eng</a></li>
+     {% endif %}
           <li><a href="https://github.com/Ezhil-Language-Foundation/open-tamil">Documentation</a></li>
         </ul>
       </div> <!-- container -->
@@ -41,28 +47,38 @@
           <div class="sidebar-nav">
             <!-- side bar goes here -->
             <ul class="nav nav-tabs nav-stacked" role="navigation">
-              <li class="navbar-brand">{% trans 'Applications' % }</li>
+              <li class="navbar-brand">{% trans 'Applications' %}</li>
               
-              <li><a href="/number">Tamil Number</a></li>
-              <li><a href="/vaypaadu">Tamil Multiplication Tables</a></li>
-              <li><a href="/keechu">Word Count</a></li>
+              <li><a href="/number">{% trans "Tamil Number" %}</a></li>
+              <li><a href="/vaypaadu">{% trans "Tamil Multiplication Tables" %}</a></li>
+              <li><a href="/keechu">{% trans "Word Count" %}</a></li>
               
-              <li><a href="/translite">Transliteration</a></li>
+              <li><a href="/translite">{% trans "Transliteration" %}</a></li>
               
-              <li><a href="/spell">Tamil Spell Checker</a></li>
+              <li><a href="/spell">{% trans "Tamil Spell Checker" %}</a></li>
               
-              <li><a href="/tsci">Unicode Converter</a></li>
+              <li><a href="/tsci">{% trans "Unicode Converter" %}</a></li>
               
-              <li><a href="/ngram">Tamil N-gram</a></li>
+              <li><a href="/ngram">{% trans "Tamil N-gram" %}</a></li>
               
-              <li><a href="/unigram">Tamil Unigram</a></li>
+              <li><a href="/unigram">{% trans "Tamil Unigram" %}</a></li>
               
-              <li><a href="/anagram">Tamil Anagram</a></li>
-              <li><a href="/revers">Reverse Words</a></li>
+              <li><a href="/anagram">{% trans "Tamil Anagram" %}</a></li>
+              <li><a href="/revers">{% trans "Reverse Words" %}</a></li>
 
 
             </ul>
           </div>
+           <form name="setLangTamil" action="/i18n/setlang/" method="POST">
+   {% csrf_token %}
+   <input name="next" type="hidden" value="{{request.path}}"/>
+   <input type="hidden" name="language" value="ta"/>
+</form>
+<form name="setLangEnglish" action="/i18n/setlang/" method="POST" id="set-eng">
+   {% csrf_token %}
+   <input name="next" type="hidden" value="" id="eng-lang"/>
+   <input type="hidden" name="language" value="en"/>
+</form>
         </div>
 <div id="content" class="col-sm-9">{% block content %}{% endblock %}</div></div></div>
 <footer role="contentinfo" class="footer">

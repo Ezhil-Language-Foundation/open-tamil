@@ -1,11 +1,12 @@
 {% extends "main.html" %}
+{% load i18n %}
 {% block title %}Unicode Convertor{% endblock %}
 
 {% block content %}
 <section id="t2u">
 <div class="col-sm-9">
 <div class="page-header">
-    <h1>Tscii to Unicode</h1>
+    <h1>{% trans "Tscii to Unicode" %}</h1>
 </div>
 <textarea id='txt1' rows="5" cols="50" class="important"></textarea> <br>
 <div class="row">

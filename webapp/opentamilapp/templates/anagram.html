@@ -1,14 +1,15 @@
 {% extends "main.html" %}
-{% block title %}Tamil Number{% endblock %}
+{% load i18n %}
+{% block title %}{% trans "Tamil Number" %}{% endblock %}
 {% block content %}
 <div class="col-sm-9">
 <div class="page-header">
-    <h1>Anagram</h1>
+    <h1>{% trans "Anagram" %}</h1>
 </div>
 <center>
   
 <textarea name="word" id="txt" rows="10" cols="70"  placeholder="Please Enter the Tamil Word"></textarea>
-<button id="btn2" class="btn btn-success">Check</button>
+<button id="btn2" class="btn btn-success">{% trans "Check" %}</button>
 <div id="progress" class="alert alert-info silpa-hide"></div>
 <p id="disp" class='important'>
 </p>
@@ -24,7 +25,7 @@ var id_result = $('#disp'),
     	url: '/anagram/'+dat,
 beforeSend:function(){
                     id_result.empty().hide();
-                    id_progress.html("cheking anagrams. Please Wait...").show();
+                    id_progress.html("{% trans 'cheking anagrams. Please Wait...' %}").show();
                 },
     	success: function(data){
  id_progress.hide();
