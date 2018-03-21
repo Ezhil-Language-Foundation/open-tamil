@@ -12,14 +12,10 @@
 <button id="btn2" class="btn btn-success">{% trans "Check" %}</button>
 
 <div id="results">  
-<label for="disp2">Input:</label>
-<textarea id="disp2" rows="15" cols="40">
-	
-</textarea>
-<label for="disp3">Output:</label>
-<textarea id="disp3" rows="15" cols="40">
+
+<p id="disp3">
     
-</textarea>
+</p>
 </div>
 </center>
 <div class="well">
@@ -45,7 +41,19 @@
 </section>
 <script type="text/javascript">
 	$(document).ready(function () {
+function highlight(newElem, oldElem){ 
+    var newText = newElem.text();
+    var oldText = oldElem.text();
+    var text = "";
+    newElem.text().split("").forEach(function(value, index){
 
+        if (value != oldText.charAt(index))
+            text += "<span class='highlight'>" + value + "</span>";         
+        else
+            text += value;
+    });
+    newElem.html(text);
+}
         $('#results').hide()
 	$('#btn2').click(function(){
     var dat = $('#txt2').val()
@@ -55,9 +63,11 @@
     	url: '/sandhi-checker/',
     	success: function(data){
             console.log(data)
-    	$('#disp2').text(data.old)
-        $('#disp3').text(data.new)
-        $('#txt2').val('')
+            $('#disp2').text(data.old)
+            $('#disp3').text(data.new)
+
+       highlight($('#disp3'),$('#disp2'));
+    	
         $('#results').show()
     	}
     })
