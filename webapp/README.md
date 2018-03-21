@@ -30,3 +30,4 @@ msgstr "இது எடுத்துக்காட்டு"
 then put following command
 
 python manage.py compilemessages
+python manage.py runserver
