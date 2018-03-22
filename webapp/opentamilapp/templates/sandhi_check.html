@@ -41,19 +41,7 @@
 </section>
 <script type="text/javascript">
 	$(document).ready(function () {
-function highlight(newElem, oldElem){ 
-    var newText = newElem.text();
-    var oldText = oldElem.text();
-    var text = "";
-    newElem.text().split("").forEach(function(value, index){
 
-        if (value != oldText.charAt(index))
-            text += "<span class='highlight'>" + value + "</span>";         
-        else
-            text += value;
-    });
-    newElem.html(text);
-}
         $('#results').hide()
 	$('#btn2').click(function(){
     var dat = $('#txt2').val()
@@ -64,9 +52,7 @@ function highlight(newElem, oldElem){
     	success: function(data){
             console.log(data)
             $('#disp2').text(data.old)
-            $('#disp3').text(data.new)
-
-       highlight($('#disp3'),$('#disp2'));
+            $('#disp3').html(data.new)
     	
         $('#results').show()
     	}

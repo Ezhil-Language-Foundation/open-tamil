@@ -93,8 +93,12 @@ def keech(request,k1):
 def call_sandhi_check(request):
     k1= request.GET.get('tamiltext',u'அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ')
     dic={}
+    temp=u""
     dic['old']=k1
     text,res=check_sandhi(k1)
+    for i,j in enumerate(k1.split()):
+        if j!=text[i]:
+           text[i]="<span class='highlight'>"+text[i]+"</span>"
     dic['new']=u" ".join(text)
     json_string = json.dumps(dic,ensure_ascii = False)
     #creating a Response object to set the content type and the encoding
