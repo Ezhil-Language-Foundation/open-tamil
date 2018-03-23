@@ -12,7 +12,7 @@ if PYTHON3:
         pass
 
 def num2tamilstr( *args ):
-    """ work till l lakh crore - i.e 1e5*1e7 = 1e12.
+    """ work till one lakh crore - i.e 1e5*1e7 = 1e12.
         turn number into a numeral, Indian style. Fractions upto 1e-30"""
     number = args[0]
     if len(args) < 2:

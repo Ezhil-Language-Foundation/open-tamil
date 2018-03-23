@@ -1,5 +1,8 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 import tamil
 import codecs
 import sys
@@ -22,6 +25,10 @@ from ngram.LetterModels import *
 from ngram.WordModels import *
 from tamil.txt2unicode import *
 import tamil.utf8 as utf8
+from .sandhi_checker import *
+if sys.version_info[0]<3:
+   reload(sys)  
+   sys.setdefaultencoding('utf8')
 def index(request):
     return render(request,'first.html',{})
 def vaypaadu(request):
@@ -44,6 +51,8 @@ def unig(request):
      return render(request,'unigram.html',{})
 def ngra(request):
      return render(request,'ngram.html',{})
+def sandhi_check(request):
+     return render(request,'sandhi_check.html',{})
 def numstr(request,num):
     typ=request.GET.get("type")
     if num.find(".")==-1:
@@ -77,6 +86,20 @@ def keech(request,k1):
             idx_len = len( get_letters(kk) )
             #print('w# ',idx, idx_len )
             dic[idx]=idx_len
+    json_string = json.dumps(dic,ensure_ascii = False)
+    #creating a Response object to set the content type and the encoding
+    response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
+    return response
+def call_sandhi_check(request):
+    k1= request.GET.get('tamiltext',u'அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ')
+    dic={}
+    temp=u""
+    dic['old']=k1
+    text,res=check_sandhi(k1)
+    for i,j in enumerate(k1.split()):
+        if j!=text[i]:
+           text[i]="<span class='highlight'>"+text[i]+"</span>"
+    dic['new']=u" ".join(text)
     json_string = json.dumps(dic,ensure_ascii = False)
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )

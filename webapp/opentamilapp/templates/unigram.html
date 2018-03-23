@@ -1,10 +1,11 @@
 {% extends "main.html" %}
+{% load i18n %}
 {% block title %}Tamil Number{% endblock %}
 {% block content %}
 <section id="home">
 <div class="col-sm-9">
 <div class="page-header">
-    <h1>Unigram</h1>
+    <h1>{% trans "Unigram" %}</h1>
 </div>
 <center>
 <input type="text" name="word" id="txt4" placeholder="Enter the word"/><br>
@@ -27,7 +28,7 @@
     	url: '/unigram/'+dat+'?n='+n,
 beforeSend:function(){
                     id_result.empty().hide();
-                    id_progress.html("making unigram. Please Wait...").show();
+                    id_progress.html("{% trans 'making unigram. Please Wait...' %}").show();
                 },
     	success: function(data){
         id_progress.hide()
