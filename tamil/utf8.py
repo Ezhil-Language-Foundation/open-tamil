@@ -16,6 +16,9 @@ import operator
 PYTHON3 = version > '3'
 del version
 
+if PYTHON3:
+    import functools
+
 ## constants
 TA_ACCENT_LEN = 13 #12 + 1
 TA_AYUDHA_LEN = 1
@@ -667,6 +670,13 @@ def print_tamil_words( tatext, use_frequencies = False ):
             print(u"%d -> %s"%(l[1],l[0]))
         else:
             print(u"%s"%l[0])
+
+def tamil_sorted(list_data):
+    if PYTHON3:
+        asorted = sorted(list_data,key=functools.cmp_to_key(compare_words_lexicographic))
+    else:
+        asorted = sorted(list_data,cmp=compare_words_lexicographic)
+    return asorted
 
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ

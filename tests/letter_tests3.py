@@ -3,6 +3,8 @@
 # setup the paths
 from opentamiltests import *
 from tamil.utf8 import *
+if PYTHON3:
+    from functools import cmp_to_key
 
 class LetterTests(unittest.TestCase):
     def test_named_vowels(self):
@@ -31,12 +33,14 @@ class LetterTests(unittest.TestCase):
                       consonant_llla,
                       consonant_zha,
                       consonant_va] #this array has a few duplicates
-        asorted = sorted(agaram_letters,compare_words_lexicographic)
-        consonants = sorted(list(set(consonants)),compare_words_lexicographic)
-        #print(u"%d - %d"%(len(asorted),len(consonants)))
+        if PYTHON3:
+            asorted = tamil_sorted(agaram_letters)
+            consonants = sorted(list(set(consonants)),key=cmp_to_key(compare_words_lexicographic))
+        else:
+            asorted = tamil_sorted(agaram_letters)
+            consonants = sorted(list(set(consonants)),cmp=compare_words_lexicographic)
         self.assertEqual(asorted,consonants)
         
-    
     def test_named_kombugal(self):
         kombugal = [accent_aa, accent_i, accent_u, accent_uu, accent_e, accent_ee, accent_ai, accent_o, accent_oo, accent_au ]
         self.assertTrue( accent_symbols[1:10], kombugal )
