@@ -420,7 +420,7 @@ class Speller(object):
         thousands = (u'ஆயிரம்',u'ஆயிரத்தி')
 
         one_prefix = (u'ஒரு',)
-        lakh = (u'இலட்சம்',u'இலட்சத்தி')
+        lakh = (u'இலட்சம்',u'இலட்சத்து')
         crore = (u'கோடி',u'கோடியே')
 
         mil = (u'மில்லியன்',)

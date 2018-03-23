@@ -109,7 +109,7 @@ public class NumeralTest extends TestCase {
     	num_numeral.put(49, "நாற்பத்தி ஒன்பது");
     	num_numeral.put(50, "ஐம்பது");
     	num_numeral.put(55, "ஐம்பத்தி ஐந்து");
-    	num_numeral.put(1000001, "பத்து இலட்சத்தி ஒன்று");
+    	num_numeral.put(1000001, "பத்து இலட்சத்து ஒன்று");
     	num_numeral.put(90, "தொன்னூறு");
     	num_numeral.put(99, "தொன்னூற்றி ஒன்பது");
     	num_numeral.put(100, "நூறு");
