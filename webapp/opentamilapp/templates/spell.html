@@ -1,18 +1,19 @@
 {% extends "main.html" %}
+{% load i18n %}
 {% block title %}Tamil Number{% endblock %}
 
 {% block content %}
 <section id="spell">
 <div class="col-sm-9">
 <div class="page-header">
-    <h1>Spellchecker</h1>
+    <h1>{% trans "Spellchecker" %}</h1>
 </div>
-<p>This is a demo of spellcheck service of . In this page, you can enter a word for checking the spelling and just get the result.</p>
-<p>For using open tamil web spellcheck service in your web or desktop applications</p>
+<p>{% trans "This is a demo of spellcheck service of . In this page, you can enter a word for checking the spelling and just get the result." %}</p>
+<p>{% trans "For using open tamil web spellcheck service in your web or desktop applications" %}</p>
 	<center>
         
             <input type="text" name="word" id="txt4" placeholder="enter the tamil word"/>
-<button id="btn4" class="btn btn-success">Check Spelling</button>
+<button id="btn4" class="btn btn-success">{% trans "Check Spelling" %}</button>
 <div id="progress" class="alert alert-info silpa-hide"></div>
    
 <div id="disp4" class="important">
@@ -32,7 +33,7 @@
     	url: '/spell/'+dat+'/',
 beforeSend:function(){
                     id_result.empty().hide();
-                    id_progress.html("checking spelling. Please Wait...").show();
+                    id_progress.html("{% trans 'checking spelling. Please Wait...' %}").show();
                 },
     	success: function(data){
            id_progress.hide()

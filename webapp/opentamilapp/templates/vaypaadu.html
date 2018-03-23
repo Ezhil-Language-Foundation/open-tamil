@@ -1,23 +1,24 @@
 {% extends "main.html" %}
+{% load i18n %}
 {% block title %}Tamil Number{% endblock %}
 
 {% block content %}
 <section id="translite">
 <div class="page-header">
-  <h1>வாய்பாடு - Multiplication Tables</h1>
+  <h1>{% trans "வாய்பாடு - Multiplication Tables" %}</h1>
 </div>
-<p>This application helps you to generate multiplication tables in Tamil</p>
+<p>{% trans "This application helps you to generate multiplication tables in Tamil" %}</p>
 
 
 <center>
 <form class="form-group">
     <div class="form-group">
-        <label for="word">Number</label>
+        <label for="word">{% trans "Number" %}</label>
     </div>
-    <p class="important">Multiplication table for number (enter input):</p>
-    <input type="text" name="source_multiplier" id="txt" class="form-control" placeholder="Please Enter the Number" style="border: 1px solid blue;
+    <p class="important">{% trans "Multiplication table for number (enter input):" %}</p>
+    <input type="text" name="source_multiplier" id="txt" class="form-control" placeholder="{% trans 'Please Enter the Number' %}" style="border: 1px solid blue;
 															   border-radius: 10px;"/>
-    <input type="text" name="source_length" id="txt2" value="20" class="form-control" placeholder="Please Enter the Number" style="border: 1px solid blue;"/>
+    <input type="text" name="source_length" id="txt2" value="20" class="form-control" placeholder="{% trans 'please Enter the Number' %}" style="border: 1px solid blue;"/>
     <input type="button" value="calc" id="calc" />
 </form>
 <div id="disp" style="padding-top:60px">

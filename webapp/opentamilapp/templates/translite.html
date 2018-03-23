@@ -1,12 +1,13 @@
 {% extends "main.html" %}
+{% load i18n %}
 {% block title %}Tamil Number{% endblock %}
 
 {% block content %}
 <section id="translite">
 <div class="page-header">
-  <h1>Transliterator</h1>
+  <h1>{% trans "Transliterator" %}</h1>
 </div>
-<p>This application helps you to transliterate text from any Indian language to any other Indian language. Enter the text for transliteration in the below text area. Language of each  word will be detected. You can give the text in any language and even with mixed language. For Tamil alone, English->Tamil, Transliteration is available.</p>
+<p>{% trans "This application helps you to transliterate text from any Indian language to any other Indian language. Enter the text for transliteration in the below text area. Language of each  word will be detected. You can give the text in any language and even with mixed language. For Tamil alone, English->Tamil, Transliteration is available." %}</p>
 
 
        <form action="" class="form-horizontal">
