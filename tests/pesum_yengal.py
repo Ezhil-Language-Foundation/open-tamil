@@ -13,8 +13,8 @@ class PesumYengalTest(unittest.TestCase):
         ramanujan = 1729
         actual_fn = []
         gometra = tamil.numeral.num2tamilstr( ramanujan, actual_fn )
-        expected_fn = ['one_thousand_prefix','thousands_1','hundreds_suffix_6','tens_suffix_0','units_9']
-        expected = u"ஓர் ஆயிரத்தி எழுநூற்று இருபத்தி ஒன்பது"
+        expected_fn = ['one_thousand_prefix','thousands_1','hundreds_suffix_6','tens_prefix_0','units_9']
+        expected = u"ஓர் ஆயிரத்து எழுநூற்று இருபத்தொன்பது"
         self.assertEqual( gometra, expected )
         self.assertEqual( expected_fn, actual_fn )
     

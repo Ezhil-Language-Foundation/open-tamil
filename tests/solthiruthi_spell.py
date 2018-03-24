@@ -70,7 +70,7 @@ class SpellTestTamil(unittest.TestCase):
         self.assertTrue(alt in sugg)
 
     def test_comma_numbers(self):
-        alt = u"பத்து ஆயிரம்"
+        alt = u"பத்து ஆயிரம் "
         not_ok,sugg = self.speller.check_word_and_suggest(u"10,000")
         self.assertFalse(not_ok)
         self.assertTrue(alt in sugg)
@@ -86,7 +86,7 @@ class SpellTestTamil(unittest.TestCase):
             self.assertTrue(ok)
 
     def test_words_with_numeral(self):
-        data = [("900",u"தொள்ளாயிரம்"),("1000001.5",u"பத்து இலட்சத்தி ஒன்று புள்ளி ஐந்து"),("-10.5",u"கழித்தல் பத்து புள்ளி ஐந்து")]
+        data = [("900",u"தொள்ளாயிரம் "),("1000001.5",u"பத்து இலட்சத்து ஒன்று புள்ளி ஐந்து"),("-10.5",u"கழித்தல் பத்து புள்ளி ஐந்து")]
         for w,sugg in data:
             not_ok,suggs = self.speller.check_word_and_suggest(w)
             self.assertFalse(not_ok)
@@ -95,7 +95,7 @@ class SpellTestTamil(unittest.TestCase):
 
     # # 1024 512 256 எல்லாமே இரண்டின் பெருக்குகள்
     def test_numeral_input(self):
-        data = [("900",u"தொள்ளாயிரம்"),("1000001.5",u"பத்து இலட்சத்தி ஒன்று புள்ளி ஐந்து"),("-10.5",u"கழித்தல் பத்து புள்ளி ஐந்து")]
+        data = [("900",u"தொள்ளாயிரம்"),("1000001.5",u"பத்து இலட்சத்து ஒன்று புள்ளி ஐந்து"),("-10.5",u"கழித்தல் பத்து புள்ளி ஐந்து")]
         for _,words in data:
             for word in words.split(u" "):
                 ok,suggs = self.speller.check_word_and_suggest(word)
