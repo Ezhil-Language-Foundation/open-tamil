@@ -64,8 +64,9 @@
 	      $('#disp').html('')
 	      $('#disp').show();
 	      var i = 0;
+              var multiplicand = getTamilString(x);
 	      for( i = 0; i < y; i++ ) {
- 	          var data = getTamilString(x) + ' x ' + getTamilString(i+1) + ' = ' + getTamilString(x*(i+1));
+ 	          var data = multiplicand + ' x ' + getTamilString(i+1) + ' = ' + getTamilString(x*(i+1));
 	          $('#disp').html($('#disp').html()+'\n<div stype=\'align:left;\'>'+data+'</div>\n');
 	       }
            }
