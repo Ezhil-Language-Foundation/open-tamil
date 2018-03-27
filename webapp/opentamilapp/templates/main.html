@@ -51,7 +51,7 @@
             <!-- side bar goes here -->
             <ul class="nav nav-tabs nav-stacked" role="navigation">
               <li class="navbar-brand">{% trans 'Applications' %}</li>
-              
+              <li><a href="/xword">{% trans "Crossword" %}</a></li>
               <li><a href="/number">{% trans "Tamil Number" %}</a></li>
                <li><a href="/sandhi-check">{% trans "Sandhi Checker" %}</a></li>
               <li><a href="/vaypaadu">{% trans "Tamil Multiplication Tables" %}</a></li>
@@ -62,15 +62,10 @@
               <li><a href="/spell">{% trans "Tamil Spell Checker" %}</a></li>
               
               <li><a href="/tsci">{% trans "Unicode Converter" %}</a></li>
-              
               <li><a href="/ngram">{% trans "Tamil N-gram" %}</a></li>
-              
-              <li><a href="/unigram">{% trans "Tamil Unigram" %}</a></li>
-              
+	      <li><a href="/unigram">{% trans "Tamil Unigram" %}</a></li>
               <li><a href="/anagram">{% trans "Tamil Anagram" %}</a></li>
               <li><a href="/revers">{% trans "Reverse Words" %}</a></li>
-
-
             </ul>
           </div>
            <form name="setLangTamil" action="/i18n/setlang/" method="POST">
@@ -98,7 +93,7 @@
           <li class="muted">·</li>
           <li><a href="#">License</a></li>
           <li class="muted">·</li>
-          <li><a href="mailto:tshrinivasan@gmail.com">Contact</a></li>
+          <li><a href="mailto:{{settings.CONTACT_EMAIL}}">Contact</a></li>
         </ul>
       </div>
     </footer>

@@ -25,9 +25,11 @@ from ngram.LetterModels import *
 from ngram.WordModels import *
 from tamil.txt2unicode import *
 import tamil.utf8 as utf8
-from .sandhi_checker import *
+from .sandhi_checker import check_sandhi
+from .tamilwordgrid import generate_tamil_word_grid
+
 if sys.version_info[0]<3:
-   reload(sys)  
+   reload(sys)
    sys.setdefaultencoding('utf8')
 def index(request):
     return render(request,'first.html',{})
@@ -155,3 +157,22 @@ def revers(request,word):
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
+
+ #TBD:
+ #def sorttamil(request):
+
+ #TBD:
+ #def synthesize_number(request):
+
+ #TBD:
+ #def kalsee_on_web(request):
+ 
+def xword(request):
+   if request.method == "GET":
+      return render(request,'xword.html',{'solution':u''})
+   assert( request.method == "POST" )
+   words = request.POST.get("words",[])
+   wordlist = filter(len,[ w.strip() for w in re.split(u"\n+",words) ])
+   grid,sol = generate_tamil_word_grid(wordlist)
+   return render(request,'xword.html',{'solution':grid,'wordlist':wordlist})
+   #return HttpResponse(sol,content_type="text/html; charset=UTF-8;")

@@ -129,3 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#can be 'open-tamil.herokuapp.com' or 'tamilpesu.us' etc.
+EXAMPLE_SITE_URL=u'tamilpesu.us'
+CONTACT_EMAIL=u'tshrinivasan@gmail.com'

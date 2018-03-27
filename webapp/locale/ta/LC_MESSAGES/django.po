@@ -1,7 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# ஓப்பன் தமிழ் வலை இடைமுகம் - தமிழாக்கம்
+# Copyright (C) 2018 சயத் அபுதாஹிர், மற்றும் பலர்
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #: opentamilweb/urls.py:27
 #, fuzzy
@@ -9,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-20 08:33+0000\n"
+"POT-Creation-Date: 2018-03-27 10:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: opentamilapp/templates/anagram.html:3 opentamilapp/templates/main.html:52
+#: opentamilapp/templates/anagram.html:3 opentamilapp/templates/main.html:55
 #: opentamilapp/templates/number.html:8
 msgid "Tamil Number"
 msgstr "தமிழ் எண்கள்"
@@ -28,11 +27,12 @@ msgstr "தமிழ் எண்கள்"
 msgid "Anagram"
 msgstr "அனாகிராம்"
 
-#: opentamilapp/templates/anagram.html:12
+#: opentamilapp/templates/anagram.html:13
+#: opentamilapp/templates/sandhi_check.html:12
 msgid "Check"
 msgstr "சரி பார்"
 
-#: opentamilapp/templates/anagram.html:28
+#: opentamilapp/templates/anagram.html:29
 msgid "cheking anagrams. Please Wait..."
 msgstr "அனாகிராம் சரிபார்க்கப் படுகிறது, காத்திருக்கவும்..."
 
@@ -66,7 +66,7 @@ msgstr "மேம்படுத்துபவர்கள்"
 msgid "Read the project announcement"
 msgstr "திட்ட அறிக்கையை வாசிக்கவும்"
 
-#: opentamilapp/templates/keechu.html:8 opentamilapp/templates/main.html:54
+#: opentamilapp/templates/keechu.html:8 opentamilapp/templates/main.html:58
 msgid "Word Count"
 msgstr "வார்தை எண்ணி"
 
@@ -82,41 +82,46 @@ msgstr "மொத்த் வார்த்தைகள்"
 msgid "and No of letter is "
 msgstr "மற்றும் மொத்த எழுத்துக்கள்"
 
-#: opentamilapp/templates/main.html:50
+#: opentamilapp/templates/main.html:53
 msgid "Applications"
 msgstr "பயன்பாடுகள்"
 
-#: opentamilapp/templates/main.html:53
+#: opentamilapp/templates/main.html:56
+#: opentamilapp/templates/sandhi_check.html:8
+msgid "Sandhi Checker"
+msgstr "தமிழ் சந்திப்பிழை திருத்தி"
+
+#: opentamilapp/templates/main.html:57
 msgid "Tamil Multiplication Tables"
 msgstr "பெருக்கல் அட்டவணை"
 
-#: opentamilapp/templates/main.html:56
+#: opentamilapp/templates/main.html:60
 msgid "Transliteration"
 msgstr "ஒலிபெயர்ப்பி"
 
-#: opentamilapp/templates/main.html:58
+#: opentamilapp/templates/main.html:62
 msgid "Tamil Spell Checker"
 msgstr "தமிழ் எழுத்துப் பிழை திருத்தி"
 
-#: opentamilapp/templates/main.html:60
+#: opentamilapp/templates/main.html:64
 msgid "Unicode Converter"
-msgstr "யுனிகோட் மாற்றி"
+msgstr "ஒறுங்குறி (யுனிகோட்) மாற்றி"
 
-#: opentamilapp/templates/main.html:62
+#: opentamilapp/templates/main.html:65
 msgid "Tamil N-gram"
 msgstr "தமிழ் N-கிராம்"
 
-#: opentamilapp/templates/main.html:64
+#: opentamilapp/templates/main.html:66
 msgid "Tamil Unigram"
 msgstr "தமிழ் யுனிகிராம்"
 
-#: opentamilapp/templates/main.html:66
+#: opentamilapp/templates/main.html:67
 msgid "Tamil Anagram"
 msgstr "தமிழ் அனாகிராம்"
 
-#: opentamilapp/templates/main.html:67 opentamilapp/templates/reverse.html:9
+#: opentamilapp/templates/main.html:68 opentamilapp/templates/reverse.html:9
 msgid "Reverse Words"
-msgstr "வார்த்தை திருப்பி"
+msgstr "வார்த்தை திருப்பி எழுது"
 
 #: opentamilapp/templates/ngram.html:26
 msgid "making ngram Please Wait..."
@@ -211,6 +216,18 @@ msgstr ""
 #: opentamilapp/templates/vaypaadu.html:21
 msgid "please Enter the Number"
 msgstr "எண்ணை அழுத்தவும்"
+
+#: opentamilapp/templates/xword.html:3
+msgid "Tamil Crossword Puzzle Generator"
+msgstr "சொல் தேடல்"
+
+#: opentamilapp/templates/xword.html:7
+msgid "Crossword"
+msgstr "சொல் தேடல்"
+
+#: opentamilapp/templates/xword.html:74
+msgid "Generate"
+msgstr ""
 
 #: opentamilweb/settings.py:110
 msgid "English"

@@ -1,0 +1,86 @@
+{% extends "main.html" %}
+{% load i18n %}
+{% block title %}{% trans "Tamil Crossword Puzzle Generator" %}{% endblock %}
+{% block content %}
+<div class="col-sm-9">
+<div class="page-header">
+    <h1>{% trans "Crossword" %}</h1>
+</div>
+<center>
+
+  "<style>
+        table {
+    border-collapse: collapse;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+table, th, td {
+    border: 1px solid black;
+}
+td {
+width : 40px;
+height: 40px;
+text-align : center;
+}
+  </style>
+  
+  {% if solution %}
+  <ul>
+  {% for word in wordlist %}
+  <li> {{word}} </li>
+  {% endfor %}
+  </ul>
+  <hr/>
+  <table>
+    {% for row_idx in solution %}
+      <tr>
+      {% for col_idx in row_idx %}
+        {% for col0 in col_idx %}
+          {% if forloop.counter == 1 %}
+             <td>{{ col0 }}</td>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      </tr>
+   {% endfor %}
+  </table>
+  <input value="Solution" type="button" onClick="$('#solution').show();" />
+  <input value="Hide" type="button" onClick="$('#solution').hide();" />
+  <div id="solution" style="visibility:hide;">
+  <table>
+    {% for row_idx in solution %}
+    <tr>
+      {% for col_idx in row_idx %}
+        {% for col0 in col_idx %}
+          {% if forloop.counter == 2 %}
+             {% if  col0 %}
+               <td>X</td>
+             {% else %}
+                <td>&nbsp;</td>
+             {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      </tr>
+   {% endfor %}
+  </table>
+  </div>
+  <script type="text/javascript">
+    $.ready($('#solution').hide());
+  </script>
+  {% else %}
+<form method="POST">
+  {% csrf_token %}
+  <textarea name="words" id="txt" rows="10" cols="70"  placeholder="Please Enter the Tamil Words for crossword puzzle">
+கற்றல் - learn
+காதல் - love
+பாடம் - lesson
+மகுடி - charmer</textarea><BR />
+  <button id="btn2" class="btn btn-success">{% trans "Generate" %}</button>
+  <div id="progress" class="alert alert-info silpa-hide"></div>
+  <p id="disp" class='important'>
+  </p>
+</form>
+{% endif %}
+</center>
+</div>
+{% endblock %}
