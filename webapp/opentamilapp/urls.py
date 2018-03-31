@@ -13,11 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.shortcuts import redirect
 from django.conf.urls import url
 from .views import *
 
 urlpatterns = [
     url(r'^$', index,name="home"),
+    url(r'^apidoc/$',lambda r: redirect("/static/sphinx_doc/_build/html/index.html")),
     url(r'^translite/$', trans,name="translite"),
     url(r'^tsci/$', uni,name="tsci"),
     url(r'^keechu/$', keechu,name="keechu"),
