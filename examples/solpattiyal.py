@@ -1,3 +1,4 @@
+#!python
 # -*- coding: utf-8 -*-
 # 
 # This file is distributed under MIT License or default open-tamil license.
