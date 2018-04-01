@@ -1,3 +1,29 @@
+-------------------------------
+Mar 31, 2018
+
+Developing a unit-distance graph of words.
+
+G(V,E) where V is all words in vocabulary and Ei,j is an allowed edge when Vi, Vj have unit edit distance.
+
+Such a graph G, can have property that we may find all the words which are
+capable of being reached by a series of 1-edit-distance hops.
+
+Reachability is symmetric : Vi <-> Vj, and particular shortest path is found
+using Djikstra.
+
+We may find answers to whether there is any reachability at all for a given
+word pair Vi <-> Vj. We can form a meta-graph G2 which is biartite and connects words which are only reachable from each other - really this will become some kind of clustering of the vocabulary as islands of equivalence classes. Since Va - Vb are reachable and then by induction all of the nodes reachable from Va or Vb are also reachable from the nodes Va, Vb and path (Va, Vb) forming an equivalence class.
+
+e.g. Such graphs G, G2 can be used to form the decisions / classification of
+whether words Vi, Vj are reachable. In G it will be existence of a path.
+In G2 it will be if Vi, Vj belong to the same "node" or equivalence class.
+
+63896**2
+4082698816
+>>> 63896*(63895)/2.0
+2041317460.0
+
+
 Measures of a spelling checker:
 -------------------------------
 Dec 15, 2017

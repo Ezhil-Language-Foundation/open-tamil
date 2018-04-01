@@ -14,5 +14,5 @@ from . import regexp
 from . import wordutils
 from . import utils
 
-VERSION = '0.7'
+VERSION = '0.71'
 __all__ = ['utf8','txt2unicode','numeral','txt2unicode','txt2ipa','numeral','regexp','utils']
