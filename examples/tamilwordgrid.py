@@ -4,6 +4,7 @@
 
 import copy, random
 import tamil
+import re
 import sys
 import codecs
 from math import sqrt
@@ -40,6 +41,8 @@ class WordGrid:
         drv.clear_placements()
         drv.generate()
         drv.display(outputfile)
+        print drv.grid_size
+        print drv.grid
         return
     
     def __init__(self,words,letters):
@@ -74,6 +77,11 @@ height: 40px;
 text-align : center;
 }
 </style>""")
+        output.write("<div><ol>\n")
+        for w in self.words:
+            lw = len(tamil.utf8.get_letters(w))
+            output.write(u"<li>%s | %d</li>\n"%(w,lw))
+        output.write("</ol></div>\n")
         output.write(u"<table>\n")
         for row_idx in range(len(self.grid)):
             row_data = u" ".join( u"<td>%s</td>"%self.grid[row_idx][col_idx][0] for col_idx in range( len(self.grid[row_idx]) ) )
@@ -99,8 +107,8 @@ text-align : center;
     def precompute(self):
         # grid rows = no of words
         # grid size = no of columns        
-        self.max_word_len = int(2+sqrt(sum( list(map(len,self.words)) )))
-        self.grid_size = self.max_word_len
+        self.max_word_len = int((max( list(map(lambda x: len(tamil.utf8.get_letters(x)),self.words)) )))
+        self.grid_size = 3+int(self.max_word_len)
         # sort words in order
         if PYTHON3:
             self.words = sorted( self.words, key=len )
@@ -262,7 +270,7 @@ text-align : center;
         
     def generate_randomized(self):
         # try shuffling the grid a thousand times
-        for i in xrange(0,1000):
+        for i in xrange(0,100000):
             self.clear_placements()
             if self.generate_randomized_placement():
                 print(u"Found solution during attempt %d"%i)
@@ -287,8 +295,8 @@ def gen_grid():
     else:
         data = codecs.open(sys.argv[1],"r","utf-8").readlines()
         wordlist = [line.split("-")[0].strip() for line in data] 
-        wordlist = map( lambda x: x.strip(), wordlist)
-        wordlist = filter( lambda w: w.find(u"#") == -1, wordlist )
+        wordlist = map( lambda x: re.sub('\s+','',x).strip(), wordlist)
+        wordlist = filter( lambda w: w.find(u"#") == -1 , wordlist )
         fill_letters = tamil.utf8.get_letters( u"".join(wordlist) )
         if tamil.utf8.all_tamil(wordlist[0]):
             fill_letters  += tamil.utf8.uyir_letters + tamil.utf8.agaram_letters
