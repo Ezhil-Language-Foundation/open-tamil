@@ -9,8 +9,10 @@ import tamil
 import sys
 from transliterate import *
 from tamil.utf8 import print_tamil_words
+USE_BS4=False
 try:
     import bs4 #requires beautiful soup 4
+    USE_BS4=True
 except ImportError as ie:
     # work with BS3
     try:
@@ -25,8 +27,15 @@ from urllib2 import urlopen
 import operator
 
 def url_tamil_text_filter( url ):
-    tapage = bs4.BeautifulSoup(urlopen(url))
-    tatext = tapage.body.text
+    if USE_BS4:
+        tapage = bs4.BeautifulSoup(urlopen(url),"html.parser")
+    else:
+        tapage = bs4.BeautifulSoup(urlopen(url))
+    #tatext = tapage.body.text
+    # Ref: SO 1936466
+    tatext = tapage.findAll(text=True)
+    tatext = filter( lambda x: not (x.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']), tatext )
+    tatext = u" ".join([txt.strip() for txt in tatext]) 
     print_tamil_words( tatext )
 
 if __name__ == u"__main__":
