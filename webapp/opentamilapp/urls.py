@@ -20,6 +20,7 @@ from .views import *
 urlpatterns = [
     url(r'^$', index,name="home"),
     url(r'^apidoc/$',lambda r: redirect("/static/sphinx_doc/_build/html/index.html")),
+    url(r'^tts_demo/$',tts_demo,name="tts_demo"),
     url(r'^translite/$', trans,name="translite"),
     url(r'^tsci/$', uni,name="tsci"),
     url(r'^keechu/$', keechu,name="keechu"),

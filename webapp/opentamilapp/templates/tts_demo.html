@@ -1,0 +1,49 @@
+{% extends "main.html" %}
+{% load i18n %}
+{% block title %}{% trans "Tamil TTS Demo" %}{% endblock %}
+{% block content %}
+<div class="col-sm-9">
+<div class="page-header">
+    <h1>{% trans "Tamil TTS" %}</h1>
+Tamil-TTS is provided by work of Prof. Vasu Renganathan, licensed under GNU GPLv3. We thank all people involved in enabling the release of this code, development and Prof. Vasu to create the concatennative speech synthesis.
+<a href="https://github.com/Ezhil-Language-Foundation/tamil-tts">Tamil TTS</a>
+</div>
+<center>
+
+  "<style>
+        table {
+    border-collapse: collapse;
+}
+tr:nth-child(even){background-color: #f2f2f2}
+table, th, td {
+    border: 1px solid black;
+}
+td {
+width : 40px;
+height: 40px;
+text-align : center;
+}
+  </style>
+  
+  {% if solution %}
+<div>   
+<audio controls>
+  <source src="/{{solution}}" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+</div>
+  {% else %}
+<form method="POST">
+  {% csrf_token %}
+<div>Tamil TTS provided by Prof. Vasu Renganathan's voice files.</div>
+  <textarea name="words" id="txt" rows="10" cols="70">
+</textarea><BR />
+  <button id="btn2" class="btn btn-success">{% trans "Generate" %}</button>
+  <div id="progress" class="alert alert-info silpa-hide"></div>
+  <p id="disp" class='important'>
+  </p>
+</form>
+{% endif %}
+</center>
+</div>
+{% endblock %}

@@ -27,6 +27,11 @@ from tamil.txt2unicode import *
 import tamil.utf8 as utf8
 from .sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
+import random
+try: 
+   from tamiltts import ConcatennativeTTS
+except Exception as ioe:
+   pass
 
 if sys.version_info[0]<3:
    reload(sys)
@@ -167,6 +172,17 @@ def revers(request,word):
  #TBD:
  #def kalsee_on_web(request):
  
+def tts_demo(request):
+   if request.method == "GET":
+      return render(request,"tts_demo.html",{'solution':u''})
+   assert( request.method == "POST" )
+   words = request.POST.get("words",u"")
+   mp3path = os.path.join('static',u"audio_%d.mp3"%random.randint(0,1000000))
+   static_path = os.path.join(os.path.split(__file__)[0],mp3path)
+   tts = ConcatennativeTTS(words,static_path)
+   tts.run()
+   return render(request,"tts_demo.html",{'solution':mp3path})
+
 def xword(request):
    if request.method == "GET":
       return render(request,'xword.html',{'solution':u''})
