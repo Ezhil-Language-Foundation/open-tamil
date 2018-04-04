@@ -27,10 +27,11 @@ text-align : center;
   
   {% if solution %}
 <div>   
-<audio controls>
+<audio controls loop>
   <source src="/{{solution}}" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
+<a href="/{{solution}}"> download MP3</a>.
 </div>
   {% else %}
 <form method="POST">
