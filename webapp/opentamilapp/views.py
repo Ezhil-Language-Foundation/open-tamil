@@ -23,10 +23,10 @@ from ngram.Corpus import Corpus
 from ngram import LetterModels
 from ngram.LetterModels import *
 from ngram.WordModels import *
-from tamil.txt2unicode import *
 import tamil.utf8 as utf8
 from .sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
+from .webuni import unicode_converter
 import random
 try: 
    from tamiltts import ConcatennativeTTS
@@ -77,12 +77,7 @@ def numstr(request,num):
     return response
 def unicod(request,tsci):
     cod=request.GET.get("cod")
-    if cod =='t2u':
-       out=tamil.tscii.convert_to_unicode(tsci)
-    elif cod=='u2t':  
-         temp=tsci.decode('utf-8')
-         out=unicode2tscii(temp)
-    data = { "result" : out}
+    data=unicode_converter(tsci,cod)
     json_string = json.dumps(data,ensure_ascii = False)
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
