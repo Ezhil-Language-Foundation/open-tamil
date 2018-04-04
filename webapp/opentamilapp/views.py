@@ -24,7 +24,7 @@ from ngram import LetterModels
 from ngram.LetterModels import *
 from ngram.WordModels import *
 import tamil.utf8 as utf8
-from .sandhi_checker import check_sandhi
+from tamilsandhi.sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
 from .webuni import unicode_converter
 import random
