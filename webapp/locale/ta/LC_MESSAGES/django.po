@@ -38,7 +38,7 @@ msgstr "அனாகிராம் சரிபார்க்கப் பட�
 
 #: opentamilapp/templates/first.html:7
 msgid "Welcome to OPEN TAMIL WEB!"
-msgstr "திறமூல தமிழ் வலைதளம் தங்களை வரவேற்கிறது!"
+msgstr "திறமூல தமிழ் வலைத்தளம் தங்களை வரவேற்கிறது!"
 
 #: opentamilapp/templates/first.html:10
 msgid ""
@@ -68,19 +68,19 @@ msgstr "திட்ட அறிக்கையை வாசிக்கவு�
 
 #: opentamilapp/templates/keechu.html:8 opentamilapp/templates/main.html:58
 msgid "Word Count"
-msgstr "வார்தை எண்ணி"
+msgstr "சொல் எண்ணி"
 
 #: opentamilapp/templates/keechu.html:12
 msgid "Count"
-msgstr "எண்ணு"
+msgstr "கணக்கிடு"
 
 #: opentamilapp/templates/keechu.html:54
 msgid "No of Word is "
-msgstr "மொத்த் வார்த்தைகள்"
+msgstr "மொத்த சொற்கள்"
 
 #: opentamilapp/templates/keechu.html:54
 msgid "and No of letter is "
-msgstr "மற்றும் மொத்த எழுத்துக்கள்"
+msgstr "மற்றும் மொத்த எழுத்துகள்"
 
 #: opentamilapp/templates/main.html:53
 msgid "Applications"
@@ -101,7 +101,7 @@ msgstr "ஒலிபெயர்ப்பி"
 
 #: opentamilapp/templates/main.html:62
 msgid "Tamil Spell Checker"
-msgstr "தமிழ் எழுத்துப் பிழை திருத்தி"
+msgstr "தமிழ் எழுத்துப் பிழைதிருத்தி"
 
 #: opentamilapp/templates/main.html:64
 msgid "Unicode Converter"
@@ -121,7 +121,7 @@ msgstr "தமிழ் அனாகிராம்"
 
 #: opentamilapp/templates/main.html:68 opentamilapp/templates/reverse.html:9
 msgid "Reverse Words"
-msgstr "வார்த்தை திருப்பி எழுது"
+msgstr "சொல்லை திருப்பி எழுது"
 
 #: opentamilapp/templates/ngram.html:26
 msgid "making ngram Please Wait..."
@@ -136,19 +136,19 @@ msgstr "கொடுக்கப்பட்ட எண்ணிற்கு இ�
 #: opentamilapp/templates/number.html:16
 #: opentamilapp/templates/vaypaadu.html:19
 msgid "Please Enter the Number"
-msgstr "எண்களை அழுத்தவு"
+msgstr "எண்களை உள்ளிடு"
 
 #: opentamilapp/templates/number.html:21
 msgid "Indian Standard"
-msgstr "இந்திய தரநிலை"
+msgstr "இந்தியத் தரநிலை"
 
 #: opentamilapp/templates/number.html:23
 msgid "American Standard"
-msgstr "அமெரிக்க தரநிலை"
+msgstr "அமெரிக்கத் தரநிலை"
 
 #: opentamilapp/templates/spell.html:9
 msgid "Spellchecker"
-msgstr "எழுத்துப் பிழை திருத்தி"
+msgstr "எழுத்துப் பிழைதிருத்தி"
 
 #: opentamilapp/templates/spell.html:11
 msgid ""
@@ -164,7 +164,7 @@ msgstr ""
 
 #: opentamilapp/templates/spell.html:16
 msgid "Check Spelling"
-msgstr "எழுத்துப் பிழை சரி பார்"
+msgstr "எழுத்துப் பிழையை சரி பார்"
 
 #: opentamilapp/templates/spell.html:36
 msgid "checking spelling. Please Wait..."
