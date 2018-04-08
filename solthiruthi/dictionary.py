@@ -67,6 +67,49 @@ class Dictionary:
                     self.add(word.strip())
         return
 
+# simple list-based dictionary
+class SimpleDictionary(Dictionary):
+    def __init__(self,filename):
+        super(SimpleDictionary,self).__init__()
+        self.store = []
+        self.filename = filename
+        
+    def loadWordFile(self):
+        with codecs.open(self.filename,"r","utf-8") as fp:
+            for w in fp.readlines():
+                word = w.strip()
+                if len(word) < 1:
+                    continue
+                self.store.append(word)
+        #print u"loaded %d words into dictionary"%len(self.store)
+
+    def getAllWords(self):
+        return self.store
+
+    def isWord(self,w):
+        return w in self.store
+
+    def add(self,w):
+        self.store.append(w)
+        return
+
+    def getWordsStartingWith(self,pfx):
+        r = filter( lambda w: w.startswith(pfx), self.getAllWords() )
+        return r
+
+    def getWordsEndingWith(self,pfx):
+        r = filter( lambda w: w.endswith(pfx), self.getAllWords() )
+        return r
+
+    def hasWordsStartingWith(self,pfx):
+        for w in self.store:
+            if w.startswith(pfx):
+                return True
+        return False
+    
+    def getDictionaryPath(self):
+        return self.filename
+
 class Agarathi(Dictionary):
     def __init__(self,dictionary_path,reverse=False):
         self.dictionary_path = dictionary_path
