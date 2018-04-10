@@ -22,10 +22,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 from tamil import utf8 as tamil
 import argparse
 import codecs
-import sys
 
 class Text:
     def __init__(self, content, lineonly=True, wordonly=True, charonly=True):

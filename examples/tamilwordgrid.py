@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import copy, random
 import tamil
 import re
-import sys
 import codecs
 from math import sqrt
 PYTHON3 = sys.version > '3'

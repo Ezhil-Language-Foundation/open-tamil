@@ -1,6 +1,9 @@
 #!python
 # -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 from sys import argv, exit, stdin
 from cmd import Cmd

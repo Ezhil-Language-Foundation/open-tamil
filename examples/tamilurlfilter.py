@@ -5,8 +5,11 @@
 # This file is part of 'open-tamil' package tests
 # 
 
-import tamil
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+import tamil
 from transliterate import *
 from tamil.utf8 import print_tamil_words
 USE_BS4=False

@@ -6,6 +6,9 @@
 # 
 from __future__ import print_function
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 import codecs
 from tamil.utf8 import print_tamil_words
 from transliterate import *
