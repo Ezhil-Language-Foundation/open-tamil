@@ -98,7 +98,7 @@ def construct_file_stats(textobj, name = ""): #Text
         file_stat_display += "{:>8}".format(textobj.word_toll)
     if attribs["char"]:
         file_stat_display += "{:>8}".format(textobj.letter_toll)
-
+    #TBD: complete implementation of unique-word counting
     file_stat_display += " {}".format(name)
 
     return file_stat_display
@@ -106,21 +106,24 @@ def construct_file_stats(textobj, name = ""): #Text
 parser = argparse.ArgumentParser()
 parser.add_argument('-w',action='store_true', help='Count Words')
 parser.add_argument('-l',action='store_true', help='Count Lines')
-parser.add_argument('-c',action='store_true', help='Count Charachters')
+parser.add_argument('-c',action='store_true', help='Count Characters')
+parser.add_argument('-u',action='store_true', help='Count unique words')
 parser.add_argument('files', nargs=argparse.REMAINDER)
 options = parser.parse_args()
 
+#defaults
 attribs = {
     "line": True,
     "word": True,
-    "char": True
+    "char": True,
+    "uniq": False,
 }
 
 if options.l or options.w or options.c:
     attribs["line"] = options.l
     attribs["word"] = options.w
     attribs["char"] = options.c
-
+    attribs["uniq"] = options.u
 total_stats = Text("")
 
 if len(options.files) > 0:
