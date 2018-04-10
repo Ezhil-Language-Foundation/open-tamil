@@ -73,14 +73,12 @@ class SimpleDictionary(Dictionary):
         super(SimpleDictionary,self).__init__()
         self.store = []
         self.filename = filename
-        
+
     def loadWordFile(self):
         with codecs.open(self.filename,"r","utf-8") as fp:
             for w in fp.readlines():
                 word = w.strip()
-                if len(word) < 1:
-                    continue
-                self.store.append(word)
+                self.store.append(word.lower())
         #print u"loaded %d words into dictionary"%len(self.store)
 
     def getAllWords(self):

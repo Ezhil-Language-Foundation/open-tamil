@@ -107,6 +107,7 @@ class Trie:
     
 class Node:
     def __init__(self):
+        #super(Node,self).__init__()
         self.__dict__={'alphabets':{},'is_word':{},'count':{}}
     def __str__(self):
         return str(self.__dict__)
@@ -117,7 +118,14 @@ class DTrie(Trie):
     """
     def __init__(self):
         self.trie = Node() #root node
+        self.is_english = False
 
+    @staticmethod
+    def buildEnglishTrie(nalpha=26):
+        obj = DTrie()
+        obj.is_english = True
+        return obj
+    
     def hasWordPrefix(self,wrd_prefix):
         return self.isWordAndTrie( wrd_prefix, prefix=True )
     
@@ -129,7 +137,7 @@ class DTrie(Trie):
     
     def isWordAndTrie(self,word,prefix=False):
         ref_trie = self.trie
-        letters = utf8.get_letters(word)
+        letters = self.get_letters(word)
         wLen = len(letters)
         rval = False
         is_prefix = False
@@ -156,12 +164,15 @@ class DTrie(Trie):
         if not isWord:
             raise Exception(u"Word does not exist in Trie")
         #pprint(str(ref_trie))
-        letters = utf8.get_letters( word )
+        letters = self.get_letters(word)
         return ref_trie.count[ letters[-1] ]
-    
+
+    def get_letters(self,word):
+        return self.is_english and [l for l in word] or utf8.get_letters(word)
+        
     def add(self,word):
         ref_trie = self.trie
-        letters = utf8.get_letters(word)
+        letters = self.get_letters(word)
         wLen = len(letters)
         prev_trie = None
         assert wLen >= 1
@@ -198,7 +209,7 @@ class DTrie(Trie):
     def getAllWordsPrefix(self,prefix):
         all_words = []
         val,curr_trie = self.isWord(prefix,ret_ref_trie=True)
-        prefix_letters = utf8.get_letters(prefix)
+        prefix_letters = self.get_letters(prefix)
         ref_trie = curr_trie.alphabets.get( prefix_letters[-1], curr_trie )
         #print(ref_trie.__str__())
         # ignore val
@@ -273,16 +284,21 @@ class TamilTrie(Trie):
     def buildEnglishTrie(nalpha=26):
         # utility method
         to_eng = lambda x: chr(x+ord('a'))
-        eng_idx = lambda x: ord(x) - ord('a')
+        eng_idx = lambda x: ord(x.lower()) - ord('a')
         obj = TamilTrie(eng_idx,to_eng,nalpha)
+        obj.is_english = True
         return obj
-        
+
+    def get_letters(self,word):
+        return self.is_english and [l for l in word] or utf8.get_letters(word)
+    
     def __init__(self, get_idx = utf8.getidx, invert_idx = utf8.tamil, alphabet_len = utf8.TA_LETTERS_LEN):
         self.L = alphabet_len
         self.trie = Trie.mk_empty_trie(self.L)
         self.word_limits = Trie.mk_empty_trie(self.L)
         self.getidx = get_idx
         self.invertidx = invert_idx
+        self.is_english = False
         
     def getAllWords(self):
         # list all words in the trie structure in DFS fashion
@@ -344,7 +360,7 @@ class TamilTrie(Trie):
     def add(self,word):
         # trie data structure is built here
         #print("*"*30,"adding","*"*30)
-        letters = utf8.get_letters(word)
+        letters = self.get_letters(word)
         wLen = len(letters)
         ref_trie = self.trie
         ref_word_limits = self.word_limits
