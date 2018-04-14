@@ -49,7 +49,7 @@ class BlindIterative:
         eng_parts.reverse()
 
         for eng_part in eng_parts:
-            tamil_equiv = table[eng_part]
+            tamil_equiv = table.get(eng_part,eng_part)
             parts = out_str.split( eng_part )
             out_str = tamil_equiv.join( parts )
 
@@ -225,12 +225,11 @@ class Iterative:
             if ( success ):
                 continue
 
-            # too-bad we didn't find a replacement - just copy char to output
-            ## print "concatennate the unmatched =>",english_str[pos],"<="
+            # copy input to output if transliteration fails or Tamil inputs found
             if ord(english_str[pos]) < 128:
                 rep_char = english_str[pos]
             else:
-                rep_char = "?"
+                rep_char = english_str[pos] #copy-string to output - maybe Tamil letter also.
             out_str = out_str + rep_char
 
             pos = pos + 1

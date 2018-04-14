@@ -94,6 +94,19 @@ class Yazhpanam(unittest.TestCase):
             else:
                 if ( LINUX ): print(u"matched %s => %s"%(k,PYTHON3 and tamil_tx or unicode(tamil_tx)))
         return
-
+    
+class DubashTest(unittest.TestCase):
+    def test_multi_lang(self):
+        test_str = u"அம்மா ammA"
+        expected_str = u"அம்மா அம்மா"
+        tamil_tx = algorithm.BlindIterative.transliterate( azhagi.Transliteration.table, test_str )
+        self.assertEqual(tamil_tx, expected_str)
+        return
+    def test_multi_lang2(self):
+        test_str = u"அம்மா ammA"
+        expected_str = u"அம்மா அம்மா"
+        tamil_tx = algorithm.Iterative.transliterate( azhagi.Transliteration.table, test_str )
+        self.assertEqual(tamil_tx, expected_str)
+        return
 if __name__ == '__main__':
     unittest.main()
