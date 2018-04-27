@@ -23,13 +23,15 @@ def get_data_dictionaries( ):
     return srcfiles
 
 def get_data_categories( ):
+    # add new elements to end
     srcfiles = [u'peyargal.txt',
                 u'capitals-n-countries.txt',
                 u'maligaiporul.txt',
                 u'mooligaigal.txt',
                 u'nagarangal.txt',
                 u'palam.txt',
-                u'vilangugal.txt']
+                u'vilangugal.txt',
+                u'TamilStopWords.txt']
     return  _make_dict_with_path(srcfiles)
 
 DATADIR = get_data_dir()

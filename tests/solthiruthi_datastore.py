@@ -6,11 +6,16 @@ from solthiruthi.data_parser import *
 from solthiruthi.datastore import RTrie, TamilTrie, DTrie, Queue
 from solthiruthi.Ezhimai import *
 from solthiruthi.resources import DICTIONARY_DATA_FILES
+from solthiruthi.stopwords import get_stop_words
 import sys
 import copy
 from pprint import pprint
 
 class EzhimaiTest(unittest.TestCase):
+    def test_stopwords(self):
+        stopw = get_stop_words()
+        self.assertEqual( 125, len(stopw) )
+        
     def test_pattiyal(self):
         obj = PattiyalThiruthi('std')
         in_words = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
