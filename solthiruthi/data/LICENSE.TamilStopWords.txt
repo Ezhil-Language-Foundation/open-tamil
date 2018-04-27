@@ -1,0 +1,3 @@
+This file is originally created from and licensed under terms of Apache 2.0.
+See: https://github.com/AshokR/TamilNLP.git
+See: https://github.com/AshokR/TamilNLP/wiki/Stopwords
