@@ -9,6 +9,7 @@ import sys
 import copy
 import math
 import re
+import cgi
 from tamil.utf8 import get_letters
 from tamil import wordutils, utf8
 from spell import Speller, LoadDictionary
@@ -93,7 +94,7 @@ def keech(request,k1):
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
 def call_sandhi_check(request):
-    k1= request.GET.get('tamiltext',u'அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ')
+    k1= cgi.escape(request.GET.get('tamiltext',u'அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் '))
     dic={}
     temp=u""
     dic['old']=k1
