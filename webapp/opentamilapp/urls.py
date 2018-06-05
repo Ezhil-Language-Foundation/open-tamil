@@ -43,4 +43,5 @@ urlpatterns = [
     url(r'^unigram/(?P<word>.+?)/$', test_basic,name="ta_unigram"),
     url(r'^revers/(?P<word>.+?)/$', revers,name="ta_revers"),
     url(r'^xword/$',xword,name='ta_xword'),
+    url(r'^summarizer/',summarizer,name='ta_summarizer'),    
 ]

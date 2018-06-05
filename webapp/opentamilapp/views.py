@@ -187,4 +187,22 @@ def xword(request):
    wordlist = filter(len,[ w.strip() for w in re.split(u"\n+",words) ])
    grid,sol = generate_tamil_word_grid(wordlist)
    return render(request,'xword.html',{'solution':grid,'wordlist':wordlist})
-   #return HttpResponse(sol,content_type="text/html; charset=UTF-8;")
+
+def summarizer(request):
+   if request.method == "GET":
+      return render(request,'summarizer.html',{'text_input':u''})
+   assert( request.method == "POST" )
+   text_input = request.POST.get("text_input",u"")
+   
+   # Create a SummaryTool object
+   st = tamil.utils.SummaryTool()
+   
+   # Build the sentences dictionary
+   sentences_dic = st.get_sentences_ranks(text_input)
+   title = u"தமிழ் பேசு.us:"
+   # Build the summary with the sentences dictionary
+   text_summary = st.get_summary(title, text_input, sentences_dic)
+   in_w = len(tamil.utf8.get_words(text_input))
+   out_w = len(tamil.utf8.get_words(text_summary))
+   text_comments = u"உள்ளீடு அளவு: %d சொற்கள், வெளியீடு அளவு: %d சொற்கள். சுருக்கம் %3.3g.\n"%(in_w,out_w,in_w/(1.0*out_w))
+   return render(request,u'summarizer.html',{'text_input':text_input,"text_summary":text_summary,"text_comments":text_comments})
