@@ -1,0 +1,60 @@
+{% extends "main.html" %}
+{% load i18n %}
+{% block title %}classifier{% endblock %}
+{% block content %}
+
+<section id="keechu">
+<div class="page-header">
+    <h1>{% trans "Word Classifier" %}</h1>
+Read more about this project at <a href="https://github.com/Ezhil-Language-Foundation/open-tamil/tree/master/examples/classifier">here on github</a>. <BR/>
+</div>
+<center>
+<textarea rows="10" cols="40" name="word" id="txt2"></textarea><br>
+<button id="btn2" class="btn btn-success">{% trans "Check" %}</button>
+
+<div id="results">  
+<p id='result'></p>
+</div>
+</center>
+<div class="well">
+    <h3>Word Classifier JSON API</h3>
+    <p>
+        This service provides word classifier for given word.
+        <ul>
+            <li>Input data: Tamil or English word 
+                <ul>
+                    <li>Return : ....  </li>
+                </ul>
+            </li>
+        </ul>
+
+        Sample usage is given below.
+      
+  <pre>
+        http://tamilpesu.us/classify-word/?tamiltext="Inputtamiltext"
+        Result: '....'
+      </pre>
+    </p>
+</div>
+</section>
+<script type="text/javascript">
+	$(document).ready(function () {
+
+        $('#results').hide()
+	$('#btn2').click(function(){
+    var dat = $('#txt2').val()
+    $.ajax({
+        type:"GET",
+        data:{"tamiltext":dat},
+    	url: '/classify-word/',
+    	success: function(data){
+            console.log(data)
+    $('#result').text(data.result)	
+        $('#results').show()
+    	}
+    })
+  	})
+	})
+
+</script>
+{% endblock %}

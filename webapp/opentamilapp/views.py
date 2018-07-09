@@ -29,6 +29,7 @@ from tamilsandhi.sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
 from .webuni import unicode_converter
 import random
+from classifier import process_word
 try: 
    from tamiltts import ConcatennativeTTS
 except Exception as ioe:
@@ -61,6 +62,8 @@ def ngra(request):
      return render(request,'ngram.html',{})
 def sandhi_check(request):
      return render(request,'sandhi_check.html',{})
+def get_classify(request):
+     return render(request,'classifier.html',{})
 def numstr(request,num):
     typ=request.GET.get("type")
     if num.find(".")==-1:
@@ -206,3 +209,12 @@ def summarizer(request):
    out_w = len(tamil.utf8.get_words(text_summary))
    text_comments = u"உள்ளீடு அளவு: %d சொற்கள், வெளியீடு அளவு: %d சொற்கள். சுருக்கம் %3.3g.\n"%(in_w,out_w,in_w/(1.0*out_w))
    return render(request,u'summarizer.html',{'text_input':text_input,"text_summary":text_summary,"text_comments":text_comments})
+def classify_word(request):
+    word=request.GET.get('tamiltext')
+    result=process_word(word)
+    data = { "result" : result}
+    json_string = json.dumps(data,ensure_ascii = False)
+    #creating a Response object to set the content type and the encoding
+    response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
+    return response
+

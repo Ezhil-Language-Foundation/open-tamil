@@ -25,7 +25,7 @@ SECRET_KEY = 'ubg%yxe)2$31f%qsf%6avm(lqe(he_)y$x*rujhbouk@kagifq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tamiltts.ml']
 
 
 # Application definition
