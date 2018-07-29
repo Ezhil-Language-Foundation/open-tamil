@@ -25,6 +25,18 @@ class TestEnglishDictionary(unittest.TestCase):
             self.assertFalse(self.ENG.isWord(w+'31'))    
         return
 
+class TestParallelDictionary(unittest.TestCase):
+    def setUp(self):
+        self.paralleld,_ = DictionaryBuilder.create(ParallelDictionary)
+
+    def test_wordlist(self):
+        self.assertTrue( len(self.paralleld.synonym) > 0 )
+        self.assertEqual(len(self.paralleld.getAllWords()), -3+len(self.paralleld.synonym))
+    def test_synonym(self):
+        word,syn = u"abundance-மிகுதியாக".split('-')
+        res = self.paralleld.getWordTranslation(word)
+        self.assertEqual(res,syn)
+
 class TestDictionarySaveLoad(unittest.TestCase):
     def setUp(self):
         self.fname = 'data.dot'

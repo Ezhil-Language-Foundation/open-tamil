@@ -11,11 +11,11 @@ from . import resources
 from . import datastore
 
 PYTHON3 = (sys.version[0] == '3')
-    
+
 # specify dictionary interface without specifying storage
 class Dictionary:
     __metaclass__ = abc.ABCMeta
-        
+    
     @abc.abstractmethod
     def add(self,word):
         return
@@ -185,7 +185,21 @@ class EnglishLinux(Agarathi):
     
     def add(self,word):
         return Agarathi.add(self,word.lower())
-    
+
+class ParallelDictionary(Agarathi):
+    def __init__(self):
+        Agarathi.__init__(self,resources.DICTIONARY_DATA_FILES['parallel'])
+        self.synonym = []
+        self.eng = []
+        self.proc2 = lambda x: [self.synonym.append(x[1]),self.eng.append(x[0]),x[0]][2]
+        self.processor = lambda x: self.proc2(list(map(lambda y:y.strip(),x.split('-'))))
+        
+    def loadWordFile(self):
+        Agarathi.loadWordFile(self,self.processor)
+
+    def getWordTranslation(self,word):
+        return self.synonym[self.eng.index(word)]
+
 def reverse_TamilVU():
     return _reverse_dict(TamilVU)()
 
