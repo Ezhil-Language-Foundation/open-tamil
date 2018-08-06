@@ -57,7 +57,9 @@
             <ul class="nav nav-tabs nav-stacked" role="navigation">
               <li class="navbar-brand">{% trans 'Applications' %}</li>
               <li><a href="/tts_demo">{% trans "Text to Speech Synthesizer" %}</a></li>
+{% if not PYTHON26 %}
 	      <li><a href="/get-classify">{% trans "Classifier" %}</a></li>
+{% endif %}
               <li><a href="/xword">{% trans "Crossword" %}</a></li>
               <li><a href="/number">{% trans "Tamil Number" %}</a></li>
                <li><a href="/sandhi-check">{% trans "Sandhi Checker" %}</a></li>

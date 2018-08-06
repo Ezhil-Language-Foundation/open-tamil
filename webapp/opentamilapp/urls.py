@@ -13,9 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+import sys
 from django.shortcuts import redirect
 from django.conf.urls import url
 from .views import *
+
+PYTHON26 = sys.version.find('2.6') >= 0
 
 urlpatterns = [
     url(r'^$', index,name="home"),
@@ -25,7 +28,6 @@ urlpatterns = [
     url(r'^tsci/$', uni,name="tsci"),
     url(r'^keechu/$', keechu,name="keechu"),
     url(r'^sandhi-check/$', sandhi_check,name="sandhi"),
-    url(r'^get-classify/$', get_classify,name="classifier"),
     url(r'^spell/$', spl,name="spell"),
     url(r'^revers/$', rev,name="revers"),
     url(r'^number/$', num,name="number"),
@@ -45,5 +47,9 @@ urlpatterns = [
     url(r'^revers/(?P<word>.+?)/$', revers,name="ta_revers"),
     url(r'^xword/$',xword,name='ta_xword'),
     url(r'^summarizer/',summarizer,name='ta_summarizer'),
-    url(r'^classify-word/$', classify_word,name="classify_word"),
 ]
+
+if not PYTHON26:
+    urlpatterns.extend( [
+        url(r'^classify-word/$', classify_word,name="classify_word"),
+        url(r'^get-classify/$', get_classify,name="classifier")] )

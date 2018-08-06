@@ -20,13 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ubg%yxe)2$31f%qsf%6avm(lqe(he_)y$x*rujhbouk@kagifq'
+SECRET_KEY = 'enter#a$secret$key#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['tamiltts.ml']
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -114,7 +113,7 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ta'
 
 TIME_ZONE = 'UTC'
 

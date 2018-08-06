@@ -29,7 +29,11 @@ from tamilsandhi.sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
 from .webuni import unicode_converter
 import random
-from classifier import process_word
+
+PYTHON26 = sys.version.find('2.6') >= 0
+if not PYTHON26:
+   from classifier import process_word
+
 try: 
    from tamiltts import ConcatennativeTTS
 except Exception as ioe:
@@ -39,31 +43,34 @@ if sys.version_info[0]<3:
    reload(sys)
    sys.setdefaultencoding('utf8')
 def index(request):
-    return render(request,'first.html',{})
+    return render(request,'first.html',{"PYTHON26":PYTHON26})
 def vaypaadu(request):
-    return render(request,'vaypaadu.html',{})
+    return render(request,'vaypaadu.html',{"PYTHON26":PYTHON26})
 def trans(request):
-     return render(request,'translite.html',{})
+     return render(request,'translite.html',{"PYTHON26":PYTHON26})
 def uni(request):
-     return render(request,'unicode.html',{})
+     return render(request,'unicode.html',{"PYTHON26":PYTHON26})
 def keechu(request):
-     return render(request,'keechu.html',{})
+     return render(request,'keechu.html',{"PYTHON26":PYTHON26})
 def spl(request):
-     return render(request,'spell.html',{})
+     return render(request,'spell.html',{"PYTHON26":PYTHON26})
 def rev(request):
-     return render(request,'reverse.html',{})
+     return render(request,'reverse.html',{"PYTHON26":PYTHON26})
 def num(request):
-     return render(request,'number.html',{})
+     return render(request,'number.html',{"PYTHON26":PYTHON26})
 def anag(request):
-     return render(request,'anagram.html',{})
+     return render(request,'anagram.html',{"PYTHON26":PYTHON26})
 def unig(request):
-     return render(request,'unigram.html',{})
+     return render(request,'unigram.html',{"PYTHON26":PYTHON26})
 def ngra(request):
-     return render(request,'ngram.html',{})
+     return render(request,'ngram.html',{"PYTHON26":PYTHON26})
 def sandhi_check(request):
-     return render(request,'sandhi_check.html',{})
-def get_classify(request):
-     return render(request,'classifier.html',{})
+     return render(request,'sandhi_check.html',{"PYTHON26":PYTHON26})
+
+if not PYTHON26:
+   def get_classify(request):
+      return render(request,'classifier.html',{"PYTHON26":PYTHON26})
+
 def numstr(request,num):
     typ=request.GET.get("type")
     if num.find(".")==-1:
@@ -173,27 +180,27 @@ def revers(request,word):
  
 def tts_demo(request):
    if request.method == "GET":
-      return render(request,"tts_demo.html",{'solution':u''})
+      return render(request,"tts_demo.html",{'solution':u'','PYTHON26':PYTHON26})
    assert( request.method == "POST" )
    words = request.POST.get("words",u"")
    mp3path = os.path.join('static',u"audio_%d.mp3"%random.randint(0,1000000))
    static_path = os.path.join(os.path.split(__file__)[0],mp3path)
    tts = ConcatennativeTTS(words,static_path)
    tts.run()
-   return render(request,"tts_demo.html",{'solution':mp3path})
+   return render(request,"tts_demo.html",{'solution':mp3path,'PYTHON26':PYTHON26})
 
 def xword(request):
    if request.method == "GET":
-      return render(request,'xword.html',{'solution':u''})
+      return render(request,'xword.html',{'solution':u'','PYTHON26':PYTHON26})
    assert( request.method == "POST" )
    words = request.POST.get("words",[])
    wordlist = filter(len,[ w.strip() for w in re.split(u"\n+",words) ])
    grid,sol = generate_tamil_word_grid(wordlist)
-   return render(request,'xword.html',{'solution':grid,'wordlist':wordlist})
+   return render(request,'xword.html',{'solution':grid,'wordlist':wordlist,'PYTHON26':PYTHON26})
 
 def summarizer(request):
    if request.method == "GET":
-      return render(request,'summarizer.html',{'text_input':u''})
+      return render(request,'summarizer.html',{'text_input':u'','PYTHON26':PYTHON26})
    assert( request.method == "POST" )
    text_input = request.POST.get("text_input",u"")
    
@@ -208,7 +215,7 @@ def summarizer(request):
    in_w = len(tamil.utf8.get_words(text_input))
    out_w = len(tamil.utf8.get_words(text_summary))
    text_comments = u"உள்ளீடு அளவு: %d சொற்கள், வெளியீடு அளவு: %d சொற்கள். சுருக்கம் %3.3g.\n"%(in_w,out_w,in_w/(1.0*out_w))
-   return render(request,u'summarizer.html',{'text_input':text_input,"text_summary":text_summary,"text_comments":text_comments})
+   return render(request,u'summarizer.html',{'text_input':text_input,"text_summary":text_summary,"text_comments":text_comments,'PYTHON26':PYTHON26})
 def classify_word(request):
     word=request.GET.get('tamiltext')
     result=process_word(word)

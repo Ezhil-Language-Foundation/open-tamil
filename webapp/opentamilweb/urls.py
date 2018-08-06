@@ -17,12 +17,14 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.conf.urls.i18n import i18n_patterns
 from django.utils.translation import ugettext_lazy as _
-urlpatterns=[
-           url(r'^i18n/', include('django.conf.urls.i18n')),
-
-]
-urlpatterns += i18n_patterns(
-    #url(r'^admin/', admin.site.urls),
-    
-    url(_(r''),include('opentamilapp.urls')),
-)
+import sys
+if sys.version.find('2.6') >= 0:
+    urlpatterns = [url(r'',include('opentamilapp.urls')),]
+else:
+    urlpatterns=[
+        url(r'^i18n/', include('django.conf.urls.i18n')),
+    ]
+    urlpatterns += i18n_patterns(
+        #url(r'^admin/', admin.site.urls),
+        url(_(r''),include('opentamilapp.urls')),
+        )
