@@ -103,6 +103,14 @@ msgstr "ஒலிபெயர்ப்பி"
 msgid "Tamil Spell Checker"
 msgstr "தமிழ் எழுத்துப் பிழைதிருத்தி"
 
+#: opentamilapp/templates/main.html:59
+msgid "Text to Speech Synthesizer"
+msgstr "உரை ஒலி மாற்றி"
+
+#: opentamilapp/templates/main.html:61
+msgid "Classifier"
+msgstr "சொல் மொழி பகுப்பாய்வு - செயற்கை நுண்ணறிவு"
+
 #: opentamilapp/templates/main.html:64
 msgid "Unicode Converter"
 msgstr "ஒறுங்குறி (யுனிகோட்) மாற்றி"
@@ -118,6 +126,10 @@ msgstr "தமிழ் யுனிகிராம்"
 #: opentamilapp/templates/main.html:67
 msgid "Tamil Anagram"
 msgstr "தமிழ் அனாகிராம்"
+
+#: opentamilapp/templates/main.html:75
+msgid "Text summarizer"
+msgstr "தமிழ் உரை சுருக்கி"
 
 #: opentamilapp/templates/main.html:68 opentamilapp/templates/reverse.html:9
 msgid "Reverse Words"
@@ -199,7 +211,7 @@ msgstr "N-கிராம் உருவாக்கப் படுகிற�
 
 #: opentamilapp/templates/vaypaadu.html:8
 msgid "வாய்பாடு - Multiplication Tables"
-msgstr ""
+msgstr "வாய்பாடு"
 
 #: opentamilapp/templates/vaypaadu.html:10
 msgid "This application helps you to generate multiplication tables in Tamil"
@@ -211,7 +223,7 @@ msgstr "எண்"
 
 #: opentamilapp/templates/vaypaadu.html:18
 msgid "Multiplication table for number (enter input):"
-msgstr ""
+msgstr "பெருக்கல் அட்ட்வனை"
 
 #: opentamilapp/templates/vaypaadu.html:21
 msgid "please Enter the Number"
@@ -223,11 +235,11 @@ msgstr "சொல் தேடல்"
 
 #: opentamilapp/templates/xword.html:7
 msgid "Crossword"
-msgstr "சொல் தேடல்"
+msgstr "சொல் தேடல் - குறுக்கெழுத்து"
 
 #: opentamilapp/templates/xword.html:74
 msgid "Generate"
-msgstr ""
+msgstr "உறுவாக்கு"
 
 #: opentamilweb/settings.py:110
 msgid "English"
