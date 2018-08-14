@@ -1,0 +1,18 @@
+OpenTamilWebApp - search engine for Project Madurai corpus #169
+
+Search engine for Project Madurai corpus:
+
+Search by name, author, title, genre etc already implemented in MinMadurai [மின் மதுரை] https://github.com/Ezhil-Language-Foundation/MinMadurai
+
+We need to have full text search by building a index of words/phrases to documents, and a concordance database built for Madurai corpus. Two of these items will provide a
+good cross referencing and utility for research purposes.
+
+e.g.
+We can also show number of words, characters, paragraphs in a given work of text in Project Madurai corpus. This is basic.
+Researcher/user wants to know how many documents are referencing 'கணிதம்' or 'மோக்‌ஷம்' ?
+What are sentences referencing 'மணப்பெண்' and 'மாமியார்' ?
+What are documents written by a specific author ?
+
+This has a good ability to form a framework that can load the index and corpus files [separately] for each corpus, and analyze within Open Tamil.
+
+Further if you add NLP parsing to query beautiful things will happen :-)
