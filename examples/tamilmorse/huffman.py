@@ -65,7 +65,7 @@ def huffman_get_codes(codes,tree,sym=None,pfx='',level=0):
 
 def huffman( v, p ):
     """ v - list of symbols. p - list of corresponding probabilities for symbol """
-    assert sum(p) == 1.0
+    assert sum(p) >= 0.99,"Sum of p = %g"%sum(p)
     treelist = [Tree(vv,pp) for vv,pp in zip(v,p)]
     while len(treelist) > 1:
         huffman_reduce(treelist)
@@ -80,7 +80,7 @@ def print_huffman_code_cwl(code,p,v):
     for k,_v in code.items():
         print(u"%s -> %s"%(k,_v))
         cwl += p[v.index(k)]*len(_v)
-    print "cwl = %g"%cwl
+    print(u"cwl = %g"%cwl)
     return cwl,code.values()
 
 #examples
@@ -98,4 +98,5 @@ def demo():
     cwl,codelist = print_huffman_code_cwl(code,p,v)
     assert( cwl == 1.85 )
 
-demo()
+if __name__ == u"__main__":
+    demo()
