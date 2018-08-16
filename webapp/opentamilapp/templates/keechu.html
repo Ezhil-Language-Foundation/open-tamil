@@ -48,7 +48,8 @@
     	var len=0
     		for(var data1 in data){
     			len+=data[count]
-    			count+=1
+			if(data[count]!=0)
+    			   count+=1
     			
     	}
     	$('#disp2').text("{% trans 'No of Word is ' %}"+' '+count+' '+"{% trans 'and No of letter is '%}"+' '+len)
