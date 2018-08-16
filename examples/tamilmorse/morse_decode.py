@@ -7,13 +7,18 @@ import codecs
 import json
 import tamil
 import sys
-#e.g. python morse_encode.py கலைஞர்
-def encode(text):
+#e.g. python morse_decode.py ...-. .-.---.-.-..-- ..-.--.---.-.-... --.-....
+def decode(text):
     with codecs.open("tamilmorse.json","r","utf-8") as fp:
         codebook = json.loads(fp.read())
-    output = [codebook.get(l,l) for l in tamil.utf8.get_letters(text)]
+    output = []
+    reverse_code = {}
+    for k,v in codebook.items():
+        reverse_code[v] = k
+    #print(">%s<"%text)
+    output = [reverse_code.get(chunks,"x") for chunks in text.split(" ")]
     print(u" ".join(output))
     return
 
 if __name__ == u"__main__":
-    encode(u" ".join([i.decode("utf-8") for i in sys.argv[1:]]))
+    decode(" ".join(sys.argv[1:]))
