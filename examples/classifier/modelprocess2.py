@@ -48,7 +48,7 @@ Y = Y.ravel()
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y)
 scaler = StandardScaler()
 scaler.fit(X_train)
-
+joblib.dump(scaler,'test_scaler.pkl')#scaler Dump for webapps
 print("Size of Training set => %d"%X_train.shape[0])
 print("Size of Test set => %d"%X_test.shape[0])
 
@@ -66,7 +66,7 @@ nn = MLPClassifier(hidden_layer_sizes=(8,8,7),solver='lbfgs')#activation='logist
 #                   max_iter=500,solver='sgd',activation='logistic')
 print(nn)
 nn.fit(X_train,Y_train)
-joblib.dump(nn,'nn-%s.pkl'%time.ctime())
+joblib.dump(nn,'nn-%s.pkl'%time.ctime())#change dump name to test_nn.pkl for webapps
 
 Y_pred = nn.predict(X_test)
 print(" accuracy => ",accuracy_score(Y_pred.ravel(),Y_test))
