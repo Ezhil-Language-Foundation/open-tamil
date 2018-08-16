@@ -1,5 +1,7 @@
 ## -*- coding: utf-8 -*-
-## (C) 2017 Muthiah Annamalai,
+#(C) 2018 Muthiah Annamalai
+# This file is part of Open-Tamil project
+# You may use or distribute this file under terms of MIT license
 ## 
 from __future__ import print_function
 import codecs
