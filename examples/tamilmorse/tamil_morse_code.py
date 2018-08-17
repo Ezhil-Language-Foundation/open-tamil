@@ -15,16 +15,18 @@ from huffman import huffman, print_huffman_code_cwl
 
 def build_morse_code():
     unigram = TamilUnigramStats().unigram
-    v = unigram.keys()
-    p = [unigram[k] for k in v]
-    code,_ = huffman(v,p)
-    cwl,codelist = print_huffman_code_cwl(code,p,v)
+    v_keys = unigram.keys()
+    p = [unigram[k] for k in v_keys]
+    code,_ = huffman(v_keys,p)
+    cwl,codelist = print_huffman_code_cwl(code,p,v_keys)
     tamilmorse = {}
     print(u"<ul>")
-    for k,v in zip(unigram.keys(),codelist):
+    descending_keys = [x for _,x in sorted(zip(unigram.values(),v_keys),reverse=True)]
+    for k in descending_keys:
+        v = code[k]
         v = v.replace('0','.').replace('1','-')
         tamilmorse[k] = v
-        print(u"<li>%s  -&gt <b>%s</b></li>"%(k,v))
+        print(u"<li>%s  -&gt; <b><kbd>%s</kbd></b></li>"%(k,v))
     print(u"</ul>")
     with codecs.open("tamilmorse.json","w","utf-8") as fp:
         fp.write( json.dumps(tamilmorse) )
