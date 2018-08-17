@@ -27,7 +27,8 @@ msgid "this is example"
 
 msgstr "இது எடுத்துக்காட்டு"
 
-then put following command
+then put following commands
 
 python manage.py compilemessages
+
 python manage.py runserver
