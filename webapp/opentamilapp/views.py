@@ -10,6 +10,7 @@ import copy
 import math
 import re
 import cgi
+import json
 from tamil.utf8 import get_letters
 from tamil import wordutils, utf8
 from spell import Speller, LoadDictionary
@@ -29,6 +30,12 @@ from tamilsandhi.sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
 from .webuni import unicode_converter
 import random
+
+#try:
+import tamilmorse
+#except ImportError as ioe:
+#   print("tamilmorse library not imported")
+#   pass
 
 PYTHON26 = sys.version.find('2.6') >= 0
 if not PYTHON26:
@@ -56,6 +63,8 @@ def spl(request):
      return render(request,'spell.html',{"PYTHON26":PYTHON26})
 def rev(request):
      return render(request,'reverse.html',{"PYTHON26":PYTHON26})
+def morse_code(request):
+     return render(request,'morse.html',{"PYTHON26":PYTHON26})
 def num(request):
      return render(request,'number.html',{"PYTHON26":PYTHON26})
 def anag(request):
@@ -169,15 +178,25 @@ def revers(request,word):
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
 
- #TBD:
- #def sorttamil(request):
+def morse(request,direction="encode",word=""):
+   if direction.lower().find("encode") >= 0:
+      fn = tamilmorse.encode
+   else:
+      fn = tamilmorse.decode
+   json_string = json.dumps( fn(word), ensure_ascii = False )
+   print json_string
+   response = HttpResponse( json_string, content_type="application/json; charset=utf-8" )
+   return response
 
- #TBD:
- #def synthesize_number(request):
+#TBD:
+#def sorttamil(request):
 
- #TBD:
- #def kalsee_on_web(request):
- 
+#TBD:
+#def synthesize_number(request):
+
+#TBD:
+#def kalsee_on_web(request):
+
 def tts_demo(request):
    if request.method == "GET":
       return render(request,"tts_demo.html",{'solution':u'','PYTHON26':PYTHON26})

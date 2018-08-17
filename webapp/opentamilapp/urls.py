@@ -47,6 +47,8 @@ urlpatterns = [
     url(r'^revers/(?P<word>.+?)/$', revers,name="ta_revers"),
     url(r'^xword/$',xword,name='ta_xword'),
     url(r'^summarizer/',summarizer,name='ta_summarizer'),
+    url(r'^morse/(?P<direction>.+)/(?P<word>.+)/$',morse,name='ta_morse'),
+    url(r'^morse/$', morse_code,name="morse_code"),
 ]
 
 if not PYTHON26:
