@@ -20,7 +20,7 @@ def TVU_morse_code():
 
 def Madurai_morse_code():
     # unigram data from Project Madurai
-    unigram = TamilUnigramStats().unigram
+    unigram = MaduraiUnigramStats().unigram
     build_morse_code(unigram)
     
 def build_morse_code(unigram):
