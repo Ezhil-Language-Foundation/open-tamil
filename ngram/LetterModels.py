@@ -29,7 +29,10 @@ class Letters:
             op = op + u"%s => %d\n"%(lett,freq)
         print(max(self.letter.values()))
         return op
-
+    
+    def update_file(self,filename):
+        self.corpus = Corpus( filename )
+        
     def save(self,filename):
         raise Exception('Not implemented')
     
