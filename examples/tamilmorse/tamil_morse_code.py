@@ -13,8 +13,17 @@ from pprint import pprint
 from solthiruthi import resources
 from huffman import huffman, print_huffman_code_cwl
 
-def build_morse_code():
+def TVU_morse_code():
+    # unigram data from Project Madurai
     unigram = TamilUnigramStats().unigram
+    build_morse_code(unigram)
+
+def Madurai_morse_code():
+    # unigram data from Project Madurai
+    unigram = TamilUnigramStats().unigram
+    build_morse_code(unigram)
+    
+def build_morse_code(unigram):
     v_keys = unigram.keys()
     p = [unigram[k] for k in v_keys]
     code,_ = huffman(v_keys,p)
@@ -32,10 +41,10 @@ def build_morse_code():
         fp.write( json.dumps(tamilmorse) )
     return
 
-class TamilUnigramStats:
-    def __init__(self):
+class UnigramStats:
+    def __init__(self,filename):
         self.unigram = {} # Tamil letter -> probability of occurence
-        self.unigram_file = resources.mk_path("tvu_unigram.txt")
+        self.unigram_file = resources.mk_path(filename)
         with codecs.open(self.unigram_file,"r","utf-8") as fp:
             for L in fp.readlines():
                 a,b = L.split("-")
@@ -45,8 +54,15 @@ class TamilUnigramStats:
             normalize = 1+sum(self.unigram.values())
             for k,v in self.unigram.items():
                 self.unigram[k] = v/normalize
-        
+
+class TamilUnigramStats(UnigramStats):
+    def __init__(self):
+        UnigramStats.__init__(self,"tvu_unigram.txt")
+
+class MaduraiUnigramStats(UnigramStats):
+    def __init__(self):
+        UnigramStats.__init__(self,"madurai_unigram.txt")
 
 if __name__ == u"__main__":
-    build_morse_code()
+    Madurai_morse_code()
 
