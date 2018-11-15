@@ -12,7 +12,7 @@ from sys import version
 from copy import copy
 import re
 import operator
-
+import string
 PYTHON3 = version > '3'
 del version
 
@@ -296,6 +296,10 @@ def is_tamil_unicode( sequence ):
     if len(sequence) > 1:
         return list(map( is_tamil_unicode_predicate, get_letters(sequence) ))
     return is_tamil_unicode_predicate( sequence )
+
+def has_english( word_in ):
+    """ return True if word_in has any English letters in the string"""
+    return not all_tamil(word_in) and len(word_in) > 0 and any([l in word_in for l in string.ascii_letters])
 
 def all_tamil( word_in ):
     """ predicate checks if all letters of the input word are Tamil letters """

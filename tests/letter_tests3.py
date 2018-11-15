@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 # This file is part of Open-Tamil package unittests
+# (C) 2018 Muthu Annamalai
 
 # setup the paths
 from opentamiltests import *
@@ -7,6 +9,11 @@ if PYTHON3:
     from functools import cmp_to_key
 
 class LetterTests(unittest.TestCase):
+    def test_has_english(self):
+        expected = [True,True,False,False]
+        result = list(map(has_english, ['Tamil','Telugu',u'தமிழ்',u'கிரேக்கம்'] ))
+        self.assertEqual(result,expected)
+        
     def test_named_vowels(self):
         vowels = [vowel_a, vowel_aa, vowel_i, vowel_ii, vowel_u, vowel_uu, vowel_e, vowel_ee, vowel_ai, vowel_o, vowel_oo, vowel_au]
         self.assertEqual( vowels, uyir_letters )
