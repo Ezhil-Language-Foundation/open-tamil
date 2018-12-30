@@ -3,6 +3,7 @@ open-tamil [![Build Status](https://travis-ci.org/Ezhil-Language-Foundation/open
 
 Open Source Tamil Tools and Tamil Library for Python 2, 3
 திற மூல தமிழ் கருவிகள்
+Version 0.8
 
 ## மென்பொருள் (Software)
 
