@@ -36,8 +36,9 @@ Read more about this project at <a href="https://github.com/nithyadurai87/tamil-
         Sample usage is given below.
       
   <pre>
-        http://tamilpesu.us/sandhi-checker/?tamiltext="Inputtamiltext"
-        Result: '{"old":"input tamil text","new":"Output tamil text"}'
+       POST http://tamilpesu.us/sandhi-checker/
+       Data: tamiltext="Inputtamiltext"
+       Result: '{"old":"input tamil text","new":"Output tamil text"}'
       </pre>
     </p>
 </div>
@@ -49,9 +50,9 @@ Read more about this project at <a href="https://github.com/nithyadurai87/tamil-
 	$('#btn2').click(function(){
     var dat = $('#txt2').val()
     $.ajax({
-        type:"GET",
+        type:"POST",
         data:{"tamiltext":dat},
-    	url: '/sandhi-checker/',
+    	url: '/en/sandhi-checker/',
     	success: function(data){
             console.log(data)
             $('#disp2').text(data.old)

@@ -112,15 +112,20 @@ def keech(request,k1):
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
+@csrf_exempt
 def call_sandhi_check(request):
-    k1= cgi.escape(request.GET.get('tamiltext',u'அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் '))
+    k1= cgi.escape(request.POST.get('tamiltext',u'அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் '))
+    print(k1)
     dic={}
     temp=u""
     dic['old']=k1
     text,res=check_sandhi(k1)
     for i,j in enumerate(k1.split()):
-        if j!=text[i]:
-           text[i]="<span class='highlight'>"+text[i]+"</span>"
+       try:
+          if j!=text[i]:
+             text[i]="<span class='highlight'>"+text[i]+"</span>"
+       except IndexError:
+              pass
     dic['new']=u" ".join(text)
     json_string = json.dumps(dic,ensure_ascii = False)
     #creating a Response object to set the content type and the encoding
