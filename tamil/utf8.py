@@ -453,17 +453,26 @@ for _uyir_idx in range(0,12):
         _uyirmei = uyirmei_constructed( _mei_idx, _uyir_idx )
         grantha_uyirmei_splits[_uyirmei] = [_mei,uyir_letters[_uyir_idx]]
 
-def get_letters_elementary_iterable(word):
+def join_letters_elementary(elements):
+    assert len(elements)%2 == 0, u'input has to be an even numbered list'
+    return u"".join([joinMeiUyir(elements[i],elements[i+1]) for i in range(0,len(elements),2)])
+
+def get_letters_elementary_iterable(word,symmetric=False):
     for letter in get_letters_iterable(word):
         letter_parts = grantha_uyirmei_splits.get(letter,None)
         if letter_parts:
             yield letter_parts[0]
             yield letter_parts[1]
         else:
-            yield letter
+            if letter in grantha_mei_letters:
+                yield letter
+                if symmetry: yield None
+            else:
+                if symmetry: yield None
+                yield letter
     return
 
-def get_letters_elementary(word):
+def get_letters_elementary(word,symmetric=False):
     rval = []
     for letter in get_letters(word):
         letter_parts = grantha_uyirmei_splits.get(letter,None)
@@ -471,7 +480,12 @@ def get_letters_elementary(word):
             rval.append( letter_parts[0] )
             rval.append( letter_parts[1] )
         else:
-            rval.append( letter )
+            if letter in grantha_mei_letters:
+                rval.append( letter )
+                if symmetric: rval.append(None)
+            else:
+                if symmetric: rval.append(None)
+                rval.append( letter )
     return rval
 
 def get_words(letters,tamil_only=False):
@@ -613,18 +627,17 @@ def joinMeiUyir(mei_char, uyir_char):
     Date : 22.09.2014
     """
     if not isinstance(mei_char, PYTHON3 and str or unicode):
-        raise ValueError("Passed input mei character '%s' must be unicode, \
-                                not just string" % mei_char)
-    if not isinstance(uyir_char, PYTHON3 and str or unicode):
-        raise ValueError("Passed input uyir character '%s' must be unicode, \
-                                not just string" % uyir_char)
+        raise ValueError(u"Passed input mei character '%s' must be unicode, not just string" % mei_char)
+    if not isinstance(uyir_char, PYTHON3 and str or unicode) and uyir_char != None:
+        raise ValueError(u"Passed input uyir character '%s' must be unicode, not just string" % uyir_char)
     if mei_char not in grantha_mei_letters:
-        raise ValueError("Passed input character '%s' is not a"
-                         "tamil mei character" % mei_char)
-    if uyir_char not in uyir_letters:
-        raise ValueError("Passed input character '%s' is not a"
-                         "tamil uyir character" % uyir_char)
-    uyiridx = uyir_letters.index(uyir_char)
+        raise ValueError(u"Passed input character '%s' is not a tamil mei character" % mei_char)
+    if uyir_char not in uyir_letters and uyir_char != None:
+        raise ValueError(u"Passed input character '%s' is not a tamil uyir character" % uyir_char)
+    if uyir_char:
+        uyiridx = uyir_letters.index(uyir_char)
+    else:
+        return mei_char
     meiidx = grantha_mei_letters.index(mei_char)
     # calculate uyirmei index
     uyirmeiidx = meiidx*12 + uyiridx

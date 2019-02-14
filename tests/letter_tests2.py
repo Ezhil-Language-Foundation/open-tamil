@@ -31,7 +31,26 @@ class Letters(unittest.TestCase):
         first = itemgetter(0)
         numbers = list(map(first,tamil.utf8.tamil_digits))
         self.assertEqual(sum(numbers), 1155)
-        self.assertTrue( numbers,[0,1,2,3,4,5,6,7,8,9,10,100,1000])        
+        self.assertTrue( numbers,[0,1,2,3,4,5,6,7,8,9,10,100,1000])
+
+    def test_symmetric_split_join(self):
+        from tamil.utf8 import get_letters_elementary as GLE
+        from tamil.utf8 import join_letters_elementary
+        origin = u'பழரதம்'
+        symmetric = GLE(origin,True)
+        splits = [u'\u0baa\u0bcd', u'\u0b85',
+                  u'\u0bb4\u0bcd',
+                  u'\u0b85',
+                  u'\u0bb0\u0bcd',
+                  u'\u0b85',
+                  u'\u0ba4\u0bcd',
+                  u'\u0b85',
+                  u'\u0bae\u0bcd',
+                  None]
+        self.assertEqual( symmetric, splits )
+        joined = join_letters_elementary(splits)
+        self.assertEqual( origin, joined )
+        
     def test_uyir_mei_split(self):
         ak = utf8.splitMeiUyir(u"ஃ")
         self.assertEqual(ak,u"ஃ")
