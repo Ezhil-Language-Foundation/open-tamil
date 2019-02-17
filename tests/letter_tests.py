@@ -88,6 +88,18 @@ class Words(unittest.TestCase):
         self.assertFalse( pos3 )
 
 class Letters(unittest.TestCase):
+    def test_split_join_symmetric(self):
+        a=[u'கப்பல்',u'வேகம்',u'உவகை']
+        b = map(lambda x: utf8.get_letters_elementary(x,True), a )
+        c = []
+        for i,b_w in enumerate(b):
+            w = utf8.join_letters_elementary(b_w)
+            print u"%s"%w
+            c.append(w)
+        d = map( len, b )
+        self.assertEqual([8,6,6],d)
+        self.assertSequenceEqual(c,a)
+
     def test_odd_case(self):
         # truly mal-formed inputs get mangled by get-letters
         not_a_word = u"ஆாள்"
