@@ -18,7 +18,7 @@ import copy
 # we can restrict the edit distance search to any value from [1-N]
 def oridam_generate_patterns(word_in,cm,ed=1,level=0,pos=0,candidates=None):
     """ ed = 1 by default, pos - internal variable for algorithm """
-    alternates = cm.get(word_in[pos])
+    alternates = cm.get(word_in[pos],[])
     if not candidates:
         candidates = []
     assert ed <= len(word_in), 'edit distance has to be comparable to word size [ins/del not explored]'
@@ -46,44 +46,12 @@ def oridam_generate_patterns(word_in,cm,ed=1,level=0,pos=0,candidates=None):
             oridam_generate_patterns(word_in,cm,ed, level+1,n_pos,candidates)
     return candidates
 
-# edit distance of N - length of input - this is searching far too deep.
-# ideally we restrict to 1 or 2 typographical error in entering a word
-# this is the worst case for a fluent Tamil input writer
-def generate_candidates(word_in,keyboard_cm,level=0):
-    if not isinstance(word_in,list):
-        v_c_letters = get_letters_elementary(word_in,symmetric=True)
-    else:
-        v_c_letters = word_in
-    if len(v_c_letters) == 0:
-        return []
-    alternates_for_current_letters = keyboard_cm.get(v_c_letters[0],[])
-    alternates_for_current_letters.insert(0,v_c_letters[0])
-    #TODO: fixup case when adjacent letter is a pulli
-    alternates_for_current_letters = filter(lambda x : not ( x in pulli_symbols), alternates_for_current_letters) 
-    if len(v_c_letters) >= 2:
-        sub_candidates = generate_candidates(v_c_letters[1:],keyboard_cm,level+1)
-    else:
-        return alternates_for_current_letters
-    full_candidates = []
-    for c in sub_candidates:
-        if not c:
-            c = []
-        elif not isinstance(c,list):
-            c = list(c)
-        for alt in alternates_for_current_letters:
-            altc = copy.copy(c)
-            altc.insert(0,alt)    
-            full_candidates.append( altc )
-    if level == 0 : full_candidates.append(v_c_letters)
-    return full_candidates
-
 def correct(word_in,dictionary,keyboard_cm):
     """
     @input: word_in - input word
          dictionary - dictionary/lexicon
          keyboard_cm - confusion matrix for keyboard in question
     """
-    raise Exception("Not implemented")
     #candidates = generate_candidates(word_in,keyboard_cm)
     #score candidates by n-gram probability of language model occurrence
     #etc. or edit distance from source word etc.
