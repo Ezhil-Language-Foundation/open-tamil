@@ -46,7 +46,7 @@ class WordSimilaritySpeller(unittest.TestCase):
     def get_min_distance_alternate( self, pizhai ):
         from ngram.Distance import edit_distance
         agarathi_sorkal = [u'அவிழ்',u'அவல்',u'அவள்',u'தவில்',u'தவள்']
-        distances = map( lambda w: edit_distance( pizhai, w) , agarathi_sorkal )
+        distances = list( map( lambda w: edit_distance( pizhai, w) , agarathi_sorkal ) )
         print(distances)
         m = min(distances)
         idx = -1

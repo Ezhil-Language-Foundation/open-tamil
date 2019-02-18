@@ -19,8 +19,8 @@ class SolthiruthiTypographical(unittest.TestCase):
         pat = oridam_generate_patterns(word_in,kbd_cm,ed)
         pat = [u"".join(p) for p in pat]
         if DEBUG:
-            print "Total = %d"%(len(pat))
-            print "Total set = %d"%len( set(pat) )
+            print("Total = %d"%(len(pat)))
+            print("Total set = %d"%len( set(pat) ))
         return (len(pat),len(set(pat)))
     
     def test_edit_distance_one(self):
