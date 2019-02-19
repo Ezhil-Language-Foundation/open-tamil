@@ -12,6 +12,7 @@
 # பழரதம் when used intended to type பழரசம் in the Tamil 99 keyboard
 # 
 from tamil.utf8 import get_letters_elementary, pulli_symbols
+from .dictionary import Dictionary
 import copy
 
 # explore all edit distances - i.e. len(word_in) or only upto value in ed.
@@ -46,13 +47,14 @@ def oridam_generate_patterns(word_in,cm,ed=1,level=0,pos=0,candidates=None):
             oridam_generate_patterns(word_in,cm,ed, level+1,n_pos,candidates)
     return candidates
 
-def correct(word_in,dictionary,keyboard_cm):
+def corrections(word_in,dictionary,keyboard_cm,ed=2):
     """
     @input: word_in - input word
          dictionary - dictionary/lexicon
          keyboard_cm - confusion matrix for keyboard in question
     """
-    #candidates = generate_candidates(word_in,keyboard_cm)
-    #score candidates by n-gram probability of language model occurrence
+    assert isinstance(dictionary,Dictionary)
+    candidates = oridam_generate_patterns(word_in,keyboard_cm,ed)
+    #TBD: score candidates by n-gram probability of language model occurrence
     #etc. or edit distance from source word etc.
-    #return filter(dictionary.isWord,candidates)
+    return list(filter(dictionary.isWord,candidates))
