@@ -90,13 +90,13 @@ class Words(unittest.TestCase):
 class Letters(unittest.TestCase):
     def test_split_join_symmetric(self):
         a=[u'கப்பல்',u'வேகம்',u'உவகை']
-        b = map(lambda x: utf8.get_letters_elementary(x,True), a )
+        b = list(map(lambda x: utf8.get_letters_elementary(x,True), a ))
         c = []
         for i,b_w in enumerate(b):
             w = utf8.join_letters_elementary(b_w)
             print(u"%s"%w)
             c.append(w)
-        d = map( len, b )
+        d = list(map( len, b ))
         self.assertEqual([8,6,6],d)
         self.assertSequenceEqual(c,a)
 
