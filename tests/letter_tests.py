@@ -94,7 +94,7 @@ class Letters(unittest.TestCase):
         c = []
         for i,b_w in enumerate(b):
             w = utf8.join_letters_elementary(b_w)
-            print u"%s"%w
+            print(u"%s"%w)
             c.append(w)
         d = map( len, b )
         self.assertEqual([8,6,6],d)
