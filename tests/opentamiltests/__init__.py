@@ -27,6 +27,8 @@ import unittest
 
 import solthiruthi
 
+import tamilstemmer
+
 # 2-3 straddle
 try:
     from test import test_support

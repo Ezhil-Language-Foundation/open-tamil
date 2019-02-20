@@ -5,6 +5,7 @@
 
 # Tamil99 Keyboard adjacency matrix - aka - confusion matrix
 # for keystroke error modeling
+# see attached file [open-tamil/solthiruthi/tamil99_kbd.png]
 
 confusion_matrix = {
 u'ஆ' : [u'ஈ',u'இ',u'அ'], 
