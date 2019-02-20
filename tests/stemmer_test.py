@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 ## (C) 2019 Muthiah Annamalai,
-import unittest
-
+from opentamiltests import *
 from tamilstemmer import TamilStemmer
 
 class TamilTest(unittest.TestCase):
