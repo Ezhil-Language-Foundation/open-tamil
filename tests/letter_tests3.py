@@ -4,6 +4,8 @@
 
 # setup the paths
 from opentamiltests import *
+import unicodedata
+import codecs
 from tamil.utf8 import *
 if PYTHON3:
     from functools import cmp_to_key
@@ -51,7 +53,16 @@ class LetterTests(unittest.TestCase):
     def test_named_kombugal(self):
         kombugal = [accent_aa, accent_i, accent_u, accent_uu, accent_e, accent_ee, accent_ai, accent_o, accent_oo, accent_au ]
         self.assertTrue( accent_symbols[1:10], kombugal )
-        
+
+    def test_utf16(self):
+        # as long as data are in unicode format we dont care the encoding in the file as UTF-8 or UTF-16.
+        # see: SO #10288016
+        word_lengths = [69, 65, 64, 79, 62, 62, 71, 61, 70, 63]
+        with codecs.open(os.path.join(os.path.dirname(__file__),'data','utf16-demo.txt'),'r','utf-16') as fp:
+            t = fp.readlines()
+        self.assertSequenceEqual( word_lengths, list(map(len,map(get_letters,t))) )
+        self.assertEqual( unicodedata.name(t[1][11]), 'TAMIL LETTER E' )
+
 if __name__ == u"__main__":
     unittest.main()
 
