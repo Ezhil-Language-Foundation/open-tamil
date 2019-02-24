@@ -4,6 +4,8 @@
 from __future__ import print_function, division
 import copy
 import collections
+import random
+import math
 from . import utf8
 
 def combinations(symbols_in):
@@ -268,7 +270,31 @@ def word_split(inword,dictionary):
         idx = idx + 1
     
     return ((solutions))
-    
+
+def minnal(word_list):
+    L = map(utf8.get_letters, word_list)
+    allL = list()
+    [allL.extend(l) for l in L]
+    L = sorted( set(allL), cmp=utf8.compare_words_lexicographic )
+    Sq = int(math.ceil( math.sqrt( len(L) ) )**2)
+    random_inserts = Sq - len(L)
+    L.extend( [random.choice(utf8.tamil_letters) for i in range(0,random_inserts) ] )
+    random.shuffle(L)
+    i = 0
+    Lside = int(math.sqrt(len(L)))
+    textgrid = []
+    text = u''
+    while i < len(L):
+        text = text + (u",".join(L[i:i+Lside])) + u'\n'
+        textgrid.append( L[i:i+Lside] )
+        i = i + Lside
+    from pprint import pprint
+    pprint(textgrid)
+    return textgrid,text
+    #tbd: print L as square grid with random inserts
+
+
+
 # dummy dictionary interface for use with anagrams
 DictionaryWithPredicate = collections.namedtuple('DictionaryWithPredicate',['isWord'])
 

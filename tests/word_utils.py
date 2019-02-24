@@ -12,6 +12,12 @@ from tamil import wordutils, tweetparser
 import math
 
 class TestTweetParse(unittest.TestCase):
+    def test_minnal( self ):
+        a,b=wordutils.minnal([u'அப்பம்', u'நேய்',u'தபால்',u'காதல்'])
+        self.assertEqual( len(a), 4 )
+        self.assertEqual( len(a[0]), 4 )
+        self.assertTrue( u'அ' in b )
+        
     def test_tweety( self ):
         tweet = u"ஈர்ப்பு அலைகள் உருவாக்கும் அலைகள் #LIGO #tamil @nsf | SBS Your Language http://www.sbs.com.au/yourlanguage/tamil/ta/content/iirppu-alaikll-uruvaakkum-alaikll?language=ta"
         tobj = tweetparser.TamilTweetParser(timeline_owner = "@ezhillang",tweet=tweet)
