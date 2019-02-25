@@ -3,6 +3,7 @@
 # MIT License
 #
 # Copyright (c) 2018 சுரேந்தர் இரவிச்சந்திரன்
+# Copyright (C) 2019 முத்து அண்ணாமலை
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +41,8 @@ import argparse
 import codecs
 
 class Text:
-    def __init__(self, content, lineonly=True, wordonly=True, charonly=True):
+    """ Text object holds a file object and counts requisite stats """
+    def __init__(self, content=None, lineonly=True, wordonly=True, charonly=True):
         self.content = content
         self.lineonly = lineonly
         self.wordonly = wordonly
@@ -48,27 +50,25 @@ class Text:
         self.letter_toll = 0
         self.line_toll = 0
         self.word_toll = 0
-        if self.lineonly:
-            self.count_line()
-        if self.wordonly:
-            self.count_word()
-        if self.charonly:
-            self.count_letter()
-
+        self.line = u''
+        if content:
+            for line in content:
+                self.line = line
+                if self.lineonly:
+                    self.count_line()
+                if self.wordonly:
+                    self.count_word()
+                if self.charonly:
+                    self.count_letter()
+        
     def count_word(self):
-        if self.__valid():
-            self.word_toll = len(self.content.split())
+        self.word_toll += len(self.line.split())
 
     def count_line(self):
-        if self.__valid():
-            self.line_toll = len(self.content.splitlines())
+        self.line_toll += 1 
 
     def count_letter(self):
-        if self.__valid():
-            self.letter_toll = len(tamil.get_letters(self.content))
-
-    def __valid(self):
-        return True
+        self.letter_toll += len(tamil.get_letters(self.line))
 
 def print_file_stats(filename):
     try:
@@ -80,7 +80,7 @@ def print_file_stats(filename):
         print("OS error: {0}".format(err))
         return
     file_text = Text(
-            fileobj.read(), 
+            fileobj, 
             lineonly=attribs["line"],
             wordonly=attribs["word"],
             charonly=attribs["char"]
@@ -133,7 +133,7 @@ if options.l or options.w or options.c:
     attribs["word"] = options.w
     attribs["char"] = options.c
     attribs["uniq"] = options.u
-total_stats = Text("")
+total_stats = Text()
 
 if len(options.files) > 0:
     for file in options.files:

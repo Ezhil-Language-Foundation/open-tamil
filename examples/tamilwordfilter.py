@@ -1,6 +1,6 @@
 #!python
 # -*- coding: utf-8 -*-
-# (C) 2013-2018 Muthiah Annamalai
+# (C) 2013-2019 Muthiah Annamalai
 # 
 # This file is part of 'open-tamil' package tests
 # 
@@ -28,4 +28,5 @@ if __name__ == u"__main__":
         print(u"Usage: tamilwordfilter.py <filename-1> <filename-2> ... \n")
     for filename in sys.argv[1:]:
         with codecs.open(filename,"r","UTF-8") as fp:
-            print_tamil_words( fp.read() )
+            for line in fp: #SO:6475328 - read file line by line
+                print_tamil_words( line )
