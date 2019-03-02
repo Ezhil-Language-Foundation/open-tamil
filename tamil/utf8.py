@@ -136,6 +136,11 @@ u"வ"  ,u"வா"  ,u"வி"  ,u"வீ"  ,u"வு"  ,u"வூ"  ,u"வெ"  
 u"ழ"  ,u"ழா"  ,u"ழி"  ,u"ழீ"  ,u"ழு"  ,u"ழூ"  ,u"ழெ"  ,u"ழே"  ,u"ழை"  ,u"ழொ"  ,u"ழோ"  ,u"ழௌ" ,
 u"ள"  ,u"ளா"  ,u"ளி"  ,u"ளீ"  ,u"ளு"  ,u"ளூ"  ,u"ளெ"  ,u"ளே"  ,u"ளை"  ,u"ளொ"  ,u"ளோ"  ,u"ளௌ" ]
 
+tamil247 = [ ayudha_letter ]
+tamil247.extend( uyir_letters )
+tamil247.extend( mei_letters )
+tamil247.extend( uyirmei_letters )
+
 # Ref: https://en.wikipedia.org/wiki/Tamil_numerals
 # tamil digits : Apart from the numerals (0-9), Tamil also has numerals for 10, 100 and 1000.
 tamil_digit_1to10 = [u"௦", u"௧", u"௨",u"௩",u"௪",u"௫",u"௬",u"௭",u"௮",u"௯",u"௰"]

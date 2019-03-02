@@ -11,6 +11,9 @@ if PYTHON3:
     from functools import cmp_to_key
 
 class LetterTests(unittest.TestCase):
+    def test_tamil247(self):
+        self.assertEqual( len(tamil247), 247 )
+    
     def test_has_english(self):
         expected = [True,True,False,False]
         result = list(map(has_english, ['Tamil','Telugu',u'தமிழ்',u'கிரேக்கம்'] ))
