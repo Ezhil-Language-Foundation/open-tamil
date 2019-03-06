@@ -1,0 +1,65 @@
+{% extends "main.html" %}
+{% block title %}Tamil Word Game Minnal{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <!-- Word Game Minnal -->
+    <h1>தமிழ் சொல் விளையாட்டு - மின்னல்</h1>
+</div>
+<div>
+  <p>மின்னல் என்ற ஒரு சொல்விளையாட்டை தமிழ் கல்வி நிறுவனம் <a href="https://ipaatti.us">ஐபாட்டி</a> உருவாக்கியுள்ளது. இதனை பற்றி நாங்கள் இங்கு எழுதியுள்ளோம்; <a href="https://ezhillang.blog/2019/02/25/%e0%ae%9a%e0%af%8a%e0%ae%b2%e0%af%8d-%e0%ae%b5%e0%ae%bf%e0%ae%b3%e0%af%88%e0%ae%af%e0%ae%9f%e0%af%8d%e0%ae%9f%e0%af%81-%e0%ae%ae%e0%ae%bf%e0%ae%a9%e0%af%8d%e0%ae%a9%e0%ae%b2%e0%af%8d/">எழில் வலை தளம்</a></p>
+</div>
+<center>
+  <div style="padding-bottom:100px;">
+    <p id="disp" class='important'>
+    </p>
+  </div>
+  <div>
+    <textarea type="text" rows="10" columns="10" name="word" id="txt4" placeholder="Enter the word"></textarea><br />
+    <button id="btn4" class="btn btn-success">submit</button>
+  </div>
+  <div id="progress" class="alert alert-info silpa-hide"></div>
+</center>
+<script type="text/javascript">
+	$(document).ready(function () {
+	$('#btn4').click(function(){
+console.log('btn4 clicked!');
+    var dat = $('#txt4').val().split('\n').join(',');
+    var id_result = $('#disp');
+    var id_progress = $('#progress');
+
+    function getRandomInt(max) {
+	return Math.floor(Math.random() * 1024)%max;
+    }
+	
+    $.ajax({
+    	url: encodeURI('/minnal/'+dat+'/'),
+beforeSend:function(){
+                    id_result.empty().hide();
+                    id_progress.html("making Minnal. Please Wait...").show();
+                },
+    	success: function(data){
+            id_progress.hide();
+   	    var str="<table style='border:1px solid black;'>";
+            var bgcolors = ["blue","purple","green","magenta","red"];
+	    for(var i in data){
+	        var key = i;
+                var val = data[i];
+                str += "<tr style='padding:15px;border:1px;text-align:middle;'>";
+                for(var cellVal in val) {
+                    str+="<td style='font-weight:bold;color:white;padding:15px;border:1px solid black;background-color:"+bgcolors[getRandomInt(bgcolors.length)]+"'>"+'&nbsp &nbsp'+data[i][cellVal]+'&nbsp &nbsp &nbsp &nbsp'+'<td>';
+                }
+                str += '</tr>';
+            }
+            str += '</table>'	
+            $('#disp').html(str);
+            id_result.show();
+    	   }
+      });
+    });
+});
+</script>
+{% endblock %}
+<!--/**
+கந்தன் சஷ்டி கவசம்
+*/-->

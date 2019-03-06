@@ -11,8 +11,9 @@ import math
 import re
 import cgi
 import json
+import random
 from tamil.utf8 import get_letters
-from tamil import wordutils, utf8
+from tamil import wordutils
 from spell import Speller, LoadDictionary
 from solthiruthi.datastore import TamilTrie, DTrie, Queue
 from solthiruthi.Ezhimai import *
@@ -29,7 +30,7 @@ import tamil.utf8 as utf8
 from tamilsandhi.sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
 from .webuni import unicode_converter
-import random
+from tamil.wordutils import minnal as tamil_minnal
 
 #try:
 import tamilmorse
@@ -148,12 +149,11 @@ def spell_check(request,k1):
 def test_ngram(request,ng):
     obj = DTrie()
     prev_letter = u''
-            # per-line processor - remove spaces
-    for char in u"".join(re.split('\s+',ng)).lower():
-        if prev_letter.isalpha() and char.isalpha():
-           bigram = u"".join([prev_letter,char])
-           obj.add(bigram)
-                # update previous
+    # per-line processor - remove spaces
+    for char in get_letters(u"".join(re.split('\s+',ng)).lower()):
+        if (prev_letter.isalpha() and char.isalpha()) or ( utf8.is_tamil_unicode(prev_letter) and utf8.is_tamil_unicode(char)):
+            bigram = u"".join([prev_letter,char])
+            obj.add(bigram) # update previous
         prev_letter = char
     actual = obj.getAllWordsAndCount()
     json_string = json.dumps(actual,ensure_ascii = False)
@@ -248,4 +248,12 @@ def classify_word(request):
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
-
+def minnal(request):
+    return render(request,'minnal.html',{})
+def test_minnal(request,word):
+    data,_ = tamil_minnal(re.split('\s+|,',word))
+    json_string = json.dumps(data,ensure_ascii = False)
+    #creating a Response object to set the content type and the encoding
+    response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
+    return response
+ 

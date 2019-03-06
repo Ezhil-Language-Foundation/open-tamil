@@ -33,7 +33,6 @@ urlpatterns = [
     url(r'^number/$', num,name="number"),
     url(r'^anagram/$', anag,name="anagram"),
     url(r'^unigram/$', unig,name="unigram"),
-    url(r'^ngram/$', ngra,name="ngram"),
     url(r'^vaypaadu/$',vaypaadu,name="multiplication"),
     url(r'^number/(?P<num>\d+)/$', numstr,name="numstr"),
     url(r'^tsci/(?P<tsci>.+?)/$', unicod,name="unicod"),
@@ -41,7 +40,8 @@ urlpatterns = [
     url(r'^sandhi-checker/$', call_sandhi_check,name="sandhi_check"),
     url(r'^translite/(?P<tan>.+?)/$', translite,name="phonetic"),
     url(r'^spell/(?P<k1>.+?)/$', spell_check,name="spell_check"),
-    url(r'^ngram/(?P<ng>.+?)', test_ngram,name="test_ngram"),
+    url(r'^ngram/$', ngra,name="ta_ngram"),
+    url(r'^ngram/(?P<ng>.+?)/$', test_ngram,name="ngram"),
     url(r'^anagram/(?P<word>.+?)/$', anagram,name="ta_anagram"),
     url(r'^unigram/(?P<word>.+?)/$', test_basic,name="ta_unigram"),
     url(r'^revers/(?P<word>.+?)/$', revers,name="ta_revers"),
@@ -49,6 +49,8 @@ urlpatterns = [
     url(r'^summarizer/',summarizer,name='ta_summarizer'),
     url(r'^morse/(?P<direction>.+)/(?P<word>.+)/$',morse,name='ta_morse'),
     url(r'^morse/$', morse_code,name="morse_code"),
+    url(r'^minnal/$',minnal,name="ta_minnal"),
+    url(r'^minnal/(?P<word>.+?)/$',test_minnal,name="minnal")
 ]
 
 if not PYTHON26:
