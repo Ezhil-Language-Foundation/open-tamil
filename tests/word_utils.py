@@ -17,7 +17,19 @@ class TestTweetParse(unittest.TestCase):
         self.assertEqual( len(a), 4 )
         self.assertEqual( len(a[0]), 4 )
         self.assertTrue( u'அ' in b )
-        
+    def test_minnal_double( self ):
+        # when same letter repeats in a word we need to keep the duplication
+        # intra word, but inter-word duplicates are to be eliminated
+        a,b=wordutils.minnal([u'apple','beetle'])
+        # we expect 3 e's and 2 p's only
+        n_p,n_e = 0,0
+        for i in range(0,len(a)):
+            for j in range(0,len(a[i])):
+                if a[i][j] == u'p': n_p+=1
+                elif a[i][j] == u'e': n_e+=1
+        self.assertEqual(n_p,2)
+        self.assertEqual(n_e,3)
+    
     def test_tweety( self ):
         tweet = u"ஈர்ப்பு அலைகள் உருவாக்கும் அலைகள் #LIGO #tamil @nsf | SBS Your Language http://www.sbs.com.au/yourlanguage/tamil/ta/content/iirppu-alaikll-uruvaakkum-alaikll?language=ta"
         tobj = tweetparser.TamilTweetParser(timeline_owner = "@ezhillang",tweet=tweet)

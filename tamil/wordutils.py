@@ -4,8 +4,9 @@
 from __future__ import print_function, division
 import copy
 import collections
-import random
 import math
+import random
+import re
 from . import utf8
 
 def combinations(symbols_in):
@@ -274,8 +275,20 @@ def word_split(inword,dictionary):
 def minnal(word_list):
     L = list(map(utf8.get_letters, word_list))
     allL = list()
-    for l in L: allL.extend(l)
-    L = utf8.tamil_sorted( set(allL) )
+    # For words like: 'கன்னன்' we need both the 'ன்' to come out in grid.
+    for l in L:
+        stat = {}
+        wordl = []
+        #for i,j in zip(l,range(0,len(l)))] )
+        for i in l:
+            stat[i] = stat.get(i,0) + 1
+        for i in l:
+            wordl.append(i+str(stat[i]))
+            stat[i] -= 1
+        allL.extend( wordl )
+    allL = list( set(allL) )
+    allL = [re.sub('\d+','',l) for l in allL]
+    L = utf8.tamil_sorted( allL )
     Sq = int(math.ceil( math.sqrt( len(L) ) )**2)
     random_inserts = Sq - len(L)
     L.extend( [random.choice(utf8.tamil_letters) for i in range(0,random_inserts) ] )
@@ -288,8 +301,6 @@ def minnal(word_list):
         text = text + (u",".join(L[i:i+Lside])) + u'\n'
         textgrid.append( L[i:i+Lside] )
         i = i + Lside
-    #from pprint import pprint
-    #pprint(textgrid)
     return textgrid,text
 
 # dummy dictionary interface for use with anagrams
