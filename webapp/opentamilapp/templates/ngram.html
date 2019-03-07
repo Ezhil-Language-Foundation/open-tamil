@@ -1,14 +1,15 @@
 {% extends "main.html" %}
-{% load i18n %}
 {% block title %}Tamil Number{% endblock %}
 
 {% block content %}
 <div class="page-header">
     <h1>N-gram</h1>
 </div>
-<center>
-<input type="text" name="word" id="txt4" placeholder="Enter the word"/><br>
+<div>
+<center>  
+<input type="text" name="word" style="width:25%;" id="txt4" placeholder="Enter the word"/><br>
 <button id="btn4" class="btn btn-success">submit</button>
+</div>
 <div id="progress" class="alert alert-info silpa-hide"></div>
 <p id="disp" class='important'>
 </p>
@@ -16,35 +17,28 @@
 <script type="text/javascript">
 	$(document).ready(function () {
 	$('#btn4').click(function(){
-    var dat = $('#txt4').val()
-    var id_result = $('#disp'),
-        id_progress = $('#progress')
+    var dat = $('#txt4').val();
+    var id_result = $('#disp');
+    var id_progress = $('#progress');
     $.ajax({
-    	url: '/ngram/'+dat,
+    	url: encodeURI('/ngram/'+dat+'/'),
 beforeSend:function(){
                     id_result.empty().hide();
-                    id_progress.html("{% trans 'making ngram Please Wait...' %}").show();
+                    id_progress.html("making ngram. Please Wait...").show();
                 },
     	success: function(data){
-        id_progress.hide()
-    		/*
-    		for(var i=0;i<data.length;i++){
-          var t='<span>'+data[i]+'&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp'+'<span>'
-    		str+=t
-    		}
-        */
-var str=''
-for(var i in data){
-    var key = i;
-    var val = data[i];   
-str+='<span>'+key+'&nbsp &nbsp'+val+'&nbsp &nbsp &nbsp &nbsp'+'<span>'
-}
-$('#disp').html(str)
-        id_result.show();
-    	}
-    })
-  	})
-	})
-
+                 id_progress.hide();
+	         var str="<table style='border:1px solid black;'>";
+                 for(var i in data){
+                     var key = i;
+                     var val = data[i];   
+                     str+='<tr style=\'border:2px solid blue;\'><td>'+key+'&nbsp &nbsp'+val+'&nbsp &nbsp &nbsp &nbsp'+'</td></tr>';
+                 }
+                $('#disp').html(str);
+                id_result.show();
+      }
+    });
+  });
+});
 </script>
 {% endblock %}
