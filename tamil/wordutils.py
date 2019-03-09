@@ -272,7 +272,7 @@ def word_split(inword,dictionary):
     
     return ((solutions))
 
-def minnal(word_list):
+def minnal(word_list,use_grantham=False):
     L = list(map(utf8.get_letters, word_list))
     allL = list()
     # For words like: 'கன்னன்' we need both the 'ன்' to come out in grid.
@@ -291,7 +291,7 @@ def minnal(word_list):
     L = utf8.tamil_sorted( allL )
     Sq = int(math.ceil( math.sqrt( len(L) ) )**2)
     random_inserts = Sq - len(L)
-    L.extend( [random.choice(utf8.tamil_letters) for i in range(0,random_inserts) ] )
+    L.extend( [random.choice(utf8.tamil247 if not use_grantham else utf8.tamil_letters) for i in range(0,random_inserts) ] )
     random.shuffle(L)
     i = 0
     Lside = int(math.sqrt(len(L)))
