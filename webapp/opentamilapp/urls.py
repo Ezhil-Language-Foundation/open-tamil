@@ -50,7 +50,9 @@ urlpatterns = [
     url(r'^morse/(?P<direction>.+)/(?P<word>.+)/$',morse,name='ta_morse'),
     url(r'^morse/$', morse_code,name="morse_code"),
     url(r'^minnal/$',minnal,name="ta_minnal"),
-    url(r'^minnal/(?P<word>.+?)/$',test_minnal,name="minnal")
+    url(r'^minnal/(?P<word>.+?)/$',test_minnal,name="minnal"),
+    url(r'^textrandomizer_auth/(?P<key>.+)/$',textrandomizer,name="ta_textrandomizer"),
+    url(r'^textrandomizer/(?P<level>.+)/$',test_textrandomizer,name="textrandomizer"),
 ]
 
 if not PYTHON26:

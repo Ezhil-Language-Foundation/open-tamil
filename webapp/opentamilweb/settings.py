@@ -21,9 +21,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'enter#a$secret$key#'
+APP_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = not False
 
 ALLOWED_HOSTS = ['*']
 
@@ -128,8 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
-
+TEXTRANDOMIZER_FILES = []
 #can be 'open-tamil.herokuapp.com' or 'tamilpesu.us' etc.
 EXAMPLE_SITE_URL=u'tamilpesu.us'
 CONTACT_EMAIL=u'ezhillang@gmail.com'
-

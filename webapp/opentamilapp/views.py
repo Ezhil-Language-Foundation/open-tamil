@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 import tamil
 import codecs
@@ -31,6 +31,7 @@ from tamilsandhi.sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
 from .webuni import unicode_converter
 from tamil.wordutils import minnal as tamil_minnal
+from opentamilweb import settings
 
 #try:
 import tamilmorse
@@ -256,4 +257,57 @@ def test_minnal(request,word):
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
- 
+
+def load_textrandomizer_db():
+    TEXTRANDOMIZER_DB = {}
+    for jsonf in settings.TEXTRANDOMIZER_FILES:
+        with codecs.open(os.path.join(os.path.dirname(__file__),'static',jsonf),"r","utf-8") as fp:
+            TEXTRANDOMIZER_DB[ os.path.basename(jsonf)[0].upper() ] = json.loads(fp.read())
+            
+    return TEXTRANDOMIZER_DB
+TEXTRANDOMIZER_DB = load_textrandomizer_db()
+
+def textrandomizer(request,key=None):
+    if not key or key != settings.APP_KEY: return Http404("Permission denied")
+    request.session['authorized'] = key
+    return render(request,'textrandomizer.html')
+
+def get_n_unique(n,r_range):
+   rval = []
+   assert n < len(r_range)
+   while n > 0:
+      rval.append( random.choice(r_range) )
+      n -= 1
+      del r_range[r_range.index(rval[-1])]
+   return rval
+
+def test_textrandomizer(request,level):
+    if request.session.get('authorized','') != settings.APP_KEY:
+       return Http404("Permission denied")
+    if level == "kanigal":
+       q,p,j = 6,2,2
+       nilai = u'கனிகள்'
+       nilai_description = u'இரண்டாம் நிலை'
+    elif  level == "malargal":
+       nilai = u'மலர்கள்'
+       nilai_description = u'முதல் எளிய நிலை'
+       q,p,j = 10,0,0
+    else:
+       return Http404(u"எனக்கு இந்த நிலை தெரியவில்லை - %s"%(level))
+    assert (q+p+j) == 10
+    nq = get_n_unique(q,range(0,len(TEXTRANDOMIZER_DB['Q'])))
+    np = get_n_unique(p,range(0,len(TEXTRANDOMIZER_DB['P'])))
+    nj = get_n_unique(p,range(0,len(TEXTRANDOMIZER_DB['J'])))
+    questions = []
+    answers = []
+    QK = TEXTRANDOMIZER_DB['Q'].keys()
+    QV = [TEXTRANDOMIZER_DB['Q'][k] for k in QK]
+    PK = TEXTRANDOMIZER_DB['P'].keys()
+    PV = [TEXTRANDOMIZER_DB['P'][k] for k in PK]
+    JK = TEXTRANDOMIZER_DB['J'].keys()
+    JV = [TEXTRANDOMIZER_DB['J'][k] for k in JK]
+    for idq in nq: questions.append( QV[idq] ); answers.append( QK[idq] )
+    for idp in np: questions.append( PK[idp] ); answers.append( PV[idp] )
+    for idj in nj: questions.append( JV[idj] ); answers.append( JK[idj] )
+    assert len(questions) == (q+p+j)
+    return render(request,"textrandomizer.html",{'questions':zip(questions,answers),'nilai':nilai,'nilai_description':nilai_description})
