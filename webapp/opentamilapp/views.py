@@ -297,7 +297,7 @@ def test_textrandomizer(request,level):
     assert (q+p+j) == 10
     nq = get_n_unique(q,range(0,len(TEXTRANDOMIZER_DB['Q'])))
     np = get_n_unique(p,range(0,len(TEXTRANDOMIZER_DB['P'])))
-    nj = get_n_unique(p,range(0,len(TEXTRANDOMIZER_DB['J'])))
+    nj = get_n_unique(j,range(0,len(TEXTRANDOMIZER_DB['J'])))
     questions = []
     answers = []
     QK = TEXTRANDOMIZER_DB['Q'].keys()
@@ -306,8 +306,8 @@ def test_textrandomizer(request,level):
     PV = [TEXTRANDOMIZER_DB['P'][k] for k in PK]
     JK = TEXTRANDOMIZER_DB['J'].keys()
     JV = [TEXTRANDOMIZER_DB['J'][k] for k in JK]
-    for idq in nq: questions.append( QV[idq] ); answers.append( QK[idq] )
-    for idp in np: questions.append( PK[idp] ); answers.append( PV[idp] )
-    for idj in nj: questions.append( JV[idj] ); answers.append( JK[idj] )
+    for idq in nq: questions.append( QK[idq] + u' ?' ); answers.append( QV[idq] )
+    for idp in np: questions.append( PK[idp] + u' ?'); answers.append( PV[idp] )
+    for idj in nj: questions.append( JK[idj] + u' (ஜெப்பர்டீ)' ); answers.append( JV[idj] )
     assert len(questions) == (q+p+j)
     return render(request,"textrandomizer.html",{'questions':zip(questions,answers),'nilai':nilai,'nilai_description':nilai_description})
