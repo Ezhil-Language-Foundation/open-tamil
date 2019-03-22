@@ -53,6 +53,8 @@ urlpatterns = [
     url(r'^minnal/(?P<word>.+?)/$',test_minnal,name="minnal"),
     url(r'^textrandomizer_auth/(?P<key>.+)/$',textrandomizer,name="ta_textrandomizer"),
     url(r'^textrandomizer/(?P<level>.+)/$',test_textrandomizer,name="textrandomizer"),
+    url(r'^stemmer/$',tastemmer,name="stemmer"),
+    url(r'^stemmer/json/$',lambda x: tastemmer(x,use_json=True),name="json_stemmer"),
 ]
 
 if not PYTHON26:

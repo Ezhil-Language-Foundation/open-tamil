@@ -31,6 +31,7 @@ from tamilsandhi.sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
 from .webuni import unicode_converter
 from tamil.wordutils import minnal as tamil_minnal
+from tamilstemmer import TamilStemmer
 from opentamilweb import settings
 
 #try:
@@ -308,6 +309,20 @@ def test_textrandomizer(request,level):
     JV = [TEXTRANDOMIZER_DB['J'][k] for k in JK]
     for idq in nq: questions.append( QK[idq] + u' ?' ); answers.append( QV[idq] )
     for idp in np: questions.append( PK[idp] + u' ?'); answers.append( PV[idp] )
-    for idj in nj: questions.append( JK[idj] + u' (ஜெப்பர்டீ)' ); answers.append( JV[idj] )
+    for idj in nj: questions.append( JK[idj] + u' ' ); answers.append( JV[idj] )
     assert len(questions) == (q+p+j)
     return render(request,"textrandomizer.html",{'questions':zip(questions,answers),'nilai':nilai,'nilai_description':nilai_description})
+
+def tastemmer(request,use_json=False):
+   if request.method == "GET":
+      return render(request,'stemmer.html',{'text_output':u''})
+   assert( request.method == "POST" )
+   text_input = request.POST.get("text_input",u"")
+   words_in = filter(len,re.split('\s+',text_input))
+   words_out = TamilStemmer().stemWords(words_in)
+   data = zip(words_in,words_out)
+   if use_json:
+      json_string = json.dumps(data,ensure_ascii = False)
+      response = HttpResponse(json_string,content_type="application/json; charset=utf-8")
+   return render(request,'stemmer.html',{'text_output':data,'text_input':text_input})
+

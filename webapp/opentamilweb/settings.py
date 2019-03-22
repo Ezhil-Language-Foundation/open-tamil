@@ -24,7 +24,7 @@ SECRET_KEY = 'enter#a$secret$key#'
 APP_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = not False
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 

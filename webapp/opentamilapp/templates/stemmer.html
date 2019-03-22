@@ -1,0 +1,78 @@
+{% extends "main.html" %}
+{% load i18n %}
+{% block title %}Tamil Stemmer{% endblock %}
+
+{% block content %}
+<section id="stemmer">
+<div class="col-sm-9">
+<div class="page-header">
+  <h1>தமிழ் பேசு.us - ஓபன் தமிழ் வேர்சொல் திரட்டி</h1>
+</div>
+{% if text_output %}
+<div>
+  {% if text_output %}
+  <div id="disp4" >
+    <p class="important">
+    <ol>
+    {% for stem_pair in text_output %}
+    <li>
+      {% for word in stem_pair %}
+      {% if forloop.counter == 1 %}
+         {{word}}
+      {% else %}
+          -> {{word}}
+      {% endif %}
+      {% endfor %}
+    </li>
+    {% endfor %}
+    </p>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+<hr>
+<div>
+  <form method="POST">
+	{% csrf_token %}
+	<center>
+          <textarea rows="12" cols="80" name="text_input" id="txt4" placeholder="உரை உள்ளீடுகளை இடுக!">
+	    {% if text_input %}
+	    {{text_input}}
+	    {% endif %}
+	  </textarea>
+	  <br />
+	  <input type="button" id="btn-clear" class="btn btn-success" onClick="$('#txt4').val('');" value="அழி"></input>
+	  <input type="submit" id="btn-submit" class="btn btn-success" action="submit" value="வேர்சொல் திரட்டு"></input>
+	</center>
+  </form>
+</div>
+<div class="well">
+  <h4>விளக்கம் / ஆக்கம்</h4>
+  <p>இந்த செயலியின் மூல காரணகத்தா 2013-இல் வெளியிடப்பட்ட தமிழ் வேர்ச்சொல் பகுப்பாய்வு வடிகட்டியை பொது பயனுக்கு வெளியிட்ட திரு. தாமோதரன் இராஜலிங்கம்.
+  முழு கட்டுரை <a href="http://www.kaniyam.com/releasing-tamil-stemmer-using-open-tamil/">இங்கு</a>.</p>
+</div>
+<div class="well">
+    <h3>Tamil stemmer: JSON API</h3>
+    <p>
+        This service provides tamil text stemmer
+        <ul>
+            <li>Input data: text input to be stemmed
+                <ul>
+                    <li>arg1 : UTF-8 text</li>
+                    <li>Return : stems of the UTF-8 text</li>
+                </ul>
+            </li>
+        </ul>
+
+        Sample usage is given below.
+      
+  <pre>
+    http://tamilpesu.us/stemmer/json/
+    Method: POST
+    Variables: text_input
+    Result: '{"text_stemmed": "..."}
+  </pre>
+    </p>
+</div>
+</section>
+{% endblock %}
