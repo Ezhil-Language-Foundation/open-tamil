@@ -9,6 +9,8 @@
     <meta name="description" content="Indian Language Computing Platform">
     <meta name="author" content="Open Tamil Developers">
 
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/jquery.ime.css' %}"  />
@@ -29,8 +31,6 @@
       <div class="container">
         <ul class="nav navbar-nav">
           <li><a class="navbar-brand" href="/">Open Tamil Web</a></li>
-         
-          
         </ul>
         <ul class="nav navbar-nav pull-right hidden-xs">
           {% if LANGUAGE_CODE|stringformat:"s" == "en"  %}
@@ -53,6 +53,9 @@
 	    </ul>
           </div>
           <div class="sidebar-nav">
+	    <div align="center">
+	    <img src="{% static 'images/open-tamil-logo-small.png' %}" alt="Open-Tamil project logo" height="128" width="128" />
+	  </div>
             <!-- side bar goes here -->
             <ul class="nav nav-tabs nav-stacked" role="navigation">
               <li class="navbar-brand">{% trans 'Applications' %}</li>
@@ -95,7 +98,8 @@
         </div>
 <div id="content" class="col-sm-9">{% block content %}{% endblock %}</div></div></div>
 <footer role="contentinfo" class="footer">
-      <div class="container">
+  <div class="container">
+    <img align="left" src="{% static 'images/open-tamil-logo-small.png' %}" alt="Open-Tamil project logo" height="128" width="128" />
         <p>All rights reserved. &copy2014-2017, Open Tamil Web Team</p>
         <p>Code licensed under <a href="http://www.fsf.org/licensing/licenses/agpl-3.0.html" target="_blank">GNU Affero General Public License.</a></p>
         <ul class="footer-links">
