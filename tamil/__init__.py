@@ -1,6 +1,6 @@
 # * coding: utf8 *
 # 
-# (C) 2013-2015, 2017 Muthiah Annamalai <ezhillang@gmail.com>
+# (C) 2013-2015, 2017-2019 Muthiah Annamalai <ezhillang@gmail.com>
 # Library provides various encoding services for Tamil libraries
 
 from . import utf8
@@ -14,5 +14,5 @@ from . import regexp
 from . import wordutils
 from . import utils
 
-VERSION = '0.8'
+VERSION = '0.9'
 __all__ = ['utf8','txt2unicode','numeral','txt2unicode','txt2ipa','numeral','regexp','utils','wordutils']
