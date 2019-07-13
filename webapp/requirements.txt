@@ -1,2 +1,2 @@
-django==1.11.20
+django==1.11.22
 open-tamil
