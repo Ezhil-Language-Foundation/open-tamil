@@ -11,6 +11,10 @@ if PYTHON3:
     from functools import cmp_to_key
 
 class LetterTests(unittest.TestCase):
+    def test_indian_rupee_symbol(self):
+        print(get_letters(u"₹ 500"))
+        self.assertTrue( u"₹" in  get_letters(u"₹ 500") )
+    
     def test_tamil247(self):
         self.assertEqual( len(tamil247), 247 )
     
@@ -68,4 +72,3 @@ class LetterTests(unittest.TestCase):
 
 if __name__ == u"__main__":
     unittest.main()
-

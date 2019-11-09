@@ -161,8 +161,8 @@ _numeral = u"௺"
 _sri = u"\u0bb6\u0bcd\u0bb0\u0bc0" #SRI - ஶ்ரீ
 _ksha = u"\u0b95\u0bcd\u0bb7" #KSHA - க்ஷ
 _ksh = u"\u0b95\u0bcd\u0bb7\u0bcd" #KSH - க்ஷ்
-
-tamil_symbols = [_day, _month, _year, _debit, _credit, _rupee, _numeral, _sri, _ksha, _ksh]
+_indian_rupee = u"₹"
+tamil_symbols = [_day, _month, _year, _debit, _credit, _rupee, _numeral, _sri, _ksha, _ksh,_indian_rupee]
 
 ## total tamil letters in use, including sanskrit letters
 tamil_letters = [
