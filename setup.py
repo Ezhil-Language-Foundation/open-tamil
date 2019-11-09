@@ -8,7 +8,7 @@ from distutils.core import setup
 from codecs import open
 
 setup(name='Open-Tamil',
-      version='0.9',
+      version='0.95',
       description='Tamil language text processing tools for Python v2, v3',
       author='M. Annamalai, T. Arulalan, and other contributors',
       author_email='ezhillang@gmail.com',
@@ -22,8 +22,6 @@ setup(name='Open-Tamil',
                'examples/solpattiyal.py'],
       platforms='PC,Linux,Mac',
       classifiers=['Natural Language :: Tamil',
-    'Programming Language :: Python :: 2.6',
-    'Programming Language :: Python :: 2.7',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.2',
     'Programming Language :: Python :: 3.3',
