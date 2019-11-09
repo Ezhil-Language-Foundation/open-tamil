@@ -17,7 +17,6 @@ Welcome to open-tamil's documentation!
    tamilmorse
    tamilsandhi
    transliterate
-   webspell
 
 
 Indices and tables
