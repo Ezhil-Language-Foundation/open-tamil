@@ -1,9 +1,9 @@
 open-tamil [![Build Status](https://travis-ci.org/Ezhil-Language-Foundation/open-tamil.png)](https://travis-ci.org/Ezhil-Language-Foundation/open-tamil) [![Documentation Status](https://readthedocs.org/projects/open-tamil/badge/)](http://open-tamil.readthedocs.org/en/latest/)
 ====================
 
-Open Source Tamil Tools and Tamil Library for Python 2, 3
+Open Source Tamil Tools and Tamil Library for Python 3
 திற மூல தமிழ் கருவிகள்
-Version 0.9
+Version 0.95
 <img src="./open-tamil-logo.jpg" alt="open-tamil logo" align="center" width="128" height="128"/>
 ## மென்பொருள் (Software)
 

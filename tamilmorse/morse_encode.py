@@ -7,13 +7,16 @@ import codecs
 import json
 import tamil
 import sys
+import os
+
 #e.g. python morse_encode.py கலைஞர்
+CURRDIR = os.path.dirname(os.path.realpath(__file__))
 def encode(text):
-    with codecs.open("tamilmorse.json","r","utf-8") as fp:
+    with codecs.open(os.path.join(CURRDIR,"data","madurai_tamilmorse.json"),"r","utf-8") as fp:
         codebook = json.loads(fp.read())
     output = [codebook.get(l,l) for l in tamil.utf8.get_letters(text)]
-    print(u" ".join(output))
-    return
+    #print(u" ".join(output))
+    return u" ".join(output)
 
 if __name__ == u"__main__":
     encode(u" ".join([i.decode("utf-8") for i in sys.argv[1:]]))

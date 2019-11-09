@@ -1,0 +1,3 @@
+[submodule "tamil-sandhi-checker"]
+	path = tamil-sandhi-checker
+	url = https://github.com/Ezhil-Language-Foundation/tamil-sandhi-checker.git
