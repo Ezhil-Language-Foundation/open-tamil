@@ -47,7 +47,7 @@ Read more details about [txt2ipa](tamil/txt2ipa/README.md)
 சர்வதேச (ஐபிஏ) மாற்றி, தமிழ் யுனிகோட் உரை; மேலும் விபரங்களுக்கு -> படிக்க [இங்கு சொடுக்கவும்](tamil/txt2ipa/README.md).
 
 #### transliterate
-The python package `transliterate` provides for commonly used transliteration 
+The python package `transliterate` provides for commonly used transliteration
 phonetic schemes like,
 
 1. Azhagi - phonetic maps for all Tamil letters - many -> one supporting multiple form inputs
@@ -60,6 +60,20 @@ where you can supply English text, which phonetically encodes Tamil, and then re
 1. அழகி - தமிழ் கடிதங்கள் ஒலிப்பு வரைபடங்கள் - பல -> ஒரு ஆதரவு பல வடிவம் உள்ளீடுகள்
 2. யாழ்ப்பாண நூலகம் - தமிழ் கடிதங்கள் ஒலிப்பு வரைபடங்கள் - ஒன்று> ஒரு
 3. பலதரப்பட்ட அமைப்பு - உயிர் + மெய் உச்சரிப்பு மேப்பிங் அடிப்படையில்
+
+### *tamilmorse*
+இந்த தொகுப்பில் தமிழுக்கான மோர்சு குறிகளை உருவாக்கவும், குறியீடுகளை
+பிரித்துப்பார்கவும் முடியும்.
+
+### *tamilsandhi*
+தமிழில் சந்திப்பிழை திருத்தி உருவாக்கவும் பிழைகள் திருத்தவும் உதவியாக
+இந்த நிரல் தொகுப்பு வழிவகுக்கும். ஏரக்குறைய 40-விதிகளை கொண்டது இந்த
+ நிரல் தொகுப்பை உருவாக்கியவர் திருமதி. நித்யா. மேலும் விவரங்களுக்கு https://github.com/nithyadurai87/tamil-sandhi-checker
+Tamil Sandhi Checker is a project created and maintained by Nithya Duraisamy,
+with contributions from Ezhil Language Foundation. It is distributed under
+terms of GNU GPLv3.
+
+For convenience this code is packaged with Open-Tamil.
 
 ### *C-tamil*
 The package under C-tamil provides some of the same functionality as Python 'tamil' but in ISO-C for C/C++ use.    
