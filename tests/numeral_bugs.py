@@ -20,7 +20,7 @@ class NumeralStressTest(unittest.TestCase):
         for kitr in range(0,1000):
             k = random.randint(0,1e6)
             fns = []
-            print('verifying => no %g '%k)
+            #print('verifying => no %g '%k)
             v = tamil.numeral.num2tamilstr(k,fns)
             #print('int/file -> /  @ %g -> %s'%(k,u"-".join(fns)))
             
@@ -30,7 +30,7 @@ class NumeralStressTest(unittest.TestCase):
         for kitr in range(0,1000):
             k = float(random.randint(0,1e6))/5.55
             fns = []
-            print('float/verifying => no %10g '%k)
+            #print('float/verifying => no %10g '%k)
             v = tamil.numeral.num2tamilstr(k,fns)
             #print('float/file -> %g ->  @ %s'%(k,u"-".join(fns)))            
         return
@@ -75,7 +75,7 @@ class NumeralBugsTest(unittest.TestCase):
         for k,actual_v in var.items():
             fns = []
             v = tamil.numeral.num2tamilstr(k,fns)
-            print('verifying => # %g /  @ %s'%(k,u"-".join(fns)))
+            #print('verifying => # %g /  @ %s'%(k,u"-".join(fns)))
             self.assertEqual(v,actual_v,k)
         return
             

@@ -2,6 +2,7 @@
 
 # run unittests on Python 3
 # run unit tests when previous bits passed
+export PYTHONPATH=`pwd`:$PYTHONPATH
 cd tests/
 
 
@@ -38,6 +39,7 @@ then
    echo "Testing Successful!"
    exitcode=0 # success
 else
+  cat failed3.txt
    echo "Expecting $NFAIL failures, but found $TOTFAIL failures"
    echo "Too few/many failures; some negative tests may have failed"
    exitcode=255 #failed failures != $NFAIL

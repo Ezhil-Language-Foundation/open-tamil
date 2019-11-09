@@ -102,7 +102,7 @@ class NumeralTestAmerican(unittest.TestCase):
         
         for k,actual_v in var.items():
             v = tamil.numeral.num2tamilstr_american(k)
-            print('verifying => # %d'%k)
+            #print('verifying => # %d'%k)
             self.assertEqual(v,actual_v,k)
         return
 
@@ -171,7 +171,7 @@ class NumeralTest(unittest.TestCase):
         
         for k,actual_v in var.items():
             v = tamil.numeral.num2tamilstr(k)
-            print('verifying => # %d'%k)
+            #print('verifying => # %d'%k)
             self.assertEqual(v,actual_v,k)
         return
 
