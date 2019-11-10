@@ -1,7 +1,7 @@
 # * coding: utf8 *
-# 
+#
 # (C) 2019 Muthiah Annamalai <ezhillang@gmail.com>
-# 
+#
 #  This file provides a REST API interface to Tamil spelling checker
 #  written in compliance with Vaani solthiruthi protocol by Neechalkaran.
 #
@@ -21,15 +21,15 @@ BASEURL = '#########################################'
 class SpellChecker:
     def __init__(self,apikey='XXXXX',_baseurl=None):
         self._apikey = apikey
-        self._baseurl = BASEURL if not _baseurl: else _baseurl
-        
+        self._baseurl = BASEURL if not _baseurl else _baseurl
+
     def check_word( self, words : list, sandhi = False, translated = False ):
         """ HTTP Get request parameters.
         1. tamilwords -> each words need to be separated with single pipe |. sentence are separated by double pipe ||string|Required
         2. apikey -> Valid apikey|string|Required
         3. sandhi -> Default value is true. It needs to be set false, if sandhi suggestions are not required |Boolean|optional
         4. translated -> Default value is true. It needs to be set false, if foreign words do not need relevant Tamil word|Boolean|optional
-        
+
         Resource Result Description
         Collection of Sol
         1. Flag -> It returns the result of the word|boolean|None.

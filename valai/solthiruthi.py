@@ -1,9 +1,9 @@
 # * coding: utf8 *
-# 
+#
 # (C) 2019 Muthiah Annamalai <ezhillang@gmail.com>
-# 
+#
 #  This file provides a REST API interface to Tamil spelling checker
-#  written in compliance 
+#  written in compliance
 #
 
 import requests
@@ -19,14 +19,12 @@ class SpellChecker:
     def __init__(self,apikey='XXXXX',_baseurl=None):
         self._apikey = apikey
         self._baseurl = BASEURL if not _baseurl else _baseurl
-        
+
     def check_word( self, words : list, lang_code = 'ta_IN' ):
         """ HTTP POST request parameters.
         1. lang  : language code - ta_IN is only supported now.
         2. text  : string formed by words separated by '\n' character
         """
-        import pdb
-        pdb.set_trace()
         if not isinstance(words,list):
             words = re.split('\s+',words)
         response = requests.post(self._baseurl,

@@ -14,7 +14,8 @@ setup(name='Open-Tamil',
       author_email='ezhillang@gmail.com',
       url='https://github.com/Ezhil-Language-Foundation/open-tamil',
       packages=['tamil','transliterate','ngram','tamil.txt2ipa','tamil.txt2unicode',\
-      'tamil.utils', 'solthiruthi','spell','tamilstemmer','tamilmorse','tamilsandhi'],
+      'tamil.utils', 'solthiruthi','spell','tamilstemmer','tamilmorse','tamilsandhi',\
+      'valai'],
       package_dir={'solthiruthi': 'solthiruthi','tamilmorse':'tamilmorse',\
       'tamilsandhi':'tamil-sandhi-checker/tamilsandhi'},
       package_data={'solthiruthi': ['data/*.txt'],'tamilmorse':['data/*.json'],\
