@@ -8,7 +8,8 @@ python:
 before_install:
   - echo `ruby -v` is the ruby version
 install:  
-  - pip install argparse  
+  - pip install argparse
+  - pip install requests  
   - python setup.py sdist build
   - pip install nose-cov
 script:
