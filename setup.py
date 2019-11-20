@@ -7,11 +7,14 @@
 from distutils.core import setup
 from codecs import open
 
+long_description = open('README.rst','r','UTF-8').read()
+
 setup(name='Open-Tamil',
       version='0.95',
       description='Tamil language text processing tools for Python v2, v3',
       author='M. Annamalai, T. Arulalan, and other contributors',
       author_email='ezhillang@gmail.com',
+      long_description=long_description,
       url='https://github.com/Ezhil-Language-Foundation/open-tamil',
       packages=['tamil','transliterate','ngram','tamil.txt2ipa','tamil.txt2unicode',\
       'tamil.utils', 'solthiruthi','spell','tamilstemmer','tamilmorse','tamilsandhi',\
@@ -27,10 +30,8 @@ setup(name='Open-Tamil',
       platforms='PC,Linux,Mac',
       classifiers=['Natural Language :: Tamil',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.2',
-    'Programming Language :: Python :: 3.3',
-    'Programming Language :: Python :: 3.4'],
-     long_description=open('README.md','r','UTF-8').read(),
-     long_description_content_type="text/markdown",
+    'Programming Language :: Python :: 3.4',
+    'Programming Language :: Python :: 3.6',
+    'Programming Language :: Python :: 3.8'],
      download_url='https://github.com/Ezhil-Language-Foundation/open-tamil/archive/master.zip',
       )
