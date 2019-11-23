@@ -30,14 +30,14 @@ triangular	 முக்கோணமான
 tastes	 சுவைகள்
 bitter	 கசப்பான
 fresh	 உவர்ப்பற்ற
-salty	uppu  உப்பு கரிக்கிற
+salty  உப்பு கரிக்கிற
 sour	 புளிப்பான
 spicy	 காரசாரமான
 sweet	 இனிப்பான
 qualities	 தரங்கள்
 bad	 மோசமான
 clean	 சுத்தமான
-dark	karu  கரு நிறமான
+dark  கரு நிறமான
 difficult	 கடினமான
 dirty	 அழுக்கான
 dry	 காய்ந்த
