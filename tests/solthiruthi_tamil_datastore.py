@@ -10,6 +10,11 @@ import sys
 import copy
 from pprint import pprint
 
+class CachedGetLetters(unittest.TestCase):
+    def test_fubar(self):
+         q=TamilTrie()
+         self.assertTrue( callable(q.get_letters_impl) )
+
 class RevTrieTest(unittest.TestCase):
     def test_rev_trie(self):
         rt = RTrie()

@@ -50,8 +50,15 @@ class Queue(list):
     def append(self,obj):
         raise Exception(Queue.ExceptionMsg%"append")
 
-class Trie:
+class Trie(utf8.CacheGetLettersMixin):
     __metaclass__ = abc.ABCMeta
+
+    def __init__(self):
+        super(Trie,self).__init__()
+
+    #concrete implementation for cached mixin
+    def get_letters_impl(self,word):
+        return self.is_english and [l for l in word] or utf8.get_letters(word)
 
     @abc.abstractmethod
     def add(self,word):
@@ -117,9 +124,9 @@ class DTrie(Trie):
         implementation uses a dictionary; it contains an attribute count for frequency of letter.
     """
     def __init__(self):
+        super(DTrie,self).__init__()
         self.trie = Node() #root node
         self.is_english = False
-        self._cache = {}
 
     @staticmethod
     def buildEnglishTrie(nalpha=26):
@@ -168,18 +175,6 @@ class DTrie(Trie):
         letters = self.get_letters(word)
         return ref_trie.count[ letters[-1] ]
 
-    def get_letters(self,word):
-        """
-        This is a cached implementation of get_letters.
-        @word - can be a Tamil/English word (letter sequence)
-        @return - list of letters in @word and cache for future use.
-        """
-        rval = self._cache.get(word,None)
-        if not rval:
-            rval = self.is_english and [l for l in word] or utf8.get_letters(word)
-            self._cache[word] = rval
-        return rval
-        
     def add(self,word):
         ref_trie = self.trie
         letters = self.get_letters(word)
@@ -299,10 +294,8 @@ class TamilTrie(Trie):
         obj.is_english = True
         return obj
 
-    def get_letters(self,word):
-        return self.is_english and [l for l in word] or utf8.get_letters(word)
-
     def __init__(self, get_idx = utf8.getidx, invert_idx = utf8.tamil, alphabet_len = utf8.TA_LETTERS_LEN):
+        super(Trie,self).__init__()
         self.L = alphabet_len
         self.trie = Trie.mk_empty_trie(self.L)
         self.word_limits = Trie.mk_empty_trie(self.L)
@@ -340,7 +333,7 @@ class TamilTrie(Trie):
         val,ref_trie,ref_word_limits = self.isWord(prefix,ret_ref_trie=True)
         # ignore val
         if val: all_words.append( prefix )
-        prefix_letters = utf8.get_letters(prefix)
+        prefix_letters = self.get_letters(prefix)
         self.getAllWordsHelper( ref_trie, ref_word_limits, prefix_letters, all_words)
         return all_words
 
@@ -349,7 +342,7 @@ class TamilTrie(Trie):
 
     def isWord(self,word,ret_ref_trie=False):
         # see if @word is present in the current Trie; return True or False
-        letters = utf8.get_letters(word)
+        letters = self.get_letters(word)
         wLen = len(letters)
         ref_trie = self.trie
         ref_word_limits = self.word_limits

@@ -13,6 +13,7 @@ from copy import copy
 import re
 import operator
 import string
+import abc
 PYTHON3 = version > '3'
 del version
 
@@ -633,7 +634,7 @@ def joinMeiUyir(mei_char, uyir_char):
     """
     if not mei_char: return uyir_char
     if not uyir_char: return mei_char
-    
+
     if not isinstance(mei_char, PYTHON3 and str or unicode):
         raise ValueError(u"Passed input mei character '%s' must be unicode, not just string" % mei_char)
     if not isinstance(uyir_char, PYTHON3 and str or unicode) and uyir_char != None:
@@ -731,3 +732,24 @@ def tamil_sorted(list_data):
 # ஸ ஸா ஸி ஸீ ஸு ஸூ ஸெ ஸே ஸை ஸொ ஸோ ஸௌ
 # ஹ ஹா ஹி ஹீ ஹு ஹூ ஹெ ஹே ஹை ஹொ ஹோ ஹௌ
 # க்ஷ க்ஷா க்ஷி க்ஷீ க்ஷு க்ஷூ க்ஷெ க்ஷே க்ஷை க்ஷொ க்ஷோ க்ஷௌ
+
+class CacheGetLettersMixin:
+    __metaclass__ = abc.ABCMeta
+    def __init__(self):
+        self._cache = {}
+
+    @abc.abstractmethod
+    def get_letters_impl(self,word):
+        raise NotImplementedError()
+
+    def get_letters(self,word):
+        """
+        This is a cached implementation of get_letters.
+        @word - can be a Tamil/English word (letter sequence)
+        @return - list of letters in @word and cache for future use.
+        """
+        rval = self._cache.get(word,None)
+        if not rval:
+            rval = self.get_letters_impl(word)
+            self._cache[word] = rval
+        return rval
