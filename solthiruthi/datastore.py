@@ -1,6 +1,6 @@
 ## -*- coding: utf-8 -*-
-## (C) 2015 Muthiah Annamalai,
-## 
+## (C) 2015-2019 Muthiah Annamalai,
+##
 from __future__ import print_function
 import abc
 import sys
@@ -16,17 +16,17 @@ class Queue(list):
     # implement a FIFO structure based on a list
     def __init__(self):
         super(Queue,self).__init__()
-    
+
     def insert(self,obj):
         super(Queue,self).insert(0,obj)
-    
+
     def peek(self):
         """ look at next imminent item """
         return self[0]
-    
+
     def isempty(self):
         return self.__len__() == 0
-    
+
     def __getitem__(self,pos):
         LEN = self.__len__()
         if pos != 0 and pos != -1 and pos != (LEN-1):
@@ -34,38 +34,38 @@ class Queue(list):
         if pos == -1:
             pos = LEN-1
         return super(Queue,self).__getitem__(LEN-1-pos)
-    
+
     def reverse(self):
         raise Exception(Queue.ExceptionMsg%"reverse")
-    
+
     def __getslice__(self):
         raise Exception(Queue.ExceptionMsg%"__getslice__")
-    
+
     def remove(self):
         raise Exception(Queue.ExceptionMsg%"remove")
-    
+
     def sort(self):
         raise Exception(Queue.ExceptionMsg%"sort")
-        
+
     def append(self,obj):
         raise Exception(Queue.ExceptionMsg%"append")
 
 class Trie:
     __metaclass__ = abc.ABCMeta
-    
+
     @abc.abstractmethod
     def add(self,word):
         return
-    
+
     @abc.abstractmethod
     def isWord(self,word,ret_ref_trie=False):
         """ return a boolean as first output, and second output will be the reference trie """
         return
-    
+
     @abc.abstractmethod
     def getAllWords(self):
         return
-        
+
     @abc.abstractmethod
     def getAllWordsPrefix(self,prefix):
         return
@@ -79,11 +79,11 @@ class Trie:
         for word in self.getAllWords():
             yield word
         return
-    
+
     @staticmethod
     def mk_empty_trie(alpha_len):
         return [[False,None] for i in range(alpha_len)]
-        
+
     def loadWordFile(self,filename):
         # words will be loaded from the file into the Trie structure
         with codecs.open(filename,'r','utf-8') as fp:
@@ -91,20 +91,20 @@ class Trie:
             for word in fp.readlines():
                 self.add(word.strip())
         return
-    
+
     @staticmethod
     def serializeToFile(obj,filename):
         with open(filename,u'wb') as fp:
             pickle.dump(obj,fp)
         return True
-        
+
     @staticmethod
     def deserializeFromFile(filename):
         obj = None
         with open(filename,u'rb') as fp:
             obj = pickle.load(fp)
         return obj
-    
+
 class Node:
     def __init__(self):
         #super(Node,self).__init__()
@@ -113,28 +113,29 @@ class Node:
         return str(self.__dict__)
 
 class DTrie(Trie):
-    """ trie where number of alphabets at each nodes grows with time; 
+    """ trie where number of alphabets at each nodes grows with time;
         implementation uses a dictionary; it contains an attribute count for frequency of letter.
     """
     def __init__(self):
         self.trie = Node() #root node
         self.is_english = False
+        self._cache = {}
 
     @staticmethod
     def buildEnglishTrie(nalpha=26):
         obj = DTrie()
         obj.is_english = True
         return obj
-    
+
     def hasWordPrefix(self,wrd_prefix):
         return self.isWordAndTrie( wrd_prefix, prefix=True )
-    
+
     def isWord(self,word,ret_ref_trie=False):
         rval,ref_trie = self.isWordAndTrie( word )
         if ret_ref_trie:
             return rval, ref_trie
         return rval
-    
+
     def isWordAndTrie(self,word,prefix=False):
         ref_trie = self.trie
         letters = self.get_letters(word)
@@ -145,20 +146,20 @@ class DTrie(Trie):
         for idx,letter in enumerate(letters):
             #print(str(ref_trie))
             rval = ref_trie.is_word.get(letter,False)
-            prev_trie = ref_trie            
+            prev_trie = ref_trie
             ref_trie = ref_trie.alphabets.get(letter,None)
             if not ref_trie:
                 break
-        
+
         if  prefix:
             if idx < (len(letters)-1):
                 return False
             elif not ref_trie:
                 return False
             return True
-        
+
         return rval,prev_trie
-    
+
     def getWordCount(self,word):
         isWord, ref_trie = self.isWord( word, ret_ref_trie = True)
         if not isWord:
@@ -168,7 +169,16 @@ class DTrie(Trie):
         return ref_trie.count[ letters[-1] ]
 
     def get_letters(self,word):
-        return self.is_english and [l for l in word] or utf8.get_letters(word)
+        """
+        This is a cached implementation of get_letters.
+        @word - can be a Tamil/English word (letter sequence)
+        @return - list of letters in @word and cache for future use.
+        """
+        rval = self._cache.get(word,None)
+        if not rval:
+            rval = self.is_english and [l for l in word] or utf8.get_letters(word)
+            self._cache[word] = rval
+        return rval
         
     def add(self,word):
         ref_trie = self.trie
@@ -176,7 +186,7 @@ class DTrie(Trie):
         wLen = len(letters)
         prev_trie = None
         assert wLen >= 1
-        for idx,letter in enumerate(letters):                
+        for idx,letter in enumerate(letters):
             value = ref_trie.alphabets.get(letter,None)
             prev_trie = ref_trie
             if not value:
@@ -199,13 +209,13 @@ class DTrie(Trie):
             count = self.getWordCount(word)
             d.update({word:count})
         return d
-        
+
     def getAllWords(self):
         # list all words in the trie structure in DFS fashion
         all_words = []
         self.getAllWordsHelper(self.trie,prefix=[],all_words=all_words)
         return all_words
-        
+
     def getAllWordsPrefix(self,prefix):
         all_words = []
         val,curr_trie = self.isWord(prefix,ret_ref_trie=True)
@@ -216,7 +226,7 @@ class DTrie(Trie):
         if val:    all_words.append( prefix )
         self.getAllWordsHelper( ref_trie, prefix_letters, all_words=all_words )
         return all_words
-    
+
     def getAllWordsHelper(self,ref_trie,prefix,all_words):
         for letter in sorted(ref_trie.alphabets.keys()):
             prefix.append( letter )
@@ -227,10 +237,10 @@ class DTrie(Trie):
                 self.getAllWordsHelper(ref_trie.alphabets[letter],prefix,all_words)
             prefix.pop()
         return
-        
+
     def getAllWordsIterable(self):
         return self.getAllWordsIterableHelper(self.trie,[])
-        
+
     def getAllWordsIterableHelper(self,ref_trie,prefix):
         for letter in sorted(ref_trie.alphabets.keys()):
             prefix.append( letter )
@@ -248,30 +258,30 @@ class RTrie(DTrie):
     def __init__(self,is_tamil=False):
         DTrie.__init__(self)
         self.is_tamil = is_tamil
-        
+
     def reverse(self,word):
         if self.is_tamil:
             rev_word = utf8.reverse_word(word)
         else:
             rev_word = word[::-1]
         return rev_word
-        
+
     def add(self,word):
         rev_word = self.reverse(word)
         DTrie.add(self,rev_word)
-    
+
     def getAllWordsIterable(self):
         # internal storage is in reverse order, but we insert/retrieve for
         # user via regular word order.
         for word in DTrie.getAllWordsIterable(self):
             yield self.reverse(word)
         return
-    
+
     def getAllWordsPrefix(self,pfx):
         for word_pfx in DTrie.getAllWordsPrefix(self,self.reverse(pfx)):
             yield self.reverse(word_pfx)
         return
-    
+
     def getWordsEndingWith(self,sfx):
         for word_sfx in self.getAllWordsPrefix(sfx):
             yield word_sfx
@@ -279,7 +289,7 @@ class RTrie(DTrie):
 
 class TamilTrie(Trie):
     "Store a list of words into the Trie data structure"
-    
+
     @staticmethod
     def buildEnglishTrie(nalpha=26):
         # utility method
@@ -291,7 +301,7 @@ class TamilTrie(Trie):
 
     def get_letters(self,word):
         return self.is_english and [l for l in word] or utf8.get_letters(word)
-    
+
     def __init__(self, get_idx = utf8.getidx, invert_idx = utf8.tamil, alphabet_len = utf8.TA_LETTERS_LEN):
         self.L = alphabet_len
         self.trie = Trie.mk_empty_trie(self.L)
@@ -299,13 +309,13 @@ class TamilTrie(Trie):
         self.getidx = get_idx
         self.invertidx = invert_idx
         self.is_english = False
-        
+
     def getAllWords(self):
         # list all words in the trie structure in DFS fashion
         all_words = []
         self.getAllWordsHelper(self.trie,self.word_limits,prefix=[],all_words=all_words)
         return all_words
-        
+
     def getAllWordsHelper(self,ref_trie,ref_word_limits,prefix,all_words):
         for letter_pos in range(0,len(ref_trie)):
             if ref_trie[letter_pos][0]:
@@ -318,12 +328,12 @@ class TamilTrie(Trie):
                     self.getAllWordsHelper(ref_trie[letter_pos][1],ref_word_limits[letter_pos][1],prefix,all_words)
                 prefix.pop()
         return
-    
+
     def getAllWordsIterable(self):
         for word in self.getAllWords():
             yield word
         return
-    
+
     def getAllWordsPrefix(self,prefix):
         raise Exception("NOT IMPLEMENTED RIGHT")
         all_words = []
@@ -356,7 +366,7 @@ class TamilTrie(Trie):
         if ret_ref_trie:
             return ref_word_limits[idx][0],ref_trie,ref_word_limits
         return ref_word_limits[idx][0]
-        
+
     def add(self,word):
         # trie data structure is built here
         #print("*"*30,"adding","*"*30)
@@ -381,7 +391,7 @@ class TamilTrie(Trie):
         ref_word_limits[idx][0] = True
         #pprint( self.trie )
         #pprint( self.word_limits )
-            
+
 def do_stuff():
     obj = DTrie() #TamilTrie.buildEnglishTrie()
     #pprint( obj.trie )
@@ -391,16 +401,16 @@ def do_stuff():
     #print( obj.trie )
     for w in all_words:
         ret = obj.isWord(w,True)
-        print(w,str(ret[0]),str(ret[1]))    
+        print(w,str(ret[0]),str(ret[1]))
     pprint( obj.trie )
     pprint( obj.getAllWords() )
     pprint( obj.getWordCount('apple'))
-    
+
     obj = DTrie()
     for i in range(3): obj.add('a')
     for j in range(4): obj.add('b')
     print(obj.trie.__str__())
-    
+
     return obj
 
 def do_load():
