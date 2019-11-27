@@ -1,6 +1,6 @@
 Open Source Tamil Tools and NLP Library for Python 3
 ======================================================
-திற மூல தமிழ் கருவிகள்Version 0.95
+திற மூல தமிழ் கருவிகள்Version 0.96
 -------------------------------------
 .. image:: open-tamil-logo.jpg
 
@@ -12,7 +12,7 @@ Open Source Tamil Tools and NLP Library for Python 3
 =====================================
 tamilstemmer
 ------------
-This module is new in version 0.9 and provides access to simple stemmer functions
+This module is new in version 0.96 and provides access to simple stemmer functions
 originally created by Damodharan Rajalingam.
 
 tamil
@@ -32,12 +32,12 @@ open-tamil provides Python package 'tamil' with ability to,
 
 txt2unicode
 -----------
-Tamil Text Encode to Unicode Converter and vice versa.        
-If you don't you know what your Tamil text encoding is, don't worry; the `tamil.txt2unicode.auto2unicode` function will find it and convert to unicode for you.           
-யுனிகோட் மாற்றி மற்றும் மாறாகவும் தமிழ் உரைக் குறியாக்கம்.          
+Tamil Text Encode to Unicode Converter and vice versa.
+If you don't you know what your Tamil text encoding is, don't worry; the `tamil.txt2unicode.auto2unicode` function will find it and convert to unicode for you.
+யுனிகோட் மாற்றி மற்றும் மாறாகவும் தமிழ் உரைக் குறியாக்கம்.
 உங்களது தமிழ் உரைக் குறியீடு என்னவென்று தெரியாதெனில், நீங்கள் கவலை கொள்ளத் தேவையில்லை; `tamil.txt2unicode.auto2unicode` செயல்பாடு இதனைக் கண்டறியும் மற்றும் இதனை யுனிகோடுக்கு மாற்றும்.
 
-Right now, it supports 25 known Tamil encodings. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of `auto2unicode` and `unicode2auto`.        
+Right now, it supports 25 known Tamil encodings. Read more details about [txt2unicode](tamil/txt2unicode/README.md) and [limitation](examples/txt2unicode/encodes_chars/README.md) of `auto2unicode` and `unicode2auto`.
 தற்சமயம், இது 25 தமிழ் குறியாக்கம் கொண்ட எழுத்துருக்களை ஆதரிக்கிறது. [txt2unicode](tamil/txt2unicode/README.md) பற்றி மேலும் விவரங்களும் 'auto2unicode' மற்றும் 'unicode2auto'-வின் [குறைபாடுகளையும்] (examples/txt2unicode/encodes_chars/README.md) காண்க.
 
 txt2ipa
@@ -77,19 +77,19 @@ For convenience this code is packaged with Open-Tamil.
 
 C-tamil
 -------
-The package under C-tamil provides some of the same functionality as Python 'tamil' but in ISO-C for C/C++ use.    
-*சி தமிழ்*       
+The package under C-tamil provides some of the same functionality as Python 'tamil' but in ISO-C for C/C++ use.
+*சி தமிழ்*
 பைதான் 'தமிழ்' தொகுப்பில் உள்ள சில பயன்பாடுகளை 'சி தமிழ்' ஐஎஸ்ஓ-சி-யில், சி/சி++ பயன்படுத்தும் வகையில் கொடுக்கும்.
 
 திரை விசைப்பலகை (Onscreen Keyboard)
 ----------------------------------
-Open-tamil provides the keyboard layout in the file `keyboard/tamil.js` for they jQuery UI plugin.     
-'tamil.js' விசைப்பலகை அமைப்பை வழங்குகிறது.     
+Open-tamil provides the keyboard layout in the file `keyboard/tamil.js` for they jQuery UI plugin.
+'tamil.js' விசைப்பலகை அமைப்பை வழங்குகிறது.
 
 மாதிரிகள் (Language Modes)
 -------------------------
 Basic support for letter unigram, bigram models using UTF-8 based corpora are supported in the package 'ngram/'
-which supports unigram model at the moment. More complex language models are expected to be developed soon.          
+which supports unigram model at the moment. More complex language models are expected to be developed soon.
 எழுத்து unigram அடிப்படை ஆதரவு, மற்றும் UTF-8 அடிப்படையில் சொற்கிடங்கின் பயன்படுத்தி bigram மாதிரிகள் 'ngram/' தொகுப்பால் ஆதரிக்கப்படுகின்றன, தற்பொழுது அது மாதிரி unigram-ஐ ஆதரிக்கிறது. மிகவும் நுணுக்கமான மொழி மாதிரிகள் விரைவில் அபிவிருத்தி செய்யப்படும் என எதிர்பார்க்கப்படுகிறது.
 
 நிறுவுதல் (Installation)
@@ -107,7 +107,7 @@ Open-Tamil is still a basic collection of tools - its not complete yet. We have 
 
 Examples for using Python Open-Tamil are found [here](tests/).
 
-ஓபன்-தமிழ் என்பது தொகுக்கப்பட்ட பைதான் நூலகமாகும், உங்கள் வலை, ணினி நிரல், முகத்திரை வரைகலை மற்றும் பல தமிழ் எழுத்துரு செயற்பாடுகளுக்கு மிகவும் உவியாக இருக்கும்.       
+ஓபன்-தமிழ் என்பது தொகுக்கப்பட்ட பைதான் நூலகமாகும், உங்கள் வலை, ணினி நிரல், முகத்திரை வரைகலை மற்றும் பல தமிழ் எழுத்துரு செயற்பாடுகளுக்கு மிகவும் உவியாக இருக்கும்.
 ஓபன்-தமிழ் என்பது அடிப்படை தொகுப்புக்களை மட்டுமே கொண்ட கருவிகளாும், இது இன்னும் முழுமை பெறவில்லை. இதில் UTF-8, என்-கிராம் மொழி மாதிரிகள், transliterators முதலியன பழைய முறையை மாற்ற விசைப்பலகை அமைப்பு, மாற்றிகள் உள்ளன. பைதான் ஓபன் தமிழ் பயன்படுத்தி உதாரணங்கள் [இங்கு](tests/) காணப்படுகின்றன.
 
 இலக்குகள் (Goals)
