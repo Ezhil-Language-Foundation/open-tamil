@@ -92,6 +92,13 @@ class Valluvar(unittest.TestCase):
         uni_from_shreelipiavid = shreelipiavid2unicode(shreelipiavid_from_uni)
         self.assertTrue(uni_words == uni_from_shreelipiavid)
         if ( LINUX ): print("unicode2shreelipiavid test passed 'OK'")
+
+    def test_bamini2unicode(self):
+        bamini_words = """mwKk; murpaYk;"""
+        uni_words = bamini2unicode(bamini_words)
+        bamini_from_uni = unicode2bamini(uni_words)
+        self.assertTrue(bamini_words == bamini_from_uni)
+        if ( LINUX ): print("bamini2unicode test passed 'OK'")
         
 if __name__ == '__main__':
     unittest.main()
