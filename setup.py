@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# (C) 2013-2019 முத்து அண்ணாமலை மற்றும் ஓப்பன் தமிழ் பங்களிப்பாளர்கள்
+# (C) 2013-2020 முத்து அண்ணாமலை மற்றும் ஓப்பன் தமிழ் பங்களிப்பாளர்கள்
 # open-tamil project
 
 from distutils.core import setup
@@ -10,7 +10,7 @@ from codecs import open
 long_description = open('README.rst','r','UTF-8').read()
 
 setup(name='Open-Tamil',
-      version='0.96',
+      version='0.97',
       description='Tamil language text processing tools for Python v2, v3',
       author='M. Annamalai, T. Arulalan, and other contributors',
       author_email='ezhillang@gmail.com',
@@ -18,7 +18,7 @@ setup(name='Open-Tamil',
       url='https://github.com/Ezhil-Language-Foundation/open-tamil',
       packages=['tamil','transliterate','ngram','tamil.txt2ipa','tamil.txt2unicode',\
       'tamil.utils', 'solthiruthi','spell','tamilstemmer','tamilmorse','tamilsandhi',\
-      'valai'],
+      'valai','kural'],
       package_dir={'solthiruthi': 'solthiruthi','tamilmorse':'tamilmorse',\
       'tamilsandhi':'tamil-sandhi-checker/tamilsandhi'},
       package_data={'solthiruthi': ['data/*.txt'],'tamilmorse':['data/*.json'],\

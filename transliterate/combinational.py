@@ -1,27 +1,31 @@
 # -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
-# 
+#
 # Implementation of combinational transliterate rules - தமிழ் எழுத்துக்கள்
 # according to uyir+mei combination using their respective phonetic sounds.
-# 
+#
 # like how,  க் +  ஊ -> கூ , using the following table we can write in english,
-# k -> க், uu -> ஊ   ==>  kuu -> கூ 
-# 
+# k -> க், uu -> ஊ   ==>  kuu -> கூ
+#
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ
 # vowels = [u"a", u"aa", u"i", u"ii", u"u", u"uu", u"e", u"ee", u"ai", u"o", u"oo", u"au"]
-# 
+#
 # க ச ட த ப ற ஞ ங ண ந ம ன ய ர ல வ ழ ள ஜ ஷ ஸ ஹ
 # க, ச, ட, த, ப, ற, ஞ, ங, ண, ந, ம, ன, ய, ர, ல, வ, ழ, ள, ஜ, ஷ, ஸ, ஹ
 # consonant_mei = [u"k", u"s", u"d", u"th",u"p",u"R",u"nj", u"ng",u"N", u"n-", u"m",u"n",
 #                  u"y", u"r",u"l",u"v", u"zh", u"L", u"j", u"S", u"sh", u"ha"]
-# 
+#
 # Key Map Table  : Acknowledgements to concept used at Kandupidi.com
-# 
+#
 # For maintenance, use the function '__built_table__()' to build the phonetic->Unicode mapping
 
 class Transliteration:
-    table = {}        
-    
+    """
+    Implementation of combinational transliterate rules - தமிழ் எழுத்துக்கள்
+    according to uyir+mei combination using their respective phonetic sounds.
+    """
+    table = {}
+
     table[u"1"] = u"௧"
     table[u"10"] = u"௰"
     table[u"1000"] = u"௲"
@@ -373,35 +377,35 @@ class Transliteration:
     table[u"zho"] = u"ழொ"
     table[u"zhoo"] = u"ழோ"
     table[u"zhu"] = u"ழு"
-    table[u"zhuu"] = u"ழூ"    
+    table[u"zhuu"] = u"ழூ"
 
 def __built_table__():
     """ this class is for maintenance purposes only """
     from tamil import utf8
 
     table = {}
-    
+
     # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ
     vowels = [u"a", u"aa", u"i", u"ii", u"u", u"uu", u"e", u"ee", u"ai", u"o", u"oo", u"au"]
-        
+
     print(u" ".join(utf8.agaram_letters+utf8.sanskrit_letters))
-    # 
+    #
     # க ச ட த ப ற ஞ ங ண ந ம ன ய ர ல வ ழ ள ஜ ஷ ஸ ஹ
     # க, ச, ட, த, ப, ற, ஞ, ங, ண, ந, ம, ன, ய, ர, ல, வ, ழ, ள, ஜ, ஷ, ஸ, ஹ
     consonant_mei = [u"k", u"s", u"d", u"th",u"p",u"R",u"nj", u"ng",u"N", u"n-", u"m",u"n",
                      u"y", u"r",u"l",u"v", u"zh", u"L", u"j", u"S", u"sh", u"ha"]
-    
+
     # initialize mei phonetic map
     for mei,mei_utf8 in zip(consonant_mei,utf8.mei_letters+utf8.sanskrit_mei_letters):
         table[mei] = mei_utf8
-    
-    # build the combination table for 
+
+    # build the combination table for
     # uyirmei phonetic map
     for mei,mei_agaram in zip(consonant_mei,utf8.agaram_letters+utf8.sanskrit_letters):
         for uyir,uyir_accent in zip(vowels,utf8.accent_symbols):
             table[mei+uyir] = mei_agaram + uyir_accent
             print(u"uyirmei->phonetic | %s => %s "%(table[mei+uyir],mei+uyir))
-        
+
     # special grantha characters
     table["ksha"]=u"க்ஷ"
     table["kshaa"]=u"க்ஷா"
@@ -477,9 +481,9 @@ def __built_table__():
     for k in kk:
         v = table[k]
         print(u"\ttable[u\"%s\"] = u\"%s\""%(k,v))
-    
+
 #  Key Map Table  : Acknowledgements to Kandupidi.com
-# 
+#
 # 		a	aa	i	ii	u	uu	e	ee	ai	o	oo	au
 # 		அ	ஆ	இ	ஈ	உ	ஊ	எ	ஏ	ஐ	ஒ	ஓ	ஔ
 # k	க்	க	கா	கி	கீ	கு	கூ	கெ	கே	கை	கொ	கோ	கௌ

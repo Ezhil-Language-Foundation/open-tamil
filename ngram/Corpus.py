@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# 
+#
 # The MIT License (MIT)
-# 
+#
 # (C) முத்தையா அண்ணாமலை 2013-2015
-# 
+#
 
 import codecs
 from tamil import utf8
@@ -11,10 +11,12 @@ from tamil import utf8
 
 class Corpus:
     """ Class defines a Corpus data file, and reading information from
-        this file for only the Tamil letters """
+        this file for only the Tamil letters. Usage would be to construct this object,
+        with a filename argument, and then use next_tamil_letter() method on this object. """
     def __init__(self,filename):
         self.filename = filename
         self.handle = None
+
     def __del__(self):
         try:
             self.handle.close()

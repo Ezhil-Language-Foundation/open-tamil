@@ -6,9 +6,11 @@
 import copy
 #import pdb
 
-# Implement binary Huffman codes
-# Ref: https://www2.cs.duke.edu/csed/poop/huff/info/
 class Tree:
+    """
+    Implement binary Huffman codes
+    Ref: https://www2.cs.duke.edu/csed/poop/huff/info/
+    """
     def __init__(self,val,prob):
         self.value = val
         self.prob = prob
@@ -17,6 +19,7 @@ class Tree:
 
     @staticmethod
     def make(leftTree,rightTree):
+        """ Utility make function."""
         t = Tree('%s%s'%(leftTree.prob,rightTree.prob),
                  leftTree.prob+rightTree.prob)
         if leftTree.prob >= rightTree.prob:
@@ -26,9 +29,10 @@ class Tree:
         return t
 
 def huffman_reduce(treelist):
+    """ Intermediate steps in Huffman code. """
     if len(treelist) < 2:
         return
-    
+
     if len(treelist) == 2:
         v = Tree.make(treelist[0],treelist[1])
         treelist.pop()
@@ -45,7 +49,7 @@ def huffman_reduce(treelist):
     idx1 = pvalues.index(min(pvalues))
     tree1 = treelist[idx1]
     del treelist[idx1]
-    
+
     treejoin = Tree.make(tree0,tree1)
     treelist.append(treejoin)
     return

@@ -1,9 +1,10 @@
 
 # -*- coding: utf-8 -*-
-# 
+#
 # (C) முத்தையா அண்ணாமலை 2013-2015
-# 
+#
 # N-gram language model for Tamil letters
+#This module contains edit_distance, similarity scoring modules.
 
 import tamil
 
@@ -15,7 +16,7 @@ def edit_distance(wordA,wordB):
         lettersA = tamil.utf8.get_letters(wordA)
     else:
         lettersA = wordA
-    
+
     if not type(wordB) is list:
         lettersB = tamil.utf8.get_letters(wordB)
     else:
@@ -34,10 +35,14 @@ def edit_distance(wordA,wordB):
                 new_dist = dist_AB[i-1][j-1]
             else:
                 new_dist = min( [dist_AB[i-1][j]+1, dist_AB[i][j-1]+1, dist_AB[i-1][j-1]+1] ) #del, ins, or sub
-            dist_AB[i][j] = new_dist 
+            dist_AB[i][j] = new_dist
     return dist_AB[-1][-1]
 
 def Jaccard_coeff(*args):
+    """
+        # Jaccard coeff - similarity score for two words @wordA, @wordB
+        # https://en.wikipedia.org/wiki/Jaccard_index
+    """
     return (1.0 - Dice_coeff(*args))
 
 def Dice_coeff(wordA,wordB):
@@ -50,7 +55,7 @@ def Dice_coeff(wordA,wordB):
         lettersA = tamil.utf8.get_letters(wordA)
     else:
         lettersA = wordA
-    
+
     if not type(wordB) is list:
         lettersB = tamil.utf8.get_letters(wordB)
     else:
