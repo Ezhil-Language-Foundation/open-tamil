@@ -680,7 +680,7 @@ def classify_letter(letter):
         return 'digit'
     raise ValueError("Unknown letter '%s' neither Tamil nor English or number"%letter)
 
-def print_tamil_words( tatext, use_frequencies = False ):
+def print_tamil_words( tatext, use_frequencies = not False ):
     taletters = get_letters(tatext)
     #for word in re.split(u"\s+",tatext):
     #    print(u"-> ",word)
@@ -691,7 +691,7 @@ def print_tamil_words( tatext, use_frequencies = False ):
     #for key in frequency.keys():
     #    print(u"%s : %s"%(frequency[key],key))
     # sort words by descending order of occurence
-    for l in sorted(frequency.iteritems(), key=operator.itemgetter(1)):
+    for l in sorted(frequency.items(), key=operator.itemgetter(1)):
         if use_frequencies:
             print(u"%d -> %s"%(l[1],l[0]))
         else:

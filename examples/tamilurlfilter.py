@@ -1,4 +1,4 @@
-#!python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # (C) 2013-2018 Muthiah Annamalai
 # 
@@ -6,6 +6,9 @@
 # 
 
 import sys
+import imp
+import ssl
+
 try:
     reload  # Python 2.7
 except NameError:
@@ -15,8 +18,8 @@ except NameError:
         from imp import reload  # Python 3.0 - 3.3
 
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#imp.reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 import tamil
 from transliterate import *
@@ -35,8 +38,11 @@ except ImportError as ie:
     class bs4:
         BeautifulSoup = BeautifulSoup.BeautifulSoup
 
-from urllib2 import urlopen
+from urllib.request import urlopen
 import operator
+
+# support HTTPS default contexts
+ssl._create_default_https_context = ssl._create_unverified_context
 
 def url_tamil_text_filter( url ):
     if USE_BS4:
@@ -46,12 +52,12 @@ def url_tamil_text_filter( url ):
     #tatext = tapage.body.text
     # Ref: SO 1936466
     tatext = tapage.findAll(text=True)
-    tatext = filter( lambda x: not (x.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]']), tatext )
-    tatext = u" ".join([txt.strip() for txt in tatext]) 
+    tatext = [x for x in tatext if not (x.parent.name in ['style', 'script', 'head', 'title', 'meta', '[document]'])]
+    tatext = " ".join([txt.strip() for txt in tatext]) 
     print_tamil_words( tatext )
 
-if __name__ == u"__main__":
+if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print(u"Usage: tamilurlfilter.py <url-1> <url-2> ...\n")
+        print("Usage: tamilurlfilter.py <url-1> <url-2> ...\n")
     for url in sys.argv[1:]:
         url_tamil_text_filter(url)
