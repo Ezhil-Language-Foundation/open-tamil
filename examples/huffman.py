@@ -85,9 +85,9 @@ def main():
     code,_ = huffman(v,p)
     #return code,_
     cwl = 0.0
-    for k,_v in code.items():
-        print(u"%s -> %s"%(k,_v))
+    for k,_v in list(code.items()):
+        print(("%s -> %s"%(k,_v)))
         cwl += p[v.index(k)]*len(_v)
-    print "cwl = %g"%cwl
+    print("cwl = %g"%cwl)
 # Ref: https://www2.cs.duke.edu/csed/poop/huff/info/
 main()

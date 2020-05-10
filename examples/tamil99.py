@@ -12,7 +12,7 @@ fp.close()
 # nearest neighbors
 nn = {}
 
-data = filter(lambda l: len(l.strip()) > 0,data)
+data = [l for l in data if len(l.strip()) > 0]
 order = []
 for d in data:
     a,b=d.split('-')
@@ -20,28 +20,28 @@ for d in data:
     values = b.strip().split(' ')
     nn[a.strip()]=values
 
-print '{'
+print('{')
 #for k,v in nn.items():
 for i in order:
     k,v = i,nn[i]
     vv = ",".join([ "u'%s'"%vi   for vi in v])
-    print """u'%s' : [%s], """%(k,vv)
-print '}'
+    print("""u'%s' : [%s], """%(k,vv))
+print('}')
 
 fwd_confusion_matrix = nn
 confusion_matrix = {}
-for k,v in fwd_confusion_matrix.items():
+for k,v in list(fwd_confusion_matrix.items()):
     for vv in v:
         if not confusion_matrix.get(vv,None):
             confusion_matrix[vv]=set()
         confusion_matrix[vv].add(k)
 
 nn = confusion_matrix
-print '{'
+print('{')
 #for k,v in nn.items():
 for i in order:
     k,v = i,nn[i]
     v=list(v)
     vv = ",".join([ "u'%s'"%vi   for vi in v])
-    print """u'%s' : [%s], """%(k,vv)
-print '}'
+    print("""u'%s' : [%s], """%(k,vv))
+print('}')

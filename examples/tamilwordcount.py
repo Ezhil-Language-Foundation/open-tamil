@@ -24,6 +24,7 @@
 # SOFTWARE.
 
 import sys
+import imp
 try:
     reload  # Python 2.7
 except NameError:
@@ -33,8 +34,8 @@ except NameError:
         from imp import reload  # Python 3.0 - 3.3
 
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+imp.reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 from tamil import utf8 as tamil
 import argparse
@@ -50,7 +51,7 @@ class Text:
         self.letter_toll = 0
         self.line_toll = 0
         self.word_toll = 0
-        self.line = u''
+        self.line = ''
         if content:
             for line in content:
                 self.line = line
@@ -60,12 +61,12 @@ class Text:
                     self.count_word()
                 if self.charonly:
                     self.count_letter()
-        
+
     def count_word(self):
         self.word_toll += len(self.line.split())
 
     def count_line(self):
-        self.line_toll += 1 
+        self.line_toll += 1
 
     def count_letter(self):
         self.letter_toll += len(tamil.get_letters(self.line))
@@ -74,13 +75,13 @@ def print_file_stats(filename):
     try:
         fileobj = codecs.open(filename, 'r','utf-8')
     except FileNotFoundError as e:
-        print("File {} not found".format("\"" + filename + "\""))
+        print(("File {} not found".format("\"" + filename + "\"")))
         return
     except OSError as err:
-        print("OS error: {0}".format(err))
+        print(("OS error: {0}".format(err)))
         return
     file_text = Text(
-            fileobj, 
+            fileobj,
             lineonly=attribs["line"],
             wordonly=attribs["word"],
             charonly=attribs["char"]
@@ -140,7 +141,7 @@ if len(options.files) > 0:
         try:
             print_file_stats(file)
         except Exception as ioe:
-            print(u"Cannot process file %s\n    %s"%(file,str(ioe)))
+            print(("Cannot process file %s\n    %s"%(file,str(ioe))))
     if len(options.files) > 1:
         total = construct_file_stats(total_stats, "total")
         print(total)

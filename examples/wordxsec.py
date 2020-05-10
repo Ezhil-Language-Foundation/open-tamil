@@ -54,15 +54,15 @@ class WordXSec:
         # print adjacency list of intersection graph
         for k in self.wordlist:
             v = self.xsections[k]
-            print( ",".join( ["%d"%len(vv) for vv in v] ) )
+            print(( ",".join( ["%d"%len(vv) for vv in v] ) ))
         return
 
 if __name__ == "__main__":
     lang = ['EN','TA'][0]
     if lang == 'EN':
-        wordlist = [u'food',u'water',u'shelter',u'clothing']
+        wordlist = ['food','water','shelter','clothing']
         fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
     else:
-        wordlist = [u'உப்பு', u'நாற்பண்',u'பராபரம்', u'கான்யாறு', u'ஆறு', u'சன்னியாசி', u'நெல்லி']
+        wordlist = ['உப்பு', 'நாற்பண்','பராபரம்', 'கான்யாறு', 'ஆறு', 'சன்னியாசி', 'நெல்லி']
         fill_letters = tamil.utf8.tamil_letters
     WordXSec.driver( wordlist )
