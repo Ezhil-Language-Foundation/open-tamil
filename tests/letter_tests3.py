@@ -79,6 +79,8 @@ class LetterTests(unittest.TestCase):
        mei,uyir = tace16.splitMeiUyir(word[0])
        self.assertEqual( mei, im)
        self.assertEqual( uyir, u)
-       
+       _mu = tace16.joinMeiUyir(im , u)
+       self.assertEqual( _mu, word[0] )
+
 if __name__ == "__main__":
     unittest.main()

@@ -15,7 +15,7 @@ def splitMeiUyir(uyirmei_char):
 def joinMeiUyir(mei_char, uyir_char):
     """This function join mei character and uyir character, and retuns as
     compound uyirmei unicode character."""
-    return mei | (uyir & const000F)
+    return mei_char | (uyir_char & const000F)
 
 #OrderedDict
 tace2utf8 = ([
