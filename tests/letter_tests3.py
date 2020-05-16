@@ -82,5 +82,11 @@ class LetterTests(unittest.TestCase):
        _mu = tace16.joinMeiUyir(im , u)
        self.assertEqual( _mu, word[0] )
 
+    def test_tace16_letters(self):
+        text_utf8 = "தமிழ் இயற்கை மொழி பகுப்பாய்வு நிரல்தொகுப்பு"
+        text = "    "
+        letters = tace16.get_letters([ord(c) for c in text])
+        self.assertEqual(len(letters),len(get_letters(text_utf8)))
+
 if __name__ == "__main__":
     unittest.main()

@@ -1,11 +1,15 @@
 # (C) 2020 முத்து அண்ணாமலை
 # இந்த நிரல் ஓப்பன்-தமிழ் திட்டத்தின் பகுதியாகும்
 # மேற்கோள் - https://en.wikipedia.org/wiki/Tamil_All_Character_Encoding
-
+import copy as _copy
+import string as _string
 OFFSET=int('0xE200',16)
 constFF0F=int('0xFF0F',16)
 constFFF0=int('0xFFF0',16)
 const000F=int('0x000F',16)
+
+def get_letters(text):
+    return list(filter(lambda c: c in TACE16_ASCII_WHITESPACE,text))
 
 def splitMeiUyir(uyirmei_char):
     uyir = uyirmei_char & constFF0F
@@ -17,8 +21,7 @@ def joinMeiUyir(mei_char, uyir_char):
     compound uyirmei unicode character."""
     return mei_char | (uyir_char & const000F)
 
-#OrderedDict
-tace2utf8 = ([
+tace2utf8 = [
     ("“", "\""),
     ("”", "\""),
     ("‘", "'"),
@@ -336,4 +339,10 @@ tace2utf8 = ([
     ("", "ஷ"),
     ("", "ஜ"),
     ("", "ஹ"),
-    ])
+    ]
+TACE16 = [ord(pos[0]) for pos in tace2utf8]
+TACE16_ASCII_WHITESPACE = _copy.copy(TACE16)
+TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.whitespace)))
+TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.punctuation)))
+TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.ascii_letters)))
+TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.digits)))
