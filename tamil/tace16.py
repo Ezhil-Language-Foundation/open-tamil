@@ -8,8 +8,23 @@ constFF0F=int('0xFF0F',16)
 constFFF0=int('0xFFF0',16)
 const000F=int('0x000F',16)
 
+is_tamil_tace_predicate = lambda x: x >= (OFFSET) and x <= (OFFSET+255)
+
+def rebase_ord(charval):
+    """ Rebase a TACE16 code-point within the chosen @tace16.OFFSET """
+    return (ord(charval) & 255) | OFFSET
+
 def get_letters(text):
     return list(filter(lambda c: c in TACE16_ASCII_WHITESPACE,text))
+
+def to_bytes(chars):
+    """Convert 2-byte representation into 1-byte representation for TACE16"""
+    if isinstance(chars,list):
+        for c in chars:
+            if is_tamil_tace_predicate(c):
+                yield (c%256).to_bytes(1,'big')
+    else:
+        yield (chars%256).to_bytes(1,'big')
 
 def splitMeiUyir(uyirmei_char):
     uyir = uyirmei_char & constFF0F
@@ -340,7 +355,7 @@ tace2utf8 = [
     ("", "ஜ"),
     ("", "ஹ"),
     ]
-TACE16 = [ord(pos[0]) for pos in tace2utf8]
+TACE16 = [(ord(pos[0])&255)|OFFSET for pos in tace2utf8]
 TACE16_ASCII_WHITESPACE = _copy.copy(TACE16)
 TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.whitespace)))
 TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.punctuation)))

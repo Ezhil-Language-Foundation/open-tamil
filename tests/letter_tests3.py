@@ -71,11 +71,12 @@ class LetterTests(unittest.TestCase):
         self.assertSequenceEqual( word_lengths, list(map(len,list(map(get_letters,t)))) )
         self.assertEqual( unicodedata.name(t[1][11]), 'TAMIL LETTER E' )
 
+class TaceTests(unittest.TestCase):
     def test_tace16(self):
        muttram = "முற்றம்"
-       word = [ord(x) for x in ["","","",""]]
-       im = ord("") #ம்
-       u = ord("") #உ
+       word = [tace16.rebase_ord(x) for x in ["","","",""]]
+       im = tace16.rebase_ord("") #ம்
+       u = tace16.rebase_ord("") #உ
        mei,uyir = tace16.splitMeiUyir(word[0])
        self.assertEqual( mei, im)
        self.assertEqual( uyir, u)
@@ -85,8 +86,26 @@ class LetterTests(unittest.TestCase):
     def test_tace16_letters(self):
         text_utf8 = "தமிழ் இயற்கை மொழி பகுப்பாய்வு நிரல்தொகுப்பு"
         text = "    "
-        letters = tace16.get_letters([ord(c) for c in text])
+        letters = tace16.get_letters([tace16.rebase_ord(c) for c in text])
         self.assertEqual(len(letters),len(get_letters(text_utf8)))
+
+    def test_is_tace16_codepoint(self):
+        actual = [b'\x1c', b'\x1d', b'\x18', b'\x19', b'\x84', b'\x88', b'\x89', b'\x8a', b'\x8b', b'\x8d']
+        self.assertListEqual( list(tace16.to_bytes(tace16.TACE16[0:10])), actual )
+
+    def test_tace16_as_bytes(self):
+       muttram = "முற்றம்"
+       _word = [tace16.rebase_ord(x) for x in ["","","",""]]
+       word = list(tace16.to_bytes(_word))
+       im = list(tace16.to_bytes(tace16.rebase_ord("")))[0] #ம்
+       u = list(tace16.to_bytes(tace16.rebase_ord("")))[0] #உ
+       mei,uyir = tace16.splitMeiUyir(tace16.rebase_ord(word[0]))
+       print(hex(mei))
+       print(hex(uyir))
+       self.assertEqual( mei, tace16.rebase_ord(im))
+       self.assertEqual( uyir, tace16.rebase_ord(u))
+       _mu = tace16.joinMeiUyir(tace16.rebase_ord(im) , tace16.rebase_ord(u))
+       self.assertEqual( _mu, tace16.rebase_ord(word[0]) )
 
 if __name__ == "__main__":
     unittest.main()
