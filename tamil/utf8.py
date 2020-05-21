@@ -684,6 +684,32 @@ def tamil_sorted(list_data):
     asorted = sorted(list_data,key=functools.cmp_to_key(compare_words_lexicographic))
     return asorted
 
+def hex2unicode(ip_data,offset=3):
+    """
+        எ.கா. 'b9abc1b95bbeba4bbebb0baebcd' =
+                   'சுகாதாரம்'
+        எ.கா. 'b95' = அ
+    """
+    result = []
+    for s in re.split('\-|\/',ip_data):
+        result.append(''.join([chr(int(s[i:i+offset],16)) for i in range(0,len(s),offset)]))
+    return result
+
+def unicode2hex(ip_data,offset=3):
+    """
+         hex2unicode என்பதன் நேர்மாறான சார்பு
+        எ.கா.  'சுகாதாரம்' ->  'b9abc1b95bbeba4bbebb0baebcd'
+        எ.கா. 'அ' -> 'b95'
+    """
+    result = []
+    for letter in get_letters_iterable(ip_data):
+        if is_tamil_unicode(letter):
+            for _letter in letter:
+                result.append(('%{0}x'.format(offset))%ord(_letter))
+        else:
+            result.append(letter)
+    return ''.join(result)
+
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ
 # க் ச் ட் த் ப் ற் ஞ் ங் ண் ந் ம் ன் ய் ர் ல் வ் ழ் ள் ஜ் ஷ் ஸ் ஹ்

@@ -12,8 +12,18 @@ if PYTHON3:
     from functools import cmp_to_key
 
 class LetterTests(unittest.TestCase):
+    def test_GOI_encoding(self):
+        coded = "baaba4bc1-b85bb1bbfbb5bc1ba4bcd-ba4b95bb5bb2bcdb95bb3bcd/baaba9bcdba9bbeb9fbcdb9fbc1baabcd-baabb2bb5b95bc8baabcd-baabafba3bbfb95bb3bcd-b92bb0bcd-b95ba3bcdba3b9fbcdb9fbaebcd"
+        decoded=['பது',  'அறிவுத்',  'தகவல்கள்',  'பன்னாட்டுப்',  'பலவகைப்',
+                        'பயணிகள்',  'ஒர்',  'கண்ணட்டம்']
+        actual=hex2unicode(coded)
+        self.assertListEqual(decoded,actual)
+
+    def test_unicode2hex(self):
+        actual = unicode2hex('கர்ப்ப-சுகாதாரம்')
+        self.assertEqual(actual,'b95bb0bcdbaabcdbaa-b9abc1b95bbeba4bbebb0baebcd')
+
     def test_indian_rupee_symbol(self):
-        print((get_letters("₹ 500")))
         self.assertTrue( "₹" in  get_letters("₹ 500") )
 
     def test_tamil247(self):
@@ -100,8 +110,6 @@ class TaceTests(unittest.TestCase):
        im = list(tace16.to_bytes(tace16.rebase_ord("")))[0] #ம்
        u = list(tace16.to_bytes(tace16.rebase_ord("")))[0] #உ
        mei,uyir = tace16.splitMeiUyir(tace16.rebase_ord(word[0]))
-       print(hex(mei))
-       print(hex(uyir))
        self.assertEqual( mei, tace16.rebase_ord(im))
        self.assertEqual( uyir, tace16.rebase_ord(u))
        _mu = tace16.joinMeiUyir(tace16.rebase_ord(im) , tace16.rebase_ord(u))
