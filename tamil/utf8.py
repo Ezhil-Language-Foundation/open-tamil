@@ -381,8 +381,9 @@ uyir_letter_set   = _make_set(uyir_letters)
 ## Split a tamil-unicode stream into
 ## tamil characters (individuals).
 def get_letters( word ):
-    """ splits the word into a character-list of tamil/english
-    characters present in the stream """
+    """ Splits the @word into a character-list of tamil/english
+    characters present in the stream. This routine provides a robust tokenizer
+    for Tamil unicode letters. """
     ta_letters = list()
     not_empty = False
     WLEN,idx = len(word),0
