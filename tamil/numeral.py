@@ -313,6 +313,7 @@ def num2tamilstr_american( *args ):
     return units[0]
 
 def num2tamilstr_casual(arg,method=num2tamilstr):
+    raise NotImplementedError()
     units = {'பூஜ்ஜியம்':'பூஜ்ஜியம்',
                  'ஒன்று':'ஒன்னு',
                  'இரண்டு':'ரெண்டு',
