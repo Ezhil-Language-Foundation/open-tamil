@@ -5,11 +5,7 @@
 import sys
 import math
 PYTHON3 = sys.version > '3'
-
-if PYTHON3:
-    unicode = str
-    class long(int):
-        pass
+assert PYTHON3,"Python3 or larger required for this module"
 
 def num2tamilstr( *args ):
     """ work till one lakh crore - i.e 1e5*1e7 = 1e12.
@@ -23,9 +19,9 @@ def num2tamilstr( *args ):
         tensSpecial = args[2]
     else:
         tensSpecial='BASIC'
-    if not any( filter( lambda T: isinstance( number, T), [str,unicode,int, long, float]) ) or isinstance(number,complex):
-        raise Exception('num2tamilstr input has to be a long or integer or float')
-    if float(number) > long(1e12):
+    if not any( filter( lambda T: isinstance( number, T), [str,int, float]) ) or isinstance(number,complex):
+        raise Exception('num2tamilstr input has to be a integer or float')
+    if float(number) > int(1e12):
         raise Exception('num2tamilstr input is too large')
     if float(number) < 0:
         return u"- "+num2tamilstr( -number )
@@ -66,7 +62,7 @@ def num2tamilstr( *args ):
             rval.append( units[int(digit)] )
         return u' '.join(rval)
 
-    if isinstance(number,str) or isinstance(number,unicode):
+    if isinstance(number,str):
         result = u""
         number = number.strip()
         assert(len(args) == 1)
@@ -112,16 +108,16 @@ def num2tamilstr( *args ):
                 return u" ".join(num_map[n_base])
             elif tensSpecial=='NINES':
                 filenames.extend(file_map[n_base])
-                return units_suffix_nine[long(number%10)]
+                return units_suffix_nine[int(number%10)]
             else:
                 filenames.extend(file_map[n_base])
-                return units_suffix[long(number%10)]
-        quotient_number = long( number/n_base )
+                return units_suffix[int(number%10)]
+        quotient_number = int( number/n_base )
         residue_number = number - n_base*quotient_number
         #print number, n_base, quotient_number, residue_number, tensSpecial
         if n_base == n_one:
             if isinstance(number,float):
-                int_part = long(number%10)
+                int_part = int(number%10)
                 frac = number - float(int_part)
                 filenames.append("units_%d"%int_part)
                 if abs(frac) > 1e-30:
@@ -199,8 +195,8 @@ def num2tamilstr( *args ):
             else:
                 numeral = num2tamilstr( quotient_number, filenames )
         if n_base >= n_thousand:
-            suffix = suffix_base[n_base][long(residue_number >= 1)]
-            suffix_filename = "%s_%d"%(suffix_file_map[n_base],long(residue_number >= 1))
+            suffix = suffix_base[n_base][int(residue_number >= 1)]
+            suffix_filename = "%s_%d"%(suffix_file_map[n_base],int(residue_number >= 1))
             if residue_number == 0:
                 filenames.append(suffix_filename)
                 return numeral + u' ' + suffix+u' '
@@ -218,9 +214,9 @@ def num2tamilstr_american( *args ):
     """ work till 1000 trillion  - 1 - i.e  = 1e12*1e3 - 1.
         turn number into a numeral, American style. Fractions upto 1e-30. """
 
-    if not any( filter( lambda T: isinstance( number, T), [int, str, unicode, long, float]) ) or isinstance(number,complex):
-        raise Exception('num2tamilstr_american input has to be long or integer')
-    if float(number) >= long(1e15):
+    if not any( filter( lambda T: isinstance( number, T), [int, str, int, float]) ) or isinstance(number,complex):
+        raise Exception('num2tamilstr_american input has to be integer')
+    if float(number) >= int(1e15):
         raise Exception('num2tamilstr input is too large')
     if float(number) < 0:
         return u"- "+num2tamilstr_american( -float(number) )
@@ -246,8 +242,8 @@ def num2tamilstr_american( *args ):
     n_hundred = 100
     n_thousand = 1000
     n_million = 1000*n_thousand
-    n_billion = long(1000*n_million)
-    n_trillion = long(1000*n_billion)
+    n_billion = int(1000*n_million)
+    n_trillion = int(1000*n_billion)
 
     suffix_base = { n_trillion: trillion,
                     n_billion : billion,
@@ -269,7 +265,7 @@ def num2tamilstr_american( *args ):
     if float(number) > 0.0 and float(number) <= 1000.0:
         return num2tamilstr(number)
 
-    if isinstance(number,str) or isinstance(number,unicode):
+    if isinstance(number,str):
         result = u""
         number = number.strip()
         assert(len(args) == 1)
@@ -292,7 +288,7 @@ def num2tamilstr_american( *args ):
         n_base = allowed_bases[0]
         if number == n_base:
             return u" ".join(num_map[n_base])
-        quotient_number = long( number/n_base )
+        quotient_number = int( number/n_base )
         residue_number = number - n_base*quotient_number
 
         if n_base < n_thousand:
@@ -306,7 +302,7 @@ def num2tamilstr_american( *args ):
             else:
                 numeral = num2tamilstr( quotient_number )
         if n_base >= n_thousand:
-            suffix = suffix_base[n_base][long(residue_number >= 1)]
+            suffix = suffix_base[n_base][int(residue_number >= 1)]
             if residue_number == 0:
                 return numeral + u' ' + suffix
             numeral = numeral + u' ' + suffix
@@ -315,3 +311,21 @@ def num2tamilstr_american( *args ):
 
     # number has to be zero
     return units[0]
+
+def num2tamilstr_casual(arg,method=num2tamilstr):
+    units = {'பூஜ்ஜியம்':'பூஜ்ஜியம்',
+                 'ஒன்று':'ஒன்னு',
+                 'இரண்டு':'ரெண்டு',
+                  'மூன்று':'மூனு',
+                  'நான்கு':'நாலு',
+                  'ஐந்து':'அஞ்சு',
+                  'ஆறு':'ஆறு',
+                  'ஏழு':'ஏழு',
+                  'எட்டு':'எட்டு',
+                  'ஒன்பது':'ஒம்போது',
+                  'பத்து':'பத்து'}
+    value = method(arg)
+    for k,v in units.items():
+        if value.endswith(k):
+            return value.replace(k,v)
+    raise ValueError("எண் -> உரை மாற்றியால் சரியாக செயல்படவில்லை போல் தெறிகிறது.")

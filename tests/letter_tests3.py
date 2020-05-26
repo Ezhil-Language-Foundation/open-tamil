@@ -8,8 +8,15 @@ import unicodedata
 import codecs
 from tamil.utf8 import *
 from tamil import tace16
-if PYTHON3:
-    from functools import cmp_to_key
+import tamiltts
+from functools import cmp_to_key
+
+class TTSTests(unittest.TestCase):
+    def test_normalize(self):
+        text = ["இரு","நண்பர்கள்","௹","100","கொடுத்து","உணவு","உண்டனர்."]
+        text_out = tamiltts.normalize_punctuation_text(text)
+        expected = ['இரு', 'நண்பர்கள்', 'ரூபாய்', '100', 'கொடுத்து', 'உணவு', 'உண்டனர்.']
+        self.assertEqual(text_out,expected)
 
 class LetterTests(unittest.TestCase):
     def test_GOI_encoding(self):
