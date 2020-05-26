@@ -17,15 +17,15 @@ def index():
     return redirect('/static/tinymce/index.html')
 
 #/spell?word=%E0%AE%B5%E0%AE%B0%E0%AF%81%E0%AE%95&lang=ta
-# 
+#
 @app.route('/spell',methods=['GET','POST'])
 def spell():
     if request.method == "GET":
         return render_template("spell.html",solution=False)
-    
+
     if request.method != "POST":
         return "<B>404! Error</B>"
-        
+
     if u'word' in request.form:
         word = request.form['word']
         if not word:
@@ -33,7 +33,7 @@ def spell():
         lang="TA"
         if "lang" in request.form:
             lang = request.form["lang"]
-        
+
         ok,suggs = Speller(lang=lang,mode="web").REST_interface(word)
         if ok:
             HTML = "<B style='color:green;'>OK!</B>"
@@ -43,7 +43,7 @@ def spell():
             HTML = "<B style='color:red;'>Not OK!</B><br /><select>"+data_suggs2+"\n</select><br/>"
         return render_template("spell.html",solution=True,HTML=HTML,word=word)
     return redirect(url_for('spell'))
-    
+
 def spell_get_only():
     if u'word' in request.args:
         word = request.args['word']
@@ -52,7 +52,7 @@ def spell_get_only():
         lang="TA"
         if "lang" in request.args:
             lang = request.args["lang"]
-        
+
         ok,suggs = Speller(lang=lang,mode="web").REST_interface(word)
         if ok:
             return "<B style='color:green;'>OK!</B>"
@@ -73,7 +73,7 @@ def spellchecker():
         lang = "TA"
         spell_checker = Speller(lang=lang,mode="web")
         result_dict = {'words':{}}
-        
+
         for itr,word in enumerate( filter(len,re.split('\s+',text)) ):
             if word.find("<") >= 0: #HTML Tags, skip
                 continue
@@ -84,10 +84,10 @@ def spellchecker():
             except Exception as ioe:
                 ok = True
                 pprint.pprint(ioe)
-            
+
             if not ok:
                 word = Speller.scrub_ws(word)
-                result_dict['words'][word] = suggs    
+                result_dict['words'][word] = list(suggs)
         return json.dumps(result_dict)
     else:
         return "RPC interface for TinyMCE Spell Checker!"
