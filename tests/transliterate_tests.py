@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# (C) 2013-2018 Muthiah Annamalai
+# (C) 2013-2018,2020 Muthiah Annamalai
 #
 # This file is part of 'open-tamil' package tests
 #
 
 # setup the paths
 from opentamiltests import *
-from transliterate import azhagi, jaffna, combinational, UOM, algorithm
+from transliterate import azhagi, jaffna, combinational, UOM, itrans, algorithm
 
 class ReverseTransliterationTests(unittest.TestCase):
     def test_tamil2en_1(self):
@@ -94,7 +94,7 @@ class Yazhpanam(unittest.TestCase):
             else:
                 if ( LINUX ): print(u"matched %s => %s"%(k,PYTHON3 and tamil_tx or unicode(tamil_tx)))
         return
-    
+
 class DubashTest(unittest.TestCase):
     def test_multi_lang(self):
         test_str = u"அம்மா ammA"
@@ -108,5 +108,13 @@ class DubashTest(unittest.TestCase):
         tamil_tx = algorithm.Iterative.transliterate( azhagi.Transliteration.table, test_str )
         self.assertEqual(tamil_tx, expected_str)
         return
+
+class ITRANSTest(unittest.TestCase):
+        def test_vanakkam_itrans(self):
+            tamil_word = "வணக்கம்"
+            for eng_string in ["vaNakkam"]:
+                tamil_tx = algorithm.Iterative.transliterate(itrans.Transliteration.table,eng_string)
+                self.assertEqual( tamil_word, tamil_tx )
+
 if __name__ == '__main__':
     unittest.main()
