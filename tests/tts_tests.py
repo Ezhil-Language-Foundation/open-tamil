@@ -15,6 +15,7 @@ class TTSTests(unittest.TestCase):
         files = os.listdir( ConcatennativeTTS.TARGETDIR )
         for f in files:
             f2 = os.path.basename(f)
+            if f2.startswith('.git'): continue
             if not ( f2 in available):
                 raise Exception("File %s is not in syllable list"%f2)
         return
