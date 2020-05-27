@@ -1,10 +1,32 @@
 # This Python file uses the following encoding: utf-8
 # (C) 2020 Muthiah Annamalai
 # This file is part of open-tamil project
+import string
 from tamil.utf8 import get_letters
+from tamil.numeral import num2tamilstr
+
+def normalize_numeral_text(text_tokens):
+    """
+    Input @text_tokens = ["இரு","நண்பர்கள்","௹","100","கொடுத்து","உணவு","உண்டனர்."]
+                                                                                      ^   - எண் 100 என்பது சொல்வடிவில் நூறு என்று
+    வெளியிடப்படும்.
+    """
+    rval = []
+    for word in text_tokens:
+        if (word[0] in string.digits) or word[0] == '-':
+            try:
+                val = num2tamilstr(word)
+                rval.append(val)
+            except Exception as e:
+                rval.append(word)
+        else:
+            rval.append(word)
+    return rval
+
 def normalize_punctuation_text(text_tokens):
     """
     Input @text_tokens = ["இரு","நண்பர்கள்","௹","100","கொடுத்து","உணவு","உண்டனர்."]
+                                                                             ^ ரூபாய் என்று மாற்றி வெளியிடப்படும்.
     """
     special_char_map = {'!':'ஆச்சரியக்குறி',
     '!=':'சமன்பாடு இல்லை',

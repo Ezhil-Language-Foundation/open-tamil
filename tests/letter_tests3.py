@@ -12,10 +12,16 @@ import tamiltts
 from functools import cmp_to_key
 
 class TTSTests(unittest.TestCase):
-    def test_normalize(self):
+    def test_normalize_symbols(self):
         text = ["இரு","நண்பர்கள்","௹","100","கொடுத்து","உணவு","உண்டனர்."]
         text_out = tamiltts.normalize_punctuation_text(text)
         expected = ['இரு', 'நண்பர்கள்', 'ரூபாய்', '100', 'கொடுத்து', 'உணவு', 'உண்டனர்.']
+        self.assertEqual(text_out,expected)
+
+    def test_normalize_numerals(self):
+        text = ["இரு","நண்பர்கள்","௹","100","கொடுத்து","உணவு","உண்டனர்."]
+        text_out = tamiltts.normalize_numeral_text(text)
+        expected = ['இரு', 'நண்பர்கள்', '௹', 'நூறு', 'கொடுத்து', 'உணவு', 'உண்டனர்.']
         self.assertEqual(text_out,expected)
 
 class LetterTests(unittest.TestCase):

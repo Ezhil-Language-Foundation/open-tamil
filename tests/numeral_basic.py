@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) 2013-2015 Muthiah Annamalai
+# (C) 2013-2015,2020 Muthiah Annamalai
 #
 # This file is part of 'open-tamil' package tests
 #
@@ -9,10 +9,6 @@ from opentamiltests import *
 import tamil.utf8 as utf8
 from tamil.tscii import TSCII
 import codecs
-
-if PYTHON3:
-    class long(int):
-        pass
 
 class NumeralStringLimitTests(unittest.TestCase):
     def test_case_basic(self):
@@ -63,15 +59,15 @@ class NumeralTestAmerican(unittest.TestCase):
         return
 
     def test_max( self ):
-        maxno = long(1e15 - 1)
+        maxno = int(1e15 - 1)
         expected = u'தொள்ளாயிரத்து தொன்னூற்றொன்பது டிரில்லியன் தொள்ளாயிரத்து தொன்னூற்றொன்பது பில்லியன் தொள்ளாயிரத்து தொன்னூற்றொன்பது மில்லியன் தொள்ளாயிரத்து தொன்னூற்றொன்பது ஆயிரத்து தொள்ளாயிரத்து தொன்னூற்றொன்பது'
         self.assertEqual( tamil.numeral.num2tamilstr_american( maxno ), expected )
         return
 
     def test_numerals(self):
         var = {0:u"பூஜ்ஜியம்",
-        long(1e7):u"பத்து மில்லியன்",
-        long(1e9-1):u"தொள்ளாயிரத்து தொன்னூற்றொன்பது மில்லியன் தொள்ளாயிரத்து தொன்னூற்றொன்பது ஆயிரத்து தொள்ளாயிரத்து தொன்னூற்றொன்பது",
+        int(1e7):u"பத்து மில்லியன்",
+        int(1e9-1):u"தொள்ளாயிரத்து தொன்னூற்றொன்பது மில்லியன் தொள்ளாயிரத்து தொன்னூற்றொன்பது ஆயிரத்து தொள்ளாயிரத்து தொன்னூற்றொன்பது",
         3060:u"மூன்று ஆயிரத்து அறுபது",
         1:u"ஒன்று",
         2:u"இரண்டு",
@@ -134,7 +130,7 @@ class NumeralTest(unittest.TestCase):
         return
 
     def test_max( self ):
-        maxno = long(1e12 - 1 )
+        maxno = int(1e12 - 1 )
         expected = u'தொன்னூற்றொன்பது ஆயிரத்து தொள்ளாயிரத்து தொன்னூற்றொன்பது கோடியே தொன்னூற்றொன்பது இலட்சத்து தொன்னூற்றொன்பது ஆயிரத்து தொள்ளாயிரத்து தொன்னூற்றொன்பது'
         self.assertEqual( tamil.numeral.num2tamilstr( maxno ), expected )
         return
