@@ -186,6 +186,10 @@ class EnglishLinux(Agarathi):
     def add(self,word):
         return Agarathi.add(self,word.lower())
 
+class VatamozhiMonierWilliams(Agarathi):
+    def __init__(self):
+        Agarathi.__init__(self,resources.DICTIONARY_DATA_FILES['vatamozhi'])
+
 class ParallelDictionary(Agarathi):
     def __init__(self):
         Agarathi.__init__(self,resources.DICTIONARY_DATA_FILES['parallel'])
