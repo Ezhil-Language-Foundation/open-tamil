@@ -31,8 +31,7 @@ from ngram.Distance import Dice_coeff, edit_distance
 # Make Bi-Lingual dictionary
 
 PYTHON3 = ( sys.version_info[0] == 3 )
-if PYTHON3:
-    unicode = str
+assert PYTHON3, "சொல்திருத்தி செயலி பைத்தான் 3-இல் மற்றுமே இயங்கும்!"
 
 _DEBUG = False
 
@@ -284,12 +283,13 @@ class Speller(object):
         if len(filter_suggs) == 0:
             # guess!
             filter_suggs = suggs
-            filter_suggs=sorted(filter_suggs,cmp=tamil.utf8.compare_words_lexicographic)
+            filter_suggs=list(tamil.utf8.tamil_sorted(filter_suggs))
             filter_suggs[min(10,len(filter_suggs)-1):]=[]
             return filter_suggs
-        filter_suggs=sorted(filter_suggs,cmp=Speller.dice_comparison)
+        _compare_fn = lambda wA,wB: (edit_distance(wA,word) < edit_distance(wB,word))
+        filter_suggs=list(tamil.utf8.tamil_sorted(filter_suggs,key=functools.cmp_to_key( _compare_fn)))
         return filter_suggs
-
+#கட
     def str_suggestions(self,word):
         if self.in_tamil_mode():
             return u"சொல் \"%s\" மாற்றங்கள்"%word
@@ -306,11 +306,7 @@ class Speller(object):
     def interactive(self):
         try:
             while( True ):
-                if PYTHON3:
-                    word = input(u">> ")
-                else:
-                    word = raw_input(u">> ")
-                    word = word.decode("utf-8").strip()
+                word = input(u">> ")
                 word = re.sub(u"\s+","",word)
 
                 # skip empty words
@@ -346,8 +342,7 @@ class Speller(object):
                 # FIXME : handle punctuation
                 #word = filter( tamil.utf8.is_tamil_unicode_predicate, word )
                 ok,suggs = self.check_word_and_suggest( word )
-                if PYTHON3 and not ok:
-                    suggs = list(suggs)
+                suggs = list(suggs)
                 if not ok:
                     option = suggs[0]
                     # take user input.
@@ -365,8 +360,7 @@ class Speller(object):
                         else:
                             choice_str=u"option [-1 ignore, 0-%d replace]: "
                         choice = input(choice_str%(len(suggs)-1))
-                        if PYTHON3:
-                            choice = int(choice)
+                        choice = int(choice)
                         if choice == -1:
                             if self.in_tamil_mode():
                                 print(u"வார்த்தை மாறாத இருந்தது")
@@ -384,7 +378,7 @@ class Speller(object):
                     else:
                         replace_msg = u" replacing word %s -> %s\n"
                     print(replace_msg%(word,option))
-                    new_document.append( unicode(option) )
+                    new_document.append( str(option) )
                 else:
                     new_document.append( word )
             new_document.append(u"\n")
@@ -556,21 +550,21 @@ class Speller(object):
         # TODO: Noun Declension - ticket-
 
         # suggestions at edit distance 1
-        norvig_suggests = filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 2,limit=25))
+        norvig_suggests1 = list(filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 1,limit=100)))
+        norvig_suggests2 = list(filter( TVU_dict.isWord, norvig_suggestor( word, self.alphabets, 2,limit=100)))
         combinagram_suggests = list(tamil.wordutils.combinagrams(word,TVU_dict,limit=25))
         pfx_options = TVU_dict.getWordsStartingWith( u"".join( letters[:-1] ) )
-
         # FIXME: score  the options
         options = greedy_results
         options.extend( ottru_options )
-        options.extend( list(norvig_suggests) )
+        options.extend( norvig_suggests1 )
+        options.extend( norvig_suggests2 )
         options.extend( combinagram_suggests )
         options.extend( pfx_options )
 
         # filter the options against a dictionary!
         options = filter(TVU_dict.isWord,options )
-        if PYTHON3:
-            options = list(options)
+        options = list(options)
 
         if self.in_tamil_mode():
             options.extend( self.mayangoli_suggestions(orig_word,letters) )
@@ -579,10 +573,7 @@ class Speller(object):
         if not self.in_tamil_mode():
             options.sort()
         else:
-            if PYTHON3:
-                options = sorted( options, key=functools.cmp_to_key(tamil.utf8.compare_words_lexicographic) )
-            else:
-                options = sorted( options, cmp=tamil.utf8.compare_words_lexicographic )
+            options = list(tamil.utf8.tamil_sorted( options))
 
         # remove replacements with single-letter words
         WL = len(tamil.utf8.get_letters(word))
@@ -609,7 +600,7 @@ class Speller(object):
         options = zip( options2, options_score)
 
         # limit options by score
-        options = sorted(options,key=operator.itemgetter(1),reverse=True)
+        options = list(sorted(options,key=operator.itemgetter(1),reverse=True))
         options = [word_pair[0] for word_pair in options]
         #L = 40
         # limit to first top -L=20 only which is good enough

@@ -681,8 +681,9 @@ def print_tamil_words( tatext, use_frequencies = not False ):
         else:
             print(u"%s"%l[0])
 
-def tamil_sorted(list_data):
-    asorted = sorted(list_data,key=functools.cmp_to_key(compare_words_lexicographic))
+compare_lexicograph_key = functools.cmp_to_key(compare_words_lexicographic)
+def tamil_sorted(list_data,key=compare_lexicograph_key):
+    asorted = sorted(list_data,key=key)
     return asorted
 
 def hex2unicode(ip_data,offset=3):

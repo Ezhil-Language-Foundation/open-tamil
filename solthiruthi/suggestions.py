@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 # (C) 2015-2016 Muthiah Annamalai
 #  <ezhillang@gmail.com>
-# 
+#
 # This function provides a list of alternatives for downstream use as suggestor in
 # the Tamil spelling modules/programs
 
@@ -25,7 +25,7 @@ def norvig_suggestor(word,alphabets=None,nedits=1,limit=float("inf")):
                 break
             result.extend( norvig_suggestor(nAlternate,alphabets,1,limit-len(result)) )
         return set(result)
-       
+
     ta_splits     = [ [u"".join(wordL[:idx-1]),u"".join(wordL[idx:])] for idx in range(len(wordL) + 1)]
     #pprint( ta_splits )
     ta_deletes    = [a + b[1:] for a, b in ta_splits if b]
@@ -35,19 +35,3 @@ def norvig_suggestor(word,alphabets=None,nedits=1,limit=float("inf")):
     ta_inserts    = [a + c + b     for a, b in ta_splits for c in alphabets]
     # TODO: add a normalizing pass word words in vowel+consonant forms to eliminate dangling ligatures
     return set(ta_deletes + ta_transposes + ta_replaces + ta_replaces2 + ta_inserts )
-
-def mayangoli_suggestor():
-    """ 
-    Rules:
-   ண, ன     - mayakkam
-   ல, ழ, ள    - mayakkam
-   ர, ற   - mayakkam
-    ivattrilum ithan uyirmei varisayilum mayakkangalai kaanalaam.
-    """
-    pass
-
-def kombu_suggestor():
-    """
-    
-    """
-    pass
