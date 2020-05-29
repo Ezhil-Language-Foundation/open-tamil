@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 ## This file is part of Open-Tamil project.
 ## (C) 2015,2020 Muthiah Annamalai
-## 
+##
 from __future__ import print_function
 
 import os
@@ -15,7 +15,7 @@ def get_data_dir():
     return os.path.sep.join([dirname,u'data'])
 
 def get_data_dictionaries( ):
-    srcfiles = {'tamilv' : 'tamilvu_dictionary_words.txt',
+    srcfiles = {'tamilvu' : 'tamilvu_dictionary_words.txt',
         'projmad':'proj-madurai-040415.txt',
         'wikipedia':'wikipedia_full_text_032915.txt',
         'english':'english_dictionary_words.txt',
