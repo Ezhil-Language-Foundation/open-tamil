@@ -7,6 +7,170 @@ import math
 PYTHON3 = sys.version > '3'
 assert PYTHON3,"Python3 or larger required for this module"
 
+def tamilstr2num(tokens):
+    """
+        இயல்மொழி எண்பகுப்பாய்வு.
+        numeral parser; convert numeral to number.
+        e.g. ["இருநூற்று","நாற்பத்தைந்து"] => 245
+    """
+    is_american_str = False
+    has_decimal = False
+    US_values = [1e12, 1e9, 1e6]
+    US_placements = ['டிரில்லியன்', 'பில்லியன்','மில்லியன்']
+    IN_values = [1e7,1e7,1e5,1e5]
+    IN_placements = ('கோடி','கோடியே','இலட்சம்','இலட்சத்து',)
+    for tok in tokens:
+        if tok in US_placements:
+            is_american_str =True
+        elif tok == 'புள்ளி':
+            has_decimal = True
+    value = 0
+    stack = list()
+    if is_american_str:
+        HIGHEST=('டிரில்லியன்',)
+        PLACEMENTS=US_placements
+        VALUES=US_values
+    else:
+        HIGHEST=IN_placements[0:2]
+        PLACEMENTS=IN_placements
+        VALUES=IN_values
+
+    for tok in tokens:
+        if tok in PLACEMENTS:
+                if len(stack) == 0:
+                    tmpval = 1.0
+                    if value != 0.0 and tok in HIGHEST:
+                        value = value*VALUES[PLACEMENTS.index(tok)]
+                        continue
+                else:
+                    tmpval = helper_tamilstr2num(stack)
+                stack = list()
+                value += tmpval*VALUES[PLACEMENTS.index(tok)]
+                continue
+        stack.append(tok)
+    if len(stack) != 0:
+        value += helper_tamilstr2num(stack)
+    return value
+
+def helper_tamilstr2num(tokens):
+    val_map = {}
+    val_units = list(range(11))
+    units = (u'பூஜ்ஜியம்', u'ஒன்று', u'இரண்டு', u'மூன்று', u'நான்கு', u'ஐந்து', u'ஆறு', u'ஏழு', u'எட்டு', u'ஒன்பது', u'பத்து') # 0-10
+    units_suffix = (u'பூஜ்ஜியம்', u'தொன்று', u'திரண்டு', u'மூன்று', u'நான்கு', u'தைந்து', u'தாறு', u'தேழு', u'தெட்டு', u'தொன்பது', u'பத்து') # 0-10
+    units_suffix_nine = (u'பூஜ்ஜியம்', u'றொன்று', u'றிரண்டு', u'மூன்று', u'நான்கு', u'றைந்து', u'றாறு', u'றேழு', u'றெட்டு', u'றொன்பது', u'பத்து') # 0-10
+    for _u in [units,units_suffix,units_suffix_nine]:
+        for k,v in zip(_u,val_units):
+            val_map[k]=v
+
+    teens = (u'பதினொன்று', u'பனிரண்டு', u'பதிமூன்று', u'பதினான்கு', u'பதினைந்து',u'பதினாறு', u'பதினேழு', u'பதினெட்டு', u'பத்தொன்பது') # 11-19
+    for k,v in zip(teens,range(11,20)):
+        val_map[k]=v
+    tens = (u'பத்து', u'இருபது', u'முப்பது', u'நாற்பது', u'ஐம்பது',u'அறுபது', u'எழுபது', u'எண்பது', u'தொன்னூறு') # 10-90
+    for k,v in zip(tens,range(10,100,10)):
+        val_map[k]=v
+    tens_full_prefix = (u'இருபத்து', u'முப்பத்து', u'நாற்பத்து', u'ஐம்பத்து', u'அறுபத்து', u'எழுபத்து', u'எண்பத்து', u'தொன்னூற்று') # 10+-90+
+    for k,v in zip(tens_full_prefix,range(20,100,10)):
+        val_map[k]=v
+    tens_prefix = (u'இருபத்', u'முப்பத்', u'நாற்பத்', u'ஐம்பத்', u'அறுபத்', u'எழுபத்', u'எண்பத்', u'தொன்னூற்') # 10+-90+
+    for k,v in zip(tens_prefix,range(20,100,10)):
+        val_map[k]=v
+    hundreds = ( u'நூறு', u'இருநூறு', u'முன்னூறு', u'நாநூறு',u'ஐநூறு', u'அறுநூறு', u'எழுநூறு', u'எண்ணூறு', u'தொள்ளாயிரம்') #100 - 900
+    for k,v in zip(hundreds,range(100,1000,100)):
+        val_map[k]=v
+    hundreds_suffix = (u'நூற்றி', u'இருநூற்று', u'முன்னூற்று', u'நாநூற்று', u'ஐநூற்று', u'அறுநூற்று', u'எழுநூற்று', u'எண்ணூற்று',u'தொள்ளாயிரத்து') #100+ - 900+
+    for k,v in zip(hundreds_suffix,range(100,1000,100)):
+        val_map[k]=v
+    one_thousand_prefix = u'ஓர்'
+    val_map[one_thousand_prefix] = 1.0
+    thousands = (u'ஆயிரம்',u'ஆயிரத்து')
+    val_map[thousands[0]] = 1000.0
+    val_map[thousands[1]] = 1000.0
+    one_prefix = u'ஒரு'
+    val_map[one_prefix] = 1.0
+    lakh = (u'இலட்சம்',u'இலட்சத்து')
+    val_map[lakh[0]] = 100000.0
+    val_map[lakh[1]] = 100000.0
+    crore = (u'கோடி',u'கோடியே')
+    val_map[crore[0]] = 10000000
+    val_map[crore[1]] = 10000000
+    pulli = u'புள்ளி'
+    val_map[pulli] = 0.0
+
+    mil = u'மில்லியன்'
+    val_map[mil] = 1000000.0
+    bil = u'பில்லியன்'
+    val_map[bil] = val_map[mil]*1e3
+    tril = u'டிரில்லியன்'
+    val_map[tril] = val_map[bil]*1e3
+    in_fractional_portion = False
+    multiplier = 1.0
+    value = 0.0
+    #["இருநூற்று","நாற்பத்தைந்து"] => 245
+    n_tokens = len(tokens)
+    for idx,tok in enumerate(tokens):
+        n_remain = n_tokens - idx - 1
+        if in_fractional_portion:
+            multiplier *= 0.1
+            value += multiplier*val_map[tok]
+            continue
+        if tok in mil:
+            multiplier = 1e6
+            continue
+        elif tok in bil:
+            multiplier = 1e9
+            continue
+        elif tok in tril:
+            multiplier = 1e12
+            continue
+        elif tok in lakh:
+            multiplier = 1e5
+            continue
+        elif tok in crore:
+            multiplier = 1e7
+            continue
+        elif tok in thousands:
+            multiplier = 1e3
+            continue
+        elif tok == pulli:
+            if  multiplier > 1.0:
+                if value > 0:
+                    value *= multiplier
+                else:
+                    value = multiplier
+            else:
+                value *= multiplier
+            multiplier = 1
+            in_fractional_portion = True
+            continue
+        for _tens in tens_prefix:
+             if tok.startswith(_tens):
+                 tok = tok.replace(_tens,'')
+                 value = value*multiplier + val_map[_tens]
+                 multiplier=1.0
+                 if tok != '':
+                     value += val_map[tok]
+                     tok = ''
+                 continue
+        for _hundreds in hundreds_suffix:
+             if tok.startswith(_hundreds):
+                tok = tok.replace(_hundreds,'')
+                value = (value)*multiplier + val_map[_hundreds]
+                multiplier=1.0
+                if tok != '':
+                    value += val_map[tok]
+                    tok = ''
+                continue
+        value = value*multiplier + (tok != '' and val_map[tok] or 0)
+        multiplier=1.0
+    if  multiplier > 1.0:
+        if value > 0:
+            value *= multiplier
+        else:
+            value = multiplier
+    elif not in_fractional_portion:
+            value *= multiplier
+    return value
+
 def num2tamilstr( *args ):
     """ work till one lakh crore - i.e 1e5*1e7 = 1e12.
         turn number into a numeral, Indian style. Fractions upto 1e-30"""

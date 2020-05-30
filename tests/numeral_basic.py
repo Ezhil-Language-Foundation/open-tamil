@@ -9,6 +9,72 @@ from opentamiltests import *
 import tamil.utf8 as utf8
 from tamil.tscii import TSCII
 import codecs
+import math
+from tamil.numeral import tamilstr2num
+
+class NumeralToNumberTests(unittest.TestCase):
+    def test_numerals2numbers(self):
+        var = {0:u"பூஜ்ஜியம்",
+        3060:u"மூன்று ஆயிரத்து அறுபது",
+        1:u"ஒன்று",
+        2:u"இரண்டு",
+        3:u"மூன்று",
+        5:u"ஐந்து",
+        10:u"பத்து",
+        11:u"பதினொன்று",
+        17:u"பதினேழு ",
+        19:u"பத்தொன்பது ",
+        20:u"இருபது",
+        21:u"இருபத்தொன்று",
+        1051:u"ஓர் ஆயிரத்து ஐம்பத்தொன்று",
+        100000:u"ஒரு இலட்சம்",
+        100001:u"ஒரு இலட்சத்து ஒன்று",
+        10011:u"பத்து ஆயிரத்து பதினொன்று ",
+        49:u"நாற்பத்தொன்பது",
+        50:u"ஐம்பது",
+        55:u"ஐம்பத்தைந்து",
+        1000001:u"பத்து இலட்சத்து ஒன்று",
+        90:u"தொன்னூறு",
+        99:u"தொன்னூற்றொன்பது",
+        100:u"நூறு",
+        101:u"நூற்றி ஒன்று",
+        1000:u"ஓர் ஆயிரம்",
+        111:u"நூற்றி பதினொன்று ",
+        1011:u"ஓர் ஆயிரத்து பதினொன்று "}
+        for k,v in var.items():
+            self.assertEqual( tamil.numeral.tamilstr2num(v.strip().split(' ')), k )
+        return
+
+    def test_parse(self):
+        self.assertEqual(tamilstr2num("இருநூற்று நாற்பத்தைந்து".split(' ')),245.0)
+        self.assertEqual(tamilstr2num("நூற்றி இரண்டு ஆயிரத்து நாநூற்று பத்து".split(' ')),102410.0)
+        self.assertEqual(tamilstr2num(["ஓர்","ஆயிரம்"]),1000.0)
+        self.assertEqual(tamilstr2num(["ஆயிரம்"]),1000.0)
+        self.assertEqual(tamilstr2num(["மில்லியன்"]),1e6)
+        self.assertEqual(tamilstr2num(["கோடி"]),1e7)
+        self.assertEqual(tamilstr2num(["பில்லியன்"]),1e9)
+        self.assertEqual(tamilstr2num(["பத்து","கோடி"]),1e8)
+        self.assertEqual(tamilstr2num(["பத்து","கோடி","ஐம்பது"]),1e8+50)
+        self.assertEqual(tamilstr2num("ஓர் ஆயிரத்து அறுநூற்று ஒன்பது".split(' ')),1000+600+9)
+        self.assertEqual(tamilstr2num(["இருபது","இலட்சம்"]),20e5)
+        self.assertEqual(tamilstr2num(["இருபது","இலட்சம்","ஒன்று"]),20e5+1)
+        self.assertEqual(tamilstr2num(["இருபது","ஆயிரம்"]),20e3)
+        self.assertEqual(tamilstr2num(["இருபது","ஆயிரம்","கோடி"]),20e3*1e7)
+
+    def test_1lakh_crores(self):
+        self.assertEqual(tamilstr2num("ஒரு இலட்சம் கோடி".split(' ')),1000000000000)
+
+    def test_20lakh_crores(self):
+        self.assertEqual(tamilstr2num(["இருபது","இலட்சம்","கோடி"]),20e5*1e7)
+
+    def test_parse_fractional(self):
+        self.assertEqual(tamilstr2num(["இருபது","ஆயிரம்"]),20e3)
+        self.assertEqual(tamilstr2num(["ஆயிரம்","புள்ளி","ஐந்து"]),1000.5)
+
+    def test_parse_USA(self):
+        self.assertEqual(tamilstr2num(["ஒரு","மில்லியன்","பத்து","ஆயிரம்"]),1e6+1e4)
+        self.assertEqual(tamilstr2num(["ஒரு","மில்லியன்","ஆயிரம்","புள்ளி","ஐந்து"]),1001000.5)
+        self.assertEqual(tamilstr2num(["இருபது","டிரில்லியன்"]),20e12)
 
 class NumeralStringLimitTests(unittest.TestCase):
     def test_case_basic(self):
@@ -22,7 +88,7 @@ class NumeralStringLimitTests(unittest.TestCase):
 class NumeralTestAmerican(unittest.TestCase):
     def runTest(self,var,nos):
         for numerStr,num in zip(var,nos):
-            print('Testing ---> ',num)
+            #print('Testing ---> ',num)
             self.assertEqual( numerStr, tamil.numeral.num2tamilstr_american( num ), num )
         return
 
@@ -105,7 +171,7 @@ class NumeralTestAmerican(unittest.TestCase):
 class NumeralTest(unittest.TestCase):
     def runTest(self,var,nos):
         for numerStr,num in zip(var,nos):
-            print('Testing ---> ',num)
+            #print('Testing ---> ',num)
             self.assertEqual( numerStr, tamil.numeral.num2tamilstr( num ), num )
         return
 
@@ -174,8 +240,8 @@ class NumeralTest(unittest.TestCase):
 class NumeralNegTest(unittest.TestCase):
     def runTest(self,var,nos):
         for numerStr,num in zip(var,nos):
-            print('Testing ---> ',num)
-            print('NumerString',numerStr)
+            #print('Testing ---> ',num)
+            #print('NumerString',numerStr)
             self.maxDiff = None
             self.assertEqual( numerStr, tamil.numeral.num2tamilstr( num ), num )
         return
@@ -205,16 +271,12 @@ class NumeralNegTest(unittest.TestCase):
         self.assertEqual( actual, expected )
 
     def test_PI(self):
-        if PYTHON3:
-            print("Python3 has different rounding")
-            return
-
-        pie = 3.1415
+        pie = math.pi
         expected = u'மூன்று புள்ளி ஒன்று நான்கு ஒன்று ஐந்து'
         actual = tamil.numeral.num2tamilstr(pie)
         actual_USA = tamil.numeral.num2tamilstr_american(pie)
-        self.assertEqual(actual,expected)
-        self.assertEqual(actual_USA,expected)
+        self.assertEqual(actual[0:len(expected)],expected)
+        self.assertEqual(actual_USA[0:len(expected)],expected)
 
     def test_PI_million(self):
         pie = 3e6 + 0.1415
@@ -230,15 +292,14 @@ class NumeralNegTest(unittest.TestCase):
 
     #@unittest.skipIf( PYTHON3, "Python3 has different rounding")
     def test_INFRAC(self):
-        if PYTHON3:
-            print("Python3 has different rounding")
-            return
         exp2 = u'ஓர் ஆயிரத்து ஒன்று புள்ளி நான்கு ஐந்து'
         actual_IN2 = tamil.numeral.num2tamilstr(1001+0.45)
-        self.assertEqual(actual_IN2,exp2)
+        self.assertEqual(actual_IN2[0:len(exp2)],exp2)
+
+    def test_INFRAC2(self):
         exp2 = u'ஓர் ஆயிரம் புள்ளி நான்கு ஐந்து'
         actual_IN2 = tamil.numeral.num2tamilstr(1000+0.45)
-        self.assertEqual(actual_IN2,exp2)
+        self.assertEqual(actual_IN2[0:len(exp2)],exp2)
 
     def test_VITHIVILAKKU(self):
         if PYTHON2_6:
