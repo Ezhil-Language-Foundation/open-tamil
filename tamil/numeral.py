@@ -4,15 +4,18 @@
 
 import sys
 import math
+import re
 PYTHON3 = sys.version > '3'
 assert PYTHON3,"Python3 or larger required for this module"
-
+SPACE=re.compile('\s+')
 def tamilstr2num(tokens):
     """
         இயல்மொழி எண்பகுப்பாய்வு.
         numeral parser; convert numeral to number.
         e.g. ["இருநூற்று","நாற்பத்தைந்து"] => 245
     """
+    if isinstance(tokens,str):
+        tokens = re.split(SPACE,tokens)
     is_american_str = False
     has_decimal = False
     US_values = [1e12, 1e9, 1e6]
@@ -105,6 +108,9 @@ def helper_tamilstr2num(tokens):
     in_fractional_portion = False
     multiplier = 1.0
     value = 0.0
+
+
+
     #["இருநூற்று","நாற்பத்தைந்து"] => 245
     n_tokens = len(tokens)
     for idx,tok in enumerate(tokens):

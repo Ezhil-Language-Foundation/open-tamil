@@ -12,6 +12,11 @@ import codecs
 import math
 from tamil.numeral import tamilstr2num
 
+@unittest.skip("Compound numerals not parsed.")
+class CompoundNumeralTests(unittest.TestCase):
+    def test_compound(self):
+        self.assertEqual(2000.0,tamilstr2num("இரண்டாயிரம்"))
+
 class NumeralToNumberTests(unittest.TestCase):
     def test_numerals2numbers(self):
         var = {0:u"பூஜ்ஜியம்",

@@ -403,7 +403,7 @@ def get_letters( word ):
             else:
                 ta_letters[-1] += c
         else:
-            if ord(c) < 256 or not (is_tamil_unicode(c)):
+            if ord(c) < 256 or not (is_tamil_unicode_predicate(c)):
                 ta_letters.append( c )
             else:
                 if not_empty:

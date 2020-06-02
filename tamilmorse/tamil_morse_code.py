@@ -7,11 +7,8 @@ from __future__ import print_function
 import codecs
 import json
 
-from tamil import utf8
-from pprint import pprint
-
 from solthiruthi import resources
-from huffman import huffman, print_huffman_code_cwl
+from .huffman import huffman, print_huffman_code_cwl
 
 def TVU_morse_code():
     # unigram data from Project Madurai

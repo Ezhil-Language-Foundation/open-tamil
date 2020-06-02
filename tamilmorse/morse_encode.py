@@ -15,7 +15,6 @@ def encode(text):
     with codecs.open(os.path.join(CURRDIR,"data","madurai_tamilmorse.json"),"r","utf-8") as fp:
         codebook = json.loads(fp.read())
     output = [codebook.get(l,l) for l in tamil.utf8.get_letters(text)]
-    #print(u" ".join(output))
     return u" ".join(output)
 
 if __name__ == u"__main__":

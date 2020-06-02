@@ -2,10 +2,6 @@
 # This file is part of Open-Tamil project
 # You may use or distribute this file under terms of MIT license
 
-
-import copy
-#import pdb
-
 class Tree:
     """
     Implement binary Huffman codes

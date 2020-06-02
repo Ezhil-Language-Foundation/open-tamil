@@ -1,6 +1,9 @@
 import glob
 import os
 import sys
+import tamil
+
+print("ஒப்பன் தமிழ் வரிசை எண் - ",tamil.VERSION)
 
 # copy all test to a new directory and just run them without setting up the PATH.
 # ensure the tests all ran fine.

@@ -6,10 +6,7 @@
 import time
 import sys
 PYTHON3 = sys.version > '3'
-
-if PYTHON3:
-    class long(int):
-        pass
+assert PYTHON3, "This module requires Python 3"
 
 class BasicTamilTimeFormat:
     @staticmethod
