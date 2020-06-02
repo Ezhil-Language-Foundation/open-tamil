@@ -13,7 +13,7 @@ install:
   - python setup.py sdist build
   - pip install nose-cov
 script:
-  - cd ./C-tamil && make all && make test && cd ..
+  - cd ./extras/C-tamil && make all && make test && cd ..
   - ./unittest3 #naked tests
 after_success:
   - pip install coveralls
