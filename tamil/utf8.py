@@ -577,8 +577,8 @@ def splitMeiUyir(uyirmei_char):
     This function split uyirmei compound character into mei + uyir characters
     and returns in tuple.
 
-    Input : It must be unicode tamil char.
-
+    Input : It must be unicode tamil char, V=vowel, C=char, VC=compound VC.
+    Output: (mei,uyir) if it is VC, otherwise return input if it is V, or C.
     Written By : Arulalan.T
     Date : 22.09.2014
 
