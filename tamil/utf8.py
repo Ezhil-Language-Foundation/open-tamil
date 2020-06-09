@@ -761,3 +761,58 @@ class CacheGetLettersMixin:
             rval = self.get_letters_impl(word)
             self._cache[word] = rval
         return rval
+
+"""
+மாத்திரை கணித்தல்
+date: 10/06/2020
+Written By: Parathan
+"""
+vantrodar_ugaram = ["கு", "சு", "டு", "து", "பு", "று"] # வன்றொடர் உகரம்
+
+def calculate_maththirai(letter):
+
+    eluththuvarisai = get_letters(letter)
+
+    maaththiraivarisai = []
+
+    for i in eluththuvarisai:
+
+        # ஐகாரக்குறுக்கம் checking
+        if len(eluththuvarisai) == 1 and eluththuvarisai[0] == vowel_ai:
+            maaththiraivarisai.append(2)
+        elif (i in vowel_ai):
+            maaththiraivarisai.append(1.5)
+
+        if i in uyirmei_letters:
+
+            if (uyirmei_letters.index(i) % 2 == 1):
+                maaththiraivarisai.append(2)
+            elif (uyirmei_letters.index(i) % 2 == 0):
+                maaththiraivarisai.append(1)
+
+        elif i in nedil_letters:
+            maaththiraivarisai.append(2)
+
+        elif i in kuril_letters:
+            maaththiraivarisai.append(1)
+
+        elif i in mei_letters or i in ayudha_letter: 
+            maaththiraivarisai.append(1/2)
+    
+    # Check for Kutriyalugaram
+    if len(eluththuvarisai) == 2 and (eluththuvarisai[-2] in kuril_letters or uyirmei_letters.index(eluththuvarisai[-2]) == 0 ):
+        pass
+    elif eluththuvarisai[-1] in vantrodar_ugaram and eluththuvarisai[-2] not in ayudha_letter:
+        maaththiraivarisai[-1] = 0.5
+
+    return maaththiraivarisai
+
+def total_maaththirai(letter):
+
+    maaththiraivarisai = calculate_maththirai(letter)
+    maaththirai = 0
+    
+    for i in maaththiraivarisai:
+        maaththirai = maaththirai + i
+    
+    return maaththirai
