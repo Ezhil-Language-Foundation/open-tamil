@@ -70,5 +70,9 @@ class LetterTests(unittest.TestCase):
         self.assertSequenceEqual( word_lengths, list(map(len,map(get_letters,t))) )
         self.assertEqual( unicodedata.name(t[1][11]), 'TAMIL LETTER E' )
 
+    def test_total_maaththirai(self):
+        word = "தமிழ்"
+        self.assertTrue(total_maaththirai(word) == 2.5)
+
 if __name__ == u"__main__":
     unittest.main()
