@@ -1,6 +1,7 @@
 ## -*- coding: utf-8 -*-
-## (C) 2015 Muthiah Annamalai
-## 
+## This file is part of Open-Tamil project.
+## (C) 2015,2020 Muthiah Annamalai
+##
 from __future__ import print_function
 
 import os
@@ -14,25 +15,26 @@ def get_data_dir():
     return os.path.sep.join([dirname,u'data'])
 
 def get_data_dictionaries( ):
-    srcfiles = {u'tamilvu' : u'tamilvu_dictionary_words.txt',
-        u'projmad':u'proj-madurai-040415.txt',
-        u'wikipedia':u'wikipedia_full_text_032915.txt',
-        u'english':u'english_dictionary_words.txt',
-        u'parallel':u'parallel_dictionary.txt'}
+    srcfiles = {'tamilvu' : 'tamilvu_dictionary_words.txt',
+        'projmad':'proj-madurai-040415.txt',
+        'wikipedia':'wikipedia_full_text_032915.txt',
+        'english':'english_dictionary_words.txt',
+        'parallel':'parallel_dictionary.txt',
+        'vatamozhi':'monierwilliams_dictionary_words.txt'}
     for  k, v in srcfiles.items():
         srcfiles[k] = mk_path( v )
     return srcfiles
 
 def get_data_categories( ):
     # add new elements to end
-    srcfiles = [u'peyargal.txt',
-                u'capitals-n-countries.txt',
-                u'maligaiporul.txt',
-                u'mooligaigal.txt',
-                u'nagarangal.txt',
-                u'palam.txt',
-                u'vilangugal.txt',
-                u'TamilStopWords.txt']
+    srcfiles = ['peyargal.txt',
+                'capitals-n-countries.txt',
+                'maligaiporul.txt',
+                'mooligaigal.txt',
+                'nagarangal.txt',
+                'palam.txt',
+                'vilangugal.txt',
+                'TamilStopWords.txt']
     return  _make_dict_with_path(srcfiles)
 
 DATADIR = get_data_dir()

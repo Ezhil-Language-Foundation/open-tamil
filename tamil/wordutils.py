@@ -27,10 +27,10 @@ def combinations(symbols_in):
         yield word_combo
     return
 
-def default_true(*args):
+def __default_true(*args):
     return True
 
-def permutations(symbols,predicate=default_true,prefix=u""):
+def permutations(symbols,predicate=__default_true,prefix=u""):
     if not isinstance(symbols,list):
         #        raise Exception(u'symbols என்ற உள்ளீடு iterable interface கொண்டதாக வேண்டும். அது சரம் (str) வகையாக இருந்தால் tamil.utf8.get_letters() பயன்பாட்டை முதலில் உபயொகிக்க!')
         symbols = utf8.get_letters(symbols)

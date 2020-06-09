@@ -1,14 +1,14 @@
 ## -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
-# 
-# Implementation of Jaffna library transliteration tables
-# first used in Gaim En->Ta Plugin (2006+) by Varun Soundarajan, <s.varun@gmail.com>
-# and later used in TamilKaruvi (2007) by your's truly.
-#    
-
+#
 class Transliteration:
+    """
+     Implementation of Jaffna library transliteration tables
+     first used in Gaim En->Ta Plugin (2006+) by Varun Soundarajan, <s.varun@gmail.com>
+     and later used in TamilKaruvi (2007) by your's truly.
+    """
     table = {}
-    
+
     # mix of consonants and compound - uyirmei - letters
     table["njau"]=u"ஞௌ"
     table["njai"]=u"ஞை"

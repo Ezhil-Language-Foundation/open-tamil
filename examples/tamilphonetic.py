@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
 import sys
+import imp
 try:
     reload  # Python 2.7
 except NameError:
@@ -10,8 +11,8 @@ except NameError:
     except ImportError:
         from imp import reload  # Python 3.0 - 3.3
 
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#imp.reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 from sys import argv, exit, stdin
 from cmd import Cmd
@@ -23,12 +24,12 @@ import codecs, sys
 from transliterate import *
 
 def usage():
-    return u"tamilphonetic.py [[-stdin] [<filename-1>] [<filename-2>] ...] "
+    return "tamilphonetic.py [[-stdin] [<filename-1>] [<filename-2>] ...] "
 
 class CmdTransliterate( Cmd ):
     def __init__(self):
         Cmd.__init__(self)
-        self.prompt = u"azhagi>> "
+        self.prompt = "azhagi>> "
         self.phonetic_table = azhagi.Transliteration.table        
 
     def do_EOF(self,line):
@@ -38,16 +39,16 @@ class CmdTransliterate( Cmd ):
     def default(self,line):
         if ( line == "exit" ):
             exit(0)
-        print( iterative_transliterate(self.phonetic_table,line) )
+        print(( iterative_transliterate(self.phonetic_table,line) ))
         return
 
-if __name__ == u"__main__":
+if __name__ == "__main__":
     if not argv[1:]:
         CmdTransliterate().cmdloop()
     
     for fname in argv[1:]:
         try:
-            if fname == u"-stdin":
+            if fname == "-stdin":
                 CmdTransliterate().cmdloop()
                 exit(0)
             with open(fname) as fileHandle:
@@ -55,5 +56,5 @@ if __name__ == u"__main__":
                 output = iterative_transliterate( phonetic_table, fileHandle.read() )
                 print( output )
         except Exception as fileOrConvException:
-            print(u"tamilphonetic.py error - file %s could not be processed due to - %s"%(fname,str(fileOrConvException)))
+            print(("tamilphonetic.py error - file %s could not be processed due to - %s"%(fname,str(fileOrConvException))))
             raise fileOrConvException

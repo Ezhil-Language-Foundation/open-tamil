@@ -9,7 +9,7 @@
 # e.g. it has been used to identify patterns in Tamil Wikipedia 
 # articles.
 # 
-from __future__ import print_function
+
 import tamil
 import sys
 import codecs
@@ -39,19 +39,19 @@ class WordFrequency(object):
                 buf.append( let )
             else:
                 if len(buf) > 0:
-                    yield  u"".join( buf )
+                    yield  "".join( buf )
                     buf = []
         if len(buf) > 0:
-            yield u"".join(buf)
+            yield "".join(buf)
                               
     # sentinel
-    def __init__(self,tatext=u''):
+    def __init__(self,tatext=''):
         object.__init__(self)       
         self.frequency = {}
    
     # process data
     def process(self,new_text):
-        for taline in new_text.split(u"\n"):
+        for taline in new_text.split("\n"):
             self.tamil_words_process( taline  )
         return
 
@@ -76,12 +76,12 @@ class WordFrequency(object):
     # closer/results
     def print_tamil_words(self):
         # sort words by descending order of occurence
-        print(u"# unique words = %d"%(len(self.frequency)))
-        for l in sorted(self.frequency.items(), key=operator.itemgetter(1)):
+        print("# unique words = %d"%(len(self.frequency)))
+        for l in sorted(list(self.frequency.items()), key=operator.itemgetter(1)):
             print( l[0],':',l[1])        
-        print(u"#"*80)
-        print(u"# sorted in Tamil order")
-        for l in sorted(self.frequency.keys(), key=cmp_to_key(tamil.utf8.compare_words_lexicographic)):
+        print("#"*80)
+        print("# sorted in Tamil order")
+        for l in sorted(list(self.frequency.keys()), key=cmp_to_key(tamil.utf8.compare_words_lexicographic)):
             print( l,':',self.frequency[l])
         return
 
@@ -100,7 +100,7 @@ def demo_tamil_text_filter( file_urls ):
     obj.display()
     return obj
 
-if __name__ == u"__main__":
+if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("usage: python solpattiyal.py <filename>")
         print("       this command shows list of unique words in Tamil and their frequencies in document(s);")

@@ -14,12 +14,12 @@ def do():
     for line in lines:
         parts = re.split('\s+',line)
         tapart = []
-        ta_part = filter( tamil.utf8.istamil_prefix, parts )
-        rest_part = filter( lambda x:  not tamil.utf8.istamil_prefix(x), parts )
-        dst.write(u"%s   %s\n"%(re.sub(u"\-$",u" ",u"-".join(rest_part)),u"-".join(ta_part)))
+        ta_part = list(filter( tamil.utf8.istamil_prefix, parts ))
+        rest_part = [x for x in parts if not tamil.utf8.istamil_prefix(x)]
+        dst.write("%s   %s\n"%(re.sub("\-$"," ","-".join(rest_part)),"-".join(ta_part)))
     dst.close()
 
-if __name__ == u"__main__":
+if __name__ == "__main__":
     if len(sys.argv) < 3:
         print("Usage: flipline.py <file-src> <file-dest>")
         sys.exit(0)

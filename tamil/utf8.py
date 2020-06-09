@@ -1,6 +1,6 @@
 ## This Python file uses the following encoding: utf-8
 ##
-## (C) 2007, 2008, 2013, 2015, 2016 Muthiah Annamalai <ezhillang@gmail.com>
+## (C) 2007, 2008, 2013, 2015, 2016-2020 Muthiah Annamalai <ezhillang@gmail.com>
 ## (C) 2013 msathia <msathia@gmail.com>
 ##
 ## This file is dual licensed - originally GPL v3 from Ezhil, and
@@ -15,10 +15,8 @@ import operator
 import string
 import abc
 PYTHON3 = version > '3'
-del version
-
-if PYTHON3:
-    import functools
+assert PYTHON3,"PYTHON3 required to operate Open-Tamil library"
+import functools
 
 ## constants
 TA_ACCENT_LEN = 13 #12 + 1
@@ -291,10 +289,8 @@ def istamil_prefix( word ):
             return True
     return False
 
-if not PYTHON3:
-    is_tamil_unicode_predicate = lambda x: x >= unichr(2946) and x <= unichr(3066)
-else:
-    is_tamil_unicode_predicate = lambda x: x >= chr(2946) and x <= chr(3066)
+
+is_tamil_unicode_predicate = lambda x: x >= chr(2946) and x <= chr(3066)
 def is_tamil_unicode( sequence ):
     # Ref: languagetool-office-extension/src/main/java/org/languagetool/openoffice/TamilDetector.java
     if type(sequence) is list:
@@ -344,7 +340,6 @@ def reverse_word( word ):
 ## find out if the letters like, "பொ" are written in canonical "ப + ொ"" graphemes then
 ## return True. If they are written like "ப + ெ + ா" then return False on first occurrence
 def is_normalized( text ):
-    #print(text[0],text[1],text[2],text[-1],text[-2])
     TLEN,idx = len(text),1
     kaal = u"ா"
     Laa = u"ள"
@@ -377,9 +372,7 @@ def is_normalized( text ):
     return True
 
 def _make_set(args):
-    if PYTHON3:
-        return frozenset(args)
-    return set(args)
+    return frozenset(args)
 
 grantha_agaram_set = _make_set(grantha_agaram_letters)
 accent_symbol_set = _make_set(accent_symbols)
@@ -388,14 +381,14 @@ uyir_letter_set   = _make_set(uyir_letters)
 ## Split a tamil-unicode stream into
 ## tamil characters (individuals).
 def get_letters( word ):
-    """ splits the word into a character-list of tamil/english
-    characters present in the stream """
+    """ Splits the @word into a character-list of tamil/english
+    characters present in the stream. This routine provides a robust tokenizer
+    for Tamil unicode letters. """
     ta_letters = list()
     not_empty = False
     WLEN,idx = len(word),0
     while (idx < WLEN):
         c = word[idx]
-        #print(idx,hex(ord(c)),len(ta_letters))
         if c in uyir_letter_set or c == ayudha_letter:
             ta_letters.append(c)
             not_empty = True
@@ -408,14 +401,12 @@ def get_letters( word ):
                 ta_letters.append(c)
                 not_empty = True
             else:
-                #print("Merge/accent")
                 ta_letters[-1] += c
         else:
-            if ord(c) < 256 or not (is_tamil_unicode(c)):
+            if ord(c) < 256 or not (is_tamil_unicode_predicate(c)):
                 ta_letters.append( c )
             else:
                 if not_empty:
-                    #print("Merge/??")
                     ta_letters[-1]+= c
                 else:
                     ta_letters.append(c)
@@ -436,7 +427,6 @@ def get_letters_iterable( word ):
 
     while (idx < WLEN):
         c = word[idx]
-        #print(idx,hex(ord(c)),len(ta_letters))
         if c in uyir_letter_set or c == ayudha_letter:
             idx = idx + 1
             yield c
@@ -519,13 +509,12 @@ def get_tamil_words( letters ):
         raise Exception("metehod needs to be used with list generated from 'tamil.utf8.get_letters(...)'")
     return [word for word in get_words_iterable( letters, tamil_only = True )]
 
-if PYTHON3:
-    def cmp( x, y):
-        if x == y:
-            return 0
-        if x > y:
-            return 1
-        return -1
+def cmp( x, y):
+    if x == y:
+        return 0
+    if x > y:
+        return 1
+    return -1
 
 # answer if word_a ranks ahead of, or at same level, as word_b in a Tamil dictionary order...
 # for use with Python : if a > 0
@@ -533,10 +522,6 @@ def compare_words_lexicographic( word_a, word_b ):
     """ compare words in Tamil lexicographic order """
     # sanity check for words to be all Tamil
     if ( not all_tamil(word_a) ) or (not all_tamil(word_b)) :
-        #print("## ")
-        #print(word_a)
-        #print(word_b)
-        #print("Both operands need to be Tamil words")
         pass
     La = len(word_a)
     Lb = len(word_b)
@@ -546,7 +531,6 @@ def compare_words_lexicographic( word_a, word_b ):
             pos2 = all_TA_letters.find( word_b[itr] )
 
             if pos1 != pos2 :
-                    #print  not( pos1 > pos2), pos1, pos2
                     return cmp(pos1, pos2)
 
     # result depends on if La is shorter than Lb, or 0 if La == Lb  i.e. cmp
@@ -593,14 +577,14 @@ def splitMeiUyir(uyirmei_char):
     This function split uyirmei compound character into mei + uyir characters
     and returns in tuple.
 
-    Input : It must be unicode tamil char.
-
+    Input : It must be unicode tamil char, V=vowel, C=char, VC=compound VC.
+    Output: (mei,uyir) if it is VC, otherwise return input if it is V, or C.
     Written By : Arulalan.T
     Date : 22.09.2014
 
     """
 
-    if not isinstance(uyirmei_char, PYTHON3 and str or unicode):
+    if not isinstance(uyirmei_char,  str):
         raise ValueError("Passed input letter '%s' must be unicode, \
                                 not just string" % uyirmei_char)
 
@@ -635,9 +619,9 @@ def joinMeiUyir(mei_char, uyir_char):
     if not mei_char: return uyir_char
     if not uyir_char: return mei_char
 
-    if not isinstance(mei_char, PYTHON3 and str or unicode):
+    if not isinstance(mei_char, str):
         raise ValueError(u"Passed input mei character '%s' must be unicode, not just string" % mei_char)
-    if not isinstance(uyir_char, PYTHON3 and str or unicode) and uyir_char != None:
+    if not isinstance(uyir_char, str) and uyir_char != None:
         raise ValueError(u"Passed input uyir character '%s' must be unicode, not just string" % uyir_char)
     if mei_char not in grantha_mei_letters:
         raise ValueError(u"Passed input character '%s' is not a tamil mei character" % mei_char)
@@ -653,7 +637,7 @@ def joinMeiUyir(mei_char, uyir_char):
     return grantha_uyirmei_letters[uyirmeiidx]
 
 def classify_letter(letter):
-    if not isinstance(letter, PYTHON3 and str or unicode):
+    if not isinstance(letter, str):
         raise TypeError("Input'%s' must be unicode, not just string" % letter)
     kinds = [u'kuril',u'nedil',u'ayudham',u'vallinam',u'mellinam',u'idayinam',u'uyirmei',u'tamil_or_grantham']
     if letter in uyir_letters:
@@ -680,7 +664,7 @@ def classify_letter(letter):
         return 'digit'
     raise ValueError("Unknown letter '%s' neither Tamil nor English or number"%letter)
 
-def print_tamil_words( tatext, use_frequencies = False ):
+def print_tamil_words( tatext, use_frequencies = not False ):
     taletters = get_letters(tatext)
     #for word in re.split(u"\s+",tatext):
     #    print(u"-> ",word)
@@ -691,18 +675,42 @@ def print_tamil_words( tatext, use_frequencies = False ):
     #for key in frequency.keys():
     #    print(u"%s : %s"%(frequency[key],key))
     # sort words by descending order of occurence
-    for l in sorted(frequency.iteritems(), key=operator.itemgetter(1)):
+    for l in sorted(frequency.items(), key=operator.itemgetter(1)):
         if use_frequencies:
             print(u"%d -> %s"%(l[1],l[0]))
         else:
             print(u"%s"%l[0])
 
-def tamil_sorted(list_data):
-    if PYTHON3:
-        asorted = sorted(list_data,key=functools.cmp_to_key(compare_words_lexicographic))
-    else:
-        asorted = sorted(list_data,cmp=compare_words_lexicographic)
+compare_lexicograph_key = functools.cmp_to_key(compare_words_lexicographic)
+def tamil_sorted(list_data,key=compare_lexicograph_key):
+    asorted = sorted(list_data,key=key)
     return asorted
+
+def hex2unicode(ip_data,offset=3):
+    """
+        எ.கா. 'b9abc1b95bbeba4bbebb0baebcd' =
+                   'சுகாதாரம்'
+        எ.கா. 'b95' = அ
+    """
+    result = []
+    for s in re.split('\-|\/',ip_data):
+        result.append(''.join([chr(int(s[i:i+offset],16)) for i in range(0,len(s),offset)]))
+    return result
+
+def unicode2hex(ip_data,offset=3):
+    """
+         hex2unicode என்பதன் நேர்மாறான சார்பு
+        எ.கா.  'சுகாதாரம்' ->  'b9abc1b95bbeba4bbebb0baebcd'
+        எ.கா. 'அ' -> 'b95'
+    """
+    result = []
+    for letter in get_letters_iterable(ip_data):
+        if is_tamil_unicode(letter):
+            for _letter in letter:
+                result.append(('%{0}x'.format(offset))%ord(_letter))
+        else:
+            result.append(letter)
+    return ''.join(result)
 
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ

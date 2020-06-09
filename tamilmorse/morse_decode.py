@@ -5,7 +5,6 @@
 
 import codecs
 import json
-import tamil
 import sys
 import os
 
@@ -18,9 +17,7 @@ def decode(text):
     reverse_code = {}
     for k,v in codebook.items():
         reverse_code[v] = k
-    #print(">%s<"%text)
     output = [reverse_code.get(chunks,"x") for chunks in text.split(" ")]
-    #print(u" ".join(output))
     return u" ".join(output)
 
 if __name__ == u"__main__":

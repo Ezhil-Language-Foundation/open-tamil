@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 # This file is part of open-tamil project, distributed as an example
-from __future__ import print_function
+
 import tamil
 
 import codecs
@@ -27,13 +27,13 @@ class WordlistFilter:
         
         
     def print_tamil_words( self, line ):
-        tatext = re.sub(u'\s+',u' ',line)
+        tatext = re.sub('\s+',' ',line)
         if len(tatext) < 1:
             return
         taletters = tamil.utf8.get_letters(tatext)
-        taletters = filter( lambda x: tamil.utf8.istamil(x) or x.isspace(), taletters )
+        taletters = [x for x in taletters if tamil.utf8.istamil(x) or x.isspace()]
         frequency = self.frequency
-        word = u"".join(taletters)
+        word = "".join(taletters)
         if len(word) < 1:
             return
         frequency[word] = 1 + frequency.get(word,0)
@@ -41,7 +41,7 @@ class WordlistFilter:
         self.frequency = frequency
     
     def __del__(self):
-        for l in sorted(self.frequency.items(), key=operator.itemgetter(1)):
+        for l in sorted(list(self.frequency.items()), key=operator.itemgetter(1)):
             if l:
                 self.fout.write( "%s:%d\n"%(l[0],l[1]))
         print('total number of unique words = %d'%len(self.frequency))

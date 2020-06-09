@@ -7,6 +7,9 @@
 import tamil
 
 def reverse_transliteration_table(table_in):
+    """
+        transliteration table from Tamil -> English.
+    """
     table_out = {}
     keys = table_in.keys()
     keys = sorted(keys)
@@ -17,6 +20,9 @@ def reverse_transliteration_table(table_in):
     return table_out
 
 class Tamil2English:
+    """
+        Transliterate Class from Tamil -> English.
+    """
     @staticmethod
     def transliterate(table,tamil_str):
         letters = tamil.utf8.get_letters(tamil_str)
@@ -24,9 +30,10 @@ class Tamil2English:
         eng_transliterated = u"".join([ta2en_map.get(tl,tl) for tl in letters])
         return eng_transliterated
 
-# BlindIterative Algorithm from TamilKaruvi - less than optimal -
 class BlindIterative:
-
+    """
+    BlindIterative Algorithm from TamilKaruvi - less than optimal -
+    """
     @staticmethod
     def transliterate(table,english_str):
         """ @table - has to be one of Jaffna or Azhagi etc.
@@ -67,7 +74,7 @@ class Greedy:
         self.scores = [0.0]
         self.lexicon = lexicon
         self.full_search = False
-    
+
     def score(self):
         max_idx = 0
         for idx,op in enumerate(self.options):
@@ -85,34 +92,34 @@ class Greedy:
                 max_idx = idx
             self.scores.append( w_score )
         return max_idx
-    
+
     #check if level=0 and letter is mei, then return False
     #all other cases return True
     def skip_mei(self,level,letter):
         if level > 0:
             return True
         return not( letter in tamil.utf8.mei_letters)
-    
+
     def generate(self,english_str,partial='',level=0):
         if len(english_str) == 0:
             self.options.append(partial)
             return
         if level >= 1 and len(partial) == 0:
             return
-        
+
         for itr,s in enumerate(english_str):
             curr = s
             if itr < len(english_str)-1:
                 nxt = english_str[itr+1]
             else:
                 nxt = ''
-            
+
             w1 = self.table.get(curr,None)
             if w1: self.skip_mei(level,w1) and self.generate(english_str[itr+1:],partial+w1,level+1)
-            
+
             w2 = self.table.get(curr.upper()+nxt,None)
             if w2: self.skip_mei(level,w2) and self.generate(english_str[itr+2:],partial+w2,level+1)
-            
+
             #w2 = self.table.get(prev+curr,None)
             #if w2: self.generate(english_str[itr+1:],partial+w2)
             w3 = self.table.get(curr+nxt,None)
@@ -120,20 +127,20 @@ class Greedy:
 
             #w4 = self.table.get(curr.upper()+nxt.upper(),None)
             #if w4: self.skip_mei(level,w4) and self.generate(english_str[itr+2:],partial+w4,level+1)
-            
+
             #w4 = self.table.get(prev+curr+nxt,None)
             #if w4: self.generate(english_str[itr+2:],partial+w4)
             prev = curr
             if ( not self.full_search ):
                 break
-        
+
         return
-        
+
     def pick_dictionary_words(self):
         if not self.lexicon:
             return
         self.options = list(filter(self.lexicon.isWord,self.options))
-        
+
     def run(self,english_str):
         self.generate(english_str)
         self.pick_dictionary_words()
@@ -147,12 +154,12 @@ class Greedy:
         #print(u'Total choices => ',len(self.options))
         #print(u'Best => %s'%best)
         return best
-    
+
     @staticmethod
     def transliterate(table,english_str,lexicon=None):
         g = Greedy(table,lexicon)
         return g.run(english_str),g
-    
+
 # Azhagi has a many-to-one mapping - using a Tamil language model and Baye's conditional probabilities
 # to break the tie when two or more Tamil letters have the same English syllable. Currently
 # this predictive transliterator is not available in this package. Also such an algorithm could be
@@ -162,14 +169,18 @@ class Greedy:
 # instead of using the longest/earliest match
 # http://www.mazhalaigal.com/tamil/learn/keys.php
 class Predictive:
+    """
+    This is work in progress. Currently disabled.
+    """
     @staticmethod
     def transliterate(table,english_str):
         raise Exception("Not Implemented!")
         pass
 
-# Sequential Iterative Algorithm modified from TamilKaruvi
 class Iterative:
-
+    """
+    Sequential Iterative Algorithm modified from TamilKaruvi
+    """
     @staticmethod
     def transliterate(table,english_str):
         """ @table - has to be one of Jaffna or Azhagi etc.

@@ -1,16 +1,17 @@
 ## -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
-# 
-# Implementation of Azhagi rules - தமிழ் எழுத்துக்கள்
-# Ref: B. Viswanathan, http://www.mazhalaigal.com/tamil/learn/keys.php
-# 
+#
 class Transliteration:
+    """
+     Implementation of Azhagi rules - தமிழ் எழுத்துக்கள்
+     Ref: B. Viswanathan, http://www.mazhalaigal.com/tamil/learn/keys.php
+    """
     table = {}
     # not implemented - many-to-one table
 
     # Azhagi has a many-to-one mapping - using a Tamil language model and Baye's conditional probabilities
-    # to break the tie when two or more Tamil letters have the same English syllable. Currently 
-    
+    # to break the tie when two or more Tamil letters have the same English syllable. Currently
+
     table["a"]=u"அ"
     table["aa"]=u"ஆ"
     table["A"]=u"ஆ"
@@ -113,10 +114,10 @@ class Transliteration:
     table["ko"]=u"கொ"
     table["kO"]=u"கொ"
     table["kO"]=u"கொ"
-    
+
     table["kho"]=u"கோ"
     table["kHO"]=u"கோ"
-    
+
     table["kou"]=u"கௌ"
     table["kau"]=u"கௌ"
     table["gow"]=u"கௌ"

@@ -3,13 +3,20 @@
 
 from opentamiltests import *
 from solthiruthi.datastore import RTrie, TamilTrie, DTrie, Queue
-from solthiruthi.dictionary import SimpleDictionary, EnglishLinux
+from solthiruthi.dictionary import SimpleDictionary, EnglishLinux, VatamozhiMonierWilliams
 from solthiruthi.resources import DICTIONARY_DATA_FILES
 import sys
 import copy
 import codecs
 from pprint import pprint
 import string
+
+class VatamozhiDictionaryTest(unittest.TestCase):
+    def test_load(self):
+        self.simple_skt = SimpleDictionary( DICTIONARY_DATA_FILES['vatamozhi'] )
+        self.simple_skt.loadWordFile()
+        self.trie_skt = VatamozhiMonierWilliams()
+        self.trie_skt.loadWordFile()
 
 class XCheckEnglishDictionaryTest(unittest.TestCase):
     def setUp(self):

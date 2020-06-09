@@ -22,14 +22,14 @@ def print_tamil_words( tatext ):
     #for key in frequency.keys():
     #    print(u"%s : %s"%(frequency[key],key))
     # sort words by descending order of occurence
-    for l in sorted(frequency.iteritems(), reverse=True, key=operator.itemgetter(1)):
-        print(u"%s"%( l[0]))#,l[1]))
+    for l in sorted(iter(frequency.items()), reverse=True, key=operator.itemgetter(1)):
+        print(("%s"%( l[0])))#,l[1]))
 
 def demo_tamil_text_filter( url ):    
     tatext = codecs.open(url,"r","utf-8").read()
     print_tamil_words( tatext )
 
-if __name__ == u"__main__":
+if __name__ == "__main__":
     for url in sys.argv[1:]:
         demo_tamil_text_filter(url)
 
