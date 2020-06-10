@@ -13,8 +13,9 @@ install:
   - python setup.py sdist build
   - pip install nose-cov
 script:
-  - cd ./extras/C-tamil && make all && make test && cd ..
-  - ./unittest3 #naked tests
+  - X=`pwd`
+  - cd ./extras/C-tamil && make all && make test
+  - cd $X && ./unittest3 #naked tests
 after_success:
   - pip install coveralls
   - coveralls
