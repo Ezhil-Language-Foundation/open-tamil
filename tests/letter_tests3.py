@@ -95,10 +95,10 @@ class LetterTests(unittest.TestCase):
         self.assertEqual( unicodedata.name(t[1][11]), 'TAMIL LETTER E' )
 
     def test_total_maaththirai(self):
-        word_expected = {"தமிழ்":2.5,"காதல்":3.5,"ஸ்":0.0}
+        word_expected = {"தமிழ்":2.5,"காதல்":3.5,"ஸ்":0.0,"குகன்":2.5,"ப்ரீதா":4.5}
         for word,val in word_expected.items():
             self.assertEqual(total_maaththirai(word), val)
-        
+
 class TaceTests(unittest.TestCase):
     def test_tace16(self):
        muttram = "முற்றம்"
