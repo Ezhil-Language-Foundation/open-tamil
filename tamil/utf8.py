@@ -778,7 +778,14 @@ Written By: Parathan
 vantrodar_ugaram = ["கு", "சு", "டு", "து", "பு", "று"] # வன்றொடர் உகரம்
 
 def calculate_maththirai(letters):
-    "மாத்திரை கணித்தல்: ஒரு தமிழ் சொல்லின் @letters மாத்திரை அளவை கணிக்கும்"
+    "மாத்திரை கணித்தல்: ஒரு தமிழ் சொல்லின் @letters மாத்திரை அளவை கணிக்கும்.
+
+    விதிகள்:
+    நெடில் எழுத்துக்கள் ஒலிக்கும் கால அளவு 2 மாத்திரை.
+    குறில் எழுத்துக்கள் ஒலிக்கும் கால அளவு 1 மாத்திரை.
+    மெய் எழுத்துக்கள் ஒலிக்கும் கால அளவு 1/2 மாத்திரை.
+    ஆய்த எழுத்தை ஒலிக்க ஆகும் கால அளவு 1/2 மாத்திரை.
+    "
     if isinstance(letters,list):
         eluththuvarisai = letters
     else:
@@ -798,7 +805,7 @@ def calculate_maththirai(letters):
             if (uyirmei_letters.index(i) % 2 == 1):
                 maaththiraivarisai.append(2) #உயிர்மெய்  நெடில்
             else: #(idx % 2 == 0):
-                maaththiraivarisai.append(1) #உயிர்மெய் குரில்
+                maaththiraivarisai.append(1) #உயிர்மெய் குறில்
         elif i in nedil_letters:
             maaththiraivarisai.append(2)
         elif i in kuril_letters:
