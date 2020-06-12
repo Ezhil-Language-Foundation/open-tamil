@@ -53,10 +53,12 @@ vowel_ai = u"ஐ"
 vowel_o  = u"ஒ"
 vowel_oo = u"ஓ"
 vowel_au = u"ஔ"
-ayudha_letter = u"ஃ"
+aytham_letter = u"ஃ"
+ayudha_letter = aytham_letter
 
 kuril_letters = [u"அ", u"இ", u"உ", u"எ", u"ஒ"]
-nedil_letters = [u"ஆ", u"ஈ", u"ஊ", u"ஏ", u"ஓ"]
+nedil_letters = [u"ஆ", u"ஈ", u"ஊ", u"ஏ", u"ஓ","ஐ","ஔ"]
+dipthong_letters = ["ஐ","ஔ"]
 
 vallinam_letters = [u"க்", u"ச்", u"ட்", u"த்", u"ப்", u"ற்"]
 mellinam_letters = [u"ங்", u"ஞ்", u"ண்", u"ந்", u"ம்", u"ன்"]
@@ -769,9 +771,12 @@ Written By: Parathan
 """
 vantrodar_ugaram = ["கு", "சு", "டு", "து", "பு", "று"] # வன்றொடர் உகரம்
 
-def calculate_maththirai(letter):
-
-    eluththuvarisai = get_letters(letter)
+def calculate_maththirai(letters):
+    "மாத்திரை கணித்தல்: ஒரு தமிழ் சொல்லின் @letters மாத்திரை அளவை கணிக்கும்"
+    if isinstance(letters,list):
+        eluththuvarisai = letters
+    else:
+        eluththuvarisai = get_letters(letters)
 
     maaththiraivarisai = []
 
@@ -784,21 +789,17 @@ def calculate_maththirai(letter):
             maaththiraivarisai.append(1.5)
 
         if i in uyirmei_letters:
-
             if (uyirmei_letters.index(i) % 2 == 1):
-                maaththiraivarisai.append(2)
-            elif (uyirmei_letters.index(i) % 2 == 0):
-                maaththiraivarisai.append(1)
-
+                maaththiraivarisai.append(2) #உயிர்மெய்  நெடில்
+            else: #(idx % 2 == 0):
+                maaththiraivarisai.append(1) #உயிர்மெய் குரில்
         elif i in nedil_letters:
             maaththiraivarisai.append(2)
-
         elif i in kuril_letters:
             maaththiraivarisai.append(1)
-
-        elif i in mei_letters or i in ayudha_letter: 
+        elif i in mei_letters or i in ayudha_letter:
             maaththiraivarisai.append(1/2)
-    
+
     # Check for Kutriyalugaram
     if len(eluththuvarisai) == 2 and (eluththuvarisai[-2] in kuril_letters or uyirmei_letters.index(eluththuvarisai[-2]) == 0 ):
         pass
@@ -807,12 +808,11 @@ def calculate_maththirai(letter):
 
     return maaththiraivarisai
 
-def total_maaththirai(letter):
-
-    maaththiraivarisai = calculate_maththirai(letter)
-    maaththirai = 0
-    
-    for i in maaththiraivarisai:
-        maaththirai = maaththirai + i
-    
+def total_maaththirai(letters):
+    """
+    ஒரு சொல் அதன் எழுத்துக்களின் @letters  என்பதன் மாத்திரைகளை தனித்தனியே
+    கணிக்கிட்டு முழுமையாக அதன் சொல்-அளவான முழு மாத்திரை அளவை வெளியிடுகிறது.
+    """
+    maaththiraivarisai = calculate_maththirai(letters)
+    maaththirai = sum(maaththiraivarisai)
     return maaththirai
