@@ -62,8 +62,8 @@ class WordGrid:
         if not output:
             output = sys.stdout
         
-        output.write(u"<html><meta charset=\"UTF-8\" />\n<head><title>word grids</title></head>\n<body>\n")
-        output.write(u"""<style>
+        output.write("<html><meta charset=\"UTF-8\" />\n<head><title>word grids</title></head>\n<body>\n")
+        output.write("""<style>
         table {
     border-collapse: collapse;
 }
@@ -80,22 +80,22 @@ text-align : center;
         output.write("<div><ol>\n")
         for w in self.words:
             lw = len(tamil.utf8.get_letters(w))
-            output.write(u"<li>%s | %d</li>\n"%(w,lw))
+            output.write("<li>%s | %d</li>\n"%(w,lw))
         output.write("</ol></div>\n")
-        output.write(u"<table>\n")
+        output.write("<table>\n")
         for row_idx in range(len(self.grid)):
-            row_data = u" ".join( u"<td>%s</td>"%self.grid[row_idx][col_idx][0] for col_idx in range( len(self.grid[row_idx]) ) )
-            output.write(u"<tr>%s</tr>\n"%row_data)
-        output.write(u"</table>\n")
+            row_data = " ".join( "<td>%s</td>"%self.grid[row_idx][col_idx][0] for col_idx in range( len(self.grid[row_idx]) ) )
+            output.write("<tr>%s</tr>\n"%row_data)
+        output.write("</table>\n")
         # occupancy
-        output.write(u"<hr/>\n")
-        output.write(u"<table>\n")
+        output.write("<hr/>\n")
+        output.write("<table>\n")
         for row_idx in range(len(self.grid)):
-            row_data = u" ".join( u"<td>%s</td>"%(self.grid[row_idx][col_idx][1] and u'X' or u'\u25A0') for col_idx in range( len(self.grid[row_idx]) ) )
-            output.write(u"<tr>%s</tr>\n"%row_data)
-        output.write(u"</table>\n")
+            row_data = " ".join( "<td>%s</td>"%(self.grid[row_idx][col_idx][1] and 'X' or '\u25A0') for col_idx in range( len(self.grid[row_idx]) ) )
+            output.write("<tr>%s</tr>\n"%row_data)
+        output.write("</table>\n")
         #style=\"border: 1px solid black;\"
-        output.write(u"</body></html>\n")
+        output.write("</body></html>\n")
         return
         
         output.write("<= P =>")
@@ -107,7 +107,7 @@ text-align : center;
     def precompute(self):
         # grid rows = no of words
         # grid size = no of columns        
-        self.max_word_len = int((max( list(map(lambda x: len(tamil.utf8.get_letters(x)),self.words)) )))
+        self.max_word_len = int((max( list([len(tamil.utf8.get_letters(x)) for x in self.words]) )))
         self.grid_size = 3+int(self.max_word_len)
         # sort words in order
         if PYTHON3:
@@ -124,7 +124,7 @@ text-align : center;
         # grid rows = no of words
         # grid size = no of columns
         # prepare a random grid of dim [#words x #max-word-length]
-        for idx in xrange( 0, self.grid_size ):
+        for idx in range( 0, self.grid_size ):
             for idy in range( 0, self.grid_size ):
                 self.grid[idx][idy][1] = False
                 self.grid[idx][idy][0] = random.choice( self.fill_letters )
@@ -241,14 +241,14 @@ text-align : center;
         pos = None
         directions = ['\\','/','-','|']
         seed_sites = list()
-        for idx in xrange( 0, self.grid_size ):
+        for idx in range( 0, self.grid_size ):
             for idy in range( 0, self.grid_size ):
                 # can't use this position as a seed
                 if self.grid[idx][idy][1]:
                    continue
                 seed_sites.append( [idx,idy] )
         
-        for itr in xrange( 0, len(seed_sites)):
+        for itr in range( 0, len(seed_sites)):
             pos = random.choice( seed_sites )
             for dir in directions:
                 if self.can_place_in_direction(word,dir,pos):
@@ -262,7 +262,7 @@ text-align : center;
             directions = ['|','-','\\','/']
             pos,dir = self.can_place_word(word)
             if not pos:
-                print(u"Cannot place the word # %d"%words_to_place)
+                print(("Cannot place the word # %d"%words_to_place))
                 return False
             self.place_word(word,dir,pos)
             words_to_place -= 1
@@ -270,12 +270,12 @@ text-align : center;
         
     def generate_randomized(self):
         # try shuffling the grid a thousand times
-        for i in xrange(0,100000):
+        for i in range(0,100000):
             self.clear_placements()
             if self.generate_randomized_placement():
-                print(u"Found solution during attempt %d"%i)
+                print(("Found solution during attempt %d"%i))
                 return
-        print(u"Cannot find solution after several attempts")
+        print("Cannot find solution after several attempts")
         return
     
     def generate(self):
@@ -286,18 +286,18 @@ def gen_grid():
     if len(sys.argv) < 2:
         lang = ['EN','TA'][1]
         if lang == 'EN':
-            wordlist = [u'food',u'water',u'shelter',u'clothing']
+            wordlist = ['food','water','shelter','clothing']
             fill_letters = list(map(chr,[ord('a')+i for i in range(0,26)]))
         else:
-            wordlist = [u'உப்பு', u'நாற்பண்',u'பராபரம்', u'கான்யாறு', u'ஆறு', u'சன்னியாசி', u'நெல்லி']
+            wordlist = ['உப்பு', 'நாற்பண்','பராபரம்', 'கான்யாறு', 'ஆறு', 'சன்னியாசி', 'நெல்லி']
             fill_letters = tamil.utf8.uyir_letters + tamil.utf8.mei_letters + tamil.utf8.agaram_letters        
         WordGrid.compute( wordlist, fill_letters)
     else:
         data = codecs.open(sys.argv[1],"r","utf-8").readlines()
         wordlist = [line.split("-")[0].strip() for line in data] 
-        wordlist = map( lambda x: re.sub('\s+','',x).strip(), wordlist)
-        wordlist = filter( lambda w: w.find(u"#") == -1 , wordlist )
-        fill_letters = tamil.utf8.get_letters( u"".join(wordlist) )
+        wordlist = [re.sub('\s+','',x).strip() for x in wordlist]
+        wordlist = [w for w in wordlist if w.find("#") == -1]
+        fill_letters = tamil.utf8.get_letters( "".join(wordlist) )
         if tamil.utf8.all_tamil(wordlist[0]):
             fill_letters  += tamil.utf8.uyir_letters + tamil.utf8.agaram_letters
         else:
@@ -312,20 +312,20 @@ def gen_grid():
 
 class HTMLFileBuffer:
     def __init__(self):
-        self.buffer = [u'']
+        self.buffer = ['']
 
     def write(self,arg):
         self.buffer.append(arg)
 
     def as_string(self):
-        return u''.join(self.buffer)
+        return ''.join(self.buffer)
 
 
 def generate_tamil_word_grid(data):
     wordlist = [line.split("-")[0].strip() for line in data]
-    wordlist = map( lambda x: re.sub('\s+','',x).strip(), wordlist)
-    wordlist = filter( lambda w: w.find(u"#") == -1, wordlist )
-    fill_letters = tamil.utf8.get_letters( u"".join(wordlist) )
+    wordlist = [re.sub('\s+','',x).strip() for x in wordlist]
+    wordlist = [w for w in wordlist if w.find("#") == -1]
+    fill_letters = tamil.utf8.get_letters( "".join(wordlist) )
     if tamil.utf8.all_tamil(wordlist[0]):
         fill_letters  += tamil.utf8.uyir_letters + tamil.utf8.agaram_letters
     else:
@@ -334,5 +334,5 @@ def generate_tamil_word_grid(data):
     fp = HTMLFileBuffer()
     return WordGrid.compute( wordlist, fill_letters, fp ),fp
     
-if __name__ == u"__main__":
+if __name__ == "__main__":
     gen_grid()

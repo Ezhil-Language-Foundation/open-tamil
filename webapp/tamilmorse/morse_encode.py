@@ -13,7 +13,7 @@ def encode(text):
     with codecs.open(os.path.join(os.path.dirname(__file__),"tamilmorse.json"),"r","utf-8") as fp:
         codebook = json.loads(fp.read())
     output = [codebook.get(l,l) for l in tamil.utf8.get_letters(text)]
-    return (u" ".join(output))
+    return (" ".join(output))
 
-if __name__ == u"__main__":
-    print encode(u" ".join([i.decode("utf-8") for i in sys.argv[1:]]))
+if __name__ == "__main__":
+    print(encode(" ".join([i.decode("utf-8") for i in sys.argv[1:]])))

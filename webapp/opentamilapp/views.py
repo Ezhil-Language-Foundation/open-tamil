@@ -36,13 +36,14 @@ from opentamilweb import settings
 
 #try:
 import tamilmorse
+import imp
 #except ImportError as ioe:
 #   print("tamilmorse library not imported")
 #   pass
 
 PYTHON26 = sys.version.find('2.6') >= 0
 if not PYTHON26:
-   from classifier import process_word
+   from .classifier import process_word
 
 try: 
    from tamiltts import ConcatennativeTTS
@@ -50,7 +51,7 @@ except Exception as ioe:
    pass
 
 if sys.version_info[0]<3:
-   reload(sys)
+   imp.reload(sys)
    sys.setdefaultencoding('utf8')
 def index(request):
     return render(request,'first.html',{"PYTHON26":PYTHON26})
@@ -117,10 +118,10 @@ def keech(request,k1):
     return response
 @csrf_exempt
 def call_sandhi_check(request):
-    k1= cgi.escape(request.POST.get('tamiltext',u'அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் '))
+    k1= cgi.escape(request.POST.get('tamiltext','அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் '))
     print(k1)
     dic={}
-    temp=u""
+    temp=""
     dic['old']=k1
     text,res=check_sandhi(k1)
     for i,j in enumerate(k1.split()):
@@ -129,7 +130,7 @@ def call_sandhi_check(request):
              text[i]="<span class='highlight'>"+text[i]+"</span>"
        except IndexError:
               pass
-    dic['new']=u" ".join(text)
+    dic['new']=" ".join(text)
     json_string = json.dumps(dic,ensure_ascii = False)
     #creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
@@ -142,7 +143,7 @@ def translite(request,tan):
     response = HttpResponse(json_string,content_type="application/json; charset=utf-8" )
     return response
 def spell_check(request,k1):
-    speller =  Speller(lang=u"TA",mode="web")
+    speller =  Speller(lang="TA",mode="web")
     notok,suggs = speller.check_word_and_suggest( k1 )
     json_string = json.dumps(suggs,ensure_ascii = False)
     #creating a Response object to set the content type and the encoding
@@ -150,11 +151,11 @@ def spell_check(request,k1):
     return response
 def test_ngram(request,ng):
     obj = DTrie()
-    prev_letter = u''
+    prev_letter = ''
     # per-line processor - remove spaces
-    for char in get_letters(u"".join(re.split('\s+',ng)).lower()):
+    for char in get_letters("".join(re.split('\s+',ng)).lower()):
         if (prev_letter.isalpha() and char.isalpha()) or ( utf8.is_tamil_unicode(prev_letter) and utf8.is_tamil_unicode(char)):
-            bigram = u"".join([prev_letter,char])
+            bigram = "".join([prev_letter,char])
             obj.add(bigram) # update previous
         prev_letter = char
     actual = obj.getAllWordsAndCount()
@@ -191,7 +192,7 @@ def morse(request,direction="encode",word=""):
    else:
       fn = tamilmorse.decode
    json_string = json.dumps( fn(word), ensure_ascii = False )
-   print json_string
+   print(json_string)
    response = HttpResponse( json_string, content_type="application/json; charset=utf-8" )
    return response
 
@@ -206,10 +207,10 @@ def morse(request,direction="encode",word=""):
 
 def tts_demo(request):
    if request.method == "GET":
-      return render(request,"tts_demo.html",{'solution':u'','PYTHON26':PYTHON26})
+      return render(request,"tts_demo.html",{'solution':'','PYTHON26':PYTHON26})
    assert( request.method == "POST" )
-   words = request.POST.get("words",u"")
-   mp3path = os.path.join('static',u"audio_%d.mp3"%random.randint(0,1000000))
+   words = request.POST.get("words","")
+   mp3path = os.path.join('static',"audio_%d.mp3"%random.randint(0,1000000))
    static_path = os.path.join(os.path.split(__file__)[0],mp3path)
    tts = ConcatennativeTTS(words,static_path)
    tts.run()
@@ -217,31 +218,31 @@ def tts_demo(request):
 
 def xword(request):
    if request.method == "GET":
-      return render(request,'xword.html',{'solution':u'','PYTHON26':PYTHON26})
+      return render(request,'xword.html',{'solution':'','PYTHON26':PYTHON26})
    assert( request.method == "POST" )
    words = request.POST.get("words",[])
-   wordlist = filter(len,[ w.strip() for w in re.split(u"\n+",words) ])
+   wordlist = list(filter(len,[ w.strip() for w in re.split("\n+",words) ]))
    grid,sol = generate_tamil_word_grid(wordlist)
    return render(request,'xword.html',{'solution':grid,'wordlist':wordlist,'PYTHON26':PYTHON26})
 
 def summarizer(request):
    if request.method == "GET":
-      return render(request,'summarizer.html',{'text_input':u'','PYTHON26':PYTHON26})
+      return render(request,'summarizer.html',{'text_input':'','PYTHON26':PYTHON26})
    assert( request.method == "POST" )
-   text_input = request.POST.get("text_input",u"")
+   text_input = request.POST.get("text_input","")
    
    # Create a SummaryTool object
    st = tamil.utils.SummaryTool()
    
    # Build the sentences dictionary
    sentences_dic = st.get_sentences_ranks(text_input)
-   title = u"தமிழ் பேசு.us:"
+   title = "தமிழ் பேசு.us:"
    # Build the summary with the sentences dictionary
    text_summary = st.get_summary(title, text_input, sentences_dic)
    in_w = len(tamil.utf8.get_words(text_input))
    out_w = len(tamil.utf8.get_words(text_summary))
-   text_comments = u"உள்ளீடு அளவு: %d சொற்கள், வெளியீடு அளவு: %d சொற்கள். சுருக்கம் %3.3g.\n"%(in_w,out_w,in_w/(1.0*out_w))
-   return render(request,u'summarizer.html',{'text_input':text_input,"text_summary":text_summary,"text_comments":text_comments,'PYTHON26':PYTHON26})
+   text_comments = "உள்ளீடு அளவு: %d சொற்கள், வெளியீடு அளவு: %d சொற்கள். சுருக்கம் %3.3g.\n"%(in_w,out_w,in_w/(1.0*out_w))
+   return render(request,'summarizer.html',{'text_input':text_input,"text_summary":text_summary,"text_comments":text_comments,'PYTHON26':PYTHON26})
 def classify_word(request):
     word=request.GET.get('tamiltext')
     result=process_word(word)
@@ -287,40 +288,40 @@ def test_textrandomizer(request,level):
        return Http404("Permission denied")
     if level == "kanigal":
        q,p,j = 6,2,2
-       nilai = u'கனிகள்'
-       nilai_description = u'இரண்டாம் நிலை'
+       nilai = 'கனிகள்'
+       nilai_description = 'இரண்டாம் நிலை'
     elif  level == "malargal":
-       nilai = u'மலர்கள்'
-       nilai_description = u'முதல் எளிய நிலை'
+       nilai = 'மலர்கள்'
+       nilai_description = 'முதல் எளிய நிலை'
        q,p,j = 10,0,0
     else:
-       return Http404(u"எனக்கு இந்த நிலை தெரியவில்லை - %s"%(level))
+       return Http404("எனக்கு இந்த நிலை தெரியவில்லை - %s"%(level))
     assert (q+p+j) == 10
-    nq = get_n_unique(q,range(0,len(TEXTRANDOMIZER_DB['Q'])))
-    np = get_n_unique(p,range(0,len(TEXTRANDOMIZER_DB['P'])))
-    nj = get_n_unique(j,range(0,len(TEXTRANDOMIZER_DB['J'])))
+    nq = get_n_unique(q,list(range(0,len(TEXTRANDOMIZER_DB['Q']))))
+    np = get_n_unique(p,list(range(0,len(TEXTRANDOMIZER_DB['P']))))
+    nj = get_n_unique(j,list(range(0,len(TEXTRANDOMIZER_DB['J']))))
     questions = []
     answers = []
-    QK = TEXTRANDOMIZER_DB['Q'].keys()
+    QK = list(TEXTRANDOMIZER_DB['Q'].keys())
     QV = [TEXTRANDOMIZER_DB['Q'][k] for k in QK]
-    PK = TEXTRANDOMIZER_DB['P'].keys()
+    PK = list(TEXTRANDOMIZER_DB['P'].keys())
     PV = [TEXTRANDOMIZER_DB['P'][k] for k in PK]
-    JK = TEXTRANDOMIZER_DB['J'].keys()
+    JK = list(TEXTRANDOMIZER_DB['J'].keys())
     JV = [TEXTRANDOMIZER_DB['J'][k] for k in JK]
-    for idq in nq: questions.append( QK[idq] + u' ?' ); answers.append( QV[idq] )
-    for idp in np: questions.append( PK[idp] + u' ?'); answers.append( PV[idp] )
-    for idj in nj: questions.append( JK[idj] + u' ' ); answers.append( JV[idj] )
+    for idq in nq: questions.append( QK[idq] + ' ?' ); answers.append( QV[idq] )
+    for idp in np: questions.append( PK[idp] + ' ?'); answers.append( PV[idp] )
+    for idj in nj: questions.append( JK[idj] + ' ' ); answers.append( JV[idj] )
     assert len(questions) == (q+p+j)
-    return render(request,"textrandomizer.html",{'questions':zip(questions,answers),'nilai':nilai,'nilai_description':nilai_description})
+    return render(request,"textrandomizer.html",{'questions':list(zip(questions,answers)),'nilai':nilai,'nilai_description':nilai_description})
 
 def tastemmer(request,use_json=False):
    if request.method == "GET":
-      return render(request,'stemmer.html',{'text_output':u''})
+      return render(request,'stemmer.html',{'text_output':''})
    assert( request.method == "POST" )
-   text_input = request.POST.get("text_input",u"")
-   words_in = filter(len,re.split('\s+',text_input))
+   text_input = request.POST.get("text_input","")
+   words_in = list(filter(len,re.split('\s+',text_input)))
    words_out = TamilStemmer().stemWords(words_in)
-   data = zip(words_in,words_out)
+   data = list(zip(words_in,words_out))
    if use_json:
       json_string = json.dumps(data,ensure_ascii = False)
       response = HttpResponse(json_string,content_type="application/json; charset=utf-8")

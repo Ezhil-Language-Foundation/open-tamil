@@ -7,11 +7,11 @@ from solthiruthi.scoring import bigram_scores, unigram_score
 
 jaffnatable = jaffna.Transliteration.table
 rev_jaffnatable = {}
-for k,v in jaffnatable.items():
+for k,v in list(jaffnatable.items()):
     rev_jaffnatable[v] = k
 
 def reverse_transliterate(letter):
-    return algorithm.Iterative.transliterate(rev_jaffnatable,u"%s"%letter)
+    return algorithm.Iterative.transliterate(rev_jaffnatable,"%s"%letter)
 
 class Feature:
     def __init__(self):
@@ -30,7 +30,7 @@ class Feature:
         self.bigscore = 0.0 #bigram score
         
     def __str__(self):
-        return u"(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)"%(self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels,self.unigrscore,self.bigscore)
+        return "(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)"%(self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels,self.unigrscore,self.bigscore)
     
     def data(self):
         return (self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels,self.unigscore,self.bigscore)
@@ -38,7 +38,7 @@ class Feature:
     @staticmethod
     def get(word):
         word = word.strip()
-        word = word.replace(u' ',u'')
+        word = word.replace(' ','')
         letters = utf8.get_letters(word)
         F = Feature()
         F.nletters = len(letters)*1.0
@@ -105,7 +105,7 @@ def process(fname):
             try:
                 f = Feature.get(w)
             except Exception as ioe:
-                print("SKIPPING => ",ioe.message)
+                print(("SKIPPING => ",ioe.message))
                 continue
             ofp.writerow(f.data())
     #ofp.close()
@@ -114,5 +114,5 @@ def run():
     for fname in sys.argv[1:]:
         process(fname)
 
-if __name__ == u"__main__":
+if __name__ == "__main__":
     run()

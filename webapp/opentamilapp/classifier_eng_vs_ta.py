@@ -6,8 +6,8 @@ from tamil import utf8
 from transliterate import azhagi, jaffna, combinational, algorithm
 
 def demo_classify():
-    for l in utf8.get_letters_iterable(u"இதுதாண்டாபோலிசு"):
-        print("%s - %s"%(l,utf8.classify_letter(l)))
+    for l in utf8.get_letters_iterable("இதுதாண்டாபோலிசு"):
+        print(("%s - %s"%(l,utf8.classify_letter(l))))
 
 def jaffna_transliterate(eng_string):
     tamil_tx = algorithm.Iterative.transliterate(jaffna.Transliteration.table,eng_string)
@@ -33,9 +33,9 @@ def operations():
             if len(w) < 1:
                 continue
             print(idx)
-            jfile.write(u"%s\n"%jaffna_transliterate(w))
-            cfile.write(u"%s\n"%combinational_transliterate(w))
-            afile.write(u"%s\n"%azhagi_transliterate(w))
+            jfile.write("%s\n"%jaffna_transliterate(w))
+            cfile.write("%s\n"%combinational_transliterate(w))
+            afile.write("%s\n"%azhagi_transliterate(w))
 
     jfile.close()
     cfile.close()

@@ -14,10 +14,10 @@ def decode(text):
         codebook = json.loads(fp.read())
     output = []
     reverse_code = {}
-    for k,v in codebook.items():
+    for k,v in list(codebook.items()):
         reverse_code[v] = k
     output = [reverse_code.get(chunks,"x") for chunks in text.split(" ")]
-    return u" ".join(output)
+    return " ".join(output)
 
-if __name__ == u"__main__":
-    print decode(" ".join(sys.argv[1:]))
+if __name__ == "__main__":
+    print(decode(" ".join(sys.argv[1:])))

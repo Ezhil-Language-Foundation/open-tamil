@@ -12,8 +12,8 @@ import time,os
 from sklearn.externals import joblib
 
 # project modules
-from classifier_eng_vs_ta import jaffna_transliterate
-from preprocess import Feature
+from .classifier_eng_vs_ta import jaffna_transliterate
+from .preprocess import Feature
 
 scaler=joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_scaler.pkl')
 
@@ -31,9 +31,9 @@ def process_word(s):
        #print( scaled_feature )
         #print( y )
         if y.ravel() > 0:
-            return u"%s என்பது தமிழ் வார்த்தையாக இருக்கலாம்"%s
+            return "%s என்பது தமிழ் வார்த்தையாக இருக்கலாம்"%s
         else:
-            return u"%s என்பது ஆங்கில வார்த்தையாக இருக்கலாம்"%s 
+            return "%s என்பது ஆங்கில வார்த்தையாக இருக்கலாம்"%s 
     except Exception as ioe:
         return ioe.message
     return

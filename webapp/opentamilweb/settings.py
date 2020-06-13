@@ -131,5 +131,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 TEXTRANDOMIZER_FILES = []
 #can be 'open-tamil.herokuapp.com' or 'tamilpesu.us' etc.
-EXAMPLE_SITE_URL=u'tamilpesu.us'
-CONTACT_EMAIL=u'ezhillang@gmail.com'
+EXAMPLE_SITE_URL='tamilpesu.us'
+CONTACT_EMAIL='ezhillang@gmail.com'
