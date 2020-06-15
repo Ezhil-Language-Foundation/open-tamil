@@ -15,5 +15,5 @@ from . import wordutils
 from . import utils
 from . import tace16
 
-VERSION = '0.97'
+VERSION = '0.98'
 __all__ = ['utf8','txt2unicode','numeral','txt2unicode','txt2ipa','numeral','regexp','utils','wordutils']
