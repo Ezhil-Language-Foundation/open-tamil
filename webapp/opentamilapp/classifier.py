@@ -15,9 +15,9 @@ from sklearn.externals import joblib
 from .classifier_eng_vs_ta import jaffna_transliterate
 from .preprocess import Feature
 
-scaler=joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_scaler.pkl')
+scaler=None #joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_scaler.pkl')
 
-nn=joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_nn.pkl')
+nn=None#joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_nn.pkl')
 
 def process_word(s):
     if any( [l in string.ascii_lowercase for l in s] ):

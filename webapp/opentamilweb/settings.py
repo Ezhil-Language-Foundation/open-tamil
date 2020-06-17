@@ -24,7 +24,7 @@ SECRET_KEY = 'enter#a$secret$key#'
 APP_KEY = SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = not False
 
 ALLOWED_HOSTS = ['*']
 
@@ -129,6 +129,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '.'
 TEXTRANDOMIZER_FILES = []
 #can be 'open-tamil.herokuapp.com' or 'tamilpesu.us' etc.
 EXAMPLE_SITE_URL='tamilpesu.us'
