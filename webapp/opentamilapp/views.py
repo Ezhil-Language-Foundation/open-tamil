@@ -118,7 +118,7 @@ def keech(request,k1):
     return response
 @csrf_exempt
 def call_sandhi_check(request):
-    k1= cgi.escape(request.POST.get('tamiltext','அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் '))
+    k1= cgi.escape(request.GET.get('tamiltext','அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் '))
     print(k1)
     dic={}
     temp=""
