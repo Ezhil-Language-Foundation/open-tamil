@@ -816,7 +816,7 @@ def calculate_maththirai(letters):
             maaththiraivarisai.append(1/2)
 
     # Check for Kutriyalugaram
-    if len(eluththuvarisai) == 2 and (eluththuvarisai[-2] in kuril_letters or uyirmei_letters.index(eluththuvarisai[-2]) == 0 ):
+    if len(eluththuvarisai) == 2 and (eluththuvarisai[-2] in kuril_letters or (uyirmei_letters[0] == eluththuvarisai[-2]) ):
         pass
     elif eluththuvarisai[-1] in vantrodar_ugaram and eluththuvarisai[-2] not in ayudha_letter:
         maaththiraivarisai[-1] = 0.5
