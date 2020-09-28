@@ -1,7 +1,7 @@
 ## -*- coding: utf-8 -*-
 # (C) 2020 முத்து அண்ணாமலை
 # https://en.wikipedia.org/wiki/ITRANS
-from tamil.utf8 import uyirmei_letters, splitMeiUyir
+from tamil.utf8 import uyirmei_letters, uyir_letters,  splitMeiUyir
 from collections import OrderedDict
 _uyir = (("அ","a"),
     ("ஆ",("aa","A")),
@@ -67,6 +67,9 @@ for vc in uyirmei_letters:
         for co in _options(_mei,c):
             if not Transliteration.table.get(co+vo,None):
                 Transliteration.table[co+vo] = vc
+            elif not vc in Transliteration.table.values():
+                #print("clobbered ",co+vo,Transliteration.table[co+vo],vc)
+                Transliteration.table[co+vo]=vc
 
 #from pprint import pprint
 #pprint(Transliteration.table)

@@ -379,6 +379,13 @@ class Transliteration:
     table[u"zhu"] = u"ழு"
     table[u"zhuu"] = u"ழூ"
 
+    vowels = [u"a", u"aa", u"i", u"ii", u"u", u"uu", u"e", u"ee", u"ai", u"o", u"oo", u"au"]
+    uyir_letters="அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ".split(" ")
+    aytham_letter = u"ஃ"
+    for uyir,uyir_utf8 in zip(vowels,uyir_letters):
+        table[uyir] = uyir_utf8
+    table["ak"] = aytham_letter
+
 def __built_table__():
     """ this class is for maintenance purposes only """
     from tamil import utf8
@@ -387,11 +394,14 @@ def __built_table__():
 
     # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ
     vowels = [u"a", u"aa", u"i", u"ii", u"u", u"uu", u"e", u"ee", u"ai", u"o", u"oo", u"au"]
-
+    for uyir,uyir_utf8 in zip(vowels,utf8.uyir_letters):
+        table[uyir] = uyir_utf8
+    table["ak"] = utf8.aytham_letter
     print(u" ".join(utf8.agaram_letters+utf8.sanskrit_letters))
     #
     # க ச ட த ப ற ஞ ங ண ந ம ன ய ர ல வ ழ ள ஜ ஷ ஸ ஹ
     # க, ச, ட, த, ப, ற, ஞ, ங, ண, ந, ம, ன, ய, ர, ல, வ, ழ, ள, ஜ, ஷ, ஸ, ஹ
+    #
     consonant_mei = [u"k", u"s", u"d", u"th",u"p",u"R",u"nj", u"ng",u"N", u"n-", u"m",u"n",
                      u"y", u"r",u"l",u"v", u"zh", u"L", u"j", u"S", u"sh", u"ha"]
 
