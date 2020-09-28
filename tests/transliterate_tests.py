@@ -20,6 +20,11 @@ class ReverseTransliterationTests(unittest.TestCase):
         eng_str = algorithm.Tamil2English.transliterate(azhagi_table,tamil_str)
         self.assertEqual( eng_str, u"annHam")
 
+        tamil_str = u"இறையோன்"
+        exp_eng_str = "iRaiyOn"
+        eng_str = algorithm.Tamil2English.transliterate(azhagi_table,tamil_str)
+        self.assertEqual(eng_str,exp_eng_str)
+
 class GreedyTests(unittest.TestCase):
     def test_UOM(self):
         # University of Madras Lexicon style transliteration standard

@@ -67,7 +67,7 @@ for vc in uyirmei_letters:
         for co in _options(_mei,c):
             if not Transliteration.table.get(co+vo,None):
                 Transliteration.table[co+vo] = vc
-            elif not vc in Transliteration.table.values():
+            elif False:#elif not vc in Transliteration.table.values():
                 #print("clobbered ",co+vo,Transliteration.table[co+vo],vc)
                 Transliteration.table[co+vo]=vc
 
