@@ -69,5 +69,5 @@ def search( patt, inputstr ):
     return (re.search( custom_patt, inputstr), custom_patt)
 
 def match( patt, inputstr ):
-    custom_patt = make_pattern( patt )
+    custom_patt = make_pattern( patt )[0]
     return (re.match( custom_patt, inputstr), custom_patt)

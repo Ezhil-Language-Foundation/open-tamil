@@ -11,7 +11,7 @@ import codecs
 import re
 from opentamiltests import *
 from tamil.utils.santhirules import joinWords
-from tamil.regexp import make_pattern
+from tamil.regexp import make_pattern, match
 
 class SantheeRules(unittest.TestCase):
     def test_filebased_conjugation_tests( self ):
@@ -129,6 +129,28 @@ class GrepTests(unittest.TestCase):
         expected = [1,2,6] # i.e.தமிழ்
         self.match_test(pattern,expected,data)
         return
-    
+        # 91 6385 158621
+
+    def test_issue_228a(self):
+        data = 'குல் கடி குழை கழி குறை கலி சிலை கலை குறி கா குரு கோடு சிறை சேர் குடி சரி குடை கை குமை கரை சிதை சாய் குலை காடு'
+        சொற்கள் = data.split(' ')
+        சரியானவை = 'குல் குழை குறை சிலை குறி குரு சிறை குடி குடை குமை சிதை குலை'.split(' ')
+        pattern = '(சி|கு)[^\\s]+'
+        கண்டவை = []
+        for சொல் in சொற்கள்:
+            [mobj,_] = match(pattern,சொல்)
+            if mobj: கண்டவை.append(mobj.group())
+        self.assertEqual( சரியானவை, கண்டவை )
+
+    def test_issue_228b(self):
+        data = ['சிசிசிகுகுசிகு','பசி','குசி']
+        சரியானவை=[data[0],data[2]]
+        pattern = '(சி|கு)+'
+        கண்டவை = []
+        for சொல் in data:
+            [mobj,_] = match(pattern,சொல்)
+            if mobj: கண்டவை.append(mobj.group())
+        self.assertEqual(சரியானவை, கண்டவை)
+
 if __name__ == '__main__':    
     unittest.main()
