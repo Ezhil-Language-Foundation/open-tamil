@@ -1,6 +1,6 @@
 Open Source Tamil Tools and NLP Library for Python 3
 ======================================================
-திற மூல தமிழ் கருவிகள்Version 0.96
+திற மூல தமிழ் கருவிகள் version 0.98
 -------------------------------------
 .. image:: open-tamil-logo.jpg
 
@@ -12,8 +12,8 @@ Open Source Tamil Tools and NLP Library for Python 3
 =====================================
 tamilstemmer
 ------------
-This module is new in version 0.96 and provides access to simple stemmer functions
-originally created by Damodharan Rajalingam.
+This module is new in v0.96 provides access to simple stemmer functions
+ originally created by Damodharan Rajalingam.
 
 tamil
 -----
@@ -119,7 +119,7 @@ Goal of this package is to collect and develop open-source licensed Tamil tools,
 3. Breakdown Tamil glyphs and unicode code-points into Tamil letter representations - collation
 4. Tools for navigating a corpus of data, build word frequency, prediction tables etc.
 5. Conversion from various encodings. e.g. TSCII to Unicode etc. We hope eventually to converts between the other major Tamil encodings like TAB, TAM, Bamini (*insert-your-favortie-font-encoding*) into Tamil Unicode encoding.
-6. Support all of above in Python 2.6.x, 2.7.x as well as in Python3.
+6. Support all of above in Python3.
 
 While most of tools in this package will be in Python 2.6. or later, we are open to other open-source language source code contributions.
 
