@@ -781,9 +781,62 @@ class CacheGetLettersMixin:
 date: 10/06/2020
 Written By: Parathan
 """
+
 vantrodar_ugaram = ["கு", "சு", "டு", "து", "பு", "று"] # வன்றொடர் உகரம்
 
+uyir_mei_kuril = [ u"க", u"கி", u"கு", u"கெ",u"கொ", u"கௌ"
+,u"ச", u"சி", u"சு", u"செ", u"சொ",u"சௌ"
+,u"ட", u"டி", u"டு", u"டெ" ,u"டொ", u"டௌ"
+,u"த", u"தி" , u"து"  ,u"தெ" ,u"தொ" ,u"தௌ"
+,u"ப"  ,u"பி" ,u"பு"  ,u"பெ", u"பொ", u"பௌ"
+,u"ற" ,u"றி"  ,u"று"  , u"றெ"  , u"றொ", u"றௌ"
+,u"ஞ" ,u"ஞி", u"ஞு", u"ஞெ", u"ஞொ" , u"ஞௌ"
+,u"ங" ,u"ஙி"  , u"ஙு" , u"ஙெ", u"ஙொ"  , u"ஙௌ"
+,u"ண" ,u"ணி"  , u"ணு", u"ணெ", u"ணொ"  , u"ணௌ"
+,u"ந"  , u"நி" ,u"நு" , u"நெ" , u"நொ" ,u"நௌ"
+,u"ம" ,u"மி", u"மு" , u"மெ", u"மொ" ,u"மௌ"
+,u"ன"  ,u"னி"  ,u"னு"  ,u"னெ" , u"னொ", u"னௌ"
+,u"ய" ,u"யி", u"யு"  ,u"யெ", u"யொ", u"யௌ"
+,u"ர" ,u"ரி" ,u"ரு"  ,u"ரெ"  ,u"ரொ" ,u"ரௌ"
+,u"ல"  ,u"லி"  ,u"லு" , u"லெ"  , u"லொ" , u"லௌ"
+,u"வ" ,u"வி"  , u"வு"  ,u"வெ" ,u"வொ" , u"வௌ"
+,u"ழ" ,u"ழி"  ,u"ழு"  ,u"ழெ" , u"ழொ"  , u"ழௌ"
+,u"ள" ,u"ளி", u"ளு" , u"ளெ"  ,u"ளொ" ,u"ளௌ"]
+
+uyir_mei_nedil = [u"கா" ,u"கீ" ,u"கூ" ,u"கே",u"கோ"
+,u"சா" ,u"சீ"  ,u"சூ"  ,u"சே" ,u"சோ" 
+,u"டா"  ,u"டீ" ,u"டூ"  ,u"டே" ,u"டோ"
+,u"தா"  ,u"தீ"  ,u"தூ"    ,u"தே"    ,u"தோ" 
+,u"பா"   ,u"பீ"  ,u"பூ"    ,u"பே"  ,u"போ" 
+,u"றா"   ,u"றீ"    ,u"றூ"    ,u"றே"   ,u"றோ"
+,u"ஞா"   ,u"ஞீ"    ,u"ஞூ"    ,u"ஞே"    ,u"ஞோ" 
+,u"ஙா"  ,u"ஙீ"    ,u"ஙூ"    ,u"ஙே"  ,u"ஙோ"
+,u"ணா"  ,u"ணீ"    ,u"ணூ"    ,u"ணே"    ,u"ணோ" 
+,u"நா"   ,u"நீ"   ,u"நூ"   ,u"நே"   ,u"நோ" 
+,u"மா"  ,u"மீ"   ,u"மூ"   ,u"மே"   ,u"மோ"
+,u"னா"   ,u"னீ"   ,u"னூ"   ,u"னே"  ,u"னோ" 
+,u"யா"   ,u"யீ"  ,u"யூ"    ,u"யே"   ,u"யோ"
+,u"ரா"  ,u"ரீ"    ,u"ரூ"    ,u"ரே"  ,u"ரோ"  
+,u"லா"  ,u"லீ"   ,u"லூ"    ,u"லே"   ,u"லோ" 
+,u"வா"  ,u"வீ"   ,u"வூ"   ,u"வே"    ,u"வோ" 
+,u"ழா"   ,u"ழீ"   ,u"ழூ"    ,u"ழே"    ,u"ழோ"
+,u"ளா"  ,u"ளீ"    ,u"ளூ"  ,u"ளே"    ,u"ளோ"]
+
+def calculate_uyir_nedil_kuril_maathirai(word):
+
+    if word in uyir_mei_kuril:
+        return 1
+    elif word in uyir_mei_nedil:
+        return 2
+    elif word in nedil_letters:
+        return 2
+    elif word in kuril_letters:
+        return 1
+    elif word in mei_letters:
+        return 0.5
+
 def calculate_maththirai(letters):
+    
     """மாத்திரை கணித்தல்: ஒரு தமிழ் சொல்லின் @letters மாத்திரை அளவை கணிக்கும்.
 
     விதிகள்:
@@ -791,47 +844,119 @@ def calculate_maththirai(letters):
     குறில் எழுத்துக்கள் ஒலிக்கும் கால அளவு 1 மாத்திரை.
     மெய் எழுத்துக்கள் ஒலிக்கும் கால அளவு 1/2 மாத்திரை.
     ஆய்த எழுத்தை ஒலிக்க ஆகும் கால அளவு 1/2 மாத்திரை.
+    மகரக் குறுக்கம் "ன்", "ண்" ஐ தொடர்ந்து வரும் "ம்" ஆனது தன அரை மாத்திரையில் இருந்து கால் மாத்திரையாய் ஒலிக்கும்
+    ஒளகாரக் குறுக்கம் சொல்லின் ஆரம்பத்தில் வரும் ஒள, மெள, வௌ என்பன 1 மாத்திரையில் ஒலித்தல்
+
     """
-    if isinstance(letters,list):
-        eluththuvarisai = letters
-    else:
-        eluththuvarisai = get_letters(letters)
+    
+    ikaram = [ u"கி", u"சி", u"டி", u"தி", u"பி", u"றி", u"ஞி", u"ஙி", u"ணி", u"நி", u"மி", u"னி", u"யி", u"ரி", u"லி", u"வி", u"ழி",u"ளி"]
 
+    aikaaram = [ u"கை", u"சை" , u"டை" ,u"தை", u"பை", u"றை", u"ஞை", u"ஙை", u"ணை", u"நை" ,u"மை", u"னை", 
+    u"யை", u"ரை", u"லை" ,u"வை", u"ழை" ,u"ளை"]
+    
+    yakaram = [u"ய"  ,u"யா"  ,u"யி"  ,u"யீ"  ,u"யு"  ,u"யூ"  ,u"யெ"  ,u"யே"  ,u"யை" ,
+               u"யொ"  ,u"யோ"  ,u"யௌ"]
+    
+    single_word = get_letters(letters)
+        
     maaththiraivarisai = []
+    
+    # maaththiraivarisai_word = []
+    
+    for index,eluthu in enumerate(single_word):
+        
+        # maaththiraivarisai_word.append(eluthu)
+        # print(maaththiraivarisai_word)
+                
+        # குற்றியலுகரம்
+        if eluthu in vantrodar_ugaram:
+            
+            if index == 0:
+                maaththiraivarisai.append(1)
+            elif index == 1:
+                if single_word[0] not in uyir_mei_kuril and single_word[0] not in kuril_letters:
+                    maaththiraivarisai.append(0.5)
+                else:
+                    maaththiraivarisai.append(1)
 
-    for i in eluththuvarisai:
+            else:
+                maaththiraivarisai.append(0.5)
 
-        # ஐகாரக்குறுக்கம் checking
-        if len(eluththuvarisai) == 1 and eluththuvarisai[0] == vowel_ai:
-            maaththiraivarisai.append(2)
-        elif (i in vowel_ai):
-            maaththiraivarisai.append(1.5)
+        # குற்றியலிகரம்
+        elif eluthu in ikaram:
+            
+            checkNext = False
+            
+            try:
+                checkNext = single_word[index+1] in yakaram
+            except:
+                checkNext = False
+                
+            if checkNext:
+                maaththiraivarisai.append(0.5)
+            else:
+                maaththiraivarisai.append(1)
+                    
+        # ஔகாரக் குறுக்கம்
+        elif eluthu == "ஔ" or eluthu == "மௌ" or eluthu == "வெள":
+            if single_word[0] == "ஔ" or single_word[0] == "மௌ" or single_word[0] == "வெள":
+                maaththiraivarisai.append(1)
 
-        if i in uyirmei_letters:
-            if (uyirmei_letters.index(i) % 2 == 1):
-                maaththiraivarisai.append(2) #உயிர்மெய்  நெடில்
-            else: #(idx % 2 == 0):
-                maaththiraivarisai.append(1) #உயிர்மெய் குறில்
-        elif i in nedil_letters:
-            maaththiraivarisai.append(2)
-        elif i in kuril_letters:
-            maaththiraivarisai.append(1)
-        elif i in mei_letters or i in ayudha_letter:
-            maaththiraivarisai.append(1/2)
-
-    # Check for Kutriyalugaram
-    if len(eluththuvarisai) == 2 and (eluththuvarisai[-2] in kuril_letters or (uyirmei_letters[0] == eluththuvarisai[-2]) ):
-        pass
-    elif eluththuvarisai[-1] in vantrodar_ugaram and eluththuvarisai[-2] not in ayudha_letter:
-        maaththiraivarisai[-1] = 0.5
-
-    return maaththiraivarisai
+        # ஐகாரக்குறுக்கம்
+        elif eluthu == "ஐ":
+            if single_word[0] == "ஐ":
+                maaththiraivarisai.append(1.5)
+                
+        elif eluthu in aikaaram:
+            if single_word[0] in aikaaram:
+                maaththiraivarisai.append(1.5)
+            else:
+                maaththiraivarisai.append(1)
+        # ஆய்தம் 
+        elif eluthu == "ஃ":
+            if single_word[-1] == "ஃ":
+                maaththiraivarisai.append(0.5)
+            else:
+                maaththiraivarisai.append(0.25)
+                
+        # மகரக் குறுக்கம்
+        elif eluthu == "ம்":
+            
+            checkMagaram = False
+            
+            try:
+                checkMagaram = single_word[index-1] == "ண்" or single_word[index-1] == "ன்"
+            except:
+                checkMagaram = False
+                
+            if checkMagaram:
+                maaththiraivarisai.append(0.25)
+            else:
+                maaththiraivarisai.append(0.5)
+                
+        else:
+            maaththiraivarisai.append(calculate_uyir_nedil_kuril_maathirai(eluthu))
+        
+        # print(maaththiraivarisai)
+       
+    return sum(maaththiraivarisai)
 
 def total_maaththirai(letters):
     """
     ஒரு சொல் அதன் எழுத்துக்களின் @letters  என்பதன் மாத்திரைகளை தனித்தனியே
     கணிக்கிட்டு முழுமையாக அதன் சொல்-அளவான முழு மாத்திரை அளவை வெளியிடுகிறது.
     """
-    maaththiraivarisai = calculate_maththirai(letters)
-    maaththirai = sum(maaththiraivarisai)
-    return maaththirai
+    
+    txt_string = letters.split(sep= " ")
+
+    total_maaththiraivarisai = []
+
+    if(len(txt_string) > 1):
+    
+        for word in txt_string:
+            total_maaththiraivarisai.append(calculate_maththirai(word))
+            
+    else:
+        total_maaththiraivarisai.append(calculate_maththirai(letters))
+        
+    return sum(total_maaththiraivarisai)
