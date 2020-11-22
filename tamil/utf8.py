@@ -429,6 +429,10 @@ _all_symbols = copy( accent_symbols )
 _all_symbols.extend( pulli_symbols )
 all_symbol_set = _make_set(_all_symbols)
 
+def get_letters_length(word):
+    """ @word என்ற சொல் என்பதன் எழுத்துக்கள் நீளம்."""
+    return len(get_letters(word))
+
 # same as get_letters but use as iterable
 def get_letters_iterable( word ):
     """ splits the word into a character-list of tamil/english

@@ -32,6 +32,9 @@ class Arichuvadi(unittest.TestCase):
         parts2 = utf8.get_letters_elementary(u'கழுதை')
         self.assertEqual(parts2,actual)
 
+    def test_letters_length(self):
+        self.assertEqual(14,utf8.get_letters_length(u"ஜனரஞ்சகப்பத்திரிகைகள்"))
+
     def test_split_uyirmei(self):
         p1 = utf8.grantha_uyirmei_splits[u'ழு']
         p2 = utf8.grantha_uyirmei_splits[u'தை']

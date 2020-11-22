@@ -4,6 +4,7 @@
 from opentamiltests import *
 from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix
 from solthiruthi.morphology import RemovePrefix, CaseFilter
+from solthiruthi.peyarchorkal import make_all_variants
 import re
 import codecs
 from tamil import utf8
@@ -84,6 +85,12 @@ class CaseFilterTest(unittest.TestCase):
             trunc_word = objf.apply( w )
             self.assertEqual( trunc_word ,rval[0] )
         return
-        
+
+    @unittest.skip("not settled")
+    def test_peyarchorkal(self):
+        expected=[]
+        self.assertListEqual(expected,make_all_variants("மாடு"))
+        return
+
 if __name__ == "__main__":
     unittest.main()

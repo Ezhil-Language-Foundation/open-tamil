@@ -41,7 +41,7 @@ def joinWords(word_a, word_b):
         first_word_last_mei_char, first_word_last_uyir_char = first_word_last_chars[0], first_word_last_chars[0]
 
     # get rule sub dictionary from all dictionary by passing
-    rule = all_rules[first_word_last_uyir_char]
+    rule = all_rules.get(first_word_last_uyir_char,None)
 
     if word_a == word_b:
         # both input words are same
@@ -74,19 +74,20 @@ def joinWords(word_a, word_b):
         # end of if word_a in same_word_rule[0]:
     # end of if word_a == word_b:
 
-    if word_a in rule.get('first_solo_words', []):
-        # todo : need to find tune this first solo word check like using startswith, endswith, etc
-        rval = word_a + ' ' + word_b
-        return rval
+    if rule:
+        if word_a in rule.get('first_solo_words', []):
+            # todo : need to find tune this first solo word check like using startswith, endswith, etc
+            rval = word_a + ' ' + word_b
+            return rval
     # end of if word_a in rule.get('first_solo_words', []):
 
-    for diff_jn in rule.get('diff_jn_words', []):
-        if word_a in diff_jn[0]:
-            for last in diff_jn[1]:
-                if word_b.startswith(last):
-                    # apply different conjuction char rule
-                    rval = word_a + diff_jn[2] + word_b
-                    return rval
+        for diff_jn in rule.get('diff_jn_words', []):
+            if word_a in diff_jn[0]:
+                for last in diff_jn[1]:
+                    if word_b.startswith(last):
+                        # apply different conjuction char rule
+                        rval = word_a + diff_jn[2] + word_b
+                        return rval
     # end of for diff_jn in  rule.get('diff_jn_words', []):
 
     # get readable letters of second word
@@ -100,38 +101,39 @@ def joinWords(word_a, word_b):
     else:
         second_word_first_mei_char, second_word_first_uyir_char = second_word_first_chars[0], second_word_first_chars[0]
 
-    if second_word_first_mei_char in rule.get('secondword_first_chars', []):
-        # apply major conjuction rule
-        return word_a + second_word_first_mei_char + ' ' + word_b
-    # end of if second_word_first_mei_char in rule.get('secondword_first_chars', []):
+    if rule:
+        if second_word_first_mei_char in rule.get('secondword_first_chars', []):
+            # apply major conjuction rule
+            return word_a + second_word_first_mei_char + ' ' + word_b
+            # end of if second_word_first_mei_char in rule.get('secondword_first_chars', []):
 
-    firstword_double_special_secondword = rule.get('firstword_double_special_secondword', [])
-    if firstword_double_special_secondword:
-        if len(first_word_letters) == 4:
-            # check either first word has repeated two times
-            if first_word_letters[:2] == first_word_letters[2:]:  # first word repeat two times within it
-                # get root second word by removing prefix
-                sec_word = second_word_first_uyir_char + second_word_after_first_char
-                if sec_word in firstword_double_special_secondword[0]:
-                    # get conjuction char by joining  special conjuction and  second root word
-                    jn = joinMeiUyir(firstword_double_special_secondword[1], second_word_first_uyir_char)
-                    # join all
-                    return word_a + jn + second_word_after_first_char
-    # end of if firstword_double_special_secondword:
+        firstword_double_special_secondword = rule.get('firstword_double_special_secondword', None)
+        if firstword_double_special_secondword:
+            if len(first_word_letters) == 4:
+                # check either first word has repeated two times
+                if first_word_letters[:2] == first_word_letters[2:]:  # first word repeat two times within it
+                    # get root second word by removing prefix
+                    sec_word = second_word_first_uyir_char + second_word_after_first_char
+                    if sec_word in firstword_double_special_secondword[0]:
+                        # get conjuction char by joining  special conjuction and  second root word
+                        jn = joinMeiUyir(firstword_double_special_secondword[1], second_word_first_uyir_char)
+                        # join all
+                        return word_a + jn + second_word_after_first_char
+        # end of if firstword_double_special_secondword:
 
-    special_secondword_first_chars = rule.get('special_secondword_first_chars', [])
-    if special_secondword_first_chars:
-        if second_word_first_uyir_char in special_secondword_first_chars[0]:
-            # get special conjuction char
-            jn = special_secondword_first_chars[1]
-            # join special conjuction char with second word's first uyir char
-            second_word_first_schar = joinMeiUyir(jn, second_word_first_uyir_char)
-            # complete second word with prefix of conjuction
-            second_word = second_word_first_schar + second_word_after_first_char
-            # join all
-            return word_a + second_word
-        # end of if second_word_first_uyir_char in special_secondword_first_chars[0]:
-    # end of if special_secondword_first_chars:
+        special_secondword_first_chars = rule.get('special_secondword_first_chars', None)
+        if special_secondword_first_chars:
+            if second_word_first_uyir_char in special_secondword_first_chars[0]:
+                # get special conjuction char
+                jn = special_secondword_first_chars[1]
+                # join special conjuction char with second word's first uyir char
+                second_word_first_schar = joinMeiUyir(jn, second_word_first_uyir_char)
+                # complete second word with prefix of conjuction
+                second_word = second_word_first_schar + second_word_after_first_char
+                # join all
+                return word_a + second_word
+            # end of if second_word_first_uyir_char in special_secondword_first_chars[0]:
+        # end of if special_secondword_first_chars:
 
     # if all above rules not applicable, then just return as it is !
     return word_a + ' ' + word_b
