@@ -823,7 +823,6 @@ uyir_mei_nedil = [u"கா" ,u"கீ" ,u"கூ" ,u"கே",u"கோ"
 ,u"ளா"  ,u"ளீ"    ,u"ளூ"  ,u"ளே"    ,u"ளோ"]
 
 def calculate_uyir_nedil_kuril_maathirai(word):
-
     if word in uyir_mei_kuril:
         return 1
     elif word in uyir_mei_nedil:
@@ -834,6 +833,7 @@ def calculate_uyir_nedil_kuril_maathirai(word):
         return 1
     elif word in mei_letters:
         return 0.5
+    return 0.0 #எழுத்து வடமொழியாக இருப்பின்.. 0.0
 
 def calculate_maththirai(letters):
     
@@ -937,8 +937,7 @@ def calculate_maththirai(letters):
         else:
             maaththiraivarisai.append(calculate_uyir_nedil_kuril_maathirai(eluthu))
         
-        # print(maaththiraivarisai)
-       
+    print(maaththiraivarisai)
     return sum(maaththiraivarisai)
 
 def total_maaththirai(letters):
