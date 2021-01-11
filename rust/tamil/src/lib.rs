@@ -1,0 +1,16 @@
+/**
+ * (C) 2021, Ezhil Language Foundation.
+ *  This file is part of Open-Tamil for Rust language.
+ */
+
+mod tamil;
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn test_uyir_mei_skt() {
+        use tamil;
+        assert_eq!(tamil::uyir.len(),12);
+        assert_eq!(tamil::sanskrit_letters.len(), 6);
+    }
+}

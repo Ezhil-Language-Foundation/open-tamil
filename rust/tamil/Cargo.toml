@@ -1,0 +1,7 @@
+[package]
+name = "tamil"
+version = "1.0.0"
+authors = ["Muthiah Annamalai <ezhillang@gmail.com>"]
+edition="2021"
+
+[dependencies]

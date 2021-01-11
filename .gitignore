@@ -47,3 +47,6 @@ nosetests.xml
 .project
 .pydevproject
 /java/OpenTamil/nbproject/private/
+
+rust/tamil/target
+rust/tamil/target/*
