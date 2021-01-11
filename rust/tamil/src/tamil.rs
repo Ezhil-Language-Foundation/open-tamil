@@ -2,7 +2,7 @@
  * (C) 2021, Ezhil Language Foundation.
  *  This file is part of Open-Tamil for Rust language.
  */
- 
+
 pub const uyir: [char;12] = ['அ','ஆ','இ','ஈ','உ','ஊ','எ','ஏ','ஐ','ஒ','ஓ','ஔ'];
 pub const vowel_a :char = 'அ';
 pub const vowel_aa:char = 'ஆ';
@@ -83,3 +83,40 @@ pub const consonant_va:char = 'வ';
 
 pub const sanskrit_letters :[&str;6]= ["ஶ","ஜ","ஷ", "ஸ","ஹ","க்ஷ"];
 pub const sanskrit_mei_letters:[&str;6] =["ஶ்","ஜ்","ஷ்", "ஸ்","ஹ்","க்ஷ்"];
+
+pub fn trial_get_letters(x:&String) -> Vec<String> {
+    let mut v: Vec<String> = Vec::new();
+    let mut i:usize = 0;
+    while i < x.len() {
+        i = i+1;
+    }
+    v
+}
+
+/** Split a tamil-unicode stream into
+* tamil characters (individuals).
+*/
+pub fn get_letters(x:&str) -> Vec<String> {
+    /* Splits the @word into a character-list of tamil/english
+    *characters present in the stream. This routine provides a robust tokenizer
+    *for Tamil unicode letters. */
+    let mut v: Vec<String> = Vec::new();
+    let mut tmp:String=String::from("");
+    for (idx,c) in x.chars().enumerate() {
+        if x.is_char_boundary(idx) {
+            if ( tmp.len() != 0 ) {
+                v.push(format!("{}",tmp));
+                v.push(format!("{}",c));
+            } else {
+                v.push(format!("{}",c));
+            }
+            tmp.clear();
+        } else {
+            tmp =  format!("{}{}",tmp,c);
+        }
+    }
+    if tmp.len() != 0 {
+        v.push(tmp);
+    }
+    v
+}

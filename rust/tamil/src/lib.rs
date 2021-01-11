@@ -13,4 +13,11 @@ mod tests {
         assert_eq!(tamil::uyir.len(),12);
         assert_eq!(tamil::sanskrit_letters.len(), 6);
     }
+    
+    #[test]
+    fn test_get_letters() {
+        use tamil;
+        assert_eq!(tamil::get_letters("அப்பம்").len(),4);
+        assert_eq!(tamil::get_letters("இறை").len(), 2);
+    }
 }
