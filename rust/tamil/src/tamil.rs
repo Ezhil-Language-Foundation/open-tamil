@@ -2,95 +2,121 @@
  * (C) 2021, Ezhil Language Foundation.
  *  This file is part of Open-Tamil for Rust language.
  */
+pub const UYIR: [char;12] = ['அ','ஆ','இ','ஈ','உ','ஊ','எ','ஏ','ஐ','ஒ','ஓ','ஔ'];
+pub const UYIR_LETTERS:&'static [char;12]=&UYIR;
+pub const VOWEL_A :char = 'அ';
+pub const VOWEL_AA:char = 'ஆ';
+pub const VOWEL_I :char = 'இ';
+pub const VOWEL_II:char = 'ஈ';
+pub const VOWEL_U  :char= 'உ';
+pub const VOWEL_UU:char = 'ஊ';
+pub const VOWEL_E:char  =  'எ';
+pub const VOWEL_EE:char = 'ஏ';
+pub const VOWEL_AI:char = 'ஐ';
+pub const VOWEL_O:char  = 'ஒ';
+pub const VOWEL_OO:char = 'ஓ';
+pub const VOWEL_AU:char = 'ஔ';
+pub const AYTHAM_LETTER:char = 'ஃ';
+pub const AYUDHA_LETTER:char = 'ஃ';
 
-pub const uyir: [char;12] = ['அ','ஆ','இ','ஈ','உ','ஊ','எ','ஏ','ஐ','ஒ','ஓ','ஔ'];
-pub const vowel_a :char = 'அ';
-pub const vowel_aa:char = 'ஆ';
-pub const vowel_i :char = 'இ';
-pub const vowel_ii:char = 'ஈ';
-pub const vowel_u  :char= 'உ';
-pub const vowel_uu:char = 'ஊ';
-pub const vowel_e:char  =  'எ';
-pub const vowel_ee:char = 'ஏ';
-pub const vowel_ai:char = 'ஐ';
-pub const vowel_o:char  = 'ஒ';
-pub const vowel_oo:char = 'ஓ';
-pub const vowel_au:char = 'ஔ';
-pub const aytham_letter:char = 'ஃ';
-pub const ayudha_letter:char = 'ஃ';
+pub const KURIL_LETTERS: [char;5] = ['அ', 'இ', 'உ', 'எ', 'ஒ'];
+pub const NEDIL_LETTERS: [char;7] = ['ஆ', 'ஈ', 'ஊ', 'ஏ', 'ஓ','ஐ','ஔ'];
+pub const DIPTHONG_LETTERS: [char;2] = ['ஐ','ஔ'];
 
-pub const kuril_letters: [char;5] = ['அ', 'இ', 'உ', 'எ', 'ஒ'];
-pub const nedil_letters: [char;7] = ['ஆ', 'ஈ', 'ஊ', 'ஏ', 'ஓ','ஐ','ஔ'];
-pub const dipthong_letters: [char;2] = ['ஐ','ஔ'];
+pub const PRONOUN_LETTERS:[char;3]=['அ','இ','உ'];
+pub const SUTTEZHUTHTHU:&'static [char;3]=&PRONOUN_LETTERS;
 
-pub const pronoun_letters:[char;3]=['அ','இ','உ'];
-pub const suttezhuththu:&'static [char;3]=&pronoun_letters;
+pub const QUESTIONSUFFIX_LETTERS:[char;3]=['ஆ','ஏ','ஓ'];
+pub const VINAAEZHUTHTHU:&'static [char;3]=&QUESTIONSUFFIX_LETTERS;
 
-pub const questionsuffix_letters:[char;3]=['ஆ','ஏ','ஓ'];
-pub const vinaaezhuththu:&'static [char;3]=&questionsuffix_letters;
+pub const VALLINAM_LETTERS:[&str;6] = ["க்", "ச்", "ட்", "த்", "ப்", "ற்"];
+pub const MELLINAM_LETTERS:[&str;6] = ["ங்", "ஞ்", "ண்", "ந்", "ம்", "ன்"];
+pub const IDAYINAM_LETTERS:[&str;6] = ["ய்", "ர்", "ல்", "வ்", "ழ்", "ள்"];
 
-pub const vallinam_letters:[&str;6] = ["க்", "ச்", "ட்", "த்", "ப்", "ற்"];
-pub const mellinam_letters:[&str;6] = ["ங்", "ஞ்", "ண்", "ந்", "ம்", "ன்"];
-pub const idayinam_letters:[&str;6] = ["ய்", "ர்", "ல்", "வ்", "ழ்", "ள்"];
-
-pub const mei_letters:[&str;18] = ["க்","ச்","ட்","த்","ப்","ற்",
+pub const MEI_LETTERS:[&str;18] = ["க்","ச்","ட்","த்","ப்","ற்",
            "ஞ்","ங்","ண்","ந்","ம்","ன்",
            "ய்","ர்","ல்","வ்","ழ்","ள்" ];
 
-pub const accent_symbols:[&str;13] = ["","ா","ி","ீ","ு","ூ",
+pub const ACCENT_SYMBOLS:[&str;13] = ["","ா","ி","ீ","ு","ூ",
           "ெ","ே","ை","ொ","ோ","ௌ","ஃ"];
 
-pub const accent_aa:&str = accent_symbols[1];
-pub const accent_i:&str  = accent_symbols[2];
-pub const accent_u:&str  = accent_symbols[3];
-pub const accent_uu:&str = accent_symbols[4];
-pub const accent_e:&str  = accent_symbols[5];
-pub const accent_ee:&str = accent_symbols[6];
-pub const accent_ai:&str = accent_symbols[7];
-pub const accent_o:&str  = accent_symbols[8];
-pub const accent_oo:&str = accent_symbols[9];
-pub const accent_au:&str = accent_symbols[10];
+pub const ACCENT_AA:&str = ACCENT_SYMBOLS[1];
+pub const ACCENT_I:&str  = ACCENT_SYMBOLS[2];
+pub const ACCENT_U:&str  = ACCENT_SYMBOLS[3];
+pub const ACCENT_UU:&str = ACCENT_SYMBOLS[4];
+pub const ACCENT_E:&str  = ACCENT_SYMBOLS[5];
+pub const ACCENT_EE:&str = ACCENT_SYMBOLS[6];
+pub const ACCENT_AI:&str = ACCENT_SYMBOLS[7];
+pub const ACCENT_O:&str  = ACCENT_SYMBOLS[8];
+pub const ACCENT_OO:&str = ACCENT_SYMBOLS[9];
+pub const ACCENT_AU:&str = ACCENT_SYMBOLS[10];
 
-pub const pulli_symbols:[char;1] = ['்'];
+pub const PULLI_SYMBOLS:[char;1] = ['்'];
 
-pub const agaram_letters:[char;18] = ['க','ச','ட','த','ப','ற',
+pub const AGARAM_LETTERS:[char;18] = ['க','ச','ட','த','ப','ற',
           'ஞ','ங','ண','ந','ம','ன',
           'ய','ர','ல','வ','ழ','ள'];
-pub const mayangoli_letters:[char;8] = ['ண', 'ன', 'ந', 'ல',
+pub const MAYANGOLI_LETTERS:[char;8] = ['ண', 'ன', 'ந', 'ல',
             'ழ', 'ள', 'ர', 'ற'];
 
-pub const consonant_ka:char =  'க';
-pub const consonant_nga:char =  'ங';
-pub const consonant_ca:char =  'ச';
-pub const consonant_ja:char =  'ஜ';
-pub const consonant_nya:char =  'ஞ';
-pub const consonant_tta:char =  'ட';
-pub const consonant_nna:char =  'ண';
-pub const consonant_nnna:char =  'ன';
-pub const consonant_ta:char =  'த';
-pub const consonant_tha:char =  'த';
-pub const consonant_na:char =  'ந';
-pub const consonant_pa:char =  'ப';
-pub const consonant_ma:char =  'ம';
-pub const consonant_ya:char =  'ய';
-pub const consonant_ra:char =  'ர';
-pub const consonant_rra:char =  'ற';
-pub const consonant_la:char =  'ல';
-pub const consonant_lla:char =  'ள';
-pub const consonant_llla:char = 'ழ';
-pub const consonant_zha:char = 'ழ';
-pub const consonant_va:char = 'வ';
+pub const CONSONANT_KA:char =  'க';
+pub const CONSONANT_NGA:char =  'ங';
+pub const CONSONANT_CA:char =  'ச';
+pub const CONSONANT_JA:char =  'ஜ';
+pub const CONSONANT_NYA:char =  'ஞ';
+pub const CONSONANT_TTA:char =  'ட';
+pub const CONSONANT_NNA:char =  'ண';
+pub const CONSONANT_NNNA:char =  'ன';
+pub const CONSONANT_TA:char =  'த';
+pub const CONSONANT_THA:char =  'த';
+pub const CONSONANT_NA:char =  'ந';
+pub const CONSONANT_PA:char =  'ப';
+pub const CONSONANT_MA:char =  'ம';
+pub const CONSONANT_YA:char =  'ய';
+pub const CONSONANT_RA:char =  'ர';
+pub const CONSONANT_RRA:char =  'ற';
+pub const CONSONANT_LA:char =  'ல';
+pub const CONSONANT_LLA:char =  'ள';
+pub const CONSONANT_LLLA:char = 'ழ';
+pub const CONSONANT_ZHA:char = 'ழ';
+pub const CONSONANT_VA:char = 'வ';
 
-pub const sanskrit_letters :[&str;6]= ["ஶ","ஜ","ஷ", "ஸ","ஹ","க்ஷ"];
-pub const sanskrit_mei_letters:[&str;6] =["ஶ்","ஜ்","ஷ்", "ஸ்","ஹ்","க்ஷ்"];
+pub const SANSKRIT_LETTERS :[&str;6]= ["ஶ","ஜ","ஷ", "ஸ","ஹ","க்ஷ"];
+pub const SANSKRIT_MEI_LETTERS:[&str;6] =["ஶ்","ஜ்","ஷ்", "ஸ்","ஹ்","க்ஷ்"];
 
-pub fn trial_get_letters(x:&String) -> Vec<String> {
-    let mut v: Vec<String> = Vec::new();
-    let mut i:usize = 0;
-    while i < x.len() {
-        i = i+1;
+pub const UYIRMEI_LETTERS:[&str;216] = ["க"  ,"கா"  ,"கி"  ,"கீ"  ,"கு"  ,"கூ"  ,
+"கெ"  ,"கே"  ,"கை"  ,"கொ"  ,"கோ"  ,"கௌ"  ,
+"ச"  ,"சா"  ,"சி"  ,"சீ"  ,"சு"  ,"சூ"  ,"செ"  ,"சே"  ,"சை"  ,"சொ"  ,"சோ"  ,"சௌ" ,
+"ட"  ,"டா"  ,"டி"  ,"டீ"  ,"டு"  ,"டூ"  ,"டெ"  ,"டே"  ,"டை"  ,"டொ"  ,"டோ"  ,"டௌ",
+"த"  ,"தா"  ,"தி"  ,"தீ"  ,"து"  ,"தூ"  ,"தெ"  ,"தே"  ,"தை"  ,"தொ"  ,"தோ"  ,"தௌ",
+"ப"  ,"பா"  ,"பி"  ,"பீ"  ,"பு"  ,"பூ"  ,"பெ"  ,"பே"  ,"பை"  ,"பொ"  ,"போ"  ,"பௌ" ,
+"ற"  ,"றா"  ,"றி"  ,"றீ"  ,"று"  ,"றூ"  ,"றெ"  ,"றே"  ,"றை"  ,"றொ"  ,"றோ"  ,"றௌ",
+"ஞ"  ,"ஞா"  ,"ஞி"  ,"ஞீ"  ,"ஞு"  ,"ஞூ"  ,"ஞெ"  ,"ஞே"  ,"ஞை"  ,"ஞொ"  ,"ஞோ"  ,"ஞௌ"  ,
+"ங"  ,"ஙா"  ,"ஙி"  ,"ஙீ"  ,"ஙு"  ,"ஙூ"  ,"ஙெ"  ,"ஙே"  ,"ஙை"  ,"ஙொ"  ,"ஙோ"  ,"ஙௌ"  ,
+"ண"  ,"ணா"  ,"ணி"  ,"ணீ"  ,"ணு"  ,"ணூ"  ,"ணெ"  ,"ணே"  ,"ணை"  ,"ணொ"  ,"ணோ"  ,"ணௌ"  ,
+"ந"  ,"நா"  ,"நி"  ,"நீ"  ,"நு"  ,"நூ"  ,"நெ"  ,"நே"  ,"நை"  ,"நொ"  ,"நோ"  ,"நௌ"  ,
+"ம"  ,"மா"  ,"மி"  ,"மீ"  ,"மு"  ,"மூ"  ,"மெ"  ,"மே"  ,"மை"  ,"மொ"  ,"மோ"  ,"மௌ" ,
+"ன"  ,"னா"  ,"னி"  ,"னீ"  ,"னு"  ,"னூ"  ,"னெ"  ,"னே"  ,"னை"  ,"னொ"  ,"னோ"  ,"னௌ",
+"ய"  ,"யா"  ,"யி"  ,"யீ"  ,"யு"  ,"யூ"  ,"யெ"  ,"யே"  ,"யை"  ,"யொ"  ,"யோ"  ,"யௌ",
+"ர"  ,"ரா"  ,"ரி"  ,"ரீ"  ,"ரு"  ,"ரூ"  ,"ரெ"  ,"ரே"  ,"ரை"  ,"ரொ"  ,"ரோ"  ,"ரௌ",
+"ல"  ,"லா"  ,"லி"  ,"லீ"  ,"லு"  ,"லூ"  ,"லெ"  ,"லே"  ,"லை"  ,"லொ"  ,"லோ"  ,"லௌ" ,
+"வ"  ,"வா"  ,"வி"  ,"வீ"  ,"வு"  ,"வூ"  ,"வெ"  ,"வே"  ,"வை"  ,"வொ"  ,"வோ"  ,"வௌ" ,
+"ழ"  ,"ழா"  ,"ழி"  ,"ழீ"  ,"ழு"  ,"ழூ"  ,"ழெ"  ,"ழே"  ,"ழை"  ,"ழொ"  ,"ழோ"  ,"ழௌ" ,
+"ள"  ,"ளா"  ,"ளி"  ,"ளீ"  ,"ளு"  ,"ளூ"  ,"ளெ"  ,"ளே"  ,"ளை"  ,"ளொ"  ,"ளோ"  ,"ளௌ" ];
+
+pub fn tamil247() -> Vec<String> {
+    let mut _tamil247:Vec<String> =   vec!();
+    _tamil247.push(AYUDHA_LETTER.to_string());
+    for letter in UYIR_LETTERS.iter() {
+        _tamil247.push(letter.to_string());
     }
-    v
+    for letter in MEI_LETTERS.iter() {
+        _tamil247.push(letter.to_string());
+    }
+    for letter in UYIRMEI_LETTERS.iter() {
+        _tamil247.push(letter.to_string());
+    }
+    _tamil247
 }
 
 /** Split a tamil-unicode stream into
@@ -104,7 +130,7 @@ pub fn get_letters(x:&str) -> Vec<String> {
     let mut tmp:String=String::from("");
     for (idx,c) in x.chars().enumerate() {
         if x.is_char_boundary(idx) {
-            if ( tmp.len() != 0 ) {
+            if  tmp.len() != 0  {
                 v.push(format!("{}",tmp));
                 v.push(format!("{}",c));
             } else {
