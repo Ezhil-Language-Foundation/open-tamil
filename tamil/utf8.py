@@ -33,31 +33,31 @@ def to_unicode_repr( _letter ):
     """ helpful in situations where browser/app may recognize Unicode encoding
         in the \u0b8e type syntax but not actual unicode glyph/code-point"""
     # Python 2-3 compatible
-    return u"u'"+ u"".join( [ u"\\u%04x"%ord(l) for l in _letter ] ) + u"'"
+    return "u'"+ "".join( [ "\\u%04x"%ord(l) for l in _letter ] ) + "'"
 
 def letters_to_py( _letters ):
         """ return list of letters e.g. uyir_letters as a Python list """
-        return u"[u'"+u"',u'".join( _letters )+u"']"
+        return "[u'"+"',u'".join( _letters )+"']"
 
 # List of letters you can use
-uyir_letters = [u"அ",u"ஆ",u"இ",u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ"]
-vowel_a  = u"அ"
-vowel_aa = u"ஆ"
-vowel_i  = u"இ"
-vowel_ii = u"ஈ"
-vowel_u  = u"உ"
-vowel_uu = u"ஊ"
-vowel_e  =  u"எ"
-vowel_ee = u"ஏ"
-vowel_ai = u"ஐ"
-vowel_o  = u"ஒ"
-vowel_oo = u"ஓ"
-vowel_au = u"ஔ"
-aytham_letter = u"ஃ"
+uyir_letters = ["அ","ஆ","இ","ஈ","உ","ஊ","எ","ஏ","ஐ","ஒ","ஓ","ஔ"]
+vowel_a  = "அ"
+vowel_aa = "ஆ"
+vowel_i  = "இ"
+vowel_ii = "ஈ"
+vowel_u  = "உ"
+vowel_uu = "ஊ"
+vowel_e  =  "எ"
+vowel_ee = "ஏ"
+vowel_ai = "ஐ"
+vowel_o  = "ஒ"
+vowel_oo = "ஓ"
+vowel_au = "ஔ"
+aytham_letter = "ஃ"
 ayudha_letter = aytham_letter
 
-kuril_letters = [u"அ", u"இ", u"உ", u"எ", u"ஒ"]
-nedil_letters = [u"ஆ", u"ஈ", u"ஊ", u"ஏ", u"ஓ","ஐ","ஔ"]
+kuril_letters = ["அ", "இ", "உ", "எ", "ஒ"]
+nedil_letters = ["ஆ", "ஈ", "ஊ", "ஏ", "ஓ","ஐ","ஔ"]
 dipthong_letters = ["ஐ","ஔ"]
 
 pronoun_letters=["அ","இ","உ"]
@@ -66,16 +66,16 @@ suttezhuththu=pronoun_letters
 questionsuffix_letters=["ஆ","ஏ","ஓ"]
 vinaaezhuththu=questionsuffix_letters
 
-vallinam_letters = [u"க்", u"ச்", u"ட்", u"த்", u"ப்", u"ற்"]
-mellinam_letters = [u"ங்", u"ஞ்", u"ண்", u"ந்", u"ம்", u"ன்"]
-idayinam_letters = [u"ய்", u"ர்", u"ல்", u"வ்", u"ழ்", u"ள்"]
+vallinam_letters = ["க்", "ச்", "ட்", "த்", "ப்", "ற்"]
+mellinam_letters = ["ங்", "ஞ்", "ண்", "ந்", "ம்", "ன்"]
+idayinam_letters = ["ய்", "ர்", "ல்", "வ்", "ழ்", "ள்"]
 
-mei_letters = [u"க்",u"ச்",u"ட்",u"த்",u"ப்",u"ற்",
-           u"ஞ்",u"ங்",u"ண்",u"ந்",u"ம்",u"ன்",
-           u"ய்",u"ர்",u"ல்",u"வ்",u"ழ்",u"ள்" ]
+mei_letters = ["க்","ச்","ட்","த்","ப்","ற்",
+           "ஞ்","ங்","ண்","ந்","ம்","ன்",
+           "ய்","ர்","ல்","வ்","ழ்","ள்" ]
 
-accent_symbols = [u"",u"ா",u"ி",u"ீ",u"ு",u"ூ",
-          u"ெ",u"ே",u"ை",u"ொ",u"ோ",u"ௌ",u"ஃ"]
+accent_symbols = ["","ா","ி","ீ","ு","ூ",
+          "ெ","ே","ை","ொ","ோ","ௌ","ஃ"]
 accent_aa = accent_symbols[1]
 accent_i  = accent_symbols[2]
 accent_u  = accent_symbols[3]
@@ -87,37 +87,37 @@ accent_o  = accent_symbols[8]
 accent_oo = accent_symbols[9]
 accent_au = accent_symbols[10]
 
-pulli_symbols = [u"்"]
+pulli_symbols = ["்"]
 
-agaram_letters = [u"க",u"ச",u"ட",u"த",u"ப",u"ற",
-          u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",
-          u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள"]
+agaram_letters = ["க","ச","ட","த","ப","ற",
+          "ஞ","ங","ண","ந","ம","ன",
+          "ய","ர","ல","வ","ழ","ள"]
 mayangoli_letters = ['ண', 'ன', 'ந', 'ல', 'ழ', 'ள', 'ர', 'ற']
 
-consonant_ka = u"க"
-consonant_nga = u"ங"
-consonant_ca = u"ச"
-consonant_ja = u"ஜ"
-consonant_nya = u"ஞ"
-consonant_tta = u"ட"
-consonant_nna = u"ண"
-consonant_nnna = u"ன"
-consonant_ta = u"த"
-consonant_tha = u"த"
-consonant_na = u"ந"
-consonant_pa = u"ப"
-consonant_ma = u"ம"
-consonant_ya = u"ய"
-consonant_ra = u"ர"
-consonant_rra = u"ற"
-consonant_la = u"ல"
-consonant_lla = u"ள"
-consonant_llla = u"ழ"
-consonant_zha = u"ழ"
-consonant_va = u"வ"
+consonant_ka = "க"
+consonant_nga = "ங"
+consonant_ca = "ச"
+consonant_ja = "ஜ"
+consonant_nya = "ஞ"
+consonant_tta = "ட"
+consonant_nna = "ண"
+consonant_nnna = "ன"
+consonant_ta = "த"
+consonant_tha = "த"
+consonant_na = "ந"
+consonant_pa = "ப"
+consonant_ma = "ம"
+consonant_ya = "ய"
+consonant_ra = "ர"
+consonant_rra = "ற"
+consonant_la = "ல"
+consonant_lla = "ள"
+consonant_llla = "ழ"
+consonant_zha = "ழ"
+consonant_va = "வ"
 
-sanskrit_letters = [u"ஶ",u"ஜ",u"ஷ", u"ஸ",u"ஹ",u"க்ஷ"]
-sanskrit_mei_letters =[u"ஶ்",u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்",u"க்ஷ்"]
+sanskrit_letters = ["ஶ","ஜ","ஷ", "ஸ","ஹ","க்ஷ"]
+sanskrit_mei_letters =["ஶ்","ஜ்","ஷ்", "ஸ்","ஹ்","க்ஷ்"]
 
 grantha_mei_letters = copy(mei_letters)
 grantha_mei_letters.extend(sanskrit_mei_letters)
@@ -126,24 +126,24 @@ grantha_agaram_letters = copy(agaram_letters)
 grantha_agaram_letters.extend(sanskrit_letters)
 
 uyirmei_letters = [
-u"க"  ,u"கா"  ,u"கி"  ,u"கீ"  ,u"கு"  ,u"கூ"  ,u"கெ"  ,u"கே"  ,u"கை"  ,u"கொ"  ,u"கோ"  ,u"கௌ"  ,
-u"ச"  ,u"சா"  ,u"சி"  ,u"சீ"  ,u"சு"  ,u"சூ"  ,u"செ"  ,u"சே"  ,u"சை"  ,u"சொ"  ,u"சோ"  ,u"சௌ" ,
-u"ட"  ,u"டா"  ,u"டி"  ,u"டீ"  ,u"டு"  ,u"டூ"  ,u"டெ"  ,u"டே"  ,u"டை"  ,u"டொ"  ,u"டோ"  ,u"டௌ",
-u"த"  ,u"தா"  ,u"தி"  ,u"தீ"  ,u"து"  ,u"தூ"  ,u"தெ"  ,u"தே"  ,u"தை"  ,u"தொ"  ,u"தோ"  ,u"தௌ",
-u"ப"  ,u"பா"  ,u"பி"  ,u"பீ"  ,u"பு"  ,u"பூ"  ,u"பெ"  ,u"பே"  ,u"பை"  ,u"பொ"  ,u"போ"  ,u"பௌ" ,
-u"ற"  ,u"றா"  ,u"றி"  ,u"றீ"  ,u"று"  ,u"றூ"  ,u"றெ"  ,u"றே"  ,u"றை"  ,u"றொ"  ,u"றோ"  ,u"றௌ",
-u"ஞ"  ,u"ஞா"  ,u"ஞி"  ,u"ஞீ"  ,u"ஞு"  ,u"ஞூ"  ,u"ஞெ"  ,u"ஞே"  ,u"ஞை"  ,u"ஞொ"  ,u"ஞோ"  ,u"ஞௌ"  ,
-u"ங"  ,u"ஙா"  ,u"ஙி"  ,u"ஙீ"  ,u"ஙு"  ,u"ஙூ"  ,u"ஙெ"  ,u"ஙே"  ,u"ஙை"  ,u"ஙொ"  ,u"ஙோ"  ,u"ஙௌ"  ,
-u"ண"  ,u"ணா"  ,u"ணி"  ,u"ணீ"  ,u"ணு"  ,u"ணூ"  ,u"ணெ"  ,u"ணே"  ,u"ணை"  ,u"ணொ"  ,u"ணோ"  ,u"ணௌ"  ,
-u"ந"  ,u"நா"  ,u"நி"  ,u"நீ"  ,u"நு"  ,u"நூ"  ,u"நெ"  ,u"நே"  ,u"நை"  ,u"நொ"  ,u"நோ"  ,u"நௌ"  ,
-u"ம"  ,u"மா"  ,u"மி"  ,u"மீ"  ,u"மு"  ,u"மூ"  ,u"மெ"  ,u"மே"  ,u"மை"  ,u"மொ"  ,u"மோ"  ,u"மௌ" ,
-u"ன"  ,u"னா"  ,u"னி"  ,u"னீ"  ,u"னு"  ,u"னூ"  ,u"னெ"  ,u"னே"  ,u"னை"  ,u"னொ"  ,u"னோ"  ,u"னௌ",
-u"ய"  ,u"யா"  ,u"யி"  ,u"யீ"  ,u"யு"  ,u"யூ"  ,u"யெ"  ,u"யே"  ,u"யை"  ,u"யொ"  ,u"யோ"  ,u"யௌ",
-u"ர"  ,u"ரா"  ,u"ரி"  ,u"ரீ"  ,u"ரு"  ,u"ரூ"  ,u"ரெ"  ,u"ரே"  ,u"ரை"  ,u"ரொ"  ,u"ரோ"  ,u"ரௌ",
-u"ல"  ,u"லா"  ,u"லி"  ,u"லீ"  ,u"லு"  ,u"லூ"  ,u"லெ"  ,u"லே"  ,u"லை"  ,u"லொ"  ,u"லோ"  ,u"லௌ" ,
-u"வ"  ,u"வா"  ,u"வி"  ,u"வீ"  ,u"வு"  ,u"வூ"  ,u"வெ"  ,u"வே"  ,u"வை"  ,u"வொ"  ,u"வோ"  ,u"வௌ" ,
-u"ழ"  ,u"ழா"  ,u"ழி"  ,u"ழீ"  ,u"ழு"  ,u"ழூ"  ,u"ழெ"  ,u"ழே"  ,u"ழை"  ,u"ழொ"  ,u"ழோ"  ,u"ழௌ" ,
-u"ள"  ,u"ளா"  ,u"ளி"  ,u"ளீ"  ,u"ளு"  ,u"ளூ"  ,u"ளெ"  ,u"ளே"  ,u"ளை"  ,u"ளொ"  ,u"ளோ"  ,u"ளௌ" ]
+"க"  ,"கா"  ,"கி"  ,"கீ"  ,"கு"  ,"கூ"  ,"கெ"  ,"கே"  ,"கை"  ,"கொ"  ,"கோ"  ,"கௌ"  ,
+"ச"  ,"சா"  ,"சி"  ,"சீ"  ,"சு"  ,"சூ"  ,"செ"  ,"சே"  ,"சை"  ,"சொ"  ,"சோ"  ,"சௌ" ,
+"ட"  ,"டா"  ,"டி"  ,"டீ"  ,"டு"  ,"டூ"  ,"டெ"  ,"டே"  ,"டை"  ,"டொ"  ,"டோ"  ,"டௌ",
+"த"  ,"தா"  ,"தி"  ,"தீ"  ,"து"  ,"தூ"  ,"தெ"  ,"தே"  ,"தை"  ,"தொ"  ,"தோ"  ,"தௌ",
+"ப"  ,"பா"  ,"பி"  ,"பீ"  ,"பு"  ,"பூ"  ,"பெ"  ,"பே"  ,"பை"  ,"பொ"  ,"போ"  ,"பௌ" ,
+"ற"  ,"றா"  ,"றி"  ,"றீ"  ,"று"  ,"றூ"  ,"றெ"  ,"றே"  ,"றை"  ,"றொ"  ,"றோ"  ,"றௌ",
+"ஞ"  ,"ஞா"  ,"ஞி"  ,"ஞீ"  ,"ஞு"  ,"ஞூ"  ,"ஞெ"  ,"ஞே"  ,"ஞை"  ,"ஞொ"  ,"ஞோ"  ,"ஞௌ"  ,
+"ங"  ,"ஙா"  ,"ஙி"  ,"ஙீ"  ,"ஙு"  ,"ஙூ"  ,"ஙெ"  ,"ஙே"  ,"ஙை"  ,"ஙொ"  ,"ஙோ"  ,"ஙௌ"  ,
+"ண"  ,"ணா"  ,"ணி"  ,"ணீ"  ,"ணு"  ,"ணூ"  ,"ணெ"  ,"ணே"  ,"ணை"  ,"ணொ"  ,"ணோ"  ,"ணௌ"  ,
+"ந"  ,"நா"  ,"நி"  ,"நீ"  ,"நு"  ,"நூ"  ,"நெ"  ,"நே"  ,"நை"  ,"நொ"  ,"நோ"  ,"நௌ"  ,
+"ம"  ,"மா"  ,"மி"  ,"மீ"  ,"மு"  ,"மூ"  ,"மெ"  ,"மே"  ,"மை"  ,"மொ"  ,"மோ"  ,"மௌ" ,
+"ன"  ,"னா"  ,"னி"  ,"னீ"  ,"னு"  ,"னூ"  ,"னெ"  ,"னே"  ,"னை"  ,"னொ"  ,"னோ"  ,"னௌ",
+"ய"  ,"யா"  ,"யி"  ,"யீ"  ,"யு"  ,"யூ"  ,"யெ"  ,"யே"  ,"யை"  ,"யொ"  ,"யோ"  ,"யௌ",
+"ர"  ,"ரா"  ,"ரி"  ,"ரீ"  ,"ரு"  ,"ரூ"  ,"ரெ"  ,"ரே"  ,"ரை"  ,"ரொ"  ,"ரோ"  ,"ரௌ",
+"ல"  ,"லா"  ,"லி"  ,"லீ"  ,"லு"  ,"லூ"  ,"லெ"  ,"லே"  ,"லை"  ,"லொ"  ,"லோ"  ,"லௌ" ,
+"வ"  ,"வா"  ,"வி"  ,"வீ"  ,"வு"  ,"வூ"  ,"வெ"  ,"வே"  ,"வை"  ,"வொ"  ,"வோ"  ,"வௌ" ,
+"ழ"  ,"ழா"  ,"ழி"  ,"ழீ"  ,"ழு"  ,"ழூ"  ,"ழெ"  ,"ழே"  ,"ழை"  ,"ழொ"  ,"ழோ"  ,"ழௌ" ,
+"ள"  ,"ளா"  ,"ளி"  ,"ளீ"  ,"ளு"  ,"ளூ"  ,"ளெ"  ,"ளே"  ,"ளை"  ,"ளொ"  ,"ளோ"  ,"ளௌ" ]
 
 tamil247 = [ ayudha_letter ]
 tamil247.extend( uyir_letters )
@@ -152,77 +152,77 @@ tamil247.extend( uyirmei_letters )
 
 # Ref: https://en.wikipedia.org/wiki/Tamil_numerals
 # tamil digits : Apart from the numerals (0-9), Tamil also has numerals for 10, 100 and 1000.
-tamil_digit_1to10 = [u"௦", u"௧", u"௨",u"௩",u"௪",u"௫",u"௬",u"௭",u"௮",u"௯",u"௰"]
-tamil_digit_100 = u"௱"
-tamil_digit_1000 = u"௲"
+tamil_digit_1to10 = ["௦", "௧", "௨","௩","௪","௫","௬","௭","௮","௯","௰"]
+tamil_digit_100 = "௱"
+tamil_digit_1000 = "௲"
 
 tamil_digits = [(num,digit) for num,digit in zip(range(0,11),tamil_digit_1to10)]
 tamil_digits.extend( [(100,tamil_digit_100),(1000,tamil_digit_1000)] )
 
 # tamil symbols
-_day = u"௳"
-_month = u"௴"
-_year = u"௵"
-_debit = u"௶"
-_credit = u"௷"
-_rupee = u"௹"
-_numeral = u"௺"
-_sri = u"\u0bb6\u0bcd\u0bb0\u0bc0" #SRI - ஶ்ரீ
-_ksha = u"\u0b95\u0bcd\u0bb7" #KSHA - க்ஷ
-_ksh = u"\u0b95\u0bcd\u0bb7\u0bcd" #KSH - க்ஷ்
-_indian_rupee = u"₹"
+_day = "௳"
+_month = "௴"
+_year = "௵"
+_debit = "௶"
+_credit = "௷"
+_rupee = "௹"
+_numeral = "௺"
+_sri = "\u0bb6\u0bcd\u0bb0\u0bc0" #SRI - ஶ்ரீ
+_ksha = "\u0b95\u0bcd\u0bb7" #KSHA - க்ஷ
+_ksh = "\u0b95\u0bcd\u0bb7\u0bcd" #KSH - க்ஷ்
+_indian_rupee = "₹"
 tamil_symbols = [_day, _month, _year, _debit, _credit, _rupee, _numeral, _sri, _ksha, _ksh,_indian_rupee]
 
 ## total tamil letters in use, including sanskrit letters
 tamil_letters = [
 
 ## /* Uyir */
-u"அ",u"ஆ",u"இ", u"ஈ",u"உ",u"ஊ",u"எ",u"ஏ",u"ஐ",u"ஒ",u"ஓ",u"ஔ",
+"அ","ஆ","இ", "ஈ","உ","ஊ","எ","ஏ","ஐ","ஒ","ஓ","ஔ",
 
 ##/* Ayuda Ezhuthu */
-u"ஃ",
+"ஃ",
 
 ## /* Mei */
-u"க்",u"ச்",u"ட்",u"த்",u"ப்",u"ற்",u"ஞ்",u"ங்",u"ண்",u"ந்",u"ம்",u"ன்",u"ய்",u"ர்",u"ல்",u"வ்",u"ழ்",u"ள்",
+"க்","ச்","ட்","த்","ப்","ற்","ஞ்","ங்","ண்","ந்","ம்","ன்","ய்","ர்","ல்","வ்","ழ்","ள்",
 
 ## /* Agaram */
-## u"க",u"ச",u"ட",u"த",u"ப",u"ற",u"ஞ",u"ங",u"ண",u"ந",u"ம",u"ன",u"ய",u"ர",u"ல",u"வ",u"ழ",u"ள",
+## "க","ச","ட","த","ப","ற","ஞ","ங","ண","ந","ம","ன","ய","ர","ல","வ","ழ","ள",
 
 ## /* Sanskrit (Vada Mozhi) */
-## u"ஜ",u"ஷ", u"ஸ",u"ஹ",
+## "ஜ","ஷ", "ஸ","ஹ",
 
 ##/* Sanskrit (Mei) */
-u"ஜ்",u"ஷ்", u"ஸ்",u"ஹ்",
+"ஜ்","ஷ்", "ஸ்","ஹ்",
 
 ## /* Uyir Mei */
-u"க"  ,u"கா"  ,u"கி"  ,u"கீ"  ,u"கு"  ,u"கூ"  ,u"கெ"  ,u"கே"  ,u"கை"  ,u"கொ"  ,u"கோ"  ,u"கௌ"
-,u"ச"  ,u"சா"  ,u"சி"  ,u"சீ"  ,u"சு"  ,u"சூ"  ,u"செ"  ,u"சே"  ,u"சை"  ,u"சொ"  ,u"சோ"  ,u"சௌ"
-,u"ட"  ,u"டா"  ,u"டி"  ,u"டீ"  ,u"டு"  ,u"டூ"  ,u"டெ"  ,u"டே"  ,u"டை"  ,u"டொ"  ,u"டோ"  ,u"டௌ"
-,u"த"  ,u"தா"  ,u"தி"  ,u"தீ"  ,u"து"  ,u"தூ"  ,u"தெ"  ,u"தே"  ,u"தை"  ,u"தொ"  ,u"தோ"  ,u"தௌ"
-,u"ப"  ,u"பா"  ,u"பி"  ,u"பீ"  ,u"பு"  ,u"பூ"  ,u"பெ"  ,u"பே"  ,u"பை"  ,u"பொ"  ,u"போ"  ,u"பௌ"
-,u"ற"  ,u"றா"  ,u"றி"  ,u"றீ"  ,u"று"  ,u"றூ"  ,u"றெ"  ,u"றே"  ,u"றை"  ,u"றொ"  ,u"றோ"  ,u"றௌ"
-,u"ஞ"  ,u"ஞா"  ,u"ஞி"  ,u"ஞீ"  ,u"ஞு"  ,u"ஞூ"  ,u"ஞெ"  ,u"ஞே"  ,u"ஞை"  ,u"ஞொ"  ,u"ஞோ"  ,u"ஞௌ"
-,u"ங"  ,u"ஙா"  ,u"ஙி"  ,u"ஙீ"  ,u"ஙு"  ,u"ஙூ"  ,u"ஙெ"  ,u"ஙே"  ,u"ஙை"  ,u"ஙொ"  ,u"ஙோ"  ,u"ஙௌ"
-,u"ண"  ,u"ணா"  ,u"ணி"  ,u"ணீ"  ,u"ணு"  ,u"ணூ"  ,u"ணெ"  ,u"ணே"  ,u"ணை"  ,u"ணொ"  ,u"ணோ"  ,u"ணௌ"
-,u"ந"  ,u"நா"  ,u"நி"  ,u"நீ"  ,u"நு"  ,u"நூ"  ,u"நெ"  ,u"நே"  ,u"நை"  ,u"நொ"  ,u"நோ"  ,u"நௌ"
-,u"ம"  ,u"மா"  ,u"மி"  ,u"மீ"  ,u"மு"  ,u"மூ"  ,u"மெ"  ,u"மே"  ,u"மை"  ,u"மொ"  ,u"மோ"  ,u"மௌ"
-,u"ன"  ,u"னா"  ,u"னி"  ,u"னீ"  ,u"னு"  ,u"னூ"  ,u"னெ"  ,u"னே"  ,u"னை"  ,u"னொ"  ,u"னோ"  ,u"னௌ"
-,u"ய"  ,u"யா"  ,u"யி"  ,u"யீ"  ,u"யு"  ,u"யூ"  ,u"யெ"  ,u"யே"  ,u"யை"  ,u"யொ"  ,u"யோ"  ,u"யௌ"
-,u"ர"  ,u"ரா"  ,u"ரி"  ,u"ரீ"  ,u"ரு"  ,u"ரூ"  ,u"ரெ"  ,u"ரே"  ,u"ரை"  ,u"ரொ"  ,u"ரோ"  ,u"ரௌ"
-,u"ல"  ,u"லா"  ,u"லி"  ,u"லீ"  ,u"லு"  ,u"லூ"  ,u"லெ"  ,u"லே"  ,u"லை"  ,u"லொ"  ,u"லோ"  ,u"லௌ"
-,u"வ"  ,u"வா"  ,u"வி"  ,u"வீ"  ,u"வு"  ,u"வூ"  ,u"வெ"  ,u"வே"  ,u"வை"  ,u"வொ"  ,u"வோ"  ,u"வௌ"
-,u"ழ"  ,u"ழா"  ,u"ழி"  ,u"ழீ"  ,u"ழு"  ,u"ழூ"  ,u"ழெ"  ,u"ழே"  ,u"ழை"  ,u"ழொ"  ,u"ழோ"  ,u"ழௌ"
-,u"ள"  ,u"ளா"  ,u"ளி"  ,u"ளீ"  ,u"ளு"  ,u"ளூ"  ,u"ளெ"  ,u"ளே"  ,u"ளை"  ,u"ளொ"  ,u"ளோ"  ,u"ளௌ"
+"க"  ,"கா"  ,"கி"  ,"கீ"  ,"கு"  ,"கூ"  ,"கெ"  ,"கே"  ,"கை"  ,"கொ"  ,"கோ"  ,"கௌ"
+,"ச"  ,"சா"  ,"சி"  ,"சீ"  ,"சு"  ,"சூ"  ,"செ"  ,"சே"  ,"சை"  ,"சொ"  ,"சோ"  ,"சௌ"
+,"ட"  ,"டா"  ,"டி"  ,"டீ"  ,"டு"  ,"டூ"  ,"டெ"  ,"டே"  ,"டை"  ,"டொ"  ,"டோ"  ,"டௌ"
+,"த"  ,"தா"  ,"தி"  ,"தீ"  ,"து"  ,"தூ"  ,"தெ"  ,"தே"  ,"தை"  ,"தொ"  ,"தோ"  ,"தௌ"
+,"ப"  ,"பா"  ,"பி"  ,"பீ"  ,"பு"  ,"பூ"  ,"பெ"  ,"பே"  ,"பை"  ,"பொ"  ,"போ"  ,"பௌ"
+,"ற"  ,"றா"  ,"றி"  ,"றீ"  ,"று"  ,"றூ"  ,"றெ"  ,"றே"  ,"றை"  ,"றொ"  ,"றோ"  ,"றௌ"
+,"ஞ"  ,"ஞா"  ,"ஞி"  ,"ஞீ"  ,"ஞு"  ,"ஞூ"  ,"ஞெ"  ,"ஞே"  ,"ஞை"  ,"ஞொ"  ,"ஞோ"  ,"ஞௌ"
+,"ங"  ,"ஙா"  ,"ஙி"  ,"ஙீ"  ,"ஙு"  ,"ஙூ"  ,"ஙெ"  ,"ஙே"  ,"ஙை"  ,"ஙொ"  ,"ஙோ"  ,"ஙௌ"
+,"ண"  ,"ணா"  ,"ணி"  ,"ணீ"  ,"ணு"  ,"ணூ"  ,"ணெ"  ,"ணே"  ,"ணை"  ,"ணொ"  ,"ணோ"  ,"ணௌ"
+,"ந"  ,"நா"  ,"நி"  ,"நீ"  ,"நு"  ,"நூ"  ,"நெ"  ,"நே"  ,"நை"  ,"நொ"  ,"நோ"  ,"நௌ"
+,"ம"  ,"மா"  ,"மி"  ,"மீ"  ,"மு"  ,"மூ"  ,"மெ"  ,"மே"  ,"மை"  ,"மொ"  ,"மோ"  ,"மௌ"
+,"ன"  ,"னா"  ,"னி"  ,"னீ"  ,"னு"  ,"னூ"  ,"னெ"  ,"னே"  ,"னை"  ,"னொ"  ,"னோ"  ,"னௌ"
+,"ய"  ,"யா"  ,"யி"  ,"யீ"  ,"யு"  ,"யூ"  ,"யெ"  ,"யே"  ,"யை"  ,"யொ"  ,"யோ"  ,"யௌ"
+,"ர"  ,"ரா"  ,"ரி"  ,"ரீ"  ,"ரு"  ,"ரூ"  ,"ரெ"  ,"ரே"  ,"ரை"  ,"ரொ"  ,"ரோ"  ,"ரௌ"
+,"ல"  ,"லா"  ,"லி"  ,"லீ"  ,"லு"  ,"லூ"  ,"லெ"  ,"லே"  ,"லை"  ,"லொ"  ,"லோ"  ,"லௌ"
+,"வ"  ,"வா"  ,"வி"  ,"வீ"  ,"வு"  ,"வூ"  ,"வெ"  ,"வே"  ,"வை"  ,"வொ"  ,"வோ"  ,"வௌ"
+,"ழ"  ,"ழா"  ,"ழி"  ,"ழீ"  ,"ழு"  ,"ழூ"  ,"ழெ"  ,"ழே"  ,"ழை"  ,"ழொ"  ,"ழோ"  ,"ழௌ"
+,"ள"  ,"ளா"  ,"ளி"  ,"ளீ"  ,"ளு"  ,"ளூ"  ,"ளெ"  ,"ளே"  ,"ளை"  ,"ளொ"  ,"ளோ"  ,"ளௌ"
 
 ##/* Sanskrit Uyir-Mei */
-,u"ஶ", 	u"ஶா", 	u"ஶி", 	u"ஶீ", u"ஶு", u"ஶூ", u"ஶெ", u"ஶே", u"ஶை", u"ஶொ", u"ஶோ", u"ஶௌ"
-,u"ஜ"  ,u"ஜா"  ,u"ஜி"  ,u"ஜீ"  ,u"ஜு"  ,u"ஜூ"  ,u"ஜெ"  ,u"ஜே"  ,u"ஜை"  ,u"ஜொ"  ,u"ஜோ"  ,u"ஜௌ"
-,u"ஷ"  ,u"ஷா"  ,u"ஷி"  ,u"ஷீ"  ,u"ஷு"  ,u"ஷூ"  ,u"ஷெ"  ,u"ஷே"  ,u"ஷை"  ,u"ஷொ"  ,u"ஷோ"  ,u"ஷௌ"
-,u"ஸ"  ,u"ஸா"  ,u"ஸி"  ,u"ஸீ"  ,u"ஸு"  ,u"ஸூ"  ,u"ஸெ"  ,u"ஸே"  ,u"ஸை"  ,u"ஸொ"  ,u"ஸோ"  ,u"ஸௌ"
-,u"ஹ"  ,u"ஹா"  ,u"ஹி"  ,u"ஹீ"  ,u"ஹு"  ,u"ஹூ"  ,u"ஹெ"  ,u"ஹே"  ,u"ஹை"  ,u"ஹொ"  ,u"ஹோ"  ,u"ஹௌ"
-,u"க்ஷ"  ,u"க்ஷா"  ,u"க்ஷி" 	,u"க்ஷீ" 	,u"க்ஷு"  ,u"க்ஷூ"  ,u"க்ஷெ"   ,u"க்ஷே" ,u"க்ஷை"  ,u"க்ஷொ" ,u"க்ஷோ"  ,u"க்ஷௌ" ]
+,"ஶ", 	"ஶா", 	"ஶி", 	"ஶீ", "ஶு", "ஶூ", "ஶெ", "ஶே", "ஶை", "ஶொ", "ஶோ", "ஶௌ"
+,"ஜ"  ,"ஜா"  ,"ஜி"  ,"ஜீ"  ,"ஜு"  ,"ஜூ"  ,"ஜெ"  ,"ஜே"  ,"ஜை"  ,"ஜொ"  ,"ஜோ"  ,"ஜௌ"
+,"ஷ"  ,"ஷா"  ,"ஷி"  ,"ஷீ"  ,"ஷு"  ,"ஷூ"  ,"ஷெ"  ,"ஷே"  ,"ஷை"  ,"ஷொ"  ,"ஷோ"  ,"ஷௌ"
+,"ஸ"  ,"ஸா"  ,"ஸி"  ,"ஸீ"  ,"ஸு"  ,"ஸூ"  ,"ஸெ"  ,"ஸே"  ,"ஸை"  ,"ஸொ"  ,"ஸோ"  ,"ஸௌ"
+,"ஹ"  ,"ஹா"  ,"ஹி"  ,"ஹீ"  ,"ஹு"  ,"ஹூ"  ,"ஹெ"  ,"ஹே"  ,"ஹை"  ,"ஹொ"  ,"ஹோ"  ,"ஹௌ"
+,"க்ஷ"  ,"க்ஷா"  ,"க்ஷி" 	,"க்ஷீ" 	,"க்ஷு"  ,"க்ஷூ"  ,"க்ஷெ"   ,"க்ஷே" ,"க்ஷை"  ,"க்ஷொ" ,"க்ஷோ"  ,"க்ஷௌ" ]
 
-grantha_uyirmei_letters = copy( tamil_letters[tamil_letters.index(u"கா")-1:] )
+grantha_uyirmei_letters = copy( tamil_letters[tamil_letters.index("கா")-1:] )
 
 ## length of the definitions
 def accent_len( ):
@@ -345,15 +345,15 @@ def reverse_word( word ):
     """ reverse a Tamil word according to letters not unicode-points """
     op = get_letters( word )
     op.reverse()
-    return u"".join(op)
+    return "".join(op)
 
 ## find out if the letters like, "பொ" are written in canonical "ப + ொ"" graphemes then
 ## return True. If they are written like "ப + ெ + ா" then return False on first occurrence
 def is_normalized( text ):
     TLEN,idx = len(text),1
-    kaal = u"ா"
-    Laa = u"ள"
-    sinna_kombu, periya_kombu = u"ெ", u"ே"
+    kaal = "ா"
+    Laa = "ள"
+    sinna_kombu, periya_kombu = "ெ", "ே"
     kombugal = [sinna_kombu, periya_kombu]
 
     # predicate measures if the normalization is violated
@@ -465,7 +465,7 @@ for _uyir_idx in range(0,12):
 
 def join_letters_elementary(elements):
     assert len(elements)%2 == 0, u'input has to be an even numbered list'
-    return u"".join([joinMeiUyir(elements[i],elements[i+1]) for i in range(0,len(elements),2)])
+    return "".join([joinMeiUyir(elements[i],elements[i+1]) for i in range(0,len(elements),2)])
 
 def get_letters_elementary_iterable(word,symmetric=False):
     for letter in get_letters_iterable(word):
@@ -512,10 +512,10 @@ def get_words_iterable( letters, tamil_only=False ):
                 buf.append( let )
         else:
             if len(buf) > 0:
-                yield  u"".join( buf )
+                yield  "".join( buf )
                 buf = []
     if len(buf) > 0:
-        yield u"".join(buf)
+        yield "".join(buf)
 
 def get_tamil_words( letters ):
     """ reverse a Tamil word according to letters, not unicode-points """
@@ -539,7 +539,7 @@ def compare_words_lexicographic( word_a, word_b ):
         pass
     La = len(word_a)
     Lb = len(word_b)
-    all_TA_letters = u"".join(tamil_letters)
+    all_TA_letters = "".join(tamil_letters)
     for itr in range(0,min(La,Lb)):
             pos1 = all_TA_letters.find( word_a[itr] )
             pos2 = all_TA_letters.find( word_b[itr] )
@@ -566,13 +566,13 @@ def word_intersection( word_a, word_b ):
     return positions
 
 def unicode_normalize(cplxchar):
-    Laa = u"ள"
-    kaal = u"ா"
-    sinna_kombu_a = u"ெ"
-    periya_kombu_aa = u"ே"
-    sinna_kombu_o = u"ொ"
-    periya_kombu_oo = u"ோ"
-    kombu_ak = u"ௌ"
+    Laa = "ள"
+    kaal = "ா"
+    sinna_kombu_a = "ெ"
+    periya_kombu_aa = "ே"
+    sinna_kombu_o = "ொ"
+    periya_kombu_oo = "ோ"
+    kombu_ak = "ௌ"
 
     lcplx = len(cplxchar)
     if lcplx>=3 and cplxchar[-1] == Laa:
@@ -634,13 +634,13 @@ def joinMeiUyir(mei_char, uyir_char):
     if not uyir_char: return mei_char
 
     if not isinstance(mei_char, str):
-        raise ValueError(u"Passed input mei character '%s' must be unicode, not just string" % mei_char)
+        raise ValueError("Passed input mei character '%s' must be unicode, not just string" % mei_char)
     if not isinstance(uyir_char, str) and uyir_char != None:
-        raise ValueError(u"Passed input uyir character '%s' must be unicode, not just string" % uyir_char)
+        raise ValueError("Passed input uyir character '%s' must be unicode, not just string" % uyir_char)
     if mei_char not in grantha_mei_letters:
-        raise ValueError(u"Passed input character '%s' is not a tamil mei character" % mei_char)
+        raise ValueError("Passed input character '%s' is not a tamil mei character" % mei_char)
     if uyir_char not in uyir_letters:
-        raise ValueError(u"Passed input character '%s' is not a tamil uyir character" % uyir_char)
+        raise ValueError("Passed input character '%s' is not a tamil uyir character" % uyir_char)
     if uyir_char:
         uyiridx = uyir_letters.index(uyir_char)
     else:
@@ -680,20 +680,20 @@ def classify_letter(letter):
 
 def print_tamil_words( tatext, use_frequencies = not False ):
     taletters = get_letters(tatext)
-    #for word in re.split(u"\s+",tatext):
-    #    print(u"-> ",word)
+    #for word in re.split("\s+",tatext):
+    #    print("-> ",word)
     # tamil words only
     frequency = {}
     for pos,word in enumerate(get_tamil_words(taletters)):
         frequency[word] = 1 + frequency.get(word,0)
     #for key in frequency.keys():
-    #    print(u"%s : %s"%(frequency[key],key))
+    #    print("%s : %s"%(frequency[key],key))
     # sort words by descending order of occurence
     for l in sorted(frequency.items(), key=operator.itemgetter(1)):
         if use_frequencies:
-            print(u"%d -> %s"%(l[1],l[0]))
+            print("%d -> %s"%(l[1],l[0]))
         else:
-            print(u"%s"%l[0])
+            print("%s"%l[0])
 
 compare_lexicograph_key = functools.cmp_to_key(compare_words_lexicographic)
 def tamil_sorted(list_data,key=compare_lexicograph_key):
@@ -784,43 +784,43 @@ Written By: Parathan
 
 vantrodar_ugaram = ["கு", "சு", "டு", "து", "பு", "று"] # வன்றொடர் உகரம்
 
-uyir_mei_kuril = [ u"க", u"கி", u"கு", u"கெ",u"கொ", u"கௌ"
-,u"ச", u"சி", u"சு", u"செ", u"சொ",u"சௌ"
-,u"ட", u"டி", u"டு", u"டெ" ,u"டொ", u"டௌ"
-,u"த", u"தி" , u"து"  ,u"தெ" ,u"தொ" ,u"தௌ"
-,u"ப"  ,u"பி" ,u"பு"  ,u"பெ", u"பொ", u"பௌ"
-,u"ற" ,u"றி"  ,u"று"  , u"றெ"  , u"றொ", u"றௌ"
-,u"ஞ" ,u"ஞி", u"ஞு", u"ஞெ", u"ஞொ" , u"ஞௌ"
-,u"ங" ,u"ஙி"  , u"ஙு" , u"ஙெ", u"ஙொ"  , u"ஙௌ"
-,u"ண" ,u"ணி"  , u"ணு", u"ணெ", u"ணொ"  , u"ணௌ"
-,u"ந"  , u"நி" ,u"நு" , u"நெ" , u"நொ" ,u"நௌ"
-,u"ம" ,u"மி", u"மு" , u"மெ", u"மொ" ,u"மௌ"
-,u"ன"  ,u"னி"  ,u"னு"  ,u"னெ" , u"னொ", u"னௌ"
-,u"ய" ,u"யி", u"யு"  ,u"யெ", u"யொ", u"யௌ"
-,u"ர" ,u"ரி" ,u"ரு"  ,u"ரெ"  ,u"ரொ" ,u"ரௌ"
-,u"ல"  ,u"லி"  ,u"லு" , u"லெ"  , u"லொ" , u"லௌ"
-,u"வ" ,u"வி"  , u"வு"  ,u"வெ" ,u"வொ" , u"வௌ"
-,u"ழ" ,u"ழி"  ,u"ழு"  ,u"ழெ" , u"ழொ"  , u"ழௌ"
-,u"ள" ,u"ளி", u"ளு" , u"ளெ"  ,u"ளொ" ,u"ளௌ"]
+uyir_mei_kuril = [ "க", "கி", "கு", "கெ","கொ", "கௌ"
+,"ச", "சி", "சு", "செ", "சொ","சௌ"
+,"ட", "டி", "டு", "டெ" ,"டொ", "டௌ"
+,"த", "தி" , "து"  ,"தெ" ,"தொ" ,"தௌ"
+,"ப"  ,"பி" ,"பு"  ,"பெ", "பொ", "பௌ"
+,"ற" ,"றி"  ,"று"  , "றெ"  , "றொ", "றௌ"
+,"ஞ" ,"ஞி", "ஞு", "ஞெ", "ஞொ" , "ஞௌ"
+,"ங" ,"ஙி"  , "ஙு" , "ஙெ", "ஙொ"  , "ஙௌ"
+,"ண" ,"ணி"  , "ணு", "ணெ", "ணொ"  , "ணௌ"
+,"ந"  , "நி" ,"நு" , "நெ" , "நொ" ,"நௌ"
+,"ம" ,"மி", "மு" , "மெ", "மொ" ,"மௌ"
+,"ன"  ,"னி"  ,"னு"  ,"னெ" , "னொ", "னௌ"
+,"ய" ,"யி", "யு"  ,"யெ", "யொ", "யௌ"
+,"ர" ,"ரி" ,"ரு"  ,"ரெ"  ,"ரொ" ,"ரௌ"
+,"ல"  ,"லி"  ,"லு" , "லெ"  , "லொ" , "லௌ"
+,"வ" ,"வி"  , "வு"  ,"வெ" ,"வொ" , "வௌ"
+,"ழ" ,"ழி"  ,"ழு"  ,"ழெ" , "ழொ"  , "ழௌ"
+,"ள" ,"ளி", "ளு" , "ளெ"  ,"ளொ" ,"ளௌ"]
 
-uyir_mei_nedil = [u"கா" ,u"கீ" ,u"கூ" ,u"கே",u"கோ"
-,u"சா" ,u"சீ"  ,u"சூ"  ,u"சே" ,u"சோ" 
-,u"டா"  ,u"டீ" ,u"டூ"  ,u"டே" ,u"டோ"
-,u"தா"  ,u"தீ"  ,u"தூ"    ,u"தே"    ,u"தோ" 
-,u"பா"   ,u"பீ"  ,u"பூ"    ,u"பே"  ,u"போ" 
-,u"றா"   ,u"றீ"    ,u"றூ"    ,u"றே"   ,u"றோ"
-,u"ஞா"   ,u"ஞீ"    ,u"ஞூ"    ,u"ஞே"    ,u"ஞோ" 
-,u"ஙா"  ,u"ஙீ"    ,u"ஙூ"    ,u"ஙே"  ,u"ஙோ"
-,u"ணா"  ,u"ணீ"    ,u"ணூ"    ,u"ணே"    ,u"ணோ" 
-,u"நா"   ,u"நீ"   ,u"நூ"   ,u"நே"   ,u"நோ" 
-,u"மா"  ,u"மீ"   ,u"மூ"   ,u"மே"   ,u"மோ"
-,u"னா"   ,u"னீ"   ,u"னூ"   ,u"னே"  ,u"னோ" 
-,u"யா"   ,u"யீ"  ,u"யூ"    ,u"யே"   ,u"யோ"
-,u"ரா"  ,u"ரீ"    ,u"ரூ"    ,u"ரே"  ,u"ரோ"  
-,u"லா"  ,u"லீ"   ,u"லூ"    ,u"லே"   ,u"லோ" 
-,u"வா"  ,u"வீ"   ,u"வூ"   ,u"வே"    ,u"வோ" 
-,u"ழா"   ,u"ழீ"   ,u"ழூ"    ,u"ழே"    ,u"ழோ"
-,u"ளா"  ,u"ளீ"    ,u"ளூ"  ,u"ளே"    ,u"ளோ"]
+uyir_mei_nedil = ["கா" ,"கீ" ,"கூ" ,"கே","கோ"
+,"சா" ,"சீ"  ,"சூ"  ,"சே" ,"சோ"
+,"டா"  ,"டீ" ,"டூ"  ,"டே" ,"டோ"
+,"தா"  ,"தீ"  ,"தூ"    ,"தே"    ,"தோ"
+,"பா"   ,"பீ"  ,"பூ"    ,"பே"  ,"போ"
+,"றா"   ,"றீ"    ,"றூ"    ,"றே"   ,"றோ"
+,"ஞா"   ,"ஞீ"    ,"ஞூ"    ,"ஞே"    ,"ஞோ"
+,"ஙா"  ,"ஙீ"    ,"ஙூ"    ,"ஙே"  ,"ஙோ"
+,"ணா"  ,"ணீ"    ,"ணூ"    ,"ணே"    ,"ணோ"
+,"நா"   ,"நீ"   ,"நூ"   ,"நே"   ,"நோ"
+,"மா"  ,"மீ"   ,"மூ"   ,"மே"   ,"மோ"
+,"னா"   ,"னீ"   ,"னூ"   ,"னே"  ,"னோ"
+,"யா"   ,"யீ"  ,"யூ"    ,"யே"   ,"யோ"
+,"ரா"  ,"ரீ"    ,"ரூ"    ,"ரே"  ,"ரோ"
+,"லா"  ,"லீ"   ,"லூ"    ,"லே"   ,"லோ"
+,"வா"  ,"வீ"   ,"வூ"   ,"வே"    ,"வோ"
+,"ழா"   ,"ழீ"   ,"ழூ"    ,"ழே"    ,"ழோ"
+,"ளா"  ,"ளீ"    ,"ளூ"  ,"ளே"    ,"ளோ"]
 
 def calculate_uyir_nedil_kuril_maathirai(word):
     if word in uyir_mei_kuril:
@@ -836,7 +836,7 @@ def calculate_uyir_nedil_kuril_maathirai(word):
     return 0.0 #எழுத்து வடமொழியாக இருப்பின்.. 0.0
 
 def calculate_maththirai(letters):
-    
+
     """மாத்திரை கணித்தல்: ஒரு தமிழ் சொல்லின் @letters மாத்திரை அளவை கணிக்கும்.
 
     விதிகள்:
@@ -848,29 +848,29 @@ def calculate_maththirai(letters):
     ஒளகாரக் குறுக்கம் சொல்லின் ஆரம்பத்தில் வரும் ஒள, மெள, வௌ என்பன 1 மாத்திரையில் ஒலித்தல்
 
     """
-    
-    ikaram = [ u"கி", u"சி", u"டி", u"தி", u"பி", u"றி", u"ஞி", u"ஙி", u"ணி", u"நி", u"மி", u"னி", u"யி", u"ரி", u"லி", u"வி", u"ழி",u"ளி"]
 
-    aikaaram = [ u"கை", u"சை" , u"டை" ,u"தை", u"பை", u"றை", u"ஞை", u"ஙை", u"ணை", u"நை" ,u"மை", u"னை", 
-    u"யை", u"ரை", u"லை" ,u"வை", u"ழை" ,u"ளை"]
-    
-    yakaram = [u"ய"  ,u"யா"  ,u"யி"  ,u"யீ"  ,u"யு"  ,u"யூ"  ,u"யெ"  ,u"யே"  ,u"யை" ,
-               u"யொ"  ,u"யோ"  ,u"யௌ"]
-    
+    ikaram = [ "கி", "சி", "டி", "தி", "பி", "றி", "ஞி", "ஙி", "ணி", "நி", "மி", "னி", "யி", "ரி", "லி", "வி", "ழி","ளி"]
+
+    aikaaram = [ "கை", "சை" , "டை" ,"தை", "பை", "றை", "ஞை", "ஙை", "ணை", "நை" ,"மை", "னை",
+    "யை", "ரை", "லை" ,"வை", "ழை" ,"ளை"]
+
+    yakaram = ["ய"  ,"யா"  ,"யி"  ,"யீ"  ,"யு"  ,"யூ"  ,"யெ"  ,"யே"  ,"யை" ,
+               "யொ"  ,"யோ"  ,"யௌ"]
+
     single_word = get_letters(letters)
-        
+
     maaththiraivarisai = []
-    
+
     # maaththiraivarisai_word = []
-    
+
     for index,eluthu in enumerate(single_word):
-        
+
         # maaththiraivarisai_word.append(eluthu)
         # print(maaththiraivarisai_word)
-                
+
         # குற்றியலுகரம்
         if eluthu in vantrodar_ugaram:
-            
+
             if index == 0:
                 maaththiraivarisai.append(1)
             elif index == 1:
@@ -884,19 +884,19 @@ def calculate_maththirai(letters):
 
         # குற்றியலிகரம்
         elif eluthu in ikaram:
-            
+
             checkNext = False
-            
+
             try:
                 checkNext = single_word[index+1] in yakaram
             except:
                 checkNext = False
-                
+
             if checkNext:
                 maaththiraivarisai.append(0.5)
             else:
                 maaththiraivarisai.append(1)
-                    
+
         # ஔகாரக் குறுக்கம்
         elif eluthu == "ஔ" or eluthu == "மௌ" or eluthu == "வெள":
             if single_word[0] == "ஔ" or single_word[0] == "மௌ" or single_word[0] == "வெள":
@@ -906,37 +906,37 @@ def calculate_maththirai(letters):
         elif eluthu == "ஐ":
             if single_word[0] == "ஐ":
                 maaththiraivarisai.append(1.5)
-                
+
         elif eluthu in aikaaram:
             if single_word[0] in aikaaram:
                 maaththiraivarisai.append(1.5)
             else:
                 maaththiraivarisai.append(1)
-        # ஆய்தம் 
+        # ஆய்தம்
         elif eluthu == "ஃ":
             if single_word[-1] == "ஃ":
                 maaththiraivarisai.append(0.5)
             else:
                 maaththiraivarisai.append(0.25)
-                
+
         # மகரக் குறுக்கம்
         elif eluthu == "ம்":
-            
+
             checkMagaram = False
-            
+
             try:
                 checkMagaram = single_word[index-1] == "ண்" or single_word[index-1] == "ன்"
             except:
                 checkMagaram = False
-                
+
             if checkMagaram:
                 maaththiraivarisai.append(0.25)
             else:
                 maaththiraivarisai.append(0.5)
-                
+
         else:
             maaththiraivarisai.append(calculate_uyir_nedil_kuril_maathirai(eluthu))
-        
+
     print(maaththiraivarisai)
     return sum(maaththiraivarisai)
 
@@ -945,17 +945,17 @@ def total_maaththirai(letters):
     ஒரு சொல் அதன் எழுத்துக்களின் @letters  என்பதன் மாத்திரைகளை தனித்தனியே
     கணிக்கிட்டு முழுமையாக அதன் சொல்-அளவான முழு மாத்திரை அளவை வெளியிடுகிறது.
     """
-    
+
     txt_string = letters.split(sep= " ")
 
     total_maaththiraivarisai = []
 
     if(len(txt_string) > 1):
-    
+
         for word in txt_string:
             total_maaththiraivarisai.append(calculate_maththirai(word))
-            
+
     else:
         total_maaththiraivarisai.append(calculate_maththirai(letters))
-        
+
     return sum(total_maaththiraivarisai)

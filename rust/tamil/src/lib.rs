@@ -25,5 +25,20 @@ mod tests {
     fn test_all_tamil() {
         use tamil;
         assert_eq!(tamil::tamil247().len(),247);
+        assert_eq!(tamil::TAMIL_LETTERS.to_vec().len(),345);
+        assert_eq!(tamil::TAMIL_SYMBOLS.len(),11);
+    }
+
+    #[test]
+    fn test_find_sri() {
+        use tamil;
+        let mut found_sri : bool = false;
+        for sym in tamil::TAMIL_SYMBOLS.iter() {
+            if  *sym == "ஶ்ரீ" {
+                found_sri = true;
+                break;
+            }
+        }
+        assert!(found_sri);
     }
 }
