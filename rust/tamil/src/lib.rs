@@ -74,4 +74,13 @@ mod tests {
         assert_eq!(istamil_prefix("Irai"),false);
         assert_eq!(istamil_prefix("Iraiஅப்பம்"),false);
     }
+
+    #[test]
+    fn test_word_alltamil() {
+        use tamil::all_tamil;
+        assert_eq!(all_tamil("அப்பம்"),true);
+        assert_eq!(all_tamil("இறை"),true);
+        assert_eq!(all_tamil("Irai"),false);
+        assert_eq!(all_tamil("அப்பம்Irai"),false);
+    }
 }

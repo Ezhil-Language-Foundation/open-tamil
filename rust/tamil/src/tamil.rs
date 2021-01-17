@@ -264,6 +264,10 @@ pub fn get_letters(x:&str) -> Vec<String> {
     v
 }
 
+pub fn all_tamil(word:&str) -> bool {
+    get_letters(&word).iter().all(|x| is_tamil_unicode_predicate(x.chars().next().unwrap()) )
+}
+
 pub fn istamil_prefix( word : &str ) -> bool {
     /* check if the given word has a tamil prefix. Returns
     * either a True/False flag
