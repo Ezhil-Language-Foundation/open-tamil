@@ -37,19 +37,19 @@ pub const MEI_LETTERS:[&str;18] = ["க்","ச்","ட்","த்","ப்",
            "ஞ்","ங்","ண்","ந்","ம்","ன்",
            "ய்","ர்","ல்","வ்","ழ்","ள்" ];
 
-pub const ACCENT_SYMBOLS:[&str;13] = ["","ா","ி","ீ","ு","ூ",
-          "ெ","ே","ை","ொ","ோ","ௌ","ஃ"];
+pub const ACCENT_SYMBOLS:[char;13] = ['\u{0}','ா','ி','ீ','ு','ூ',
+          'ெ','ே','ை','ொ','ோ','ௌ','ஃ'];
 
-pub const ACCENT_AA:&str = ACCENT_SYMBOLS[1];
-pub const ACCENT_I:&str  = ACCENT_SYMBOLS[2];
-pub const ACCENT_U:&str  = ACCENT_SYMBOLS[3];
-pub const ACCENT_UU:&str = ACCENT_SYMBOLS[4];
-pub const ACCENT_E:&str  = ACCENT_SYMBOLS[5];
-pub const ACCENT_EE:&str = ACCENT_SYMBOLS[6];
-pub const ACCENT_AI:&str = ACCENT_SYMBOLS[7];
-pub const ACCENT_O:&str  = ACCENT_SYMBOLS[8];
-pub const ACCENT_OO:&str = ACCENT_SYMBOLS[9];
-pub const ACCENT_AU:&str = ACCENT_SYMBOLS[10];
+pub const ACCENT_AA:char = ACCENT_SYMBOLS[1];
+pub const ACCENT_I:char  = ACCENT_SYMBOLS[2];
+pub const ACCENT_U:char  = ACCENT_SYMBOLS[3];
+pub const ACCENT_UU:char = ACCENT_SYMBOLS[4];
+pub const ACCENT_E:char  = ACCENT_SYMBOLS[5];
+pub const ACCENT_EE:char = ACCENT_SYMBOLS[6];
+pub const ACCENT_AI:char = ACCENT_SYMBOLS[7];
+pub const ACCENT_O:char  = ACCENT_SYMBOLS[8];
+pub const ACCENT_OO:char = ACCENT_SYMBOLS[9];
+pub const ACCENT_AU:char = ACCENT_SYMBOLS[10];
 
 pub const PULLI_SYMBOLS:[char;1] = ['்'];
 
@@ -212,10 +212,11 @@ def uyirmei_constructed( mei_idx, uyir_idx):
     return grantha_agaram_letters[mei_idx]+accent_symbols[uyir_idx]
 */
 pub fn uyirmei_constructed(mei_idx:usize,uyir_idx:usize) -> String {
-    return format!("{}{}",
-                GRANTHA_AGARAM_LETTERS[mei_idx],
-                ACCENT_SYMBOLS[uyir_idx]
-            );
+        match uyir_idx {
+            0 => { format!("{}",GRANTHA_AGARAM_LETTERS[mei_idx]) }
+            _ => { format!("{}{}",GRANTHA_AGARAM_LETTERS[mei_idx],
+            ACCENT_SYMBOLS[uyir_idx]) }
+        }
 }
 
 pub fn is_tamil_unicode_predicate(_x:char) -> bool {
@@ -238,6 +239,19 @@ pub fn getidx(letter:String) -> usize {
     itr
 }
 
+/*
+def has_tamil( word ):
+    """check if the word has any occurance of any tamil letter """
+    # list comprehension is not necessary - we bail at earliest
+    for letters in tamil_letters:
+        if ( word.find(letters) >= 0 ):
+            return True
+    return False
+*/
+pub fn get_letters_length(word:&str) -> usize {
+    get_letters(word).len()
+}
+
 /** Split a tamil-unicode stream into
 * tamil characters (individuals).
 */
@@ -245,21 +259,26 @@ pub fn get_letters(x:&str) -> Vec<String> {
     /* Splits the @word into a character-list of tamil/english
     *characters present in the stream. This routine provides a robust tokenizer
     *for Tamil unicode letters. */
+    const SPL_SYMBOLS:[char;12] = ['்','ா','ி','ீ','ு','ூ',
+              'ெ','ே','ை','ொ','ோ','ௌ'];
     let mut v: Vec<String> = Vec::new();
     let mut tmp:String=String::from("");
-    for (idx,c) in x.chars().enumerate() {
-        if x.is_char_boundary(idx) {
-            if  tmp.len() != 0  {
-                v.push(tmp.clone());
+    for c in x.chars() {
+        if SPL_SYMBOLS.iter().any(|x| *x == c) {
+            let z = v.pop();
+            match z {
+                Some(zz) => {tmp.push_str(&zz);}
+                _ => {}
             }
-            v.push(c.to_string());
+        }
+
+        if tmp.len() != 0  {
+            tmp.push(c);
+            v.push(tmp.clone());
             tmp.clear();
         } else {
-            tmp.push(c);
+            v.push(c.to_string());
         }
-    }
-    if tmp.len() != 0 {
-        v.push(tmp);
     }
     v
 }

@@ -83,4 +83,13 @@ mod tests {
         assert_eq!(all_tamil("Irai"),false);
         assert_eq!(all_tamil("அப்பம்Irai"),false);
     }
+
+    #[test]
+    fn test_word_len() {
+        use tamil::get_letters_length;
+        assert_eq!(get_letters_length("இறையோன்"),4);
+        assert_eq!(get_letters_length("திருவிடைமருதூர்"),8);
+        assert_eq!(get_letters_length("திருவான்மீயூர்"),7);
+    }
+
 }
