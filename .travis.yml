@@ -1,33 +1,31 @@
 sudo: false
-matrix:
-    include:
-        -language: python
-            python:
-              - "3.6"
-              - "3.5-dev"
-              - "pypy" #
+-language: python
+    python:
+      - "3.6"
+      - "3.5-dev"
+      - "pypy" #
 
-            before_install:
-              - echo `ruby -v` is the ruby version
-            install:
-              - pip install argparse
-              - pip install requests
-              - python setup.py sdist build
-              - pip install nose-cov
-            script:
-              - X=`pwd`
-              - cd ./extras/C-tamil && make all && make test
-              - cd $X && ./unittest3 #naked tests
-            after_success:
-              - pip install coveralls
-              - coveralls
-        -language: rust
-            rust:
-              - stable
-              - beta
-              - nightly
-            matrix:
-              allow_failures:
-                - rust: nightly
-            script:
-              - cd ./rust/tamil && cargo test
+    before_install:
+      - echo `ruby -v` is the ruby version
+    install:
+      - pip install argparse
+      - pip install requests
+      - python setup.py sdist build
+      - pip install nose-cov
+    script:
+      - X=`pwd`
+      - cd ./extras/C-tamil && make all && make test
+      - cd $X && ./unittest3 #naked tests
+    after_success:
+      - pip install coveralls
+      - coveralls
+-language: rust
+    rust:
+      - stable
+      - beta
+      - nightly
+    matrix:
+      allow_failures:
+        - rust: nightly
+    script:
+      - cd ./rust/tamil && cargo test
