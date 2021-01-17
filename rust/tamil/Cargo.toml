@@ -2,6 +2,10 @@
 name = "tamil"
 version = "0.1.0"
 authors = ["Muthiah Annamalai <ezhillang@gmail.com>"]
-
+license = "MIT"
+description = "Tamil Language NLP tools"
+homepage="http://tamilpesu.us"
+documentation = "rustdoc"
+repository="https://github.com/Ezhil-Language-Foundation/open-tamil.git"
 
 [dependencies]
