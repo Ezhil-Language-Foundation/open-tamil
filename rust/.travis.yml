@@ -1,0 +1,9 @@
+language: rust
+rust:
+  - stable
+  - beta
+  - nightly
+tamil:
+  allow_failures:
+    - rust: nightly
+
