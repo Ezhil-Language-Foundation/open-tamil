@@ -84,6 +84,13 @@ pub const CONSONANT_VA:char = 'வ';
 pub const SANSKRIT_LETTERS :[&str;6]= ["ஶ","ஜ","ஷ", "ஸ","ஹ","க்ஷ"];
 pub const SANSKRIT_MEI_LETTERS:[&str;6] =["ஶ்","ஜ்","ஷ்", "ஸ்","ஹ்","க்ஷ்"];
 
+pub const GRANTHA_MEI_LETTERS:[&str;24]=["க்","ச்","ட்","த்","ப்","ற்",
+           "ஞ்","ங்","ண்","ந்","ம்","ன்",
+           "ய்","ர்","ல்","வ்","ழ்","ள்","ஶ்","ஜ்","ஷ்", "ஸ்","ஹ்","க்ஷ்"];
+pub const GRANTHA_AGARAM_LETTERS:[&str;24]=["க","ச","ட","த","ப","ற",
+          "ஞ","ங","ண","ந","ம","ன",
+          "ய","ர","ல","வ","ழ","ள","ஶ","ஜ","ஷ", "ஸ","ஹ","க்ஷ"];
+
 pub const UYIRMEI_LETTERS:[&str;216] = ["க"  ,"கா"  ,"கி"  ,"கீ"  ,"கு"  ,"கூ"  ,
 "கெ"  ,"கே"  ,"கை"  ,"கொ"  ,"கோ"  ,"கௌ"  ,
 "ச"  ,"சா"  ,"சி"  ,"சீ"  ,"சு"  ,"சூ"  ,"செ"  ,"சே"  ,"சை"  ,"சொ"  ,"சோ"  ,"சௌ" ,
@@ -182,6 +189,55 @@ pub fn tamil247() -> Vec<String> {
     _tamil247
 }
 
+/**
+mei_to_agaram("ழ்") => ழ
+*/
+pub fn mei_to_agaram(in_syllable:String) -> String {
+     match GRANTHA_MEI_LETTERS.iter().position(|&x| x == in_syllable) {
+        Some(mei_pos)=> {
+            let agaram_a_pos : usize = 0;
+            uyirmei_constructed(mei_pos,agaram_a_pos)
+            }
+
+        None => in_syllable
+    }
+}
+
+/**
+def uyirmei_constructed( mei_idx, uyir_idx):
+    """ construct uyirmei letter give mei index and uyir index """
+    idx,idy = mei_idx,uyir_idx
+    assert ( idy >= 0 and idy < uyir_len() )
+    assert ( idx >= 0 and idx < 6+mei_len() )
+    return grantha_agaram_letters[mei_idx]+accent_symbols[uyir_idx]
+*/
+pub fn uyirmei_constructed(mei_idx:usize,uyir_idx:usize) -> String {
+    return format!("{}{}",
+                GRANTHA_AGARAM_LETTERS[mei_idx],
+                ACCENT_SYMBOLS[uyir_idx]
+            );
+}
+
+pub fn is_tamil_unicode_predicate(_x:char) -> bool {
+    let ranges : [i32;2] = [2946,3066];
+    let x = _x as i32;
+    x >= ranges[0] && x <= ranges[1]
+}
+
+pub fn getidx(letter:String) -> usize {
+    let mut itr :usize=0;
+    loop {
+        if itr == TAMIL_LETTERS.len () {
+            panic!("Cannot find letter in Tamil arichuvadi");
+        } else  if  letter == TAMIL_LETTERS[itr] {
+            break;
+        } else {
+            itr = itr + 1
+       }
+    }
+    itr
+}
+
 /** Split a tamil-unicode stream into
 * tamil characters (individuals).
 */
@@ -194,18 +250,29 @@ pub fn get_letters(x:&str) -> Vec<String> {
     for (idx,c) in x.chars().enumerate() {
         if x.is_char_boundary(idx) {
             if  tmp.len() != 0  {
-                v.push(format!("{}",tmp));
-                v.push(format!("{}",c));
-            } else {
-                v.push(format!("{}",c));
+                v.push(tmp.clone());
             }
+            v.push(c.to_string());
             tmp.clear();
         } else {
-            tmp =  format!("{}{}",tmp,c);
+            tmp.push(c);
         }
     }
     if tmp.len() != 0 {
         v.push(tmp);
     }
     v
+}
+
+pub fn istamil_prefix( word : &str ) -> bool {
+    /* check if the given word has a tamil prefix. Returns
+    * either a True/False flag
+    */
+    match word.len() {
+        0 => false,
+        _ => {
+            let letters = get_letters(&word);
+            TAMIL_LETTERS.iter().any(|x| x == &letters[0])
+        }
+    }
 }
