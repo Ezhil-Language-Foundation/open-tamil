@@ -240,14 +240,19 @@ pub fn getidx(letter:String) -> usize {
 }
 
 /*
-def has_tamil( word ):
     """check if the word has any occurance of any tamil letter """
     # list comprehension is not necessary - we bail at earliest
-    for letters in tamil_letters:
-        if ( word.find(letters) >= 0 ):
-            return True
-    return False
 */
+pub fn has_tamil(word:&str) -> bool {
+    for c in word.chars() {
+        let cstr = c.to_string();
+        if  TAMIL_LETTERS.iter().any( |x| *x == cstr )  {
+            return true
+        }
+    }
+    false
+}
+
 pub fn get_letters_length(word:&str) -> usize {
     get_letters(word).len()
 }

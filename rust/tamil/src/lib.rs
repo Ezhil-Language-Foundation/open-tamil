@@ -2,7 +2,6 @@
  * (C) 2021, Ezhil Language Foundation.
  *  This file is part of Open-Tamil for Rust language.
  */
-
 pub mod tamil;
 
 #[cfg(test)]
@@ -90,6 +89,26 @@ mod tests {
         assert_eq!(get_letters_length("இறையோன்"),4);
         assert_eq!(get_letters_length("திருவிடைமருதூர்"),8);
         assert_eq!(get_letters_length("திருவான்மீயூர்"),7);
+    }
+
+    #[test]
+    fn test_has_tamil() {
+        use tamil::has_tamil;
+        use std::collections::HashMap;
+
+        assert_eq!(has_tamil("அப்பம்"),true);
+        assert_eq!(has_tamil("இறை"),true);
+        assert_eq!(has_tamil("Irai"),false);
+        assert_eq!(has_tamil("அப்பம்Irai"),true);
+
+        let timber_resources: HashMap<&str, bool> = [("Norway", false),
+        ("Denmark", false), ("Iceland", false)].iter().cloned().collect();
+        for (key,value) in timber_resources.iter() {
+            assert_eq!(has_tamil(key),*value);
+            let mut keytam = key.to_string();
+            keytam.push('க');
+            assert_eq!(has_tamil(&keytam),true);
+        }
     }
 
 }
