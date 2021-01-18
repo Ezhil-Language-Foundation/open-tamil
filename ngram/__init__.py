@@ -8,7 +8,7 @@
 #       Raymond J. Mooney, U of Texas, Austin.
 # Ref: N-gram models https://en.wikipedia.org/wiki/N-gram
 
-from . import LetterModels
-from . import WordModels
 from . import Corpus
 from . import Distance
+from . import LetterModels
+from . import WordModels

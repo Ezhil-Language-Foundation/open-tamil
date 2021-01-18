@@ -1,9 +1,9 @@
 # (C) 2013-2015 Muthiah Annamalai
-from . import jaffna
+from . import UOM
 from . import azhagi
 from . import combinational
-from . import UOM
 from . import itrans
+from . import jaffna
 from .algorithm import Iterative, Greedy, Tamil2English, reverse_transliteration_table
 
 #Transliteration module
