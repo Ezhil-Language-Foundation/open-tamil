@@ -1,6 +1,3 @@
-import glob
-import os
-import sys
 import tamil
 
 print("ஒப்பன் தமிழ் வரிசை எண் - ",tamil.VERSION)
