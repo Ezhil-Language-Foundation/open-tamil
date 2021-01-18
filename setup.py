@@ -4,8 +4,9 @@
 # (C) 2013-2020 முத்து அண்ணாமலை மற்றும் ஓப்பன் தமிழ் பங்களிப்பாளர்கள்
 # open-tamil project
 
-from setuptools import setup
 from codecs import open
+
+from setuptools import setup
 
 long_description = open('README.rst','r','UTF-8').read()
 
