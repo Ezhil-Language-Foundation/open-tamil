@@ -301,8 +301,11 @@ def istamil_prefix( word ):
     return False
 
 def is_tamil_unicode_predicate(x:str):
-    intx = ord(x)
-    return intx >= (2946) and intx <= (3066)
+    for c in x:
+        intx = ord(c)
+        if not (intx >= (2946) and intx <= (3066)):
+            return False
+    return True
 
 def is_tamil_unicode( sequence ):
     # Ref: languagetool-office-extension/src/main/java/org/languagetool/openoffice/TamilDetector.java

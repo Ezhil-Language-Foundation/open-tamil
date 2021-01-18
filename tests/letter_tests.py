@@ -336,12 +336,9 @@ class CodecTSCII(unittest.TestCase):
         self.assertEqual( TSCII[0xAB]+TSCII[0xF4]+TSCII[0xC0]+TSCII[0xA1], u"அப்பா" )
 
     def test_TSCII_to_UTF8_part1( self ):
-        if PYTHON3:
-            print("#### TEST NOT RUN FOR PYTHON3 #######")
-            return
-        with open("data/Sample.TSCII") as fp:
+        with codecs.open("data/Sample.TSCII","rb") as fp:
             str = fp.read()
-        output = tamil.tscii.convert_to_unicode( str )
+        output = tamil.tscii.convert_to_unicode( [chr(x) for x in str] )
         if ( LINUX ): print(output)
         needle = u"""உடுப்பி ஒட்டலுக்குப் போய் மசாலா தோசை சாப்பிட்டு வரலாமா"""
         assert( output.find(needle) >= 0 )
