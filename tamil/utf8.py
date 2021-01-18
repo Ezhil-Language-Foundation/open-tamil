@@ -95,7 +95,10 @@ mei_letters = [
     "ள்",
 ]
 
-accent_symbols = ["", "ா", "ி", "ீ", "ு", "ூ", "ெ", "ே", "ை", "ொ", "ோ", "ௌ", "ஃ"]
+accent_symbols = [
+    "", "ா", "ி", "ீ", "ு", "ூ", "ெ", "ே", "ை", "ொ", "ோ", "ௌ", "ஃ"
+]
+
 accent_aa = accent_symbols[1]
 accent_i = accent_symbols[2]
 accent_u = accent_symbols[3]
@@ -392,7 +395,8 @@ tamil_digit_1to10 = ["௦", "௧", "௨", "௩", "௪", "௫", "௬", "௭", "�
 tamil_digit_100 = "௱"
 tamil_digit_1000 = "௲"
 
-tamil_digits = [(num, digit) for num, digit in zip(range(0, 11), tamil_digit_1to10)]
+tamil_digits = [(num, digit)
+                for num, digit in zip(range(0, 11), tamil_digit_1to10)]
 tamil_digits.extend([(100, tamil_digit_100), (1000, tamil_digit_1000)])
 
 # tamil symbols
@@ -853,9 +857,17 @@ def istamil_prefix(word):
     return False
 
 
+def is_tamil_unicode_value(intx: int):
+    return (intx >= (2946) and intx <= (3066))
+
+
+def is_tamil_unicode_codept(x: str):
+    intx = ord(x)
+    return is_tamil_unicode_value(intx)
+
+
 def is_tamil_unicode_predicate(x: str):
-    intx = ord(x[0])
-    if not (intx >= (2946) and intx <= (3066)):
+    if not is_tamil_unicode_codept(x[0]):
         return False
     return (len(x) > 1 and is_tamil_unicode_predicate(x[1:])) or True
 
@@ -871,11 +883,8 @@ def is_tamil_unicode(sequence):
 
 def has_english(word_in):
     """ return True if word_in has any English letters in the string"""
-    return (
-        not all_tamil(word_in)
-        and len(word_in) > 0
-        and any([l in word_in for l in string.ascii_letters])
-    )
+    return (not all_tamil(word_in) and len(word_in) > 0
+            and any([l in word_in for l in string.ascii_letters]))
 
 
 def all_tamil(word_in):
@@ -961,41 +970,60 @@ grantha_agaram_set = _make_set(grantha_agaram_letters)
 accent_symbol_set = _make_set(accent_symbols)
 uyir_letter_set = _make_set(uyir_letters)
 
-
+_GLL = set()
+_GLL.update(uyir_letter_set)
+_GLL.add(ayudha_letter)
+_GLL.update(grantha_agaram_set)
 ## Split a tamil-unicode stream into
 ## tamil characters (individuals).
+from functools import lru_cache
+
+
+def copy_lru_decorator(f):
+    @lru_cache(16192)
+    def f_lru(*args, **kwargs):
+        return f(*args, **kwargs)
+
+    def f_copy_lru(*args, **kwargs):
+        y = f_lru(*args, **kwargs)
+        return copy(y)
+
+    return f_copy_lru
+
+
+#@copy_lru_decorator
 def get_letters(word):
     """Splits the @word into a character-list of tamil/english
     characters present in the stream. This routine provides a robust tokenizer
     for Tamil unicode letters."""
     ta_letters = list()
     not_empty = False
-    WLEN, idx = len(word), 0
-    while idx < WLEN:
-        c = word[idx]
-        if c in uyir_letter_set or c == ayudha_letter:
+    for c in word:
+        if c in _GLL:
             ta_letters.append(c)
             not_empty = True
-        elif c in grantha_agaram_set:
-            ta_letters.append(c)
-            not_empty = True
-        elif c in accent_symbol_set:
+            continue
+
+        if c in accent_symbol_set:
             if not not_empty:
                 # odd situation
                 ta_letters.append(c)
                 not_empty = True
             else:
                 ta_letters[-1] += c
+            continue
+
+        cval = ord(c)
+        if cval < 256 or not (is_tamil_unicode_value(cval)):
+            ta_letters.append(c)
+            continue
+
+        if not_empty:
+            ta_letters[-1] += c
         else:
-            if ord(c) < 256 or not (is_tamil_unicode_predicate(c)):
-                ta_letters.append(c)
-            else:
-                if not_empty:
-                    ta_letters[-1] += c
-                else:
-                    ta_letters.append(c)
-                    not_empty = True
-        idx = idx + 1
+            ta_letters.append(c)
+            not_empty = True
+
     return ta_letters
 
 
@@ -1043,9 +1071,10 @@ for _uyir_idx in range(0, 12):
 
 def join_letters_elementary(elements):
     assert len(elements) % 2 == 0, u"input has to be an even numbered list"
-    return "".join(
-        [joinMeiUyir(elements[i], elements[i + 1]) for i in range(0, len(elements), 2)]
-    )
+    return "".join([
+        joinMeiUyir(elements[i], elements[i + 1])
+        for i in range(0, len(elements), 2)
+    ])
 
 
 def get_letters_elementary_iterable(word, symmetric=False):
@@ -1196,17 +1225,11 @@ def splitMeiUyir(uyirmei_char):
     """
 
     if not isinstance(uyirmei_char, str):
-        raise ValueError(
-            "Passed input letter '%s' must be unicode, \
-                                not just string"
-            % uyirmei_char
-        )
+        raise ValueError("Passed input letter '%s' must be unicode, \
+                                not just string" % uyirmei_char)
 
-    if (
-        uyirmei_char in mei_letters
-        or uyirmei_char in uyir_letters
-        or uyirmei_char in ayudha_letter
-    ):
+    if (uyirmei_char in mei_letters or uyirmei_char in uyir_letters
+            or uyirmei_char in ayudha_letter):
         return uyirmei_char
 
     if uyirmei_char not in grantha_uyirmei_letters:
@@ -1214,13 +1237,13 @@ def splitMeiUyir(uyirmei_char):
             norm_char = unicode_normalize(uyirmei_char)
             rval = splitMeiUyir(norm_char)
             return rval
-        raise ValueError("Passed input letter '%s' is not tamil letter" % uyirmei_char)
+        raise ValueError("Passed input letter '%s' is not tamil letter" %
+                         uyirmei_char)
 
     idx = grantha_uyirmei_letters.index(uyirmei_char)
     uyiridx = idx % 12
     meiidx = int((idx - uyiridx) / 12)
     return (grantha_mei_letters[meiidx], uyir_letters[uyiridx])
-
 
 # end of def splitMeiUyir(uyirmei_char):
 
@@ -1245,21 +1268,19 @@ def joinMeiUyir(mei_char, uyir_char):
     if not isinstance(mei_char, str):
         raise ValueError(
             "Passed input mei character '%s' must be unicode, not just string"
-            % mei_char
-        )
+            % mei_char)
     if not isinstance(uyir_char, str) and uyir_char != None:
         raise ValueError(
             "Passed input uyir character '%s' must be unicode, not just string"
-            % uyir_char
-        )
+            % uyir_char)
     if mei_char not in grantha_mei_letters:
         raise ValueError(
-            "Passed input character '%s' is not a tamil mei character" % mei_char
-        )
+            "Passed input character '%s' is not a tamil mei character" %
+            mei_char)
     if uyir_char not in uyir_letters:
         raise ValueError(
-            "Passed input character '%s' is not a tamil uyir character" % uyir_char
-        )
+            "Passed input character '%s' is not a tamil uyir character" %
+            uyir_char)
     if uyir_char:
         uyiridx = uyir_letters.index(uyir_char)
     else:
@@ -1305,7 +1326,8 @@ def classify_letter(letter):
         return "english"
     elif letter.isdigit():
         return "digit"
-    raise ValueError("Unknown letter '%s' neither Tamil nor English or number" % letter)
+    raise ValueError(
+        "Unknown letter '%s' neither Tamil nor English or number" % letter)
 
 
 def print_tamil_words(tatext, use_frequencies=not False):
@@ -1325,14 +1347,11 @@ def print_tamil_words(tatext, use_frequencies=not False):
         else:
             print("%s" % l[0])
 
-
 compare_lexicograph_key = functools.cmp_to_key(compare_words_lexicographic)
-
 
 def tamil_sorted(list_data, key=compare_lexicograph_key):
     asorted = sorted(list_data, key=key)
     return asorted
-
 
 def hex2unicode(ip_data, offset=3):
     """
@@ -1342,9 +1361,8 @@ def hex2unicode(ip_data, offset=3):
     """
     result = []
     for s in re.split("\\-|/", ip_data):
-        result.append(
-            "".join([chr(int(s[i : i + offset], 16)) for i in range(0, len(s), offset)])
-        )
+        result.append("".join(
+            [chr(int(s[i:i + offset], 16)) for i in range(0, len(s), offset)]))
     return result
 
 
@@ -1398,24 +1416,20 @@ class CacheGetLettersMixin:
     __metaclass__ = abc.ABCMeta
 
     def __init__(self):
-        self._cache = {}
+        pass
 
     @abc.abstractmethod
     def get_letters_impl(self, word):
         raise NotImplementedError()
 
+    @copy_lru_decorator
     def get_letters(self, word):
         """
         This is a cached implementation of get_letters.
         @word - can be a Tamil/English word (letter sequence)
         @return - list of letters in @word and cache for future use.
         """
-        rval = self._cache.get(word, None)
-        if not rval:
-            rval = self.get_letters_impl(word)
-            self._cache[word] = rval
-        return copy(rval)
-
+        return self.get_letters_impl(word)
 
 """
 மாத்திரை கணித்தல்
@@ -1699,7 +1713,9 @@ def calculate_maththirai(letters):
         "ளை",
     ]
 
-    yakaram = ["ய", "யா", "யி", "யீ", "யு", "யூ", "யெ", "யே", "யை", "யொ", "யோ", "யௌ"]
+    yakaram = [
+        "ய", "யா", "யி", "யீ", "யு", "யூ", "யெ", "யே", "யை", "யொ", "யோ", "யௌ"
+    ]
 
     single_word = get_letters(letters)
 
@@ -1718,10 +1734,8 @@ def calculate_maththirai(letters):
             if index == 0:
                 maaththiraivarisai.append(1)
             elif index == 1:
-                if (
-                    single_word[0] not in uyir_mei_kuril
-                    and single_word[0] not in kuril_letters
-                ):
+                if (single_word[0] not in uyir_mei_kuril
+                        and single_word[0] not in kuril_letters):
                     maaththiraivarisai.append(0.5)
                 else:
                     maaththiraivarisai.append(1)
@@ -1746,11 +1760,8 @@ def calculate_maththirai(letters):
 
         # ஔகாரக் குறுக்கம்
         elif eluthu == "ஔ" or eluthu == "மௌ" or eluthu == "வெள":
-            if (
-                single_word[0] == "ஔ"
-                or single_word[0] == "மௌ"
-                or single_word[0] == "வெள"
-            ):
+            if (single_word[0] == "ஔ" or single_word[0] == "மௌ"
+                    or single_word[0] == "வெள"):
                 maaththiraivarisai.append(1)
 
         # ஐகாரக்குறுக்கம்
@@ -1776,9 +1787,8 @@ def calculate_maththirai(letters):
             checkMagaram = False
 
             try:
-                checkMagaram = (
-                    single_word[index - 1] == "ண்" or single_word[index - 1] == "ன்"
-                )
+                checkMagaram = (single_word[index - 1] == "ண்"
+                                or single_word[index - 1] == "ன்")
             except:
                 checkMagaram = False
 
@@ -1788,7 +1798,8 @@ def calculate_maththirai(letters):
                 maaththiraivarisai.append(0.5)
 
         else:
-            maaththiraivarisai.append(calculate_uyir_nedil_kuril_maathirai(eluthu))
+            maaththiraivarisai.append(
+                calculate_uyir_nedil_kuril_maathirai(eluthu))
 
     print(maaththiraivarisai)
     return sum(maaththiraivarisai)
