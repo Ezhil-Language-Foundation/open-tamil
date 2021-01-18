@@ -8,12 +8,13 @@
 ##
 ## Licensed under GPL Version 3
 
-from sys import version
-from copy import copy
-import re
-import operator
-import string
 import abc
+import operator
+import re
+import string
+from copy import copy
+from sys import version
+
 PYTHON3 = version > '3'
 assert PYTHON3,"PYTHON3 required to operate Open-Tamil library"
 import functools
@@ -299,8 +300,10 @@ def istamil_prefix( word ):
             return True
     return False
 
+def is_tamil_unicode_predicate(x:str):
+    intx = ord(x)
+    return intx >= (2946) and intx <= (3066)
 
-is_tamil_unicode_predicate = lambda x: x >= chr(2946) and x <= chr(3066)
 def is_tamil_unicode( sequence ):
     # Ref: languagetool-office-extension/src/main/java/org/languagetool/openoffice/TamilDetector.java
     if type(sequence) is list:
@@ -476,9 +479,9 @@ def get_letters_elementary_iterable(word,symmetric=False):
         else:
             if letter in grantha_mei_letters:
                 yield letter
-                if symmetry: yield None
+                if symmetric: yield None
             else:
-                if symmetry: yield None
+                if symmetric: yield None
                 yield letter
     return
 
@@ -532,17 +535,18 @@ def cmp( x, y):
 
 # answer if word_a ranks ahead of, or at same level, as word_b in a Tamil dictionary order...
 # for use with Python : if a > 0
-def compare_words_lexicographic( word_a, word_b ):
+def compare_words_lexicographic(word_a, word_b):
     """ compare words in Tamil lexicographic order """
     # sanity check for words to be all Tamil
-    if ( not all_tamil(word_a) ) or (not all_tamil(word_b)) :
-        pass
-    La = len(word_a)
-    Lb = len(word_b)
-    all_TA_letters = "".join(tamil_letters)
+    word_a_in = get_letters(word_a)
+    word_b_in = get_letters(word_b)
+    if ( not all_tamil(word_a_in)) or (not all_tamil(word_b_in)) :
+        return cmp(word_a_in, word_b_in)
+    La = len(word_a_in)
+    Lb = len(word_b_in)
     for itr in range(0,min(La,Lb)):
-            pos1 = all_TA_letters.find( word_a[itr] )
-            pos2 = all_TA_letters.find( word_b[itr] )
+            pos1 = tamil_letters.index(word_a_in[itr])
+            pos2 = tamil_letters.index(word_b_in[itr])
 
             if pos1 != pos2 :
                     return cmp(pos1, pos2)
@@ -707,7 +711,7 @@ def hex2unicode(ip_data,offset=3):
         எ.கா. 'b95' = அ
     """
     result = []
-    for s in re.split('\-|\/',ip_data):
+    for s in re.split('\\-|/',ip_data):
         result.append(''.join([chr(int(s[i:i+offset],16)) for i in range(0,len(s),offset)]))
     return result
 
@@ -774,7 +778,7 @@ class CacheGetLettersMixin:
         if not rval:
             rval = self.get_letters_impl(word)
             self._cache[word] = rval
-        return rval
+        return copy(rval)
 
 """
 மாத்திரை கணித்தல்
