@@ -133,4 +133,10 @@ mod tests {
         use tamil::reverse_word;
         assert_eq!(reverse_word("கபாலி"), "லிபாக");
     }
+    #[test]
+    fn test_classify() {
+        use tamil::classify_letter;
+        assert_eq!("<UyirLetter>",classify_letter("அ"));
+        assert_eq!("<TamilLetter>",classify_letter("கொ"));
+    }
 }
