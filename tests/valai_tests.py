@@ -9,15 +9,17 @@ from spell import Speller, LoadDictionary, OttruSplit, Mayangoli
 from valai import solthiruthi as tamilpesu
 from valai import vaani
 
+
 class TamilpesuTest(unittest.TestCase):
-        def test_basic(self):
-              tp = tamilpesu.SpellChecker()
-              try:
-                  options = tp.check_word(u'வாணி என்பது ஒரு')
-              except Exception as e:
-                  return
-              self.assertEqual( len(options), 1)
-              self.assertGreaterEqual( len(options[0].alternatives), 2 )
+    def test_basic(self):
+        tp = tamilpesu.SpellChecker()
+        try:
+            options = tp.check_word(u"வாணி என்பது ஒரு")
+        except Exception as e:
+            return
+        self.assertEqual(len(options), 1)
+        self.assertGreaterEqual(len(options[0].alternatives), 2)
+
 
 if __name__ == "__main__":
     unittest.main()

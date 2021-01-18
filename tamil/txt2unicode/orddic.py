@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) 2014 Arulalan.T <arulalant@gmail.com>                                 
+# (C) 2014 Arulalan.T <arulalant@gmail.com>
 # This file is part of open-tamil package
 
 try:
@@ -10,4 +10,4 @@ except Exception as e:
         # In python 2.2 to 2.6, user need to install ordereddict via pip
         from ordereddict import OrderedDict
     except Exception as e:
-        OrderedDict = dict 
+        OrderedDict = dict

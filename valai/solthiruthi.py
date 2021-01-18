@@ -10,33 +10,37 @@ import requests
 from collections import namedtuple
 import re
 
-Result = namedtuple('Result',['word', 'alternatives'])
+Result = namedtuple("Result", ["word", "alternatives"])
 
-BASEURL = 'http://tamilpesu.us:7000/spellchecker'
+BASEURL = "http://tamilpesu.us:7000/spellchecker"
 from pprint import pprint
 
+
 class SpellChecker:
-    def __init__(self,apikey='XXXXX',_baseurl=None):
+    def __init__(self, apikey="XXXXX", _baseurl=None):
         self._apikey = apikey
         self._baseurl = BASEURL if not _baseurl else _baseurl
 
-    def check_word( self, words : list, lang_code = 'ta_IN' ):
-        """ HTTP POST request parameters.
+    def check_word(self, words: list, lang_code="ta_IN"):
+        """HTTP POST request parameters.
         1. lang  : language code - ta_IN is only supported now.
         2. text  : string formed by words separated by '\n' character
         """
-        if not isinstance(words,list):
-            words = re.split('\s+',words)
-        response = requests.post(self._baseurl,
-                                 data={'text':u'\n'.join(words),
-                                       'lang':lang_code})
+        if not isinstance(words, list):
+            words = re.split("\s+", words)
+        response = requests.post(
+            self._baseurl, data={"text": u"\n".join(words), "lang": lang_code}
+        )
         if not response.ok:
-            raise Exception(u'தகவல் சேவை துண்டிக்கப்பட்டது அல்லது இணைப்பு துண்டிக்கப்பட்டது')
-        result_words = response.json()['words']
+            raise Exception(
+                u"தகவல் சேவை துண்டிக்கப்பட்டது அல்லது இணைப்பு துண்டிக்கப்பட்டது"
+            )
+        result_words = response.json()["words"]
         results = []
-        for word,alternates in result_words.items():
-            results.append( Result(word=word,alternatives=alternates))
+        for word, alternates in result_words.items():
+            results.append(Result(word=word, alternatives=alternates))
         return results
 
-if __name__  == "__main__":
-    pprint( SpellChecker().check_word(u'வாணி என்பது ஒரு') )
+
+if __name__ == "__main__":
+    pprint(SpellChecker().check_word(u"வாணி என்பது ஒரு"))

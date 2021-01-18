@@ -10,10 +10,11 @@ from tamil import utf8
 
 
 class Corpus:
-    """ Class defines a Corpus data file, and reading information from
-        this file for only the Tamil letters. Usage would be to construct this object,
-        with a filename argument, and then use next_tamil_letter() method on this object. """
-    def __init__(self,filename):
+    """Class defines a Corpus data file, and reading information from
+    this file for only the Tamil letters. Usage would be to construct this object,
+    with a filename argument, and then use next_tamil_letter() method on this object."""
+
+    def __init__(self, filename):
         self.filename = filename
         self.handle = None
 
@@ -22,9 +23,10 @@ class Corpus:
             self.handle.close()
         except Exception:
             pass
+
     def next_tamil_letter(self):
-        self.handle = codecs.open(self.filename,'r','utf-8')
+        self.handle = codecs.open(self.filename, "r", "utf-8")
         for letter in utf8.get_letters_iterable(self.handle.read()):
-            if ( utf8.istamil( letter ) ):
+            if utf8.istamil(letter):
                 yield letter
         return

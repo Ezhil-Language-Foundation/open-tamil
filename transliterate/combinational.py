@@ -19,11 +19,13 @@
 #
 # For maintenance, use the function '__built_table__()' to build the phonetic->Unicode mapping
 
+
 class Transliteration:
     """
     Implementation of combinational transliterate rules - தமிழ் எழுத்துக்கள்
     according to uyir+mei combination using their respective phonetic sounds.
     """
+
     table = {}
 
     table[u"1"] = u"௧"
@@ -379,12 +381,26 @@ class Transliteration:
     table[u"zhu"] = u"ழு"
     table[u"zhuu"] = u"ழூ"
 
-    vowels = [u"a", u"aa", u"i", u"ii", u"u", u"uu", u"e", u"ee", u"ai", u"o", u"oo", u"au"]
-    uyir_letters="அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ".split(" ")
+    vowels = [
+        u"a",
+        u"aa",
+        u"i",
+        u"ii",
+        u"u",
+        u"uu",
+        u"e",
+        u"ee",
+        u"ai",
+        u"o",
+        u"oo",
+        u"au",
+    ]
+    uyir_letters = "அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ".split(" ")
     aytham_letter = u"ஃ"
-    for uyir,uyir_utf8 in zip(vowels,uyir_letters):
+    for uyir, uyir_utf8 in zip(vowels, uyir_letters):
         table[uyir] = uyir_utf8
     table["ak"] = aytham_letter
+
 
 def __built_table__():
     """ this class is for maintenance purposes only """
@@ -393,104 +409,144 @@ def __built_table__():
     table = {}
 
     # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ
-    vowels = [u"a", u"aa", u"i", u"ii", u"u", u"uu", u"e", u"ee", u"ai", u"o", u"oo", u"au"]
-    for uyir,uyir_utf8 in zip(vowels,utf8.uyir_letters):
+    vowels = [
+        u"a",
+        u"aa",
+        u"i",
+        u"ii",
+        u"u",
+        u"uu",
+        u"e",
+        u"ee",
+        u"ai",
+        u"o",
+        u"oo",
+        u"au",
+    ]
+    for uyir, uyir_utf8 in zip(vowels, utf8.uyir_letters):
         table[uyir] = uyir_utf8
     table["ak"] = utf8.aytham_letter
-    print(u" ".join(utf8.agaram_letters+utf8.sanskrit_letters))
+    print(u" ".join(utf8.agaram_letters + utf8.sanskrit_letters))
     #
     # க ச ட த ப ற ஞ ங ண ந ம ன ய ர ல வ ழ ள ஜ ஷ ஸ ஹ
     # க, ச, ட, த, ப, ற, ஞ, ங, ண, ந, ம, ன, ய, ர, ல, வ, ழ, ள, ஜ, ஷ, ஸ, ஹ
     #
-    consonant_mei = [u"k", u"s", u"d", u"th",u"p",u"R",u"nj", u"ng",u"N", u"n-", u"m",u"n",
-                     u"y", u"r",u"l",u"v", u"zh", u"L", u"j", u"S", u"sh", u"ha"]
+    consonant_mei = [
+        u"k",
+        u"s",
+        u"d",
+        u"th",
+        u"p",
+        u"R",
+        u"nj",
+        u"ng",
+        u"N",
+        u"n-",
+        u"m",
+        u"n",
+        u"y",
+        u"r",
+        u"l",
+        u"v",
+        u"zh",
+        u"L",
+        u"j",
+        u"S",
+        u"sh",
+        u"ha",
+    ]
 
     # initialize mei phonetic map
-    for mei,mei_utf8 in zip(consonant_mei,utf8.mei_letters+utf8.sanskrit_mei_letters):
+    for mei, mei_utf8 in zip(
+        consonant_mei, utf8.mei_letters + utf8.sanskrit_mei_letters
+    ):
         table[mei] = mei_utf8
 
     # build the combination table for
     # uyirmei phonetic map
-    for mei,mei_agaram in zip(consonant_mei,utf8.agaram_letters+utf8.sanskrit_letters):
-        for uyir,uyir_accent in zip(vowels,utf8.accent_symbols):
-            table[mei+uyir] = mei_agaram + uyir_accent
-            print(u"uyirmei->phonetic | %s => %s "%(table[mei+uyir],mei+uyir))
+    for mei, mei_agaram in zip(
+        consonant_mei, utf8.agaram_letters + utf8.sanskrit_letters
+    ):
+        for uyir, uyir_accent in zip(vowels, utf8.accent_symbols):
+            table[mei + uyir] = mei_agaram + uyir_accent
+            print(u"uyirmei->phonetic | %s => %s " % (table[mei + uyir], mei + uyir))
 
     # special grantha characters
-    table["ksha"]=u"க்ஷ"
-    table["kshaa"]=u"க்ஷா"
-    table["kshi"]=u"க்ஷி"
-    table["kshii"]=u"க்ஷீ"
-    table["kshu"]=u"க்ஷு"
-    table["kshuu"]=u"க்ஷூ"
-    table["kshe"]=u"க்ஷெ"
-    table["kshae"]=u"க்ஷே"
-    table["kshai"]=u"க்ஷை"
-    table["ksho"]=u"க்ஷொ"
-    table["kshoa"]=u"க்ஷோ"
-    table["kshow"]=u"க்ஷௌ"
-    table["ksh"]=u"க்ஷ்"
-    table["sri"]=u"ஸ்ரீ"
-    table["sree"]=u"ஸ்ரீ"
-    table["shree"]=u"ஸ்ரீ"
-    table["shri"]=u"ஸ்ரீ"
-    table["fa"]=u"ஃப"
-    table["faa"]=u"ஃபா"
-    table["fi"]=u"ஃபி"
-    table["fii"]=u"ஃபீ"
-    table["fu"]=u"ஃபு"
-    table["fuu"]=u"ஃபூ"
-    table["fe"]=u"ஃபெ"
-    table["fae"]=u"ஃபே"
-    table["fai"]=u"ஃபை"
-    table["fo"]=u"ஃபொ"
-    table["foa"]=u"ஃபோ"
-    table["fow"]=u"ஃபௌ"
-    table["f"]=u"ஃப்"
-    table["Za"]=u"ஃஜ"
-    table["Zaa"]=u"ஃஜா"
-    table["Zi"]=u"ஃஜி"
-    table["Zii"]=u"ஃஜீ"
-    table["Zu"]=u"ஃஜு"
-    table["Zuu"]=u"ஃஜூ"
-    table["Ze"]=u"ஃஜெ"
-    table["Zae"]=u"ஃஜே"
-    table["Zai"]=u"ஃஜை"
-    table["Zo"]=u"ஃஜொ"
-    table["Zoa"]=u"ஃஜோ"
-    table["Zow"]=u"ஃஜௌ"
-    table["Z"]=u"ஃஜ்"
-    table["xa"]=u"ஃஸ"
-    table["xaa"]=u"ஃஸா"
-    table["xi"]=u"ஃஸி"
-    table["xu"]=u"ஃஸு"
-    table["xuu"]=u"ஃஸூ"
-    table["xe"]=u"ஃஸெ"
-    table["xae"]=u"ஃஸே"
-    table["xai"]=u"ஃஸை"
-    table["xo"]=u"ஃஸொ"
-    table["xoa"]=u"ஃஸோ"
-    table["xow"]=u"ஃஸௌ"
-    table["x"]=u"ஃஸ்"
+    table["ksha"] = u"க்ஷ"
+    table["kshaa"] = u"க்ஷா"
+    table["kshi"] = u"க்ஷி"
+    table["kshii"] = u"க்ஷீ"
+    table["kshu"] = u"க்ஷு"
+    table["kshuu"] = u"க்ஷூ"
+    table["kshe"] = u"க்ஷெ"
+    table["kshae"] = u"க்ஷே"
+    table["kshai"] = u"க்ஷை"
+    table["ksho"] = u"க்ஷொ"
+    table["kshoa"] = u"க்ஷோ"
+    table["kshow"] = u"க்ஷௌ"
+    table["ksh"] = u"க்ஷ்"
+    table["sri"] = u"ஸ்ரீ"
+    table["sree"] = u"ஸ்ரீ"
+    table["shree"] = u"ஸ்ரீ"
+    table["shri"] = u"ஸ்ரீ"
+    table["fa"] = u"ஃப"
+    table["faa"] = u"ஃபா"
+    table["fi"] = u"ஃபி"
+    table["fii"] = u"ஃபீ"
+    table["fu"] = u"ஃபு"
+    table["fuu"] = u"ஃபூ"
+    table["fe"] = u"ஃபெ"
+    table["fae"] = u"ஃபே"
+    table["fai"] = u"ஃபை"
+    table["fo"] = u"ஃபொ"
+    table["foa"] = u"ஃபோ"
+    table["fow"] = u"ஃபௌ"
+    table["f"] = u"ஃப்"
+    table["Za"] = u"ஃஜ"
+    table["Zaa"] = u"ஃஜா"
+    table["Zi"] = u"ஃஜி"
+    table["Zii"] = u"ஃஜீ"
+    table["Zu"] = u"ஃஜு"
+    table["Zuu"] = u"ஃஜூ"
+    table["Ze"] = u"ஃஜெ"
+    table["Zae"] = u"ஃஜே"
+    table["Zai"] = u"ஃஜை"
+    table["Zo"] = u"ஃஜொ"
+    table["Zoa"] = u"ஃஜோ"
+    table["Zow"] = u"ஃஜௌ"
+    table["Z"] = u"ஃஜ்"
+    table["xa"] = u"ஃஸ"
+    table["xaa"] = u"ஃஸா"
+    table["xi"] = u"ஃஸி"
+    table["xu"] = u"ஃஸு"
+    table["xuu"] = u"ஃஸூ"
+    table["xe"] = u"ஃஸெ"
+    table["xae"] = u"ஃஸே"
+    table["xai"] = u"ஃஸை"
+    table["xo"] = u"ஃஸொ"
+    table["xoa"] = u"ஃஸோ"
+    table["xow"] = u"ஃஸௌ"
+    table["x"] = u"ஃஸ்"
 
     # special numerials/ symbols
-    table["1"]=u"௧"
-    table["2"]=u"௨"
-    table["3"]=u"௩"
-    table["4"]=u"௪"
-    table["5"]=u"௫"
-    table["6"]=u"௬"
-    table["7"]=u"௭"
-    table["8"]=u"௮"
-    table["9"]=u"௯"
-    table["10"]=u"௰"
-    table["1000"]=u"௲"
+    table["1"] = u"௧"
+    table["2"] = u"௨"
+    table["3"] = u"௩"
+    table["4"] = u"௪"
+    table["5"] = u"௫"
+    table["6"] = u"௬"
+    table["7"] = u"௭"
+    table["8"] = u"௮"
+    table["9"] = u"௯"
+    table["10"] = u"௰"
+    table["1000"] = u"௲"
 
     kk = table.keys()
     kk.sort()
     for k in kk:
         v = table[k]
-        print(u"\ttable[u\"%s\"] = u\"%s\""%(k,v))
+        print(u'\ttable[u"%s"] = u"%s"' % (k, v))
+
 
 #  Key Map Table  : Acknowledgements to Kandupidi.com
 #

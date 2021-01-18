@@ -2,19 +2,18 @@
 # -*- coding: utf-8 -*-
 
 # (C) 2014 Arulalan.T <arulalant@gmail.com>
-# 
+#
 # This file is part of 'open-tamil/txt2ipa' package examples
-# 
+#
 
 import sys
-sys.path.append('../..')
+
+sys.path.append("../..")
 
 from tamil.txt2ipa.ipaconvert import ipa, broad
 from tamil.txt2ipa.transliteration import tam2lat
 
-
-text = 'வணக்கம் தமிழகம் '
-
+text = "வணக்கம் தமிழகம் "
 
 t1 = tam2lat(text)
 t2 = " " + t1 + " "

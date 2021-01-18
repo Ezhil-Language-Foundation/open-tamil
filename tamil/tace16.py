@@ -3,42 +3,49 @@
 # மேற்கோள் - https://en.wikipedia.org/wiki/Tamil_All_Character_Encoding
 import copy as _copy
 import string as _string
-OFFSET=int('0xE200',16)
-constFF0F=int('0xFF0F',16)
-constFFF0=int('0xFFF0',16)
-const000F=int('0x000F',16)
 
-is_tamil_tace_predicate = lambda x: x >= (OFFSET) and x <= (OFFSET+255)
+OFFSET = int("0xE200", 16)
+constFF0F = int("0xFF0F", 16)
+constFFF0 = int("0xFFF0", 16)
+const000F = int("0x000F", 16)
+
+is_tamil_tace_predicate = lambda x: x >= (OFFSET) and x <= (OFFSET + 255)
+
 
 def rebase_ord(charval):
     """ Rebase a TACE16 code-point within the chosen @tace16.OFFSET """
     return (ord(charval) & 255) | OFFSET
 
+
 def get_letters(text):
-    return list(filter(lambda c: c in TACE16_ASCII_WHITESPACE,text))
+    return list(filter(lambda c: c in TACE16_ASCII_WHITESPACE, text))
+
 
 def to_bytes(chars):
     """Convert 2-byte representation into 1-byte representation for TACE16"""
-    if isinstance(chars,list):
+    if isinstance(chars, list):
         for c in chars:
             if is_tamil_tace_predicate(c):
-                yield (c%256).to_bytes(1,'big')
+                yield (c % 256).to_bytes(1, "big")
     else:
-        yield (chars%256).to_bytes(1,'big')
+        yield (chars % 256).to_bytes(1, "big")
+
 
 def splitMeiUyir(uyirmei_char):
     uyir = uyirmei_char & constFF0F
     mei = uyirmei_char & constFFF0
-    return (mei,uyir)
+    return (mei, uyir)
+
 
 def joinMeiUyir(mei_char, uyir_char):
     """This function join mei character and uyir character, and retuns as
     compound uyirmei unicode character."""
     return mei_char | (uyir_char & const000F)
 
+
 tace2utf8 = [
-    ("“", "\""),
-    ("”", "\""),
+    ("“", '"'),
+    ("”", '"'),
     ("‘", "'"),
     ("’", "'"),
     ("", "க்ஷீ"),
@@ -354,10 +361,10 @@ tace2utf8 = [
     ("", "ஷ"),
     ("", "ஜ"),
     ("", "ஹ"),
-    ]
-TACE16 = [(ord(pos[0])&255)|OFFSET for pos in tace2utf8]
+]
+TACE16 = [(ord(pos[0]) & 255) | OFFSET for pos in tace2utf8]
 TACE16_ASCII_WHITESPACE = _copy.copy(TACE16)
-TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.whitespace)))
-TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.punctuation)))
-TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.ascii_letters)))
-TACE16_ASCII_WHITESPACE.extend(map(ord,list(_string.digits)))
+TACE16_ASCII_WHITESPACE.extend(map(ord, list(_string.whitespace)))
+TACE16_ASCII_WHITESPACE.extend(map(ord, list(_string.punctuation)))
+TACE16_ASCII_WHITESPACE.extend(map(ord, list(_string.ascii_letters)))
+TACE16_ASCII_WHITESPACE.extend(map(ord, list(_string.digits)))

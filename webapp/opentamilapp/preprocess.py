@@ -7,11 +7,13 @@ from solthiruthi.scoring import bigram_scores, unigram_score
 
 jaffnatable = jaffna.Transliteration.table
 rev_jaffnatable = {}
-for k,v in list(jaffnatable.items()):
+for k, v in list(jaffnatable.items()):
     rev_jaffnatable[v] = k
 
+
 def reverse_transliterate(letter):
-    return algorithm.Iterative.transliterate(rev_jaffnatable,"%s"%letter)
+    return algorithm.Iterative.transliterate(rev_jaffnatable, "%s" % letter)
+
 
 class Feature:
     def __init__(self):
@@ -26,32 +28,38 @@ class Feature:
         self.first = 0.0
         self.last = 0.0
         self.vowels = 0.0
-        self.unigscore = 0.0 #unigram score
-        self.bigscore = 0.0 #bigram score
-        
+        self.unigscore = 0.0  #unigram score
+        self.bigscore = 0.0  #bigram score
+
     def __str__(self):
-        return "(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)"%(self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels,self.unigrscore,self.bigscore)
-    
+        return "(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)" % (
+            self.nletters, self.kurils, self.nedils, self.ayudhams,
+            self.vallinams, self.mellinams, self.idayinams, self.granthams,
+            self.first, self.last, self.vowels, self.unigrscore, self.bigscore)
+
     def data(self):
-        return (self.nletters,self.kurils,self.nedils,self.ayudhams,self.vallinams,self.mellinams,self.idayinams,self.granthams,self.first,self.last,self.vowels,self.unigscore,self.bigscore)
-    
+        return (self.nletters, self.kurils, self.nedils, self.ayudhams,
+                self.vallinams, self.mellinams, self.idayinams, self.granthams,
+                self.first, self.last, self.vowels, self.unigscore,
+                self.bigscore)
+
     @staticmethod
     def get(word):
         word = word.strip()
-        word = word.replace(' ','')
+        word = word.replace(' ', '')
         letters = utf8.get_letters(word)
         F = Feature()
-        F.nletters = len(letters)*1.0
+        F.nletters = len(letters) * 1.0
         F.unigscore = unigram_score(letters)
         F.bigscore = max(bigram_scores(letters))
         for l in letters:
             try:
                 rtl = reverse_transliterate(l)
-                if any( [rtl.startswith(l) for l  in ['a','e','i','o','u'] ] ):
+                if any([rtl.startswith(l) for l in ['a', 'e', 'i', 'o', 'u']]):
                     F.vowels += 1.0
             except Exception as ioe:
                 pass
-            
+
             kind = utf8.classify_letter(l)
             if kind == 'kuril':
                 F.kurils += 1
@@ -65,11 +73,11 @@ class Feature:
                 F.mellinams += 1
             elif kind == 'idayinam':
                 F.idayinams += 1
-            elif kind in ['english','digit']:
+            elif kind in ['english', 'digit']:
                 continue
             elif kind == 'tamil_or_grantham':
                 F.granthams += 1
-        
+
         F.kurils /= F.nletters
         F.nedils /= F.nletters
         F.ayudhams /= F.nletters
@@ -79,40 +87,43 @@ class Feature:
         F.idayinams /= F.nletters
         F.granthams /= F.nletters
         F.vowels /= F.nletters
-        
+
         if letters[0] in utf8.uyir_letters:
             F.first += 1.0
         if letters[0] in utf8.mei_letters:
             F.first += F.first + 0.25
         if letters[0] in utf8.uyirmei_letters:
             F.first += F.first + 0.05
-        
+
         if letters[-1] in utf8.uyir_letters:
             F.last += 1.0
         if letters[-1] in utf8.mei_letters:
             F.last += F.last + 0.25
         if letters[-1] in utf8.uyirmei_letters:
             F.last += F.last + 0.05
-        
+
         return F
 
+
 def process(fname):
-    ofname = fname+".csv"
-    ofp = csv.writer(codecs.open(ofname,"w","utf-8"))
-    with codecs.open(fname,"r","utf-8") as fp:
-        for idx,line in enumerate(fp.readlines()):
+    ofname = fname + ".csv"
+    ofp = csv.writer(codecs.open(ofname, "w", "utf-8"))
+    with codecs.open(fname, "r", "utf-8") as fp:
+        for idx, line in enumerate(fp.readlines()):
             w = line.strip()
             try:
                 f = Feature.get(w)
             except Exception as ioe:
-                print(("SKIPPING => ",ioe.message))
+                print(("SKIPPING => ", ioe.message))
                 continue
             ofp.writerow(f.data())
     #ofp.close()
-    
+
+
 def run():
     for fname in sys.argv[1:]:
         process(fname)
+
 
 if __name__ == "__main__":
     run()

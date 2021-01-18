@@ -7,7 +7,7 @@
 import numpy as np
 import random
 import string
-import time,os
+import time, os
 
 from sklearn.externals import joblib
 
@@ -15,29 +15,30 @@ from sklearn.externals import joblib
 from .classifier_eng_vs_ta import jaffna_transliterate
 from .preprocess import Feature
 
-scaler=None #joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_scaler.pkl')
+scaler = None  # joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_scaler.pkl')
 
-nn=None#joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_nn.pkl')
+nn = None  # joblib.load(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/opentamilapp/test_nn.pkl')
+
 
 def process_word(s):
-    if any( [l in string.ascii_lowercase for l in s] ):
+    if any([l in string.ascii_lowercase for l in s]):
         s = jaffna_transliterate(s)
-        #print(u"Transliterated to %s"%s)
-    #print(u"Checking in NN '%s'"%s)
+        # print(u"Transliterated to %s"%s)
+    # print(u"Checking in NN '%s'"%s)
     try:
         f = Feature.get(s)
-        scaled_feature = scaler.transform( np.array( f.data() ).reshape(1,-1)  )
-        y = nn.predict(scaled_feature )
-       #print( scaled_feature )
-        #print( y )
+        scaled_feature = scaler.transform(np.array(f.data()).reshape(1, -1))
+        y = nn.predict(scaled_feature)
+        # print( scaled_feature )
+        # print( y )
         if y.ravel() > 0:
-            return "%s என்பது தமிழ் வார்த்தையாக இருக்கலாம்"%s
+            return "%s என்பது தமிழ் வார்த்தையாக இருக்கலாம்" % s
         else:
-            return "%s என்பது ஆங்கில வார்த்தையாக இருக்கலாம்"%s 
+            return "%s என்பது ஆங்கில வார்த்தையாக இருக்கலாம்" % s
     except Exception as ioe:
         return ioe.message
     return
 
-#value=process_word('hello')
-#print(value)
 
+# value=process_word('hello')
+# print(value)

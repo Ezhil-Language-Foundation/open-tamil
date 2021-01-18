@@ -6,9 +6,9 @@ from solthiruthi.dictionary import DictionaryBuilder, TamilVU
 from solthiruthi.tamil99kbd import inv_confusion_matrix as kbd_cm
 from solthiruthi.typographical import corrections
 
-TVU,_ = DictionaryBuilder.create(TamilVU)
+TVU, _ = DictionaryBuilder.create(TamilVU)
 
-wl = corrections('அன்பம்',TVU,kbd_cm,ed=2)
+wl = corrections("அன்பம்", TVU, kbd_cm, ed=2)
 for c in wl:
-    print(("u'%s',"%c))
-print(("L = %d"%len(wl)))
+    print(("u'%s'," % c))
+print(("L = %d" % len(wl)))

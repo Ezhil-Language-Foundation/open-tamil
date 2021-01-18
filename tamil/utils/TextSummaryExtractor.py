@@ -10,11 +10,12 @@ import tamil
 # Licensed under the Apache License, Version 2.0 (the "License");
 # This is a naive text summarization algorithm created by Shlomi Babluki
 # Copyright (C) 2013 Shlomi Babluki
-# 
+#
 # http://thetokenizer.com/2013/04/28/build-your-own-summary-tool/
 # https://gist.github.com/shlomibabluki/5473521
-# 
+#
 # Copyright (C) 2016 Muthu Annamalai
+
 
 class SummaryTool(object):
 
@@ -29,13 +30,13 @@ class SummaryTool(object):
 
     # Caculate the intersection between 2 sentences
     def sentences_intersection(self, sent1, sent2):
-        
+
         # split the sentence into words/tokens
         # s1 = set(sent1.split(" "))
         # s2 = set(sent2.split(" "))
         s1 = set(tamil.utf8.get_letters(sent1))
         s2 = set(tamil.utf8.get_letters(sent2))
-        
+
         # If there is not intersection, just return 0
         # if (len(s1) + len(s2)) == 0:
         if len(s1.intersection(s2)) == 0:
@@ -48,8 +49,8 @@ class SummaryTool(object):
     # We'll use the formatted sentence as a key in our sentences dictionary
     def format_sentence(self, sentence):
         # sentence = re.sub(r'\W+', '', sentence)       # [\u0B80-\u0BFF]
-        sentence = re.sub(r'\s+', '', sentence)
-        sentence = re.sub(r'\d+','',sentence)
+        sentence = re.sub(r"\s+", "", sentence)
+        sentence = re.sub(r"\d+", "", sentence)
         # print sentence
         return sentence
 
@@ -69,7 +70,7 @@ class SummaryTool(object):
                 # Metric for intersection is symmetric so we calculate 1/2 only
                 # For additional metrics see: ngram.Distance module in open-tamil
                 # Ref https://github.com/Ezhil-Language-Foundation/open-tamil/blob/master/ngram/Distance.py
-                if i >= j :
+                if i >= j:
                     values[i][j] = values[j][i]
                     continue
                 values[i][j] = self.sentences_intersection(sentences[i], sentences[j])
@@ -86,7 +87,7 @@ class SummaryTool(object):
             kw = self.format_sentence(sentences[i])
             if len(kw) != 0:
                 sentences_dic[kw] = score
-        
+
         return sentences_dic
 
     # Return the best sentence in a paragraph

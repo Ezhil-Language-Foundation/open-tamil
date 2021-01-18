@@ -14,5 +14,15 @@ from . import utf8
 from . import utils
 from . import wordutils
 
-VERSION = '0.98'
-__all__ = ['utf8','txt2unicode','numeral','txt2unicode','txt2ipa','numeral','regexp','utils','wordutils']
+VERSION = "0.98"
+__all__ = [
+    "utf8",
+    "txt2unicode",
+    "numeral",
+    "txt2unicode",
+    "txt2ipa",
+    "numeral",
+    "regexp",
+    "utils",
+    "wordutils",
+]
