@@ -190,6 +190,11 @@ pub const TAMIL_LETTERS: [&str; 345] = [
     "வ்",
     "ழ்",
     "ள்",
+    /* Sanskrit (Mei) */
+    "ஜ்",
+    "ஷ்",
+    "ஸ்",
+    "ஹ்",
     /* Agaram */
     "க",
     "ச",
@@ -214,11 +219,6 @@ pub const TAMIL_LETTERS: [&str; 345] = [
     "ஷ",
     "ஸ",
     "ஹ",
-    /* Sanskrit (Mei) */
-    "ஜ்",
-    "ஷ்",
-    "ஸ்",
-    "ஹ்",
     /* Uyir Mei */
     "க",
     "கா",
@@ -509,7 +509,7 @@ pub const TAMIL_LETTERS: [&str; 345] = [
     "க்ஷோ",
     "க்ஷௌ",
 ];
-
+pub const UYIRMEI_OFFSET:usize = 12+1+18+2;
 pub const DAY: &str = "௳";
 pub const MONTH: &str = "௴";
 pub const YEAR: &str = "௵";
@@ -711,14 +711,14 @@ pub fn istamil_prefix(word: &str) -> bool {
     }
 }
 
-pub fn joinMeiUyir(mei_char:&str, uyir_char:&str) -> String:
+pub fn join_mei_uyir(mei_char:&str, uyir_char:&str) -> String {
     /**
-    This function join mei character and uyir character, and retuns as
-    compound uyirmei unicode character.
-
-    Inputs:
-        mei_char : It must be unicode tamil mei char.
-        uyir_char : It must be unicode tamil uyir char.
+    *This function join mei character and uyir character, and retuns as
+    *compound uyirmei unicode character.
+    *
+    *Inputs:
+    *    mei_char : It must be unicode tamil mei char.
+    *    uyir_char : It must be unicode tamil uyir char.
     */
     if mei_char.len() == 0 {
         return uyir_char.to_string();
@@ -726,17 +726,18 @@ pub fn joinMeiUyir(mei_char:&str, uyir_char:&str) -> String:
     if uyir_char.len() == 0 {
         return mei_char.to_string();
     }
-
-    let uyiridx : usize = UYIR_LETTERS.iter().position(|x| { x == uyir_char.to_string() });
-    let meiidx : usize = MEI_LETTERS.iter().position(|x| { x == mei_char.to_string() });
+    let match_uyir = |x:&char| -> bool { *x == uyir_char.chars().next().unwrap() };
+    let uyiridx : usize = UYIR_LETTERS.iter().position(match_uyir).unwrap();
+    let meiidx : usize = GRANTHA_MEI_LETTERS.iter().position( |x|{ *x == mei_char } ).unwrap(); 
     //# calculate uyirmei index
-    let uyirmeiidx = meiidx * 12 + uyiridx;
-    return GRANTHA_MEI_LETTERS[uyirmeiidx]
+    let uyirmeiidx = (meiidx+2) * 12 + uyiridx;
+    println!("{},{},{}",uyiridx,meiidx,uyirmeiidx);
+    return TAMIL_LETTERS[UYIRMEI_OFFSET+uyirmeiidx].to_string()
 }
 
-pub fn join_letters_elementary(letterA:&str,letterB&str) -> String {
-    panic!("not impl.")
-}
+//pub fn join_letters_elementary(letter_a:&str,letter_b:&str) -> String {
+//    panic!("not impl.");
+//}
 
 pub fn reverse_word(word: &str) -> String {
     let letters = get_letters(word);
