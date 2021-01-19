@@ -136,7 +136,8 @@ mod tests {
     #[test]
     fn test_classify() {
         use tamil::classify_letter;
-        assert_eq!("<UyirLetter>",classify_letter("அ"));
-        assert_eq!("<TamilLetter>",classify_letter("கொ"));
+        assert_eq!("<Kuril>",classify_letter("அ"));
+        assert_eq!("<UyirMeiLetter>",classify_letter("கொ"));
+        assert_eq!("<Vallinam>",classify_letter("க்"));
     }
 }

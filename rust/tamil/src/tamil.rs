@@ -721,45 +721,35 @@ pub fn reverse_word(word: &str) -> String {
 }
 
 pub fn classify_letter(letter:&str) -> String {
+    assert!(letter.len()<=10,"classify letter can work on only 1 letter word!");
     let eq_letter = |x:&&str|->bool{ *x==letter };
     let first_letter = letter.chars().next().unwrap();
     let eq_char = |x:&char|->bool{ *x == first_letter };
     if UYIR_LETTERS.iter().any(eq_char) {
         if KURIL_LETTERS.iter().any(eq_char) {
-            return "<Kuril>".to_owned();
+            return "<Kuril>".to_owned()
         } else if NEDIL_LETTERS.iter().any(eq_char) {
             return "<Nedil>".to_owned()
         } else if first_letter == AYTHAM_LETTER {
             return "<Ayudham>".to_owned()
         }
-        return "<UyirLetter>".to_owned();
+        return "<UyirLetter>".to_owned()
+    } else if MEI_LETTERS.iter().any(eq_letter) {
+        if MELLINAM_LETTERS.iter().any(eq_letter) {
+            return "<Mellinam>".to_owned()
+        } else if VALLINAM_LETTERS.iter().any(eq_letter) {
+            return "<Vallinam>".to_owned()
+        } else if IDAYINAM_LETTERS.iter().any(eq_letter) {
+            return "<Idayinam>".to_owned()
+        }
+    } else if UYIRMEI_LETTERS.iter().any(eq_letter) {
+        return "<UyirMeiLetter>".to_owned()
     } else if TAMIL_LETTERS.iter().any(eq_letter) {
-        
-        return "<TamilLetter>".to_owned();
+        return "<TamilOrGrantham>".to_owned()
+    } else if first_letter.is_ascii_alphanumeric() {
+        return "<English>".to_owned()
+    } else if first_letter.is_ascii_digit() {
+        return "<Digit>".to_owned()
     }
     return "<non-TamilLetter>".to_owned();
-/*
-    if letter in uyir_letters:
-    if letter in kuril_letters:
-        return u"kuril"
-    elif letter in nedil_letters:
-        return u"nedil"
-    elif letter == ayudha_letter:
-        return "ayudham"
-if letter in mei_letters:
-    if letter in mellinam_letters:
-        return "mellinam"
-    elif letter in vallinam_letters:
-        return "vallinam"
-    elif letter in idayinam_letters:
-        return "idayinam"
-if letter in uyirmei_letters:
-    return "uyirmei"
-if letter in tamil_letters:
-    return "tamil_or_grantham"
-if letter.isalpha():
-    return "english"
-elif letter.isdigit():
-    return "digit"
-**/
 }
