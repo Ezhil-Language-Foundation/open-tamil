@@ -711,6 +711,33 @@ pub fn istamil_prefix(word: &str) -> bool {
     }
 }
 
+pub fn joinMeiUyir(mei_char:&str, uyir_char:&str) -> String:
+    /**
+    This function join mei character and uyir character, and retuns as
+    compound uyirmei unicode character.
+
+    Inputs:
+        mei_char : It must be unicode tamil mei char.
+        uyir_char : It must be unicode tamil uyir char.
+    */
+    if mei_char.len() == 0 {
+        return uyir_char.to_string();
+    }
+    if uyir_char.len() == 0 {
+        return mei_char.to_string();
+    }
+
+    let uyiridx : usize = UYIR_LETTERS.iter().position(|x| { x == uyir_char.to_string() });
+    let meiidx : usize = MEI_LETTERS.iter().position(|x| { x == mei_char.to_string() });
+    //# calculate uyirmei index
+    let uyirmeiidx = meiidx * 12 + uyiridx;
+    return GRANTHA_MEI_LETTERS[uyirmeiidx]
+}
+
+pub fn join_letters_elementary(letterA:&str,letterB&str) -> String {
+    panic!("not impl.")
+}
+
 pub fn reverse_word(word: &str) -> String {
     let letters = get_letters(word);
     let mut word_out = String::from("");
