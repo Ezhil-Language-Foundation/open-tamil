@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) 2013-2015 Muthiah Annamalai
+# (C) 2013-2015, 2021 Muthiah Annamalai
 #
 # This file is part of 'open-tamil' package tests
 #
@@ -8,13 +8,11 @@
 from opentamiltests import *
 import tamil.utf8 as utf8
 from tamil.tscii import TSCII
+
 import codecs
+import os
 
-if PYTHON3:
-
-    class long(int):
-        pass
-
+CURRDIR = os.path.dirname(os.path.abspath(__file__))
 
 class Arichuvadi(unittest.TestCase):
     def test_fcns(self):
@@ -75,9 +73,7 @@ class Words(unittest.TestCase):
     def test_titanic(self):
         ta_parts = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள் பூஜ்ஜியம்".split()
         wlen_expected = [5, 5, 3, 2, 4, 2, 3, 2, 3, 8, 2, 5, 5]
-        wlen = map(lambda x: len(tamil.utf8.get_letters(x)), ta_parts)
-        if PYTHON3:
-            wlen = list(wlen)
+        wlen = list(map(lambda x: len(tamil.utf8.get_letters(x)), ta_parts))
         self.assertEqual(wlen, wlen_expected)
 
     def test_all_tamil(self):
@@ -103,7 +99,6 @@ class Letters(unittest.TestCase):
         c = []
         for i, b_w in enumerate(b):
             w = utf8.join_letters_elementary(b_w)
-            print(u"%s" % w)
             c.append(w)
         d = list(map(len, b))
         self.assertEqual([8, 6, 6], d)
@@ -131,12 +126,8 @@ class Letters(unittest.TestCase):
         self.assertEqual(24, len(utf8.grantha_agaram_letters))
 
     def test_unicode_repr(self):
-        print("********* unicode repr ******")
         actual = utf8.to_unicode_repr(u"எழில்")
         wanted = "u'\\u0b8e\\u0bb4\\u0bbf\\u0bb2\\u0bcd'"
-        if LINUX:
-            print(wanted, actual)
-            print(len(wanted), len(actual))
         self.assertEqual(actual, wanted)
 
     def test_getidx_n_tamil(self):
@@ -156,16 +147,9 @@ class Letters(unittest.TestCase):
             u"அம்மா",
             u"அப்பா",
         ]
-
-        if PYTHON3:
-            ## FIXME : __CMP__ and CMP are gone in Python3
-            ## Ref: http://python3porting.com/problems.html#unorderable-types-cmp-and-cmp
-            self.assertTrue(PYTHON3)
-            return
-        words.sort(utf8.compare_words_lexicographic)
+        words = sorted(words,key=utf8.compare_lexicograph_key)
         self.assertEqual(words, expected)
-        if LINUX:
-            print(utf8.compare_words_lexicographic(u"அப்பா", u"அம்மா"))
+        utf8.compare_words_lexicographic(u"அப்பா", u"அம்மா")
         # dad comes before mom, atleast in dictionary...
         self.assertTrue(utf8.compare_words_lexicographic(u"அப்பா", u"அம்மா") == -1)
         # same words compare equally as in dictionary...
@@ -186,20 +170,12 @@ class Letters(unittest.TestCase):
 
     def test_letter_extract_from_code_pts(self):
         letters = utf8.get_letters(u"கூவிளம் என்பது என்ன சீர்")
-        # print "len ==== > " , len(letters)
         assert len(letters) == 16
-        for pos, letter in enumerate(letters):
-            if LINUX:
-                print(u"%d %s" % (pos, letter))
-        assert letter == (u"ர்")
+        assert letters[-1] == (u"ர்")
 
     def test_letter_extract_with_ascii(self):
         letters = utf8.get_letters(u"கூவிளம் is என்பது also என்ன a சீர்")
-        print("len ==== > ", len(letters))
         assert len(letters) == 26
-        for pos, letter in enumerate(letters):
-            if LINUX:
-                print(u"%d %s" % (pos, letter))
         assert letters[-4] == u"a"
 
     def test_mei_to_agaram(self):
@@ -212,9 +188,6 @@ class Letters(unittest.TestCase):
 
         letters = utf8.get_letters(_str)
         outWords = utf8.get_words(letters, tamil_only=False)
-        if LINUX:
-            print(u"|".join(words))
-            print(u"|".join(outWords))
         self.assertEqual(outWords, words)
 
     def test_tamil_only_words2(self):
@@ -232,9 +205,6 @@ class Letters(unittest.TestCase):
         words = s.replace(u"seventh heaven ", u"").split(u" ")
         letters = utf8.get_letters(s)
         outWords = utf8.get_tamil_words(letters)
-        if LINUX:
-            print(u"|".join(words))
-            print(u"|".join(outWords))
         self.assertEqual(outWords, words)
 
     def test_letter_extract_yield_with_ascii(self):
@@ -243,11 +213,7 @@ class Letters(unittest.TestCase):
         for l in utf8.get_letters_iterable(ta_str):
             letters.append(l)
         act_letters = utf8.get_letters(ta_str)
-        print("len ==== > ", len(letters), "get_letters CALL = ", len(act_letters))
         assert len(letters) == len(act_letters)
-        for pos, letter in enumerate(letters):
-            if LINUX:
-                print(u"%d %s" % (pos, letter))
         self.assertEqual(letters[-4], u"a")
 
     def test_letter_extract_yield(self):
@@ -256,26 +222,16 @@ class Letters(unittest.TestCase):
         letters = []
         for l in utf8.get_letters_iterable(ta_str):
             letters.append(l)
-        print("len ==== > ", len(letters))
         assert len(letters) == 16
-        print("len ==== > ", len(letters), "get_letters CALL = ", len(act_letters))
         assert len(letters) == len(act_letters)
-        for pos, letter in enumerate(letters):
-            if LINUX:
-                print(u"%d %s" % (pos, letter))
-        assert letter == (u"ர்")
+        assert letters[-1] == (u"ர்")
 
     def test_reverse_words(self):
         """ unittest for reverse a Tamil string"""
-        if LINUX:
-            print(utf8.get_letters(u"இந்த"))
-            print(u"".join(utf8.get_letters(u"இந்த")))
         for (
             word
         ) in u"இந்த (C) tamil முத்தையா அண்ணாமலை 2013 இந்த ஒரு எழில் தமிழ் நிரலாக்க மொழி உதாரணம்".split():
             rword = utf8.reverse_word(word)
-            if LINUX:
-                print(word, rword)
             self.assertTrue(utf8.get_letters(rword)[0] == utf8.get_letters(word)[-1])
         return
 
@@ -314,7 +270,6 @@ class Letters(unittest.TestCase):
     def test_istamil(self):
         zz = u"முத்தையா அண்ணாமலை எந்த ஒரு தெரிந்த அல்லது தெரியாத எழுத்துருவாகவிருந்தாலும் அதனை மேல்தட்டில் உள்ளிட்டு கீழே உள்ள முடியும்"
         for z in zz.split(u" "):
-            print("********** t/f ********")
             for x, y in zip(
                 map(utf8.istamil, utf8.get_letters(z)), utf8.get_letters(z)
             ):
@@ -342,8 +297,6 @@ class Letters(unittest.TestCase):
             False,
             False,
         ]
-        print(list(map(utf8.istamil, utf8.get_letters(u"முத்தையா அண்ணாமலை 2013"))))
-        print(correct)
         assert (
             list(map(utf8.istamil, utf8.get_letters(u"முத்தையா அண்ணாமலை 2013")))
             == correct
@@ -383,26 +336,21 @@ class CodecTSCII(unittest.TestCase):
         )
 
     def test_TSCII_to_UTF8_part1(self):
-        with codecs.open("data/Sample.TSCII", "rb") as fp:
+        with codecs.open(os.path.join(CURRDIR,"data/Sample.TSCII"), "rb") as fp:
             str = fp.read()
         output = tamil.tscii.convert_to_unicode([chr(x) for x in str])
-        if LINUX:
-            print(output)
         needle = u"""உடுப்பி ஒட்டலுக்குப் போய் மசாலா தோசை சாப்பிட்டு வரலாமா"""
         assert output.find(needle) >= 0
 
     def test_TSCII_to_UTF8_part2(self):
-        if PYTHON3:
-            print("#### TEST NOT RUN FOR PYTHON3 #######")
-            return
-        with open("data/dumb.tscii") as fp:
+        with open(os.path.join(CURRDIR,"data/dumb.tscii"),"rb") as fp:
             str = fp.read()
-        output = tamil.tscii.convert_to_unicode(str)
+        output = tamil.tscii.convert_to_unicode_from_bytes(str)
         assert output.find(u"அப்பா") >= 0
 
     def test_project_MADURAI(self):
-        fname = "data/project_madurai_tscii.txt"
-        fexact = "data/project_madurai_utf8.txt"
+        fname = os.path.join(CURRDIR,"data/project_madurai_tscii.txt")
+        fexact = os.path.join(CURRDIR,"data/project_madurai_utf8.txt")
 
         # expected
         with codecs.open(fexact, "r", "utf-8") as fileHandle:

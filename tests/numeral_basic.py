@@ -430,7 +430,6 @@ class NumeralNegTest(unittest.TestCase):
         actual_IN = tamil.numeral.num2tamilstr(pie)
         self.assertEqual(actual_IN[0 : len(expected)], expected)
 
-    # @unittest.skipIf( PYTHON3, "Python3 has different rounding")
     def test_INFRAC(self):
         exp2 = u"ஓர் ஆயிரத்து ஒன்று புள்ளி நான்கு ஐந்து"
         actual_IN2 = tamil.numeral.num2tamilstr(1001 + 0.45)

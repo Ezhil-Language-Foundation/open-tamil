@@ -98,14 +98,10 @@ class LetterTests(unittest.TestCase):
             consonant_zha,
             consonant_va,
         ]  # this array has a few duplicates
-        if PYTHON3:
-            asorted = tamil_sorted(agaram_letters)
-            consonants = sorted(
-                list(set(consonants)), key=cmp_to_key(compare_words_lexicographic)
-            )
-        else:
-            asorted = tamil_sorted(agaram_letters)
-            consonants = sorted(list(set(consonants)), cmp=compare_words_lexicographic)
+        asorted = tamil_sorted(agaram_letters)
+        consonants = sorted(
+            list(set(consonants)), key=cmp_to_key(compare_words_lexicographic)
+        )
         self.assertEqual(asorted, consonants)
 
     def test_named_kombugal(self):

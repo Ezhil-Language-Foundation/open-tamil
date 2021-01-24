@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) 2015 Muthiah Annamalai
+# (C) 2015, 2021 Muthiah Annamalai
 
 import codecs
 
@@ -37,14 +37,8 @@ class Letters(unittest.TestCase):
 
         ta_parts = u"டைட்டானிக் படத்தில் வரும் ஜேக் மற்றும் ரோஸ் போன்று தன் காதலை வெளிப்படுத்தும் இரு தவளைகள்".split()
         wlen_expected = [5, 5, 3, 2, 4, 2, 3, 2, 3, 8, 2, 5]
-        wlen = map(lambda x: len(tamil.utf8.get_letters(x)), ta_parts)
-        if PYTHON3:
-            wlen = list(wlen)
-        if LINUX:
-            print(wlen)
-            print(wlen_expected)
+        wlen = list(map(lambda x: len(tamil.utf8.get_letters(x)), ta_parts))
         self.assertEqual(wlen, wlen_expected)
-
 
 if __name__ == "__main__":
     unittest.main()

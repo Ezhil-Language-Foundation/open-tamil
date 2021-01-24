@@ -167,12 +167,6 @@ class Yazhpanam(unittest.TestCase):
                     u"Transliteration changed\n Expected %s, but got %s for string input %\n"
                     % (v, tamil_tx, k)
                 )
-            else:
-                if LINUX:
-                    print(
-                        u"matched %s => %s"
-                        % (k, PYTHON3 and tamil_tx or unicode(tamil_tx))
-                    )
         return
 
 

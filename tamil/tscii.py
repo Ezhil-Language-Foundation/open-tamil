@@ -233,6 +233,11 @@ def print_table():
     print(u"</table>")
 
 
+def convert_to_unicode_from_bytes(data):
+    chrs = list(map(chr, data))
+    return convert_to_unicode(chrs)
+
+
 ## List based code uses as a look-ahead with 3-tokens before you decide to throw
 ## or convert the tokens into Unicode
 def convert_to_unicode(tscii_input):

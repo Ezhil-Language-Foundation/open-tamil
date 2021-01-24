@@ -39,12 +39,6 @@ class Letters(unittest.TestCase):
         # LetterModels
         q = Unigram("data/ex.unicode")
         q.frequency_model()
-        if not PYTHON3:
-            # if ( LINUX ):  print(unicode(q))
-            pass
-        else:
-            # if ( LINUX ):  print( q )
-            pass
         self.assertEqual(q.letter[u"ஷை"] + q.letter[u"சி"], q.letter[u"ந"])
         del z, q
 

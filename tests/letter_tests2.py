@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (C) 2017 Muthiah Annamalai
+# (C) 2017, 2021 Muthiah Annamalai
 #
 # This file is part of 'open-tamil' package tests
 #
@@ -9,12 +9,6 @@ from opentamiltests import *
 import tamil.utf8 as utf8
 from tamil.tscii import TSCII
 import codecs
-
-if PYTHON3:
-
-    class long(int):
-        pass
-
 
 class Letters(unittest.TestCase):
     def test_issue132(self):
@@ -80,7 +74,6 @@ class Letters(unittest.TestCase):
     def test_classified_except(self):
         with self.assertRaises(ValueError) as ve:
             utf8.classify_letter(u".")
-
 
 if __name__ == "__main__":
     unittest.main()
