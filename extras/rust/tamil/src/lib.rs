@@ -123,13 +123,24 @@ mod tests {
     }
     #[test]
     fn test_classify() {
-        assert_eq!("<Kuril>",classify_letter("அ"));
+        assert_eq!("<Kuril/UyirLetter>",classify_letter("அ"));
         assert_eq!("<UyirMeiLetter>",classify_letter("கொ"));
-        assert_eq!("<Vallinam>",classify_letter("க்"));
+        assert_eq!("<Vallinam/MeiLetter>",classify_letter("க்"));
     }
     #[test]
     fn test_mei_uyir() {
         assert_eq!(join_mei_uyir("ன்","ஊ"), "னூ");
         assert_eq!(join_mei_uyir("க்","ஒ"), "கொ");
+    }
+    #[test]
+    fn test_join_elementary() {
+        let expected = String::from("காரைவீடு");
+        let mut input : Vec<String> = Vec::<String>::new();
+        for s in vec!["க்","ஆ","ர்","ஐ","வ்","ஈ","ட்","உ"].iter() {
+            input.push(s.to_string());
+        }
+        let actual = join_letters_elementary(&input);
+        assert_eq!(actual.len(),expected.len());
+        assert_eq!(&actual,&expected);
     }
 }

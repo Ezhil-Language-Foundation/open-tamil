@@ -735,9 +735,21 @@ pub fn join_mei_uyir(mei_char:&str, uyir_char:&str) -> String {
     return TAMIL_LETTERS[UYIRMEI_OFFSET+uyirmeiidx].to_string()
 }
 
-//pub fn join_letters_elementary(letter_a:&str,letter_b:&str) -> String {
-//    panic!("not impl.");
-//}
+pub fn join_letters_elementary(elements:&Vec<String>) -> String {
+    /**
+    * @elements[i] : argaram letter (க)
+    * @elements[i+1] : kombu symbol ( \u{0bcd} )
+    *           = க்
+    */
+    if elements.len() % 2 != 0 {
+        panic!("input has to be an even numbered list");
+    }
+    let mut result = String::from("");
+    for i in 0..(elements.len()/2) {
+        result.push_str( &mut join_mei_uyir(&elements[2*i],&elements[2*i+1]) );
+    }
+    result
+}
 
 pub fn reverse_word(word: &str) -> String {
     let letters = get_letters(word);
@@ -755,20 +767,20 @@ pub fn classify_letter(letter:&str) -> String {
     let eq_char = |x:&char|->bool{ *x == first_letter };
     if UYIR_LETTERS.iter().any(eq_char) {
         if KURIL_LETTERS.iter().any(eq_char) {
-            return "<Kuril>".to_owned()
+            return "<Kuril/UyirLetter>".to_owned()
         } else if NEDIL_LETTERS.iter().any(eq_char) {
-            return "<Nedil>".to_owned()
+            return "<Nedil/UyirLetter>".to_owned()
         } else if first_letter == AYTHAM_LETTER {
-            return "<Ayudham>".to_owned()
+            return "<Ayudham/UyirLetter>".to_owned()
         }
         return "<UyirLetter>".to_owned()
     } else if MEI_LETTERS.iter().any(eq_letter) {
         if MELLINAM_LETTERS.iter().any(eq_letter) {
-            return "<Mellinam>".to_owned()
+            return "<Mellinam/MeiLetter>".to_owned()
         } else if VALLINAM_LETTERS.iter().any(eq_letter) {
-            return "<Vallinam>".to_owned()
+            return "<Vallinam/MeiLetter>".to_owned()
         } else if IDAYINAM_LETTERS.iter().any(eq_letter) {
-            return "<Idayinam>".to_owned()
+            return "<Idayinam/MeiLetter>".to_owned()
         }
     } else if UYIRMEI_LETTERS.iter().any(eq_letter) {
         return "<UyirMeiLetter>".to_owned()
