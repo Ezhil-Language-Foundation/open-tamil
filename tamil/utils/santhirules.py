@@ -30,6 +30,9 @@ all_rules = {
 def joinWords(word_a, word_b):
     word_a = word_a.strip()
     word_b = word_b.strip()
+
+    if word_b == "கள்": return word_a + word_b
+
     # get readable letters of first word
     first_word_letters = get_letters(word_a)
 

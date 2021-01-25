@@ -105,9 +105,8 @@ class CaseFilterTest(unittest.TestCase):
             self.assertEqual(trunc_word, rval[0])
         return
 
-    @unittest.skip("not settled")
     def test_peyarchorkal(self):
-        expected = []
+        expected = ['மாடுகள்', 'மாடு இன்', 'மாடு இன் அது', 'மாடு ற்கு', 'மாடு ஆல்']
         self.assertListEqual(expected, make_all_variants("மாடு"))
         return
 
