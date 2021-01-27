@@ -143,4 +143,33 @@ mod tests {
         assert_eq!(actual.len(),expected.len());
         assert_eq!(&actual,&expected);
     }
+
+    #[test]
+    fn test_split_mei_uyir() {
+        let ab = split_mei_uyir("போ");
+        assert_eq!(&ab[0],"ப்");
+        assert_eq!(&ab[1],"ஓ");
+        assert_eq!(ab.len(),2);
+
+        let bc = split_mei_uyir("டா");
+        assert_eq!(&bc[0],"ட்");
+        assert_eq!(&bc[1],"ஆ");
+        assert_eq!(bc.len(),2);
+    }
+
+    #[test]
+    fn test_split_mei_uyir2() {
+        let bc = split_mei_uyir("ற");
+        assert_eq!(&bc[0],"ற்");
+        assert_eq!(&bc[1],"அ");
+        assert_eq!(bc.len(),2);
+    }
+
+    #[test]
+    fn test_get_letters_elementary() {
+        let parts = get_letters_elementary("கொற்றவை");
+        let expected = vec!["க்","ஒ","ற்","","ற்","அ","வ்","ஐ"];
+        println!("{:?}",parts);
+        assert_eq!(parts,expected);
+    }
 }

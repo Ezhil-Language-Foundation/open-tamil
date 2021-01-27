@@ -660,7 +660,8 @@ pub fn get_letters_length(word: &str) -> usize {
     get_letters(word).len()
 }
 
-/** Split a tamil-unicode stream into
+/**
+* Split a tamil-unicode stream into
 * tamil characters (individuals).
 */
 pub fn get_letters(x: &str) -> Vec<String> {
@@ -690,6 +691,53 @@ pub fn get_letters(x: &str) -> Vec<String> {
         }
     }
     v
+}
+
+pub fn split_mei_uyir(uyirmei_char:&str) -> Vec<String> {
+    /**
+    This function split uyirmei compound character into mei + uyir characters
+    and returns in tuple.
+
+    Input : It must be unicode tamil char, V=vowel, C=char, VC=compound VC.
+    Output: (mei,uyir) if it is VC, otherwise return input if it is V, or C.
+    Written By : Arulalan.T
+    Date : 22.09.2014
+
+    **/
+    let match_char = |x:&char| -> bool { *x == uyirmei_char.chars().next().unwrap() };
+
+    let is_uyir : bool = UYIR_LETTERS.iter().any(match_char);
+    let is_mei : bool = GRANTHA_MEI_LETTERS.iter().any(|x| { *x == uyirmei_char });
+    if is_uyir  {
+        return vec!["".to_string(),uyirmei_char.to_string()];
+    } else if is_mei  {
+        return vec![uyirmei_char.to_string(),"".to_string()];
+    }
+    // has to be uyirmei letters.
+    let uyirmeiidx : usize = TAMIL_LETTERS.iter().position( |x|{ *x == uyirmei_char } ).unwrap() - UYIRMEI_OFFSET;
+
+    //# calculate uyirmei index
+    let uyiridx:usize = uyirmeiidx%12;
+    let mut midx : usize = ((uyirmeiidx-uyiridx)/12);
+    if midx >= 2 {
+        midx = (midx - 2);
+    }
+    midx = midx%GRANTHA_MEI_LETTERS.len();
+    let meiidx : usize = midx;
+    let gmei = String::from(GRANTHA_MEI_LETTERS[meiidx].to_string());
+    let guyir = String::from(UYIR_LETTERS[uyiridx].to_string());
+    println!("{},{}",gmei,guyir);
+    return vec![gmei,guyir]
+}
+
+pub fn get_letters_elementary(word:&str) -> Vec<String> {
+    let mut retval = Vec::<String>::new();
+    for w in get_letters(word) {
+        let result = split_mei_uyir(&w);
+        retval.push(result[0].to_string());
+        retval.push(result[1].to_string());
+    }
+    retval
 }
 
 pub fn all_tamil(word: &str) -> bool {
