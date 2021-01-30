@@ -14,7 +14,7 @@ from . import utf8
 from . import utils
 from . import wordutils
 
-VERSION = "0.98"
+VERSION = "0.99"
 __all__ = [
     "utf8",
     "txt2unicode",

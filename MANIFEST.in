@@ -1,4 +1,15 @@
-include setup.py ngram/*.py tamil/*.py transliterate/*.py
+include setup.py ngram/*.py
+include tamil/*.py tamil/txt2ipa/*.py tamil/txt2unicode/*.py tamil/utils/*.py
+inlcude transliterate/*.py
+include kural/*.py
+include solthiruthi/*.py solthiruthi/data/*.txt
+include spell/*.py
+include tabraille/*.py
+include tamilmorse/*.py tamilmorse/data/*.json
+include tamilsandhi/*.py
+include tamilsandhi/all-tamil-nouns.txt
+include tamilstemmer/*.py
+include valai/*.py
 include README.md
 include README.rst
 include open-tamil-logo.jpg

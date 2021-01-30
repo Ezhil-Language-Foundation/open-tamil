@@ -1,6 +1,6 @@
 Open Source Tamil Tools and NLP Library for Python 3
 ======================================================
-திற மூல தமிழ் கருவிகள் version 0.98
+திற மூல தமிழ் கருவிகள் version 0.99
 -------------------------------------
 .. image:: https://travis-ci.org/Ezhil-Language-Foundation/open-tamil.svg?branch=main
     :target: https://travis-ci.org/Ezhil-Language-Foundation/open-tamil
@@ -57,7 +57,7 @@ phonetic schemes like,
 1. Azhagi - phonetic maps for all Tamil letters - many -> one supporting multiple form inputs
 2. Jaffna Library - phonetic maps for all Tamil letters - one->one
 3. Combinational layout - based on phonetic mapping of vowel+consonant
-
+4. University of Madras, ISO - transliteration schemes are added.
 where you can supply English text, which phonetically encodes Tamil, and then receive Unicode encoded, in a best-effort algorithm for the longest phonetic match.
 
 `transliterate` தொகுப்பு பொதுவாக பயன்படுத்தப்படும் ஒலிபெயர்ப்புகளை வழங்குகிறது; அவை,
