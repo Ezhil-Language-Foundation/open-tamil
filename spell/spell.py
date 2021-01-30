@@ -378,8 +378,9 @@ class Speller(object):
 
     def spellcheck(self, filename):
         new_document = []
-        data = codecs.open(filename, u"r", u"utf-8")
-        lines = data.readlines()
+        lines = []
+        with codecs.open(filename, u"r", u"utf-8") as data:
+            lines = data.readlines()
         for line in lines:
             words = tamil.utf8.get_words(tamil.utf8.get_letters(line))
             for word in words:
