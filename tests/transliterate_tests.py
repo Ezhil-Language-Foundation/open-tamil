@@ -5,8 +5,10 @@
 #
 
 # setup the paths
+import unittest
 from opentamiltests import *
-from transliterate import azhagi, jaffna, combinational, UOM, itrans, algorithm
+from tamil.utf8 import get_letters
+from transliterate import azhagi, jaffna, combinational, UOM, ISO, itrans, algorithm
 
 
 class ReverseTransliterationTests(unittest.TestCase):
@@ -26,8 +28,33 @@ class ReverseTransliterationTests(unittest.TestCase):
         eng_str = algorithm.Tamil2English.transliterate(azhagi_table, tamil_str)
         self.assertEqual(eng_str, exp_eng_str)
 
+class ISOTest(unittest.TestCase):
+    def test_tables(self):
+        self.assertEqual(len(ISO.ReverseTransliteration.table),len(ISO.Transliteration.table))
+
+    def test_ISO(self):
+        ISO_table = ISO.ReverseTransliteration.table
+        expected = 'cāmi. citamparaṉār nūṟ kaḷañciyam'
+        tamil_str = "சாமி. சிதம்பரனார் நூற் களஞ்சியம்"
+        eng_str = algorithm.Direct.transliterate(ISO_table,tamil_str)
+        self.assertEqual(expected,eng_str)
 
 class GreedyTests(unittest.TestCase):
+    @unittest.skip("incorrect")
+    def test_ISO(self):
+        ISO_table = algorithm.reverse_transliteration_table(ISO.Transliteration.table)
+        expected = 'cāmi. citamparaṉār nūṟ kaḷañciyam'
+        tamil_str = "சாமி. சிதம்பரனார் நூற் களஞ்சியம்"
+        eng_words = []
+        for tamil_word in tamil_str.split(' '):
+            _,eng_str = algorithm.Greedy.transliterate(ISO_table, tamil_word,full_search=True)
+            print(eng_str.options)
+            if len(eng_str.options) < 1: continue
+            eng_str.options = list(eng_str.options)
+            eng_words.append(eng_str.options[0])
+        eng_fullstr = ' '.join(eng_words)
+        self.assertEqual(expected, eng_fullstr)
+
     def test_UOM(self):
         # University of Madras Lexicon style transliteration standard
         tamil_word = u"வணக்கம்"

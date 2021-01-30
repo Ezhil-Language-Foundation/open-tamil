@@ -4,6 +4,7 @@ from . import azhagi
 from . import combinational
 from . import itrans
 from . import jaffna
+from . import ISO
 from .algorithm import Iterative, Greedy, Tamil2English, reverse_transliteration_table
 
 #Transliteration module
