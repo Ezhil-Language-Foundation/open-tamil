@@ -23,7 +23,7 @@
         }
     </style>
   </head>
-  <body>
+<body>
 <script src="{% static 'js/jquery.min.js' %}"></script>
 <script src="{% static 'js/jquery.ime.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -59,9 +59,7 @@
             <ul class="nav nav-tabs nav-stacked" role="navigation">
               <li class="navbar-brand">{% trans 'Applications' %}</li>
               <li><a href="/tts_demo">{% trans "Text to Speech Synthesizer" %}</a></li>
-{% if not PYTHON26 %}
-	      <li><a href="/get-classify">{% trans "Classifier" %}</a></li>
-{% endif %}
+    	      <li><a href="/get-classify">{% trans "Classifier" %}</a></li>
               <li><a href="/xword">{% trans "Crossword" %}</a></li>
               <li><a href="/number">{% trans "Tamil Number" %}</a></li>
        	      <li><a href="/stemmer">{% trans "Tamil Stemmer" %}</a></li>
@@ -82,6 +80,7 @@
               <li><a href="/rever">{% trans "Reverse Words" %}</a></li>
 	      <li><a href="/summarizer">{% trans "Text summarizer" %}</a></li>
 	      <li><a href="/morse">{% trans "Tamil Morse code" %}</a></li>
+                <li><a href="/version">{% trans "Open-Tamil version" %}</a></li>
             </ul>
           </div>
            <form name="setLangTamil" action="/i18n/setlang/" method="POST">

@@ -184,6 +184,12 @@ msgstr "அமெரிக்கத் தரநிலை"
 msgid "Spellchecker"
 msgstr "எழுத்துப் பிழைதிருத்தி"
 
+msgid "Open-Tamil version"
+msgstr "ஓப்பன்-தமிழ் வரிசை எண்"
+
+msgid "Running Open-Tamil version"
+msgstr "இயக்கத்தில் பயன்படுத்துவது ஓப்பன்-தமிழ் வரிசை எண்"
+
 #: opentamilapp/templates/spell.html:11
 msgid ""
 "This is a demo of spellcheck service of . In this page, you can enter a word "

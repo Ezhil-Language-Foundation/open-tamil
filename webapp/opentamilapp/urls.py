@@ -18,8 +18,6 @@ from django.shortcuts import redirect
 from django.conf.urls import url
 from .views import *
 
-PYTHON26 = sys.version.find("2.6") >= 0
-
 urlpatterns = [
     url(r"^$", index, name="home"),
     url(r"^apidoc/$", lambda r: redirect("/static/sphinx_doc/_build/html/index.html")),
@@ -57,12 +55,6 @@ urlpatterns = [
     url(r"^textrandomizer/(?P<level>.+)/$", test_textrandomizer, name="textrandomizer"),
     url(r"^stemmer/$", tastemmer, name="stemmer"),
     url(r"^stemmer/json/$", lambda x: tastemmer(x, use_json=True), name="json_stemmer"),
-]
-
-if not PYTHON26:
-    urlpatterns.extend(
-        [
-            url(r"^classify-word/$", classify_word, name="classify_word"),
-            url(r"^get-classify/$", get_classify, name="classifier"),
-        ]
-    )
+    url(r"version/",version,name="version"),
+    url(r"^classify-word/$", classify_word, name="classify_word"),
+    url(r"^get-classify/$", get_classify, name="classifier")]

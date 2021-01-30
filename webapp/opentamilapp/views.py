@@ -35,7 +35,6 @@ from tamilstemmer import TamilStemmer
 from opentamilweb import settings
 
 import tamilmorse
-import imp
 
 try:
     from tamiltts import ConcatennativeTTS
@@ -43,67 +42,62 @@ try:
 except Exception as ioe:
     pass
 
-PYTHON26 = False
-if sys.version_info[0] < 3:
-    PYTHON26 = True
-    imp.reload(sys)
-    sys.setdefaultencoding("utf8")
-
-
 def index(request):
-    return render(request, "first.html", {"PYTHON26": PYTHON26})
+    return render(request, "first.html")
 
+def version(request):
+    return render(request,"version.html",{"VERSION":tamil.VERSION})
 
 def vaypaadu(request):
-    return render(request, "vaypaadu.html", {"PYTHON26": PYTHON26})
+    return render(request, "vaypaadu.html")
 
 
 def trans(request):
-    return render(request, "translite.html", {"PYTHON26": PYTHON26})
+    return render(request, "translite.html")
 
 
 def uni(request):
-    return render(request, "unicode.html", {"PYTHON26": PYTHON26})
+    return render(request, "unicode.html")
 
 
 def keechu(request):
-    return render(request, "keechu.html", {"PYTHON26": PYTHON26})
+    return render(request, "keechu.html")
 
 
 def spl(request):
-    return render(request, "spell.html", {"PYTHON26": PYTHON26})
+    return render(request, "spell.html")
 
 
 def rev(request):
-    return render(request, "reverse.html", {"PYTHON26": PYTHON26})
+    return render(request, "reverse.html")
 
 
 def morse_code(request):
-    return render(request, "morse.html", {"PYTHON26": PYTHON26})
+    return render(request, "morse.html")
 
 
 def num(request):
-    return render(request, "number.html", {"PYTHON26": PYTHON26})
+    return render(request, "number.html")
 
 
 def anag(request):
-    return render(request, "anagram.html", {"PYTHON26": PYTHON26})
+    return render(request, "anagram.html")
 
 
 def unig(request):
-    return render(request, "unigram.html", {"PYTHON26": PYTHON26})
+    return render(request, "unigram.html")
 
 
 def ngra(request):
-    return render(request, "ngram.html", {"PYTHON26": PYTHON26})
+    return render(request, "ngram.html")
 
 
 def sandhi_check(request):
-    return render(request, "sandhi_check.html", {"PYTHON26": PYTHON26})
+    return render(request, "sandhi_check.html")
 
 
 def get_classify(request):
-    return render(request, "classifier.html", {"PYTHON26": PYTHON26})
+    return render(request, "classifier.html")
 
 
 def numstr(request, num):
@@ -242,19 +236,19 @@ def morse(request, direction="encode", word=""):
 
 def tts_demo(request):
     if request.method == "GET":
-        return render(request, "tts_demo.html", {"solution": "", "PYTHON26": PYTHON26})
+        return render(request, "tts_demo.html", {"solution": ""})
     assert request.method == "POST"
     words = request.POST.get("words", "")
     mp3path = os.path.join("static", "audio_%d.mp3" % random.randint(0, 1000000))
     static_path = os.path.join(os.path.split(__file__)[0], mp3path)
     tts = ConcatennativeTTS(words, static_path)
     tts.run()
-    return render(request, "tts_demo.html", {"solution": mp3path, "PYTHON26": PYTHON26})
+    return render(request, "tts_demo.html", {"solution": mp3path})
 
 
 def xword(request):
     if request.method == "GET":
-        return render(request, "xword.html", {"solution": "", "PYTHON26": PYTHON26})
+        return render(request, "xword.html", {"solution": ""})
     assert request.method == "POST"
     words = request.POST.get("words", [])
     wordlist = list(filter(len, [w.strip() for w in re.split("\n+", words)]))
@@ -262,14 +256,14 @@ def xword(request):
     return render(
         request,
         "xword.html",
-        {"solution": grid, "wordlist": wordlist, "PYTHON26": PYTHON26},
+        {"solution": grid, "wordlist": wordlist},
     )
 
 
 def summarizer(request):
     if request.method == "GET":
         return render(
-            request, "summarizer.html", {"text_input": "", "PYTHON26": PYTHON26}
+            request, "summarizer.html", {"text_input": ""}
         )
     assert request.method == "POST"
     text_input = request.POST.get("text_input", "")
@@ -294,8 +288,7 @@ def summarizer(request):
         {
             "text_input": text_input,
             "text_summary": text_summary,
-            "text_comments": text_comments,
-            "PYTHON26": PYTHON26,
+            "text_comments": text_comments
         },
     )
 
