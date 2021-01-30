@@ -18,9 +18,9 @@
 
 <style type="text/css">
         .important { color: #336699;font-size:25px }
-.highlight {
-    color: red;
-}
+        .highlight {
+            color: red;
+        }
     </style>
   </head>
   <body>
@@ -30,16 +30,15 @@
     <div class="navbar navbar-inverse navbar-fixed-top silpa-navbar" role="navigation">
       <div class="container">
         <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="/">Open Tamil Web</a></li>
+          <li><a class="navbar-brand" href="/">{% trans "Open-Tamil Web" %}</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right hidden-xs">
           {% if LANGUAGE_CODE|stringformat:"s" == "en"  %}
-    <li><a onclick="document.setLangTamil.submit();return false;">தமிழ் </a></li>
-       
+    <li><a onclick="document.setLangTamil.submit();return false;">{% trans "தமிழ்" %}</a></li>
          {% else %}
-   <li><a onclick="document.setLangEnglish.submit();return false;">Eng</a></li>
+   <li><a onclick="document.setLangEnglish.submit();return false;">{% trans "Eng" %}</a></li>
      {% endif %}
-          <li><a href="https://github.com/Ezhil-Language-Foundation/open-tamil">Documentation</a></li>
+          <li><a href="https://github.com/Ezhil-Language-Foundation/open-tamil">{% trans "Documentation" %}</a></li>
         </ul>
       </div> <!-- container -->
     </div> <!-- navbar -->
@@ -108,7 +107,7 @@
           <li class="muted">·</li>
           <li><a href="http://www.glug-madurai.org/pages/mailing-list.html">Mailing List</a></li>
           <li class="muted">·</li>
-          <li><a href="https://pypi.python.org/pypi/Open-Tamil/0.7">Credits</a></li>
+          <li><a href="https://pypi.python.org/pypi/Open-Tamil/0.98">Credits</a></li>
           <li class="muted">·</li>
           <li><a href="#">License</a></li>
           <li class="muted">·</li>

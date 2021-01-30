@@ -34,24 +34,18 @@ from tamil.wordutils import minnal as tamil_minnal
 from tamilstemmer import TamilStemmer
 from opentamilweb import settings
 
-# try:
 import tamilmorse
 import imp
 
-# except ImportError as ioe:
-#   print("tamilmorse library not imported")
-#   pass
-
-PYTHON26 = sys.version.find("2.6") >= 0
-if not PYTHON26:
-    from .classifier import process_word
-
 try:
     from tamiltts import ConcatennativeTTS
+    from .classifier import process_word
 except Exception as ioe:
     pass
 
+PYTHON26 = False
 if sys.version_info[0] < 3:
+    PYTHON26 = True
     imp.reload(sys)
     sys.setdefaultencoding("utf8")
 
@@ -108,10 +102,8 @@ def sandhi_check(request):
     return render(request, "sandhi_check.html", {"PYTHON26": PYTHON26})
 
 
-if not PYTHON26:
-
-    def get_classify(request):
-        return render(request, "classifier.html", {"PYTHON26": PYTHON26})
+def get_classify(request):
+    return render(request, "classifier.html", {"PYTHON26": PYTHON26})
 
 
 def numstr(request, num):
@@ -130,7 +122,6 @@ def numstr(request, num):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
-
 def unicod(request, tsci):
     cod = request.GET.get("cod")
     data = unicode_converter(tsci, cod)
@@ -138,7 +129,6 @@ def unicod(request, tsci):
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
-
 
 def keech(request, k1):
     dic = {}
@@ -151,13 +141,11 @@ def keech(request, k1):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
-
 @csrf_exempt
 def call_sandhi_check(request):
     k1 = cgi.escape(
         request.GET.get("tamiltext", "அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ")
     )
-    print(k1)
     dic = {}
     temp = ""
     dic["old"] = k1
@@ -174,7 +162,6 @@ def call_sandhi_check(request):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
-
 def translite(request, tan):
     tamil_tx = algorithm.Iterative.transliterate(azhagi.Transliteration.table, tan)
     data = {"result": tamil_tx}
@@ -183,7 +170,6 @@ def translite(request, tan):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
-
 def spell_check(request, k1):
     speller = Speller(lang="TA", mode="web")
     notok, suggs = speller.check_word_and_suggest(k1)
@@ -191,7 +177,6 @@ def spell_check(request, k1):
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
-
 
 def test_ngram(request, ng):
     obj = DTrie()
@@ -210,7 +195,6 @@ def test_ngram(request, ng):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
-
 def anagram(request, word):
     AllTrueDictionary = wordutils.DictionaryWithPredicate(lambda x: True)
     TVU, TVU_size = DictionaryBuilder.create(TamilVU)
@@ -221,7 +205,6 @@ def anagram(request, word):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
-
 def test_basic(request, word):
     n = request.GET.get("n")
     t = get_ngram_groups(word, int(n))
@@ -230,14 +213,12 @@ def test_basic(request, word):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
-
 def revers(request, word):
     t = tamil.utf8.reverse_word(word)
     json_string = json.dumps(t, ensure_ascii=False)
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
-
 
 def morse(request, direction="encode", word=""):
     if direction.lower().find("encode") >= 0:
@@ -248,7 +229,6 @@ def morse(request, direction="encode", word=""):
     print(json_string)
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
-
 
 # TBD:
 # def sorttamil(request):
@@ -319,7 +299,6 @@ def summarizer(request):
         },
     )
 
-
 def classify_word(request):
     word = request.GET.get("tamiltext")
     result = process_word(word)
@@ -329,10 +308,8 @@ def classify_word(request):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
-
 def minnal(request):
     return render(request, "minnal.html", {})
-
 
 def test_minnal(request, word):
     data, _ = tamil_minnal(re.split("\s+|,", word))
@@ -340,7 +317,6 @@ def test_minnal(request, word):
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
-
 
 def load_textrandomizer_db():
     TEXTRANDOMIZER_DB = {}
