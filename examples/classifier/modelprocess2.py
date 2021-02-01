@@ -14,7 +14,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
-from sklearn.externals import joblib
+import joblib
 
 # project modules
 from classifier_eng_vs_ta import jaffna_transliterate
@@ -62,12 +62,13 @@ X_test = scaler.transform(X_test)
 ## Build training set for the model
 ## solver='sgd',activation='logistic',
 ## We have a 4-layer model
-# nn = MLPClassifier(hidden_layer_sizes=(15,15,10,5),
-#                   max_iter=100000,alpha=0.01,solver='lbfgs')
+nn = MLPClassifier(hidden_layer_sizes=(15,15,10,5),
+                   activation='logistic',
+                   max_iter=100000,alpha=0.01,solver='lbfgs')
 # Try 1-layer simple model with logistic activation
-nn = MLPClassifier(
-    hidden_layer_sizes=(8, 8, 7), solver="lbfgs"
-)  # activation='logistic',max_iter=1000,early_stopping=True,solver='lbfgs')
+#nn = MLPClassifier(
+#    hidden_layer_sizes=(8, 8, 7), solver="lbfgs"
+#)  # activation='logistic',max_iter=1000,early_stopping=True,solver='lbfgs')
 #                   max_iter=500,solver='sgd',activation='logistic')
 print(nn)
 nn.fit(X_train, Y_train)
@@ -125,7 +126,7 @@ for w in [
     process_word(w)
 
 while True:
-    s = raw_input(u">> ").decode("utf-8")
+    s = input(u">> ").decode("utf-8")
     s = s.strip().lower()
     if s == "end":
         break

@@ -9,7 +9,7 @@ import sys
 import copy
 import math
 import re
-import cgi
+import html
 import json
 import random
 from tamil.utf8 import get_letters
@@ -137,7 +137,7 @@ def keech(request, k1):
 
 @csrf_exempt
 def call_sandhi_check(request):
-    k1 = cgi.escape(
+    k1 = html.escape(
         request.GET.get("tamiltext", "அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ")
     )
     dic = {}

@@ -1,5 +1,5 @@
 from tamil.txt2unicode import *
-
+from transliterate import ISO, algorithm
 
 def unicode_converter(tsci, cod):
     out = ""
@@ -175,5 +175,9 @@ def unicode_converter(tsci, cod):
     elif cod == "unicode2shreelipiavid":
         temp = str(tsci)
         out = unicode2encode.unicode2shreelipiavid(temp)
+    elif cod=="unicode2ISO":
+        temp = str(tsci)
+        ISO_table = ISO.ReverseTransliteration.table
+        out = algorithm.Direct.transliterate(ISO_table,temp)
     data = {"result": out}
     return data
