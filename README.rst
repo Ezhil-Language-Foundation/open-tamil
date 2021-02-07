@@ -1,3 +1,4 @@
+
 Open Source Tamil Tools and NLP Library for Python 3
 ======================================================
 திற மூல தமிழ் கருவிகள் version 0.99
@@ -101,6 +102,15 @@ Installation from Python Package Index is also recommended, following the comman
 
     $ pip install open-tamil
 
+Installing from sources
+=======================
+After pulling sources from git repo you need to sync the submodule
+for tamilsandhi by issuing the following commands,
+
+$ git submodule init 
+$ git submodule update --force
+
+This is required for packaging, tamilsandhichecker, along with open-tamil.
 
 உதாரணங்கள் (Example
 ===================
