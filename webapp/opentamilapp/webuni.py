@@ -1,5 +1,6 @@
 from tamil.txt2unicode import *
 from transliterate import ISO, algorithm
+import tamil
 
 def unicode_converter(tsci, cod):
     out = ""

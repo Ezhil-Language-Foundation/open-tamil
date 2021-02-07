@@ -265,6 +265,7 @@ class ReverseTransliteration:
     table[u'ங்'] = u'ṅ'
     table[u'ண்'] = u'ṇ'
     table[u'ன்'] = u'ṉ'
+    table[u'ந்'] = u'n'
     table[u'ம்'] = u'm'
     table[u'ய்'] = u'y'
     table[u'ர்'] = u'r'
