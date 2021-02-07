@@ -1,6 +1,6 @@
 include setup.py ngram/*.py
 include tamil/*.py tamil/txt2ipa/*.py tamil/txt2unicode/*.py tamil/utils/*.py
-inlcude transliterate/*.py
+include transliterate/*.py
 include kural/*.py
 include solthiruthi/*.py solthiruthi/data/*.txt
 include spell/*.py
