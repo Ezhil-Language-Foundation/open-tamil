@@ -23,6 +23,7 @@ class Transliteration:
     table = OrderedDict()
     table.update(zip(transliterate_uyir_plus_aytham,uyir_letters_plus_aytham))
     table.update(zip(transliterate_all_mei,grantha_mei_letters))
+    table[u'n'] = u'ந்'
     table[u'ka'] = u'க'
     table[u'kā'] = u'கா'
     table[u'ki'] = u'கி'
