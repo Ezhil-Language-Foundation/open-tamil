@@ -1,0 +1,125 @@
+{% extends "main.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "Tamil-Inayavaani SpellChecker + Tamil-Sandhi Checker" %}{% endblock %}
+{% block content %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script src={% static 'tinymce/js/jquery/jquery-1.12.1.min.js' %}></script>
+<script src={% static 'tinymce/js/tinymce/tinymce.dev.js' %}></script>
+<script src={% static 'tinymce/js/tinymce/tinymce.jquery.js' %}></script>
+<script>
+function ta_spellchecker_cb(method, text, success, failure) {
+      var words_to_check = text.split(/\s/);
+      //debug
+      console.log( words_to_check.join('|\n') );
+
+      var request = $.ajax({
+            url: "/ta/tamilinayavaani_spellchecker",
+            method: "POST",
+            dataType: "json",
+            data: {
+              lang: 'ta_IN', /*this.getLanguage()*/
+              text: words_to_check.join('\n')
+            }});
+
+       request.done(
+        function(result) {
+          console.log(result);
+          success(result);
+        });
+
+      request.fail( function(xhr,errorStatus) {
+              failure("Spellcheck error:" + errorStatus);
+            });
+
+};
+
+/* Ref: https://www.tinymce.com/docs/plugins/spellchecker/ */
+function init() {
+	tinymce.init({
+		mode: "textareas",
+		plugins: [
+			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+			"save table contextmenu directionality emoticons template paste"
+		],
+		valid_elements: '*[*]',
+		add_unload_trigger : false,
+		editor_selector : 'editable',
+        spellchecker_language : 'ta_IN',
+        spellchecker_callback: ta_spellchecker_cb
+    });
+};
+init();
+</script>
+    <div>
+        <h3>தமிழ் திருத்தி ( தமிழிணையவாணி + தமிழ் சந்திப்பிழைத்திருத்தி)</h3>
+        <div>
+            <div id="container1">
+                <textarea id="elm1" name="elm1" rows="25" cols="80" style="width: 80%" class="editable">
+                         கலுதைக்கு தெரியுமா கல்பூரம்   வாசொனை
+                </textarea>
+            </div>
+            <a href="#" onclick="tinymce.DOM.show('container1');return false;" alt="காட்டு">[+]</a>
+            <a href="#" onclick="tinymce.DOM.hide('container1');return false;" alt="மரை">[-]</a>
+        </div>
+    </div>
+<!-- credits -->
+<div>
+    <h2>Tamilinaiyam - Pizhaithiruthi (Spellchecker)</h2>
+</div>
+<div id="python-package">
+<h2>Python Package</h2>
+<p>Python Port of TamilInaiya spell checker is named ‘tamilinayavaani’
+and available as Python module form same name. It can be used with a UTF-8 encoded text file as follows,</p>
+<div id="installation">
+<h3>Installation</h3>
+<pre>$ python3 -m pip install --upgrade tamilinayavaani&gt;<span class="o">=</span><span class="m">0</span>.13
+</pre>
+</div>
+<div id="usage-in-memory">
+<h3>Usage - in-memory</h3>
+<pre><span class="kn">from</span> <span class="nn">tamilinaiyavaani</span> <span class="kn">import</span> <span class="n">SpellChecker</span>
+
+<span class="n">flag</span><span class="p">,</span><span class="n">suggs</span><span class="o">=</span><span class="n">SpellChecker</span><span class="o">.</span><span class="n">REST_interface</span><span class="p">(</span><span class="s1">'வாழை'</span><span class="p">,</span><span class="s1">'பழம்'</span><span class="p">)</span>
+
+<span class="n">expected</span><span class="o">=</span><span class="p">[</span><span class="s1">'வாழைப்'</span><span class="p">,</span> <span class="s1">'பழம்'</span><span class="p">]</span>
+
+<span class="k">assert</span> <span class="ow">not</span> <span class="n">flag</span>
+
+<span class="k">assert</span> <span class="n">expected</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">suggs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre>
+</div>
+<div id="usage-file-based">
+<h3>Usage - file-based</h3>
+<p>An file-based use of the library would look like,</p>
+<pre><span class="kn">from</span> <span class="nn">tamilinaiyavaani</span> <span class="kn">import</span> <span class="n">SpellChecker</span><span class="p">,</span> <span class="n">SpellCheckerResult</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">SpellChecker</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span> <span class="c1">#fname is a full filename</span>
+
+<span class="c1"># result is a list of SpellCheckerResult objects.</span>
+</pre>
+</div>
+</div>
+<div id="source">
+<h2>Source</h2>
+<p>Tamil Virtual Academy release sources at <a href="http://www.tamilvu.org/ta/content/%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%95%E0%AF%8D-%E0%AE%95%E0%AE%A3%E0%AE%BF%E0%AE%A9%E0%AE%BF%E0%AE%95%E0%AF%8D-%E0%AE%95%E0%AE%B0%E0%AF%81%E0%AE%B5%E0%AE%BF%E0%AE%95%E0%AE%B3%E0%AF%8D" rel="nofollow">link.</a></p>
+</div>
+<div id="license">
+<h2>License</h2>
+<p>This code is licensed under terms of GNU GPL V2. Check <a href="https://commons.wikimedia.org/wiki/File:Tamil-Virtual-Academy-Copyright-Declaration.jpg" rel="nofollow">link</a> for license info.</p>
+</div>
+<div id="credits">
+<h2>Credits</h2>
+<ul>
+<li>Thanks to Tamil Virtual Academy, Chennai for releasing ths source code of this application. This work is open-source
+publication of Vaani from <a href="http://vaani.neechalkaran.com" rel="nofollow">link</a>
+You can support the close-source Vaani project, an 8 yr effort
+as of 2020, by donating here  <a href="http://neechalkaran.com/p/donate.html" rel="nofollow">donate(link)</a></li>
+<li>Python Port was enabled by Kaniyam Foundation, T. Shrinivasan, @manikk, Ashok Ramachandran, and others.
+You can support Kaniyam Foundation and its mission by donating via instructions
+here, <a href="http://www.kaniyam.com" rel="nofollow">Kaniyam</a>
+The Python port depends on tamilsandhichecker project <a href="https://github.com/nithyadurai87/tamil-sandhi-checker" rel="nofollow">link</a> and the Open-Tamil
+project <a href="https://pypi.org/project/Open-Tamil/" rel="nofollow">link:</a>
+    </div>
+{% endblock %}

@@ -42,6 +42,47 @@ try:
 except Exception as ioe:
     pass
 
+from tamilinayavaani import SpellChecker, SpellCheckerResult
+from django.views.decorators.csrf import csrf_exempt
+
+def tamilinayavaani_spell_check(request):
+    return render(request,"tamilinayavaani_spell_check.html")
+
+@csrf_exempt
+def tamilinayavaani_spellchecker(request):
+    if request.method == 'POST':
+        lang = request.POST['lang']
+        text = request.POST['text']
+        if lang != "ta_IN":
+            json_string = json.dumps({'error':'Language '+lang+' is not supported; only takes Tamil (code ta_IN))'})
+            response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
+            return response
+
+        lang = "TA"
+        result_dict = {'words':{}}
+
+        wordlist = list(filter(len,re.split('\s+',text)))
+        Lmax = len(wordlist)-1
+        for itr,word in enumerate( wordlist ):
+            if word.find("<") >= 0: #HTML Tags, skip
+                continue
+            #print("checking word %d"%itr,file=sys.stderr)
+            try:
+                next_word = wordlist[itr+1] if itr != Lmax else None
+                ok,suggs = SpellChecker.REST_interface(word,next_word)
+                suggs = suggs[0].split(',')
+            except Exception as ioe:
+                ok = True
+
+            if not ok:
+                word = SpellChecker.scrub_ws(word)
+                suggl = list(suggs)
+                result_dict['words'][word] = suggl
+        json_string = json.dumps(result_dict)
+        response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
+        return response
+    return HttpResponse("RPC interface for TinyMCE Spell Checker!",content_type="application/x-text; charset=utf-8")
+
 def index(request):
     return render(request, "first.html")
 
@@ -50,7 +91,6 @@ def version(request):
 
 def vaypaadu(request):
     return render(request, "vaypaadu.html")
-
 
 def trans(request):
     return render(request, "translite.html")
