@@ -81,7 +81,11 @@ def tamilinayavaani_spellchecker(request):
         json_string = json.dumps(result_dict)
         response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
         return response
-    return HttpResponse("RPC interface for TinyMCE Spell Checker!",content_type="application/x-text; charset=utf-8")
+    
+    assert request.method == "GET"
+    text = request.GET['text']
+    ok,suggs = SpellChecker.REST_interface(str(text))
+    return HttpResponse("RPC interface for TinyMCE Spell Checker!"+text+':'+str(suggs)+':'+str(ok),content_type="plain/text; charset=utf-8")
 
 def index(request):
     return render(request, "first.html")

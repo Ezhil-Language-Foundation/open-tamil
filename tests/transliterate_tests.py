@@ -46,6 +46,13 @@ class ISOTest(unittest.TestCase):
         eng_str = algorithm.Direct.transliterate(ISO_table,tamil_str)
         self.assertEqual(expected,eng_str)
 
+    def test_issue_239(self):
+        ISO_table = ISO.ReverseTransliteration.table
+        expected = 'tiyākarājaṉ'
+        tamil_str = "தியாகராஜன்"
+        eng_str = algorithm.Direct.transliterate(ISO_table,tamil_str)
+        self.assertEqual(expected,eng_str)
+
 class GreedyTests(unittest.TestCase):
     @unittest.skip("incorrect")
     def test_ISO(self):

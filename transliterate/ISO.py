@@ -240,6 +240,12 @@ class Transliteration:
     table[u'ḷo'] = u'ளொ'
     table[u'ḷō'] = u'ளோ'
     table[u'ḷau'] = u'ளௌ'
+    table[u'śa'] = u'ஶ'
+    table[u'ja'] = u'ஜ'
+    table[u'ṣa'] = u'ஷ'
+    table[u'sa'] = u'ஸ'
+    table[u'ha'] = u'ஹ'
+    table[u's̤a'] = u'க்ஷ'
 
 class ReverseTransliteration:
     table = OrderedDict()
@@ -280,6 +286,12 @@ class ReverseTransliteration:
     table[u'ஸ்'] = u's'
     table[u'ஹ்'] = u'h'
     table[u'க்ஷ்'] = u's̤'
+    table[u'ஶ'] = u'ś'
+    table[u'ஜ'] = u'ja'
+    table[u'ஷ'] = u'ṣa'
+    table[u'ஸ'] = u'sa'
+    table[u'ஹ'] = u'ha'
+    table[u'க்ஷ'] = u's̤a'
     table[u'க'] = u'ka'
     table[u'கா'] = u'kā'
     table[u'கி'] = u'ki'
