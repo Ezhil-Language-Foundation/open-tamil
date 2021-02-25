@@ -9,7 +9,7 @@ class ASpell:
         run GNU Aspell or ispell via pipe.
         Ref: http://aspell.net/man-html/Through-A-Pipe.html
     """
-    PIPE_CMD="aspell -l ta -a --suggest"
+    PIPE_CMD=re.split('\s+',"aspell -l ta -a --suggest")
     def __init__(self,command=PIPE_CMD):
         self.command = command
         self.text = ""
