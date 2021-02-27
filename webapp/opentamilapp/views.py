@@ -61,15 +61,18 @@ def aspell_spellchecker(request):
         lang = "TA"
         result_dict = {'words':{}}
 
-        wordlist = list(filter(len,re.split('\s+',text)))
-        result = ASpell().spellcheck(" ".join(wordlist))
+        result = ASpell().spellcheck(str(text))
         for word,suggl in result.items():
             result_dict['words'][word] = suggl
         json_string = json.dumps(result_dict)
         response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
         return response
 
-    return Http404("unknown request; resource not found. Use POST request!")
+    assert request.method == "GET"
+    text = request.GET['text']
+    suggs = ASpell().spellcheck(str(text))
+    return HttpResponse("RPC interface for TinyMCE Spell Checker!"+text+':'+str(suggs),content_type="plain/text; charset=utf-8")    
+    #return Http404("unknown request; resource not found. Use POST request!")
     
 def tamilinayavaani_spell_check(request):
     return render(request,"tamilinayavaani_spell_check.html")
