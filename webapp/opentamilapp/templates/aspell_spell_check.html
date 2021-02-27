@@ -1,0 +1,67 @@
+{% extends "main.html" %}
+{% load static %}
+{% load i18n %}
+{% block title %}{% trans "ASpell SpellChecker" %}{% endblock %}
+{% block content %}
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<script src={% static 'tinymce/js/jquery/jquery-1.12.1.min.js' %}></script>
+<script src={% static 'tinymce/js/tinymce/tinymce.dev.js' %}></script>
+<script src={% static 'tinymce/js/tinymce/tinymce.jquery.js' %}></script>
+<script>
+function ta_spellchecker_cb(method, text, success, failure) {
+      var words_to_check = text.split(/\s/);
+      //debug
+      console.log( words_to_check.join('|\n') );
+
+      var request = $.ajax({
+            url: "/ta/aspell_spellchecker",
+            method: "POST",
+            dataType: "json",
+            data: {
+              lang: 'ta_IN', /*this.getLanguage()*/
+              text: words_to_check.join('\n')
+            }});
+
+       request.done(
+        function(result) {
+          console.log(result);
+          success(result);
+        });
+
+      request.fail( function(xhr,errorStatus) {
+              failure("Spellcheck error:" + errorStatus);
+            });
+
+};
+
+/* Ref: https://www.tinymce.com/docs/plugins/spellchecker/ */
+function init() {
+	tinymce.init({
+		mode: "textareas",
+		plugins: [
+			"advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker",
+			"searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+			"save table contextmenu directionality emoticons template paste"
+		],
+		valid_elements: '*[*]',
+		add_unload_trigger : false,
+		editor_selector : 'editable',
+        spellchecker_language : 'ta_IN',
+        spellchecker_callback: ta_spellchecker_cb
+    });
+};
+init();
+</script>
+    <div>
+        <h3>தமிழ் சொல்திருத்தி ( தமிழிணையவாணி + தமிழ் சந்திப்பிழைத்திருத்தி)</h3>
+        <div>
+            <div id="container1">
+                <textarea id="elm1" name="elm1" rows="25" cols="80" style="width: 80%" class="editable">
+                         கலுதைக்கு தெரியுமா கல்பூரம்   வாசொனை
+                </textarea>
+            </div>
+            <a href="#" onclick="tinymce.DOM.show('container1');return false;" alt="காட்டு">[+]</a>
+            <a href="#" onclick="tinymce.DOM.hide('container1');return false;" alt="மரை">[-]</a>
+        </div>
+    </div>
+{% endblock %}
