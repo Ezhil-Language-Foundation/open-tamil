@@ -45,20 +45,21 @@ Read more about this project at <a href="https://github.com/nithyadurai87/tamil-
 </section>
 <script type="text/javascript">
 	$(document).ready(function () {
-
-        $('#results').hide()
+    $('#results').hide();
 	$('#btn2').click(function(){
-    var dat = $('#txt2').val()
+    var dat = $('#txt2').val();
     $.ajax({
         type:"POST",
-        data:{"tamiltext":dat},
+        dataType:"json",
+        data:{
+            "tamiltext":dat
+        },
     	url: '/en/sandhi-checker/',
     	success: function(data){
             console.log(data)
             $('#disp2').text(data.old)
             $('#disp3').html(data.new)
-    	
-        $('#results').show()
+            $('#results').show()
     	}
     })
   	})

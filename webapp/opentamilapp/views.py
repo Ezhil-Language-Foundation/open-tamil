@@ -210,12 +210,17 @@ def keech(request, k1):
 
 @csrf_exempt
 def call_sandhi_check(request):
-    k1 = html.escape(
-        request.GET.get("tamiltext", "அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ")
-    )
-    dic = {}
+    if request.method == 'GET':
+        k1 = html.escape(
+            request.GET.get("tamiltext","அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ")
+        )
+    elif request.method == 'POST':
+        k1 = html.escape(request.POST.get("tamiltext"))
+    else:
+        return Http404("Cannot process method {0}".format(request.method))
+    dict = {}
     temp = ""
-    dic["old"] = k1
+    dict["old"] = k1
     text, res = check_sandhi(k1)
     for i, j in enumerate(k1.split()):
         try:
@@ -223,8 +228,8 @@ def call_sandhi_check(request):
                 text[i] = "<span class='highlight'>" + text[i] + "</span>"
         except IndexError:
             pass
-    dic["new"] = " ".join(text)
-    json_string = json.dumps(dic, ensure_ascii=False)
+    dict["new"] = " ".join(text)
+    json_string = json.dumps(dict, ensure_ascii=False)
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
