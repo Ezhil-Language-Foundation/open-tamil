@@ -3,7 +3,9 @@
 
 import subprocess
 import re
-
+from tamilsandhi import check_sandhi
+NL=re.compile('\n+')
+SPC=re.compile('\s+')
 class ASpell:
     """
         run GNU Aspell or ispell via pipe.
@@ -20,6 +22,20 @@ class ASpell:
         pipe = subprocess.Popen(self.command,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
         output,_ = pipe.communicate(bytes(text,'utf-8'),timeout)
         ASpell.parse_result(self.result,output.decode('utf-8'))
+        prev_word = ''
+        for line in re.split(NL,text):
+            for word in re.split(SPC,line):
+                if prev_word != '':
+                    if prev_word not in self.result:
+                        # if a word is in error we don't/can't do a sandhi-check
+                        sandhi_result,_ = check_sandhi([prev_word,word])
+                        if sandhi_result[0] != prev_word:
+                            self.result[prev_word] = [sandhi_result[0],prev_word]
+                if word.endswith('.'):
+                    prev_word = ''
+                else:
+                    prev_word = word
+
         return self.result
 
     @staticmethod
