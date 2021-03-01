@@ -3,7 +3,12 @@
 
 import subprocess
 import re
-from tamilsandhi import check_sandhi
+
+try:
+    from tamilsandhi import check_sandhi
+    SKIP_SANDHI_CHECKER=False
+except ModuleNotFoundError:
+    SKIP_SANDHI_CHECKER=True
 NL=re.compile('\n+')
 SPC=re.compile('\s+')
 class ASpell:
@@ -22,6 +27,10 @@ class ASpell:
         pipe = subprocess.Popen(self.command,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
         output,_ = pipe.communicate(bytes(text,'utf-8'),timeout)
         ASpell.parse_result(self.result,output.decode('utf-8'))
+
+        if SKIP_SANDHI_CHECKER:
+            return self.result
+
         prev_word = ''
         for line in re.split(NL,text):
             for word in re.split(SPC,line):
