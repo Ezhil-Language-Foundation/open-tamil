@@ -13,6 +13,7 @@ from . import txt2unicode
 from . import utf8
 from . import utils
 from . import wordutils
+from . import olini
 
 VERSION = "0.99"
 __all__ = [
@@ -25,4 +26,5 @@ __all__ = [
     "regexp",
     "utils",
     "wordutils",
+    "olini"
 ]
