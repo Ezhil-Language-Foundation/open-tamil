@@ -35,11 +35,7 @@
   <form method="POST">
 	{% csrf_token %}
 	<center>
-          <textarea rows="12" cols="80" name="text_input" id="txt4" placeholder="உரை உள்ளீடுகளை இடுக!">
-	    {% if text_input %}
-	    {{text_input}}
-	    {% endif %}
-	  </textarea>
+          <textarea rows="12" cols="80" name="text_input" id="txt4" placeholder="உரை உள்ளீடுகளை இடுக!">{% if text_input %}{{text_input}}{% endif %}</textarea>
 	  <br />
 	  <input type="button" id="btn-clear" class="btn btn-success" onClick="$('#txt4').val('');" value="அழி"></input>
 	  <input type="submit" id="btn-submit" class="btn btn-success" action="submit" value="வேர்சொல் திரட்டு"></input>

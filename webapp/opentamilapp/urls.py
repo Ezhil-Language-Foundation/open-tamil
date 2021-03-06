@@ -60,5 +60,9 @@ urlpatterns = [
     url(r"^stemmer/$", tastemmer, name="stemmer"),
     url(r"^stemmer/json/$", lambda x: tastemmer(x, use_json=True), name="json_stemmer"),
     url(r"version/",version,name="version"),
+    url(r"matthirai/",matthirai,name="matthirai"),
+    url(r"matthirai/json/$",lambda x:matthirai(x,use_json=True),name="json_matthirai"),
+    url(r"kanippaan/",kanippaan,name="kanippaan"),
+    url(r"kanippaan/json/$",lambda x: kanippaan(x,use_json=True),name="json_kanippaan"),
     url(r"^classify-word/$", classify_word, name="classify_word"),
     url(r"^get-classify/$", get_classify, name="classifier")]

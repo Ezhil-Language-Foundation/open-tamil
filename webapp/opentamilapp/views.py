@@ -12,9 +12,17 @@ import re
 import html
 import json
 import random
-from tamil.utf8 import get_letters
+from tamil.utf8 import get_letters, calculate_maththirai
+import tamil.utf8 as utf8
 from tamil import wordutils
-from spell import Speller, LoadDictionary, ASpell
+from tamil.olini import கணக்கிடு
+from spell import Speller, LoadDictionary
+try:
+    from spell import ASpell
+except ImportError:
+    print("Cannot import ASpell")
+    pass
+
 from solthiruthi.datastore import TamilTrie, DTrie, Queue
 from solthiruthi.Ezhimai import *
 from solthiruthi.resources import DICTIONARY_DATA_FILES
@@ -26,7 +34,6 @@ from ngram.Corpus import Corpus
 from ngram import LetterModels
 from ngram.LetterModels import *
 from ngram.WordModels import *
-import tamil.utf8 as utf8
 from tamilsandhi.sandhi_checker import check_sandhi
 from .tamilwordgrid import generate_tamil_word_grid
 from .webuni import unicode_converter
@@ -483,4 +490,40 @@ def tastemmer(request, use_json=False):
         )
     return render(
         request, "stemmer.html", {"text_output": data, "text_input": text_input}
+    )
+
+def matthirai(request, use_json=False):
+    if request.method == "GET":
+        return render(request, "matthirai.html", {"text_output": ""})
+    assert request.method == "POST"
+    text_input = request.POST.get("text_input", "")
+    words_in = list(filter(len, re.split("\s+", text_input)))
+    words_out = ["{0}".format(calculate_maththirai(word))
+                 for word in words_in]
+    data = list(zip(words_in, words_out))
+    if use_json:
+        json_string = json.dumps(data, ensure_ascii=False)
+        response = HttpResponse(
+            json_string, content_type="application/json; charset=utf-8"
+        )
+    return render(
+        request, "matthirai.html", {"text_output": data, "text_input": text_input}
+    )
+
+def kanippaan(request,use_json=False):
+    if request.method == "GET":
+        return render(request, "kanippaan.html", {"text_output": ""})
+    assert request.method == "POST"
+    text_input = request.POST.get("text_input", "")
+    result = கணக்கிடு(text_input)
+    result_as_tamil = tamil.numeral.num2tamilstr(result)
+    data = [(text_input,result),
+            (text_input,result_as_tamil)]
+    if use_json:
+        json_string = json.dumps(data, ensure_ascii=False)
+        response = HttpResponse(
+            json_string, content_type="application/json; charset=utf-8"
+        )
+    return render(
+        request, "kanippaan.html", {"text_output": data, "text_input": text_input}
     )
