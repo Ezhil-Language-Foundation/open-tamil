@@ -515,7 +515,13 @@ def kanippaan(request,use_json=False):
         return render(request, "kanippaan.html", {"text_output": ""})
     assert request.method == "POST"
     text_input = request.POST.get("text_input", "")
-    result = கணக்கிடு(text_input)
+    error = None
+    try:
+        result = கணக்கிடு(text_input)
+    except Exception as e:
+        error = str(e)
+        result = 0
+        
     result_as_tamil = tamil.numeral.num2tamilstr(result)
     data = [(text_input,result),
             (text_input,result_as_tamil)]
@@ -525,5 +531,5 @@ def kanippaan(request,use_json=False):
             json_string, content_type="application/json; charset=utf-8"
         )
     return render(
-        request, "kanippaan.html", {"text_output": data, "text_input": text_input}
+        request, "kanippaan.html", {"text_output": data, "text_input": text_input,"error":error}
     )

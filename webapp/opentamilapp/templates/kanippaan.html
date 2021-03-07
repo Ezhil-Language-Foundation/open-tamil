@@ -8,10 +8,14 @@
 <div class="page-header">
   <h1>தமிழ் பேசு.us - ஓபன் தமிழ் சொல்வழி/உரை கணிப்பான்</h1>
 </div>
-{% if text_output %}
+{% if error %}
+<div>
+  <p style="background-color:red;">Parsing error: <b>{{error}}</b></p>
+</div>
+{% elif text_output %}
 <div>
   {% if text_output %}
-  <div id="disp4" >
+  <div id="disp4" style="background-color:orange;">
     <p class="important">
     <ol>
     {% for stem_pair in text_output %}
@@ -35,7 +39,7 @@
   <form method="POST">
 	{% csrf_token %}
 	<center>
-          <textarea rows="12" cols="80" name="text_input" id="txt4" placeholder="உரை உள்ளீடுகளை இடுக! எ.கா. 'ஆயிரம் கூட்டல் எண்பது'">{% if text_input %}{{text_input}}{% endif %}</textarea>
+          <textarea rows="12" cols="80" name="text_input" id="txt4" placeholder="உரை உள்ளீடுகளை இடுக! எ.கா. 'ஆயிரம் கூட்டல் எண்பது'">{% if text_output %}{{text_output.1.1}}{% elif text_input %}{{text_input}}{% elif error %}Parsing error. Retry.{% endif %}</textarea>
 	  <br />
 	  <input type="button" id="btn-clear" class="btn btn-success" onClick="$('#txt4').val('');" value="அழி"></input>
 	  <input type="submit" id="btn-submit" class="btn btn-success" action="submit" value="கணக்கிடு"></input>
@@ -60,7 +64,6 @@ M Annamalai, S Mahadevan - uttamam.org (2020). <a href="http://uttamam.org/paper
                 </ul>
             </li>
         </ul>
-
         Sample usage is given below.
       
   <pre>
