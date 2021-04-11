@@ -46,7 +46,7 @@ if __name__ == "__main__":
     except Exception as fileOrConvException:
         print(
             (
-                "tamiltscii2utf8 error - file %s could not be processed due to - %s"
-                % (source_file, str(fileOrConvException))
+                    "tamiltscii2utf8 error - file %s could not be processed due to - %s"
+                    % (source_file, str(fileOrConvException))
             )
         )

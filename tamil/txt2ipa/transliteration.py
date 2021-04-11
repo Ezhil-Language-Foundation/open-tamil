@@ -22,11 +22,11 @@
 
 import re
 
+
 # Convert Tamil unicode to intermediate romanized encoding
 
 
 def tam2lat(text):
-
     tameng = {
         "அ": "_a",
         "ஆ": "_A",
@@ -100,6 +100,5 @@ def tam2lat(text):
     text = text.replace("W", "au")
 
     return text
-
 
 # end of def tam2lat(text):

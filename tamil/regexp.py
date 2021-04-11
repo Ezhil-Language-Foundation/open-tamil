@@ -17,7 +17,7 @@ def expand_sequence(start, end, seq):
     end_idx = seq.index(end)
     assert start_idx >= 0 and end_idx >= 0
     start_idx, end_idx = min(start_idx, end_idx), max(start_idx, end_idx)
-    return u",".join(seq[start_idx : end_idx + 1])
+    return u",".join(seq[start_idx: end_idx + 1])
 
 
 def expand_tamil(start, end):
@@ -54,7 +54,7 @@ def make_pattern(patt, flags=0):
     LEN_PATT = len(patt_letters)
     while idx < LEN_PATT:
         if utf8.istamil(patt_letters[idx]) and (
-            prev == "-" or ((idx + 1) < LEN_PATT and patt_letters[idx + 1] == u"-")
+                prev == "-" or ((idx + 1) < LEN_PATT and patt_letters[idx + 1] == u"-")
         ):
             if (idx + 1) < LEN_PATT and patt_letters[idx + 1] == u"-":
                 patt[0] = patt_letters[idx]

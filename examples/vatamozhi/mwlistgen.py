@@ -12,8 +12,8 @@ import re
 
 
 def proc_file(htmlfile):
-    bullet3 = chr(8921)  #'⋙'
-    bullet2 = chr(8811)  #'≫'
+    bullet3 = chr(8921)  # '⋙'
+    bullet2 = chr(8811)  # '≫'
     with open(htmlfile, "r") as fp:
         dom = BeautifulSoup(fp, features="html.parser")
     tag = "dt"

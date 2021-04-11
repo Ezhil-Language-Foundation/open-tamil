@@ -17,6 +17,7 @@ import tamil.utf8 as utf8
 from tamil import wordutils
 from tamil.olini import கணக்கிடு
 from spell import Speller, LoadDictionary
+
 try:
     from spell import ASpell
 except ImportError:
@@ -52,8 +53,10 @@ except Exception as ioe:
 from tamilinayavaani import SpellChecker, SpellCheckerResult
 from django.views.decorators.csrf import csrf_exempt
 
+
 def aspell_spell_check(request):
-    return render(request,"aspell_spell_check.html")
+    return render(request, "aspell_spell_check.html")
+
 
 @csrf_exempt
 def aspell_spellchecker(request):
@@ -61,15 +64,16 @@ def aspell_spellchecker(request):
         lang = request.POST['lang']
         text = request.POST['text']
         if lang != "ta_IN":
-            json_string = json.dumps({'error':'Language '+lang+' is not supported; only takes Tamil (code ta_IN))'})
+            json_string = json.dumps(
+                {'error': 'Language ' + lang + ' is not supported; only takes Tamil (code ta_IN))'})
             response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
             return response
 
         lang = "TA"
-        result_dict = {'words':{}}
+        result_dict = {'words': {}}
 
         result = ASpell().spellcheck(str(text))
-        for word,suggl in result.items():
+        for word, suggl in result.items():
             result_dict['words'][word] = suggl
         json_string = json.dumps(result_dict)
         response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
@@ -78,11 +82,14 @@ def aspell_spellchecker(request):
     assert request.method == "GET"
     text = request.GET['text']
     suggs = ASpell().spellcheck(str(text))
-    return HttpResponse("RPC interface for TinyMCE Spell Checker!"+text+':'+str(suggs),content_type="plain/text; charset=utf-8")    
-    #return Http404("unknown request; resource not found. Use POST request!")
-    
+    return HttpResponse("RPC interface for TinyMCE Spell Checker!" + text + ':' + str(suggs),
+                        content_type="plain/text; charset=utf-8")
+    # return Http404("unknown request; resource not found. Use POST request!")
+
+
 def tamilinayavaani_spell_check(request):
-    return render(request,"tamilinayavaani_spell_check.html")
+    return render(request, "tamilinayavaani_spell_check.html")
+
 
 @csrf_exempt
 def tamilinayavaani_spellchecker(request):
@@ -90,22 +97,23 @@ def tamilinayavaani_spellchecker(request):
         lang = request.POST['lang']
         text = request.POST['text']
         if lang != "ta_IN":
-            json_string = json.dumps({'error':'Language '+lang+' is not supported; only takes Tamil (code ta_IN))'})
+            json_string = json.dumps(
+                {'error': 'Language ' + lang + ' is not supported; only takes Tamil (code ta_IN))'})
             response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
             return response
 
         lang = "TA"
-        result_dict = {'words':{}}
+        result_dict = {'words': {}}
 
-        wordlist = list(filter(len,re.split('\s+',text)))
-        Lmax = len(wordlist)-1
-        for itr,word in enumerate( wordlist ):
-            if word.find("<") >= 0: #HTML Tags, skip
+        wordlist = list(filter(len, re.split('\s+', text)))
+        Lmax = len(wordlist) - 1
+        for itr, word in enumerate(wordlist):
+            if word.find("<") >= 0:  # HTML Tags, skip
                 continue
-            #print("checking word %d"%itr,file=sys.stderr)
+            # print("checking word %d"%itr,file=sys.stderr)
             try:
-                next_word = wordlist[itr+1] if itr != Lmax else None
-                ok,suggs = SpellChecker.REST_interface(word,next_word)
+                next_word = wordlist[itr + 1] if itr != Lmax else None
+                ok, suggs = SpellChecker.REST_interface(word, next_word)
                 suggs = suggs[0].split(',')
             except Exception as ioe:
                 ok = True
@@ -117,20 +125,25 @@ def tamilinayavaani_spellchecker(request):
         json_string = json.dumps(result_dict)
         response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
         return response
-    
+
     assert request.method == "GET"
     text = request.GET['text']
-    ok,suggs = SpellChecker.REST_interface(str(text))
-    return HttpResponse("RPC interface for TinyMCE Spell Checker!"+text+':'+str(suggs)+':'+str(ok),content_type="plain/text; charset=utf-8")
+    ok, suggs = SpellChecker.REST_interface(str(text))
+    return HttpResponse("RPC interface for TinyMCE Spell Checker!" + text + ':' + str(suggs) + ':' + str(ok),
+                        content_type="plain/text; charset=utf-8")
+
 
 def index(request):
     return render(request, "first.html")
 
+
 def version(request):
-    return render(request,"version.html",{"VERSION":tamil.VERSION})
+    return render(request, "version.html", {"VERSION": tamil.VERSION})
+
 
 def vaypaadu(request):
     return render(request, "vaypaadu.html")
+
 
 def trans(request):
     return render(request, "translite.html")
@@ -196,6 +209,7 @@ def numstr(request, num):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
+
 def unicod(request, tsci):
     cod = request.GET.get("cod")
     data = unicode_converter(tsci, cod)
@@ -203,6 +217,7 @@ def unicod(request, tsci):
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
+
 
 def keech(request, k1):
     dic = {}
@@ -215,11 +230,12 @@ def keech(request, k1):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
+
 @csrf_exempt
 def call_sandhi_check(request):
     if request.method == 'GET':
         k1 = html.escape(
-            request.GET.get("tamiltext","அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ")
+            request.GET.get("tamiltext", "அங்குக் கண்டான் அந்த பையன் எத்தனை பழங்கள் ")
         )
     elif request.method == 'POST':
         k1 = html.escape(request.POST.get("tamiltext"))
@@ -241,6 +257,7 @@ def call_sandhi_check(request):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
+
 def translite(request, tan):
     tamil_tx = algorithm.Iterative.transliterate(azhagi.Transliteration.table, tan)
     data = {"result": tamil_tx}
@@ -248,6 +265,7 @@ def translite(request, tan):
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
+
 
 def spell_check(request, k1):
     speller = Speller(lang="TA", mode="web")
@@ -257,13 +275,14 @@ def spell_check(request, k1):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
+
 def test_ngram(request, ng):
     obj = DTrie()
     prev_letter = ""
     # per-line processor - remove spaces
     for char in get_letters("".join(re.split("\s+", ng)).lower()):
         if (prev_letter.isalpha() and char.isalpha()) or (
-            utf8.is_tamil_unicode(prev_letter) and utf8.is_tamil_unicode(char)
+                utf8.is_tamil_unicode(prev_letter) and utf8.is_tamil_unicode(char)
         ):
             bigram = "".join([prev_letter, char])
             obj.add(bigram)  # update previous
@@ -273,6 +292,7 @@ def test_ngram(request, ng):
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
+
 
 def anagram(request, word):
     AllTrueDictionary = wordutils.DictionaryWithPredicate(lambda x: True)
@@ -284,6 +304,7 @@ def anagram(request, word):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
+
 def test_basic(request, word):
     n = request.GET.get("n")
     t = get_ngram_groups(word, int(n))
@@ -292,12 +313,14 @@ def test_basic(request, word):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
+
 def revers(request, word):
     t = tamil.utf8.reverse_word(word)
     json_string = json.dumps(t, ensure_ascii=False)
     # creating a Response object to set the content type and the encoding
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
+
 
 def morse(request, direction="encode", word=""):
     if direction.lower().find("encode") >= 0:
@@ -308,6 +331,7 @@ def morse(request, direction="encode", word=""):
     print(json_string)
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
+
 
 # TBD:
 # def sorttamil(request):
@@ -364,8 +388,8 @@ def summarizer(request):
     in_w = len(tamil.utf8.get_words(text_input))
     out_w = len(tamil.utf8.get_words(text_summary))
     text_comments = (
-        "உள்ளீடு அளவு: %d சொற்கள், வெளியீடு அளவு: %d சொற்கள். சுருக்கம் %3.3g.\n"
-        % (in_w, out_w, in_w / (1.0 * out_w))
+            "உள்ளீடு அளவு: %d சொற்கள், வெளியீடு அளவு: %d சொற்கள். சுருக்கம் %3.3g.\n"
+            % (in_w, out_w, in_w / (1.0 * out_w))
     )
     return render(
         request,
@@ -377,6 +401,7 @@ def summarizer(request):
         },
     )
 
+
 def classify_word(request):
     word = request.GET.get("tamiltext")
     result = process_word(word)
@@ -386,8 +411,10 @@ def classify_word(request):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
+
 def minnal(request):
     return render(request, "minnal.html", {})
+
 
 def test_minnal(request, word):
     data, _ = tamil_minnal(re.split("\s+|,", word))
@@ -396,11 +423,12 @@ def test_minnal(request, word):
     response = HttpResponse(json_string, content_type="application/json; charset=utf-8")
     return response
 
+
 def load_textrandomizer_db():
     TEXTRANDOMIZER_DB = {}
     for jsonf in settings.TEXTRANDOMIZER_FILES:
         with codecs.open(
-            os.path.join(os.path.dirname(__file__), "static", jsonf), "r", "utf-8"
+                os.path.join(os.path.dirname(__file__), "static", jsonf), "r", "utf-8"
         ) as fp:
             TEXTRANDOMIZER_DB[os.path.basename(jsonf)[0].upper()] = json.loads(
                 fp.read()
@@ -492,6 +520,7 @@ def tastemmer(request, use_json=False):
         request, "stemmer.html", {"text_output": data, "text_input": text_input}
     )
 
+
 def matthirai(request, use_json=False):
     if request.method == "GET":
         return render(request, "matthirai.html", {"text_output": ""})
@@ -510,7 +539,8 @@ def matthirai(request, use_json=False):
         request, "matthirai.html", {"text_output": data, "text_input": text_input}
     )
 
-def kanippaan(request,use_json=False):
+
+def kanippaan(request, use_json=False):
     if request.method == "GET":
         return render(request, "kanippaan.html", {"text_output": ""})
     assert request.method == "POST"
@@ -521,15 +551,15 @@ def kanippaan(request,use_json=False):
     except Exception as e:
         error = str(e)
         result = 0
-        
+
     result_as_tamil = tamil.numeral.num2tamilstr(result)
-    data = [(text_input,result),
-            (text_input,result_as_tamil)]
+    data = [(text_input, result),
+            (text_input, result_as_tamil)]
     if use_json:
         json_string = json.dumps(data, ensure_ascii=False)
         response = HttpResponse(
             json_string, content_type="application/json; charset=utf-8"
         )
     return render(
-        request, "kanippaan.html", {"text_output": data, "text_input": text_input,"error":error}
+        request, "kanippaan.html", {"text_output": data, "text_input": text_input, "error": error}
     )

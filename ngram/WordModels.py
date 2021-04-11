@@ -20,5 +20,5 @@ def get_ngram_groups(word, n=1):
 
     result = []
     for i in range(0, L - n + 1):
-        result.append(u"".join(letters[i : min(i + n, L)]))
+        result.append(u"".join(letters[i: min(i + n, L)]))
     return result

@@ -13,7 +13,7 @@ import os
 # e.g. python morse_encode.py கலைஞர்
 def encode(text):
     with codecs.open(
-        os.path.join(os.path.dirname(__file__), "tamilmorse.json"), "r", "utf-8"
+            os.path.join(os.path.dirname(__file__), "tamilmorse.json"), "r", "utf-8"
     ) as fp:
         codebook = json.loads(fp.read())
     output = [codebook.get(l, l) for l in tamil.utf8.get_letters(text)]

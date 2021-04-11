@@ -124,9 +124,9 @@ class LetterTests(unittest.TestCase):
         # see: SO #10288016
         word_lengths = [69, 65, 64, 79, 62, 62, 71, 61, 70, 63]
         with codecs.open(
-            os.path.join(os.path.dirname(__file__), "data", "utf16-demo.txt"),
-            "r",
-            "utf-16",
+                os.path.join(os.path.dirname(__file__), "data", "utf16-demo.txt"),
+                "r",
+                "utf-16",
         ) as fp:
             t = fp.readlines()
         self.assertSequenceEqual(

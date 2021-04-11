@@ -113,10 +113,10 @@ def is_anagram(wordA, wordB):
 
 def anagrams_in_dictionary(dictionary):
     if not all(
-        [
-            callable(getattr(dictionary, "isWord", [])),
-            callable(getattr(dictionary, "getAllWordsIterable", [])),
-        ]
+            [
+                callable(getattr(dictionary, "isWord", [])),
+                callable(getattr(dictionary, "getAllWordsIterable", [])),
+            ]
     ):
         raise Exception("dictionary object has insufficient methods")
     anagrams = dict()
@@ -184,10 +184,10 @@ def permutagrams(word, dictionary):
 
 def rhymes_with(inword, reverse_dictionary):
     if not all(
-        [
-            callable(getattr(reverse_dictionary, "isWord", [])),
-            callable(getattr(reverse_dictionary, "getWordsEndingWith", [])),
-        ]
+            [
+                callable(getattr(reverse_dictionary, "isWord", [])),
+                callable(getattr(reverse_dictionary, "getWordsEndingWith", [])),
+            ]
     ):
         raise Exception("reverse dictionary object has insufficient methods")
     rhyming = list()
@@ -205,15 +205,15 @@ def rhymes_with(inword, reverse_dictionary):
         del letters[0]
 
     # rhyming = list(set(rhyming))
-    return set(rhyming[0 : min(len(rhyming) - 1, MAX)])
+    return set(rhyming[0: min(len(rhyming) - 1, MAX)])
 
 
 def greedy_split(inword, dictionary):
     if not all(
-        [
-            callable(getattr(dictionary, "isWord", [])),
-            callable(getattr(dictionary, "hasWordsStartingWith", [])),
-        ]
+            [
+                callable(getattr(dictionary, "isWord", [])),
+                callable(getattr(dictionary, "hasWordsStartingWith", [])),
+            ]
     ):
         raise Exception("dictionary object has insufficient methods")
 
@@ -232,7 +232,7 @@ def greedy_split(inword, dictionary):
         prev_word = u""
         while idx < len(letters):
             # print("%d -> %d"%(idx,prev_idx))
-            word = u"".join(letters[prev_idx : idx + 1])
+            word = u"".join(letters[prev_idx: idx + 1])
             if dictionary.hasWordsStartingWith(word):
                 if dictionary.isWord(word):
                     prev_word = word
@@ -282,8 +282,8 @@ def word_split(inword, dictionary):
     idx = 0
     while idx < len(letters) - 1:
         # print idx
-        prev_word = u"".join(letters[0 : idx + 1])
-        next_word = u"".join(letters[idx + 1 :])
+        prev_word = u"".join(letters[0: idx + 1])
+        next_word = u"".join(letters[idx + 1:])
         temp_sol = list()
         # print prev_word,next_word
         sol1 = greedy_split(prev_word, dictionary)
@@ -341,8 +341,8 @@ def minnal(word_list, use_grantham=False):
     textgrid = []
     text = u""
     while i < len(L):
-        text = text + (u",".join(L[i : i + Lside])) + u"\n"
-        textgrid.append(L[i : i + Lside])
+        text = text + (u",".join(L[i: i + Lside])) + u"\n"
+        textgrid.append(L[i: i + Lside])
         i = i + Lside
     return textgrid, text
 

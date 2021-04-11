@@ -3,60 +3,60 @@
 {% block title %}Tamil Number{% endblock %}
 {% block content %}
 
-<section id="keechu">
-<div class="page-header">
-    <h1>{% trans "Word Count" %}</h1>
-</div>
-	<center>
-<textarea rows="10" cols="80" name="word" id="txt2"></textarea>
-<button id="btn2" class="btn btn-success">{% trans "Count" %}</button>
+    <section id="keechu">
+        <div class="page-header">
+            <h1>{% trans "Word Count" %}</h1>
+        </div>
+        <center>
+            <textarea rows="10" cols="80" name="word" id="txt2"></textarea>
+            <button id="btn2" class="btn btn-success">{% trans "Count" %}</button>
 
-<p id="disp2">
-	
-</p>
-</center>
-<div class="well">
-    <h3>Word Count JSON API</h3>
-    <p>
-        This service provides word count for a given english letters as a json string
-        <ul>
-            <li>Input data: words or letters
-                <ul>
-                    <li>Return : word count </li>
-                </ul>
-            </li>
-        </ul>
+            <p id="disp2">
 
-        Sample usage is given below.
-      
-  <pre>
+            </p>
+        </center>
+        <div class="well">
+            <h3>Word Count JSON API</h3>
+            <p>
+                This service provides word count for a given english letters as a json string
+            <ul>
+                <li>Input data: words or letters
+                    <ul>
+                        <li>Return : word count</li>
+                    </ul>
+                </li>
+            </ul>
+
+            Sample usage is given below.
+
+            <pre>
         http://tamilpesu.us/keechu/English
         Result: '{"0": 7}'
         Hints: here 0 is consider as a first word and 7 is length of the word
       </pre>
-    </p>
-</div>
-</section>
-<script type="text/javascript">
-	$(document).ready(function () {
-	$('#btn2').click(function(){
-    var dat = $('#txt2').val()
-    $.ajax({
-    	url: '/keechu/'+dat,
-    	success: function(data){
-    		var count=0
-    	var len=0
-    		for(var data1 in data){
-    			len+=data[count]
-			if(data[count]!=0)
-    			   count+=1
-    			
-    	}
-    	$('#disp2').text("{% trans 'No of Word is ' %}"+' '+count+' '+"{% trans 'and No of letter is '%}"+' '+len)
-    	}
-    })
-  	})
-	})
+            </p>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btn2').click(function () {
+                var dat = $('#txt2').val()
+                $.ajax({
+                    url: '/keechu/' + dat,
+                    success: function (data) {
+                        var count = 0
+                        var len = 0
+                        for (var data1 in data) {
+                            len += data[count]
+                            if (data[count] != 0)
+                                count += 1
 
-</script>
+                        }
+                        $('#disp2').text("{% trans 'No of Word is ' %}" + ' ' + count + ' ' + "{% trans 'and No of letter is '%}" + ' ' + len)
+                    }
+                })
+            })
+        })
+
+    </script>
 {% endblock %}

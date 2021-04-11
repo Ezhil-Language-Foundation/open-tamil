@@ -8,25 +8,28 @@ from solthiruthi.scoring import bigram_scores, unigram_score
 
 chol = tamil.utf8.get_letters("கணனன")
 
-def mean(x):
-    return sum(x)/float(len(x))
 
-def pulligal_helper(prefix,letters):
+def mean(x):
+    return sum(x) / float(len(x))
+
+
+def pulligal_helper(prefix, letters):
     if len(letters) == 0: return [prefix]
     letter = letters[0]
     result = []
     if letter in tamil.utf8.agaram_letters:
-        result1 = pulligal_helper( prefix + letter, letters[1:])
+        result1 = pulligal_helper(prefix + letter, letters[1:])
         mei_letter = letter + tamil.utf8.pulli_symbols[0]
-        result2 = pulligal_helper( prefix + mei_letter, letters[1:])
+        result2 = pulligal_helper(prefix + mei_letter, letters[1:])
         result.extend(result1)
         result.extend(result2)
     else:
-        result1 = pulligal_helper( prefix + letter, letters[1:])
+        result1 = pulligal_helper(prefix + letter, letters[1:])
         result.extend(result1)
     return result
 
-def pulligal_branch_bound(prefix,letters,அகராதி):
+
+def pulligal_branch_bound(prefix, letters, அகராதி):
     """ we restrict options if its not a prefix in dictionary """
     if len(letters) == 0: return [prefix]
     letter = letters[0]
@@ -36,17 +39,18 @@ def pulligal_branch_bound(prefix,letters,அகராதி):
         alternate2 = prefix + mei_letter
         if அகராதி.starts_with(alternate2) or prefer:
             mei_letter = letter + tamil.utf8.pulli_symbols[0]
-            result2 = pulligal_branch_bound( alternate2, letters[1:])
+            result2 = pulligal_branch_bound(alternate2, letters[1:])
             result.extend(result2)
     alternate1 = prefix + letter
     if அகராதி.starts_with(alternate1) or prefer:
-        result1 = pulligal_branch_bound( alternate1, letters[1:])
+        result1 = pulligal_branch_bound(alternate1, letters[1:])
         result.extend(result1)
     return result
 
-#sort in descending order
-result_tpl = [("".join(sol),(unigram_score(sol)))  for sol in pulligal_helper("",chol)]
-result_tpl = sorted(result_tpl,key=operator.itemgetter(1),reverse=True)
+
+# sort in descending order
+result_tpl = [("".join(sol), (unigram_score(sol))) for sol in pulligal_helper("", chol)]
+result_tpl = sorted(result_tpl, key=operator.itemgetter(1), reverse=True)
 pprint(result_tpl)
 
 """

@@ -62,13 +62,13 @@ X_test = scaler.transform(X_test)
 ## Build training set for the model
 ## solver='sgd',activation='logistic',
 ## We have a 4-layer model
-nn = MLPClassifier(hidden_layer_sizes=(15,15,10,5),
+nn = MLPClassifier(hidden_layer_sizes=(15, 15, 10, 5),
                    activation='logistic',
-                   max_iter=100000,alpha=0.01,solver='lbfgs')
+                   max_iter=100000, alpha=0.01, solver='lbfgs')
 # Try 1-layer simple model with logistic activation
-#nn = MLPClassifier(
+# nn = MLPClassifier(
 #    hidden_layer_sizes=(8, 8, 7), solver="lbfgs"
-#)  # activation='logistic',max_iter=1000,early_stopping=True,solver='lbfgs')
+# )  # activation='logistic',max_iter=1000,early_stopping=True,solver='lbfgs')
 #                   max_iter=500,solver='sgd',activation='logistic')
 print(nn)
 nn.fit(X_train, Y_train)

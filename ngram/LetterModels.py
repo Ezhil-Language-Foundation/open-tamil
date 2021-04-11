@@ -53,7 +53,7 @@ class Unigram(Letters):
     def save(self, filename):
         with codecs.open(filename, "w", "utf-8") as fp:
             for k, v in sorted(
-                self.letter.items(), key=operator.itemgetter(1), reverse=True
+                    self.letter.items(), key=operator.itemgetter(1), reverse=True
             ):
                 if v == 0:
                     continue
@@ -118,7 +118,7 @@ class Trigram(Unigram):
     def save(self, filename):
         with codecs.open(filename, "w", "utf-8") as fp:
             for k, v in sorted(
-                self.letter3.items(), key=operator.itemgetter(1), reverse=True
+                    self.letter3.items(), key=operator.itemgetter(1), reverse=True
             ):
                 if v == 0:
                     continue

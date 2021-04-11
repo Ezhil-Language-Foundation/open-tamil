@@ -26,7 +26,6 @@ from .ipaconvert import broad as broad_ipa
 
 
 def txt2ipa(text, broad=True):
-
     lat = tam2lat(text)
     lat = " " + lat + " "
     ipa_text = ipa(lat)
@@ -38,6 +37,5 @@ def txt2ipa(text, broad=True):
         ipa_text = broad_ipa(ipa_text)
 
     return ipa_text
-
 
 # end of def txt2ipa(text, broad=True):

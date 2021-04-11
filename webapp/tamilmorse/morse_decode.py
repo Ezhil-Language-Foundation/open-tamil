@@ -13,7 +13,7 @@ import os
 # e.g. python morse_decode.py ...-. .-.---.-.-..-- ..-.--.---.-.-... --.-....
 def decode(text):
     with codecs.open(
-        os.path.join(os.path.dirname(__file__), "tamilmorse.json"), "r", "utf-8"
+            os.path.join(os.path.dirname(__file__), "tamilmorse.json"), "r", "utf-8"
     ) as fp:
         codebook = json.loads(fp.read())
     output = []

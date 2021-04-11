@@ -75,7 +75,8 @@ one_prefix = (u"ஒரு", None)
 lakh = (u"இலட்சம்", u"இலட்சத்தி")
 crore = (u"கோடி", u"கோடியே")
 
-print sum(
+print
+sum(
     map(
         len,
         [
@@ -111,7 +112,7 @@ for word_list in [
     for word in word_list:
         if not word:
             break
-        print (u"%02d) %s" % (count, word))
+        print(u"%02d) %s" % (count, word))
         count += 1
 
 # 'C:\\Users\\muthu\\devel\\open-tamil\\examples\\pesum_kediyaram'

@@ -24,7 +24,7 @@ class TweetParser:
 
         # additional intelligence
         if (self.RT
-                and len(self.UserHandles) > 0):  #change the owner of tweet?
+                and len(self.UserHandles) > 0):  # change the owner of tweet?
             self.Owner = self.UserHandles[0]
 
         return
@@ -94,6 +94,6 @@ class TamilTweetParser(TweetParser):
         """" word needs to all be in the same tamil language """
         tweet = TamilTweetParser.cleanupPunct(tweet)
         nonETwords = filter(lambda x: len(x) > 0, re.split(r'\s+', tweet))
-        #|"+|\'+|#+
+        # |"+|\'+|#+
         tamilWords = filter(TamilTweetParser.isTamilPredicate, nonETwords)
         return tamilWords

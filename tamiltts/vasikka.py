@@ -436,9 +436,9 @@ class SubjectText(object):
             curr_s = self.audiomapping[pos]
             prev_s = self.audiomapping[pos - 1]
             next_s = (
-                (pos < len(self.audiomapping) - 1)
-                and self.audiomapping[pos + 1]
-                or None
+                    (pos < len(self.audiomapping) - 1)
+                    and self.audiomapping[pos + 1]
+                    or None
             )
             if curr_s.startswith("k"):
                 if prev_s.startswith("ng"):
@@ -452,7 +452,7 @@ class SubjectText(object):
                     curr_s = "s" + curr_s[1:]
             elif curr_s.startswith("th"):
                 if prev_s in ["n", "u"] or (
-                    curr_s != "th" and prev_s != "th" and prev_s != "space"
+                        curr_s != "th" and prev_s != "th" and prev_s != "space"
                 ):
                     if _DEBUG:
                         curr_old = curr_s
@@ -466,12 +466,12 @@ class SubjectText(object):
                     curr_s = "dh" + curr_s[2:]
             elif curr_s.startswith("t"):
                 if prev_s == "nnn" or (
-                    curr_s != "t" and prev_s != "space" and prev_s != "t"
+                        curr_s != "t" and prev_s != "space" and prev_s != "t"
                 ):
                     curr_s = "d" + curr_s[1:]
             elif curr_s.startswith("p"):
                 if prev_s == "m" or (
-                    curr_s != "p" and prev_s != "p" and prev_s != "space"
+                        curr_s != "p" and prev_s != "p" and prev_s != "space"
                 ):
                     curr_s = "b" + curr_s[1:]
             self.audiomapping[pos] = curr_s

@@ -335,9 +335,9 @@ def gen_grid():
                 "நெல்லி",
             ]
             fill_letters = (
-                tamil.utf8.uyir_letters
-                + tamil.utf8.mei_letters
-                + tamil.utf8.agaram_letters
+                    tamil.utf8.uyir_letters
+                    + tamil.utf8.mei_letters
+                    + tamil.utf8.agaram_letters
             )
         WordGrid.compute(wordlist, fill_letters)
     else:

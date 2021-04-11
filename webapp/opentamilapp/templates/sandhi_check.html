@@ -3,67 +3,69 @@
 {% block title %}Sandhi Checker{% endblock %}
 {% block content %}
 
-<section id="keechu">
-<div class="page-header">
-    <h1>{% trans "Sandhi Checker" %}</h1>
-Tamil Sandhi Checker is project by Mrs. Nithya Shrinivasan, distributed under GNU GPLv3 terms. <BR />
-Tamil Sandhi Checker is an ongoing project to provide automatic detection and correction of "sandhi" grammatical errors in writing Tamil. <BR />
-Read more about this project at <a href="https://github.com/nithyadurai87/tamil-sandhi-checker">here on github</a>. <BR/>
-</div>
-<center>
-<textarea rows="10" cols="80" name="word" id="txt2"></textarea><br>
-<button id="btn2" class="btn btn-success">{% trans "Check" %}</button>
+    <section id="keechu">
+        <div class="page-header">
+            <h1>{% trans "Sandhi Checker" %}</h1>
+            Tamil Sandhi Checker is project by Mrs. Nithya Shrinivasan, distributed under GNU GPLv3 terms. <BR/>
+            Tamil Sandhi Checker is an ongoing project to provide automatic detection and correction of "sandhi"
+            grammatical errors in writing Tamil. <BR/>
+            Read more about this project at <a href="https://github.com/nithyadurai87/tamil-sandhi-checker">here on
+            github</a>. <BR/>
+        </div>
+        <center>
+            <textarea rows="10" cols="80" name="word" id="txt2"></textarea><br>
+            <button id="btn2" class="btn btn-success">{% trans "Check" %}</button>
 
-<div id="results">  
+            <div id="results">
 
-<p id="disp3">
-    
-</p>
-</div>
-</center>
-<div class="well">
-    <h3>Sandhi Checker JSON API</h3>
-    <p>
-        This service provides sandhi checker for given tamil text.
-        <ul>
-            <li>Input data: Tamil words 
-                <ul>
-                    <li>Return : Sandhi checked tamil strings  </li>
-                </ul>
-            </li>
-        </ul>
+                <p id="disp3">
 
-        Sample usage is given below.
-      
-  <pre>
+                </p>
+            </div>
+        </center>
+        <div class="well">
+            <h3>Sandhi Checker JSON API</h3>
+            <p>
+                This service provides sandhi checker for given tamil text.
+            <ul>
+                <li>Input data: Tamil words
+                    <ul>
+                        <li>Return : Sandhi checked tamil strings</li>
+                    </ul>
+                </li>
+            </ul>
+
+            Sample usage is given below.
+
+            <pre>
        POST http://tamilpesu.us/sandhi-checker/
        Data: tamiltext="Inputtamiltext"
        Result: '{"old":"input tamil text","new":"Output tamil text"}'
       </pre>
-    </p>
-</div>
-</section>
-<script type="text/javascript">
-	$(document).ready(function () {
-    $('#results').hide();
-	$('#btn2').click(function(){
-    var dat = $('#txt2').val();
-    $.ajax({
-        type:"POST",
-        dataType:"json",
-        data:{
-            "tamiltext":dat
-        },
-    	url: '/en/sandhi-checker/',
-    	success: function(data){
-            console.log(data)
-            $('#disp2').text(data.old)
-            $('#disp3').html(data.new)
-            $('#results').show()
-    	}
-    })
-  	})
-	})
+            </p>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#results').hide();
+            $('#btn2').click(function () {
+                var dat = $('#txt2').val();
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        "tamiltext": dat
+                    },
+                    url: '/en/sandhi-checker/',
+                    success: function (data) {
+                        console.log(data)
+                        $('#disp2').text(data.old)
+                        $('#disp3').html(data.new)
+                        $('#results').show()
+                    }
+                })
+            })
+        })
 
-</script>
+    </script>
 {% endblock %}

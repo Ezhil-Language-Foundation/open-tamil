@@ -292,7 +292,7 @@ def num2tamilstr(*args):
     else:
         tensSpecial = "BASIC"
     if not any(
-        filter(lambda T: isinstance(number, T), [str, int, float])
+            filter(lambda T: isinstance(number, T), [str, int, float])
     ) or isinstance(number, complex):
         raise Exception("num2tamilstr input has to be a integer or float")
     if float(number) > int(1e12):
@@ -497,15 +497,15 @@ def num2tamilstr(*args):
                         return units[int_part] + u" " + num2tamilstr(frac, filenames)
                     elif tensSpecial == "NINES":
                         return (
-                            units_suffix_nine[int_part]
-                            + u" "
-                            + num2tamilstr(frac, filenames)
+                                units_suffix_nine[int_part]
+                                + u" "
+                                + num2tamilstr(frac, filenames)
                         )
                     else:
                         return (
-                            units_suffix[int_part]
-                            + u" "
-                            + num2tamilstr(frac, filenames)
+                                units_suffix[int_part]
+                                + u" "
+                                + num2tamilstr(frac, filenames)
                         )
 
                 else:
@@ -539,9 +539,9 @@ def num2tamilstr(*args):
                 teen_number = int(math.floor(number - 10))
                 if residue_number > 1e-30:
                     return (
-                        teens[teen_number - 1]
-                        + u" "
-                        + num2tamilstr(residue_number, filenames)
+                            teens[teen_number - 1]
+                            + u" "
+                            + num2tamilstr(residue_number, filenames)
                     )
                 else:
                     return teens[teen_number - 1] + u" "
@@ -603,7 +603,7 @@ def num2tamilstr_american(*args):
         turn number into a numeral, American style. Fractions upto 1e-30. """
 
     if not any(
-        filter(lambda T: isinstance(number, T), [int, str, int, float])
+            filter(lambda T: isinstance(number, T), [int, str, int, float])
     ) or isinstance(number, complex):
         raise Exception("num2tamilstr_american input has to be integer")
     if float(number) >= int(1e15):

@@ -39,9 +39,9 @@ except ImportError as ie:
         )
         sys.exit(-1)
 
+
     class bs4:
         BeautifulSoup = BeautifulSoup.BeautifulSoup
-
 
 from urllib.request import urlopen
 import operator
@@ -62,7 +62,7 @@ def url_tamil_text_filter(url):
         x
         for x in tatext
         if not (
-            x.parent.name in ["style", "script", "head", "title", "meta", "[document]"]
+                x.parent.name in ["style", "script", "head", "title", "meta", "[document]"]
         )
     ]
     tatext = " ".join([txt.strip() for txt in tatext])

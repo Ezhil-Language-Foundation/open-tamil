@@ -3,76 +3,84 @@
 {% block title %}Tamil Arithmetic Calculator{% endblock %}
 
 {% block content %}
-<section id="stemmer">
-<div class="col-sm-9">
-<div class="page-header">
-  <h1>தமிழ் பேசு.us - ஓபன் தமிழ் சொல்வழி/உரை கணிப்பான்</h1>
-</div>
-{% if error %}
-<div>
-  <p style="background-color:red;">Parsing error: <b>{{error}}</b></p>
-</div>
-{% elif text_output %}
-<div>
-  {% if text_output %}
-  <div id="disp4" style="background-color:orange;">
-    <p class="important">
-    <ol>
-    {% for stem_pair in text_output %}
-    <li>
-      {% for word in stem_pair %}
-      {% if forloop.counter == 1 %}
-         {{word}}
-      {% else %}
-          -> {{word}}
-      {% endif %}
-      {% endfor %}
-    </li>
-    {% endfor %}
-    </p>
-  </div>
-  {% endif %}
-</div>
-{% endif %}
-<hr>
-<div>
-  <form method="POST">
-	{% csrf_token %}
-	<center>
-          <textarea rows="12" cols="80" name="text_input" id="txt4" placeholder="உரை உள்ளீடுகளை இடுக! எ.கா. 'ஆயிரம் கூட்டல் எண்பது'">{% if text_output %}{{text_output.1.1}}{% elif text_input %}{{text_input}}{% elif error %}Parsing error. Retry.{% endif %}</textarea>
-	  <br />
-	  <input type="button" id="btn-clear" class="btn btn-success" onClick="$('#txt4').val('');" value="அழி"></input>
-	  <input type="submit" id="btn-submit" class="btn btn-success" action="submit" value="கணக்கிடு"></input>
-	</center>
-  </form>
-</div>
-<div class="well">
-  <h4>விளக்கம் / ஆக்கம்</h4>
-  <p>See calculator example section of <a href="https://ezhillang.blog/2020/05/21/tamil-text-processing-with-open-tamil/">blog post</a></p>
-  <p>Cite: "Generation and Parsing of Number to Words in Tamil",
-M Annamalai, S Mahadevan - uttamam.org (2020). <a href="http://uttamam.org/papers/20_18.pdf">PDF</a></p>
-</div>
+    <section id="stemmer">
+        <div class="col-sm-9">
+            <div class="page-header">
+                <h1>தமிழ் பேசு.us - ஓபன் தமிழ் சொல்வழி/உரை கணிப்பான்</h1>
+            </div>
+            {% if error %}
+                <div>
+                    <p style="background-color:red;">Parsing error: <b>{{ error }}</b></p>
+                </div>
+            {% elif text_output %}
+                <div>
+                    {% if text_output %}
+                        <div id="disp4" style="background-color:orange;">
+                            <p class="important">
+                            <ol>
+                                {% for stem_pair in text_output %}
+                                    <li>
+                                        {% for word in stem_pair %}
+                                            {% if forloop.counter == 1 %}
+                                                {{ word }}
+                                            {% else %}
+                                                -> {{ word }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </li>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <hr>
+            <div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <center>
+                        <textarea rows="12" cols="80" name="text_input" id="txt4"
+                                  placeholder="உரை உள்ளீடுகளை இடுக! எ.கா. 'ஆயிரம் கூட்டல் எண்பது'">{% if text_output %}
+                            {{ text_output.1.1 }}{% elif text_input %}{{ text_input }}{% elif error %}Parsing error.
+                            Retry.{% endif %}</textarea>
+                        <br/>
+                        <input type="button" id="btn-clear" class="btn btn-success" onClick="$('#txt4').val('');"
+                               value="அழி"></input>
+                        <input type="submit" id="btn-submit" class="btn btn-success" action="submit"
+                               value="கணக்கிடு"></input>
+                    </center>
+                </form>
+            </div>
+            <div class="well">
+                <h4>விளக்கம் / ஆக்கம்</h4>
+                <p>See calculator example section of <a
+                        href="https://ezhillang.blog/2020/05/21/tamil-text-processing-with-open-tamil/">blog post</a>
+                </p>
+                <p>Cite: "Generation and Parsing of Number to Words in Tamil",
+                    M Annamalai, S Mahadevan - uttamam.org (2020). <a href="http://uttamam.org/papers/20_18.pdf">PDF</a>
+                </p>
+            </div>
 
-  <h3>Tamil stemmer: JSON API</h3>
-    <p>
-        This service provides tamil text base calculator
-        <ul>
-            <li>Input data: text input to be computed
-                <ul>
-                    <li>arg1 : UTF-8 text</li>
-                    <li>Return : result of expression text</li>
-                </ul>
-            </li>
-        </ul>
-        Sample usage is given below.
-      
-  <pre>
+            <h3>Tamil stemmer: JSON API</h3>
+            <p>
+                This service provides tamil text base calculator
+            <ul>
+                <li>Input data: text input to be computed
+                    <ul>
+                        <li>arg1 : UTF-8 text</li>
+                        <li>Return : result of expression text</li>
+                    </ul>
+                </li>
+            </ul>
+            Sample usage is given below.
+
+            <pre>
     http://tamilpesu.us/kanippaan/json/
     Method: POST
     Variables: text_input
     Result: '{"text_result": "..."}
   </pre>
-    </p>
-</div>
-</section>
+            </p>
+        </div>
+    </section>
 {% endblock %}

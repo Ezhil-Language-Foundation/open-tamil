@@ -83,8 +83,8 @@ class WordFrequency(object):
         print("#" * 80)
         print("# sorted in Tamil order")
         for l in sorted(
-            list(self.frequency.keys()),
-            key=cmp_to_key(tamil.utf8.compare_words_lexicographic),
+                list(self.frequency.keys()),
+                key=cmp_to_key(tamil.utf8.compare_words_lexicographic),
         ):
             print(l, ":", self.frequency[l])
         return

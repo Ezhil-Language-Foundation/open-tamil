@@ -28,7 +28,7 @@ def print_tamil_words_by_frequency(frequency, fp=None):
     fp.write(u"# sorted in Tamil order\n")
     fp.write(u"alphasort_data = [\n")
     for l in sorted(
-        frequency.keys(), key=cmp_to_key(tamil.utf8.compare_words_lexicographic)
+            frequency.keys(), key=cmp_to_key(tamil.utf8.compare_words_lexicographic)
     ):
         k, v = l, frequency[l]
         fp.write(u"[u'%s',%g],\n" % (k, v))

@@ -433,5 +433,4 @@ def auto2unicode(text, result=None):
         return ""
     # end of for encode in _all_unique_encodes_:
 
-
 # end of def auto2unicode(text):

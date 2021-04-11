@@ -41,8 +41,8 @@ class PesumYengalTest(unittest.TestCase):
         numeral = tamil.numeral.num2tamilstr(number, actual_fn)
         # print("numeral",numeral)
         # print("/".join(actual_fn))
-        self.assertEqual(numeral[0 : len(numerale)], numerale)
-        self.assertEqual(exp_filenames, actual_fn[0 : len(exp_filenames)])
+        self.assertEqual(numeral[0: len(numerale)], numerale)
+        self.assertEqual(exp_filenames, actual_fn[0: len(exp_filenames)])
 
 
 if __name__ == "__main__":

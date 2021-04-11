@@ -23,6 +23,7 @@
 
 import re
 
+
 # Convert Tamil text into romanized encoding using transliteratoin.php before apply any
 # of the functions below
 
@@ -407,7 +408,6 @@ def ipa(text):  # Generates narrow transcription of Tamil texts
 
 
 def broad(text):
-
     # Remove Palatalization,
     # text = text.replace("ʲ","ʷ",)  Labialization & Glottalization
     # text = text.replace("ʷ","")
@@ -451,6 +451,5 @@ def broad(text):
     text = text.replace("ʌ", "ə")
 
     return text
-
 
 # end of def broad(text):

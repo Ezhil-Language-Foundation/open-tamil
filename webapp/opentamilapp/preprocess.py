@@ -28,8 +28,8 @@ class Feature:
         self.first = 0.0
         self.last = 0.0
         self.vowels = 0.0
-        self.unigscore = 0.0  #unigram score
-        self.bigscore = 0.0  #bigram score
+        self.unigscore = 0.0  # unigram score
+        self.bigscore = 0.0  # bigram score
 
     def __str__(self):
         return "(n=%d,kurils=%g,nedils=%g,ayudhams=%g,vallinams=%g,mellinams=%g,idayinams=%g,granthams=%g,first=%g,last=%g)" % (
@@ -117,7 +117,7 @@ def process(fname):
                 print(("SKIPPING => ", ioe.message))
                 continue
             ofp.writerow(f.data())
-    #ofp.close()
+    # ofp.close()
 
 
 def run():

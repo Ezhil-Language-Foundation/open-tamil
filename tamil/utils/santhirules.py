@@ -135,11 +135,11 @@ def joinWords(word_a, word_b):
             if len(first_word_letters) == 4:
                 # check either first word has repeated two times
                 if (
-                    first_word_letters[:2] == first_word_letters[2:]
+                        first_word_letters[:2] == first_word_letters[2:]
                 ):  # first word repeat two times within it
                     # get root second word by removing prefix
                     sec_word = (
-                        second_word_first_uyir_char + second_word_after_first_char
+                            second_word_first_uyir_char + second_word_after_first_char
                     )
                     if sec_word in firstword_double_special_secondword[0]:
                         # get conjuction char by joining  special conjuction and  second root word
@@ -169,6 +169,5 @@ def joinWords(word_a, word_b):
 
     # if all above rules not applicable, then just return as it is !
     return word_a + " " + word_b
-
 
 # end of def joinWords(word_a, word_b):

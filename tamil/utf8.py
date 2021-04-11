@@ -763,7 +763,7 @@ tamil_letters = [
     "க்ஷௌ",
 ]
 
-grantha_uyirmei_letters = copy(tamil_letters[tamil_letters.index("கா") - 1 :])
+grantha_uyirmei_letters = copy(tamil_letters[tamil_letters.index("கா") - 1:])
 
 
 ## length of the definitions
@@ -991,7 +991,7 @@ def copy_lru_decorator(f):
     return f_copy_lru
 
 
-#@copy_lru_decorator
+# @copy_lru_decorator
 def get_letters(word):
     """Splits the @word into a character-list of tamil/english
     characters present in the stream. This routine provides a robust tokenizer
@@ -1245,6 +1245,7 @@ def splitMeiUyir(uyirmei_char):
     meiidx = int((idx - uyiridx) / 12)
     return (grantha_mei_letters[meiidx], uyir_letters[uyiridx])
 
+
 # end of def splitMeiUyir(uyirmei_char):
 
 
@@ -1347,11 +1348,14 @@ def print_tamil_words(tatext, use_frequencies=not False):
         else:
             print("%s" % l[0])
 
+
 compare_lexicograph_key = functools.cmp_to_key(compare_words_lexicographic)
+
 
 def tamil_sorted(list_data, key=compare_lexicograph_key):
     asorted = sorted(list_data, key=key)
     return asorted
+
 
 def hex2unicode(ip_data, offset=3):
     """
@@ -1430,6 +1434,7 @@ class CacheGetLettersMixin:
         @return - list of letters in @word and cache for future use.
         """
         return self.get_letters_impl(word)
+
 
 """
 மாத்திரை கணித்தல்

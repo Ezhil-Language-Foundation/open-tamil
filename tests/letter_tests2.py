@@ -10,6 +10,7 @@ import tamil.utf8 as utf8
 from tamil.tscii import TSCII
 import codecs
 
+
 class Letters(unittest.TestCase):
     def test_issue132(self):
         x = u"வரு'க"
@@ -74,6 +75,7 @@ class Letters(unittest.TestCase):
     def test_classified_except(self):
         with self.assertRaises(ValueError) as ve:
             utf8.classify_letter(u".")
+
 
 if __name__ == "__main__":
     unittest.main()

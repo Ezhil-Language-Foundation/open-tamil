@@ -40,5 +40,6 @@ class Letters(unittest.TestCase):
         wlen = list(map(lambda x: len(tamil.utf8.get_letters(x)), ta_parts))
         self.assertEqual(wlen, wlen_expected)
 
+
 if __name__ == "__main__":
     unittest.main()

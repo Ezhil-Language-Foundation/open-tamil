@@ -66,7 +66,7 @@ class DeletionFilter:
         L = len(letters)
         for idx, letter in enumerate(letters):
             muthal = idx == 0 and u"" or u"".join(letters[0:idx])
-            meethi = idx == L and u"" or u"".join(letters[min(L - 1, idx + 2) :])
+            meethi = idx == L and u"" or u"".join(letters[min(L - 1, idx + 2):])
             walt = muthal + meethi
             if lexicon.isWord(walt):
                 rval.append(walt)
@@ -100,7 +100,7 @@ class OttruSplit:
             if not (letter in tamil.utf8.grantha_uyirmei_letters):
                 continue
             muthal = idx == 0 and u"" or u"".join(self.letters[0:idx])
-            meethi = idx == L and u"" or u"".join(self.letters[idx + 1 :])
+            meethi = idx == L and u"" or u"".join(self.letters[idx + 1:])
             mei, uyir = tamil.utf8.splitMeiUyir(letter)
             muthal = muthal + mei
             meethi = uyir + meethi
@@ -309,7 +309,7 @@ class Speller(object):
         accept_min_max = [max(ref_wl - 2, 1), ref_wl + 1]
         filter_suggs = filter(
             lambda w: tamil_length(w) >= accept_min_max[0]
-            and len(w) <= accept_min_max[1],
+                      and len(w) <= accept_min_max[1],
             suggs,
         )
         # sort the suggestions by Dice coefficient
@@ -318,7 +318,7 @@ class Speller(object):
             # guess!
             filter_suggs = suggs
             filter_suggs = list(tamil.utf8.tamil_sorted(filter_suggs))
-            filter_suggs[min(10, len(filter_suggs) - 1) :] = []
+            filter_suggs[min(10, len(filter_suggs) - 1):] = []
             return filter_suggs
         _compare_fn = lambda wA, wB: (edit_distance(wA, word) < edit_distance(wB, word))
         filter_suggs = list(
@@ -593,9 +593,9 @@ class Speller(object):
 
             # check if words are transliterated
             if any(
-                filter(
-                    lambda x: x in string.ascii_letters, tamil.utf8.get_letters(word)
-                )
+                    filter(
+                        lambda x: x in string.ascii_letters, tamil.utf8.get_letters(word)
+                    )
             ):
                 # letter-sequence only
                 en_word = Speller.scrub_ws(word)
@@ -743,10 +743,10 @@ class Speller(object):
         for itr, sugg_word in enumerate(options2):
             # options_score[itr] = Dice_coeff( word, sugg_word )
             options_score[itr] = (
-                (len(word) - edit_distance(word, sugg_word))
-                / (1.0 * len(orig_word))
-                * Dice_coeff(word, sugg_word)
-                / 3.0
+                    (len(word) - edit_distance(word, sugg_word))
+                    / (1.0 * len(orig_word))
+                    * Dice_coeff(word, sugg_word)
+                    / 3.0
             )  # dice coeff is weighted down
         options = zip(options2, options_score)
 

@@ -15,8 +15,9 @@ import joblib
 from .classifier_eng_vs_ta import jaffna_transliterate
 from .preprocess import Feature
 
-scaler = joblib.load( os.path.dirname(os.path.abspath(__file__)) + '/neuralnets/scaler.pkl' )
-nn = joblib.load( os.path.dirname(os.path.abspath(__file__)) +'/neuralnets/nn.pkl' )
+scaler = joblib.load(os.path.dirname(os.path.abspath(__file__)) + '/neuralnets/scaler.pkl')
+nn = joblib.load(os.path.dirname(os.path.abspath(__file__)) + '/neuralnets/nn.pkl')
+
 
 def process_word(s):
     if any([l in string.ascii_lowercase for l in s]):
@@ -37,8 +38,9 @@ def process_word(s):
         return ioe.message
     return
 
+
 if __name__ == "__main__":
-    value=process_word('vanakkam')
+    value = process_word('vanakkam')
     print(value)
-    value=process_word('hello')
+    value = process_word('hello')
     print(value)

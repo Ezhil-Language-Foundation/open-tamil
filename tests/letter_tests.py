@@ -14,6 +14,7 @@ import os
 
 CURRDIR = os.path.dirname(os.path.abspath(__file__))
 
+
 class Arichuvadi(unittest.TestCase):
     def test_fcns(self):
         self.assertEqual(utf8.mei(0), u"க்")
@@ -147,7 +148,7 @@ class Letters(unittest.TestCase):
             u"அம்மா",
             u"அப்பா",
         ]
-        words = sorted(words,key=utf8.compare_lexicograph_key)
+        words = sorted(words, key=utf8.compare_lexicograph_key)
         self.assertEqual(words, expected)
         utf8.compare_words_lexicographic(u"அப்பா", u"அம்மா")
         # dad comes before mom, atleast in dictionary...
@@ -229,7 +230,7 @@ class Letters(unittest.TestCase):
     def test_reverse_words(self):
         """ unittest for reverse a Tamil string"""
         for (
-            word
+                word
         ) in u"இந்த (C) tamil முத்தையா அண்ணாமலை 2013 இந்த ஒரு எழில் தமிழ் நிரலாக்க மொழி உதாரணம்".split():
             rword = utf8.reverse_word(word)
             self.assertTrue(utf8.get_letters(rword)[0] == utf8.get_letters(word)[-1])
@@ -271,7 +272,7 @@ class Letters(unittest.TestCase):
         zz = u"முத்தையா அண்ணாமலை எந்த ஒரு தெரிந்த அல்லது தெரியாத எழுத்துருவாகவிருந்தாலும் அதனை மேல்தட்டில் உள்ளிட்டு கீழே உள்ள முடியும்"
         for z in zz.split(u" "):
             for x, y in zip(
-                map(utf8.istamil, utf8.get_letters(z)), utf8.get_letters(z)
+                    map(utf8.istamil, utf8.get_letters(z)), utf8.get_letters(z)
             ):
                 if LINUX:
                     print(u"%s => %s" % (y, x))
@@ -298,8 +299,8 @@ class Letters(unittest.TestCase):
             False,
         ]
         assert (
-            list(map(utf8.istamil, utf8.get_letters(u"முத்தையா அண்ணாமலை 2013")))
-            == correct
+                list(map(utf8.istamil, utf8.get_letters(u"முத்தையா அண்ணாமலை 2013")))
+                == correct
         )
 
     def test_kuril_nedil(self):
@@ -336,21 +337,21 @@ class CodecTSCII(unittest.TestCase):
         )
 
     def test_TSCII_to_UTF8_part1(self):
-        with codecs.open(os.path.join(CURRDIR,"data/Sample.TSCII"), "rb") as fp:
+        with codecs.open(os.path.join(CURRDIR, "data/Sample.TSCII"), "rb") as fp:
             str = fp.read()
         output = tamil.tscii.convert_to_unicode([chr(x) for x in str])
         needle = u"""உடுப்பி ஒட்டலுக்குப் போய் மசாலா தோசை சாப்பிட்டு வரலாமா"""
         assert output.find(needle) >= 0
 
     def test_TSCII_to_UTF8_part2(self):
-        with open(os.path.join(CURRDIR,"data/dumb.tscii"),"rb") as fp:
+        with open(os.path.join(CURRDIR, "data/dumb.tscii"), "rb") as fp:
             str = fp.read()
         output = tamil.tscii.convert_to_unicode_from_bytes(str)
         assert output.find(u"அப்பா") >= 0
 
     def test_project_MADURAI(self):
-        fname = os.path.join(CURRDIR,"data/project_madurai_tscii.txt")
-        fexact = os.path.join(CURRDIR,"data/project_madurai_utf8.txt")
+        fname = os.path.join(CURRDIR, "data/project_madurai_tscii.txt")
+        fexact = os.path.join(CURRDIR, "data/project_madurai_utf8.txt")
 
         # expected
         with codecs.open(fexact, "r", "utf-8") as fileHandle:

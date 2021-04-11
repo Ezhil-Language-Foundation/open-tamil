@@ -63,8 +63,8 @@ if __name__ == "__main__":
         except Exception as fileOrConvException:
             print(
                 (
-                    "tamilphonetic.py error - file %s could not be processed due to - %s"
-                    % (fname, str(fileOrConvException))
+                        "tamilphonetic.py error - file %s could not be processed due to - %s"
+                        % (fname, str(fileOrConvException))
                 )
             )
             raise fileOrConvException

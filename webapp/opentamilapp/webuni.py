@@ -2,6 +2,7 @@ from tamil.txt2unicode import *
 from transliterate import ISO, algorithm
 import tamil
 
+
 def unicode_converter(tsci, cod):
     out = ""
     if cod == "t2u":
@@ -176,18 +177,18 @@ def unicode_converter(tsci, cod):
     elif cod == "unicode2shreelipiavid":
         temp = str(tsci)
         out = unicode2encode.unicode2shreelipiavid(temp)
-    elif cod=="ISO2unicode":
+    elif cod == "ISO2unicode":
         temp = str(tsci)
         ISO_table = ISO.Transliteration.table
-        top,result = algorithm.Greedy.transliterate(ISO_table,temp)
-        #print(result.options)
+        top, result = algorithm.Greedy.transliterate(ISO_table, temp)
+        # print(result.options)
         out = list(result.options)[0]
-        #TODO/alternative option.
-        #out = algorithm.Direct.transliterate(ISO_table,temp)
-        #join uyir mei.
-    elif cod=="unicode2ISO":
+        # TODO/alternative option.
+        # out = algorithm.Direct.transliterate(ISO_table,temp)
+        # join uyir mei.
+    elif cod == "unicode2ISO":
         temp = str(tsci)
         ISO_table = ISO.ReverseTransliteration.table
-        out = algorithm.Direct.transliterate(ISO_table,temp)
+        out = algorithm.Direct.transliterate(ISO_table, temp)
     data = {"result": out}
     return data

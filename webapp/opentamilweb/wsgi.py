@@ -8,7 +8,8 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
 """
 import sys
-sys.path.insert(0,'/var/www/tamilpesu_us/')
+
+sys.path.insert(0, '/var/www/tamilpesu_us/')
 
 import os
 from django.core.wsgi import get_wsgi_application
