@@ -15,7 +15,7 @@ from . import utils
 from . import wordutils
 from . import olini
 
-VERSION = "0.99"
+VERSION = "1.0"
 __all__ = [
     "utf8",
     "txt2unicode",
