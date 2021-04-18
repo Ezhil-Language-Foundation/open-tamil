@@ -84,7 +84,7 @@ def print_huffman_code_cwl(code,p,v):
     return cwl,code.values()
 
 #examples
-def demo():
+def __demo__():
     ##p = [0.1,0.15,0.30,0.16,0.29]
     p = [0.125 for i in range(0,8)]
     v = ['a','b','c','d','e','f','g','h']
@@ -99,4 +99,4 @@ def demo():
     assert( cwl == 1.85 )
 
 if __name__ == u"__main__":
-    demo()
+    __demo__()

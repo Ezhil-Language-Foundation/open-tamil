@@ -13,7 +13,7 @@ long_description = open("README.rst", "r", "UTF-8").read()
 setup(
     name="Open-Tamil",
     version="1.0",
-    description="Tamil language text processing tools for Python v2, v3",
+    description="Tamil language text processing tools for Python v3",
     author="M. Annamalai, T. Arulalan, and other contributors",
     author_email="ezhillang@gmail.com",
     long_description=long_description,

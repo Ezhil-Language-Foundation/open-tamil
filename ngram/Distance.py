@@ -9,15 +9,16 @@ import tamil
 
 
 def edit_distance(wordA, wordB):
-    """ " Implements Daegmar-Levenshtein edit distance algorithm:
+    """ " Implements Daegmar-Levenshtein edit distance algorithm to find distance between words
+    @wordA, and @wordB:
     Ref: https://en.wikipedia.org/wiki/Edit_distance
     Ref: https://en.wikipedia.org/wiki/Levenshtein_distance"""
-    if not type(wordA) is list:
+    if not isinstance(wordA,list):
         lettersA = tamil.utf8.get_letters(wordA)
     else:
         lettersA = wordA
 
-    if not type(wordB) is list:
+    if not isinstance(wordB,list):
         lettersB = tamil.utf8.get_letters(wordB)
     else:
         lettersB = wordB

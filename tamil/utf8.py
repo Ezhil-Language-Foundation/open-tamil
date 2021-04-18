@@ -849,7 +849,7 @@ def getidx(letter):
 
 ## useful part of the API:
 def istamil_prefix(word):
-    """check if the given word has a tamil prefix. Returns
+    """check if the given @word has a tamil prefix. Returns
     either a True/False flag"""
     for letter in tamil_letters:
         if word.find(letter) == 0:
@@ -858,15 +858,30 @@ def istamil_prefix(word):
 
 
 def is_tamil_unicode_value(intx: int):
+    """
+    Quickly check if the given parameter @intx belongs to Tamil Unicode block.
+    :param intx:
+    :return: True if parameter is in the Tamil Unicode block.
+    """
     return (intx >= (2946) and intx <= (3066))
 
 
 def is_tamil_unicode_codept(x: str):
+    """
+    Check quickly if the given parameter @x (character) belongs to Tamil Unicode block.
+    :param x:
+    :return:
+    """
     intx = ord(x)
     return is_tamil_unicode_value(intx)
 
 
 def is_tamil_unicode_predicate(x: str):
+    """
+    Predicate to work on string @x which is not processed by get_letters() to estimate if it is a Tamil string.
+    :param x: text string
+    :return: True or False based on @x being Tamil letters exclusively.
+    """
     if not is_tamil_unicode_codept(x[0]):
         return False
     return (len(x) > 1 and is_tamil_unicode_predicate(x[1:])) or True
@@ -874,7 +889,7 @@ def is_tamil_unicode_predicate(x: str):
 
 def is_tamil_unicode(sequence):
     # Ref: languagetool-office-extension/src/main/java/org/languagetool/openoffice/TamilDetector.java
-    if type(sequence) is list:
+    if isinstance(sequence,list):
         return list(map(is_tamil_unicode_predicate, sequence))
     if len(sequence) > 1:
         return list(map(is_tamil_unicode_predicate, get_letters(sequence)))
@@ -882,13 +897,20 @@ def is_tamil_unicode(sequence):
 
 
 def has_english(word_in):
-    """ return True if word_in has any English letters in the string"""
+    """
+    :param word_in: input word was string or list sequence
+    :return: return True if word_in has any English letters in the string
+    """
     return (not all_tamil(word_in) and len(word_in) > 0
             and any([l in word_in for l in string.ascii_letters]))
 
 
 def all_tamil(word_in):
-    """ predicate checks if all letters of the input word are Tamil letters """
+    """
+    Predicate function
+    :param word_in:
+    :return:  predicate checks if all letters of the input @word_in are Tamil letters
+    """
     if isinstance(word_in, list):
         word = word_in
     else:
@@ -897,7 +919,9 @@ def all_tamil(word_in):
 
 
 def has_tamil(word):
-    """check if the word has any occurance of any tamil letter """
+    """
+    :param word: Input text string
+    :return: True if the word has any occurance of any tamil letter """
     # list comprehension is not necessary - we bail at earliest
     for letters in tamil_letters:
         if word.find(letters) >= 0:
@@ -906,7 +930,9 @@ def has_tamil(word):
 
 
 def istamil(tchar):
-    """check if the letter tchar is prefix of
+    """
+    :param tchar: input parameter character
+    :return: True if the letter tchar is prefix of
     any of tamil-letter. It suggests we have a tamil identifier"""
     if tchar in tamil_letters:
         return True
@@ -926,9 +952,14 @@ def reverse_word(word):
     return "".join(op)
 
 
-## find out if the letters like, "பொ" are written in canonical "ப + ொ"" graphemes then
-## return True. If they are written like "ப + ெ + ா" then return False on first occurrence
 def is_normalized(text):
+    """
+    find out if the letters like, "பொ" are written in canonical "ப + ொ"" graphemes then
+    return True. If they are written like "ப + ெ + ா" then return False on first occurrence
+
+    :param text: text
+    :return: True if letters of word are in canonical representation
+    """
     TLEN, idx = len(text), 1
     kaal = "ா"
     Laa = "ள"
@@ -1070,6 +1101,11 @@ for _uyir_idx in range(0, 12):
 
 
 def join_letters_elementary(elements):
+    """
+    @elements ['க்','ஆ'] input will return 'கா' - this function is complementary of splitMeiUyir(...)
+    :param elements: even element list of size >= 2  of vowel or consonants.
+    :return: join elementary list of vowel-consonant into conjugates;
+    """
     assert len(elements) % 2 == 0, u"input has to be an even numbered list"
     return "".join([
         joinMeiUyir(elements[i], elements[i + 1])
@@ -1078,6 +1114,12 @@ def join_letters_elementary(elements):
 
 
 def get_letters_elementary_iterable(word, symmetric=False):
+    """
+    Generator based @get_letters_elementary function
+    :param word: Tamil word
+    :param symmetric: boolean
+    :return: yield the letter in word
+    """
     for letter in get_letters_iterable(word):
         letter_parts = grantha_uyirmei_splits.get(letter, None)
         if letter_parts:
@@ -1096,6 +1138,13 @@ def get_letters_elementary_iterable(word, symmetric=False):
 
 
 def get_letters_elementary(word, symmetric=False):
+    """
+    Get letters elementary function to return @word as Vowel-Consonant splits.
+    e.g. ['காகம்' -> 'க்','ஆ','க்','அ','ம்',None] (None is present when @symmetric=True]
+    :param word: Tamil word
+    :param symmetric: make result list of even number.
+    :return: list of V-C splits of @word
+    """
     rval = []
     for letter in get_letters(word):
         letter_parts = grantha_uyirmei_splits.get(letter, None)
@@ -1115,12 +1164,22 @@ def get_letters_elementary(word, symmetric=False):
 
 
 def get_words(letters, tamil_only=False):
+    """
+    Return words in the letter stream.
+    :param letters: letters as list or generator
+    :param tamil_only: filter for Tamil only words
+    :return: list of words
+    """
     return [word for word in get_words_iterable(letters, tamil_only)]
 
 
 def get_words_iterable(letters, tamil_only=False):
-    """ given a list of UTF-8 letters section them into words, grouping them at spaces """
-
+    """ given a list of UTF-8 letters section them into words, grouping them at spaces; return
+        words in the letter stream; this function operates as generator
+    :param letters: letters as list or generator
+    :param tamil_only: filter for Tamil only words
+    :return: list of words as generator
+    """
     # correct algorithm for get-tamil-words
     buf = []
     for idx, let in enumerate(letters):
@@ -1136,7 +1195,11 @@ def get_words_iterable(letters, tamil_only=False):
 
 
 def get_tamil_words(letters):
-    """ reverse a Tamil word according to letters, not unicode-points """
+    """
+    Return Tamil words in the letter stream.
+    :param letters: letters as list or generator
+    :return: list of words
+    """
     if not isinstance(letters, list):
         raise Exception(
             "metehod needs to be used with list generated from 'tamil.utf8.get_letters(...)'"
@@ -1191,6 +1254,13 @@ def word_intersection(word_a, word_b):
 
 
 def unicode_normalize(cplxchar):
+    """
+    Normalize complex Vowel-Consonant conjugate Tamil letter into a Unicode normalized format;
+    e.g. 'க்'+'ஓ' என்பது 'கோ' என்று எழுதுவதே சரியான குறியீடு. 'க்'+'ஏ' = கே + கால் சேர்ப்பதும் யூனிக்கோடில்
+    அனுமதிபெற்றாலும் அது சரியானதல்ல; அவ்வகை குறிமுறைகளை சீர்செய்வதே இந்த நிரல்துண்டு.
+    :param cplxchar:
+    :return:
+    """
     Laa = "ள"
     kaal = "ா"
     sinna_kombu_a = "ெ"
@@ -1293,6 +1363,11 @@ def joinMeiUyir(mei_char, uyir_char):
 
 
 def classify_letter(letter):
+    """
+    Report if Tamil letter is kuril, nedil, aytham, vallinam, mellinam, idayinam, uyirmei or grantham letters.
+    :param letter: Tamil letter
+    :return: class of letter as string.
+    """
     if not isinstance(letter, str):
         raise TypeError("Input'%s' must be unicode, not just string" % letter)
     kinds = [
@@ -1331,28 +1406,36 @@ def classify_letter(letter):
         "Unknown letter '%s' neither Tamil nor English or number" % letter)
 
 
-def print_tamil_words(tatext, use_frequencies=not False):
+def print_tamil_words(tatext, use_frequencies=True):
+    """
+    Print tamil text word frequencies
+    :param tatext: text as string
+    :param use_frequencies: default True
+    :return: print data to terminal as side-effect.
+    """
     taletters = get_letters(tatext)
-    # for word in re.split("\s+",tatext):
-    #    print("-> ",word)
     # tamil words only
     frequency = {}
     for pos, word in enumerate(get_tamil_words(taletters)):
         frequency[word] = 1 + frequency.get(word, 0)
-    # for key in frequency.keys():
-    #    print("%s : %s"%(frequency[key],key))
     # sort words by descending order of occurence
     for l in sorted(frequency.items(), key=operator.itemgetter(1)):
         if use_frequencies:
             print("%d -> %s" % (l[1], l[0]))
         else:
             print("%s" % l[0])
-
+    return
 
 compare_lexicograph_key = functools.cmp_to_key(compare_words_lexicographic)
 
 
 def tamil_sorted(list_data, key=compare_lexicograph_key):
+    """
+    Sort list of Tamil strings in lexicographic order
+    :param list_data: list of Tamil strings
+    :param key: default to compare by Tamil dictionary (lexicographic) order
+    :return: sorted string.
+    """
     asorted = sorted(list_data, key=key)
     return asorted
 
@@ -1417,6 +1500,9 @@ def unicode2hex(ip_data, offset=3):
 
 
 class CacheGetLettersMixin:
+    """
+    Private cache for get_letters.
+    """
     __metaclass__ = abc.ABCMeta
 
     def __init__(self):
@@ -1650,6 +1736,11 @@ uyir_mei_nedil = [
 
 
 def calculate_uyir_nedil_kuril_maathirai(word):
+    """
+    Calculate maathirai helper routine.
+    :param word: kuril, nedil, uyirmei letter
+    :return: mathirai
+    """
     if word in uyir_mei_kuril:
         return 1
     elif word in uyir_mei_nedil:

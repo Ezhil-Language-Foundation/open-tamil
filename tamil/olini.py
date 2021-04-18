@@ -13,6 +13,10 @@ from tamil.numeral import num2tamilstr, num2tamilstr_american
 import ast
 
 class SimpleCalculator(ast.NodeVisitor):
+    """
+    SimpleCalculator - replacement for eval() method to compute expressions involving
+    +,-,/,* operators on constants.
+    """
     def __init__(self,*args,**kwargs):
         super(SimpleCalculator,self).__init__(*args,**kwargs)
         self.result = 0.0
@@ -56,6 +60,11 @@ def கணி(expr):
 
 
 def கணக்கிடு(_தொடர்):
+    """"
+    @_தொடர் : Tamil sentence with number to be parsed and evaluated. Supported operators are +, -, /, * spelled out as
+     கூட்டல், கழித்தல், பெருக்கல் and வகுத்தல்
+    @return @விடை result variable of the computation
+    """
     தமிழ்_உரை_தொடர் = re.sub('\s+', ' ', _தொடர்)
     # செயல்சார்புகளை குறியீடுகளாக மாற்றவும்
     for பெயர், குறியீடு in செயல்சார்புகள்.items():
@@ -86,7 +95,6 @@ def கணக்கிடு(_தொடர்):
     அச்சிடு(num2tamilstr(விடை))
     அச்சிடு(num2tamilstr_american(விடை))
     return விடை
-
 
 if __name__ == "__main__":
     assert 2 == கணக்கிடு("ஒன்று கூட்டல் ஒன்று")
