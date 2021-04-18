@@ -1,6 +1,6 @@
 # This Python file uses the following encoding: utf-8
 # !/bin/env python3
-# (C) 2020, எழில் மொழி அறக்கட்டளை
+# (C) 2020-2021, எழில் மொழி அறக்கட்டளை
 # இந்த நிரல் ஓப்பன்-தமிழ் நிரல் தொகுப்பில் சேர்ந்ததாகும்.
 
 # உரைவழி தமிழ் எண்களினை கொண்ட கணிதவியல்
@@ -10,12 +10,42 @@ import re
 import tamil
 from tamil.numeral import tamilstr2num
 from tamil.numeral import num2tamilstr, num2tamilstr_american
+import ast
 
+class SimpleCalculator(ast.NodeVisitor):
+    def __init__(self,*args,**kwargs):
+        super(SimpleCalculator,self).__init__(*args,**kwargs)
+        self.result = 0.0
+
+    def eval(self,obj):
+        self.result = self.visit(obj.body[0])
+        return self.result.n
+
+    def visit_Expr(self, node: ast.Expr):
+        return self.visit(node.value)
+
+    def visit_BinOp(self, node: ast.BinOp):
+        lhs = self.visit(node.left).n
+        rhs = self.visit(node.right).n
+        if isinstance(node.op,ast.Sub):
+            return ast.Num(lhs - rhs)
+        if isinstance(node.op,ast.Add):
+            return ast.Num(lhs + rhs)
+        if isinstance(node.op, ast.Mult):
+            return ast.Num(lhs * rhs)
+        if isinstance(node.op, ast.Div):
+            return ast.Num(lhs / rhs)
+        raise ValueError("Unsupported operation {0}".format(node.op))
+
+    def visit_Num(self, node: ast.Num):
+        return node
 
 def அச்சிடு(_): print(_)
 
-
-def கணி(_): return eval(_)
+def கணி(expr):
+    tree = ast.parse(expr,"__temp__.py")
+    calculator = SimpleCalculator()
+    return calculator.eval(tree)
 
 
 செயல்சார்புகள்_குறியீடுகள் = ('+', '-', '*', '/', '(', ')')
