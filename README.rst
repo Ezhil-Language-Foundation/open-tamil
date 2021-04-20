@@ -3,8 +3,7 @@ Open Source Tamil Tools and NLP Library for Python 3
 ======================================================
 திற மூல தமிழ் கருவிகள் version 1.0
 -------------------------------------
-.. image:: https://travis-ci.org/Ezhil-Language-Foundation/open-tamil.svg?branch=main
-    :target: https://travis-ci.org/Ezhil-Language-Foundation/open-tamil
+[![Open-Tamil Python package](https://github.com/Ezhil-Language-Foundation/open-tamil/actions/workflows/regression.yml/badge.svg)](https://github.com/Ezhil-Language-Foundation/open-tamil/actions/workflows/regression.yml)
 
 .. image:: open-tamil-logo.jpg
 
