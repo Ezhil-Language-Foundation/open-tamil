@@ -2,6 +2,7 @@
 # This file is part of snowball_py - project
 # https://github.com/shibukawa/snowball_py
 
+
 class Among(object):
     def __init__(self, s, substring_i, result, method=None):
         """

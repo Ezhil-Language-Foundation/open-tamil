@@ -19,6 +19,7 @@ def reverse_transliteration_table(table_in):
         table_out[v] = k
     return table_out
 
+
 class Tamil2English:
     """
         Transliterate Class from Tamil -> English.
@@ -30,24 +31,30 @@ class Tamil2English:
         eng_transliterated = u"".join([ta2en_map.get(tl,tl) for tl in letters])
         return eng_transliterated
 
+class Direct:
+    @staticmethod
+    def transliterate(table,tamil_str):
+        letters = tamil.utf8.get_letters(tamil_str)
+        transliterated = u"".join([table.get(tl, tl) for tl in letters])
+        #for tl in letters: print(tl,"->",table.get(tl,tl))
+        return transliterated
+
 class BlindIterative:
     """
     BlindIterative Algorithm from TamilKaruvi - less than optimal -
+     -details-
+
+     While text remains:
+       Lookup the English part in anywhere in the string position
+       If present:
+          Lookup the Corresponding Tamil Part & Append it to the string.
+       Else:
+             Continue
     """
     @staticmethod
     def transliterate(table,english_str):
         """ @table - has to be one of Jaffna or Azhagi etc.
             @english_str - """
-#
-# -details-
-#
-# While text remains:
-#   Lookup the English part in anywhere in the string position
-#   If present:
-#   	  Lookup the Corresponding Tamil Part & Append it to the string.
-#   Else:
-#         Continue
-#
         out_str = english_str
 
         # for consistent results we need to work on sorted keys
@@ -100,13 +107,16 @@ class Greedy:
             return True
         return not( letter in tamil.utf8.mei_letters)
 
-    def generate(self,english_str,partial='',level=0):
-        if len(english_str) == 0:
+    def generate(self,input_str,partial='',level=0):
+        if len(input_str) == 0:
             self.options.append(partial)
             return
         if level >= 1 and len(partial) == 0:
             return
-
+        if isinstance(input_str,list):
+            english_str = input_str
+        else:
+            english_str = tamil.utf8.get_letters(input_str)
         for itr,s in enumerate(english_str):
             curr = s
             if itr < len(english_str)-1:
@@ -137,11 +147,12 @@ class Greedy:
         return
 
     def pick_dictionary_words(self):
-        if not self.lexicon:
+        if not hasattr(self.lexicon,'isWord'):
             return
         self.options = list(filter(self.lexicon.isWord,self.options))
 
-    def run(self,english_str):
+    def run(self,english_str,full_search=False):
+        self.full_search = full_search
         self.generate(english_str)
         self.pick_dictionary_words()
         idx = self.score()
@@ -149,16 +160,12 @@ class Greedy:
             return english_str
         best = self.options[idx]
         self.options = set(self.options)
-        #for w in self.options:
-        #    print(w)
-        #print(u'Total choices => ',len(self.options))
-        #print(u'Best => %s'%best)
         return best
 
     @staticmethod
-    def transliterate(table,english_str,lexicon=None):
+    def transliterate(table,english_str,lexicon=None,full_search=False):
         g = Greedy(table,lexicon)
-        return g.run(english_str),g
+        return g.run(english_str,full_search=full_search),g
 
 # Azhagi has a many-to-one mapping - using a Tamil language model and Baye's conditional probabilities
 # to break the tie when two or more Tamil letters have the same English syllable. Currently
@@ -180,21 +187,18 @@ class Predictive:
 class Iterative:
     """
     Sequential Iterative Algorithm modified from TamilKaruvi
+     -details-
+     While text remains:
+       Lookup the First-Matching-Longest-English part
+       If present:
+          Lookup the Corresponding Tamil Part & Append it.
+       Else:
+          Continue
     """
     @staticmethod
     def transliterate(table,english_str):
         """ @table - has to be one of Jaffna or Azhagi etc.
             @english_str - """
-#
-# -details-
-#
-# While text remains:
-#   Lookup the First-Matching-Longest-English part
-#   If present:
-#   	  Lookup the Corresponding Tamil Part & Append it.
-#   Else:
-#         Continue
-#
         out_str = english_str
 
         # for consistent results we need to work on sorted keys
@@ -217,7 +221,10 @@ class Iterative:
                 curr_prefix = english_str[pos:min(pos+iters-1,remaining)]
                 curr_prefix_lower = None
                 if ( len(curr_prefix) >= 2 ):
-                    curr_prefix_lower = curr_prefix[0].lower() + curr_prefix[1:]
+                    if isinstance(curr_prefix,list):
+                        curr_prefix_lower = curr_prefix[0].lower() + "".join(curr_prefix[1:])
+                    else:
+                        curr_prefix_lower = curr_prefix[0].lower() + curr_prefix[1:]
 
                 ## print curr_prefix
                 iters = iters - 1
@@ -237,7 +244,7 @@ class Iterative:
                 continue
 
             # copy input to output if transliteration fails or Tamil inputs found
-            if ord(english_str[pos]) < 128:
+            if len(english_str[pos]) == 1 and ord(english_str[pos]) < 128:
                 rep_char = english_str[pos]
             else:
                 rep_char = english_str[pos] #copy-string to output - maybe Tamil letter also.

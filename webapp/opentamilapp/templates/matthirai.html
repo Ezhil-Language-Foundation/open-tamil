@@ -1,0 +1,105 @@
+{% extends "main.html" %}
+{% load i18n %}
+{% block title %}Tamil Matthirai Calculator{% endblock %}
+
+{% block content %}
+    <section id="stemmer">
+        <div class="col-sm-9">
+            <div class="page-header">
+                <h1>தமிழ் பேசு.us - ஓபன் தமிழ் மாத்திரை எண்ணி</h1>
+            </div>
+            {% if text_output %}
+                <div>
+                    {% if text_output %}
+                        <div id="disp4">
+                            <p class="important">
+                            <ol>
+                                {% for stem_pair in text_output %}
+                                    <li>
+                                        {% for word in stem_pair %}
+                                            {% if forloop.counter == 1 %}
+                                                {{ word }}
+                                            {% else %}
+                                                -> {{ word }}
+                                            {% endif %}
+                                        {% endfor %}
+                                    </li>
+                                {% endfor %}
+                            </p>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+            <hr>
+            <div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <center>
+                        <textarea rows="12" cols="80" name="text_input" id="txt4"
+                                  placeholder="உரை உள்ளீடுகளை இடுக!">{% if text_input %}
+                            {{ text_input }}{% endif %}</textarea>
+                        <br/>
+                        <input type="button" id="btn-clear" class="btn btn-success" onClick="$('#txt4').val('');"
+                               value="அழி"></input>
+                        <input type="submit" id="btn-submit" class="btn btn-success" action="submit"
+                               value="மாத்திரை கணக்கிடு"></input>
+                    </center>
+                </form>
+            </div>
+            <div class="well">
+                <h4>விளக்கம் / ஆக்கம்</h4>
+                <p>இந்த செயலியின் மூல காரணகத்தா 2013-இல் வெளியிடப்பட்ட தமிழ் வேர்ச்சொல் பகுப்பாய்வு வடிகட்டியை பொது
+                    பயனுக்கு வெளியிட்ட திரு. தாமோதரன் இராஜலிங்கம்.
+                    முழு கட்டுரை <a href="http://www.kaniyam.com/releasing-tamil-stemmer-using-open-tamil/">இங்கு</a>.
+                </p>
+            </div>
+
+            <div class="well">
+                <h3> மாத்திரை கணிக்கும் செயல்முறை அல்கொரிதம்</h3>
+                <div>
+                    <p>Cite: "மாத்திரை பார்வையில் குறள்", பரதன் தியாகலிங்கம், முத்து அண்ணாமலை. <a
+                            href="https://github.com/Ezhil-Language-Foundation/open-tamil/blob/main/conference-publications/%E0%AE%AE%E0%AE%BE%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AE%BF%E0%AE%B0%E0%AF%88%20%E0%AE%AA%E0%AE%BE%E0%AE%B0%E0%AF%8D%E0%AE%B5%E0%AF%88%E0%AE%AF%E0%AE%BF%E0%AE%B2%E0%AF%8D%20%E0%AE%95%E0%AF%81%E0%AE%B1%E0%AE%B3%E0%AF%8D-INFITT-2020.pdf">PDF</a>
+                    </p>
+                </div>
+                <div>
+    <pre>
+    ஒரு சொல் அதன் எழுத்துக்களின் @letters  என்பதன் மாத்திரைகளை தனித்தனியே
+    கணிக்கிட்டு முழுமையாக அதன் சொல்-அளவான முழு மாத்திரை அளவை வெளியிடுகிறது.      
+    </pre>
+                    <pre>
+    மாத்திரை கணித்தல்: ஒரு தமிழ் சொல்லின் @letters மாத்திரை அளவை கணிக்கும்.
+
+    விதிகள்:
+    நெடில் எழுத்துக்கள் ஒலிக்கும் கால அளவு 2 மாத்திரை.
+    குறில் எழுத்துக்கள் ஒலிக்கும் கால அளவு 1 மாத்திரை.
+    மெய் எழுத்துக்கள் ஒலிக்கும் கால அளவு 1/2 மாத்திரை.
+    ஆய்த எழுத்தை ஒலிக்க ஆகும் கால அளவு 1/2 மாத்திரை.
+    மகரக் குறுக்கம் "ன்", "ண்" ஐ தொடர்ந்து வரும் "ம்" ஆனது தன அரை மாத்திரையில் இருந்து கால் மாத்திரையாய் ஒலிக்கும்
+    ஒளகாரக் குறுக்கம் சொல்லின் ஆரம்பத்தில் வரும் ஒள, மெள, வௌ என்பன 1 மாத்திரையில் ஒலித்தல்
+    </pre>
+                </div>
+
+                <h3>Tamil matthirai: JSON API</h3>
+                <p>
+                    This service provides tamil text maththirai calculator
+                <ul>
+                    <li>Input data: text input to be maththirai computed
+                        <ul>
+                            <li>arg1 : UTF-8 text</li>
+                            <li>Return : maththirai counts of the UTF-8 text</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                Sample usage is given below.
+
+                <pre>
+    http://tamilpesu.us/matthirai/json/
+    Method: POST
+    Variables: text_input
+    Result: '{"text_matthirai": "..."}
+  </pre>
+                </p>
+            </div>
+    </section>
+{% endblock %}

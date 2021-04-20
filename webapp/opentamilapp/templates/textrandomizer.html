@@ -2,86 +2,92 @@
 {% block title %}Tamil Text Randomizer{% endblock %}
 
 {% block content %}
-<!-- Ref: https://www.w3schools.com/howto/howto_js_collapsible.asp -->
-<style>
-.collapsible {
-  background-color: purple;
-  color: white;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-}
+    <!-- Ref: https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+    <style>
+        .collapsible {
+            background-color: purple;
+            color: white;
+            cursor: pointer;
+            padding: 18px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 15px;
+        }
 
-.active, .collapsible:hover {
-  background-color: light green;
-}
+        .active, .collapsible:hover {
+            background-color: light green;
+        }
 
-.content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #f1f1f1;
-}
-</style>
-<div class="page-header">
-    <!-- Text Randomizer -->
-    <h1>உரை வரிசைமாற்றி காட்டல் உத்தி</h1>
-</div>
-<center>
-  <div style="padding-bottom:100px;">
-    <p id="disp" class='important'>
-    {% if nilai %}
-       <h3>{{nilai}} - {{nilai_description}}</h3>
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
+        }
+    </style>
+    <div class="page-header">
+        <!-- Text Randomizer -->
+        <h1>உரை வரிசைமாற்றி காட்டல் உத்தி</h1>
+    </div>
+    <center>
+        <div style="padding-bottom:100px;">
+            <p id="disp" class='important'>
+                {% if nilai %}
+                    <h3>{{ nilai }} - {{ nilai_description }}</h3>
+                {% endif %}
+            </p>
+        </div>
+    </center>
+    {% if questions %}
+        <center>
+            <div>
+                <table style='border:1px solid black;'>
+                    {% for qa in questions %}
+                        <tr style='border:1px solid blue;'>
+                        <td> {{ forloop.counter }}</td>
+                        {% for q in qa %}
+                            {% if forloop.counter == 1 %}
+                                <td>
+                                    <button class='collapsible'>{{ q }}</button>
+                                    {% else %}
+                                    <div class='content'><p>{{ q }}</p></div>
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </div>
+        </center>
     {% endif %}
-  </p>
-  </div>
-</center>
-{%if questions %}
-<center>
-  <div>
-  <table style='border:1px solid black;'>
-    {% for qa in questions %}
-     <tr style='border:1px solid blue;'><td> {{ forloop.counter }}</td>
-    {% for q in qa %}
-    {% if forloop.counter == 1 %}
-      <td><button class='collapsible'>{{q}}</button>
-    {% else %}
-    <div class='content'><p>{{q}}</p></div></td>
-    {% endif %}
-    {% endfor %}
-  {% endfor %}
-  </table>
-  </div>
-  </center>
-{% endif  %}
-<hr />
- <div align="center">
-   <p class="important">
-     <h4><a href="/textrandomizer/malargal/">மலர்கள் (முதல் எளிய நிலை)</a>&nbsp;</h4><h4>
-       <a href="/textrandomizer/kanigal/">கனிகள் (அடுத்த எளிய நிலை)</a></h4></p>
-   <b> ஏதேனும் ஒரு நிலையில் இருந்து விளையாட்டை தொடங்கவும்</b>
-</div>
+    <hr/>
+    <div align="center">
+        <p class="important">
+        <h4><a href="/textrandomizer/malargal/">மலர்கள் (முதல் எளிய நிலை)</a>&nbsp;</h4><h4>
+        <a href="/textrandomizer/kanigal/">கனிகள் (அடுத்த எளிய நிலை)</a></h4></p>
+        <b> ஏதேனும் ஒரு நிலையில் இருந்து விளையாட்டை தொடங்கவும்</b>
+    </div>
 
-<script>
-<!-- Ref: https://www.w3schools.com/howto/howto_js_collapsible.asp -->
-var coll = document.getElementsByClassName("collapsible");
-var i;
+    <script>
+        <
+        !--Ref
+        :
+        https://www.w3schools.com/howto/howto_js_collapsible.asp -->
+            var coll = document.getElementsByClassName("collapsible");
+        var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}
-</script>
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        }
+    </script>
 
 {% endblock %}

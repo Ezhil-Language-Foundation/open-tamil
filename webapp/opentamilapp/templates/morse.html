@@ -3,42 +3,45 @@
 {% block title %}Reverse{% endblock %}
 
 {% block content %}
-<section id="translite">
-<div class="col-sm-9">
-<div class="page-header">
-  <h1>{% trans "Morse Code for Tamil letters" %}</h1>
-</div>
-<h4>Full article on Tamil-Morse code at the <a href="https://ezhillang.blog/2018/08/16/tamil-in-morse-code/">blog</a></h4>
-<form action="" class="form-horizontal">
-  <div class="form-group">
-    <input type="radio" name="morse_direction" id="encode" label="encode" selected="true" checked>{% trans "Encoding" %}</radio>
-<input type="radio" name="morse_direction" id="decode" label="decode">{% trans "Decoding" %}</radio>
-    <textarea name='input_text' id='txt3' rows="10" cols="80" class="" placeholder="Type here text"></textarea>
-  </div>  
-</form>
-<center>
-<p id="disp3" class="important">
-</p>
-</center>
-</div>
-</section>
-<script type="text/javascript">
-	$(document).ready(function () {
-	$('#txt3').keyup(function(){
-	var dat = $('#txt3').val();
-	var direction = $('#encode').prop('checked') ? "encode" : "decode";
-    $.ajax({
-    	url: '/morse/'+direction+'/'+dat+'/',
-    	success: function(data){
-        $('#disp3').show()
-        $('#disp3').text(data)
-    	}
-    })
-	if ($('#txt3').val()==''){
-	$('#disp3').hide()
-	}
-  	})
-	})
+    <section id="translite">
+        <div class="col-sm-9">
+            <div class="page-header">
+                <h1>{% trans "Morse Code for Tamil letters" %}</h1>
+            </div>
+            <h4>Full article on Tamil-Morse code at the <a
+                    href="https://ezhillang.blog/2018/08/16/tamil-in-morse-code/">blog</a></h4>
+            <form action="" class="form-horizontal">
+                <div class="form-group">
+                    <input type="radio" name="morse_direction" id="encode" label="encode" selected="true"
+                           checked>{% trans "Encoding" %}</radio>
+                    <input type="radio" name="morse_direction" id="decode" label="decode">{% trans "Decoding" %}</radio>
+                    <textarea name='input_text' id='txt3' rows="10" cols="80" class=""
+                              placeholder="Type here text"></textarea>
+                </div>
+            </form>
+            <center>
+                <p id="disp3" class="important">
+                </p>
+            </center>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#txt3').keyup(function () {
+                var dat = $('#txt3').val();
+                var direction = $('#encode').prop('checked') ? "encode" : "decode";
+                $.ajax({
+                    url: '/morse/' + direction + '/' + dat + '/',
+                    success: function (data) {
+                        $('#disp3').show()
+                        $('#disp3').text(data)
+                    }
+                })
+                if ($('#txt3').val() == '') {
+                    $('#disp3').hide()
+                }
+            })
+        })
 
-</script>
+    </script>
 {% endblock %}

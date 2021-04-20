@@ -11,39 +11,43 @@ body {
     background-color: #34495e;
 }
 
-.silpa-navbar .navbar-nav>li>a {
+.silpa-navbar .navbar-nav > li > a {
     color: #bdc3c7;
 }
-.silpa-navbar .navbar-nav>li>a.navbar-brand {
+
+.silpa-navbar .navbar-nav > li > a.navbar-brand {
     color: #fff;
 }
 
 /* module navigation */
 .sidebar-nav {
-  padding-top:    10px;
-  padding-bottom: 10px;
-  text-shadow: 0 1px 0 #fff;
-  background-color: #f7f5fa;
-  border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-shadow: 0 1px 0 #fff;
+    background-color: #f7f5fa;
+    border-radius: 5px;
 }
+
 .sidebar-nav .nav > li > a {
-  display: block;
-  color: #716b7a;
-  padding: 5px 20px;
+    display: block;
+    color: #716b7a;
+    padding: 5px 20px;
 }
+
 .sidebar-nav .nav > li > a:hover,
 .sidebar-nav .nav > li > a:focus {
-  text-decoration: none;
-  background-color: #e5e3e9;
-  border-right: 1px solid #dbd8e0;
+    text-decoration: none;
+    background-color: #e5e3e9;
+    border-right: 1px solid #dbd8e0;
 }
+
 .sidebar-nav .nav > .active > a,
 .sidebar-nav .nav > .active:hover > a,
 .sidebar-nav .nav > .active:focus > a {
-  font-weight: bold;
-  color: #563d7c;
-  background-color: transparent;
-  border-right: 1px solid #563d7c;
+    font-weight: bold;
+    color: #563d7c;
+    background-color: transparent;
+    border-right: 1px solid #563d7c;
 }
 
 /*
@@ -51,30 +55,34 @@ body {
  */
 
 .footer {
-  padding-top: 40px;
-  padding-bottom: 30px;
-  margin-top: 100px;
-  color: #777;
-  text-align: center;
-  border-top: 1px solid #e5e5e5;
+    padding-top: 40px;
+    padding-bottom: 30px;
+    margin-top: 100px;
+    color: #777;
+    text-align: center;
+    border-top: 1px solid #e5e5e5;
 }
+
 .footer-links {
-  margin: 10px 0;
-  padding-left: 0;
+    margin: 10px 0;
+    padding-left: 0;
 }
+
 .footer-links li {
-  display: inline;
-  padding: 0 2px;
+    display: inline;
+    padding: 0 2px;
 }
+
 .footer-links li:first-child {
-  padding-left: 0;
+    padding-left: 0;
 }
 
 @media (min-width: 768px) {
-  .footer {
-    text-align: left;
-  }
-  .footer p {
-    margin-bottom: 0;
-  }
+    .footer {
+        text-align: left;
+    }
+
+    .footer p {
+        margin-bottom: 0;
+    }
 }

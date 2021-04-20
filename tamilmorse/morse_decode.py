@@ -9,8 +9,12 @@ import sys
 import os
 
 CURRDIR = os.path.dirname(os.path.realpath(__file__))
-#e.g. python morse_decode.py ...-. .-.---.-.-..-- ..-.--.---.-.-... --.-....
 def decode(text):
+    """
+    e.g. python morse_decode.py ...-. .-.---.-.-..-- ..-.--.---.-.-... --.-....
+    :param text:  encoded Morse code
+    :return: clear text
+    """
     with codecs.open(os.path.join(CURRDIR,'data',"madurai_tamilmorse.json"),"r","utf-8") as fp:
         codebook = json.loads(fp.read())
     output = []

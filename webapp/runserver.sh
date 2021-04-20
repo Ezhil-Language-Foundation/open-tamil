@@ -1,2 +1,2 @@
 #!/bin/bash -x
-python manage.py runserver --insecure
+python3 manage.py runserver

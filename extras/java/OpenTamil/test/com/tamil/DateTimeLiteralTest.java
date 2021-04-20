@@ -41,8 +41,6 @@ public class DateTimeLiteralTest extends TestCase {
 //"நாள் ஜனவரி மாதம் மூன்று ஆம் வாரம் செவ்வாய் கிழமை இரண்டு தேதி இரண்டு ஆயிரத்தி பதினாறு ஆம் வருடம்";
         String result = DateTimeLiteral.getUtteranceDate(day_of_week, day, month, year);
         assertEquals(expResult, result);
-        //
-        // TODO review the generated test code and remove the default call to fail.
     }
    
     public void testGetLocalDate() throws Exception {
@@ -85,7 +83,6 @@ public class DateTimeLiteralTest extends TestCase {
         expResult = "இப்பொழுது நள்ளிரவு நேரம்";
         hour = 0; min = 0; sec = 0;
         assertEquals(expResult,DateTimeLiteral.getUtteranceTime(hour,min,sec));
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     public void testGetMonth() {
@@ -94,7 +91,6 @@ public class DateTimeLiteralTest extends TestCase {
         String expResult = "ஜனவரி";
         String result = DateTimeLiteral.getMonth(month);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     public void testGetDayOfWeek() {
@@ -103,7 +99,6 @@ public class DateTimeLiteralTest extends TestCase {
         String expResult = "திங்கள்";
         String result = DateTimeLiteral.getDayOfWeek(day);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
 
     public void testGetPozhuthu() {
@@ -115,7 +110,6 @@ public class DateTimeLiteralTest extends TestCase {
         }
         String result = DateTimeLiteral.getPozhuthu(hourofday);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
     }
     
 }

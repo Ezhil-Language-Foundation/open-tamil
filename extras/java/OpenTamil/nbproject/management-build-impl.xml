@@ -10,7 +10,10 @@ is divided into following sections:
   - management
 
 -->
-<project name="OpenTamil-management-impl" default="run-management" basedir=".." xmlns:j2seproject="http://www.netbeans.org/ns/j2se-project/3" xmlns:j2seproject2="http://www.netbeans.org/ns/j2se-project/3" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1">
+<project name="OpenTamil-management-impl" default="run-management" basedir=".."
+         xmlns:j2seproject="http://www.netbeans.org/ns/j2se-project/3"
+         xmlns:j2seproject2="http://www.netbeans.org/ns/j2se-project/3"
+         xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1">
     <target name="default" depends="run-management" description="Build the project and enable management."/>
     <!-- 
     ======================
@@ -34,7 +37,8 @@ is divided into following sections:
     <target name="-mgt-init-project" depends="-mgt-pre-init,-mgt-init-private,-mgt-init-user">
         <property file="nbproject/project.properties"/>
     </target>
-    <target name="-mgt-do-init" depends="-mgt-pre-init,-mgt-init-private,-mgt-init-user,-mgt-init-project,-mgt-init-macrodef-property">
+    <target name="-mgt-do-init"
+            depends="-mgt-pre-init,-mgt-init-private,-mgt-init-user,-mgt-init-project,-mgt-init-macrodef-property">
         <available file="${manifest.file}" property="manifest.available"/>
         <condition property="manifest.available+main.class">
             <and>
@@ -68,7 +72,8 @@ is divided into following sections:
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>
-    <target name="-mgt-init-check" depends="-mgt-pre-init,-mgt-init-private,-mgt-init-user,-mgt-init-project,-mgt-do-init">
+    <target name="-mgt-init-check"
+            depends="-mgt-pre-init,-mgt-init-private,-mgt-init-user,-mgt-init-project,-mgt-do-init">
         <fail unless="src.dir">Must set src.dir</fail>
         <fail unless="test.src.dir">Must set test.src.dir</fail>
         <fail unless="build.dir">Must set build.dir</fail>
@@ -89,7 +94,8 @@ is divided into following sections:
             </sequential>
         </macrodef>
     </target>
-    <target name="init" depends="-mgt-pre-init,-mgt-init-private,-mgt-init-user,-mgt-init-project,-mgt-do-init,-mgt-post-init,-mgt-init-check,-mgt-init-macrodef-property"/>
+    <target name="init"
+            depends="-mgt-pre-init,-mgt-init-private,-mgt-init-user,-mgt-init-project,-mgt-do-init,-mgt-post-init,-mgt-init-check,-mgt-init-macrodef-property"/>
     <!--
     ==================
     MANAGEMENT SECTION
@@ -132,7 +138,8 @@ is divided into following sections:
             </classpath>
         </java>
     </target>
-    <target name="run-management" if="netbeans.home" depends="init,compile,-mgt-init-platform,-init-macrodef-management" description="Enable local mgt for a project in the IDE.">
+    <target name="run-management" if="netbeans.home" depends="init,compile,-mgt-init-platform,-init-macrodef-management"
+            description="Enable local mgt for a project in the IDE.">
         <echo message="${connecting.jconsole.msg} ${jconsole.managed.process.url}"/>
         <management>
             <customize>
@@ -140,7 +147,8 @@ is divided into following sections:
             </customize>
         </management>
     </target>
-    <target name="run-lcl-mgt-single" if="netbeans.home" depends="init,compile-single" description="Manage a selected class in the IDE.">
+    <target name="run-lcl-mgt-single" if="netbeans.home" depends="init,compile-single"
+            description="Manage a selected class in the IDE.">
         <fail unless="manage.class">Must select one file in the IDE or set manage.class</fail>
         <!--
                     TODO
@@ -192,8 +200,11 @@ is divided into following sections:
     <target name="-debug-start-debugger" if="netbeans.home" depends="init">
         <j2seproject1:nbjpdastart name="${debug.class}"/>
     </target>
-    <target name="-debug-start-managed-debuggee" depends="init,compile,-mgt-init-platform,-init-macrodef-management-debug">
+    <target name="-debug-start-managed-debuggee"
+            depends="init,compile,-mgt-init-platform,-init-macrodef-management-debug">
         <debug-management/>
     </target>
-    <target name="debug-management" if="netbeans.home" depends="init,compile,-debug-start-debugger,-debug-start-managed-debuggee" description="Debug project in IDE with Local mgt enabled."/>
+    <target name="debug-management" if="netbeans.home"
+            depends="init,compile,-debug-start-debugger,-debug-start-managed-debuggee"
+            description="Debug project in IDE with Local mgt enabled."/>
 </project>

@@ -14,19 +14,20 @@ from fontTools import ttLib
 
 
 def show_font_table(fontname):
-    f=ttLib.TTFont(fontname)
-    cmap=f.getBestCmap()
+    f = ttLib.TTFont(fontname)
+    cmap = f.getBestCmap()
     pprint(cmap)
-    for k,v in cmap.items():
-        if v.startswith('uni'):
-            v = chr(int(v[3:],16))
+    for k, v in cmap.items():
+        if v.startswith("uni"):
+            v = chr(int(v[3:], 16))
             try:
                 sfx = unicodedata.name(v)
             except ValueError as e:
                 sfx = None
         else:
             sfx = unicodedata.name(v[0])
-        print(k,"=>",v,'|',sfx)
+        print(k, "=>", v, "|", sfx)
+
 
 if len(sys.argv) < 2:
     print("usage: python3 show_font_table.py {TTF filename}")
