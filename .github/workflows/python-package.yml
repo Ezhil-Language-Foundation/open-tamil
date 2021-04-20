@@ -39,5 +39,6 @@ jobs:
         python3 -m unittest discover ./
     - name: Test with custom test
       run: |
-	./unittest3
+        cd . && ./unittest3
+
 
