@@ -40,5 +40,7 @@ jobs:
     - name: Test with custom test
       run: |
         cd . && ./unittest3
-
+    - name: Test Open-Tamil C
+      run: |
+        cd extras/C-tamil && make test
 
