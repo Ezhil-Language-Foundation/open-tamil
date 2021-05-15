@@ -1468,6 +1468,35 @@ def unicode2hex(ip_data, offset=3):
             result.append(letter)
     return "".join(result)
 
+def shorten(wordlist):
+    """
+    convert a [Vowel, Consonant] list into string by the following rules.
+    :param wordlist: ['அ','ப்','','ட்','ட்','உ']
+    :return: 'பட்டு'
+    """
+    word = []
+    idx = 0
+    is_vowel = lambda x: x in uyir_letters
+    is_consonant = lambda x: x in grantha_mei_letters
+    last=0
+    while idx+1 < len(wordlist):
+        if is_vowel( wordlist[idx] ) and is_consonant(wordlist[idx+1]):
+            word.append(joinMeiUyir(wordlist[idx+1],wordlist[idx]))
+            last=idx+1
+            idx+=2
+            continue
+        elif is_vowel( wordlist[idx+1] ) and is_consonant(wordlist[idx]):
+            word.append(joinMeiUyir(wordlist[idx], wordlist[idx+1]))
+            last=idx+1
+            idx+=2
+            continue
+        else:
+            last=idx
+            word.append(wordlist[idx])
+        idx=idx+1
+    if idx+1 <= len(wordlist):
+        word.append(wordlist[-1])
+    return u"".join(word)
 
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ
