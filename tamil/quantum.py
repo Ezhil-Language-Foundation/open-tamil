@@ -19,7 +19,6 @@ def get_superposition_representation(word,raw=False):
         when @raw = False the letters in supersposition are not shortened.
     """
     alternates = get_letters_elementary(word,symmetric=True)
-    print(alternates)
     grouped = []
     for idx in range(0,len(alternates),2):
         alternates[idx] = alternates[idx] or ''
