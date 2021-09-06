@@ -14,7 +14,7 @@ Open Source Tamil Tools and NLP Library for Python 3
 =====================================
 tamilstemmer
 ------------
-This module is new in v0.96 provides access to simple stemmer functions
+This module (introduced in v0.96) provides access to simple stemmer functions
  originally created by Damodharan Rajalingam.
 
 tamil
