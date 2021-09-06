@@ -2,6 +2,7 @@
 # (C) 2020 முத்து அண்ணாமலை
 # This file is part of open-tamil project
 import copy as _copy
+
 from tamil.utf8 import get_letters, pulli_symbols
 from tamil.utf8 import grantha_agaram_letters, grantha_mei_letters
 from tamil.utf8 import uyir_letters, ayudha_letter, splitMeiUyir

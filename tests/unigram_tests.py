@@ -4,13 +4,14 @@
 # This file is part of 'open-tamil' package tests
 #
 
-# setup the paths
-from opentamiltests import *
+import os
+
+import tamil.utf8 as utf8
 from ngram.Corpus import Corpus
 from ngram.LetterModels import *
 from ngram.WordModels import *
-import os
-import tamil.utf8 as utf8
+# setup the paths
+from opentamiltests import *
 
 
 class WordsNGram(unittest.TestCase):

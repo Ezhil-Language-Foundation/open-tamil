@@ -1,9 +1,10 @@
 # (C) 2016 Muthiah Annamalai
 # This code is part of open-tamil project
 
-import sys
-import re
 import codecs
+import re
+import sys
+
 import tamil
 
 

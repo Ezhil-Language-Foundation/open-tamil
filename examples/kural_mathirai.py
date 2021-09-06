@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # This Python file uses the following encoding: utf-8
-from kural import Thirukkural
-from tamil.utf8 import get_letters, get_tamil_words, total_maaththirai
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
 from collections import Counter, OrderedDict
 from pprint import pprint
-import matplotlib.pyplot as plt
-import matplotlib
-import numpy as np
 from scipy.optimize import curve_fit
+
+from kural import Thirukkural
+from tamil.utf8 import get_letters, get_tamil_words, total_maaththirai
 
 
 # Define model function to be used to fit to the data above:

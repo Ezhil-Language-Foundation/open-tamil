@@ -14,12 +14,13 @@
 # 		<td ><a href="/pm_etexts/kindlepdf/pmkindle0031.pdf">pmkindle0031.pdf</a><br/> </td>
 # 	</tr>
 
-import tamil
-import codecs
-import sys
-import collections
 import BeautifulSoup
+import codecs
+import collections
 import json
+import sys
+
+import tamil
 
 if BeautifulSoup.__version__.find("3.") != 0:
     print("Error: this program requires BeautifulSoup v3.x.x series (e.g. 3.2.1)")

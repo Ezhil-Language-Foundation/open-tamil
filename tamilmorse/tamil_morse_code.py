@@ -4,6 +4,7 @@
 # You may use or distribute this file under terms of MIT license
 ##
 from __future__ import print_function
+
 import codecs
 import json
 

@@ -3,13 +3,13 @@
 # This file is part of open-tamil examples
 # This code is released under public domain
 
+import joblib
 # Ref API help from : https://scikit-learn.org
 import numpy as np
+import os
 import random
 import string
-import time, os
-
-import joblib
+import time
 
 # project modules
 from .classifier_eng_vs_ta import jaffna_transliterate

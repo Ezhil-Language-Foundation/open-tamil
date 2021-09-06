@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
+import sys
+
 # setup the paths
 from opentamiltests import *
 from solthiruthi.data_parser import *
 from solthiruthi.solthiruthi import Solthiruthi
-import sys
 
 
 class CmdLineIO(unittest.TestCase):

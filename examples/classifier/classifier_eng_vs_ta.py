@@ -2,6 +2,7 @@
 ## (C) 2017 Muthiah Annamalai <ezhillang@gmail.com>
 ## This code is released under public domain
 import codecs
+
 from tamil import utf8
 from transliterate import azhagi, jaffna, combinational, algorithm
 

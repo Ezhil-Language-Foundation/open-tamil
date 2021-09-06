@@ -1,8 +1,9 @@
 ## This Python file uses the following encoding: utf-8
 import codecs
-import tamil
 import sys
 from pprint import pprint
+
+import tamil
 
 
 def safe_splitMeiUyir(arg):

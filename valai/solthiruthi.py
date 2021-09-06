@@ -6,9 +6,9 @@
 #  written in compliance
 #
 
+import re
 import requests
 from collections import namedtuple
-import re
 
 Result = namedtuple("Result", ["word", "alternatives"])
 

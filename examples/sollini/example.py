@@ -4,9 +4,11 @@
 
 import networkx as nx
 import random
-from tamil.utf8 import get_letters
+
 from examples.sollini.pm_bigram_sorted_042521 import freqsort_data as tamil_bigram
 from examples.sollini.pm_unigram_sorted_050621 import freqsort_data as tamil_unigram
+from tamil.utf8 import get_letters
+
 
 # Plan
 # 1. Build bi-gram trellis

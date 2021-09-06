@@ -6,10 +6,8 @@
 
 # setup the paths
 from opentamiltests import *
-
-from transliterate import *
-
 from tamil import utf8 as tamil
+from transliterate import *
 
 
 def demo_lib_tamil():

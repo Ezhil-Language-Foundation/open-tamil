@@ -2,11 +2,11 @@
 # This file is part of Open-Tamil package unittests
 # (C) 2018 Muthu Annamalai
 
+import string
+
+import tabraille
 # setup the paths
 from opentamiltests import *
-import tabraille
-
-import string
 
 
 class BrailleTests(unittest.TestCase):

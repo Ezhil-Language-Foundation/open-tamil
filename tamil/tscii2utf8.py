@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
 
-from sys import argv, exit, version
-import tamil
 import codecs
+from sys import argv, exit, version
+
+import tamil
 
 PYTHON3 = version[0] > "2"
 

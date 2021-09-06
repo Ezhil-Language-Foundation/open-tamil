@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # (C) 2015-2016 Muthiah Annamalai
 
+import codecs
+import re
+
 from opentamiltests import *
 from solthiruthi.morphology import RemoveCaseSuffix, RemovePluralSuffix
 from solthiruthi.morphology import RemovePrefix, CaseFilter
 from solthiruthi.peyarchorkal import make_all_variants
-import re
-import codecs
 from tamil import utf8
 
 

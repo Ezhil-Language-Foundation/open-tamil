@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
-import copy, random
-import tamil
-
+import copy
+import random
 from sys import version
+
+import tamil
 
 PYTHON3 = version > "3"
 

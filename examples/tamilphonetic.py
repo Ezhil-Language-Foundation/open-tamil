@@ -1,8 +1,8 @@
 #!python
 # -*- coding: utf-8 -*-
 # (C) 2013 Muthiah Annamalai
-import sys
 import imp
+import sys
 
 try:
     reload  # Python 2.7

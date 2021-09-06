@@ -4,6 +4,7 @@
 # Library provides various encoding services for Tamil libraries
 
 from . import numeral
+from . import olini
 from . import regexp
 from . import tace16
 from . import tscii
@@ -13,9 +14,8 @@ from . import txt2unicode
 from . import utf8
 from . import utils
 from . import wordutils
-from . import olini
 
-VERSION = "1.0"
+VERSION = "1.1"
 __all__ = [
     "utf8",
     "txt2unicode",

@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
-from opentamiltests import *
-from solthiruthi.dictionary import *
-from solthiruthi.datastore import DTrie
-from tamil import wordutils, utf8
 import math
 from pprint import pprint
+
+from opentamiltests import *
+from solthiruthi.datastore import DTrie
+from solthiruthi.dictionary import *
+from tamil import wordutils, utf8
 
 
 class TestAnagramsWDict(unittest.TestCase):

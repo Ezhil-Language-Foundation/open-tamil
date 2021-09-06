@@ -3,14 +3,16 @@
 # (C) 2020-2021, எழில் மொழி அறக்கட்டளை
 # இந்த நிரல் ஓப்பன்-தமிழ் நிரல் தொகுப்பில் சேர்ந்ததாகும்.
 
+import ast
 # உரைவழி தமிழ் எண்களினை கொண்ட கணிதவியல்
 # உள்ளீடை கணக்கிடும் ஒரு கருவி.
 import operator
 import re
+
 import tamil
-from tamil.numeral import tamilstr2num
 from tamil.numeral import num2tamilstr, num2tamilstr_american
-import ast
+from tamil.numeral import tamilstr2num
+
 
 class SimpleCalculator(ast.NodeVisitor):
     """

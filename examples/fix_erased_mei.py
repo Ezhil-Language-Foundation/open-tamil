@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # (C) 2020, முத்து அண்ணாமலை.
 # இந்த நிரல் துண்டு MIT உரிமத்தில் வெளியிடப்பட்டது
-import tamil
-from pprint import pprint
 import operator
+from pprint import pprint
+
+import tamil
 from solthiruthi.scoring import bigram_scores, unigram_score
 
 chol = tamil.utf8.get_letters("கணனன")

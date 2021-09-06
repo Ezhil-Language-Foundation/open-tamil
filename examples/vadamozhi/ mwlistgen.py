@@ -6,9 +6,9 @@
 # University of Cologne (Universität zu Köln)
 # Ref: http://faculty.washington.edu/prem/mw/mw.html
 
+import re
 from bs4 import BeautifulSoup
 from glob import glob
-import re
 
 
 def proc_file(htmlfile):

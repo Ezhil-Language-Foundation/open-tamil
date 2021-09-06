@@ -7,8 +7,8 @@
 from __future__ import print_function
 
 import argparse
-import copy
 import codecs
+import copy
 import functools
 import itertools
 import json
@@ -21,8 +21,9 @@ import threading
 import time
 
 import tamil
-from transliterate import azhagi, jaffna, combinational, algorithm
-from solthiruthi.suggestions import norvig_suggestor
+from ngram.Distance import Dice_coeff, edit_distance
+from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
+from solthiruthi.heuristics import BadIME, AdjacentConsonants, AdjacentVowels
 from solthiruthi.morphology import (
     RemoveCaseSuffix,
     RemovePluralSuffix,
@@ -30,9 +31,8 @@ from solthiruthi.morphology import (
     RemoveVerbSuffixTense,
     CaseFilter,
 )
-from solthiruthi.dictionary import DictionaryBuilder, TamilVU, EnglishLinux
-from solthiruthi.heuristics import BadIME, AdjacentConsonants, AdjacentVowels
-from ngram.Distance import Dice_coeff, edit_distance
+from solthiruthi.suggestions import norvig_suggestor
+from transliterate import azhagi, jaffna, combinational, algorithm
 
 # Make Bi-Lingual dictionary
 

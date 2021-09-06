@@ -3,12 +3,12 @@
 # (C) 2015 Muthiah Annamalai
 # This file is part of open-tamil project, distributed as an example
 
-import tamil
-
 import codecs
 import operator
-import sys
 import re
+import sys
+
+import tamil
 
 LINUX = not hasattr(sys, "getwindowsversion")
 PYTHON3 = sys.version > "3"

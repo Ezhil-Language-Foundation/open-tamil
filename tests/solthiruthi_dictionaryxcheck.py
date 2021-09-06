@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
+import codecs
+import copy
+import string
+import sys
+from pprint import pprint
+
 from opentamiltests import *
 from solthiruthi.datastore import RTrie, TamilTrie, DTrie, Queue
 from solthiruthi.dictionary import (
@@ -9,11 +15,6 @@ from solthiruthi.dictionary import (
     VatamozhiMonierWilliams,
 )
 from solthiruthi.resources import DICTIONARY_DATA_FILES
-import sys
-import copy
-import codecs
-from pprint import pprint
-import string
 
 
 class VatamozhiDictionaryTest(unittest.TestCase):

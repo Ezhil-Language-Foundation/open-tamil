@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
-import copy, random
-import tamil
+import codecs
+import copy
+import random
 import re
 import sys
-import codecs
 from math import sqrt
+
+import tamil
 
 PYTHON3 = sys.version > "3"
 

@@ -2,8 +2,8 @@
 # (C) 2015 Muthiah Annamalai
 # This file is part of open-tamil project
 
-import time
 import sys
+import time
 
 PYTHON3 = sys.version > "3"
 assert PYTHON3, "This module requires Python 3"

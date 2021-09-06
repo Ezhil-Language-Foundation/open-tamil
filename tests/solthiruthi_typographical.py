@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 # (C) 2019 Muthiah Annamalai
 
-from opentamiltests import *
 import unittest
-from solthiruthi.tamil99kbd import inv_confusion_matrix as ta_kbd_cm
-from solthiruthi.qwertykbd import confusion_matrix as en_kbd_cm
-from solthiruthi.typographical import oridam_generate_patterns, corrections
+
+from opentamiltests import *
 from solthiruthi.dictionary import DictionaryBuilder, TamilVU
+from solthiruthi.qwertykbd import confusion_matrix as en_kbd_cm
+from solthiruthi.tamil99kbd import inv_confusion_matrix as ta_kbd_cm
+from solthiruthi.typographical import oridam_generate_patterns, corrections
 
 DEBUG = False
 

@@ -2,11 +2,13 @@
 ##
 ## (C) 2015 Muthiah Annamalai <ezhillang@gmail.com>
 from __future__ import print_function, division
-import copy
+
 import collections
+import copy
 import math
 import random
 import re
+
 from . import utf8
 
 

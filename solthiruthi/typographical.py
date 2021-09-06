@@ -8,12 +8,13 @@
 # only a typographical errors.
 #
 
+import copy
+
 # e.g. Input with 1 typographical error maybe:
 # பழரதம் when used intended to type பழரசம் in the Tamil 99 keyboard
 #
 from tamil.utf8 import get_letters_elementary, pulli_symbols
 from .dictionary import Dictionary
-import copy
 
 
 # explore all edit distances - i.e. len(word_in) or only upto value in ed.

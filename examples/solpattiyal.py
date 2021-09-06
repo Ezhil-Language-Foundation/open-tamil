@@ -10,14 +10,14 @@
 # articles.
 #
 
-import tamil
-import sys
 import codecs
-from transliterate import *
-import re
-
-from functools import cmp_to_key
 import operator
+import re
+import sys
+from functools import cmp_to_key
+
+import tamil
+from transliterate import *
 
 PYTHON3 = sys.version[0] > "2"
 if not PYTHON3:

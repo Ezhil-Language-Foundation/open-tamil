@@ -22,6 +22,7 @@
 #                                                                            #
 ##############################################################################
 
+from .encode2unicode import _all_encodes_, _get_unique_ch, _get_unique_common_encodes
 from .encode2utf8 import (
     anjal2utf8,
     bamini2utf8,
@@ -52,8 +53,6 @@ from .encode2utf8 import (
     anu2utf8,
     shreelipiavid2utf8,
 )
-
-from .encode2unicode import _all_encodes_, _get_unique_ch, _get_unique_common_encodes
 
 __all__ = [
     "unicode2anjal",

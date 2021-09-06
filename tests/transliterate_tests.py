@@ -6,6 +6,7 @@
 
 # setup the paths
 import unittest
+
 from opentamiltests import *
 from tamil.utf8 import get_letters
 from transliterate import azhagi, jaffna, combinational, UOM, ISO, itrans, algorithm

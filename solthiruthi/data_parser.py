@@ -2,12 +2,14 @@
 # (C) 2015-2106 - Muthiah Annamalai
 # parse data files for Tamil proper nouns
 from __future__ import print_function
+
 import codecs
-import sys
 import json
-import tamil
-import re
 import pprint
+import re
+import sys
+
+import tamil
 
 
 class WordList:

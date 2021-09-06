@@ -4,10 +4,11 @@
 # This file is part of 'open-tamil' package tests
 #
 import codecs
+import operator
 import sys
+
 import tamil
 from transliterate import *
-import operator
 
 
 def print_tamil_words(tatext):

@@ -5,8 +5,9 @@
 
 import copy
 from collections import OrderedDict
-from tamil.utf8 import uyir_letters, grantha_agaram_letters, aytham_letter
+
 from tamil.utf8 import grantha_mei_letters
+from tamil.utf8 import uyir_letters, grantha_agaram_letters, aytham_letter
 
 uyir_letters_plus_aytham = copy.deepcopy(uyir_letters)
 uyir_letters_plus_aytham.extend(aytham_letter)

@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
+import copy
+import sys
+from pprint import pprint
+
 from opentamiltests import *
+from solthiruthi.Ezhimai import *
 from solthiruthi.data_parser import *
 from solthiruthi.datastore import RTrie, TamilTrie, DTrie, Queue
-from solthiruthi.Ezhimai import *
 from solthiruthi.resources import DICTIONARY_DATA_FILES
 from solthiruthi.stopwords import get_stop_words
-import sys
-import copy
-from pprint import pprint
 
 
 class EzhimaiTest(unittest.TestCase):

@@ -2,8 +2,9 @@
 # (C) 2020 Muthiah Annamalai
 # This file is part of open-tamil project
 import string
-from tamil.utf8 import get_letters
+
 from tamil.numeral import num2tamilstr
+from tamil.utf8 import get_letters
 
 
 def normalize_numeral_text(text_tokens):

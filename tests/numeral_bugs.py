@@ -4,13 +4,14 @@
 # This file is part of 'open-tamil' package tests
 #
 
+import codecs
+import os
+import random
+
+import tamil.utf8 as utf8
 # setup the paths
 from opentamiltests import *
-import tamil.utf8 as utf8
 from tamil.tscii import TSCII
-import codecs
-import random
-import os
 
 
 class NumeralStressTest(unittest.TestCase):

@@ -1,9 +1,10 @@
-from tamil import utf8
-import sys
 import codecs
 import csv
-from transliterate import jaffna
+import sys
+
 from solthiruthi.scoring import bigram_scores, unigram_score
+from tamil import utf8
+from transliterate import jaffna
 
 jaffnatable = jaffna.Transliteration.table
 rev_jaffnatable = {}

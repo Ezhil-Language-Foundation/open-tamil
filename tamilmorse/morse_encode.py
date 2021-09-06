@@ -5,9 +5,10 @@
 
 import codecs
 import json
-import tamil
-import sys
 import os
+import sys
+
+import tamil
 
 CURRDIR = os.path.dirname(os.path.realpath(__file__))
 def encode(text):

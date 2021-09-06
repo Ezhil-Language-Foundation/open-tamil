@@ -2,13 +2,14 @@
 ## (C) 2015 Muthiah Annamalai,
 ##
 from __future__ import print_function
+
 import abc
-import sys
 import codecs
+import sys
 from pprint import pprint
 
-from . import resources
 from . import datastore
+from . import resources
 
 PYTHON3 = sys.version[0] == "3"
 

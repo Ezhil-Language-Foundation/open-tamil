@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
-from opentamiltests import *
-from solthiruthi.data_parser import *
-from solthiruthi.datastore import TamilTrie, DTrie, Queue
-from solthiruthi.Ezhimai import *
-from solthiruthi.resources import DICTIONARY_DATA_FILES
-from solthiruthi.scoring import bigram_scores, unigram_score
-
-import sys
 import copy
 import re
+import sys
 from pprint import pprint
+
+from opentamiltests import *
+from solthiruthi.Ezhimai import *
+from solthiruthi.data_parser import *
+from solthiruthi.datastore import TamilTrie, DTrie, Queue
+from solthiruthi.resources import DICTIONARY_DATA_FILES
+from solthiruthi.scoring import bigram_scores, unigram_score
 
 
 class ScoringNGram(unittest.TestCase):

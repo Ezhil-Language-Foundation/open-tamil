@@ -9,9 +9,10 @@
 # setup the paths
 import codecs
 import re
+
 from opentamiltests import *
-from tamil.utils.santhirules import joinWords
 from tamil.regexp import make_pattern, match
+from tamil.utils.santhirules import joinWords
 
 
 class SantheeRules(unittest.TestCase):

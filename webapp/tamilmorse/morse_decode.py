@@ -5,9 +5,10 @@
 
 import codecs
 import json
-import tamil
-import sys
 import os
+import sys
+
+import tamil
 
 
 # e.g. python morse_decode.py ...-. .-.---.-.-..-- ..-.--.---.-.-... --.-....

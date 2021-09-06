@@ -3,8 +3,9 @@
 ##
 from __future__ import print_function
 
-import sys
 import argparse
+import sys
+
 import tamil
 
 # from pprint import pprint

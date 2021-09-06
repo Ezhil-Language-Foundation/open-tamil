@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-import sys
 import codecs
+import sys
 from pprint import pprint
 
 arg = sys.argv[1]

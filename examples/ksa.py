@@ -1,7 +1,8 @@
 #!/bin/env python3
-from codecs import open
-from tamil import utf8
 import re
+from codecs import open
+
+from tamil import utf8
 
 with open("kuttistory.txt", "r", "utf-8") as fp:
     data = fp.readlines()

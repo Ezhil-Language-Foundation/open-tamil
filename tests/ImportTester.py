@@ -6,11 +6,11 @@
 
 # setup the paths
 import time
-from opentamiltests import *
 
 import tamil
-from tamil.date import DateUtils
 from kural import Kural, Thirukkural
+from opentamiltests import *
+from tamil.date import DateUtils
 
 
 class ImportTester(unittest.TestCase):

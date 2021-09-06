@@ -2,10 +2,12 @@
 # This file is part of Open-Tamil package unittests
 # (C) 2021 Muthu Annamalai
 
+import unittest
+
 # setup the paths
 from opentamiltests import *
-import unittest
 from tamil.quantum import get_superposition_representation
+
 
 class QuantumTests(unittest.TestCase):
     def test_alternates_1(self):

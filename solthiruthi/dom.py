@@ -2,12 +2,12 @@
 ## (C) 2015 Muthiah Annamalai,
 ##
 from __future__ import print_function
+
 import abc
 import codecs
 import re
 
 from tamil import utf8
-
 from .datastore import Queue
 
 

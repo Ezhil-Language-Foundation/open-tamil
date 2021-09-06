@@ -3,13 +3,12 @@
 
 import codecs
 
+import tamil
+import tamil.utf8 as utf8
+from ngram import LetterModels
+from ngram.Corpus import Corpus
 # setup the paths
 from opentamiltests import *
-import tamil
-from ngram.Corpus import Corpus
-from ngram import LetterModels
-
-import tamil.utf8 as utf8
 
 
 class Letters(unittest.TestCase):

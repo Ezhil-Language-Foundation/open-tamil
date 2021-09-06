@@ -4,11 +4,12 @@
 #
 # N-gram language model for Tamil letters
 
-import tamil
-import copy
-from .Corpus import Corpus
 import codecs
+import copy
 import operator
+
+import tamil
+from .Corpus import Corpus
 
 
 class Letters:

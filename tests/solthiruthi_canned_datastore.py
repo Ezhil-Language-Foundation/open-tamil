@@ -2,9 +2,10 @@
 # (C) 2015 Muthiah Annamalai
 
 import os
+
 from opentamiltests import *
-from solthiruthi.dictionary import *
 from solthiruthi.datastore import Trie
+from solthiruthi.dictionary import *
 
 
 # Test the canned English dictionary with data structure

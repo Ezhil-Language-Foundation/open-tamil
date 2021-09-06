@@ -2,10 +2,12 @@
 ## (C) 2015-2017 Muthiah Annamalai,
 ##
 from __future__ import print_function
+
 import abc
 import sys
-from tamil import utf8
 from pprint import pprint
+
+from tamil import utf8
 
 PYTHON3 = sys.version[0] == "3"
 

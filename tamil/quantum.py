@@ -1,7 +1,9 @@
 # (C) 2021 Muthiah Annamalai
 # This file is part of open-tamil project
-from .utf8 import get_letters_elementary, shorten
 from itertools import product
+
+from .utf8 import get_letters_elementary, shorten
+
 
 def get_superposition_representation(word,raw=False):
     """

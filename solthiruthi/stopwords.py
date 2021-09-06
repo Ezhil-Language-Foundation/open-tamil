@@ -3,6 +3,7 @@
 
 import codecs
 import os
+
 from .resources import get_data_dir
 
 

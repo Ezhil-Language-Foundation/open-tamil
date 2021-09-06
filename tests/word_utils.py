@@ -6,10 +6,11 @@
 
 # setup the paths
 from __future__ import print_function
-from opentamiltests import *
-from tamil import wordutils, tweetparser
 
 import math
+
+from opentamiltests import *
+from tamil import wordutils, tweetparser
 
 
 class TestTweetParse(unittest.TestCase):

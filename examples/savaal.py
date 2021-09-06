@@ -3,8 +3,8 @@
 #
 # This file is part of 'open-tamil' package tests
 
-import tamil
 import solthiruthi
+import tamil
 from solthiruthi.dictionary import *
 
 TVU_dict, _ = DictionaryBuilder.create(TamilVU)

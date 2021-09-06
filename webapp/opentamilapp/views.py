@@ -1,22 +1,23 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from django.shortcuts import render
-from django.http import HttpResponse, Http404
-from django.views.decorators.csrf import csrf_exempt
-import tamil
 import codecs
-import sys
 import copy
-import math
-import re
 import html
 import json
+import math
 import random
-from tamil.utf8 import get_letters, calculate_maththirai
+import re
+import sys
+from django.http import HttpResponse, Http404
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+
+import tamil
 import tamil.utf8 as utf8
+from spell import Speller, LoadDictionary
 from tamil import wordutils
 from tamil.olini import கணக்கிடு
-from spell import Speller, LoadDictionary
+from tamil.utf8 import get_letters, calculate_maththirai
 
 try:
     from spell import ASpell

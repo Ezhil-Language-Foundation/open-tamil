@@ -2,14 +2,15 @@
 # This file is part of Open-Tamil package unittests
 # (C) 2018 Muthu Annamalai
 
+import codecs
+import unicodedata
+from functools import cmp_to_key
+
+import tamiltts
 # setup the paths
 from opentamiltests import *
-import unicodedata
-import codecs
-from tamil.utf8 import *
 from tamil import tace16
-import tamiltts
-from functools import cmp_to_key
+from tamil.utf8 import *
 
 
 class TTSTests(unittest.TestCase):

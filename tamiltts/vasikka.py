@@ -5,13 +5,14 @@
 # This file is released under terms of MIT License
 # (C) 2017 - Ezhil Language Foundation
 
-import tamil
-import os
-import sys
-import re
-import time
 import codecs
+import os
+import re
+import sys
+import time
 from pprint import pprint
+
+import tamil
 
 _DEBUG = False
 

@@ -11,8 +11,6 @@ is divided into following sections:
 
 -->
 <project name="OpenTamil-management-impl" default="run-management" basedir=".."
-         xmlns:j2seproject="http://www.netbeans.org/ns/j2se-project/3"
-         xmlns:j2seproject2="http://www.netbeans.org/ns/j2se-project/3"
          xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1">
     <target name="default" depends="run-management" description="Build the project and enable management."/>
     <!-- 

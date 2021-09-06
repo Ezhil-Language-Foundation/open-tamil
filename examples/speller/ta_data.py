@@ -4,14 +4,15 @@
 # This file is part of 'open-tamil' package
 # We generate unigram and bi-gram statistics for Tamil texts
 #
-import tamil
-from ngram.LetterModels import Unigram
 import codecs
-import pprint
 import copy
 import operator
-from functools import cmp_to_key
+import pprint
 import sys
+from functools import cmp_to_key
+
+import tamil
+from ngram.LetterModels import Unigram
 
 
 def print_tamil_words_by_frequency(frequency, fp=None):

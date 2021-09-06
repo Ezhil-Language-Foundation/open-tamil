@@ -5,7 +5,8 @@
 # path manipulation magic sets up the current development verison of ezhil
 # as the library from the "ezhil-lang/tests/unit" path.
 
-import sys, os
+import os
+import sys
 
 open_tamil_path = (os.sep).join(os.getcwd().split(os.sep)[:-1])
 # print(open_tamil_path) # library

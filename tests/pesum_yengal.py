@@ -5,9 +5,9 @@
 #
 from __future__ import print_function
 
+import tamil
 # setup the paths
 from opentamiltests import *
-import tamil
 
 
 class PesumYengalTest(unittest.TestCase):

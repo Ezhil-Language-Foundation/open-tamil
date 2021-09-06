@@ -9,9 +9,9 @@
 #  from Neechalkaran.com
 #
 
+import re
 import requests
 from collections import namedtuple
-import re
 
 Result = namedtuple("Result", ["Flag", "Solspan", "Userword", "Suggestions"])
 

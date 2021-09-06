@@ -4,14 +4,14 @@
 # This file is part of 'open-tamil' package tests
 #
 
+import tamil
 # setup the paths
 from opentamiltests import *
-import tamil
 
 
 class VersionTester(unittest.TestCase):
     def test_version(self):
-        self.assertEqual(tamil.VERSION, "1.0")
+        self.assertEqual(tamil.VERSION, "1.1")
 
 
 if __name__ == "__main__":

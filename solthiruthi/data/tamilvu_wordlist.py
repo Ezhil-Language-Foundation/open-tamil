@@ -3,10 +3,12 @@
 #     Ezhil Language Foundation
 #
 from __future__ import print_function
-import sys
+
 import codecs
-import tamil
 import json
+import sys
+
+import tamil
 
 sys.stdout = codecs.getwriter("utf-8")(sys.stdout)
 

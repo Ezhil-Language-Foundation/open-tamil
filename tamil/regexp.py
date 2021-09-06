@@ -3,6 +3,7 @@
 # Licensed under GPL Version 3
 
 import re
+
 from . import utf8
 
 

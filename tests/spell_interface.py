@@ -4,9 +4,10 @@
 # This file is part of 'open-tamil' package tests
 #
 
+import os
+
 # setup the paths
 from opentamiltests import *
-import os
 from spell import Speller
 
 

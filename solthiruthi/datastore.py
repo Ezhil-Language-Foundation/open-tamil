@@ -2,12 +2,14 @@
 ## (C) 2015-2019 Muthiah Annamalai,
 ##
 from __future__ import print_function
+
 import abc
-import sys
 import codecs
 import pickle
-from tamil import utf8
+import sys
 from pprint import pprint
+
+from tamil import utf8
 
 PYTHON3 = sys.version[0] == "3"
 

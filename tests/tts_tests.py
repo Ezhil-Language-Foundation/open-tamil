@@ -2,11 +2,12 @@
 # This file is part of Open-Tamil package unittests
 # (C) 2018 Muthu Annamalai
 
+import sys
+import unittest
+
 # setup the paths
 from opentamiltests import *
-import unittest
 from tamiltts.vasikka import *
-import sys
 
 
 class TTSTests(unittest.TestCase):

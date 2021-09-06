@@ -5,8 +5,8 @@
 #
 
 from __future__ import print_function
-from opentamiltests import *
 
+from opentamiltests import *
 from solthiruthi.suggestions import norvig_suggestor
 
 

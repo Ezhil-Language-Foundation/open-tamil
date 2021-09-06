@@ -5,6 +5,8 @@
 # This function provides a list of alternatives for downstream use as suggestor in
 # the Tamil spelling modules/programs
 
+from pprint import pprint
+
 # Ref: http://norvig.com/spell-correct.html
 from tamil.utf8 import (
     tamil_letters,
@@ -15,8 +17,6 @@ from tamil.utf8 import (
     sanskrit_mei_letters,
     uyir_letters,
 )
-
-from pprint import pprint
 
 
 def norvig_suggestor(word, alphabets=None, nedits=1, limit=float("inf")):

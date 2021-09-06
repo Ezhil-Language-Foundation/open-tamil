@@ -4,11 +4,12 @@
 # This file is part of 'open-tamil' package tests
 #
 
+import codecs
+
+import tamil.utf8 as utf8
 # setup the paths
 from opentamiltests import *
-import tamil.utf8 as utf8
 from tamil.tscii import TSCII
-import codecs
 
 
 class Letters(unittest.TestCase):

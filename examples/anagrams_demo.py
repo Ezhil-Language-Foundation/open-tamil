@@ -1,6 +1,7 @@
 import codecs
-from tamil import wordutils
+
 from solthiruthi.dictionary import *
+from tamil import wordutils
 
 TVU, TVU_size = DictionaryBuilder.create(TamilVU)
 ag, ag2 = wordutils.anagrams_in_dictionary(TVU)

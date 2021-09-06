@@ -5,8 +5,8 @@
 
 import codecs
 import json
-import sys
 import os
+import sys
 
 CURRDIR = os.path.dirname(os.path.realpath(__file__))
 def decode(text):

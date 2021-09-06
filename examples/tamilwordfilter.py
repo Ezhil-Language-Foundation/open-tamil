@@ -5,8 +5,8 @@
 # This file is part of 'open-tamil' package tests
 #
 
-import sys
 import imp
+import sys
 
 try:
     reload  # Python 2.7

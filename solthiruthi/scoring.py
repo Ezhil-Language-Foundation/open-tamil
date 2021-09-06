@@ -2,15 +2,15 @@
 ## (C) 2017 Muthiah Annamalai,
 ##
 from __future__ import print_function
+
 import codecs
 import math
 import operator
 import os
 import sys
-
-from tamil import utf8
 from pprint import pprint
 
+from tamil import utf8
 from . import resources
 
 PYTHON3 = sys.version[0] == "3"

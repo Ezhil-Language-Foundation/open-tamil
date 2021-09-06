@@ -14,8 +14,9 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 import sys
-from django.shortcuts import redirect
 from django.conf.urls import url
+from django.shortcuts import redirect
+
 from .views import *
 
 urlpatterns = [

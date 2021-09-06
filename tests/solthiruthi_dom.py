@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
-from opentamiltests import *
-from solthiruthi.dom import WordEntity, Document
-
 import os
 
+from opentamiltests import *
+from solthiruthi.dom import WordEntity, Document
 from tamil import utf8
 
 

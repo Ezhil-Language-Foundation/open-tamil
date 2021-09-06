@@ -1,8 +1,10 @@
 ## -*- coding: utf-8 -*-
 # (C) 2020 முத்து அண்ணாமலை
 # https://en.wikipedia.org/wiki/ITRANS
-from tamil.utf8 import uyirmei_letters, uyir_letters,  splitMeiUyir
 from collections import OrderedDict
+
+from tamil.utf8 import uyirmei_letters, uyir_letters, splitMeiUyir
+
 _uyir = (("அ","a"),
     ("ஆ",("aa","A")),
     ("இ","i"),

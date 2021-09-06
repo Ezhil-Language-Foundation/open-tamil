@@ -6,8 +6,8 @@
 # N.B.: Originally written to demo the Python Twitter API for a lightning talk
 # at the Boston Python group on 30th July, 2013.
 
-import unicodedata
 import re
+import unicodedata
 
 
 class TweetParser:

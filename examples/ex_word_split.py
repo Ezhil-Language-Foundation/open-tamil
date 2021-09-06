@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
-from solthiruthi.dictionary import *
-from tamil import wordutils, utf8
-from ngram import edit_distance
 import math
 from pprint import pprint
+
+from ngram import edit_distance
+from solthiruthi.dictionary import *
+from tamil import wordutils, utf8
 
 TVU, TVU_size = DictionaryBuilder.create(TamilVU)
 word2, parts2 = "ஒருதலைகாதல்", ["ஒருதலை", "காதல்"]

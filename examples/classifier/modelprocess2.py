@@ -3,18 +3,17 @@
 # This file is part of open-tamil examples
 # This code is released under public domain
 
+import joblib
 # Ref API help from : https://scikit-learn.org
 import numpy as np
 import random
 import string
 import time
-
-from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix
-import joblib
+from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
 
 # project modules
 from classifier_eng_vs_ta import jaffna_transliterate

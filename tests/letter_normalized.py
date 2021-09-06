@@ -6,6 +6,7 @@
 
 # setup the paths
 from __future__ import print_function
+
 from opentamiltests import *
 
 

@@ -4,12 +4,13 @@
 #
 
 import datetime
-import time
 import os
 import sys
-import tamil
-import winsound
+import time
 import wave
+import winsound
+
+import tamil
 
 
 def get_time():

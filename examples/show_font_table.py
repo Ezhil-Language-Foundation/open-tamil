@@ -5,12 +5,11 @@
 # Ref: https://github.com/Ezhil-Language-Foundation/open-tamil/issues/216
 
 import sys
-from pprint import pprint
 import unicodedata
-
 # requires installing fontTools
 # Ref: https://fonttools.readthedocs.io
 from fontTools import ttLib
+from pprint import pprint
 
 
 def show_font_table(fontname):

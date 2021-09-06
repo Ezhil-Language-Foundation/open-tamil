@@ -4,6 +4,7 @@
 ## This code maybe used/distributed under MIT LICENSE.
 
 from __future__ import print_function
+
 import abc
 import codecs
 import copy

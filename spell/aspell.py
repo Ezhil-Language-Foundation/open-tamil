@@ -1,8 +1,8 @@
 ## -*- coding: utf-8 -*-
 ## (C) 2021 Muthiah Annamalai
 
-import subprocess
 import re
+import subprocess
 
 try:
     from tamilsandhi import check_sandhi

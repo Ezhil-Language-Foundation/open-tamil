@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # (C) 2016-17 Muthiah Annamalai
 
-from opentamiltests import *
-import os
 import codecs
+import os
 from pprint import pprint
+
+from opentamiltests import *
 from spell import Speller, LoadDictionary, OttruSplit, Mayangoli, ASpell
 from valai import solthiruthi as tamilpesu
 from valai import vaani

@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 # (C) 2015 Muthiah Annamalai
 
+import codecs
+import re
+
 from opentamiltests import *
 from solthiruthi.heuristics import (
     AdjacentVowels,
@@ -8,8 +11,6 @@ from solthiruthi.heuristics import (
     RepeatedLetters,
     BadIME,
 )
-import re
-import codecs
 from tamil import utf8
 
 

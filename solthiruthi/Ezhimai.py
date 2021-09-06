@@ -6,8 +6,9 @@ from __future__ import print_function
 import codecs
 import os
 import sys
-from tamil import utf8
 from pprint import pprint
+
+from tamil import utf8
 from . import WordSpeller
 from . import resources
 

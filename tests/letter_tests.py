@@ -4,13 +4,13 @@
 # This file is part of 'open-tamil' package tests
 #
 
-# setup the paths
-from opentamiltests import *
-import tamil.utf8 as utf8
-from tamil.tscii import TSCII
-
 import codecs
 import os
+
+import tamil.utf8 as utf8
+# setup the paths
+from opentamiltests import *
+from tamil.tscii import TSCII
 
 CURRDIR = os.path.dirname(os.path.abspath(__file__))
 

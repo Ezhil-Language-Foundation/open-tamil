@@ -7,8 +7,8 @@
 
 import json
 import requests
-from urllib.parse import quote
 from functools import lru_cache
+from urllib.parse import quote
 
 
 @lru_cache(1024, str)

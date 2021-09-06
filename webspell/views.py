@@ -1,16 +1,17 @@
 ## -*- coding: utf-8 -*-
 ## (C) 2016 Muthiah Annamalai,
 from __future__ import print_function
-from webspell import app
-import json
+
 import codecs
-import sys
-import re
+import json
 import pprint
 import re
-
+import re
+import sys
 from flask import request, render_template, redirect, url_for
+
 from spell import Speller, LoadDictionary
+from webspell import app
 
 
 @app.route("/")
