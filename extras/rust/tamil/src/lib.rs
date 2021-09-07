@@ -123,53 +123,53 @@ mod tests {
     }
     #[test]
     fn test_classify() {
-        assert_eq!("<Kuril/UyirLetter>",classify_letter("அ"));
-        assert_eq!("<UyirMeiLetter>",classify_letter("கொ"));
-        assert_eq!("<Vallinam/MeiLetter>",classify_letter("க்"));
+        assert_eq!("<Kuril/UyirLetter>", classify_letter("அ"));
+        assert_eq!("<UyirMeiLetter>", classify_letter("கொ"));
+        assert_eq!("<Vallinam/MeiLetter>", classify_letter("க்"));
     }
     #[test]
     fn test_mei_uyir() {
-        assert_eq!(join_mei_uyir("ன்","ஊ"), "னூ");
-        assert_eq!(join_mei_uyir("க்","ஒ"), "கொ");
+        assert_eq!(join_mei_uyir("ன்", "ஊ"), "னூ");
+        assert_eq!(join_mei_uyir("க்", "ஒ"), "கொ");
     }
     #[test]
     fn test_join_elementary() {
         let expected = String::from("காரைவீடு");
-        let mut input : Vec<String> = Vec::<String>::new();
-        for s in vec!["க்","ஆ","ர்","ஐ","வ்","ஈ","ட்","உ"].iter() {
+        let mut input: Vec<String> = Vec::<String>::new();
+        for s in vec!["க்", "ஆ", "ர்", "ஐ", "வ்", "ஈ", "ட்", "உ"].iter() {
             input.push(s.to_string());
         }
         let actual = join_letters_elementary(&input);
-        assert_eq!(actual.len(),expected.len());
-        assert_eq!(&actual,&expected);
+        assert_eq!(actual.len(), expected.len());
+        assert_eq!(&actual, &expected);
     }
 
     #[test]
     fn test_split_mei_uyir() {
         let ab = split_mei_uyir("போ");
-        assert_eq!(&ab[0],"ப்");
-        assert_eq!(&ab[1],"ஓ");
-        assert_eq!(ab.len(),2);
+        assert_eq!(&ab[0], "ப்");
+        assert_eq!(&ab[1], "ஓ");
+        assert_eq!(ab.len(), 2);
 
         let bc = split_mei_uyir("டா");
-        assert_eq!(&bc[0],"ட்");
-        assert_eq!(&bc[1],"ஆ");
-        assert_eq!(bc.len(),2);
+        assert_eq!(&bc[0], "ட்");
+        assert_eq!(&bc[1], "ஆ");
+        assert_eq!(bc.len(), 2);
     }
 
     #[test]
     fn test_split_mei_uyir2() {
         let bc = split_mei_uyir("ற");
-        assert_eq!(&bc[0],"ற்");
-        assert_eq!(&bc[1],"அ");
-        assert_eq!(bc.len(),2);
+        assert_eq!(&bc[0], "ற்");
+        assert_eq!(&bc[1], "அ");
+        assert_eq!(bc.len(), 2);
     }
 
     #[test]
     fn test_get_letters_elementary() {
         let parts = get_letters_elementary("கொற்றவை");
-        let expected = vec!["க்","ஒ","ற்","","ற்","அ","வ்","ஐ"];
-        println!("{:?}",parts);
-        assert_eq!(parts,expected);
+        let expected = vec!["க்", "ஒ", "ற்", "", "ற்", "அ", "வ்", "ஐ"];
+        println!("{:?}", parts);
+        assert_eq!(parts, expected);
     }
 }
