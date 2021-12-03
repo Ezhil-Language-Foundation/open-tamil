@@ -509,7 +509,7 @@ pub const TAMIL_LETTERS: [&str; 345] = [
     "க்ஷோ",
     "க்ஷௌ",
 ];
-pub const UYIRMEI_OFFSET:usize = 12+1+18+2;
+pub const UYIRMEI_OFFSET: usize = 12 + 1 + 18 + 2;
 pub const DAY: &str = "௳";
 pub const MONTH: &str = "௴";
 pub const YEAR: &str = "௵";
@@ -693,7 +693,7 @@ pub fn get_letters(x: &str) -> Vec<String> {
     v
 }
 
-pub fn split_mei_uyir(uyirmei_char:&str) -> Vec<String> {
+pub fn split_mei_uyir(uyirmei_char: &str) -> Vec<String> {
     /**
     This function split uyirmei compound character into mei + uyir characters
     and returns in tuple.
@@ -704,33 +704,37 @@ pub fn split_mei_uyir(uyirmei_char:&str) -> Vec<String> {
     Date : 22.09.2014
 
     **/
-    let match_char = |x:&char| -> bool { *x == uyirmei_char.chars().next().unwrap() };
+    let match_char = |x: &char| -> bool { *x == uyirmei_char.chars().next().unwrap() };
 
-    let is_uyir : bool = UYIR_LETTERS.iter().any(match_char);
-    let is_mei : bool = GRANTHA_MEI_LETTERS.iter().any(|x| { *x == uyirmei_char });
-    if is_uyir  {
-        return vec!["".to_string(),uyirmei_char.to_string()];
-    } else if is_mei  {
-        return vec![uyirmei_char.to_string(),"".to_string()];
+    let is_uyir: bool = UYIR_LETTERS.iter().any(match_char);
+    let is_mei: bool = GRANTHA_MEI_LETTERS.iter().any(|x| *x == uyirmei_char);
+    if is_uyir {
+        return vec!["".to_string(), uyirmei_char.to_string()];
+    } else if is_mei {
+        return vec![uyirmei_char.to_string(), "".to_string()];
     }
     // has to be uyirmei letters.
-    let uyirmeiidx : usize = TAMIL_LETTERS.iter().position( |x|{ *x == uyirmei_char } ).unwrap() - UYIRMEI_OFFSET;
+    let uyirmeiidx: usize = TAMIL_LETTERS
+        .iter()
+        .position(|x| *x == uyirmei_char)
+        .unwrap()
+        - UYIRMEI_OFFSET;
 
     //# calculate uyirmei index
-    let uyiridx:usize = uyirmeiidx%12;
-    let mut midx : usize = ((uyirmeiidx-uyiridx)/12);
+    let uyiridx: usize = uyirmeiidx % 12;
+    let mut midx: usize = ((uyirmeiidx - uyiridx) / 12);
     if midx >= 2 {
         midx = (midx - 2);
     }
-    midx = midx%GRANTHA_MEI_LETTERS.len();
-    let meiidx : usize = midx;
+    midx = midx % GRANTHA_MEI_LETTERS.len();
+    let meiidx: usize = midx;
     let gmei = String::from(GRANTHA_MEI_LETTERS[meiidx].to_string());
     let guyir = String::from(UYIR_LETTERS[uyiridx].to_string());
-    println!("{},{}",gmei,guyir);
-    return vec![gmei,guyir]
+    println!("{},{}", gmei, guyir);
+    return vec![gmei, guyir];
 }
 
-pub fn get_letters_elementary(word:&str) -> Vec<String> {
+pub fn get_letters_elementary(word: &str) -> Vec<String> {
     let mut retval = Vec::<String>::new();
     for w in get_letters(word) {
         let result = split_mei_uyir(&w);
@@ -759,42 +763,45 @@ pub fn istamil_prefix(word: &str) -> bool {
     }
 }
 
-pub fn join_mei_uyir(mei_char:&str, uyir_char:&str) -> String {
+pub fn join_mei_uyir(mei_char: &str, uyir_char: &str) -> String {
     /**
-    *This function join mei character and uyir character, and retuns as
-    *compound uyirmei unicode character.
-    *
-    *Inputs:
-    *    mei_char : It must be unicode tamil mei char.
-    *    uyir_char : It must be unicode tamil uyir char.
-    */
+     *This function join mei character and uyir character, and retuns as
+     *compound uyirmei unicode character.
+     *
+     *Inputs:
+     *    mei_char : It must be unicode tamil mei char.
+     *    uyir_char : It must be unicode tamil uyir char.
+     */
     if mei_char.len() == 0 {
         return uyir_char.to_string();
     }
     if uyir_char.len() == 0 {
         return mei_char.to_string();
     }
-    let match_uyir = |x:&char| -> bool { *x == uyir_char.chars().next().unwrap() };
-    let uyiridx : usize = UYIR_LETTERS.iter().position(match_uyir).unwrap();
-    let meiidx : usize = GRANTHA_MEI_LETTERS.iter().position( |x|{ *x == mei_char } ).unwrap(); 
+    let match_uyir = |x: &char| -> bool { *x == uyir_char.chars().next().unwrap() };
+    let uyiridx: usize = UYIR_LETTERS.iter().position(match_uyir).unwrap();
+    let meiidx: usize = GRANTHA_MEI_LETTERS
+        .iter()
+        .position(|x| *x == mei_char)
+        .unwrap();
     //# calculate uyirmei index
-    let uyirmeiidx = (meiidx+2) * 12 + uyiridx;
-    println!("{},{},{}",uyiridx,meiidx,uyirmeiidx);
-    return TAMIL_LETTERS[UYIRMEI_OFFSET+uyirmeiidx].to_string()
+    let uyirmeiidx = (meiidx + 2) * 12 + uyiridx;
+    println!("{},{},{}", uyiridx, meiidx, uyirmeiidx);
+    return TAMIL_LETTERS[UYIRMEI_OFFSET + uyirmeiidx].to_string();
 }
 
-pub fn join_letters_elementary(elements:&Vec<String>) -> String {
+pub fn join_letters_elementary(elements: &Vec<String>) -> String {
     /**
-    * @elements[i] : argaram letter (க)
-    * @elements[i+1] : kombu symbol ( \u{0bcd} )
-    *           = க்
-    */
+     * @elements[i] : argaram letter (க)
+     * @elements[i+1] : kombu symbol ( \u{0bcd} )
+     *           = க்
+     */
     if elements.len() % 2 != 0 {
         panic!("input has to be an even numbered list");
     }
     let mut result = String::from("");
-    for i in 0..(elements.len()/2) {
-        result.push_str( &mut join_mei_uyir(&elements[2*i],&elements[2*i+1]) );
+    for i in 0..(elements.len() / 2) {
+        result.push_str(&mut join_mei_uyir(&elements[2 * i], &elements[2 * i + 1]));
     }
     result
 }
@@ -808,36 +815,39 @@ pub fn reverse_word(word: &str) -> String {
     word_out
 }
 
-pub fn classify_letter(letter:&str) -> String {
-    assert!(letter.len()<=10,"classify letter can work on only 1 letter word!");
-    let eq_letter = |x:&&str|->bool{ *x==letter };
+pub fn classify_letter(letter: &str) -> String {
+    assert!(
+        letter.len() <= 10,
+        "classify letter can work on only 1 letter word!"
+    );
+    let eq_letter = |x: &&str| -> bool { *x == letter };
     let first_letter = letter.chars().next().unwrap();
-    let eq_char = |x:&char|->bool{ *x == first_letter };
+    let eq_char = |x: &char| -> bool { *x == first_letter };
     if UYIR_LETTERS.iter().any(eq_char) {
         if KURIL_LETTERS.iter().any(eq_char) {
-            return "<Kuril/UyirLetter>".to_owned()
+            return "<Kuril/UyirLetter>".to_owned();
         } else if NEDIL_LETTERS.iter().any(eq_char) {
-            return "<Nedil/UyirLetter>".to_owned()
+            return "<Nedil/UyirLetter>".to_owned();
         } else if first_letter == AYTHAM_LETTER {
-            return "<Ayudham/UyirLetter>".to_owned()
+            return "<Ayudham/UyirLetter>".to_owned();
         }
-        return "<UyirLetter>".to_owned()
+        return "<UyirLetter>".to_owned();
     } else if MEI_LETTERS.iter().any(eq_letter) {
         if MELLINAM_LETTERS.iter().any(eq_letter) {
-            return "<Mellinam/MeiLetter>".to_owned()
+            return "<Mellinam/MeiLetter>".to_owned();
         } else if VALLINAM_LETTERS.iter().any(eq_letter) {
-            return "<Vallinam/MeiLetter>".to_owned()
+            return "<Vallinam/MeiLetter>".to_owned();
         } else if IDAYINAM_LETTERS.iter().any(eq_letter) {
-            return "<Idayinam/MeiLetter>".to_owned()
+            return "<Idayinam/MeiLetter>".to_owned();
         }
     } else if UYIRMEI_LETTERS.iter().any(eq_letter) {
-        return "<UyirMeiLetter>".to_owned()
+        return "<UyirMeiLetter>".to_owned();
     } else if TAMIL_LETTERS.iter().any(eq_letter) {
-        return "<TamilOrGrantham>".to_owned()
+        return "<TamilOrGrantham>".to_owned();
     } else if first_letter.is_ascii_alphanumeric() {
-        return "<English>".to_owned()
+        return "<English>".to_owned();
     } else if first_letter.is_ascii_digit() {
-        return "<Digit>".to_owned()
+        return "<Digit>".to_owned();
     }
     return "<non-TamilLetter>".to_owned();
 }

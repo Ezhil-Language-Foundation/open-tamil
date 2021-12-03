@@ -33,7 +33,7 @@ done
 
 NFAIL=0 #ideally no unittests should fail
 TOTFAIL=`wc -l failed3.txt | cut -d'f' -f1`
-echo "from sys import exit; exit( $TOTFAIL !=  $NFAIL )" | python
+echo "from sys import exit; exit( $TOTFAIL !=  $NFAIL )" | python3
 if [ $?  -eq 0 ]
 then
    echo "Testing Successful!"
