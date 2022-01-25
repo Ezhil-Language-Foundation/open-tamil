@@ -5,8 +5,89 @@
 import sys
 import time
 
+from datetime import datetime as datetime_cpy
+
 PYTHON3 = sys.version > "3"
 assert PYTHON3, "This module requires Python 3"
+
+TA_WEEKDAYS_SHORT = [
+    "திங்கள்",
+    "செவ்வாய்",
+    "புதன்",
+    "வியாழன்",
+    "வெள்ளி",
+    "சனி",
+    "ஞாயிறு",
+]
+
+TA_WEEKDAYS_FULL = [
+    "திங்கட்கிழமை",
+    "செவ்வாய்க்கிழமை",
+    "புதன்கிழமை",
+    "வியாழக்கிழமை",
+    "வெள்ளிக்கிழமை",
+    "சனிக்கிழமை",
+    "ஞாயிற்றுகிழமை",
+]
+
+TA_MONTHS = [
+    "ஜனவரி",
+    "பிப்ரவரி",
+    "மார்ச்",
+    "ஏப்ரல்",
+    "மே",
+    "ஜூன்",
+    "ஜூலை",
+    "ஆகஸ்ட்",
+    "செப்டம்பர்",
+    "அக்டோபர்",
+    "நவம்பர்",
+    "டிசம்பர்",
+]
+
+
+class datetime(datetime_cpy):  # noqa
+    def __get_ta_str_item(self, code):
+        if code == "a":
+            return TA_WEEKDAYS_SHORT[self.weekday()]
+        if code == "A":
+            return TA_WEEKDAYS_FULL[self.weekday()]
+        if code == "b" or code == "B":
+            return TA_MONTHS[self.month - 1]
+        if code == "p":
+            if self.hour < 12:
+                return "முற்பொழுது"
+            else:
+                return "பிற்பொழுது"
+        return self.strftime(f"%{code}")
+
+    def strftime_ta(self, fmt):
+        """An alternate `strftime` implementation that creates a date string with
+        Tamil literals.
+
+        Example usage:
+
+        >>> from tamil.date import datetime
+        >>> d = datetime(2022, 1, 25, 9, 30)
+        >>> d.strftime_ta("%a %d, %b %Y")
+        'செவ்வாய் 25, ஜனவரி 2022'
+        >>> d.strftime_ta("%A (%d %b %Y) %p %I:%M")
+        'செவ்வாய்க்கிழமை (25 ஜனவரி 2022) முற்பொழுது 09:30'
+
+        :param fmt: Format string compatible with `datetime.strftime`
+        :return: string representation of the date in Tamil literals and Arabic Numerals
+        """
+        tokens = []
+        i = 0
+        while i < len(fmt):
+            c = fmt[i]
+            if c == "%":
+                tokens.append(self.__get_ta_str_item(fmt[i + 1]))
+                i += 1
+            else:
+                tokens.append(c)
+            i += 1
+        return "".join(tokens)
 
 
 class BasicTamilTimeFormat:
