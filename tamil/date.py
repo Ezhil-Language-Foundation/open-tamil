@@ -238,7 +238,9 @@ class DateUtils:
         return DateUtils.MONTHS[key]
 
     @staticmethod
-    def get_time(local_time: time.struct_time = None, fmt: Type[BasicTamilTimeFormat] = None):
+    def get_time(
+        local_time: time.struct_time = None, fmt: Type[BasicTamilTimeFormat] = None
+    ):
         """Get the localtime in Tamil
 
         :param local_time: OPTIONAL - time.struct_time object to get a specific
