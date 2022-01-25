@@ -5,6 +5,7 @@
 import sys
 import time
 
+from typing import Type
 from datetime import datetime as datetime_cpy
 
 PYTHON3 = sys.version > "3"
@@ -47,7 +48,7 @@ TA_MONTHS = [
 
 
 class datetime(datetime_cpy):  # noqa
-    def __get_ta_str_item(self, code):
+    def __get_ta_str_item(self, code: str) -> str:
         if code == "a":
             return TA_WEEKDAYS_SHORT[self.weekday()]
         if code == "A":
@@ -61,7 +62,7 @@ class datetime(datetime_cpy):  # noqa
                 return "பிற்பொழுது"
         return self.strftime(f"%{code}")
 
-    def strftime_ta(self, fmt):
+    def strftime_ta(self, fmt: str) -> str:
         """An alternate `strftime` implementation that creates a date string with
         Tamil literals.
 
@@ -205,17 +206,47 @@ class DateUtils:
     }
 
     @staticmethod
-    def tamil_weekday(week_day):
+    def tamil_weekday(week_day: int) -> str:
+        """Returns name of the weekday in Tamil
+
+        >>> from tamil.date import DateUtils as DU
+        >>> DU.tamil_weekday(0)
+        'திங்கள்'
+
+        :param week_day: day of the week as an integer from 0..6 with 0 being
+            Monday and 6 for Sunday, similar to value of `date.weekday` of the
+            Python standard library
+        :return: Tamil names of the week days
+        """
         key = DateUtils.WEEKDAYS_INDEX[week_day]
         return DateUtils.WEEKDAYS[key]
 
     @staticmethod
-    def tamil_month(month):
+    def tamil_month(month: int) -> str:
+        """Returns the name of the months in Tamil
+
+        >>> from tamil.date import DateUtils as DU
+        >>> DU.tamil_month(1)
+        'ஜனவரி'
+
+        :param month: number of the month from 1..12 with 1 being January & 12
+            being December, similar to the value of `date.month` from the standard
+            library
+        :return: Name of the month in Tamil
+        """
         key = DateUtils.MONTHS_INDEX[month]
         return DateUtils.MONTHS[key]
 
     @staticmethod
-    def get_time(local_time=None, fmt=None):
+    def get_time(local_time: time.struct_time = None, fmt: Type[BasicTamilTimeFormat] = None):
+        """Get the localtime in Tamil
+
+        :param local_time: OPTIONAL - time.struct_time object to get a specific
+            time in Tamil
+        :param fmt: OPTIONAL - a class that has a static function named `format`
+            similar to the :class:`.BasicTamilTimeFormat`
+        :return: current or specified local time in Tamil
+        """
         if not local_time:
             local_time = time.localtime()
         if not fmt:
@@ -229,23 +260,45 @@ class DateUtils:
         return fmt.format(year, month, month_day, week_day, hour, minute, second)
 
     @staticmethod
-    def get_hour_prefix(hour):
-        assert hour >= 0 and hour <= 24  # "hour variable should be in [0,24] c
+    def get_hour_prefix(hour: int) -> str:
+        """Returns the descriptive prefix based on the value of the hour.
+
+        .. csv-table::
+           :header: "Hour Range", "Prefix returned"
+
+           "0-3, 23", நள்ளிரவு
+           3-6, அதிகாலை
+           7-11, காலை
+           12-14, மத்தியானம்
+           15-18, மாலை
+           19-22, இரவு
+
+        Usage:
+
+        >>> from tamil.date import DateUtils as DU
+        >>> DU.get_hour_prefix(4)
+        'அதிகாலை'
+        >>> DU.get_hour_prefix(20)
+        'இரவு'
+
+        :param hour: integer denoting the hour of the day 0..23
+        :return: Prefix for the hour in Tamil
+        :raises: ValueError if the value of hour is less than 0 or more than 23
+        """
+        if not 0 <= hour < 24:  # "hour variable should be in [0,24] c
+            raise ValueError("Hour should be between 0 to 23 (inclusive)")
+
         if (hour <= 3) or (hour >= 12 + 11):
-            prefix = "நள்ளிரவு"  # u"nalliravu"
+            return "நள்ளிரவு"  # u"nalliravu"
         elif hour <= 6:
-            prefix = "அதிகாலை"  # u"vidikalai"
+            return "அதிகாலை"  # u"vidikalai"
         elif hour < 12:
-            prefix = "காலை"  # u"kalai"
+            return "காலை"  # u"kalai"
         elif hour < (12 + 3):
-            prefix = "மத்தியானம்"  # u"mathiyam"
+            return "மத்தியானம்"  # u"mathiyam"
         elif hour < (12 + 7):
-            prefix = "மாலை"  # u"malai"
-        elif hour < (12 + 11):
-            prefix = "இரவு"  # u"iravu"
-        else:
-            assert False
-        return prefix
+            return "மாலை"  # u"malai"
+        return "இரவு"  # u"iravu"
 
 
 if __name__ == "__main__":
