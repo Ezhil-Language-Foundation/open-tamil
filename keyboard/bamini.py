@@ -8,3 +8,9 @@ class Bamini(Layout):
     def load_layout(self):
         self.keymap[u"`"] = u"ஹ|`"
         self.keymap[u"1"] = u"1|!"
+        
+class Bamini(Layout):
+    def load_layout(self):
+        self.keymap[u"`"] = u"ஹ|`"
+        self.keymap[u"1"] = u"1|!"
+
