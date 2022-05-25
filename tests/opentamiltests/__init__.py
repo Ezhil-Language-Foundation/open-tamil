@@ -27,15 +27,7 @@ import ngram
 import unittest
 
 import solthiruthi
-
 import tamilstemmer
-
-# 2-3 straddle
-try:
-    from test import test_support
-except ImportError as ex:
-    from test import support as test_support
-
 
 # decorator
 def skip_python2_6(function):

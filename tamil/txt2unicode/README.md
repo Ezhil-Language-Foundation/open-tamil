@@ -2,11 +2,11 @@ txt2unicode
 ===========
 Tamil Text font-based Encode to Unicode Converter and vice versa.
 
-If you dont know what is your text encoding, don't worry; the module  **'txt2unicode'** will find it by best guess and convert to unicode for you, automatically!
+If you dont know what is your text encoding, don't worry; the module  **'txt2unicode'** will find it by best guess and
+convert to unicode for you, automatically!
 
 Available Tamil Encoding Converters
 ===================================
-
 
 | S.No  | எழுத்துரு | Encoding Name | To Unicode Converter | To Encode Convereter |
 | ---- | :---------: | :---------: | :---------: | :---------: |
@@ -43,58 +43,60 @@ Available Tamil Encoding Converters
 Automatic Input Encoding & Conversion to Unicode
 ================================================
 
-The 'auto2unicode' function will try to find encode of input text. If it is found, then it will convert input text to unicode using appropriate encode converters among available encode converters.
-  
-  **Out of 25 encodes, 20 encodes can be found by this 'auto2unicode'.** 
-  
-  Except 'dinamani', 'nakkeeran' , 'murasoli' , 'tam' & 'webulagam' encodes, 'auto2unicode' function can find input text's encode and will convert it into unicode. [Why?](../../examples/txt2unicode/encodes_chars/README.md)
-  
-  Look at demo of [tscii2unicode](../../examples/txt2unicode/demo_tscii2utf8.py) converter
+The 'auto2unicode' function will try to find encode of input text. If it is found, then it will convert input text to
+unicode using appropriate encode converters among available encode converters.
 
-  Look at demo of [auto2unicode](../../examples/txt2unicode/demo_auto2utf8.py) converter
-  
-  Look at **limitation of 'auto2unicode'** [here](../../examples/txt2unicode/encodes_chars/README.md)
-  
-  
+**Out of 25 encodes, 20 encodes can be found by this 'auto2unicode'.**
 
-  
+Except 'dinamani', 'nakkeeran' , 'murasoli' , 'tam' & 'webulagam' encodes, 'auto2unicode' function can find input text's
+encode and will convert it into unicode. [Why?](../../examples/txt2unicode/encodes_chars/README.md)
+
+Look at demo of [tscii2unicode](../../examples/txt2unicode/demo_tscii2utf8.py) converter
+
+Look at demo of [auto2unicode](../../examples/txt2unicode/demo_auto2utf8.py) converter
+
+Look at **limitation of 'auto2unicode'** [here](../../examples/txt2unicode/encodes_chars/README.md)
+
+
+
+
 Convert From Unicode to Encode
 ==============================
-  Here reverse engine of 'encode2unicode' used to convert back to encode from unicode.
-  
-  Look at above table for available 'unicode2encode' functions.
-  
-  Look at demo of [unicode2tscii](../../examples/txt2unicode/demo_utf8_2_tscii.py) converter
-  
-  Look at demo of [unicode2auto](../../examples/txt2unicode/demo_utf8_2_auto.py) converter
-  
+Here reverse engine of 'encode2unicode' used to convert back to encode from unicode.
+
+Look at above table for available 'unicode2encode' functions.
+
+Look at demo of [unicode2tscii](../../examples/txt2unicode/demo_utf8_2_tscii.py) converter
+
+Look at demo of [unicode2auto](../../examples/txt2unicode/demo_utf8_2_auto.py) converter
+
 
 Test Status:
 ===========
-  1. auto2unicode works
-  2. tscii2unicode works
-  3. unicode2tscii works
-   
 
+1. auto2unicode works
+2. tscii2unicode works
+3. unicode2tscii works
 
 Todo:
 ====
-  * Need to test all the above encodes
-  * Need to add fonts2unicode converter for the above encodings
-  
+
+* Need to test all the above encodes
+* Need to add fonts2unicode converter for the above encodings
 
 RoadMap:
 =======
-  * Look roadmap of txt2unicode [here](https://github.com/arulalant/txt2unicode/wiki/RoadMap)
-  
+
+* Look roadmap of txt2unicode [here](https://github.com/arulalant/txt2unicode/wiki/RoadMap)
 
 Credits:
 =======
-  Thanks to following online & offline tools.
-  1. http://kandupidi.com/converter/,
-  2. http://www.suratha.com/reader.htm  and 
-  3. http://nhm-converter.software.informer.com/1.0/ 
-  
+Thanks to following online & offline tools.
+
+1. http://kandupidi.com/converter/,
+2. http://www.suratha.com/reader.htm  and
+3. http://nhm-converter.software.informer.com/1.0/
+
 Regards,
 
 Arulalan.T

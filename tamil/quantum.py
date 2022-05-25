@@ -5,7 +5,7 @@ from itertools import product
 from .utf8 import get_letters_elementary, shorten
 
 
-def get_superposition_representation(word,raw=False):
+def get_superposition_representation(word, raw=False):
     """
         Treat word as a Vowel + Consonant representation and compute Kronecker product:
         e.g.
@@ -23,17 +23,17 @@ def get_superposition_representation(word,raw=False):
         Note: for N-letter word we return 2^N alternates which can be time and memory
         in-efficient for large N.
     """
-    alternates = [x or '' for x in get_letters_elementary(word,symmetric=True)]
+    alternates = [x or '' for x in get_letters_elementary(word, symmetric=True)]
     grouped = []
-    for idx in range(0,len(alternates),2):
-        grouped.append( [alternates[idx], alternates[idx+1]] )
+    for idx in range(0, len(alternates), 2):
+        grouped.append([alternates[idx], alternates[idx + 1]])
     if raw:
         superpos = [u"".join(word) for word in product(*grouped)]
         return superpos
     superpos = []
     for word_ in product(*grouped):
         # remove none
-        word = list(filter(lambda x: x,word_))
+        word = list(filter(lambda x: x, word_))
         superpos.append(word)
-    shortened = list(map(shorten,superpos))
+    shortened = list(map(shorten, superpos))
     return shortened

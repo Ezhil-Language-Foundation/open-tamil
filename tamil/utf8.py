@@ -889,7 +889,7 @@ def is_tamil_unicode_predicate(x: str):
 
 def is_tamil_unicode(sequence):
     # Ref: languagetool-office-extension/src/main/java/org/languagetool/openoffice/TamilDetector.java
-    if isinstance(sequence,list):
+    if isinstance(sequence, list):
         return list(map(is_tamil_unicode_predicate, sequence))
     if len(sequence) > 1:
         return list(map(is_tamil_unicode_predicate, get_letters(sequence)))
@@ -1426,6 +1426,7 @@ def print_tamil_words(tatext, use_frequencies=True):
             print("%s" % l[0])
     return
 
+
 compare_lexicograph_key = functools.cmp_to_key(compare_words_lexicographic)
 
 
@@ -1468,6 +1469,7 @@ def unicode2hex(ip_data, offset=3):
             result.append(letter)
     return "".join(result)
 
+
 def shorten(wordlist):
     """
     convert a [Vowel, Consonant] list into string by the following rules.
@@ -1478,25 +1480,26 @@ def shorten(wordlist):
     idx = 0
     is_vowel = lambda x: x in uyir_letters
     is_consonant = lambda x: x in grantha_mei_letters
-    last=0
-    while idx+1 < len(wordlist):
-        if is_vowel( wordlist[idx] ) and is_consonant(wordlist[idx+1]):
-            word.append(joinMeiUyir(wordlist[idx+1],wordlist[idx]))
-            last=idx+1
-            idx+=2
+    last = 0
+    while idx + 1 < len(wordlist):
+        if is_vowel(wordlist[idx]) and is_consonant(wordlist[idx + 1]):
+            word.append(joinMeiUyir(wordlist[idx + 1], wordlist[idx]))
+            last = idx + 1
+            idx += 2
             continue
-        elif is_vowel( wordlist[idx+1] ) and is_consonant(wordlist[idx]):
-            word.append(joinMeiUyir(wordlist[idx], wordlist[idx+1]))
-            last=idx+1
-            idx+=2
+        elif is_vowel(wordlist[idx + 1]) and is_consonant(wordlist[idx]):
+            word.append(joinMeiUyir(wordlist[idx], wordlist[idx + 1]))
+            last = idx + 1
+            idx += 2
             continue
         else:
-            last=idx
+            last = idx
             word.append(wordlist[idx])
-        idx=idx+1
-    if idx+1 <= len(wordlist):
+        idx = idx + 1
+    if idx + 1 <= len(wordlist):
         word.append(wordlist[-1])
     return u"".join(word)
+
 
 # Tamil Letters
 # அ ஆ இ ஈ உ ஊ எ ஏ ஐ ஒ ஓ ஔ ஃ

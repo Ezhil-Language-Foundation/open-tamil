@@ -19,11 +19,12 @@ class SimpleCalculator(ast.NodeVisitor):
     SimpleCalculator - replacement for eval() method to compute expressions involving
     +,-,/,* operators on constants.
     """
-    def __init__(self,*args,**kwargs):
-        super(SimpleCalculator,self).__init__(*args,**kwargs)
+
+    def __init__(self, *args, **kwargs):
+        super(SimpleCalculator, self).__init__(*args, **kwargs)
         self.result = 0.0
 
-    def eval(self,obj):
+    def eval(self, obj):
         self.result = self.visit(obj.body[0])
         return self.result.n
 
@@ -33,9 +34,9 @@ class SimpleCalculator(ast.NodeVisitor):
     def visit_BinOp(self, node: ast.BinOp):
         lhs = self.visit(node.left).n
         rhs = self.visit(node.right).n
-        if isinstance(node.op,ast.Sub):
+        if isinstance(node.op, ast.Sub):
             return ast.Num(lhs - rhs)
-        if isinstance(node.op,ast.Add):
+        if isinstance(node.op, ast.Add):
             return ast.Num(lhs + rhs)
         if isinstance(node.op, ast.Mult):
             return ast.Num(lhs * rhs)
@@ -46,10 +47,12 @@ class SimpleCalculator(ast.NodeVisitor):
     def visit_Num(self, node: ast.Num):
         return node
 
+
 def அச்சிடு(_): print(_)
 
+
 def கணி(expr):
-    tree = ast.parse(expr,"__temp__.py")
+    tree = ast.parse(expr, "__temp__.py")
     calculator = SimpleCalculator()
     return calculator.eval(tree)
 
@@ -97,6 +100,7 @@ def கணக்கிடு(_தொடர்):
     அச்சிடு(num2tamilstr(விடை))
     அச்சிடு(num2tamilstr_american(விடை))
     return விடை
+
 
 if __name__ == "__main__":
     assert 2 == கணக்கிடு("ஒன்று கூட்டல் ஒன்று")

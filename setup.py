@@ -12,7 +12,7 @@ long_description = open("README.rst", "r", "UTF-8").read()
 
 setup(
     name="Open-Tamil",
-    version="1.0",
+    version="1.1",
     description="Tamil language text processing tools for Python v3",
     author="M. Annamalai, T. Arulalan, and other contributors",
     author_email="ezhillang@gmail.com",
@@ -66,3 +66,4 @@ setup(
     ],
     download_url="https://github.com/Ezhil-Language-Foundation/open-tamil/archive/master.zip",
 )
+

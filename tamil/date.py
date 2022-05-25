@@ -4,9 +4,8 @@
 
 import sys
 import time
-
-from typing import Type
 from datetime import datetime as datetime_cpy
+from typing import Type
 
 PYTHON3 = sys.version > "3"
 assert PYTHON3, "This module requires Python 3"
@@ -239,7 +238,7 @@ class DateUtils:
 
     @staticmethod
     def get_time(
-        local_time: time.struct_time = None, fmt: Type[BasicTamilTimeFormat] = None
+            local_time: time.struct_time = None, fmt: Type[BasicTamilTimeFormat] = None
     ):
         """Get the localtime in Tamil
 
