@@ -31,6 +31,22 @@ open-tamil provides Python package 'tamil' with ability to,
    e.g. following call will return the string
    >> tamil.numeral.num2tamilstr_american( long(1e7) )
    u"பத்து மில்லியன்",
+5. date module: new update to this module in the v1.1 release was added by Arunmozhi (Techolic)
+   adds datetime class with strftime, tamil_weekday(),
+   Example usage::
+
+    >>> from tamil.date import datetime
+    >>> d = datetime(2022, 1, 25, 9, 30)
+    >>> d.strftime_ta("%a %d, %b %Y")
+    'செவ்வாய் 25, ஜனவரி 2022'
+    >>> d.strftime_ta("%A (%d %b %Y) %p %I:%M")
+    'செவ்வாய்க்கிழமை (25 ஜனவரி 2022) முற்பொழுது 09:30'
+
+This adds a subclass of datetime.datetime class from the Python standard
+library that can be used as an alternate to the standard library class
+with an extra date-to-string function called strftime_ta which functions
+similar to the strftime function, except day, month names are returned
+in Tamil.
 
 txt2unicode
 -----------
