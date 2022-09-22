@@ -82,6 +82,10 @@ class Words(unittest.TestCase):
         self.assertFalse(tamil.utf8.all_tamil(u"சம்மதம்1"))
         self.assertTrue(tamil.utf8.all_tamil([u"பொ", u"ம", u"த"]))
 
+    def test_all_tamil_text(self):
+        self.assertTrue(tamil.utf8.all_tamil_text(u"எப்பொருள் யார்யார்வாய்க் கேட்பினும் அப்பொருள் மெய்ப்பொருள் காண்பது அறிவு. 423"))
+        self.assertFalse(tamil.utf8.all_tamil_text(u"அகர முதல எழுத்தெல்லாம் ஆதி பகவன் முதற்றே உலகு. Kural-1"))
+
     def test_word_xsection(self):
         pos1 = utf8.word_intersection(u"தேடுக", u"தடங்கல்")
         self.assertTrue(pos1[0] == (2, 3))

@@ -918,6 +918,22 @@ def all_tamil(word_in):
     return all([(letter in tamil_letters) for letter in word])
 
 
+def check_ta(ch):
+    """
+    True if a given char is a Tamil alphabet or a punctuation or digit or whitespace, False otherwise
+    """
+    return all_tamil(ch) or ch in string.punctuation or ch.isdigit() or ch.isspace()
+
+
+def all_tamil_text(str):
+    """
+    Predicate function
+    :param: str
+    :return: True if if only contains Tamil characters and punctuations (for ex. without English) and False otherwise
+    """
+    return all(list(map(check_ta, set(get_letters(str)))))
+
+
 def has_tamil(word):
     """
     :param word: Input text string
