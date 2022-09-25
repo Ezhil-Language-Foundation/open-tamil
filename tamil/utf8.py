@@ -924,7 +924,6 @@ def check_ta(ch):
     """
     return all_tamil(ch) or ch in string.punctuation or ch.isdigit() or ch.isspace()
 
-
 def all_tamil_text_v1(str):
     """
     Predicate function
@@ -935,6 +934,7 @@ def all_tamil_text_v1(str):
 
 _punctuation = '|'.join(re.escape(string.punctuation))
 _whitespace_digits_or_alpha = re.compile(r'[\s|\d|'+_punctuation+']+')
+
 def all_tamil_text(str):
     """
     Predicate function
