@@ -272,8 +272,8 @@ def _get_unique_ch(text, all_common_encodes):
     for line in text:
         for word in line.split(" "):
         #this place is little trickier how can we change it for python 3 ?
-            if not PYTHON3:
-                word = word.decode("utf-8")
+        #   if not PYTHON3:
+        #       word = word.decode("utf-8")
             for ch in all_common_encodes:
                 if ch in word:
                     word = word.replace(ch, "")
