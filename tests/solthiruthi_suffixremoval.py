@@ -41,7 +41,6 @@ class RemovePluralTest(unittest.TestCase):
         for w, x in zip(words_list, expected):
             rval = obj.removeSuffix(w)
             self.assertTrue(rval[1])
-            # if not PYTHON3: print(utf8.get_letters(w),u'->',rval[1])
             self.assertEqual(rval[0], x)
         return
 

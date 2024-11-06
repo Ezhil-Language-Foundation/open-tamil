@@ -20,17 +20,7 @@
 # <http://www.gnu.org/licenses/>.                                            #
 #                                                                            #
 ##############################################################################
-from sys import version
-
-PYTHON3 = version > "3"
-del version
-
-try:
-    # python 2
-    from .orddic import OrderedDict
-except ImportError as ime:
-    # python 3
-    from collections import OrderedDict
+from collections import OrderedDict
 
 from .encode2utf8 import (
     anjal2utf8,
@@ -281,6 +271,7 @@ def _get_unique_ch(text, all_common_encodes):
     special_chars = [".", ",", ";", ":", "", " ", "\r", "\t", "=", "\n"]
     for line in text:
         for word in line.split(" "):
+        #this place is little trickier how can we change it for python 3 ?
             if not PYTHON3:
                 word = word.decode("utf-8")
             for ch in all_common_encodes:
@@ -330,8 +321,9 @@ def _get_unique_common_encodes():
     _all_common_encodes_single_char_ = set([])
 
     for name, encode in _all_encodes_.items():
+    # This place has python3 unicode handling?
         encode_utf8 = set(
-            [PYTHON3 and ch or ch.decode("utf-8") for ch in encode.keys()]
+            [ ch for ch in encode.keys()]
         )
         _all_unicode_encodes_[name] = encode_utf8
     _all_unique_encodes_full_ = _all_unicode_encodes_.copy()

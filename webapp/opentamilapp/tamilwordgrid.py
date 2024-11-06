@@ -11,7 +11,7 @@ from math import sqrt
 
 import tamil
 
-PYTHON3 = sys.version > "3"
+
 
 
 # Vertical / Horizontal Word Grids
@@ -129,10 +129,10 @@ text-align : center;
         )
         self.grid_size = 3 + int(self.max_word_len)
         # sort words in order
-        if PYTHON3:
-            self.words = sorted(self.words, key=len)
-        else:
-            self.words.sort(cmp=WordGrid.sorter)
+
+        self.words = sorted(self.words, key=len)
+        #else:
+        #    self.words.sort(cmp=WordGrid.sorter)
         # prepare a random grid of dim [#words x #max-word-length]
         # len(self.words)
         for itr_r in range(self.grid_size):
