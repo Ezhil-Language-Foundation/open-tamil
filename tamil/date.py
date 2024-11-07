@@ -7,9 +7,6 @@ import time
 from datetime import datetime as datetime_cpy
 from typing import Type
 
-PYTHON3 = sys.version > "3"
-assert PYTHON3, "This module requires Python 3"
-
 TA_WEEKDAYS_SHORT = [
     "திங்கள்",
     "செவ்வாய்",

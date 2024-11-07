@@ -11,7 +11,7 @@ import sys
 import tamil
 
 LINUX = not hasattr(sys, "getwindowsversion")
-PYTHON3 = sys.version > "3"
+
 
 
 # compute word intersection graph of the a wordlist

@@ -9,9 +9,6 @@ from pprint import pprint
 
 from tamil import utf8
 
-PYTHON3 = sys.version[0] == "3"
-
-
 def get_letters(word):
     if isinstance(word, list):
         chars = word

@@ -12,9 +12,6 @@ from tamil import utf8
 from . import WordSpeller
 from . import resources
 
-PYTHON3 = sys.version > "3"
-
-
 class PattiyalThiruthi(WordSpeller.ISpeller):
     def __init__(self, option):
         """ spell checker based on whitelist agarathi """
@@ -37,9 +34,8 @@ class PattiyalThiruthi(WordSpeller.ISpeller):
         # words will be loaded from the file into the Trie structure
         with codecs.open(filename, "r", "utf-8") as fp:
             data = map(lambda word: word.strip(), fp.readlines())
-        if PYTHON3:
-            return frozenset(data)
-        return set(data)
+        return frozenset(data)
+        #return set(data)
 
 
 if __name__ == "__main__":

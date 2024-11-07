@@ -18,6 +18,7 @@ PYTHON3 = sys.version > "3"
 WINDOWS = sys.platform.find("win") != -1
 LINUX = not WINDOWS
 
+
 import tamil
 
 import transliterate

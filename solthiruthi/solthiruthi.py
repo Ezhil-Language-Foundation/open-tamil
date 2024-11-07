@@ -10,7 +10,7 @@ import tamil
 
 # from pprint import pprint
 
-PYTHON3 = sys.version[0] == "3"
+
 
 
 class Solthiruthi:

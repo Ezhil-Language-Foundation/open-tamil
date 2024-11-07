@@ -11,7 +11,7 @@ from pprint import pprint
 from . import datastore
 from . import resources
 
-PYTHON3 = sys.version[0] == "3"
+
 
 
 # specify dictionary interface without specifying storage

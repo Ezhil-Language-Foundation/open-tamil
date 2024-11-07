@@ -15,8 +15,6 @@ import string
 from copy import copy
 from sys import version
 
-PYTHON3 = version > "3"
-assert PYTHON3, "PYTHON3 required to operate Open-Tamil library"
 import functools
 
 ## constants

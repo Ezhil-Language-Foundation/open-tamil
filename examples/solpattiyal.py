@@ -19,10 +19,6 @@ from functools import cmp_to_key
 import tamil
 from transliterate import *
 
-PYTHON3 = sys.version[0] > "2"
-if not PYTHON3:
-    sys.stdout = codecs.getwriter("utf-8")(sys.stdout)
-
 
 # use generators for better memory footprint -- 04/04/15
 class WordFrequency(object):
