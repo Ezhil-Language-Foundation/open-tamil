@@ -11,7 +11,7 @@ from pprint import pprint
 
 from tamil import utf8
 
-PYTHON3 = sys.version[0] == "3"
+
 
 
 class Queue(list):
