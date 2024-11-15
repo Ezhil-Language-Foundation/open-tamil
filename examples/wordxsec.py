@@ -8,9 +8,6 @@ from sys import version
 
 import tamil
 
-PYTHON3 = version > "3"
-
-
 # compute word intersection graph of the a wordlist
 # optimized for using the symmetry in computation but not space
 class WordXSec:

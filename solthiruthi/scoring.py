@@ -12,10 +12,7 @@ from pprint import pprint
 
 from tamil import utf8
 from . import resources
-
-PYTHON3 = sys.version[0] == "3"
-if PYTHON3:
-    from functools import reduce
+from functools import reduce
 
 
 class NGStats:

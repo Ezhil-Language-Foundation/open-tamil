@@ -6,8 +6,6 @@ import math
 import re
 import sys
 
-PYTHON3 = sys.version > "3"
-assert PYTHON3, "Python3 or larger required for this module"
 SPACE = re.compile("\s+")
 
 

@@ -36,9 +36,6 @@ from transliterate import azhagi, jaffna, combinational, algorithm
 
 # Make Bi-Lingual dictionary
 
-PYTHON3 = sys.version_info[0] == 3
-assert PYTHON3, "சொல்திருத்தி செயலி பைத்தான் 3-இல் மற்றுமே இயங்கும்!"
-
 _DEBUG = False
 
 
