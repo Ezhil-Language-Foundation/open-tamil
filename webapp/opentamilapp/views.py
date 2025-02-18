@@ -280,10 +280,9 @@ def spell_check(request, k1):
 def test_ngram(request, ng):
     obj = DTrie()
     prev_letter = ""
-    # per-line processor - remove spaces
     for char in get_letters("".join(re.split("\s+", ng)).lower()):
         if (prev_letter.isalpha() and char.isalpha()) or (
-                utf8.is_tamil_unicode(prev_letter) and utf8.is_tamil_unicode(char)
+                prev_letter and utf8.is_tamil_unicode(prev_letter) and utf8.is_tamil_unicode(char)
         ):
             bigram = "".join([prev_letter, char])
             obj.add(bigram)  # update previous
