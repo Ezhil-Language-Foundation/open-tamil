@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 import sys
-from django.conf.urls import url, include
+from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 if sys.version.find("2.6") >= 0:
     urlpatterns = [
@@ -25,9 +25,9 @@ if sys.version.find("2.6") >= 0:
     ]
 else:
     urlpatterns = [
-        url(r"^i18n/", include("django.conf.urls.i18n")),
+        path('i18n/', include('django.conf.urls.i18n')),
     ]
     urlpatterns += i18n_patterns(
-        # url(r'^admin/', admin.site.urls),
-        url(_(r""), include("opentamilapp.urls")),
+        # path('admin/', admin.site.urls),
+        path('', include('opentamilapp.urls')),
     )
