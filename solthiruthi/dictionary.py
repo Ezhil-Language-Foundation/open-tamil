@@ -74,24 +74,35 @@ class Dictionary:
 class SimpleDictionary(Dictionary):
     def __init__(self, filename):
         super(SimpleDictionary, self).__init__()
+        # self.store is still kept as a list to ensure backward compatibility for any 
+        # external modules or legacy code that expects an ordered list like the previous one.
         self.store = []
+        
+        #  key change: wrote a parallel set for O(1) constant time loopups. 
+        #it improves the search loopup very efficiently.
+        self._lookup_set = set()
         self.filename = filename
 
     def loadWordFile(self):
         with codecs.open(self.filename, "r", "utf-8") as fp:
             for w in fp.readlines():
                 word = w.strip()
+                # populate both the legacy list and the high-performance set
                 self.store.append(word.lower())
+                self._lookup_set.add(word.lower())
         # print u"loaded %d words into dictionary"%len(self.store)
 
     def getAllWords(self):
+        # Returns the list to preserve original API behavior and ordering
         return self.store
 
     def isWord(self, w):
-        return w in self.store
+        return w in self._lookup_set
 
     def add(self, w):
+        # Keeps both of thedata structures in sync as new words are added in this.
         self.store.append(w)
+        self._lookup_set.add(w)
         return
 
     def getWordsStartingWith(self, pfx):
@@ -110,6 +121,7 @@ class SimpleDictionary(Dictionary):
 
     def getDictionaryPath(self):
         return self.filename
+
 
 
 class Agarathi(Dictionary):
