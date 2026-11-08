@@ -366,6 +366,9 @@ class CodecTSCII(unittest.TestCase):
             output = tamil.tscii.convert_to_unicode(fileHandle.read())
         self.maxDiff = None
 
+        output = output.replace("\r\n", "\n")
+        exact = exact.replace("\r\n", "\n")
+
         self.assertEqual(output, exact[:-1])
 
 
